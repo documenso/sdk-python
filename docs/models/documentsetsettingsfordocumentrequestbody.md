@@ -1,0 +1,10 @@
+# DocumentSetSettingsForDocumentRequestBody
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `document_id`                                                                                          | *float*                                                                                                | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `data`                                                                                                 | [Optional[models.Data]](../models/data.md)                                                             | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |
+| `meta`                                                                                                 | [Optional[models.DocumentSetSettingsForDocumentMeta]](../models/documentsetsettingsfordocumentmeta.md) | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |

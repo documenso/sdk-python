@@ -1,0 +1,9 @@
+# RecipientGetDocumentRecipientAuthOptions
+
+
+## Fields
+
+| Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `access_auth`                                                                                                    | [Nullable[models.RecipientGetDocumentRecipientAccessAuth]](../models/recipientgetdocumentrecipientaccessauth.md) | :heavy_check_mark:                                                                                               | The type of authentication required for the recipient to access the document.                                    |
+| `action_auth`                                                                                                    | [Nullable[models.RecipientGetDocumentRecipientActionAuth]](../models/recipientgetdocumentrecipientactionauth.md) | :heavy_check_mark:                                                                                               | The type of authentication required for the recipient to sign the document.                                      |

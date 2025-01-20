@@ -1,0 +1,9 @@
+# RecipientCreateTemplateRecipientsRequestBody
+
+
+## Fields
+
+| Field                                                                                                                | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `template_id`                                                                                                        | *float*                                                                                                              | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
+| `recipients`                                                                                                         | List[[models.RecipientCreateTemplateRecipientsRecipients](../models/recipientcreatetemplaterecipientsrecipients.md)] | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |

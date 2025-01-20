@@ -1,0 +1,18 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    documenso-OAS:
+        inputs:
+            - location: registry.speakeasyapi.dev/documenso-inc/api/documenso-v-2-beta-api:main
+        registry:
+            location: registry.speakeasyapi.dev/documenso-inc/api/documenso-oas
+targets:
+    documenso:
+        target: python
+        source: documenso-OAS
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/documenso-inc/api/documenso-oas-python-code-samples
+            labelOverride:
+                fixedValue: Python (SDK)
+            blocking: false

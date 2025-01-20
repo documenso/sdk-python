@@ -1,0 +1,11 @@
+# RecipientUpdateDocumentRecipientDocumentsRecipientsRole
+
+
+## Values
+
+| Name       | Value      |
+| ---------- | ---------- |
+| `CC`       | CC         |
+| `SIGNER`   | SIGNER     |
+| `VIEWER`   | VIEWER     |
+| `APPROVER` | APPROVER   |

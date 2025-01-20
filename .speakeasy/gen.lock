@@ -1,0 +1,1932 @@
+lockVersion: 2.0.0
+id: 9b8ab966-40b1-444c-b41e-217acf02dd9e
+management:
+  docChecksum: 76e9b7822f2da5a5cb122b30d7f464b9
+  docVersion: 0.0.0
+  speakeasyVersion: 1.469.10
+  generationVersion: 2.493.31
+  releaseVersion: 0.0.1
+  configChecksum: 65d773f94c646f9ca8a39274ebf927cf
+features:
+  python:
+    additionalDependencies: 1.0.0
+    constsAndDefaults: 1.0.5
+    core: 5.10.3
+    defaultEnabledRetries: 0.2.0
+    devContainers: 3.0.0
+    enumUnions: 0.1.0
+    envVarSecurityUsage: 0.3.2
+    flatRequests: 1.0.1
+    flattening: 3.1.0
+    globalSecurity: 3.0.2
+    globalSecurityCallbacks: 1.0.0
+    globalSecurityFlattening: 1.0.0
+    globalServerURLs: 3.1.0
+    groups: 3.0.0
+    methodArguments: 1.0.2
+    nameOverrides: 3.0.1
+    nullables: 1.0.0
+    responseFormat: 1.0.1
+    retries: 3.0.2
+    sdkHooks: 1.0.0
+    unions: 3.0.4
+generatedFiles:
+  - .devcontainer/README.md
+  - .devcontainer/devcontainer.json
+  - .devcontainer/setup.sh
+  - .gitattributes
+  - .python-version
+  - .vscode/settings.json
+  - USAGE.md
+  - docs/models/accessauth.md
+  - docs/models/actionauth.md
+  - docs/models/authoptions.md
+  - docs/models/data.md
+  - docs/models/dateformat.md
+  - docs/models/distributionmethod.md
+  - docs/models/document.md
+  - docs/models/documentcreatedocumenttemporaryaccessauth.md
+  - docs/models/documentcreatedocumenttemporaryactionauth.md
+  - docs/models/documentcreatedocumenttemporaryauthoptions.md
+  - docs/models/documentcreatedocumenttemporarydistributionmethod.md
+  - docs/models/documentcreatedocumenttemporarydocumentdata.md
+  - docs/models/documentcreatedocumenttemporarydocumentmeta.md
+  - docs/models/documentcreatedocumenttemporarydocumentsauthoptions.md
+  - docs/models/documentcreatedocumenttemporarydocumentsfields.md
+  - docs/models/documentcreatedocumenttemporarydocumentsrecipients.md
+  - docs/models/documentcreatedocumenttemporarydocumentstype.md
+  - docs/models/documentcreatedocumenttemporaryemailsettings.md
+  - docs/models/documentcreatedocumenttemporaryfieldmeta.md
+  - docs/models/documentcreatedocumenttemporaryfieldmeta1.md
+  - docs/models/documentcreatedocumenttemporaryfieldmeta2.md
+  - docs/models/documentcreatedocumenttemporaryfieldmeta3.md
+  - docs/models/documentcreatedocumenttemporaryfieldmeta4.md
+  - docs/models/documentcreatedocumenttemporaryfieldmeta5.md
+  - docs/models/documentcreatedocumenttemporaryfieldmeta6.md
+  - docs/models/documentcreatedocumenttemporaryfieldmeta7.md
+  - docs/models/documentcreatedocumenttemporaryfieldmeta8.md
+  - docs/models/documentcreatedocumenttemporaryfieldmeta9.md
+  - docs/models/documentcreatedocumenttemporaryfieldmetadocumentsresponse200applicationjsonresponsebodydocumentfields9type.md
+  - docs/models/documentcreatedocumenttemporaryfieldmetadocumentsresponse200applicationjsonresponsebodydocumentfieldstype.md
+  - docs/models/documentcreatedocumenttemporaryfieldmetadocumentsresponse200applicationjsonresponsebodydocumenttype.md
+  - docs/models/documentcreatedocumenttemporaryfieldmetadocumentsresponse200applicationjsonresponsebodytype.md
+  - docs/models/documentcreatedocumenttemporaryfieldmetadocumentsresponse200applicationjsontype.md
+  - docs/models/documentcreatedocumenttemporaryfieldmetadocumentsresponse200type.md
+  - docs/models/documentcreatedocumenttemporaryfieldmetadocumentsresponsetype.md
+  - docs/models/documentcreatedocumenttemporaryfieldmetadocumentsresponsevalues.md
+  - docs/models/documentcreatedocumenttemporaryfieldmetadocumentstype.md
+  - docs/models/documentcreatedocumenttemporaryfieldmetadocumentsvalues.md
+  - docs/models/documentcreatedocumenttemporaryfieldmetatype.md
+  - docs/models/documentcreatedocumenttemporaryfieldmetavalues.md
+  - docs/models/documentcreatedocumenttemporaryfields.md
+  - docs/models/documentcreatedocumenttemporaryfieldsdocumentsfieldmeta.md
+  - docs/models/documentcreatedocumenttemporaryfieldsdocumentsrequestfieldmeta.md
+  - docs/models/documentcreatedocumenttemporaryfieldsdocumentsrequestrequestbodyfieldmeta.md
+  - docs/models/documentcreatedocumenttemporaryfieldsdocumentsrequestrequestbodyrecipients10fieldmeta.md
+  - docs/models/documentcreatedocumenttemporaryfieldsdocumentsrequestrequestbodyrecipients10fieldmetatype.md
+  - docs/models/documentcreatedocumenttemporaryfieldsdocumentsrequestrequestbodyrecipients10type.md
+  - docs/models/documentcreatedocumenttemporaryfieldsdocumentsrequestrequestbodyrecipients11fieldmeta.md
+  - docs/models/documentcreatedocumenttemporaryfieldsdocumentsrequestrequestbodyrecipients11fieldmetatype.md
+  - docs/models/documentcreatedocumenttemporaryfieldsdocumentsrequestrequestbodyrecipients11type.md
+  - docs/models/documentcreatedocumenttemporaryfieldsdocumentsrequestrequestbodyrecipients5type.md
+  - docs/models/documentcreatedocumenttemporaryfieldsdocumentsrequestrequestbodyrecipients6fieldmetatype.md
+  - docs/models/documentcreatedocumenttemporaryfieldsdocumentsrequestrequestbodyrecipients6type.md
+  - docs/models/documentcreatedocumenttemporaryfieldsdocumentsrequestrequestbodyrecipients7fieldmetatype.md
+  - docs/models/documentcreatedocumenttemporaryfieldsdocumentsrequestrequestbodyrecipients7type.md
+  - docs/models/documentcreatedocumenttemporaryfieldsdocumentsrequestrequestbodyrecipients8fieldmetatype.md
+  - docs/models/documentcreatedocumenttemporaryfieldsdocumentsrequestrequestbodyrecipients8type.md
+  - docs/models/documentcreatedocumenttemporaryfieldsdocumentsrequestrequestbodyrecipients9fieldmetatype.md
+  - docs/models/documentcreatedocumenttemporaryfieldsdocumentsrequestrequestbodyrecipients9type.md
+  - docs/models/documentcreatedocumenttemporaryfieldsdocumentsrequestrequestbodyrecipientsfieldmeta.md
+  - docs/models/documentcreatedocumenttemporaryfieldsdocumentsrequestrequestbodyrecipientstype.md
+  - docs/models/documentcreatedocumenttemporaryfieldsdocumentsrequestrequestbodytype.md
+  - docs/models/documentcreatedocumenttemporaryfieldsdocumentsrequesttype.md
+  - docs/models/documentcreatedocumenttemporaryfieldsdocumentstype.md
+  - docs/models/documentcreatedocumenttemporaryfieldsfieldmeta.md
+  - docs/models/documentcreatedocumenttemporaryfieldstype.md
+  - docs/models/documentcreatedocumenttemporaryfieldsvalues.md
+  - docs/models/documentcreatedocumenttemporaryformvalues.md
+  - docs/models/documentcreatedocumenttemporaryglobalaccessauth.md
+  - docs/models/documentcreatedocumenttemporaryglobalactionauth.md
+  - docs/models/documentcreatedocumenttemporaryreadstatus.md
+  - docs/models/documentcreatedocumenttemporaryrecipients.md
+  - docs/models/documentcreatedocumenttemporaryrequestbody.md
+  - docs/models/documentcreatedocumenttemporaryresponsebody.md
+  - docs/models/documentcreatedocumenttemporaryrole.md
+  - docs/models/documentcreatedocumenttemporarysendstatus.md
+  - docs/models/documentcreatedocumenttemporarysigningorder.md
+  - docs/models/documentcreatedocumenttemporarysigningstatus.md
+  - docs/models/documentcreatedocumenttemporarysource.md
+  - docs/models/documentcreatedocumenttemporarystatus.md
+  - docs/models/documentcreatedocumenttemporarytype.md
+  - docs/models/documentcreatedocumenttemporaryvisibility.md
+  - docs/models/documentdata.md
+  - docs/models/documentdeletedocumentrequestbody.md
+  - docs/models/documentdeletedocumentresponsebody.md
+  - docs/models/documentduplicatedocumentrequestbody.md
+  - docs/models/documentduplicatedocumentresponsebody.md
+  - docs/models/documentfinddocumentsaccessauth.md
+  - docs/models/documentfinddocumentsactionauth.md
+  - docs/models/documentfinddocumentsauthoptions.md
+  - docs/models/documentfinddocumentsdata.md
+  - docs/models/documentfinddocumentsdocumentsauthoptions.md
+  - docs/models/documentfinddocumentsformvalues.md
+  - docs/models/documentfinddocumentsglobalaccessauth.md
+  - docs/models/documentfinddocumentsglobalactionauth.md
+  - docs/models/documentfinddocumentsreadstatus.md
+  - docs/models/documentfinddocumentsrecipients.md
+  - docs/models/documentfinddocumentsrequest.md
+  - docs/models/documentfinddocumentsresponsebody.md
+  - docs/models/documentfinddocumentsrole.md
+  - docs/models/documentfinddocumentssendstatus.md
+  - docs/models/documentfinddocumentssigningstatus.md
+  - docs/models/documentfinddocumentssource.md
+  - docs/models/documentfinddocumentsstatus.md
+  - docs/models/documentfinddocumentsuser.md
+  - docs/models/documentfinddocumentsvisibility.md
+  - docs/models/documentgetdocumentwithdetailsbyidaccessauth.md
+  - docs/models/documentgetdocumentwithdetailsbyidactionauth.md
+  - docs/models/documentgetdocumentwithdetailsbyidauthoptions.md
+  - docs/models/documentgetdocumentwithdetailsbyiddistributionmethod.md
+  - docs/models/documentgetdocumentwithdetailsbyiddocumentstype.md
+  - docs/models/documentgetdocumentwithdetailsbyidemailsettings.md
+  - docs/models/documentgetdocumentwithdetailsbyidfieldmeta.md
+  - docs/models/documentgetdocumentwithdetailsbyidfieldmeta1.md
+  - docs/models/documentgetdocumentwithdetailsbyidfieldmeta2.md
+  - docs/models/documentgetdocumentwithdetailsbyidfieldmeta3.md
+  - docs/models/documentgetdocumentwithdetailsbyidfieldmeta4.md
+  - docs/models/documentgetdocumentwithdetailsbyidfieldmeta5.md
+  - docs/models/documentgetdocumentwithdetailsbyidfieldmeta6.md
+  - docs/models/documentgetdocumentwithdetailsbyidfieldmeta7.md
+  - docs/models/documentgetdocumentwithdetailsbyidfieldmeta8.md
+  - docs/models/documentgetdocumentwithdetailsbyidfieldmeta9.md
+  - docs/models/documentgetdocumentwithdetailsbyidfieldmetadocumentsresponse200applicationjsonresponsebodyfields1type.md
+  - docs/models/documentgetdocumentwithdetailsbyidfieldmetadocumentsresponse200applicationjsonresponsebodyfields9type.md
+  - docs/models/documentgetdocumentwithdetailsbyidfieldmetadocumentsresponse200applicationjsonresponsebodyfieldstype.md
+  - docs/models/documentgetdocumentwithdetailsbyidfieldmetadocumentsresponse200applicationjsonresponsebodytype.md
+  - docs/models/documentgetdocumentwithdetailsbyidfieldmetadocumentsresponse200applicationjsontype.md
+  - docs/models/documentgetdocumentwithdetailsbyidfieldmetadocumentsresponse200type.md
+  - docs/models/documentgetdocumentwithdetailsbyidfieldmetadocumentsresponsetype.md
+  - docs/models/documentgetdocumentwithdetailsbyidfieldmetadocumentsresponsevalues.md
+  - docs/models/documentgetdocumentwithdetailsbyidfieldmetadocumentstype.md
+  - docs/models/documentgetdocumentwithdetailsbyidfieldmetadocumentsvalues.md
+  - docs/models/documentgetdocumentwithdetailsbyidfieldmetatype.md
+  - docs/models/documentgetdocumentwithdetailsbyidfieldmetavalues.md
+  - docs/models/documentgetdocumentwithdetailsbyidfields.md
+  - docs/models/documentgetdocumentwithdetailsbyidformvalues.md
+  - docs/models/documentgetdocumentwithdetailsbyidglobalaccessauth.md
+  - docs/models/documentgetdocumentwithdetailsbyidglobalactionauth.md
+  - docs/models/documentgetdocumentwithdetailsbyidreadstatus.md
+  - docs/models/documentgetdocumentwithdetailsbyidrecipients.md
+  - docs/models/documentgetdocumentwithdetailsbyidrequest.md
+  - docs/models/documentgetdocumentwithdetailsbyidresponsebody.md
+  - docs/models/documentgetdocumentwithdetailsbyidrole.md
+  - docs/models/documentgetdocumentwithdetailsbyidsendstatus.md
+  - docs/models/documentgetdocumentwithdetailsbyidsigningorder.md
+  - docs/models/documentgetdocumentwithdetailsbyidsigningstatus.md
+  - docs/models/documentgetdocumentwithdetailsbyidsource.md
+  - docs/models/documentgetdocumentwithdetailsbyidstatus.md
+  - docs/models/documentgetdocumentwithdetailsbyidtype.md
+  - docs/models/documentgetdocumentwithdetailsbyidvisibility.md
+  - docs/models/documentmeta.md
+  - docs/models/documentmovedocumenttoteamauthoptions.md
+  - docs/models/documentmovedocumenttoteamformvalues.md
+  - docs/models/documentmovedocumenttoteamglobalaccessauth.md
+  - docs/models/documentmovedocumenttoteamglobalactionauth.md
+  - docs/models/documentmovedocumenttoteamrequestbody.md
+  - docs/models/documentmovedocumenttoteamresponsebody.md
+  - docs/models/documentmovedocumenttoteamsource.md
+  - docs/models/documentmovedocumenttoteamstatus.md
+  - docs/models/documentmovedocumenttoteamvisibility.md
+  - docs/models/documentresenddocumentrequestbody.md
+  - docs/models/documentresenddocumentresponsebody.md
+  - docs/models/documentsenddocumentauthoptions.md
+  - docs/models/documentsenddocumentdateformat.md
+  - docs/models/documentsenddocumentdistributionmethod.md
+  - docs/models/documentsenddocumentemailsettings.md
+  - docs/models/documentsenddocumentformvalues.md
+  - docs/models/documentsenddocumentglobalaccessauth.md
+  - docs/models/documentsenddocumentglobalactionauth.md
+  - docs/models/documentsenddocumentlanguage.md
+  - docs/models/documentsenddocumentmeta.md
+  - docs/models/documentsenddocumentrequestbody.md
+  - docs/models/documentsenddocumentresponsebody.md
+  - docs/models/documentsenddocumentsource.md
+  - docs/models/documentsenddocumentstatus.md
+  - docs/models/documentsenddocumentvisibility.md
+  - docs/models/documentsetsettingsfordocumentauthoptions.md
+  - docs/models/documentsetsettingsfordocumentdateformat.md
+  - docs/models/documentsetsettingsfordocumentdistributionmethod.md
+  - docs/models/documentsetsettingsfordocumentdocumentsglobalaccessauth.md
+  - docs/models/documentsetsettingsfordocumentdocumentsglobalactionauth.md
+  - docs/models/documentsetsettingsfordocumentdocumentsvisibility.md
+  - docs/models/documentsetsettingsfordocumentemailsettings.md
+  - docs/models/documentsetsettingsfordocumentformvalues.md
+  - docs/models/documentsetsettingsfordocumentglobalaccessauth.md
+  - docs/models/documentsetsettingsfordocumentglobalactionauth.md
+  - docs/models/documentsetsettingsfordocumentlanguage.md
+  - docs/models/documentsetsettingsfordocumentmeta.md
+  - docs/models/documentsetsettingsfordocumentrequestbody.md
+  - docs/models/documentsetsettingsfordocumentresponsebody.md
+  - docs/models/documentsetsettingsfordocumentsigningorder.md
+  - docs/models/documentsetsettingsfordocumentsource.md
+  - docs/models/documentsetsettingsfordocumentstatus.md
+  - docs/models/documentsetsettingsfordocumentvisibility.md
+  - docs/models/eight.md
+  - docs/models/eleven.md
+  - docs/models/emailsettings.md
+  - docs/models/errorbadrequest.md
+  - docs/models/errorinternalservererror.md
+  - docs/models/errorinternalservererrorissues.md
+  - docs/models/errornotfound.md
+  - docs/models/errornotfoundissues.md
+  - docs/models/field.md
+  - docs/models/field1.md
+  - docs/models/field10.md
+  - docs/models/field11.md
+  - docs/models/field2.md
+  - docs/models/field3.md
+  - docs/models/field4.md
+  - docs/models/field5.md
+  - docs/models/field6.md
+  - docs/models/field7.md
+  - docs/models/field8.md
+  - docs/models/field9.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsfieldmeta.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsrequestfieldmeta.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsrequestrequestbody10fieldmeta.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsrequestrequestbody10fieldmetatype.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsrequestrequestbody10type.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsrequestrequestbody11fieldmeta.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsrequestrequestbody11fieldmetatype.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsrequestrequestbody11type.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsrequestrequestbody4type.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsrequestrequestbody5fieldmetatype.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsrequestrequestbody5type.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsrequestrequestbody6fieldmetatype.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsrequestrequestbody6type.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsrequestrequestbody7fieldmetatype.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsrequestrequestbody7type.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsrequestrequestbody8fieldmeta.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsrequestrequestbody8fieldmetatype.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsrequestrequestbody8type.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsrequestrequestbody9fieldmeta.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsrequestrequestbody9fieldmetatype.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsrequestrequestbody9type.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsrequestrequestbodyfieldmeta.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsrequestrequestbodytype.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsrequesttype.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldstype.md
+  - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsvalues.md
+  - docs/models/fieldcreatedocumentfieldfieldfieldmeta.md
+  - docs/models/fieldcreatedocumentfieldfieldmeta.md
+  - docs/models/fieldcreatedocumentfieldfieldmeta1.md
+  - docs/models/fieldcreatedocumentfieldfieldmeta2.md
+  - docs/models/fieldcreatedocumentfieldfieldmeta3.md
+  - docs/models/fieldcreatedocumentfieldfieldmeta4.md
+  - docs/models/fieldcreatedocumentfieldfieldmeta5.md
+  - docs/models/fieldcreatedocumentfieldfieldmeta6.md
+  - docs/models/fieldcreatedocumentfieldfieldmeta7.md
+  - docs/models/fieldcreatedocumentfieldfieldmeta8.md
+  - docs/models/fieldcreatedocumentfieldfieldmeta9.md
+  - docs/models/fieldcreatedocumentfieldfieldmetadocumentsfieldsresponse200applicationjsonresponsebody7type.md
+  - docs/models/fieldcreatedocumentfieldfieldmetadocumentsfieldsresponse200applicationjsonresponsebody8type.md
+  - docs/models/fieldcreatedocumentfieldfieldmetadocumentsfieldsresponse200applicationjsonresponsebody9type.md
+  - docs/models/fieldcreatedocumentfieldfieldmetadocumentsfieldsresponse200applicationjsonresponsebodytype.md
+  - docs/models/fieldcreatedocumentfieldfieldmetadocumentsfieldsresponse200applicationjsontype.md
+  - docs/models/fieldcreatedocumentfieldfieldmetadocumentsfieldsresponse200type.md
+  - docs/models/fieldcreatedocumentfieldfieldmetadocumentsfieldsresponsetype.md
+  - docs/models/fieldcreatedocumentfieldfieldmetadocumentsfieldsresponsevalues.md
+  - docs/models/fieldcreatedocumentfieldfieldmetadocumentsfieldstype.md
+  - docs/models/fieldcreatedocumentfieldfieldmetadocumentsfieldsvalues.md
+  - docs/models/fieldcreatedocumentfieldfieldmetatype.md
+  - docs/models/fieldcreatedocumentfieldfieldmetavalues.md
+  - docs/models/fieldcreatedocumentfieldfieldtype.md
+  - docs/models/fieldcreatedocumentfieldfieldvalues.md
+  - docs/models/fieldcreatedocumentfieldrequestbody.md
+  - docs/models/fieldcreatedocumentfieldresponsebody.md
+  - docs/models/fieldcreatedocumentfieldsdocumentsfieldsfields.md
+  - docs/models/fieldcreatedocumentfieldsfieldmeta.md
+  - docs/models/fieldcreatedocumentfieldsfieldmeta1.md
+  - docs/models/fieldcreatedocumentfieldsfieldmeta2.md
+  - docs/models/fieldcreatedocumentfieldsfieldmeta3.md
+  - docs/models/fieldcreatedocumentfieldsfieldmeta4.md
+  - docs/models/fieldcreatedocumentfieldsfieldmeta5.md
+  - docs/models/fieldcreatedocumentfieldsfieldmeta6.md
+  - docs/models/fieldcreatedocumentfieldsfieldmeta7.md
+  - docs/models/fieldcreatedocumentfieldsfieldmeta8.md
+  - docs/models/fieldcreatedocumentfieldsfieldmeta9.md
+  - docs/models/fieldcreatedocumentfieldsfieldmetadocumentsfieldsresponse200applicationjsonresponsebodyfields8type.md
+  - docs/models/fieldcreatedocumentfieldsfieldmetadocumentsfieldsresponse200applicationjsonresponsebodyfields9type.md
+  - docs/models/fieldcreatedocumentfieldsfieldmetadocumentsfieldsresponse200applicationjsonresponsebodyfieldstype.md
+  - docs/models/fieldcreatedocumentfieldsfieldmetadocumentsfieldsresponse200applicationjsonresponsebodytype.md
+  - docs/models/fieldcreatedocumentfieldsfieldmetadocumentsfieldsresponse200applicationjsontype.md
+  - docs/models/fieldcreatedocumentfieldsfieldmetadocumentsfieldsresponse200type.md
+  - docs/models/fieldcreatedocumentfieldsfieldmetadocumentsfieldsresponsetype.md
+  - docs/models/fieldcreatedocumentfieldsfieldmetadocumentsfieldsresponsevalues.md
+  - docs/models/fieldcreatedocumentfieldsfieldmetadocumentsfieldstype.md
+  - docs/models/fieldcreatedocumentfieldsfieldmetadocumentsfieldsvalues.md
+  - docs/models/fieldcreatedocumentfieldsfieldmetatype.md
+  - docs/models/fieldcreatedocumentfieldsfieldmetavalues.md
+  - docs/models/fieldcreatedocumentfieldsfields.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsfieldmeta.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequestfieldmeta.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody10fieldmeta.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody10fieldmetatype.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody10type.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody11fieldmeta.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody11fieldmetatype.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody11type.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody4fieldmetatype.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody4type.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody5fieldmetatype.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody5type.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody6fieldmetatype.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody6type.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody7fieldmeta.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody7fieldmetatype.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody7type.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody8fieldmeta.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody8fieldmetatype.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody8type.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody9fieldmeta.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody9fieldmetatype.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody9type.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequestrequestbodyfieldmeta.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequestrequestbodytype.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequesttype.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsrequestvalues.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldstype.md
+  - docs/models/fieldcreatedocumentfieldsfieldsdocumentsfieldsvalues.md
+  - docs/models/fieldcreatedocumentfieldsfieldsfieldmeta.md
+  - docs/models/fieldcreatedocumentfieldsfieldstype.md
+  - docs/models/fieldcreatedocumentfieldsfieldsvalues.md
+  - docs/models/fieldcreatedocumentfieldsrequestbody.md
+  - docs/models/fieldcreatedocumentfieldsresponsebody.md
+  - docs/models/fieldcreatedocumentfieldstype.md
+  - docs/models/fieldcreatedocumentfieldtype.md
+  - docs/models/fieldcreatetemplatefieldfield.md
+  - docs/models/fieldcreatetemplatefieldfield1.md
+  - docs/models/fieldcreatetemplatefieldfield10.md
+  - docs/models/fieldcreatetemplatefieldfield11.md
+  - docs/models/fieldcreatetemplatefieldfield2.md
+  - docs/models/fieldcreatetemplatefieldfield3.md
+  - docs/models/fieldcreatetemplatefieldfield4.md
+  - docs/models/fieldcreatetemplatefieldfield5.md
+  - docs/models/fieldcreatetemplatefieldfield6.md
+  - docs/models/fieldcreatetemplatefieldfield7.md
+  - docs/models/fieldcreatetemplatefieldfield8.md
+  - docs/models/fieldcreatetemplatefieldfield9.md
+  - docs/models/fieldcreatetemplatefieldfieldfieldmeta.md
+  - docs/models/fieldcreatetemplatefieldfieldmeta.md
+  - docs/models/fieldcreatetemplatefieldfieldmeta1.md
+  - docs/models/fieldcreatetemplatefieldfieldmeta2.md
+  - docs/models/fieldcreatetemplatefieldfieldmeta3.md
+  - docs/models/fieldcreatetemplatefieldfieldmeta4.md
+  - docs/models/fieldcreatetemplatefieldfieldmeta5.md
+  - docs/models/fieldcreatetemplatefieldfieldmeta6.md
+  - docs/models/fieldcreatetemplatefieldfieldmeta7.md
+  - docs/models/fieldcreatetemplatefieldfieldmeta8.md
+  - docs/models/fieldcreatetemplatefieldfieldmeta9.md
+  - docs/models/fieldcreatetemplatefieldfieldmetatemplatesfieldsresponse200applicationjsonresponsebody7type.md
+  - docs/models/fieldcreatetemplatefieldfieldmetatemplatesfieldsresponse200applicationjsonresponsebody8type.md
+  - docs/models/fieldcreatetemplatefieldfieldmetatemplatesfieldsresponse200applicationjsonresponsebody9type.md
+  - docs/models/fieldcreatetemplatefieldfieldmetatemplatesfieldsresponse200applicationjsonresponsebodytype.md
+  - docs/models/fieldcreatetemplatefieldfieldmetatemplatesfieldsresponse200applicationjsontype.md
+  - docs/models/fieldcreatetemplatefieldfieldmetatemplatesfieldsresponse200type.md
+  - docs/models/fieldcreatetemplatefieldfieldmetatemplatesfieldsresponsetype.md
+  - docs/models/fieldcreatetemplatefieldfieldmetatemplatesfieldsresponsevalues.md
+  - docs/models/fieldcreatetemplatefieldfieldmetatemplatesfieldstype.md
+  - docs/models/fieldcreatetemplatefieldfieldmetatemplatesfieldsvalues.md
+  - docs/models/fieldcreatetemplatefieldfieldmetatype.md
+  - docs/models/fieldcreatetemplatefieldfieldmetavalues.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsfieldmeta.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequestfieldmeta.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequestrequestbody10fieldmeta.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequestrequestbody10fieldmetatype.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequestrequestbody10type.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequestrequestbody11fieldmeta.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequestrequestbody11fieldmetatype.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequestrequestbody11type.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequestrequestbody4fieldmetatype.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequestrequestbody4type.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequestrequestbody5fieldmetatype.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequestrequestbody5type.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequestrequestbody6fieldmetatype.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequestrequestbody6type.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequestrequestbody7fieldmeta.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequestrequestbody7fieldmetatype.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequestrequestbody7type.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequestrequestbody8fieldmeta.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequestrequestbody8fieldmetatype.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequestrequestbody8type.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequestrequestbody9fieldmeta.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequestrequestbody9fieldmetatype.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequestrequestbody9type.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequestrequestbodyfieldmeta.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequestrequestbodytype.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequesttype.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsrequestvalues.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldstype.md
+  - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsvalues.md
+  - docs/models/fieldcreatetemplatefieldfieldtype.md
+  - docs/models/fieldcreatetemplatefieldfieldvalues.md
+  - docs/models/fieldcreatetemplatefieldrequestbody.md
+  - docs/models/fieldcreatetemplatefieldresponsebody.md
+  - docs/models/fieldcreatetemplatefieldsfieldmeta.md
+  - docs/models/fieldcreatetemplatefieldsfieldmeta1.md
+  - docs/models/fieldcreatetemplatefieldsfieldmeta2.md
+  - docs/models/fieldcreatetemplatefieldsfieldmeta3.md
+  - docs/models/fieldcreatetemplatefieldsfieldmeta4.md
+  - docs/models/fieldcreatetemplatefieldsfieldmeta5.md
+  - docs/models/fieldcreatetemplatefieldsfieldmeta6.md
+  - docs/models/fieldcreatetemplatefieldsfieldmeta7.md
+  - docs/models/fieldcreatetemplatefieldsfieldmeta8.md
+  - docs/models/fieldcreatetemplatefieldsfieldmeta9.md
+  - docs/models/fieldcreatetemplatefieldsfieldmetatemplatesfieldsresponse200applicationjsonresponsebodyfields8type.md
+  - docs/models/fieldcreatetemplatefieldsfieldmetatemplatesfieldsresponse200applicationjsonresponsebodyfields9type.md
+  - docs/models/fieldcreatetemplatefieldsfieldmetatemplatesfieldsresponse200applicationjsonresponsebodyfieldstype.md
+  - docs/models/fieldcreatetemplatefieldsfieldmetatemplatesfieldsresponse200applicationjsonresponsebodytype.md
+  - docs/models/fieldcreatetemplatefieldsfieldmetatemplatesfieldsresponse200applicationjsontype.md
+  - docs/models/fieldcreatetemplatefieldsfieldmetatemplatesfieldsresponse200type.md
+  - docs/models/fieldcreatetemplatefieldsfieldmetatemplatesfieldsresponsetype.md
+  - docs/models/fieldcreatetemplatefieldsfieldmetatemplatesfieldsresponsevalues.md
+  - docs/models/fieldcreatetemplatefieldsfieldmetatemplatesfieldstype.md
+  - docs/models/fieldcreatetemplatefieldsfieldmetatemplatesfieldsvalues.md
+  - docs/models/fieldcreatetemplatefieldsfieldmetatype.md
+  - docs/models/fieldcreatetemplatefieldsfieldmetavalues.md
+  - docs/models/fieldcreatetemplatefieldsfields.md
+  - docs/models/fieldcreatetemplatefieldsfields1.md
+  - docs/models/fieldcreatetemplatefieldsfields10.md
+  - docs/models/fieldcreatetemplatefieldsfields11.md
+  - docs/models/fieldcreatetemplatefieldsfields2.md
+  - docs/models/fieldcreatetemplatefieldsfields3.md
+  - docs/models/fieldcreatetemplatefieldsfields4.md
+  - docs/models/fieldcreatetemplatefieldsfields5.md
+  - docs/models/fieldcreatetemplatefieldsfields6.md
+  - docs/models/fieldcreatetemplatefieldsfields7.md
+  - docs/models/fieldcreatetemplatefieldsfields8.md
+  - docs/models/fieldcreatetemplatefieldsfields9.md
+  - docs/models/fieldcreatetemplatefieldsfieldsfieldmeta.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsfieldmeta.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequestfieldmeta.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequestrequestbody10fieldmeta.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequestrequestbody10fieldmetatype.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequestrequestbody10type.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequestrequestbody11fieldmeta.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequestrequestbody11fieldmetatype.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequestrequestbody11type.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequestrequestbody4fieldmetatype.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequestrequestbody4type.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequestrequestbody5fieldmetatype.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequestrequestbody5type.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequestrequestbody6fieldmetatype.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequestrequestbody6type.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequestrequestbody7fieldmeta.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequestrequestbody7fieldmetatype.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequestrequestbody7type.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequestrequestbody8fieldmeta.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequestrequestbody8fieldmetatype.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequestrequestbody8type.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequestrequestbody9fieldmeta.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequestrequestbody9fieldmetatype.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequestrequestbody9type.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequestrequestbodyfieldmeta.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequestrequestbodytype.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequesttype.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsrequestvalues.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldstype.md
+  - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsvalues.md
+  - docs/models/fieldcreatetemplatefieldsfieldstype.md
+  - docs/models/fieldcreatetemplatefieldsfieldsvalues.md
+  - docs/models/fieldcreatetemplatefieldsrequestbody.md
+  - docs/models/fieldcreatetemplatefieldsresponsebody.md
+  - docs/models/fieldcreatetemplatefieldstemplatesfieldsfields.md
+  - docs/models/fieldcreatetemplatefieldstype.md
+  - docs/models/fieldcreatetemplatefieldtype.md
+  - docs/models/fielddeletedocumentfieldrequestbody.md
+  - docs/models/fielddeletedocumentfieldresponsebody.md
+  - docs/models/fielddeletetemplatefieldrequestbody.md
+  - docs/models/fielddeletetemplatefieldresponsebody.md
+  - docs/models/fieldfieldmeta.md
+  - docs/models/fieldgetdocumentfieldfieldmeta.md
+  - docs/models/fieldgetdocumentfieldfieldmetadocumentsfieldsresponse200applicationjsonresponsebody8type.md
+  - docs/models/fieldgetdocumentfieldfieldmetadocumentsfieldsresponse200applicationjsonresponsebody9type.md
+  - docs/models/fieldgetdocumentfieldfieldmetadocumentsfieldsresponse200applicationjsonresponsebodytype.md
+  - docs/models/fieldgetdocumentfieldfieldmetadocumentsfieldsresponse200applicationjsontype.md
+  - docs/models/fieldgetdocumentfieldfieldmetadocumentsfieldsresponse200type.md
+  - docs/models/fieldgetdocumentfieldfieldmetadocumentsfieldsresponsetype.md
+  - docs/models/fieldgetdocumentfieldfieldmetadocumentsfieldstype.md
+  - docs/models/fieldgetdocumentfieldfieldmetadocumentsfieldsvalues.md
+  - docs/models/fieldgetdocumentfieldfieldmetatype.md
+  - docs/models/fieldgetdocumentfieldfieldmetavalues.md
+  - docs/models/fieldgetdocumentfieldrequest.md
+  - docs/models/fieldgetdocumentfieldresponsebody.md
+  - docs/models/fieldgetdocumentfieldtype.md
+  - docs/models/fieldgettemplatefieldfieldmeta.md
+  - docs/models/fieldgettemplatefieldfieldmeta1.md
+  - docs/models/fieldgettemplatefieldfieldmeta2.md
+  - docs/models/fieldgettemplatefieldfieldmeta3.md
+  - docs/models/fieldgettemplatefieldfieldmeta4.md
+  - docs/models/fieldgettemplatefieldfieldmeta5.md
+  - docs/models/fieldgettemplatefieldfieldmeta6.md
+  - docs/models/fieldgettemplatefieldfieldmeta7.md
+  - docs/models/fieldgettemplatefieldfieldmeta8.md
+  - docs/models/fieldgettemplatefieldfieldmeta9.md
+  - docs/models/fieldgettemplatefieldfieldmetatemplatesfieldsresponse200applicationjsonresponsebody7type.md
+  - docs/models/fieldgettemplatefieldfieldmetatemplatesfieldsresponse200applicationjsonresponsebody8type.md
+  - docs/models/fieldgettemplatefieldfieldmetatemplatesfieldsresponse200applicationjsonresponsebody9type.md
+  - docs/models/fieldgettemplatefieldfieldmetatemplatesfieldsresponse200applicationjsonresponsebodytype.md
+  - docs/models/fieldgettemplatefieldfieldmetatemplatesfieldsresponse200applicationjsontype.md
+  - docs/models/fieldgettemplatefieldfieldmetatemplatesfieldsresponse200type.md
+  - docs/models/fieldgettemplatefieldfieldmetatemplatesfieldsresponsetype.md
+  - docs/models/fieldgettemplatefieldfieldmetatemplatesfieldsresponsevalues.md
+  - docs/models/fieldgettemplatefieldfieldmetatemplatesfieldstype.md
+  - docs/models/fieldgettemplatefieldfieldmetatemplatesfieldsvalues.md
+  - docs/models/fieldgettemplatefieldfieldmetatype.md
+  - docs/models/fieldgettemplatefieldfieldmetavalues.md
+  - docs/models/fieldgettemplatefieldrequest.md
+  - docs/models/fieldgettemplatefieldresponsebody.md
+  - docs/models/fieldgettemplatefieldtype.md
+  - docs/models/fieldmeta.md
+  - docs/models/fieldmeta1.md
+  - docs/models/fieldmeta2.md
+  - docs/models/fieldmeta3.md
+  - docs/models/fieldmeta4.md
+  - docs/models/fieldmeta5.md
+  - docs/models/fieldmeta6.md
+  - docs/models/fieldmeta7.md
+  - docs/models/fieldmeta8.md
+  - docs/models/fieldmeta9.md
+  - docs/models/fieldmetatype.md
+  - docs/models/fieldmetavalues.md
+  - docs/models/fields1.md
+  - docs/models/fields10.md
+  - docs/models/fields11.md
+  - docs/models/fields2.md
+  - docs/models/fields3.md
+  - docs/models/fields4.md
+  - docs/models/fields5.md
+  - docs/models/fields6.md
+  - docs/models/fields7.md
+  - docs/models/fields8.md
+  - docs/models/fields9.md
+  - docs/models/fieldsfieldmeta.md
+  - docs/models/fieldstype.md
+  - docs/models/fieldsvalues.md
+  - docs/models/fieldtype.md
+  - docs/models/fieldupdatedocumentfieldfield.md
+  - docs/models/fieldupdatedocumentfieldfield1.md
+  - docs/models/fieldupdatedocumentfieldfield10.md
+  - docs/models/fieldupdatedocumentfieldfield11.md
+  - docs/models/fieldupdatedocumentfieldfield2.md
+  - docs/models/fieldupdatedocumentfieldfield3.md
+  - docs/models/fieldupdatedocumentfieldfield4.md
+  - docs/models/fieldupdatedocumentfieldfield5.md
+  - docs/models/fieldupdatedocumentfieldfield6.md
+  - docs/models/fieldupdatedocumentfieldfield7.md
+  - docs/models/fieldupdatedocumentfieldfield8.md
+  - docs/models/fieldupdatedocumentfieldfield9.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsfieldmeta.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequestfieldmeta.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequestrequestbody10fieldmeta.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequestrequestbody10fieldmetatype.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequestrequestbody10type.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequestrequestbody11fieldmeta.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequestrequestbody11fieldmetatype.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequestrequestbody11type.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequestrequestbody4fieldmetatype.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequestrequestbody4type.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequestrequestbody5fieldmetatype.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequestrequestbody5type.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequestrequestbody6fieldmetatype.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequestrequestbody6type.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequestrequestbody7fieldmeta.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequestrequestbody7fieldmetatype.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequestrequestbody7type.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequestrequestbody8fieldmeta.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequestrequestbody8fieldmetatype.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequestrequestbody8type.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequestrequestbody9fieldmeta.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequestrequestbody9fieldmetatype.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequestrequestbody9type.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequestrequestbodyfieldmeta.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequestrequestbodytype.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequesttype.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsrequestvalues.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldstype.md
+  - docs/models/fieldupdatedocumentfieldfielddocumentsfieldsvalues.md
+  - docs/models/fieldupdatedocumentfieldfieldfieldmeta.md
+  - docs/models/fieldupdatedocumentfieldfieldmeta.md
+  - docs/models/fieldupdatedocumentfieldfieldmeta1.md
+  - docs/models/fieldupdatedocumentfieldfieldmeta2.md
+  - docs/models/fieldupdatedocumentfieldfieldmeta3.md
+  - docs/models/fieldupdatedocumentfieldfieldmeta4.md
+  - docs/models/fieldupdatedocumentfieldfieldmeta5.md
+  - docs/models/fieldupdatedocumentfieldfieldmeta6.md
+  - docs/models/fieldupdatedocumentfieldfieldmeta7.md
+  - docs/models/fieldupdatedocumentfieldfieldmeta8.md
+  - docs/models/fieldupdatedocumentfieldfieldmeta9.md
+  - docs/models/fieldupdatedocumentfieldfieldmetadocumentsfieldsresponse200applicationjsonresponsebody7type.md
+  - docs/models/fieldupdatedocumentfieldfieldmetadocumentsfieldsresponse200applicationjsonresponsebody8type.md
+  - docs/models/fieldupdatedocumentfieldfieldmetadocumentsfieldsresponse200applicationjsonresponsebody9type.md
+  - docs/models/fieldupdatedocumentfieldfieldmetadocumentsfieldsresponse200applicationjsonresponsebodytype.md
+  - docs/models/fieldupdatedocumentfieldfieldmetadocumentsfieldsresponse200applicationjsontype.md
+  - docs/models/fieldupdatedocumentfieldfieldmetadocumentsfieldsresponse200type.md
+  - docs/models/fieldupdatedocumentfieldfieldmetadocumentsfieldsresponsetype.md
+  - docs/models/fieldupdatedocumentfieldfieldmetadocumentsfieldsresponsevalues.md
+  - docs/models/fieldupdatedocumentfieldfieldmetadocumentsfieldstype.md
+  - docs/models/fieldupdatedocumentfieldfieldmetadocumentsfieldsvalues.md
+  - docs/models/fieldupdatedocumentfieldfieldmetatype.md
+  - docs/models/fieldupdatedocumentfieldfieldmetavalues.md
+  - docs/models/fieldupdatedocumentfieldfieldtype.md
+  - docs/models/fieldupdatedocumentfieldfieldvalues.md
+  - docs/models/fieldupdatedocumentfieldrequestbody.md
+  - docs/models/fieldupdatedocumentfieldresponsebody.md
+  - docs/models/fieldupdatedocumentfieldsdocumentsfieldsfields.md
+  - docs/models/fieldupdatedocumentfieldsfieldmeta.md
+  - docs/models/fieldupdatedocumentfieldsfieldmeta1.md
+  - docs/models/fieldupdatedocumentfieldsfieldmeta2.md
+  - docs/models/fieldupdatedocumentfieldsfieldmeta3.md
+  - docs/models/fieldupdatedocumentfieldsfieldmeta4.md
+  - docs/models/fieldupdatedocumentfieldsfieldmeta5.md
+  - docs/models/fieldupdatedocumentfieldsfieldmeta6.md
+  - docs/models/fieldupdatedocumentfieldsfieldmeta7.md
+  - docs/models/fieldupdatedocumentfieldsfieldmeta8.md
+  - docs/models/fieldupdatedocumentfieldsfieldmeta9.md
+  - docs/models/fieldupdatedocumentfieldsfieldmetadocumentsfieldsresponse200applicationjsonresponsebodyfields8type.md
+  - docs/models/fieldupdatedocumentfieldsfieldmetadocumentsfieldsresponse200applicationjsonresponsebodyfields9type.md
+  - docs/models/fieldupdatedocumentfieldsfieldmetadocumentsfieldsresponse200applicationjsonresponsebodyfieldstype.md
+  - docs/models/fieldupdatedocumentfieldsfieldmetadocumentsfieldsresponse200applicationjsonresponsebodytype.md
+  - docs/models/fieldupdatedocumentfieldsfieldmetadocumentsfieldsresponse200applicationjsontype.md
+  - docs/models/fieldupdatedocumentfieldsfieldmetadocumentsfieldsresponse200type.md
+  - docs/models/fieldupdatedocumentfieldsfieldmetadocumentsfieldsresponsetype.md
+  - docs/models/fieldupdatedocumentfieldsfieldmetadocumentsfieldsresponsevalues.md
+  - docs/models/fieldupdatedocumentfieldsfieldmetadocumentsfieldstype.md
+  - docs/models/fieldupdatedocumentfieldsfieldmetadocumentsfieldsvalues.md
+  - docs/models/fieldupdatedocumentfieldsfieldmetatype.md
+  - docs/models/fieldupdatedocumentfieldsfieldmetavalues.md
+  - docs/models/fieldupdatedocumentfieldsfields.md
+  - docs/models/fieldupdatedocumentfieldsfields1.md
+  - docs/models/fieldupdatedocumentfieldsfields10.md
+  - docs/models/fieldupdatedocumentfieldsfields11.md
+  - docs/models/fieldupdatedocumentfieldsfields2.md
+  - docs/models/fieldupdatedocumentfieldsfields3.md
+  - docs/models/fieldupdatedocumentfieldsfields4.md
+  - docs/models/fieldupdatedocumentfieldsfields5.md
+  - docs/models/fieldupdatedocumentfieldsfields6.md
+  - docs/models/fieldupdatedocumentfieldsfields7.md
+  - docs/models/fieldupdatedocumentfieldsfields8.md
+  - docs/models/fieldupdatedocumentfieldsfields9.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsfieldmeta.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequestfieldmeta.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody10fieldmeta.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody10fieldmetatype.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody10type.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody11fieldmeta.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody11fieldmetatype.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody11type.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody4fieldmetatype.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody4type.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody5fieldmetatype.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody5type.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody6fieldmetatype.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody6type.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody7fieldmeta.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody7fieldmetatype.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody7type.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody8fieldmeta.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody8fieldmetatype.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody8type.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody9fieldmeta.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody9fieldmetatype.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequestrequestbody9type.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequestrequestbodyfieldmeta.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequestrequestbodytype.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequesttype.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsrequestvalues.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldstype.md
+  - docs/models/fieldupdatedocumentfieldsfieldsdocumentsfieldsvalues.md
+  - docs/models/fieldupdatedocumentfieldsfieldsfieldmeta.md
+  - docs/models/fieldupdatedocumentfieldsfieldstype.md
+  - docs/models/fieldupdatedocumentfieldsfieldsvalues.md
+  - docs/models/fieldupdatedocumentfieldsrequestbody.md
+  - docs/models/fieldupdatedocumentfieldsresponsebody.md
+  - docs/models/fieldupdatedocumentfieldstype.md
+  - docs/models/fieldupdatedocumentfieldtype.md
+  - docs/models/fieldupdatetemplatefieldfield.md
+  - docs/models/fieldupdatetemplatefieldfield1.md
+  - docs/models/fieldupdatetemplatefieldfield10.md
+  - docs/models/fieldupdatetemplatefieldfield11.md
+  - docs/models/fieldupdatetemplatefieldfield2.md
+  - docs/models/fieldupdatetemplatefieldfield3.md
+  - docs/models/fieldupdatetemplatefieldfield4.md
+  - docs/models/fieldupdatetemplatefieldfield5.md
+  - docs/models/fieldupdatetemplatefieldfield6.md
+  - docs/models/fieldupdatetemplatefieldfield7.md
+  - docs/models/fieldupdatetemplatefieldfield8.md
+  - docs/models/fieldupdatetemplatefieldfield9.md
+  - docs/models/fieldupdatetemplatefieldfieldfieldmeta.md
+  - docs/models/fieldupdatetemplatefieldfieldmeta.md
+  - docs/models/fieldupdatetemplatefieldfieldmeta1.md
+  - docs/models/fieldupdatetemplatefieldfieldmeta2.md
+  - docs/models/fieldupdatetemplatefieldfieldmeta3.md
+  - docs/models/fieldupdatetemplatefieldfieldmeta4.md
+  - docs/models/fieldupdatetemplatefieldfieldmeta5.md
+  - docs/models/fieldupdatetemplatefieldfieldmeta6.md
+  - docs/models/fieldupdatetemplatefieldfieldmeta7.md
+  - docs/models/fieldupdatetemplatefieldfieldmeta8.md
+  - docs/models/fieldupdatetemplatefieldfieldmeta9.md
+  - docs/models/fieldupdatetemplatefieldfieldmetatemplatesfieldsresponse200applicationjsonresponsebody7type.md
+  - docs/models/fieldupdatetemplatefieldfieldmetatemplatesfieldsresponse200applicationjsonresponsebody8type.md
+  - docs/models/fieldupdatetemplatefieldfieldmetatemplatesfieldsresponse200applicationjsonresponsebody9type.md
+  - docs/models/fieldupdatetemplatefieldfieldmetatemplatesfieldsresponse200applicationjsonresponsebodytype.md
+  - docs/models/fieldupdatetemplatefieldfieldmetatemplatesfieldsresponse200applicationjsontype.md
+  - docs/models/fieldupdatetemplatefieldfieldmetatemplatesfieldsresponse200type.md
+  - docs/models/fieldupdatetemplatefieldfieldmetatemplatesfieldsresponsetype.md
+  - docs/models/fieldupdatetemplatefieldfieldmetatemplatesfieldsresponsevalues.md
+  - docs/models/fieldupdatetemplatefieldfieldmetatemplatesfieldstype.md
+  - docs/models/fieldupdatetemplatefieldfieldmetatemplatesfieldsvalues.md
+  - docs/models/fieldupdatetemplatefieldfieldmetatype.md
+  - docs/models/fieldupdatetemplatefieldfieldmetavalues.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsfieldmeta.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequestfieldmeta.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequestrequestbody10fieldmeta.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequestrequestbody10fieldmetatype.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequestrequestbody10type.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequestrequestbody11fieldmeta.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequestrequestbody11fieldmetatype.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequestrequestbody11type.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequestrequestbody4fieldmetatype.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequestrequestbody4type.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequestrequestbody5fieldmetatype.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequestrequestbody5type.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequestrequestbody6fieldmetatype.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequestrequestbody6type.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequestrequestbody7fieldmeta.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequestrequestbody7fieldmetatype.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequestrequestbody7type.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequestrequestbody8fieldmeta.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequestrequestbody8fieldmetatype.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequestrequestbody8type.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequestrequestbody9fieldmeta.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequestrequestbody9fieldmetatype.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequestrequestbody9type.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequestrequestbodyfieldmeta.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequestrequestbodytype.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequesttype.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsrequestvalues.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldstype.md
+  - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsvalues.md
+  - docs/models/fieldupdatetemplatefieldfieldtype.md
+  - docs/models/fieldupdatetemplatefieldfieldvalues.md
+  - docs/models/fieldupdatetemplatefieldrequestbody.md
+  - docs/models/fieldupdatetemplatefieldresponsebody.md
+  - docs/models/fieldupdatetemplatefieldsfieldmeta.md
+  - docs/models/fieldupdatetemplatefieldsfieldmeta1.md
+  - docs/models/fieldupdatetemplatefieldsfieldmeta2.md
+  - docs/models/fieldupdatetemplatefieldsfieldmeta3.md
+  - docs/models/fieldupdatetemplatefieldsfieldmeta4.md
+  - docs/models/fieldupdatetemplatefieldsfieldmeta5.md
+  - docs/models/fieldupdatetemplatefieldsfieldmeta6.md
+  - docs/models/fieldupdatetemplatefieldsfieldmeta7.md
+  - docs/models/fieldupdatetemplatefieldsfieldmeta8.md
+  - docs/models/fieldupdatetemplatefieldsfieldmeta9.md
+  - docs/models/fieldupdatetemplatefieldsfieldmetatemplatesfieldsresponse200applicationjsonresponsebodyfields8type.md
+  - docs/models/fieldupdatetemplatefieldsfieldmetatemplatesfieldsresponse200applicationjsonresponsebodyfields9type.md
+  - docs/models/fieldupdatetemplatefieldsfieldmetatemplatesfieldsresponse200applicationjsonresponsebodyfieldstype.md
+  - docs/models/fieldupdatetemplatefieldsfieldmetatemplatesfieldsresponse200applicationjsonresponsebodytype.md
+  - docs/models/fieldupdatetemplatefieldsfieldmetatemplatesfieldsresponse200applicationjsontype.md
+  - docs/models/fieldupdatetemplatefieldsfieldmetatemplatesfieldsresponse200type.md
+  - docs/models/fieldupdatetemplatefieldsfieldmetatemplatesfieldsresponsetype.md
+  - docs/models/fieldupdatetemplatefieldsfieldmetatemplatesfieldsresponsevalues.md
+  - docs/models/fieldupdatetemplatefieldsfieldmetatemplatesfieldstype.md
+  - docs/models/fieldupdatetemplatefieldsfieldmetatemplatesfieldsvalues.md
+  - docs/models/fieldupdatetemplatefieldsfieldmetatype.md
+  - docs/models/fieldupdatetemplatefieldsfieldmetavalues.md
+  - docs/models/fieldupdatetemplatefieldsfields.md
+  - docs/models/fieldupdatetemplatefieldsfields1.md
+  - docs/models/fieldupdatetemplatefieldsfields10.md
+  - docs/models/fieldupdatetemplatefieldsfields11.md
+  - docs/models/fieldupdatetemplatefieldsfields2.md
+  - docs/models/fieldupdatetemplatefieldsfields3.md
+  - docs/models/fieldupdatetemplatefieldsfields4.md
+  - docs/models/fieldupdatetemplatefieldsfields5.md
+  - docs/models/fieldupdatetemplatefieldsfields6.md
+  - docs/models/fieldupdatetemplatefieldsfields7.md
+  - docs/models/fieldupdatetemplatefieldsfields8.md
+  - docs/models/fieldupdatetemplatefieldsfields9.md
+  - docs/models/fieldupdatetemplatefieldsfieldsfieldmeta.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsfieldmeta.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequestfieldmeta.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequestrequestbody10fieldmeta.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequestrequestbody10fieldmetatype.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequestrequestbody10type.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequestrequestbody11fieldmeta.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequestrequestbody11fieldmetatype.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequestrequestbody11type.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequestrequestbody4fieldmetatype.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequestrequestbody4type.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequestrequestbody5fieldmetatype.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequestrequestbody5type.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequestrequestbody6fieldmetatype.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequestrequestbody6type.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequestrequestbody7fieldmeta.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequestrequestbody7fieldmetatype.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequestrequestbody7type.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequestrequestbody8fieldmeta.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequestrequestbody8fieldmetatype.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequestrequestbody8type.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequestrequestbody9fieldmeta.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequestrequestbody9fieldmetatype.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequestrequestbody9type.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequestrequestbodyfieldmeta.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequestrequestbodytype.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequesttype.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsrequestvalues.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldstype.md
+  - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsvalues.md
+  - docs/models/fieldupdatetemplatefieldsfieldstype.md
+  - docs/models/fieldupdatetemplatefieldsfieldsvalues.md
+  - docs/models/fieldupdatetemplatefieldsrequestbody.md
+  - docs/models/fieldupdatetemplatefieldsresponsebody.md
+  - docs/models/fieldupdatetemplatefieldstemplatesfieldsfields.md
+  - docs/models/fieldupdatetemplatefieldstype.md
+  - docs/models/fieldupdatetemplatefieldtype.md
+  - docs/models/fieldvalues.md
+  - docs/models/five.md
+  - docs/models/formvalues.md
+  - docs/models/four.md
+  - docs/models/globalaccessauth.md
+  - docs/models/globalactionauth.md
+  - docs/models/issues.md
+  - docs/models/language.md
+  - docs/models/meta.md
+  - docs/models/nine.md
+  - docs/models/one.md
+  - docs/models/orderbycolumn.md
+  - docs/models/orderbydirection.md
+  - docs/models/queryparamtype.md
+  - docs/models/readstatus.md
+  - docs/models/recipient.md
+  - docs/models/recipientcreatedocumentrecipientaccessauth.md
+  - docs/models/recipientcreatedocumentrecipientactionauth.md
+  - docs/models/recipientcreatedocumentrecipientauthoptions.md
+  - docs/models/recipientcreatedocumentrecipientdocumentsrecipientsaccessauth.md
+  - docs/models/recipientcreatedocumentrecipientdocumentsrecipientsactionauth.md
+  - docs/models/recipientcreatedocumentrecipientdocumentsrecipientsrole.md
+  - docs/models/recipientcreatedocumentrecipientreadstatus.md
+  - docs/models/recipientcreatedocumentrecipientrequestbody.md
+  - docs/models/recipientcreatedocumentrecipientresponsebody.md
+  - docs/models/recipientcreatedocumentrecipientrole.md
+  - docs/models/recipientcreatedocumentrecipientsaccessauth.md
+  - docs/models/recipientcreatedocumentrecipientsactionauth.md
+  - docs/models/recipientcreatedocumentrecipientsauthoptions.md
+  - docs/models/recipientcreatedocumentrecipientsdocumentsrecipientsaccessauth.md
+  - docs/models/recipientcreatedocumentrecipientsdocumentsrecipientsactionauth.md
+  - docs/models/recipientcreatedocumentrecipientsdocumentsrecipientsrecipients.md
+  - docs/models/recipientcreatedocumentrecipientsdocumentsrecipientsrole.md
+  - docs/models/recipientcreatedocumentrecipientsendstatus.md
+  - docs/models/recipientcreatedocumentrecipientsigningstatus.md
+  - docs/models/recipientcreatedocumentrecipientsreadstatus.md
+  - docs/models/recipientcreatedocumentrecipientsrecipients.md
+  - docs/models/recipientcreatedocumentrecipientsrequestbody.md
+  - docs/models/recipientcreatedocumentrecipientsresponsebody.md
+  - docs/models/recipientcreatedocumentrecipientsrole.md
+  - docs/models/recipientcreatedocumentrecipientssendstatus.md
+  - docs/models/recipientcreatedocumentrecipientssigningstatus.md
+  - docs/models/recipientcreatetemplaterecipientaccessauth.md
+  - docs/models/recipientcreatetemplaterecipientactionauth.md
+  - docs/models/recipientcreatetemplaterecipientauthoptions.md
+  - docs/models/recipientcreatetemplaterecipientreadstatus.md
+  - docs/models/recipientcreatetemplaterecipientrecipient.md
+  - docs/models/recipientcreatetemplaterecipientrequestbody.md
+  - docs/models/recipientcreatetemplaterecipientresponsebody.md
+  - docs/models/recipientcreatetemplaterecipientrole.md
+  - docs/models/recipientcreatetemplaterecipientsaccessauth.md
+  - docs/models/recipientcreatetemplaterecipientsactionauth.md
+  - docs/models/recipientcreatetemplaterecipientsauthoptions.md
+  - docs/models/recipientcreatetemplaterecipientsendstatus.md
+  - docs/models/recipientcreatetemplaterecipientsigningstatus.md
+  - docs/models/recipientcreatetemplaterecipientsreadstatus.md
+  - docs/models/recipientcreatetemplaterecipientsrecipients.md
+  - docs/models/recipientcreatetemplaterecipientsrequestbody.md
+  - docs/models/recipientcreatetemplaterecipientsresponsebody.md
+  - docs/models/recipientcreatetemplaterecipientsrole.md
+  - docs/models/recipientcreatetemplaterecipientssendstatus.md
+  - docs/models/recipientcreatetemplaterecipientssigningstatus.md
+  - docs/models/recipientcreatetemplaterecipientstemplatesrecipientsaccessauth.md
+  - docs/models/recipientcreatetemplaterecipientstemplatesrecipientsactionauth.md
+  - docs/models/recipientcreatetemplaterecipientstemplatesrecipientsrecipients.md
+  - docs/models/recipientcreatetemplaterecipientstemplatesrecipientsrole.md
+  - docs/models/recipientcreatetemplaterecipienttemplatesrecipientsaccessauth.md
+  - docs/models/recipientcreatetemplaterecipienttemplatesrecipientsactionauth.md
+  - docs/models/recipientcreatetemplaterecipienttemplatesrecipientsrole.md
+  - docs/models/recipientdeletedocumentrecipientrequestbody.md
+  - docs/models/recipientdeletedocumentrecipientresponsebody.md
+  - docs/models/recipientdeletetemplaterecipientrequestbody.md
+  - docs/models/recipientdeletetemplaterecipientresponsebody.md
+  - docs/models/recipientgetdocumentrecipientaccessauth.md
+  - docs/models/recipientgetdocumentrecipientactionauth.md
+  - docs/models/recipientgetdocumentrecipientauthoptions.md
+  - docs/models/recipientgetdocumentrecipientfieldmeta.md
+  - docs/models/recipientgetdocumentrecipientfieldmeta1.md
+  - docs/models/recipientgetdocumentrecipientfieldmeta2.md
+  - docs/models/recipientgetdocumentrecipientfieldmeta3.md
+  - docs/models/recipientgetdocumentrecipientfieldmeta4.md
+  - docs/models/recipientgetdocumentrecipientfieldmeta5.md
+  - docs/models/recipientgetdocumentrecipientfieldmeta6.md
+  - docs/models/recipientgetdocumentrecipientfieldmeta7.md
+  - docs/models/recipientgetdocumentrecipientfieldmeta8.md
+  - docs/models/recipientgetdocumentrecipientfieldmeta9.md
+  - docs/models/recipientgetdocumentrecipientfieldmetadocumentsrecipientsresponse200applicationjsonresponsebodyfields8type.md
+  - docs/models/recipientgetdocumentrecipientfieldmetadocumentsrecipientsresponse200applicationjsonresponsebodyfields9type.md
+  - docs/models/recipientgetdocumentrecipientfieldmetadocumentsrecipientsresponse200applicationjsonresponsebodyfieldstype.md
+  - docs/models/recipientgetdocumentrecipientfieldmetadocumentsrecipientsresponse200applicationjsonresponsebodytype.md
+  - docs/models/recipientgetdocumentrecipientfieldmetadocumentsrecipientsresponse200applicationjsontype.md
+  - docs/models/recipientgetdocumentrecipientfieldmetadocumentsrecipientsresponse200type.md
+  - docs/models/recipientgetdocumentrecipientfieldmetadocumentsrecipientsresponsetype.md
+  - docs/models/recipientgetdocumentrecipientfieldmetadocumentsrecipientsresponsevalues.md
+  - docs/models/recipientgetdocumentrecipientfieldmetadocumentsrecipientstype.md
+  - docs/models/recipientgetdocumentrecipientfieldmetadocumentsrecipientsvalues.md
+  - docs/models/recipientgetdocumentrecipientfieldmetatype.md
+  - docs/models/recipientgetdocumentrecipientfieldmetavalues.md
+  - docs/models/recipientgetdocumentrecipientfields.md
+  - docs/models/recipientgetdocumentrecipientrequest.md
+  - docs/models/recipientgetdocumentrecipientresponsebody.md
+  - docs/models/recipientgetdocumentrecipientrole.md
+  - docs/models/recipientgetdocumentrecipienttype.md
+  - docs/models/recipientgettemplaterecipientaccessauth.md
+  - docs/models/recipientgettemplaterecipientactionauth.md
+  - docs/models/recipientgettemplaterecipientauthoptions.md
+  - docs/models/recipientgettemplaterecipientfieldmeta.md
+  - docs/models/recipientgettemplaterecipientfieldmeta1.md
+  - docs/models/recipientgettemplaterecipientfieldmeta2.md
+  - docs/models/recipientgettemplaterecipientfieldmeta3.md
+  - docs/models/recipientgettemplaterecipientfieldmeta4.md
+  - docs/models/recipientgettemplaterecipientfieldmeta5.md
+  - docs/models/recipientgettemplaterecipientfieldmeta6.md
+  - docs/models/recipientgettemplaterecipientfieldmeta7.md
+  - docs/models/recipientgettemplaterecipientfieldmeta8.md
+  - docs/models/recipientgettemplaterecipientfieldmeta9.md
+  - docs/models/recipientgettemplaterecipientfieldmetatemplatesrecipientsresponse200applicationjsonresponsebodyfields8type.md
+  - docs/models/recipientgettemplaterecipientfieldmetatemplatesrecipientsresponse200applicationjsonresponsebodyfields9type.md
+  - docs/models/recipientgettemplaterecipientfieldmetatemplatesrecipientsresponse200applicationjsonresponsebodyfieldstype.md
+  - docs/models/recipientgettemplaterecipientfieldmetatemplatesrecipientsresponse200applicationjsonresponsebodytype.md
+  - docs/models/recipientgettemplaterecipientfieldmetatemplatesrecipientsresponse200applicationjsontype.md
+  - docs/models/recipientgettemplaterecipientfieldmetatemplatesrecipientsresponse200type.md
+  - docs/models/recipientgettemplaterecipientfieldmetatemplatesrecipientsresponsetype.md
+  - docs/models/recipientgettemplaterecipientfieldmetatemplatesrecipientsresponsevalues.md
+  - docs/models/recipientgettemplaterecipientfieldmetatemplatesrecipientstype.md
+  - docs/models/recipientgettemplaterecipientfieldmetatemplatesrecipientsvalues.md
+  - docs/models/recipientgettemplaterecipientfieldmetatype.md
+  - docs/models/recipientgettemplaterecipientfieldmetavalues.md
+  - docs/models/recipientgettemplaterecipientfields.md
+  - docs/models/recipientgettemplaterecipientreadstatus.md
+  - docs/models/recipientgettemplaterecipientrequest.md
+  - docs/models/recipientgettemplaterecipientresponsebody.md
+  - docs/models/recipientgettemplaterecipientrole.md
+  - docs/models/recipientgettemplaterecipientsendstatus.md
+  - docs/models/recipientgettemplaterecipientsigningstatus.md
+  - docs/models/recipientgettemplaterecipienttype.md
+  - docs/models/recipientupdatedocumentrecipientaccessauth.md
+  - docs/models/recipientupdatedocumentrecipientactionauth.md
+  - docs/models/recipientupdatedocumentrecipientauthoptions.md
+  - docs/models/recipientupdatedocumentrecipientdocumentsrecipientsaccessauth.md
+  - docs/models/recipientupdatedocumentrecipientdocumentsrecipientsactionauth.md
+  - docs/models/recipientupdatedocumentrecipientdocumentsrecipientsrole.md
+  - docs/models/recipientupdatedocumentrecipientfieldmeta.md
+  - docs/models/recipientupdatedocumentrecipientfieldmeta1.md
+  - docs/models/recipientupdatedocumentrecipientfieldmeta2.md
+  - docs/models/recipientupdatedocumentrecipientfieldmeta3.md
+  - docs/models/recipientupdatedocumentrecipientfieldmeta4.md
+  - docs/models/recipientupdatedocumentrecipientfieldmeta5.md
+  - docs/models/recipientupdatedocumentrecipientfieldmeta6.md
+  - docs/models/recipientupdatedocumentrecipientfieldmeta7.md
+  - docs/models/recipientupdatedocumentrecipientfieldmeta8.md
+  - docs/models/recipientupdatedocumentrecipientfieldmeta9.md
+  - docs/models/recipientupdatedocumentrecipientfieldmetadocumentsrecipientsresponse200applicationjsonresponsebodyfields8type.md
+  - docs/models/recipientupdatedocumentrecipientfieldmetadocumentsrecipientsresponse200applicationjsonresponsebodyfields9type.md
+  - docs/models/recipientupdatedocumentrecipientfieldmetadocumentsrecipientsresponse200applicationjsonresponsebodyfieldstype.md
+  - docs/models/recipientupdatedocumentrecipientfieldmetadocumentsrecipientsresponse200applicationjsonresponsebodytype.md
+  - docs/models/recipientupdatedocumentrecipientfieldmetadocumentsrecipientsresponse200applicationjsontype.md
+  - docs/models/recipientupdatedocumentrecipientfieldmetadocumentsrecipientsresponse200type.md
+  - docs/models/recipientupdatedocumentrecipientfieldmetadocumentsrecipientsresponsetype.md
+  - docs/models/recipientupdatedocumentrecipientfieldmetadocumentsrecipientsresponsevalues.md
+  - docs/models/recipientupdatedocumentrecipientfieldmetadocumentsrecipientstype.md
+  - docs/models/recipientupdatedocumentrecipientfieldmetadocumentsrecipientsvalues.md
+  - docs/models/recipientupdatedocumentrecipientfieldmetatype.md
+  - docs/models/recipientupdatedocumentrecipientfieldmetavalues.md
+  - docs/models/recipientupdatedocumentrecipientfields.md
+  - docs/models/recipientupdatedocumentrecipientreadstatus.md
+  - docs/models/recipientupdatedocumentrecipientrecipient.md
+  - docs/models/recipientupdatedocumentrecipientrequestbody.md
+  - docs/models/recipientupdatedocumentrecipientresponsebody.md
+  - docs/models/recipientupdatedocumentrecipientrole.md
+  - docs/models/recipientupdatedocumentrecipientsaccessauth.md
+  - docs/models/recipientupdatedocumentrecipientsactionauth.md
+  - docs/models/recipientupdatedocumentrecipientsauthoptions.md
+  - docs/models/recipientupdatedocumentrecipientsdocumentsrecipientsaccessauth.md
+  - docs/models/recipientupdatedocumentrecipientsdocumentsrecipientsactionauth.md
+  - docs/models/recipientupdatedocumentrecipientsdocumentsrecipientsrecipients.md
+  - docs/models/recipientupdatedocumentrecipientsdocumentsrecipientsrole.md
+  - docs/models/recipientupdatedocumentrecipientsendstatus.md
+  - docs/models/recipientupdatedocumentrecipientsfieldmeta.md
+  - docs/models/recipientupdatedocumentrecipientsfieldmeta1.md
+  - docs/models/recipientupdatedocumentrecipientsfieldmeta2.md
+  - docs/models/recipientupdatedocumentrecipientsfieldmeta3.md
+  - docs/models/recipientupdatedocumentrecipientsfieldmeta4.md
+  - docs/models/recipientupdatedocumentrecipientsfieldmeta5.md
+  - docs/models/recipientupdatedocumentrecipientsfieldmeta6.md
+  - docs/models/recipientupdatedocumentrecipientsfieldmeta7.md
+  - docs/models/recipientupdatedocumentrecipientsfieldmeta8.md
+  - docs/models/recipientupdatedocumentrecipientsfieldmeta9.md
+  - docs/models/recipientupdatedocumentrecipientsfieldmetadocumentsrecipientsresponse200applicationjsonresponsebodyrecipientsfields9type.md
+  - docs/models/recipientupdatedocumentrecipientsfieldmetadocumentsrecipientsresponse200applicationjsonresponsebodyrecipientsfieldstype.md
+  - docs/models/recipientupdatedocumentrecipientsfieldmetadocumentsrecipientsresponse200applicationjsonresponsebodyrecipientstype.md
+  - docs/models/recipientupdatedocumentrecipientsfieldmetadocumentsrecipientsresponse200applicationjsonresponsebodytype.md
+  - docs/models/recipientupdatedocumentrecipientsfieldmetadocumentsrecipientsresponse200applicationjsontype.md
+  - docs/models/recipientupdatedocumentrecipientsfieldmetadocumentsrecipientsresponse200type.md
+  - docs/models/recipientupdatedocumentrecipientsfieldmetadocumentsrecipientsresponsetype.md
+  - docs/models/recipientupdatedocumentrecipientsfieldmetadocumentsrecipientsresponsevalues.md
+  - docs/models/recipientupdatedocumentrecipientsfieldmetadocumentsrecipientstype.md
+  - docs/models/recipientupdatedocumentrecipientsfieldmetadocumentsrecipientsvalues.md
+  - docs/models/recipientupdatedocumentrecipientsfieldmetatype.md
+  - docs/models/recipientupdatedocumentrecipientsfieldmetavalues.md
+  - docs/models/recipientupdatedocumentrecipientsfields.md
+  - docs/models/recipientupdatedocumentrecipientsigningstatus.md
+  - docs/models/recipientupdatedocumentrecipientsreadstatus.md
+  - docs/models/recipientupdatedocumentrecipientsrecipients.md
+  - docs/models/recipientupdatedocumentrecipientsrequestbody.md
+  - docs/models/recipientupdatedocumentrecipientsresponsebody.md
+  - docs/models/recipientupdatedocumentrecipientsrole.md
+  - docs/models/recipientupdatedocumentrecipientssendstatus.md
+  - docs/models/recipientupdatedocumentrecipientssigningstatus.md
+  - docs/models/recipientupdatedocumentrecipientstype.md
+  - docs/models/recipientupdatedocumentrecipienttype.md
+  - docs/models/recipientupdatetemplaterecipientaccessauth.md
+  - docs/models/recipientupdatetemplaterecipientactionauth.md
+  - docs/models/recipientupdatetemplaterecipientauthoptions.md
+  - docs/models/recipientupdatetemplaterecipientfieldmeta.md
+  - docs/models/recipientupdatetemplaterecipientfieldmeta1.md
+  - docs/models/recipientupdatetemplaterecipientfieldmeta2.md
+  - docs/models/recipientupdatetemplaterecipientfieldmeta3.md
+  - docs/models/recipientupdatetemplaterecipientfieldmeta4.md
+  - docs/models/recipientupdatetemplaterecipientfieldmeta5.md
+  - docs/models/recipientupdatetemplaterecipientfieldmeta6.md
+  - docs/models/recipientupdatetemplaterecipientfieldmeta7.md
+  - docs/models/recipientupdatetemplaterecipientfieldmeta8.md
+  - docs/models/recipientupdatetemplaterecipientfieldmeta9.md
+  - docs/models/recipientupdatetemplaterecipientfieldmetatemplatesrecipientsresponse200applicationjsonresponsebodyfields8type.md
+  - docs/models/recipientupdatetemplaterecipientfieldmetatemplatesrecipientsresponse200applicationjsonresponsebodyfields9type.md
+  - docs/models/recipientupdatetemplaterecipientfieldmetatemplatesrecipientsresponse200applicationjsonresponsebodyfieldstype.md
+  - docs/models/recipientupdatetemplaterecipientfieldmetatemplatesrecipientsresponse200applicationjsonresponsebodytype.md
+  - docs/models/recipientupdatetemplaterecipientfieldmetatemplatesrecipientsresponse200applicationjsontype.md
+  - docs/models/recipientupdatetemplaterecipientfieldmetatemplatesrecipientsresponse200type.md
+  - docs/models/recipientupdatetemplaterecipientfieldmetatemplatesrecipientsresponsetype.md
+  - docs/models/recipientupdatetemplaterecipientfieldmetatemplatesrecipientsresponsevalues.md
+  - docs/models/recipientupdatetemplaterecipientfieldmetatemplatesrecipientstype.md
+  - docs/models/recipientupdatetemplaterecipientfieldmetatemplatesrecipientsvalues.md
+  - docs/models/recipientupdatetemplaterecipientfieldmetatype.md
+  - docs/models/recipientupdatetemplaterecipientfieldmetavalues.md
+  - docs/models/recipientupdatetemplaterecipientfields.md
+  - docs/models/recipientupdatetemplaterecipientreadstatus.md
+  - docs/models/recipientupdatetemplaterecipientrecipient.md
+  - docs/models/recipientupdatetemplaterecipientrequestbody.md
+  - docs/models/recipientupdatetemplaterecipientresponsebody.md
+  - docs/models/recipientupdatetemplaterecipientrole.md
+  - docs/models/recipientupdatetemplaterecipientsaccessauth.md
+  - docs/models/recipientupdatetemplaterecipientsactionauth.md
+  - docs/models/recipientupdatetemplaterecipientsauthoptions.md
+  - docs/models/recipientupdatetemplaterecipientsendstatus.md
+  - docs/models/recipientupdatetemplaterecipientsfieldmeta.md
+  - docs/models/recipientupdatetemplaterecipientsfieldmeta1.md
+  - docs/models/recipientupdatetemplaterecipientsfieldmeta2.md
+  - docs/models/recipientupdatetemplaterecipientsfieldmeta3.md
+  - docs/models/recipientupdatetemplaterecipientsfieldmeta4.md
+  - docs/models/recipientupdatetemplaterecipientsfieldmeta5.md
+  - docs/models/recipientupdatetemplaterecipientsfieldmeta6.md
+  - docs/models/recipientupdatetemplaterecipientsfieldmeta7.md
+  - docs/models/recipientupdatetemplaterecipientsfieldmeta8.md
+  - docs/models/recipientupdatetemplaterecipientsfieldmeta9.md
+  - docs/models/recipientupdatetemplaterecipientsfieldmetatemplatesrecipientsresponse200applicationjsonresponsebodyrecipientsfields9type.md
+  - docs/models/recipientupdatetemplaterecipientsfieldmetatemplatesrecipientsresponse200applicationjsonresponsebodyrecipientsfieldstype.md
+  - docs/models/recipientupdatetemplaterecipientsfieldmetatemplatesrecipientsresponse200applicationjsonresponsebodyrecipientstype.md
+  - docs/models/recipientupdatetemplaterecipientsfieldmetatemplatesrecipientsresponse200applicationjsonresponsebodytype.md
+  - docs/models/recipientupdatetemplaterecipientsfieldmetatemplatesrecipientsresponse200applicationjsontype.md
+  - docs/models/recipientupdatetemplaterecipientsfieldmetatemplatesrecipientsresponse200type.md
+  - docs/models/recipientupdatetemplaterecipientsfieldmetatemplatesrecipientsresponsetype.md
+  - docs/models/recipientupdatetemplaterecipientsfieldmetatemplatesrecipientsresponsevalues.md
+  - docs/models/recipientupdatetemplaterecipientsfieldmetatemplatesrecipientstype.md
+  - docs/models/recipientupdatetemplaterecipientsfieldmetatemplatesrecipientsvalues.md
+  - docs/models/recipientupdatetemplaterecipientsfieldmetatype.md
+  - docs/models/recipientupdatetemplaterecipientsfieldmetavalues.md
+  - docs/models/recipientupdatetemplaterecipientsfields.md
+  - docs/models/recipientupdatetemplaterecipientsigningstatus.md
+  - docs/models/recipientupdatetemplaterecipientsreadstatus.md
+  - docs/models/recipientupdatetemplaterecipientsrecipients.md
+  - docs/models/recipientupdatetemplaterecipientsrequestbody.md
+  - docs/models/recipientupdatetemplaterecipientsresponsebody.md
+  - docs/models/recipientupdatetemplaterecipientsrole.md
+  - docs/models/recipientupdatetemplaterecipientssendstatus.md
+  - docs/models/recipientupdatetemplaterecipientssigningstatus.md
+  - docs/models/recipientupdatetemplaterecipientstemplatesrecipientsaccessauth.md
+  - docs/models/recipientupdatetemplaterecipientstemplatesrecipientsactionauth.md
+  - docs/models/recipientupdatetemplaterecipientstemplatesrecipientsrecipients.md
+  - docs/models/recipientupdatetemplaterecipientstemplatesrecipientsrole.md
+  - docs/models/recipientupdatetemplaterecipientstype.md
+  - docs/models/recipientupdatetemplaterecipienttemplatesrecipientsaccessauth.md
+  - docs/models/recipientupdatetemplaterecipienttemplatesrecipientsactionauth.md
+  - docs/models/recipientupdatetemplaterecipienttemplatesrecipientsrole.md
+  - docs/models/recipientupdatetemplaterecipienttype.md
+  - docs/models/role.md
+  - docs/models/security.md
+  - docs/models/sendstatus.md
+  - docs/models/seven.md
+  - docs/models/signingorder.md
+  - docs/models/signingstatus.md
+  - docs/models/six.md
+  - docs/models/source.md
+  - docs/models/status.md
+  - docs/models/team.md
+  - docs/models/templatecreatedocumentfromtemplateaccessauth.md
+  - docs/models/templatecreatedocumentfromtemplateactionauth.md
+  - docs/models/templatecreatedocumentfromtemplateauthoptions.md
+  - docs/models/templatecreatedocumentfromtemplatedistributionmethod.md
+  - docs/models/templatecreatedocumentfromtemplatedocumentdata.md
+  - docs/models/templatecreatedocumentfromtemplatedocumentmeta.md
+  - docs/models/templatecreatedocumentfromtemplateemailsettings.md
+  - docs/models/templatecreatedocumentfromtemplatefieldmeta.md
+  - docs/models/templatecreatedocumentfromtemplatefieldmeta1.md
+  - docs/models/templatecreatedocumentfromtemplatefieldmeta2.md
+  - docs/models/templatecreatedocumentfromtemplatefieldmeta3.md
+  - docs/models/templatecreatedocumentfromtemplatefieldmeta4.md
+  - docs/models/templatecreatedocumentfromtemplatefieldmeta5.md
+  - docs/models/templatecreatedocumentfromtemplatefieldmeta6.md
+  - docs/models/templatecreatedocumentfromtemplatefieldmeta7.md
+  - docs/models/templatecreatedocumentfromtemplatefieldmeta8.md
+  - docs/models/templatecreatedocumentfromtemplatefieldmeta9.md
+  - docs/models/templatecreatedocumentfromtemplatefieldmetatemplatesresponse200applicationjsonresponsebodyfields8type.md
+  - docs/models/templatecreatedocumentfromtemplatefieldmetatemplatesresponse200applicationjsonresponsebodyfields9type.md
+  - docs/models/templatecreatedocumentfromtemplatefieldmetatemplatesresponse200applicationjsonresponsebodyfieldstype.md
+  - docs/models/templatecreatedocumentfromtemplatefieldmetatemplatesresponse200applicationjsonresponsebodytype.md
+  - docs/models/templatecreatedocumentfromtemplatefieldmetatemplatesresponse200applicationjsontype.md
+  - docs/models/templatecreatedocumentfromtemplatefieldmetatemplatesresponse200type.md
+  - docs/models/templatecreatedocumentfromtemplatefieldmetatemplatesresponsetype.md
+  - docs/models/templatecreatedocumentfromtemplatefieldmetatemplatesresponsevalues.md
+  - docs/models/templatecreatedocumentfromtemplatefieldmetatemplatestype.md
+  - docs/models/templatecreatedocumentfromtemplatefieldmetatemplatesvalues.md
+  - docs/models/templatecreatedocumentfromtemplatefieldmetatype.md
+  - docs/models/templatecreatedocumentfromtemplatefieldmetavalues.md
+  - docs/models/templatecreatedocumentfromtemplatefields.md
+  - docs/models/templatecreatedocumentfromtemplateformvalues.md
+  - docs/models/templatecreatedocumentfromtemplateglobalaccessauth.md
+  - docs/models/templatecreatedocumentfromtemplateglobalactionauth.md
+  - docs/models/templatecreatedocumentfromtemplatereadstatus.md
+  - docs/models/templatecreatedocumentfromtemplaterecipients.md
+  - docs/models/templatecreatedocumentfromtemplaterequestbody.md
+  - docs/models/templatecreatedocumentfromtemplateresponsebody.md
+  - docs/models/templatecreatedocumentfromtemplaterole.md
+  - docs/models/templatecreatedocumentfromtemplatesendstatus.md
+  - docs/models/templatecreatedocumentfromtemplatesigningorder.md
+  - docs/models/templatecreatedocumentfromtemplatesigningstatus.md
+  - docs/models/templatecreatedocumentfromtemplatesource.md
+  - docs/models/templatecreatedocumentfromtemplatestatus.md
+  - docs/models/templatecreatedocumentfromtemplatetemplatesauthoptions.md
+  - docs/models/templatecreatedocumentfromtemplatetemplatesrecipients.md
+  - docs/models/templatecreatedocumentfromtemplatetemplatestype.md
+  - docs/models/templatecreatedocumentfromtemplatetype.md
+  - docs/models/templatecreatedocumentfromtemplatevisibility.md
+  - docs/models/templatecreatetemplatedirectlinkrequestbody.md
+  - docs/models/templatecreatetemplatedirectlinkresponsebody.md
+  - docs/models/templatedeletetemplatedirectlinkrequestbody.md
+  - docs/models/templatedeletetemplatedirectlinkresponsebody.md
+  - docs/models/templatedeletetemplaterequestbody.md
+  - docs/models/templatedeletetemplateresponsebody.md
+  - docs/models/templatedocumentdata.md
+  - docs/models/templateduplicatetemplateauthoptions.md
+  - docs/models/templateduplicatetemplateglobalaccessauth.md
+  - docs/models/templateduplicatetemplateglobalactionauth.md
+  - docs/models/templateduplicatetemplaterequestbody.md
+  - docs/models/templateduplicatetemplateresponsebody.md
+  - docs/models/templateduplicatetemplatetype.md
+  - docs/models/templateduplicatetemplatevisibility.md
+  - docs/models/templatefindtemplatesaccessauth.md
+  - docs/models/templatefindtemplatesactionauth.md
+  - docs/models/templatefindtemplatesauthoptions.md
+  - docs/models/templatefindtemplatesdata.md
+  - docs/models/templatefindtemplatesdirectlink.md
+  - docs/models/templatefindtemplatesdistributionmethod.md
+  - docs/models/templatefindtemplatesfieldmeta.md
+  - docs/models/templatefindtemplatesfieldmeta1.md
+  - docs/models/templatefindtemplatesfieldmeta2.md
+  - docs/models/templatefindtemplatesfieldmeta3.md
+  - docs/models/templatefindtemplatesfieldmeta4.md
+  - docs/models/templatefindtemplatesfieldmeta5.md
+  - docs/models/templatefindtemplatesfieldmeta6.md
+  - docs/models/templatefindtemplatesfieldmeta7.md
+  - docs/models/templatefindtemplatesfieldmeta8.md
+  - docs/models/templatefindtemplatesfieldmeta9.md
+  - docs/models/templatefindtemplatesfieldmetatemplatesresponse200applicationjsonresponsebodydatafields9type.md
+  - docs/models/templatefindtemplatesfieldmetatemplatesresponse200applicationjsonresponsebodydatafieldstype.md
+  - docs/models/templatefindtemplatesfieldmetatemplatesresponse200applicationjsonresponsebodydatatype.md
+  - docs/models/templatefindtemplatesfieldmetatemplatesresponse200applicationjsonresponsebodytype.md
+  - docs/models/templatefindtemplatesfieldmetatemplatesresponse200applicationjsontype.md
+  - docs/models/templatefindtemplatesfieldmetatemplatesresponse200type.md
+  - docs/models/templatefindtemplatesfieldmetatemplatesresponsetype.md
+  - docs/models/templatefindtemplatesfieldmetatemplatesresponsevalues.md
+  - docs/models/templatefindtemplatesfieldmetatemplatestype.md
+  - docs/models/templatefindtemplatesfieldmetatemplatesvalues.md
+  - docs/models/templatefindtemplatesfieldmetatype.md
+  - docs/models/templatefindtemplatesfieldmetavalues.md
+  - docs/models/templatefindtemplatesfields.md
+  - docs/models/templatefindtemplatesglobalaccessauth.md
+  - docs/models/templatefindtemplatesglobalactionauth.md
+  - docs/models/templatefindtemplatesreadstatus.md
+  - docs/models/templatefindtemplatesrecipients.md
+  - docs/models/templatefindtemplatesrequest.md
+  - docs/models/templatefindtemplatesresponsebody.md
+  - docs/models/templatefindtemplatesrole.md
+  - docs/models/templatefindtemplatessendstatus.md
+  - docs/models/templatefindtemplatessigningorder.md
+  - docs/models/templatefindtemplatessigningstatus.md
+  - docs/models/templatefindtemplatesteam.md
+  - docs/models/templatefindtemplatestemplatemeta.md
+  - docs/models/templatefindtemplatestemplatesauthoptions.md
+  - docs/models/templatefindtemplatestemplatestype.md
+  - docs/models/templatefindtemplatestype.md
+  - docs/models/templatefindtemplatesvisibility.md
+  - docs/models/templategettemplatebyidaccessauth.md
+  - docs/models/templategettemplatebyidactionauth.md
+  - docs/models/templategettemplatebyidauthoptions.md
+  - docs/models/templategettemplatebyiddirectlink.md
+  - docs/models/templategettemplatebyiddistributionmethod.md
+  - docs/models/templategettemplatebyidemailsettings.md
+  - docs/models/templategettemplatebyidfieldmeta.md
+  - docs/models/templategettemplatebyidfieldmeta1.md
+  - docs/models/templategettemplatebyidfieldmeta2.md
+  - docs/models/templategettemplatebyidfieldmeta3.md
+  - docs/models/templategettemplatebyidfieldmeta4.md
+  - docs/models/templategettemplatebyidfieldmeta5.md
+  - docs/models/templategettemplatebyidfieldmeta6.md
+  - docs/models/templategettemplatebyidfieldmeta7.md
+  - docs/models/templategettemplatebyidfieldmeta8.md
+  - docs/models/templategettemplatebyidfieldmeta9.md
+  - docs/models/templategettemplatebyidfieldmetatemplatesresponse200applicationjsonresponsebodyfields8type.md
+  - docs/models/templategettemplatebyidfieldmetatemplatesresponse200applicationjsonresponsebodyfields9type.md
+  - docs/models/templategettemplatebyidfieldmetatemplatesresponse200applicationjsonresponsebodyfieldstype.md
+  - docs/models/templategettemplatebyidfieldmetatemplatesresponse200applicationjsonresponsebodytype.md
+  - docs/models/templategettemplatebyidfieldmetatemplatesresponse200applicationjsontype.md
+  - docs/models/templategettemplatebyidfieldmetatemplatesresponse200type.md
+  - docs/models/templategettemplatebyidfieldmetatemplatesresponsetype.md
+  - docs/models/templategettemplatebyidfieldmetatemplatesresponsevalues.md
+  - docs/models/templategettemplatebyidfieldmetatemplatestype.md
+  - docs/models/templategettemplatebyidfieldmetatemplatesvalues.md
+  - docs/models/templategettemplatebyidfieldmetatype.md
+  - docs/models/templategettemplatebyidfieldmetavalues.md
+  - docs/models/templategettemplatebyidfields.md
+  - docs/models/templategettemplatebyidglobalaccessauth.md
+  - docs/models/templategettemplatebyidglobalactionauth.md
+  - docs/models/templategettemplatebyidreadstatus.md
+  - docs/models/templategettemplatebyidrecipients.md
+  - docs/models/templategettemplatebyidrequest.md
+  - docs/models/templategettemplatebyidresponsebody.md
+  - docs/models/templategettemplatebyidrole.md
+  - docs/models/templategettemplatebyidsendstatus.md
+  - docs/models/templategettemplatebyidsigningorder.md
+  - docs/models/templategettemplatebyidsigningstatus.md
+  - docs/models/templategettemplatebyidtemplatesauthoptions.md
+  - docs/models/templategettemplatebyidtemplatesresponsetype.md
+  - docs/models/templategettemplatebyidtemplatestype.md
+  - docs/models/templategettemplatebyidtype.md
+  - docs/models/templategettemplatebyidvisibility.md
+  - docs/models/templatemeta.md
+  - docs/models/templatemovetemplatetoteamauthoptions.md
+  - docs/models/templatemovetemplatetoteamglobalaccessauth.md
+  - docs/models/templatemovetemplatetoteamglobalactionauth.md
+  - docs/models/templatemovetemplatetoteamrequestbody.md
+  - docs/models/templatemovetemplatetoteamresponsebody.md
+  - docs/models/templatemovetemplatetoteamtype.md
+  - docs/models/templatemovetemplatetoteamvisibility.md
+  - docs/models/templatetoggletemplatedirectlinkrequestbody.md
+  - docs/models/templatetoggletemplatedirectlinkresponsebody.md
+  - docs/models/templateupdatetemplateauthoptions.md
+  - docs/models/templateupdatetemplatedata.md
+  - docs/models/templateupdatetemplatedateformat.md
+  - docs/models/templateupdatetemplatedistributionmethod.md
+  - docs/models/templateupdatetemplateemailsettings.md
+  - docs/models/templateupdatetemplateglobalaccessauth.md
+  - docs/models/templateupdatetemplateglobalactionauth.md
+  - docs/models/templateupdatetemplatelanguage.md
+  - docs/models/templateupdatetemplatemeta.md
+  - docs/models/templateupdatetemplaterequestbody.md
+  - docs/models/templateupdatetemplateresponsebody.md
+  - docs/models/templateupdatetemplatesigningorder.md
+  - docs/models/templateupdatetemplatetemplatesglobalaccessauth.md
+  - docs/models/templateupdatetemplatetemplatesglobalactionauth.md
+  - docs/models/templateupdatetemplatetemplatestype.md
+  - docs/models/templateupdatetemplatetemplatesvisibility.md
+  - docs/models/templateupdatetemplatetype.md
+  - docs/models/templateupdatetemplatevisibility.md
+  - docs/models/ten.md
+  - docs/models/three.md
+  - docs/models/two.md
+  - docs/models/type.md
+  - docs/models/user.md
+  - docs/models/utils/retryconfig.md
+  - docs/models/values.md
+  - docs/models/visibility.md
+  - docs/sdks/directlink/README.md
+  - docs/sdks/documenso/README.md
+  - docs/sdks/documensofields/README.md
+  - docs/sdks/documensorecipients/README.md
+  - docs/sdks/documents/README.md
+  - docs/sdks/fields/README.md
+  - docs/sdks/recipients/README.md
+  - docs/sdks/templates/README.md
+  - poetry.toml
+  - py.typed
+  - pylintrc
+  - pyproject.toml
+  - scripts/prepare-readme.py
+  - scripts/publish.sh
+  - src/documenso_sdk/__init__.py
+  - src/documenso_sdk/_hooks/__init__.py
+  - src/documenso_sdk/_hooks/sdkhooks.py
+  - src/documenso_sdk/_hooks/types.py
+  - src/documenso_sdk/_version.py
+  - src/documenso_sdk/basesdk.py
+  - src/documenso_sdk/directlink.py
+  - src/documenso_sdk/documenso_fields.py
+  - src/documenso_sdk/documenso_recipients.py
+  - src/documenso_sdk/documents.py
+  - src/documenso_sdk/fields.py
+  - src/documenso_sdk/httpclient.py
+  - src/documenso_sdk/models/__init__.py
+  - src/documenso_sdk/models/apierror.py
+  - src/documenso_sdk/models/document_createdocumenttemporaryop.py
+  - src/documenso_sdk/models/document_deletedocumentop.py
+  - src/documenso_sdk/models/document_duplicatedocumentop.py
+  - src/documenso_sdk/models/document_finddocumentsop.py
+  - src/documenso_sdk/models/document_getdocumentwithdetailsbyidop.py
+  - src/documenso_sdk/models/document_movedocumenttoteamop.py
+  - src/documenso_sdk/models/document_resenddocumentop.py
+  - src/documenso_sdk/models/document_senddocumentop.py
+  - src/documenso_sdk/models/document_setsettingsfordocumentop.py
+  - src/documenso_sdk/models/error_bad_request.py
+  - src/documenso_sdk/models/error_internal_server_error.py
+  - src/documenso_sdk/models/error_not_found.py
+  - src/documenso_sdk/models/field_createdocumentfieldop.py
+  - src/documenso_sdk/models/field_createdocumentfieldsop.py
+  - src/documenso_sdk/models/field_createtemplatefieldop.py
+  - src/documenso_sdk/models/field_createtemplatefieldsop.py
+  - src/documenso_sdk/models/field_deletedocumentfieldop.py
+  - src/documenso_sdk/models/field_deletetemplatefieldop.py
+  - src/documenso_sdk/models/field_getdocumentfieldop.py
+  - src/documenso_sdk/models/field_gettemplatefieldop.py
+  - src/documenso_sdk/models/field_updatedocumentfieldop.py
+  - src/documenso_sdk/models/field_updatedocumentfieldsop.py
+  - src/documenso_sdk/models/field_updatetemplatefieldop.py
+  - src/documenso_sdk/models/field_updatetemplatefieldsop.py
+  - src/documenso_sdk/models/recipient_createdocumentrecipientop.py
+  - src/documenso_sdk/models/recipient_createdocumentrecipientsop.py
+  - src/documenso_sdk/models/recipient_createtemplaterecipientop.py
+  - src/documenso_sdk/models/recipient_createtemplaterecipientsop.py
+  - src/documenso_sdk/models/recipient_deletedocumentrecipientop.py
+  - src/documenso_sdk/models/recipient_deletetemplaterecipientop.py
+  - src/documenso_sdk/models/recipient_getdocumentrecipientop.py
+  - src/documenso_sdk/models/recipient_gettemplaterecipientop.py
+  - src/documenso_sdk/models/recipient_updatedocumentrecipientop.py
+  - src/documenso_sdk/models/recipient_updatedocumentrecipientsop.py
+  - src/documenso_sdk/models/recipient_updatetemplaterecipientop.py
+  - src/documenso_sdk/models/recipient_updatetemplaterecipientsop.py
+  - src/documenso_sdk/models/security.py
+  - src/documenso_sdk/models/template_createdocumentfromtemplateop.py
+  - src/documenso_sdk/models/template_createtemplatedirectlinkop.py
+  - src/documenso_sdk/models/template_deletetemplatedirectlinkop.py
+  - src/documenso_sdk/models/template_deletetemplateop.py
+  - src/documenso_sdk/models/template_duplicatetemplateop.py
+  - src/documenso_sdk/models/template_findtemplatesop.py
+  - src/documenso_sdk/models/template_gettemplatebyidop.py
+  - src/documenso_sdk/models/template_movetemplatetoteamop.py
+  - src/documenso_sdk/models/template_toggletemplatedirectlinkop.py
+  - src/documenso_sdk/models/template_updatetemplateop.py
+  - src/documenso_sdk/py.typed
+  - src/documenso_sdk/recipients.py
+  - src/documenso_sdk/sdk.py
+  - src/documenso_sdk/sdkconfiguration.py
+  - src/documenso_sdk/templates.py
+  - src/documenso_sdk/types/__init__.py
+  - src/documenso_sdk/types/basemodel.py
+  - src/documenso_sdk/utils/__init__.py
+  - src/documenso_sdk/utils/annotations.py
+  - src/documenso_sdk/utils/enums.py
+  - src/documenso_sdk/utils/eventstreaming.py
+  - src/documenso_sdk/utils/forms.py
+  - src/documenso_sdk/utils/headers.py
+  - src/documenso_sdk/utils/logger.py
+  - src/documenso_sdk/utils/metadata.py
+  - src/documenso_sdk/utils/queryparams.py
+  - src/documenso_sdk/utils/requestbodies.py
+  - src/documenso_sdk/utils/retries.py
+  - src/documenso_sdk/utils/security.py
+  - src/documenso_sdk/utils/serializers.py
+  - src/documenso_sdk/utils/url.py
+  - src/documenso_sdk/utils/values.py
+examples:
+  document-findDocuments:
+    speakeasy-default-document-find-documents:
+      parameters:
+        query:
+          orderByDirection: "desc"
+      responses:
+        "200":
+          application/json: {"data": [], "count": 4880.98, "currentPage": 9399.43, "perPage": 168.65, "totalPages": 4136.86}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "404":
+          application/json: {"message": "Not found", "code": "NOT_FOUND", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  document-getDocumentWithDetailsById:
+    speakeasy-default-document-get-document-with-details-by-id:
+      parameters:
+        path:
+          documentId: 7003.47
+      responses:
+        "200":
+          application/json: {"visibility": "MANAGER_AND_ABOVE", "status": "PENDING", "source": "TEMPLATE", "id": 969961, "externalId": "<id>", "userId": 4580.49, "authOptions": {"globalAccessAuth": "ACCOUNT", "globalActionAuth": "PASSKEY"}, "formValues": {"key": "<value>"}, "title": "<value>", "documentDataId": "<id>", "createdAt": "1735391904686", "updatedAt": "1737325523406", "completedAt": "<value>", "deletedAt": "<value>", "teamId": 801373, "templateId": 78888, "documentData": {"type": "S3_PATH", "id": "<id>", "data": "<value>", "initialData": "<value>"}, "documentMeta": {"signingOrder": "PARALLEL", "distributionMethod": "EMAIL", "id": "<id>", "subject": "<value>", "message": "<value>", "timezone": "Asia/Dushanbe", "password": "mEgZU18kgjdwKI0", "dateFormat": "<value>", "documentId": 550563, "redirectUrl": "https://tough-parade.name/", "typedSignatureEnabled": true, "language": "<value>", "emailSettings": {"recipientSigningRequest": true, "recipientRemoved": true, "recipientSigned": true, "documentPending": true, "documentCompleted": true, "documentDeleted": true, "ownerDocumentCompleted": true}}, "recipients": [{"role": "APPROVER", "readStatus": "NOT_OPENED", "signingStatus": "SIGNED", "sendStatus": "NOT_SENT", "id": 808481, "documentId": 508887, "templateId": 656841, "email": "Lenore_Jacobi45@yahoo.com", "name": "<value>", "token": "<value>", "documentDeletedAt": "<value>", "expired": "<value>", "signedAt": "<value>", "authOptions": {"accessAuth": "ACCOUNT", "actionAuth": "TWO_FACTOR_AUTH"}, "signingOrder": 3925.74, "rejectionReason": "<value>"}, {"role": "APPROVER", "readStatus": "OPENED", "signingStatus": "REJECTED", "sendStatus": "NOT_SENT", "id": 149108, "documentId": 741131, "templateId": 503671, "email": "Jed64@hotmail.com", "name": "<value>", "token": "<value>", "documentDeletedAt": "<value>", "expired": "<value>", "signedAt": "<value>", "authOptions": {"accessAuth": "ACCOUNT", "actionAuth": "EXPLICIT_NONE"}, "signingOrder": 250.42, "rejectionReason": "<value>"}], "fields": [{"type": "NUMBER", "id": 292469, "secondaryId": "<id>", "documentId": 892556, "templateId": 286547, "recipientId": 237994, "page": 7106.36, "customText": "<value>", "inserted": true, "fieldMeta": {"type": "checkbox"}}, {"type": "RADIO", "id": 667645, "secondaryId": "<id>", "documentId": 188420, "templateId": 457772, "recipientId": 83673, "page": 4090.49, "customText": "<value>", "inserted": false, "fieldMeta": {"type": "date"}}]}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "404":
+          application/json: {"message": "Not found", "code": "NOT_FOUND", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  document-createDocumentTemporary:
+    speakeasy-default-document-create-document-temporary:
+      requestBody:
+        application/json: {"title": "<value>"}
+      responses:
+        "200":
+          application/json: {"document": {"visibility": "EVERYONE", "status": "COMPLETED", "source": "DOCUMENT", "id": 42952, "externalId": "<id>", "userId": 5373.96, "authOptions": {"globalAccessAuth": "ACCOUNT", "globalActionAuth": "ACCOUNT"}, "formValues": {"key": 4734.62, "key1": false, "key2": "<value>"}, "title": "<value>", "documentDataId": "<id>", "createdAt": "1728030182019", "updatedAt": "1737356648350", "completedAt": "<value>", "deletedAt": "<value>", "teamId": 357046, "templateId": 812006, "documentData": {"type": "BYTES", "id": "<id>", "data": "<value>", "initialData": "<value>"}, "documentMeta": {"signingOrder": "PARALLEL", "distributionMethod": "EMAIL", "id": "<id>", "subject": "<value>", "message": "<value>", "timezone": "America/Port-au-Prince", "password": "nDdQyEBdZkTA06U", "dateFormat": "<value>", "documentId": 901036, "redirectUrl": "https://scientific-cutover.biz/", "typedSignatureEnabled": true, "language": "<value>", "emailSettings": {"recipientSigningRequest": true, "recipientRemoved": true, "recipientSigned": true, "documentPending": true, "documentCompleted": true, "documentDeleted": true, "ownerDocumentCompleted": true}}, "recipients": [{"role": "VIEWER", "readStatus": "NOT_OPENED", "signingStatus": "SIGNED", "sendStatus": "NOT_SENT", "id": 504146, "documentId": 487425, "templateId": 415779, "email": "Roel80@yahoo.com", "name": "<value>", "token": "<value>", "documentDeletedAt": "<value>", "expired": "<value>", "signedAt": "<value>", "authOptions": {"accessAuth": "ACCOUNT", "actionAuth": "TWO_FACTOR_AUTH"}, "signingOrder": 700.38, "rejectionReason": "<value>"}, {"role": "APPROVER", "readStatus": "OPENED", "signingStatus": "NOT_SIGNED", "sendStatus": "NOT_SENT", "id": 713985, "documentId": 107633, "templateId": 731204, "email": "Anabel.Gleichner@hotmail.com", "name": "<value>", "token": "<value>", "documentDeletedAt": "<value>", "expired": "<value>", "signedAt": "<value>", "authOptions": {"accessAuth": "ACCOUNT", "actionAuth": "EXPLICIT_NONE"}, "signingOrder": 9547.02, "rejectionReason": "<value>"}], "fields": []}, "uploadUrl": "https://determined-technician.biz/"}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  document-setSettingsForDocument:
+    speakeasy-default-document-set-settings-for-document:
+      requestBody:
+        application/json: {"documentId": 8574.78}
+      responses:
+        "200":
+          application/json: {"visibility": "MANAGER_AND_ABOVE", "status": "PENDING", "source": "TEMPLATE_DIRECT_LINK", "id": 627690, "externalId": "<id>", "userId": 4888.52, "authOptions": {"globalAccessAuth": "ACCOUNT", "globalActionAuth": "TWO_FACTOR_AUTH"}, "title": "<value>", "documentDataId": "<id>", "createdAt": "1734110098143", "updatedAt": "1737326276875", "completedAt": "<value>", "deletedAt": "<value>", "teamId": 311507, "templateId": 249440}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  document-deleteDocument:
+    speakeasy-default-document-delete-document:
+      requestBody:
+        application/json: {"documentId": 5459.07}
+      responses:
+        "200":
+          application/json: {"success": false}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  document-moveDocumentToTeam:
+    speakeasy-default-document-move-document-to-team:
+      requestBody:
+        application/json: {"documentId": 8301.72, "teamId": 6724.78}
+      responses:
+        "200":
+          application/json: {"visibility": "ADMIN", "status": "COMPLETED", "source": "TEMPLATE", "id": 775043, "externalId": "<id>", "userId": 780.73, "authOptions": {"globalAccessAuth": "ACCOUNT", "globalActionAuth": "ACCOUNT"}, "title": "<value>", "documentDataId": "<id>", "createdAt": "1711258577960", "updatedAt": "1737325397809", "completedAt": "<value>", "deletedAt": "<value>", "teamId": 700797, "templateId": 933634}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  document-sendDocument:
+    speakeasy-default-document-send-document:
+      requestBody:
+        application/json: {"documentId": 4115.92}
+      responses:
+        "200":
+          application/json: {"visibility": "ADMIN", "status": "DRAFT", "source": "TEMPLATE_DIRECT_LINK", "id": 265491, "externalId": "<id>", "userId": 6765.82, "authOptions": {"globalAccessAuth": "ACCOUNT", "globalActionAuth": "TWO_FACTOR_AUTH"}, "title": "<value>", "documentDataId": "<id>", "createdAt": "1733991179134", "updatedAt": "1737333372672", "completedAt": "<value>", "deletedAt": "<value>", "teamId": 296533, "templateId": 836846}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  document-resendDocument:
+    speakeasy-default-document-resend-document:
+      requestBody:
+        application/json: {"documentId": 5758.65, "recipients": []}
+      responses:
+        "200":
+          application/json: {"success": true}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  document-duplicateDocument:
+    speakeasy-default-document-duplicate-document:
+      requestBody:
+        application/json: {"documentId": 3523.11}
+      responses:
+        "200":
+          application/json: {"documentId": 3284.91}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  field-getDocumentField:
+    speakeasy-default-field-get-document-field:
+      parameters:
+        path:
+          fieldId: 7003.47
+      responses:
+        "200":
+          application/json: {"type": "TEXT", "id": 544221, "secondaryId": "<id>", "documentId": 521235, "templateId": 969961, "recipientId": 458049, "page": 4508.24, "customText": "<value>", "inserted": true, "fieldMeta": {"type": "name"}}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "404":
+          application/json: {"message": "Not found", "code": "NOT_FOUND", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  field-createDocumentField:
+    speakeasy-default-field-create-document-field:
+      requestBody:
+        application/json: {"documentId": 4865.89, "field": {"type": "NUMBER", "recipientId": 4174.58, "pageNumber": 1343.65, "pageX": 690.25, "pageY": 7964.74, "width": 9510.62, "height": 0.86}}
+      responses:
+        "200":
+          application/json: {"type": "FREE_SIGNATURE", "id": 89964, "secondaryId": "<id>", "documentId": 792620, "templateId": 816588, "recipientId": 586220, "page": 7524.38, "customText": "<value>", "inserted": false, "fieldMeta": {"type": "date"}}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  field-createDocumentFields:
+    speakeasy-default-field-create-document-fields:
+      requestBody:
+        application/json: {"documentId": 5158.41, "fields": [{"type": "CHECKBOX", "recipientId": 2516.72, "pageNumber": 2304.17, "pageX": 7760.32, "pageY": 3376.66, "width": 3566.94, "height": 2768.94}, {"type": "NUMBER", "recipientId": 5689.64, "pageNumber": 6483.69, "pageX": 7271.79, "pageY": 1891.56, "width": 7263.21, "height": 5043.41}]}
+      responses:
+        "200":
+          application/json: {"fields": [{"type": "RADIO", "id": 222957, "secondaryId": "<id>", "documentId": 474913, "templateId": 581606, "recipientId": 817193, "page": 6129.81, "customText": "<value>", "inserted": false, "fieldMeta": {"type": "number"}}, {"type": "TEXT", "id": 253057, "secondaryId": "<id>", "documentId": 491806, "templateId": 191040, "recipientId": 291674, "page": 9879.25, "customText": "<value>", "inserted": true, "fieldMeta": {"type": "dropdown"}}, {"type": "SIGNATURE", "id": 43577, "secondaryId": "<id>", "documentId": 501293, "templateId": 42577, "recipientId": 858534, "page": 3847.59, "customText": "<value>", "inserted": false, "fieldMeta": {"type": "number"}}]}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  field-updateDocumentField:
+    speakeasy-default-field-update-document-field:
+      requestBody:
+        application/json: {"documentId": 8574.78, "field": {"type": "TEXT", "id": 3446.2}}
+      responses:
+        "200":
+          application/json: {"type": "DROPDOWN", "id": 627690, "secondaryId": "<id>", "documentId": 488852, "templateId": 984008, "recipientId": 54062, "page": 8965.01, "customText": "<value>", "inserted": true, "fieldMeta": {"type": "email"}}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  field-updateDocumentFields:
+    speakeasy-default-field-update-document-fields:
+      requestBody:
+        application/json: {"documentId": 4057.69, "fields": [{"type": "DATE", "id": 8982.15}, {"type": "NAME", "id": 310.19}]}
+      responses:
+        "200":
+          application/json: {"fields": []}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  field-deleteDocumentField:
+    speakeasy-default-field-delete-document-field:
+      requestBody:
+        application/json: {"fieldId": 5459.07}
+      responses:
+        "200":
+          application/json: {"success": false}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  recipient-getDocumentRecipient:
+    speakeasy-default-recipient-get-document-recipient:
+      parameters:
+        path:
+          recipientId: 7003.47
+      responses:
+        "200":
+          application/json: {"role": "VIEWER", "readStatus": "OPENED", "signingStatus": "SIGNED", "sendStatus": "SENT", "id": 458049, "documentId": 450824, "templateId": 262795, "email": "Tressa.Schmitt21@gmail.com", "name": "<value>", "token": "<value>", "documentDeletedAt": "<value>", "expired": "<value>", "signedAt": "<value>", "authOptions": {"accessAuth": "ACCOUNT", "actionAuth": "ACCOUNT"}, "signingOrder": 5525.82, "rejectionReason": "<value>", "fields": [{"type": "EMAIL", "id": 746585, "secondaryId": "<id>", "documentId": 608535, "templateId": 550965, "recipientId": 322612, "page": 3231.85, "customText": "<value>", "inserted": true, "fieldMeta": {"type": "email"}}, {"type": "RADIO", "id": 284041, "secondaryId": "<id>", "documentId": 737581, "templateId": 772105, "recipientId": 710500, "page": 9091.18, "customText": "<value>", "inserted": true, "fieldMeta": {"type": "initials"}}, {"type": "DROPDOWN", "id": 444836, "secondaryId": "<id>", "documentId": 424256, "templateId": 132944, "recipientId": 159685, "page": 5505.63, "customText": "<value>", "inserted": true, "fieldMeta": {"type": "checkbox"}}]}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "404":
+          application/json: {"message": "Not found", "code": "NOT_FOUND", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  recipient-createDocumentRecipient:
+    speakeasy-default-recipient-create-document-recipient:
+      requestBody:
+        application/json: {"documentId": 4865.89, "recipient": {"email": "Haylie_Bernhard95@yahoo.com", "name": "<value>", "role": "CC"}}
+      responses:
+        "200":
+          application/json: {"role": "CC", "readStatus": "OPENED", "signingStatus": "REJECTED", "sendStatus": "SENT", "id": 752438, "documentId": 957409, "templateId": 357021, "email": "Ahmed.Ebert32@gmail.com", "name": "<value>", "token": "<value>", "documentDeletedAt": "<value>", "expired": "<value>", "signedAt": "<value>", "authOptions": {"accessAuth": "ACCOUNT", "actionAuth": "ACCOUNT"}, "signingOrder": 1009.66, "rejectionReason": "<value>"}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  recipient-createDocumentRecipients:
+    speakeasy-default-recipient-create-document-recipients:
+      requestBody:
+        application/json: {"documentId": 5158.41, "recipients": [{"email": "Demetrius.Sanford35@hotmail.com", "name": "<value>", "role": "VIEWER"}, {"email": "Lyla50@yahoo.com", "name": "<value>", "role": "APPROVER"}]}
+      responses:
+        "200":
+          application/json: {"recipients": []}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  recipient-updateDocumentRecipient:
+    speakeasy-default-recipient-update-document-recipient:
+      requestBody:
+        application/json: {"documentId": 8574.78, "recipient": {"id": 5971.29}}
+      responses:
+        "200":
+          application/json: {"role": "SIGNER", "readStatus": "OPENED", "signingStatus": "SIGNED", "sendStatus": "NOT_SENT", "id": 984008, "documentId": 54062, "templateId": 896501, "email": "Elvie_Connelly88@yahoo.com", "name": "<value>", "token": "<value>", "documentDeletedAt": "<value>", "expired": "<value>", "signedAt": "<value>", "authOptions": {"accessAuth": "ACCOUNT", "actionAuth": "PASSKEY"}, "signingOrder": 7712.03, "rejectionReason": "<value>", "fields": [{"type": "EMAIL", "id": 33980, "secondaryId": "<id>", "documentId": 756247, "templateId": 810877, "recipientId": 439152, "page": 5011.35, "customText": "<value>", "inserted": true, "fieldMeta": {"type": "email"}}, {"type": "NAME", "id": 824679, "secondaryId": "<id>", "documentId": 834574, "templateId": 888006, "recipientId": 711565, "page": 5198.81, "customText": "<value>", "inserted": true, "fieldMeta": {"type": "text"}}]}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  recipient-updateDocumentRecipients:
+    speakeasy-default-recipient-update-document-recipients:
+      requestBody:
+        application/json: {"documentId": 4057.69, "recipients": [{"id": 5359.16}, {"id": 8982.15}]}
+      responses:
+        "200":
+          application/json: {"recipients": [{"role": "CC", "readStatus": "NOT_OPENED", "signingStatus": "REJECTED", "sendStatus": "NOT_SENT", "id": 180205, "documentId": 993155, "templateId": 967004, "email": "Vickie_Koss@hotmail.com", "name": "<value>", "token": "<value>", "documentDeletedAt": "<value>", "expired": "<value>", "signedAt": "<value>", "authOptions": {"accessAuth": "ACCOUNT", "actionAuth": "PASSKEY"}, "signingOrder": 1585.39, "rejectionReason": "<value>", "fields": []}]}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  recipient-deleteDocumentRecipient:
+    speakeasy-default-recipient-delete-document-recipient:
+      requestBody:
+        application/json: {"recipientId": 5459.07}
+      responses:
+        "200":
+          application/json: {"success": false}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  template-findTemplates:
+    speakeasy-default-template-find-templates:
+      responses:
+        "200":
+          application/json: {"data": [], "count": 4880.98, "currentPage": 9399.43, "perPage": 168.65, "totalPages": 4136.86}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "404":
+          application/json: {"message": "Not found", "code": "NOT_FOUND", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  template-getTemplateById:
+    speakeasy-default-template-get-template-by-id:
+      parameters:
+        path:
+          templateId: 7003.47
+      responses:
+        "200":
+          application/json: {"type": "PRIVATE", "visibility": "MANAGER_AND_ABOVE", "id": 521235, "externalId": "<id>", "title": "<value>", "userId": 969961, "teamId": 458049, "authOptions": {"globalAccessAuth": "ACCOUNT", "globalActionAuth": "PASSKEY"}, "templateDocumentDataId": "<id>", "createdAt": "1714125588814", "updatedAt": "1737306111068", "publicTitle": "<value>", "publicDescription": "<value>", "templateDocumentData": {"type": "BYTES_64", "id": "<id>", "data": "<value>", "initialData": "<value>"}, "templateMeta": {"id": "<id>", "subject": "<value>", "message": "<value>", "timezone": "America/St_Thomas", "dateFormat": "<value>", "signingOrder": "SEQUENTIAL", "typedSignatureEnabled": true, "distributionMethod": "EMAIL", "templateId": 313464, "redirectUrl": "https://next-shark.info/", "language": "<value>", "emailSettings": {"recipientSigningRequest": true, "recipientRemoved": true, "recipientSigned": true, "documentPending": true, "documentCompleted": true, "documentDeleted": true, "ownerDocumentCompleted": true}}, "directLink": {"id": "<id>", "templateId": 746585, "token": "<value>", "createdAt": "1725028834298", "enabled": false, "directTemplateRecipientId": 322612}, "user": {"id": 323185, "name": "<value>", "email": "Dedric77@gmail.com"}, "recipients": [{"role": "SIGNER", "readStatus": "NOT_OPENED", "signingStatus": "REJECTED", "sendStatus": "NOT_SENT", "id": 424256, "documentId": 132944, "templateId": 159685, "email": "Bernardo29@yahoo.com", "name": "<value>", "token": "<value>", "documentDeletedAt": "<value>", "expired": "<value>", "signedAt": "<value>", "authOptions": {"accessAuth": "ACCOUNT", "actionAuth": "EXPLICIT_NONE"}, "signingOrder": 4073.3, "rejectionReason": "<value>"}, {"role": "SIGNER", "readStatus": "NOT_OPENED", "signingStatus": "REJECTED", "sendStatus": "SENT", "id": 656841, "documentId": 570980, "templateId": 607679, "email": "Graham.Klocko@hotmail.com", "name": "<value>", "token": "<value>", "documentDeletedAt": "<value>", "expired": "<value>", "signedAt": "<value>", "authOptions": {"accessAuth": "ACCOUNT", "actionAuth": "EXPLICIT_NONE"}, "signingOrder": 7540.54, "rejectionReason": "<value>"}, {"role": "APPROVER", "readStatus": "NOT_OPENED", "signingStatus": "NOT_SIGNED", "sendStatus": "SENT", "id": 503671, "documentId": 950598, "templateId": 486669, "email": "Armani_OConner98@gmail.com", "name": "<value>", "token": "<value>", "documentDeletedAt": "<value>", "expired": "<value>", "signedAt": "<value>", "authOptions": {"accessAuth": "ACCOUNT", "actionAuth": "TWO_FACTOR_AUTH"}, "signingOrder": 6887.35, "rejectionReason": "<value>"}], "fields": [{"type": "CHECKBOX", "id": 286547, "secondaryId": "<id>", "documentId": 237994, "templateId": 710636, "recipientId": 256758, "page": 7869.52, "customText": "<value>", "inserted": false, "fieldMeta": {"type": "radio"}}]}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "404":
+          application/json: {"message": "Not found", "code": "NOT_FOUND", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  template-updateTemplate:
+    speakeasy-default-template-update-template:
+      requestBody:
+        application/json: {"templateId": 8574.78}
+      responses:
+        "200":
+          application/json: {"type": "PRIVATE", "visibility": "MANAGER_AND_ABOVE", "id": 991464, "externalId": "<id>", "title": "<value>", "userId": 627690, "teamId": 488852, "authOptions": {"globalAccessAuth": "ACCOUNT", "globalActionAuth": "TWO_FACTOR_AUTH"}, "templateDocumentDataId": "<id>", "createdAt": "1707542973492", "updatedAt": "1737365125288", "publicTitle": "<value>", "publicDescription": "<value>"}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  template-duplicateTemplate:
+    speakeasy-default-template-duplicate-template:
+      requestBody:
+        application/json: {"templateId": 3523.11}
+      responses:
+        "200":
+          application/json: {"type": "PUBLIC", "visibility": "ADMIN", "id": 461148, "externalId": "<id>", "title": "<value>", "userId": 348891, "teamId": 524674, "authOptions": {"globalAccessAuth": "ACCOUNT", "globalActionAuth": "ACCOUNT"}, "templateDocumentDataId": "<id>", "createdAt": "1718420908539", "updatedAt": "1737329091842", "publicTitle": "<value>", "publicDescription": "<value>"}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  template-deleteTemplate:
+    speakeasy-default-template-delete-template:
+      requestBody:
+        application/json: {"templateId": 5459.07}
+      responses:
+        "200":
+          application/json: {"success": false}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  template-createDocumentFromTemplate:
+    speakeasy-default-template-create-document-from-template:
+      requestBody:
+        application/json: {"templateId": 6626.9, "recipients": [{"id": 6473.53, "email": "August_Schmeler68@yahoo.com"}, {"id": 3772.31, "email": "Angeline.Purdy@gmail.com"}]}
+      responses:
+        "200":
+          application/json: {"visibility": "EVERYONE", "status": "DRAFT", "source": "DOCUMENT", "id": 529343, "externalId": "<id>", "userId": 382.49, "authOptions": {"globalAccessAuth": "ACCOUNT", "globalActionAuth": "PASSKEY"}, "formValues": {"key": 1071.58, "key1": "<value>", "key2": "<value>"}, "title": "<value>", "documentDataId": "<id>", "createdAt": "1712773237730", "updatedAt": "1737370943529", "completedAt": "<value>", "deletedAt": "<value>", "teamId": 814818, "templateId": 649241, "documentData": {"type": "BYTES", "id": "<id>", "data": "<value>", "initialData": "<value>"}, "documentMeta": {"signingOrder": "SEQUENTIAL", "distributionMethod": "EMAIL", "id": "<id>", "subject": "<value>", "message": "<value>", "timezone": "America/Mazatlan", "password": "ygGKsqP0fmjT8Pg", "dateFormat": "<value>", "documentId": 430384, "redirectUrl": "https://disloyal-haversack.com", "typedSignatureEnabled": true, "language": "<value>", "emailSettings": {"recipientSigningRequest": true, "recipientRemoved": true, "recipientSigned": true, "documentPending": true, "documentCompleted": true, "documentDeleted": true, "ownerDocumentCompleted": true}}, "recipients": [{"role": "VIEWER", "readStatus": "OPENED", "signingStatus": "NOT_SIGNED", "sendStatus": "NOT_SENT", "id": 292530, "documentId": 987418, "templateId": 77227, "email": "Asia.Welch@gmail.com", "name": "<value>", "token": "<value>", "documentDeletedAt": "<value>", "expired": "<value>", "signedAt": "<value>", "authOptions": {"accessAuth": "ACCOUNT", "actionAuth": "ACCOUNT"}, "signingOrder": 5750.99, "rejectionReason": "<value>"}, {"role": "VIEWER", "readStatus": "NOT_OPENED", "signingStatus": "NOT_SIGNED", "sendStatus": "SENT", "id": 115596, "documentId": 220521, "templateId": 62163, "email": "Coty_Parisian91@yahoo.com", "name": "<value>", "token": "<value>", "documentDeletedAt": "<value>", "expired": "<value>", "signedAt": "<value>", "authOptions": {"accessAuth": "ACCOUNT", "actionAuth": "PASSKEY"}, "signingOrder": 3064.41, "rejectionReason": "<value>"}], "fields": [{"type": "INITIALS", "id": 9571, "secondaryId": "<id>", "documentId": 569573, "templateId": 217003, "recipientId": 960849, "page": 1861.81, "customText": "<value>", "inserted": false, "fieldMeta": {"type": "number"}}]}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  template-moveTemplateToTeam:
+    speakeasy-default-template-move-template-to-team:
+      requestBody:
+        application/json: {"templateId": 8301.72, "teamId": 6724.78}
+      responses:
+        "200":
+          application/json: {"type": "PRIVATE", "visibility": "ADMIN", "id": 634195, "externalId": "<id>", "title": "<value>", "userId": 775043, "teamId": 78073, "authOptions": {"globalAccessAuth": "ACCOUNT", "globalActionAuth": "ACCOUNT"}, "templateDocumentDataId": "<id>", "createdAt": "1706126917812", "updatedAt": "1737302519146", "publicTitle": "<value>", "publicDescription": "<value>"}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  field-createTemplateField:
+    speakeasy-default-field-create-template-field:
+      requestBody:
+        application/json: {"templateId": 4865.89, "field": {"type": "NUMBER", "recipientId": 4174.58, "pageNumber": 1343.65, "pageX": 690.25, "pageY": 7964.74, "width": 9510.62, "height": 0.86}}
+      responses:
+        "200":
+          application/json: {"type": "FREE_SIGNATURE", "id": 89964, "secondaryId": "<id>", "documentId": 792620, "templateId": 816588, "recipientId": 586220, "page": 7524.38, "customText": "<value>", "inserted": false, "fieldMeta": {"type": "date"}}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  field-getTemplateField:
+    speakeasy-default-field-get-template-field:
+      parameters:
+        path:
+          fieldId: 7003.47
+      responses:
+        "200":
+          application/json: {"type": "TEXT", "id": 544221, "secondaryId": "<id>", "documentId": 521235, "templateId": 969961, "recipientId": 458049, "page": 4508.24, "customText": "<value>", "inserted": true, "fieldMeta": {"type": "name"}}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "404":
+          application/json: {"message": "Not found", "code": "NOT_FOUND", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  field-createTemplateFields:
+    speakeasy-default-field-create-template-fields:
+      requestBody:
+        application/json: {"templateId": 5158.41, "fields": [{"type": "CHECKBOX", "recipientId": 2516.72, "pageNumber": 2304.17, "pageX": 7760.32, "pageY": 3376.66, "width": 3566.94, "height": 2768.94}, {"type": "NUMBER", "recipientId": 5689.64, "pageNumber": 6483.69, "pageX": 7271.79, "pageY": 1891.56, "width": 7263.21, "height": 5043.41}]}
+      responses:
+        "200":
+          application/json: {"fields": [{"type": "RADIO", "id": 222957, "secondaryId": "<id>", "documentId": 474913, "templateId": 581606, "recipientId": 817193, "page": 6129.81, "customText": "<value>", "inserted": false, "fieldMeta": {"type": "number"}}, {"type": "TEXT", "id": 253057, "secondaryId": "<id>", "documentId": 491806, "templateId": 191040, "recipientId": 291674, "page": 9879.25, "customText": "<value>", "inserted": true, "fieldMeta": {"type": "dropdown"}}, {"type": "SIGNATURE", "id": 43577, "secondaryId": "<id>", "documentId": 501293, "templateId": 42577, "recipientId": 858534, "page": 3847.59, "customText": "<value>", "inserted": false, "fieldMeta": {"type": "number"}}]}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  field-updateTemplateField:
+    speakeasy-default-field-update-template-field:
+      requestBody:
+        application/json: {"templateId": 8574.78, "field": {"type": "TEXT", "id": 3446.2}}
+      responses:
+        "200":
+          application/json: {"type": "DROPDOWN", "id": 627690, "secondaryId": "<id>", "documentId": 488852, "templateId": 984008, "recipientId": 54062, "page": 8965.01, "customText": "<value>", "inserted": true, "fieldMeta": {"type": "email"}}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  field-updateTemplateFields:
+    speakeasy-default-field-update-template-fields:
+      requestBody:
+        application/json: {"templateId": 4057.69, "fields": [{"type": "DATE", "id": 8982.15}, {"type": "NAME", "id": 310.19}]}
+      responses:
+        "200":
+          application/json: {"fields": []}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  field-deleteTemplateField:
+    speakeasy-default-field-delete-template-field:
+      requestBody:
+        application/json: {"fieldId": 5459.07}
+      responses:
+        "200":
+          application/json: {"success": false}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  recipient-getTemplateRecipient:
+    speakeasy-default-recipient-get-template-recipient:
+      parameters:
+        path:
+          recipientId: 7003.47
+      responses:
+        "200":
+          application/json: {"role": "VIEWER", "readStatus": "OPENED", "signingStatus": "SIGNED", "sendStatus": "SENT", "id": 458049, "documentId": 450824, "templateId": 262795, "email": "Tressa.Schmitt21@gmail.com", "name": "<value>", "token": "<value>", "documentDeletedAt": "<value>", "expired": "<value>", "signedAt": "<value>", "authOptions": {"accessAuth": "ACCOUNT", "actionAuth": "ACCOUNT"}, "signingOrder": 5525.82, "rejectionReason": "<value>", "fields": [{"type": "EMAIL", "id": 746585, "secondaryId": "<id>", "documentId": 608535, "templateId": 550965, "recipientId": 322612, "page": 3231.85, "customText": "<value>", "inserted": true, "fieldMeta": {"type": "email"}}, {"type": "RADIO", "id": 284041, "secondaryId": "<id>", "documentId": 737581, "templateId": 772105, "recipientId": 710500, "page": 9091.18, "customText": "<value>", "inserted": true, "fieldMeta": {"type": "initials"}}, {"type": "DROPDOWN", "id": 444836, "secondaryId": "<id>", "documentId": 424256, "templateId": 132944, "recipientId": 159685, "page": 5505.63, "customText": "<value>", "inserted": true, "fieldMeta": {"type": "checkbox"}}]}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "404":
+          application/json: {"message": "Not found", "code": "NOT_FOUND", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  recipient-createTemplateRecipient:
+    speakeasy-default-recipient-create-template-recipient:
+      requestBody:
+        application/json: {"templateId": 4865.89, "recipient": {"email": "Haylie_Bernhard95@yahoo.com", "name": "<value>", "role": "CC"}}
+      responses:
+        "200":
+          application/json: {"role": "CC", "readStatus": "OPENED", "signingStatus": "REJECTED", "sendStatus": "SENT", "id": 752438, "documentId": 957409, "templateId": 357021, "email": "Ahmed.Ebert32@gmail.com", "name": "<value>", "token": "<value>", "documentDeletedAt": "<value>", "expired": "<value>", "signedAt": "<value>", "authOptions": {"accessAuth": "ACCOUNT", "actionAuth": "ACCOUNT"}, "signingOrder": 1009.66, "rejectionReason": "<value>"}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  recipient-createTemplateRecipients:
+    speakeasy-default-recipient-create-template-recipients:
+      requestBody:
+        application/json: {"templateId": 5158.41, "recipients": [{"email": "Demetrius.Sanford35@hotmail.com", "name": "<value>", "role": "VIEWER"}, {"email": "Lyla50@yahoo.com", "name": "<value>", "role": "APPROVER"}]}
+      responses:
+        "200":
+          application/json: {"recipients": []}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  recipient-updateTemplateRecipient:
+    speakeasy-default-recipient-update-template-recipient:
+      requestBody:
+        application/json: {"templateId": 8574.78, "recipient": {"id": 5971.29}}
+      responses:
+        "200":
+          application/json: {"role": "SIGNER", "readStatus": "OPENED", "signingStatus": "SIGNED", "sendStatus": "NOT_SENT", "id": 984008, "documentId": 54062, "templateId": 896501, "email": "Elvie_Connelly88@yahoo.com", "name": "<value>", "token": "<value>", "documentDeletedAt": "<value>", "expired": "<value>", "signedAt": "<value>", "authOptions": {"accessAuth": "ACCOUNT", "actionAuth": "PASSKEY"}, "signingOrder": 7712.03, "rejectionReason": "<value>", "fields": [{"type": "EMAIL", "id": 33980, "secondaryId": "<id>", "documentId": 756247, "templateId": 810877, "recipientId": 439152, "page": 5011.35, "customText": "<value>", "inserted": true, "fieldMeta": {"type": "email"}}, {"type": "NAME", "id": 824679, "secondaryId": "<id>", "documentId": 834574, "templateId": 888006, "recipientId": 711565, "page": 5198.81, "customText": "<value>", "inserted": true, "fieldMeta": {"type": "text"}}]}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  recipient-updateTemplateRecipients:
+    speakeasy-default-recipient-update-template-recipients:
+      requestBody:
+        application/json: {"templateId": 4057.69, "recipients": [{"id": 5359.16}, {"id": 8982.15}]}
+      responses:
+        "200":
+          application/json: {"recipients": [{"role": "CC", "readStatus": "NOT_OPENED", "signingStatus": "REJECTED", "sendStatus": "NOT_SENT", "id": 180205, "documentId": 993155, "templateId": 967004, "email": "Vickie_Koss@hotmail.com", "name": "<value>", "token": "<value>", "documentDeletedAt": "<value>", "expired": "<value>", "signedAt": "<value>", "authOptions": {"accessAuth": "ACCOUNT", "actionAuth": "PASSKEY"}, "signingOrder": 1585.39, "rejectionReason": "<value>", "fields": []}]}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  recipient-deleteTemplateRecipient:
+    speakeasy-default-recipient-delete-template-recipient:
+      requestBody:
+        application/json: {"recipientId": 5459.07}
+      responses:
+        "200":
+          application/json: {"success": false}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  template-createTemplateDirectLink:
+    speakeasy-default-template-create-template-direct-link:
+      requestBody:
+        application/json: {"templateId": 4865.89}
+      responses:
+        "200":
+          application/json: {"id": "<id>", "templateId": 638424, "token": "<value>", "createdAt": "1719003016291", "enabled": true, "directTemplateRecipientId": 69025}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  template-deleteTemplateDirectLink:
+    speakeasy-default-template-delete-template-direct-link:
+      requestBody:
+        application/json: {"templateId": 5459.07}
+      responses:
+        "200":
+          application/json: {"success": false}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+  template-toggleTemplateDirectLink:
+    speakeasy-default-template-toggle-template-direct-link:
+      requestBody:
+        application/json: {"templateId": 722.9, "enabled": true}
+      responses:
+        "200":
+          application/json: {"id": "<id>", "templateId": 507380, "token": "<value>", "createdAt": "1730754961127", "enabled": true, "directTemplateRecipientId": 182275}
+        "400":
+          application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
+        "500":
+          application/json: {"message": "Internal server error", "code": "INTERNAL_SERVER_ERROR", "issues": []}
+examplesVersion: 1.0.0
+generatedTests: {}

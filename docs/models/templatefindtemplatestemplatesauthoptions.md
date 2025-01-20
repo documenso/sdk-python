@@ -1,0 +1,9 @@
+# TemplateFindTemplatesTemplatesAuthOptions
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `access_auth`                                                                                    | [Nullable[models.TemplateFindTemplatesAccessAuth]](../models/templatefindtemplatesaccessauth.md) | :heavy_check_mark:                                                                               | The type of authentication required for the recipient to access the document.                    |
+| `action_auth`                                                                                    | [Nullable[models.TemplateFindTemplatesActionAuth]](../models/templatefindtemplatesactionauth.md) | :heavy_check_mark:                                                                               | The type of authentication required for the recipient to sign the document.                      |

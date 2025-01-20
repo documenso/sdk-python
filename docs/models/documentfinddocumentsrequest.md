@@ -1,0 +1,15 @@
+# DocumentFindDocumentsRequest
+
+
+## Fields
+
+| Field                                                              | Type                                                               | Required                                                           | Description                                                        |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `query`                                                            | *Optional[str]*                                                    | :heavy_minus_sign:                                                 | The search query.                                                  |
+| `page`                                                             | *Optional[float]*                                                  | :heavy_minus_sign:                                                 | The pagination page number, starts at 1.                           |
+| `per_page`                                                         | *Optional[float]*                                                  | :heavy_minus_sign:                                                 | The number of items per page.                                      |
+| `template_id`                                                      | *Optional[float]*                                                  | :heavy_minus_sign:                                                 | Filter documents by the template ID used to create it.             |
+| `source`                                                           | [Optional[models.Source]](../models/source.md)                     | :heavy_minus_sign:                                                 | Filter documents by how it was created.                            |
+| `status`                                                           | [Optional[models.Status]](../models/status.md)                     | :heavy_minus_sign:                                                 | Filter documents by the current status                             |
+| `order_by_column`                                                  | [Optional[models.OrderByColumn]](../models/orderbycolumn.md)       | :heavy_minus_sign:                                                 | N/A                                                                |
+| `order_by_direction`                                               | [Optional[models.OrderByDirection]](../models/orderbydirection.md) | :heavy_minus_sign:                                                 | N/A                                                                |

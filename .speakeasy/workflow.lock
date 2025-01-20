@@ -1,0 +1,35 @@
+speakeasyVersion: 1.469.10
+sources:
+    documenso-OAS:
+        sourceNamespace: documenso-oas
+        sourceRevisionDigest: sha256:93ee78e094f9f5de4c126c6a06c363e22412c11a874255e545a8cb610b3bf047
+        sourceBlobDigest: sha256:b54d7f793fedc532b07ad3a417aa86f4af3d1b4f9e7496550ce6cf5a455187fb
+        tags:
+            - latest
+targets:
+    documenso:
+        source: documenso-OAS
+        sourceNamespace: documenso-oas
+        sourceRevisionDigest: sha256:93ee78e094f9f5de4c126c6a06c363e22412c11a874255e545a8cb610b3bf047
+        sourceBlobDigest: sha256:b54d7f793fedc532b07ad3a417aa86f4af3d1b4f9e7496550ce6cf5a455187fb
+        codeSamplesNamespace: documenso-oas-python-code-samples
+        codeSamplesRevisionDigest: sha256:9b99bf0034c33db16e98adde685b31bc76f65a98fa2815c09cbc3af97014619c
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        documenso-OAS:
+            inputs:
+                - location: registry.speakeasyapi.dev/documenso-inc/api/documenso-v-2-beta-api:main
+            registry:
+                location: registry.speakeasyapi.dev/documenso-inc/api/documenso-oas
+    targets:
+        documenso:
+            target: python
+            source: documenso-OAS
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/documenso-inc/api/documenso-oas-python-code-samples
+                labelOverride:
+                    fixedValue: Python (SDK)
+                blocking: false

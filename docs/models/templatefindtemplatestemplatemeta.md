@@ -1,0 +1,9 @@
+# TemplateFindTemplatesTemplateMeta
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `signing_order`                                                                                        | [Nullable[models.TemplateFindTemplatesSigningOrder]](../models/templatefindtemplatessigningorder.md)   | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `distribution_method`                                                                                  | [models.TemplateFindTemplatesDistributionMethod](../models/templatefindtemplatesdistributionmethod.md) | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
