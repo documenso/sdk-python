@@ -1,44 +1,45 @@
-# documenso_sdk
+<img src="https://github.com/documenso/documenso/assets/13398220/a643571f-0239-46a6-a73e-6bef38d1228b" alt="Documenso Logo">
 
-Developer-friendly & type-safe Python SDK specifically catered to leverage *documenso_sdk* API.
+&nbsp;
 
-<div align="left">
+<div align="center">
     <a href="https://www.speakeasy.com/?utm_source=documenso-sdk&utm_campaign=python"><img src="https://custom-icon-badges.demolab.com/badge/-Built%20By%20Speakeasy-212015?style=for-the-badge&logoColor=FBE331&logo=speakeasy&labelColor=545454" /></a>
     <a href="https://opensource.org/licenses/MIT">
         <img src="https://img.shields.io/badge/License-MIT-blue.svg" style="width: 100px; height: 28px;" />
     </a>
 </div>
 
+## Documenso Python SDK
 
-<br /><br />
-> [!IMPORTANT]
-> This SDK is not yet ready for production use. To complete setup please follow the steps outlined in your [workspace](https://app.speakeasy.com/org/documenso-inc/api). Delete this section before > publishing to a package manager.
+A SDK for seamless integration with Documenso v2 API.
 
-<!-- Start Summary [summary] -->
-## Summary
+The full Documenso API can be viewed here (**todo**), which includes examples.
 
-Documenso v2 beta API: Subject to breaking changes until v2 is fully released.
-<!-- End Summary [summary] -->
+## ⚠️ Warning
 
-<!-- Start Table of Contents [toc] -->
+Documenso v2 API and SDKs are currently in beta. There may be to breaking changes.
+
+To keep updated, please follow the discussions and issues here:
+- Discussion -> Todo
+- Breaking change alerts -> Todo
+<!-- No Summary [summary] -->
+
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
-* [documenso_sdk](#documensosdk)
+* [Overview](#documenso-python-sdk)
   * [SDK Installation](#sdk-installation)
   * [IDE Support](#ide-support)
-  * [SDK Example Usage](#sdk-example-usage)
   * [Authentication](#authentication)
+  * [Document creation example](#document-creation-example)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
-  * [Server Selection](#server-selection)
-  * [Custom HTTP Client](#custom-http-client)
   * [Debugging](#debugging)
 * [Development](#development)
   * [Maturity](#maturity)
   * [Contributions](#contributions)
 
-<!-- End Table of Contents [toc] -->
+<!-- No Table of Contents [toc] -->
 
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
@@ -76,63 +77,11 @@ Generally, the SDK will work well with most IDEs out of the box. However, when u
 - [PyCharm Pydantic Plugin](https://docs.pydantic.dev/latest/integrations/pycharm/)
 <!-- End IDE Support [idesupport] -->
 
-<!-- Start SDK Example Usage [usage] -->
-## SDK Example Usage
-
-### Example
-
-```python
-# Synchronous Example
-import documenso_sdk
-from documenso_sdk import Documenso
-import os
-
-with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
-) as documenso:
-
-    res = documenso.documents.find(order_by_direction=documenso_sdk.OrderByDirection.DESC)
-
-    # Handle response
-    print(res)
-```
-
-</br>
-
-The same SDK client can also be used to make asychronous requests by importing asyncio.
-```python
-# Asynchronous Example
-import asyncio
-import documenso_sdk
-from documenso_sdk import Documenso
-import os
-
-async def main():
-    async with Documenso(
-        api_key=os.getenv("DOCUMENSO_API_KEY", ""),
-    ) as documenso:
-
-        res = await documenso.documents.find_async(order_by_direction=documenso_sdk.OrderByDirection.DESC)
-
-        # Handle response
-        print(res)
-
-asyncio.run(main())
-```
-<!-- End SDK Example Usage [usage] -->
-
-<!-- Start Authentication [security] -->
 ## Authentication
 
-### Per-Client Security Schemes
+To use the SDK, you will need a Documenso API key which can be created [here](https://docs.documenso.com/developers/public-api/authentication#creating-an-api-key
+).
 
-This SDK supports the following security scheme globally:
-
-| Name      | Type   | Scheme  | Environment Variable |
-| --------- | ------ | ------- | -------------------- |
-| `api_key` | apiKey | API key | `DOCUMENSO_API_KEY`  |
-
-To authenticate with the API the `api_key` parameter must be set when initializing the SDK client instance. For example:
 ```python
 import documenso_sdk
 from documenso_sdk import Documenso
@@ -141,14 +90,26 @@ import os
 with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
-
-    res = documenso.documents.find(order_by_direction=documenso_sdk.OrderByDirection.DESC)
-
-    # Handle response
-    print(res)
-
 ```
-<!-- End Authentication [security] -->
+<!-- No Authentication [security] -->
+
+## Document creation example
+
+Currently creating a document involves two steps:
+
+1. Create the document
+2. Upload the PDF
+
+This is a temporary measure, in the near future prior to the full release we will merge these two tasks into one request. 
+
+Here is a full example of the document creation process which you can copy and run.
+
+Note that the function is temporarily called `createV0`, which will be replaced by `create` once we resolve the 2 step workaround.
+
+```python
+# Todo
+```
+<!-- No SDK Example Usage [usage] -->
 
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
@@ -324,110 +285,8 @@ with Documenso(
 ```
 <!-- End Error Handling [errors] -->
 
-<!-- Start Server Selection [server] -->
-## Server Selection
-
-### Override Server URL Per-Client
-
-The default server can also be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
-```python
-import documenso_sdk
-from documenso_sdk import Documenso
-import os
-
-with Documenso(
-    server_url="https://app.documenso.com/api/v2-beta",
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
-) as documenso:
-
-    res = documenso.documents.find(order_by_direction=documenso_sdk.OrderByDirection.DESC)
-
-    # Handle response
-    print(res)
-
-```
-<!-- End Server Selection [server] -->
-
-<!-- Start Custom HTTP Client [http-client] -->
-## Custom HTTP Client
-
-The Python SDK makes API calls using the [httpx](https://www.python-httpx.org/) HTTP library.  In order to provide a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration, you can initialize the SDK client with your own HTTP client instance.
-Depending on whether you are using the sync or async version of the SDK, you can pass an instance of `HttpClient` or `AsyncHttpClient` respectively, which are Protocol's ensuring that the client has the necessary methods to make API calls.
-This allows you to wrap the client with your own custom logic, such as adding custom headers, logging, or error handling, or you can just pass an instance of `httpx.Client` or `httpx.AsyncClient` directly.
-
-For example, you could specify a header for every request that this sdk makes as follows:
-```python
-from documenso_sdk import Documenso
-import httpx
-
-http_client = httpx.Client(headers={"x-custom-header": "someValue"})
-s = Documenso(client=http_client)
-```
-
-or you could wrap the client with your own custom logic:
-```python
-from documenso_sdk import Documenso
-from documenso_sdk.httpclient import AsyncHttpClient
-import httpx
-
-class CustomClient(AsyncHttpClient):
-    client: AsyncHttpClient
-
-    def __init__(self, client: AsyncHttpClient):
-        self.client = client
-
-    async def send(
-        self,
-        request: httpx.Request,
-        *,
-        stream: bool = False,
-        auth: Union[
-            httpx._types.AuthTypes, httpx._client.UseClientDefault, None
-        ] = httpx.USE_CLIENT_DEFAULT,
-        follow_redirects: Union[
-            bool, httpx._client.UseClientDefault
-        ] = httpx.USE_CLIENT_DEFAULT,
-    ) -> httpx.Response:
-        request.headers["Client-Level-Header"] = "added by client"
-
-        return await self.client.send(
-            request, stream=stream, auth=auth, follow_redirects=follow_redirects
-        )
-
-    def build_request(
-        self,
-        method: str,
-        url: httpx._types.URLTypes,
-        *,
-        content: Optional[httpx._types.RequestContent] = None,
-        data: Optional[httpx._types.RequestData] = None,
-        files: Optional[httpx._types.RequestFiles] = None,
-        json: Optional[Any] = None,
-        params: Optional[httpx._types.QueryParamTypes] = None,
-        headers: Optional[httpx._types.HeaderTypes] = None,
-        cookies: Optional[httpx._types.CookieTypes] = None,
-        timeout: Union[
-            httpx._types.TimeoutTypes, httpx._client.UseClientDefault
-        ] = httpx.USE_CLIENT_DEFAULT,
-        extensions: Optional[httpx._types.RequestExtensions] = None,
-    ) -> httpx.Request:
-        return self.client.build_request(
-            method,
-            url,
-            content=content,
-            data=data,
-            files=files,
-            json=json,
-            params=params,
-            headers=headers,
-            cookies=cookies,
-            timeout=timeout,
-            extensions=extensions,
-        )
-
-s = Documenso(async_client=CustomClient(httpx.AsyncClient()))
-```
-<!-- End Custom HTTP Client [http-client] -->
+<!-- No Server Selection [server] -->
+<!-- No Custom HTTP Client [http-client] -->
 
 <!-- Start Debugging [debug] -->
 ## Debugging
