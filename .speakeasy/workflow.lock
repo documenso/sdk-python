@@ -6,7 +6,6 @@ sources:
         sourceBlobDigest: sha256:1660a3a61f026b73adb9b2fdddc49fcbf66b8534c3394b38a434cf857333a785
         tags:
             - latest
-            - speakeasy-sdk-regen-1738368732
 targets:
     documenso:
         source: documenso-OAS
@@ -14,7 +13,7 @@ targets:
         sourceRevisionDigest: sha256:167083b8ead58f1af1e1e4d0ac8e36779a26c8d14d03982a3379af79c7a1910b
         sourceBlobDigest: sha256:1660a3a61f026b73adb9b2fdddc49fcbf66b8534c3394b38a434cf857333a785
         codeSamplesNamespace: documenso-oas-python-code-samples
-        codeSamplesRevisionDigest: sha256:ded89ad8f552a5e7308c646fb076b023dfa0dcd929dedcf9a6a9f1cb711a8cea
+        codeSamplesRevisionDigest: sha256:10641132a0afadd696699f72701a0b6ce2c0e656d8926bad9a6021043fda5e04
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -28,6 +27,9 @@ workflow:
         documenso:
             target: python
             source: documenso-OAS
+            publish:
+                pypi:
+                    token: $pypi_token
             codeSamples:
                 registry:
                     location: registry.speakeasyapi.dev/documenso-inc/api/documenso-oas-python-code-samples

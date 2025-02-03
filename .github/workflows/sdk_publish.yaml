@@ -6,11 +6,11 @@ permissions:
   statuses: write
   id-token: write
 "on":
-  push:
-    branches:
-      - main
-    paths:
-      - .speakeasy/gen.lock
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - .speakeasy/gen.lock
   workflow_dispatch: {}
 jobs:
   publish:

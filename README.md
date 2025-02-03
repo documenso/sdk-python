@@ -13,40 +13,39 @@
 
 A SDK for seamless integration with Documenso v2 API.
 
-The full Documenso API can be viewed here (**todo**), which includes examples.
+The full Documenso API can be viewed [here](https://openapi.documenso.com/), which includes examples.
 
 ## ⚠️ Warning
 
 Documenso v2 API and SDKs are currently in beta. There may be to breaking changes.
 
 To keep updated, please follow the discussions here:
+
 - [Feedback](https://github.com/documenso/documenso/discussions/1611)
 - [Breaking change alerts](https://github.com/documenso/documenso/discussions/1612)
 <!-- No Summary [summary] -->
 
 ## Table of Contents
+
 <!-- $toc-max-depth=2 -->
-* [Overview](#documenso-python-sdk)
-  * [SDK Installation](#sdk-installation)
-  * [IDE Support](#ide-support)
-  * [Authentication](#authentication)
-  * [Document creation example](#document-creation-example)
-  * [Available Resources and Operations](#available-resources-and-operations)
-  * [Retries](#retries)
-  * [Error Handling](#error-handling)
-  * [Debugging](#debugging)
-* [Development](#development)
-  * [Maturity](#maturity)
-  * [Contributions](#contributions)
+
+- [Overview](#documenso-python-sdk)
+  - [SDK Installation](#sdk-installation)
+  - [IDE Support](#ide-support)
+  - [Authentication](#authentication)
+  - [Document creation example](#document-creation-example)
+  - [Available Resources and Operations](#available-resources-and-operations)
+  - [Retries](#retries)
+  - [Error Handling](#error-handling)
+  - [Debugging](#debugging)
+- [Development](#development)
+  - [Maturity](#maturity)
+  - [Contributions](#contributions)
 
 <!-- No Table of Contents [toc] -->
 
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
-
-> [!TIP]
-> To finish publishing your SDK to PyPI you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
-
 
 > [!NOTE]
 > **Python version upgrade policy**
@@ -60,7 +59,7 @@ The SDK can be installed with either *pip* or *poetry* package managers.
 *PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
 
 ```bash
-pip install git+https://github.com/documenso/sdk-python.git
+pip install documenso_sdk
 ```
 
 ### Poetry
@@ -68,7 +67,7 @@ pip install git+https://github.com/documenso/sdk-python.git
 *Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
 
 ```bash
-poetry add git+https://github.com/documenso/sdk-python.git
+poetry add documenso_sdk
 ```
 
 ### Shell and script usage with `uv`
@@ -115,8 +114,7 @@ Generally, the SDK will work well with most IDEs out of the box. However, when u
 
 ## Authentication
 
-To use the SDK, you will need a Documenso API key which can be created [here](https://docs.documenso.com/developers/public-api/authentication#creating-an-api-key
-).
+To use the SDK, you will need a Documenso API key which can be created [here](https://docs.documenso.com/developers/public-api/authentication#creating-an-api-key).
 
 ```python
 import documenso_sdk
@@ -127,6 +125,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 ```
+
 <!-- No Authentication [security] -->
 
 ## Document creation example
@@ -136,15 +135,102 @@ Currently creating a document involves two steps:
 1. Create the document
 2. Upload the PDF
 
-This is a temporary measure, in the near future prior to the full release we will merge these two tasks into one request. 
+This is a temporary measure, in the near future prior to the full release we will merge these two tasks into one request.
 
 Here is a full example of the document creation process which you can copy and run.
 
-Note that the function is temporarily called `createV0`, which will be replaced by `create` once we resolve the 2 step workaround.
+Note that the function is temporarily called `create_v0`, which will be replaced by `create` once we resolve the 2 step workaround.
 
 ```python
-# Todo
+from documenso_sdk import Documenso
+import os
+import requests
+
+def upload_file_to_presigned_url(file_path: str, upload_url: str):
+  """Upload a file to a pre-signed URL."""
+  with open(file_path, 'rb') as file:
+      file_content = file.read()
+
+  response = requests.put(
+      upload_url,
+      data=file_content,
+      headers={"Content-Type": "application/octet-stream"}
+  )
+
+  if not response.ok:
+      raise Exception(f"Upload failed with status: {response.status_code}")
+
+async def main():
+  with Documenso(
+      # api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+      api_key="api_d61fxqsynan9ftcb",
+      server_url="https://stg-app.documenso.com/api/v2-beta",
+  ) as documenso:
+
+    # Create document with recipients and fields
+    create_document_response = documenso.documents.create_v0(
+      title="Document title",
+      recipients=[
+        {
+          "email": "example@documenso.com",
+          "name": "Example Doe",
+          "role": "SIGNER",
+          "fields": [
+            {
+              "type": "SIGNATURE",
+              "pageNumber": 1,
+              "pageX": 10,
+              "pageY": 10,
+              "width": 10,
+              "height": 10
+            },
+              {
+                "type": "INITIALS",
+                "pageNumber": 1,
+                "pageX": 20,
+                "pageY": 20,
+                "width": 10,
+                "height": 10
+            }
+          ]
+        },
+        {
+          "email": "admin@documenso.com",
+          "name": "Admin Doe",
+          "role": "APPROVER",
+          "fields": [
+            {
+              "type": "SIGNATURE",
+              "pageNumber": 1,
+              "pageX": 10,
+              "pageY": 50,
+              "width": 10,
+              "height": 10
+            }
+          ]
+        }
+      ],
+      meta={
+        "timezone": "Australia/Melbourne",
+        "dateFormat": "MM/dd/yyyy hh:mm a",
+        "language": "de",
+        "subject": "Email subject",
+        "message": "Email message",
+        "emailSettings": {
+            "recipientRemoved": False
+        }
+      }
+    )
+
+    # Upload the PDF file
+    upload_file_to_presigned_url("./demo.pdf", create_document_response.upload_url)
+
+
+if __name__ == "__main__":
+  import asyncio
+  asyncio.run(main())
 ```
+
 <!-- No SDK Example Usage [usage] -->
 
 <!-- Start Available Resources and Operations [operations] -->
@@ -376,7 +462,7 @@ looking for the latest version.
 
 ## Contributions
 
-While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation. 
-We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release. 
+While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation.
+We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release.
 
 ### SDK Created by [Speakeasy](https://www.speakeasy.com/?utm_source=documenso-sdk&utm_campaign=python)

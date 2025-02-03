@@ -5,10 +5,11 @@ management:
   docVersion: 0.0.0
   speakeasyVersion: 1.481.1
   generationVersion: 2.500.5
-  releaseVersion: 0.0.2
-  configChecksum: 0d454ea52b6c9682854374830aa48bb8
+  releaseVersion: 0.0.3
+  configChecksum: b3a1dd1e168b3d503d7ac5f3ce87b887
   repoURL: https://github.com/documenso/sdk-python.git
   installationURL: https://github.com/documenso/sdk-python.git
+  published: true
 features:
   python:
     additionalDependencies: 1.0.0
@@ -1660,7 +1661,7 @@ examples:
         application/json: {"documentId": 8574.78}
       responses:
         "200":
-          application/json: {"visibility": "MANAGER_AND_ABOVE", "status": "PENDING", "source": "TEMPLATE_DIRECT_LINK", "id": 627690, "externalId": "<id>", "userId": 4888.52, "authOptions": {"globalAccessAuth": "ACCOUNT", "globalActionAuth": "TWO_FACTOR_AUTH"}, "formValues": {"key": true, "key1": 6276.9, "key2": false}, "title": "<value>", "documentDataId": "<id>", "createdAt": "1734110098143", "updatedAt": "1737326276875", "completedAt": "<value>", "deletedAt": "<value>", "teamId": 311507, "templateId": 249440}
+          application/json: {"visibility": "MANAGER_AND_ABOVE", "status": "PENDING", "source": "TEMPLATE_DIRECT_LINK", "id": 627690, "externalId": "<id>", "userId": 4888.52, "authOptions": {"globalAccessAuth": "ACCOUNT", "globalActionAuth": "TWO_FACTOR_AUTH"}, "formValues": {"key": true, "key1": 6276.9, "key2": 5971.29}, "title": "<value>", "documentDataId": "<id>", "createdAt": "1734110098143", "updatedAt": "1737326276875", "completedAt": "<value>", "deletedAt": "<value>", "teamId": 311507, "templateId": 249440}
         "400":
           application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
         "500":
