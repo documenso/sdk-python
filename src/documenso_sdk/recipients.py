@@ -77,22 +77,35 @@ class Recipients(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.RecipientGetDocumentRecipientResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "404", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorNOTFOUNDData)
-            raise models.ErrorNOTFOUND(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientGetDocumentRecipientDocumentsRecipientsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.RecipientGetDocumentRecipientDocumentsRecipientsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientGetDocumentRecipientDocumentsRecipientsResponseResponseBodyData,
+            )
+            raise models.RecipientGetDocumentRecipientDocumentsRecipientsResponseResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientGetDocumentRecipientDocumentsRecipientsResponse500ResponseBodyData,
+            )
+            raise models.RecipientGetDocumentRecipientDocumentsRecipientsResponse500ResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -181,22 +194,35 @@ class Recipients(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.RecipientGetDocumentRecipientResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "404", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorNOTFOUNDData)
-            raise models.ErrorNOTFOUND(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientGetDocumentRecipientDocumentsRecipientsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.RecipientGetDocumentRecipientDocumentsRecipientsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientGetDocumentRecipientDocumentsRecipientsResponseResponseBodyData,
+            )
+            raise models.RecipientGetDocumentRecipientDocumentsRecipientsResponseResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientGetDocumentRecipientDocumentsRecipientsResponse500ResponseBodyData,
+            )
+            raise models.RecipientGetDocumentRecipientDocumentsRecipientsResponse500ResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -295,19 +321,27 @@ class Recipients(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.RecipientCreateDocumentRecipientResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientCreateDocumentRecipientDocumentsRecipientsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.RecipientCreateDocumentRecipientDocumentsRecipientsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientCreateDocumentRecipientDocumentsRecipientsResponseResponseBodyData,
+            )
+            raise models.RecipientCreateDocumentRecipientDocumentsRecipientsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -406,19 +440,27 @@ class Recipients(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.RecipientCreateDocumentRecipientResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientCreateDocumentRecipientDocumentsRecipientsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.RecipientCreateDocumentRecipientDocumentsRecipientsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientCreateDocumentRecipientDocumentsRecipientsResponseResponseBodyData,
+            )
+            raise models.RecipientCreateDocumentRecipientDocumentsRecipientsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -522,19 +564,27 @@ class Recipients(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.RecipientCreateDocumentRecipientsResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientCreateDocumentRecipientsDocumentsRecipientsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.RecipientCreateDocumentRecipientsDocumentsRecipientsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientCreateDocumentRecipientsDocumentsRecipientsResponseResponseBodyData,
+            )
+            raise models.RecipientCreateDocumentRecipientsDocumentsRecipientsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -638,19 +688,27 @@ class Recipients(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.RecipientCreateDocumentRecipientsResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientCreateDocumentRecipientsDocumentsRecipientsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.RecipientCreateDocumentRecipientsDocumentsRecipientsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientCreateDocumentRecipientsDocumentsRecipientsResponseResponseBodyData,
+            )
+            raise models.RecipientCreateDocumentRecipientsDocumentsRecipientsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -754,19 +812,27 @@ class Recipients(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.RecipientUpdateDocumentRecipientResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientUpdateDocumentRecipientDocumentsRecipientsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.RecipientUpdateDocumentRecipientDocumentsRecipientsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientUpdateDocumentRecipientDocumentsRecipientsResponseResponseBodyData,
+            )
+            raise models.RecipientUpdateDocumentRecipientDocumentsRecipientsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -870,19 +936,27 @@ class Recipients(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.RecipientUpdateDocumentRecipientResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientUpdateDocumentRecipientDocumentsRecipientsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.RecipientUpdateDocumentRecipientDocumentsRecipientsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientUpdateDocumentRecipientDocumentsRecipientsResponseResponseBodyData,
+            )
+            raise models.RecipientUpdateDocumentRecipientDocumentsRecipientsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -986,19 +1060,27 @@ class Recipients(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.RecipientUpdateDocumentRecipientsResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientUpdateDocumentRecipientsDocumentsRecipientsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.RecipientUpdateDocumentRecipientsDocumentsRecipientsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientUpdateDocumentRecipientsDocumentsRecipientsResponseResponseBodyData,
+            )
+            raise models.RecipientUpdateDocumentRecipientsDocumentsRecipientsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -1102,19 +1184,27 @@ class Recipients(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.RecipientUpdateDocumentRecipientsResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientUpdateDocumentRecipientsDocumentsRecipientsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.RecipientUpdateDocumentRecipientsDocumentsRecipientsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientUpdateDocumentRecipientsDocumentsRecipientsResponseResponseBodyData,
+            )
+            raise models.RecipientUpdateDocumentRecipientsDocumentsRecipientsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -1208,19 +1298,27 @@ class Recipients(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.RecipientDeleteDocumentRecipientResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientDeleteDocumentRecipientDocumentsRecipientsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.RecipientDeleteDocumentRecipientDocumentsRecipientsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientDeleteDocumentRecipientDocumentsRecipientsResponseResponseBodyData,
+            )
+            raise models.RecipientDeleteDocumentRecipientDocumentsRecipientsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -1314,19 +1412,27 @@ class Recipients(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.RecipientDeleteDocumentRecipientResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientDeleteDocumentRecipientDocumentsRecipientsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.RecipientDeleteDocumentRecipientDocumentsRecipientsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.RecipientDeleteDocumentRecipientDocumentsRecipientsResponseResponseBodyData,
+            )
+            raise models.RecipientDeleteDocumentRecipientDocumentsRecipientsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(

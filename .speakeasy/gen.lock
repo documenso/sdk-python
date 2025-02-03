@@ -1,23 +1,25 @@
 lockVersion: 2.0.0
 id: 9b8ab966-40b1-444c-b41e-217acf02dd9e
 management:
-  docChecksum: 76e9b7822f2da5a5cb122b30d7f464b9
+  docChecksum: 5e2ce059e01704af6196abae6c7e5982
   docVersion: 0.0.0
-  speakeasyVersion: 1.469.10
-  generationVersion: 2.493.31
-  releaseVersion: 0.0.1
-  configChecksum: 65d773f94c646f9ca8a39274ebf927cf
+  speakeasyVersion: 1.481.1
+  generationVersion: 2.500.5
+  releaseVersion: 0.0.2
+  configChecksum: 0d454ea52b6c9682854374830aa48bb8
+  repoURL: https://github.com/documenso/sdk-python.git
+  installationURL: https://github.com/documenso/sdk-python.git
 features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.10.3
+    core: 5.10.9
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
     flatRequests: 1.0.1
-    flattening: 3.1.0
+    flattening: 3.1.1
     globalSecurity: 3.0.2
     globalSecurityCallbacks: 1.0.0
     globalSecurityFlattening: 1.0.0
@@ -53,7 +55,10 @@ generatedFiles:
   - docs/models/documentcreatedocumenttemporarydocumentmeta.md
   - docs/models/documentcreatedocumenttemporarydocumentsauthoptions.md
   - docs/models/documentcreatedocumenttemporarydocumentsfields.md
+  - docs/models/documentcreatedocumenttemporarydocumentsissues.md
   - docs/models/documentcreatedocumenttemporarydocumentsrecipients.md
+  - docs/models/documentcreatedocumenttemporarydocumentsresponsebody.md
+  - docs/models/documentcreatedocumenttemporarydocumentsresponseresponsebody.md
   - docs/models/documentcreatedocumenttemporarydocumentstype.md
   - docs/models/documentcreatedocumenttemporaryemailsettings.md
   - docs/models/documentcreatedocumenttemporaryfieldmeta.md
@@ -108,6 +113,7 @@ generatedFiles:
   - docs/models/documentcreatedocumenttemporaryformvalues.md
   - docs/models/documentcreatedocumenttemporaryglobalaccessauth.md
   - docs/models/documentcreatedocumenttemporaryglobalactionauth.md
+  - docs/models/documentcreatedocumenttemporaryissues.md
   - docs/models/documentcreatedocumenttemporaryreadstatus.md
   - docs/models/documentcreatedocumenttemporaryrecipients.md
   - docs/models/documentcreatedocumenttemporaryrequestbody.md
@@ -121,8 +127,16 @@ generatedFiles:
   - docs/models/documentcreatedocumenttemporarytype.md
   - docs/models/documentcreatedocumenttemporaryvisibility.md
   - docs/models/documentdata.md
+  - docs/models/documentdeletedocumentdocumentsissues.md
+  - docs/models/documentdeletedocumentdocumentsresponsebody.md
+  - docs/models/documentdeletedocumentdocumentsresponseresponsebody.md
+  - docs/models/documentdeletedocumentissues.md
   - docs/models/documentdeletedocumentrequestbody.md
   - docs/models/documentdeletedocumentresponsebody.md
+  - docs/models/documentduplicatedocumentdocumentsissues.md
+  - docs/models/documentduplicatedocumentdocumentsresponsebody.md
+  - docs/models/documentduplicatedocumentdocumentsresponseresponsebody.md
+  - docs/models/documentduplicatedocumentissues.md
   - docs/models/documentduplicatedocumentrequestbody.md
   - docs/models/documentduplicatedocumentresponsebody.md
   - docs/models/documentfinddocumentsaccessauth.md
@@ -130,9 +144,14 @@ generatedFiles:
   - docs/models/documentfinddocumentsauthoptions.md
   - docs/models/documentfinddocumentsdata.md
   - docs/models/documentfinddocumentsdocumentsauthoptions.md
+  - docs/models/documentfinddocumentsdocumentsissues.md
+  - docs/models/documentfinddocumentsdocumentsresponse500responsebody.md
+  - docs/models/documentfinddocumentsdocumentsresponsebody.md
+  - docs/models/documentfinddocumentsdocumentsresponseresponsebody.md
   - docs/models/documentfinddocumentsformvalues.md
   - docs/models/documentfinddocumentsglobalaccessauth.md
   - docs/models/documentfinddocumentsglobalactionauth.md
+  - docs/models/documentfinddocumentsissues.md
   - docs/models/documentfinddocumentsreadstatus.md
   - docs/models/documentfinddocumentsrecipients.md
   - docs/models/documentfinddocumentsrequest.md
@@ -148,6 +167,11 @@ generatedFiles:
   - docs/models/documentgetdocumentwithdetailsbyidactionauth.md
   - docs/models/documentgetdocumentwithdetailsbyidauthoptions.md
   - docs/models/documentgetdocumentwithdetailsbyiddistributionmethod.md
+  - docs/models/documentgetdocumentwithdetailsbyiddocumentsissues.md
+  - docs/models/documentgetdocumentwithdetailsbyiddocumentsresponse500responsebody.md
+  - docs/models/documentgetdocumentwithdetailsbyiddocumentsresponsebody.md
+  - docs/models/documentgetdocumentwithdetailsbyiddocumentsresponseissues.md
+  - docs/models/documentgetdocumentwithdetailsbyiddocumentsresponseresponsebody.md
   - docs/models/documentgetdocumentwithdetailsbyiddocumentstype.md
   - docs/models/documentgetdocumentwithdetailsbyidemailsettings.md
   - docs/models/documentgetdocumentwithdetailsbyidfieldmeta.md
@@ -176,6 +200,7 @@ generatedFiles:
   - docs/models/documentgetdocumentwithdetailsbyidformvalues.md
   - docs/models/documentgetdocumentwithdetailsbyidglobalaccessauth.md
   - docs/models/documentgetdocumentwithdetailsbyidglobalactionauth.md
+  - docs/models/documentgetdocumentwithdetailsbyidissues.md
   - docs/models/documentgetdocumentwithdetailsbyidreadstatus.md
   - docs/models/documentgetdocumentwithdetailsbyidrecipients.md
   - docs/models/documentgetdocumentwithdetailsbyidrequest.md
@@ -190,23 +215,35 @@ generatedFiles:
   - docs/models/documentgetdocumentwithdetailsbyidvisibility.md
   - docs/models/documentmeta.md
   - docs/models/documentmovedocumenttoteamauthoptions.md
+  - docs/models/documentmovedocumenttoteamdocumentsissues.md
+  - docs/models/documentmovedocumenttoteamdocumentsresponsebody.md
+  - docs/models/documentmovedocumenttoteamdocumentsresponseresponsebody.md
   - docs/models/documentmovedocumenttoteamformvalues.md
   - docs/models/documentmovedocumenttoteamglobalaccessauth.md
   - docs/models/documentmovedocumenttoteamglobalactionauth.md
+  - docs/models/documentmovedocumenttoteamissues.md
   - docs/models/documentmovedocumenttoteamrequestbody.md
   - docs/models/documentmovedocumenttoteamresponsebody.md
   - docs/models/documentmovedocumenttoteamsource.md
   - docs/models/documentmovedocumenttoteamstatus.md
   - docs/models/documentmovedocumenttoteamvisibility.md
+  - docs/models/documentresenddocumentdocumentsissues.md
+  - docs/models/documentresenddocumentdocumentsresponsebody.md
+  - docs/models/documentresenddocumentdocumentsresponseresponsebody.md
+  - docs/models/documentresenddocumentissues.md
   - docs/models/documentresenddocumentrequestbody.md
   - docs/models/documentresenddocumentresponsebody.md
   - docs/models/documentsenddocumentauthoptions.md
   - docs/models/documentsenddocumentdateformat.md
   - docs/models/documentsenddocumentdistributionmethod.md
+  - docs/models/documentsenddocumentdocumentsissues.md
+  - docs/models/documentsenddocumentdocumentsresponsebody.md
+  - docs/models/documentsenddocumentdocumentsresponseresponsebody.md
   - docs/models/documentsenddocumentemailsettings.md
   - docs/models/documentsenddocumentformvalues.md
   - docs/models/documentsenddocumentglobalaccessauth.md
   - docs/models/documentsenddocumentglobalactionauth.md
+  - docs/models/documentsenddocumentissues.md
   - docs/models/documentsenddocumentlanguage.md
   - docs/models/documentsenddocumentmeta.md
   - docs/models/documentsenddocumentrequestbody.md
@@ -219,11 +256,15 @@ generatedFiles:
   - docs/models/documentsetsettingsfordocumentdistributionmethod.md
   - docs/models/documentsetsettingsfordocumentdocumentsglobalaccessauth.md
   - docs/models/documentsetsettingsfordocumentdocumentsglobalactionauth.md
+  - docs/models/documentsetsettingsfordocumentdocumentsissues.md
+  - docs/models/documentsetsettingsfordocumentdocumentsresponsebody.md
+  - docs/models/documentsetsettingsfordocumentdocumentsresponseresponsebody.md
   - docs/models/documentsetsettingsfordocumentdocumentsvisibility.md
   - docs/models/documentsetsettingsfordocumentemailsettings.md
   - docs/models/documentsetsettingsfordocumentformvalues.md
   - docs/models/documentsetsettingsfordocumentglobalaccessauth.md
   - docs/models/documentsetsettingsfordocumentglobalactionauth.md
+  - docs/models/documentsetsettingsfordocumentissues.md
   - docs/models/documentsetsettingsfordocumentlanguage.md
   - docs/models/documentsetsettingsfordocumentmeta.md
   - docs/models/documentsetsettingsfordocumentrequestbody.md
@@ -235,12 +276,6 @@ generatedFiles:
   - docs/models/eight.md
   - docs/models/eleven.md
   - docs/models/emailsettings.md
-  - docs/models/errorbadrequest.md
-  - docs/models/errorinternalservererror.md
-  - docs/models/errorinternalservererrorissues.md
-  - docs/models/errornotfound.md
-  - docs/models/errornotfoundissues.md
-  - docs/models/field.md
   - docs/models/field1.md
   - docs/models/field10.md
   - docs/models/field11.md
@@ -252,6 +287,9 @@ generatedFiles:
   - docs/models/field7.md
   - docs/models/field8.md
   - docs/models/field9.md
+  - docs/models/fieldcreatedocumentfielddocumentsfieldsissues.md
+  - docs/models/fieldcreatedocumentfielddocumentsfieldsresponsebody.md
+  - docs/models/fieldcreatedocumentfielddocumentsfieldsresponseresponsebody.md
   - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsfieldmeta.md
   - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsrequestfieldmeta.md
   - docs/models/fieldcreatedocumentfieldfielddocumentsfieldsrequestrequestbody10fieldmeta.md
@@ -303,9 +341,13 @@ generatedFiles:
   - docs/models/fieldcreatedocumentfieldfieldmetavalues.md
   - docs/models/fieldcreatedocumentfieldfieldtype.md
   - docs/models/fieldcreatedocumentfieldfieldvalues.md
+  - docs/models/fieldcreatedocumentfieldissues.md
   - docs/models/fieldcreatedocumentfieldrequestbody.md
   - docs/models/fieldcreatedocumentfieldresponsebody.md
   - docs/models/fieldcreatedocumentfieldsdocumentsfieldsfields.md
+  - docs/models/fieldcreatedocumentfieldsdocumentsfieldsissues.md
+  - docs/models/fieldcreatedocumentfieldsdocumentsfieldsresponsebody.md
+  - docs/models/fieldcreatedocumentfieldsdocumentsfieldsresponseresponsebody.md
   - docs/models/fieldcreatedocumentfieldsfieldmeta.md
   - docs/models/fieldcreatedocumentfieldsfieldmeta1.md
   - docs/models/fieldcreatedocumentfieldsfieldmeta2.md
@@ -361,6 +403,7 @@ generatedFiles:
   - docs/models/fieldcreatedocumentfieldsfieldsfieldmeta.md
   - docs/models/fieldcreatedocumentfieldsfieldstype.md
   - docs/models/fieldcreatedocumentfieldsfieldsvalues.md
+  - docs/models/fieldcreatedocumentfieldsissues.md
   - docs/models/fieldcreatedocumentfieldsrequestbody.md
   - docs/models/fieldcreatedocumentfieldsresponsebody.md
   - docs/models/fieldcreatedocumentfieldstype.md
@@ -431,6 +474,7 @@ generatedFiles:
   - docs/models/fieldcreatetemplatefieldfieldtemplatesfieldsvalues.md
   - docs/models/fieldcreatetemplatefieldfieldtype.md
   - docs/models/fieldcreatetemplatefieldfieldvalues.md
+  - docs/models/fieldcreatetemplatefieldissues.md
   - docs/models/fieldcreatetemplatefieldrequestbody.md
   - docs/models/fieldcreatetemplatefieldresponsebody.md
   - docs/models/fieldcreatetemplatefieldsfieldmeta.md
@@ -499,16 +543,36 @@ generatedFiles:
   - docs/models/fieldcreatetemplatefieldsfieldstemplatesfieldsvalues.md
   - docs/models/fieldcreatetemplatefieldsfieldstype.md
   - docs/models/fieldcreatetemplatefieldsfieldsvalues.md
+  - docs/models/fieldcreatetemplatefieldsissues.md
   - docs/models/fieldcreatetemplatefieldsrequestbody.md
   - docs/models/fieldcreatetemplatefieldsresponsebody.md
   - docs/models/fieldcreatetemplatefieldstemplatesfieldsfields.md
+  - docs/models/fieldcreatetemplatefieldstemplatesfieldsissues.md
+  - docs/models/fieldcreatetemplatefieldstemplatesfieldsresponsebody.md
+  - docs/models/fieldcreatetemplatefieldstemplatesfieldsresponseresponsebody.md
   - docs/models/fieldcreatetemplatefieldstype.md
+  - docs/models/fieldcreatetemplatefieldtemplatesfieldsissues.md
+  - docs/models/fieldcreatetemplatefieldtemplatesfieldsresponsebody.md
+  - docs/models/fieldcreatetemplatefieldtemplatesfieldsresponseresponsebody.md
   - docs/models/fieldcreatetemplatefieldtype.md
+  - docs/models/fielddeletedocumentfielddocumentsfieldsissues.md
+  - docs/models/fielddeletedocumentfielddocumentsfieldsresponsebody.md
+  - docs/models/fielddeletedocumentfielddocumentsfieldsresponseresponsebody.md
+  - docs/models/fielddeletedocumentfieldissues.md
   - docs/models/fielddeletedocumentfieldrequestbody.md
   - docs/models/fielddeletedocumentfieldresponsebody.md
+  - docs/models/fielddeletetemplatefieldissues.md
   - docs/models/fielddeletetemplatefieldrequestbody.md
   - docs/models/fielddeletetemplatefieldresponsebody.md
+  - docs/models/fielddeletetemplatefieldtemplatesfieldsissues.md
+  - docs/models/fielddeletetemplatefieldtemplatesfieldsresponsebody.md
+  - docs/models/fielddeletetemplatefieldtemplatesfieldsresponseresponsebody.md
   - docs/models/fieldfieldmeta.md
+  - docs/models/fieldgetdocumentfielddocumentsfieldsissues.md
+  - docs/models/fieldgetdocumentfielddocumentsfieldsresponse500responsebody.md
+  - docs/models/fieldgetdocumentfielddocumentsfieldsresponsebody.md
+  - docs/models/fieldgetdocumentfielddocumentsfieldsresponseissues.md
+  - docs/models/fieldgetdocumentfielddocumentsfieldsresponseresponsebody.md
   - docs/models/fieldgetdocumentfieldfieldmeta.md
   - docs/models/fieldgetdocumentfieldfieldmetadocumentsfieldsresponse200applicationjsonresponsebody8type.md
   - docs/models/fieldgetdocumentfieldfieldmetadocumentsfieldsresponse200applicationjsonresponsebody9type.md
@@ -520,6 +584,7 @@ generatedFiles:
   - docs/models/fieldgetdocumentfieldfieldmetadocumentsfieldsvalues.md
   - docs/models/fieldgetdocumentfieldfieldmetatype.md
   - docs/models/fieldgetdocumentfieldfieldmetavalues.md
+  - docs/models/fieldgetdocumentfieldissues.md
   - docs/models/fieldgetdocumentfieldrequest.md
   - docs/models/fieldgetdocumentfieldresponsebody.md
   - docs/models/fieldgetdocumentfieldtype.md
@@ -545,8 +610,14 @@ generatedFiles:
   - docs/models/fieldgettemplatefieldfieldmetatemplatesfieldsvalues.md
   - docs/models/fieldgettemplatefieldfieldmetatype.md
   - docs/models/fieldgettemplatefieldfieldmetavalues.md
+  - docs/models/fieldgettemplatefieldissues.md
   - docs/models/fieldgettemplatefieldrequest.md
   - docs/models/fieldgettemplatefieldresponsebody.md
+  - docs/models/fieldgettemplatefieldtemplatesfieldsissues.md
+  - docs/models/fieldgettemplatefieldtemplatesfieldsresponse500responsebody.md
+  - docs/models/fieldgettemplatefieldtemplatesfieldsresponsebody.md
+  - docs/models/fieldgettemplatefieldtemplatesfieldsresponseissues.md
+  - docs/models/fieldgettemplatefieldtemplatesfieldsresponseresponsebody.md
   - docs/models/fieldgettemplatefieldtype.md
   - docs/models/fieldmeta.md
   - docs/models/fieldmeta1.md
@@ -574,7 +645,11 @@ generatedFiles:
   - docs/models/fieldsfieldmeta.md
   - docs/models/fieldstype.md
   - docs/models/fieldsvalues.md
+  - docs/models/fieldt.md
   - docs/models/fieldtype.md
+  - docs/models/fieldupdatedocumentfielddocumentsfieldsissues.md
+  - docs/models/fieldupdatedocumentfielddocumentsfieldsresponsebody.md
+  - docs/models/fieldupdatedocumentfielddocumentsfieldsresponseresponsebody.md
   - docs/models/fieldupdatedocumentfieldfield.md
   - docs/models/fieldupdatedocumentfieldfield1.md
   - docs/models/fieldupdatedocumentfieldfield10.md
@@ -641,9 +716,13 @@ generatedFiles:
   - docs/models/fieldupdatedocumentfieldfieldmetavalues.md
   - docs/models/fieldupdatedocumentfieldfieldtype.md
   - docs/models/fieldupdatedocumentfieldfieldvalues.md
+  - docs/models/fieldupdatedocumentfieldissues.md
   - docs/models/fieldupdatedocumentfieldrequestbody.md
   - docs/models/fieldupdatedocumentfieldresponsebody.md
   - docs/models/fieldupdatedocumentfieldsdocumentsfieldsfields.md
+  - docs/models/fieldupdatedocumentfieldsdocumentsfieldsissues.md
+  - docs/models/fieldupdatedocumentfieldsdocumentsfieldsresponsebody.md
+  - docs/models/fieldupdatedocumentfieldsdocumentsfieldsresponseresponsebody.md
   - docs/models/fieldupdatedocumentfieldsfieldmeta.md
   - docs/models/fieldupdatedocumentfieldsfieldmeta1.md
   - docs/models/fieldupdatedocumentfieldsfieldmeta2.md
@@ -710,6 +789,7 @@ generatedFiles:
   - docs/models/fieldupdatedocumentfieldsfieldsfieldmeta.md
   - docs/models/fieldupdatedocumentfieldsfieldstype.md
   - docs/models/fieldupdatedocumentfieldsfieldsvalues.md
+  - docs/models/fieldupdatedocumentfieldsissues.md
   - docs/models/fieldupdatedocumentfieldsrequestbody.md
   - docs/models/fieldupdatedocumentfieldsresponsebody.md
   - docs/models/fieldupdatedocumentfieldstype.md
@@ -780,6 +860,7 @@ generatedFiles:
   - docs/models/fieldupdatetemplatefieldfieldtemplatesfieldsvalues.md
   - docs/models/fieldupdatetemplatefieldfieldtype.md
   - docs/models/fieldupdatetemplatefieldfieldvalues.md
+  - docs/models/fieldupdatetemplatefieldissues.md
   - docs/models/fieldupdatetemplatefieldrequestbody.md
   - docs/models/fieldupdatetemplatefieldresponsebody.md
   - docs/models/fieldupdatetemplatefieldsfieldmeta.md
@@ -848,10 +929,17 @@ generatedFiles:
   - docs/models/fieldupdatetemplatefieldsfieldstemplatesfieldsvalues.md
   - docs/models/fieldupdatetemplatefieldsfieldstype.md
   - docs/models/fieldupdatetemplatefieldsfieldsvalues.md
+  - docs/models/fieldupdatetemplatefieldsissues.md
   - docs/models/fieldupdatetemplatefieldsrequestbody.md
   - docs/models/fieldupdatetemplatefieldsresponsebody.md
   - docs/models/fieldupdatetemplatefieldstemplatesfieldsfields.md
+  - docs/models/fieldupdatetemplatefieldstemplatesfieldsissues.md
+  - docs/models/fieldupdatetemplatefieldstemplatesfieldsresponsebody.md
+  - docs/models/fieldupdatetemplatefieldstemplatesfieldsresponseresponsebody.md
   - docs/models/fieldupdatetemplatefieldstype.md
+  - docs/models/fieldupdatetemplatefieldtemplatesfieldsissues.md
+  - docs/models/fieldupdatetemplatefieldtemplatesfieldsresponsebody.md
+  - docs/models/fieldupdatetemplatefieldtemplatesfieldsresponseresponsebody.md
   - docs/models/fieldupdatetemplatefieldtype.md
   - docs/models/fieldvalues.md
   - docs/models/five.md
@@ -874,7 +962,11 @@ generatedFiles:
   - docs/models/recipientcreatedocumentrecipientauthoptions.md
   - docs/models/recipientcreatedocumentrecipientdocumentsrecipientsaccessauth.md
   - docs/models/recipientcreatedocumentrecipientdocumentsrecipientsactionauth.md
+  - docs/models/recipientcreatedocumentrecipientdocumentsrecipientsissues.md
+  - docs/models/recipientcreatedocumentrecipientdocumentsrecipientsresponsebody.md
+  - docs/models/recipientcreatedocumentrecipientdocumentsrecipientsresponseresponsebody.md
   - docs/models/recipientcreatedocumentrecipientdocumentsrecipientsrole.md
+  - docs/models/recipientcreatedocumentrecipientissues.md
   - docs/models/recipientcreatedocumentrecipientreadstatus.md
   - docs/models/recipientcreatedocumentrecipientrequestbody.md
   - docs/models/recipientcreatedocumentrecipientresponsebody.md
@@ -884,10 +976,14 @@ generatedFiles:
   - docs/models/recipientcreatedocumentrecipientsauthoptions.md
   - docs/models/recipientcreatedocumentrecipientsdocumentsrecipientsaccessauth.md
   - docs/models/recipientcreatedocumentrecipientsdocumentsrecipientsactionauth.md
+  - docs/models/recipientcreatedocumentrecipientsdocumentsrecipientsissues.md
   - docs/models/recipientcreatedocumentrecipientsdocumentsrecipientsrecipients.md
+  - docs/models/recipientcreatedocumentrecipientsdocumentsrecipientsresponsebody.md
+  - docs/models/recipientcreatedocumentrecipientsdocumentsrecipientsresponseresponsebody.md
   - docs/models/recipientcreatedocumentrecipientsdocumentsrecipientsrole.md
   - docs/models/recipientcreatedocumentrecipientsendstatus.md
   - docs/models/recipientcreatedocumentrecipientsigningstatus.md
+  - docs/models/recipientcreatedocumentrecipientsissues.md
   - docs/models/recipientcreatedocumentrecipientsreadstatus.md
   - docs/models/recipientcreatedocumentrecipientsrecipients.md
   - docs/models/recipientcreatedocumentrecipientsrequestbody.md
@@ -898,6 +994,7 @@ generatedFiles:
   - docs/models/recipientcreatetemplaterecipientaccessauth.md
   - docs/models/recipientcreatetemplaterecipientactionauth.md
   - docs/models/recipientcreatetemplaterecipientauthoptions.md
+  - docs/models/recipientcreatetemplaterecipientissues.md
   - docs/models/recipientcreatetemplaterecipientreadstatus.md
   - docs/models/recipientcreatetemplaterecipientrecipient.md
   - docs/models/recipientcreatetemplaterecipientrequestbody.md
@@ -908,6 +1005,7 @@ generatedFiles:
   - docs/models/recipientcreatetemplaterecipientsauthoptions.md
   - docs/models/recipientcreatetemplaterecipientsendstatus.md
   - docs/models/recipientcreatetemplaterecipientsigningstatus.md
+  - docs/models/recipientcreatetemplaterecipientsissues.md
   - docs/models/recipientcreatetemplaterecipientsreadstatus.md
   - docs/models/recipientcreatetemplaterecipientsrecipients.md
   - docs/models/recipientcreatetemplaterecipientsrequestbody.md
@@ -917,18 +1015,37 @@ generatedFiles:
   - docs/models/recipientcreatetemplaterecipientssigningstatus.md
   - docs/models/recipientcreatetemplaterecipientstemplatesrecipientsaccessauth.md
   - docs/models/recipientcreatetemplaterecipientstemplatesrecipientsactionauth.md
+  - docs/models/recipientcreatetemplaterecipientstemplatesrecipientsissues.md
   - docs/models/recipientcreatetemplaterecipientstemplatesrecipientsrecipients.md
+  - docs/models/recipientcreatetemplaterecipientstemplatesrecipientsresponsebody.md
+  - docs/models/recipientcreatetemplaterecipientstemplatesrecipientsresponseresponsebody.md
   - docs/models/recipientcreatetemplaterecipientstemplatesrecipientsrole.md
   - docs/models/recipientcreatetemplaterecipienttemplatesrecipientsaccessauth.md
   - docs/models/recipientcreatetemplaterecipienttemplatesrecipientsactionauth.md
+  - docs/models/recipientcreatetemplaterecipienttemplatesrecipientsissues.md
+  - docs/models/recipientcreatetemplaterecipienttemplatesrecipientsresponsebody.md
+  - docs/models/recipientcreatetemplaterecipienttemplatesrecipientsresponseresponsebody.md
   - docs/models/recipientcreatetemplaterecipienttemplatesrecipientsrole.md
+  - docs/models/recipientdeletedocumentrecipientdocumentsrecipientsissues.md
+  - docs/models/recipientdeletedocumentrecipientdocumentsrecipientsresponsebody.md
+  - docs/models/recipientdeletedocumentrecipientdocumentsrecipientsresponseresponsebody.md
+  - docs/models/recipientdeletedocumentrecipientissues.md
   - docs/models/recipientdeletedocumentrecipientrequestbody.md
   - docs/models/recipientdeletedocumentrecipientresponsebody.md
+  - docs/models/recipientdeletetemplaterecipientissues.md
   - docs/models/recipientdeletetemplaterecipientrequestbody.md
   - docs/models/recipientdeletetemplaterecipientresponsebody.md
+  - docs/models/recipientdeletetemplaterecipienttemplatesrecipientsissues.md
+  - docs/models/recipientdeletetemplaterecipienttemplatesrecipientsresponsebody.md
+  - docs/models/recipientdeletetemplaterecipienttemplatesrecipientsresponseresponsebody.md
   - docs/models/recipientgetdocumentrecipientaccessauth.md
   - docs/models/recipientgetdocumentrecipientactionauth.md
   - docs/models/recipientgetdocumentrecipientauthoptions.md
+  - docs/models/recipientgetdocumentrecipientdocumentsrecipientsissues.md
+  - docs/models/recipientgetdocumentrecipientdocumentsrecipientsresponse500responsebody.md
+  - docs/models/recipientgetdocumentrecipientdocumentsrecipientsresponsebody.md
+  - docs/models/recipientgetdocumentrecipientdocumentsrecipientsresponseissues.md
+  - docs/models/recipientgetdocumentrecipientdocumentsrecipientsresponseresponsebody.md
   - docs/models/recipientgetdocumentrecipientfieldmeta.md
   - docs/models/recipientgetdocumentrecipientfieldmeta1.md
   - docs/models/recipientgetdocumentrecipientfieldmeta2.md
@@ -952,6 +1069,7 @@ generatedFiles:
   - docs/models/recipientgetdocumentrecipientfieldmetatype.md
   - docs/models/recipientgetdocumentrecipientfieldmetavalues.md
   - docs/models/recipientgetdocumentrecipientfields.md
+  - docs/models/recipientgetdocumentrecipientissues.md
   - docs/models/recipientgetdocumentrecipientrequest.md
   - docs/models/recipientgetdocumentrecipientresponsebody.md
   - docs/models/recipientgetdocumentrecipientrole.md
@@ -982,18 +1100,27 @@ generatedFiles:
   - docs/models/recipientgettemplaterecipientfieldmetatype.md
   - docs/models/recipientgettemplaterecipientfieldmetavalues.md
   - docs/models/recipientgettemplaterecipientfields.md
+  - docs/models/recipientgettemplaterecipientissues.md
   - docs/models/recipientgettemplaterecipientreadstatus.md
   - docs/models/recipientgettemplaterecipientrequest.md
   - docs/models/recipientgettemplaterecipientresponsebody.md
   - docs/models/recipientgettemplaterecipientrole.md
   - docs/models/recipientgettemplaterecipientsendstatus.md
   - docs/models/recipientgettemplaterecipientsigningstatus.md
+  - docs/models/recipientgettemplaterecipienttemplatesrecipientsissues.md
+  - docs/models/recipientgettemplaterecipienttemplatesrecipientsresponse500responsebody.md
+  - docs/models/recipientgettemplaterecipienttemplatesrecipientsresponsebody.md
+  - docs/models/recipientgettemplaterecipienttemplatesrecipientsresponseissues.md
+  - docs/models/recipientgettemplaterecipienttemplatesrecipientsresponseresponsebody.md
   - docs/models/recipientgettemplaterecipienttype.md
   - docs/models/recipientupdatedocumentrecipientaccessauth.md
   - docs/models/recipientupdatedocumentrecipientactionauth.md
   - docs/models/recipientupdatedocumentrecipientauthoptions.md
   - docs/models/recipientupdatedocumentrecipientdocumentsrecipientsaccessauth.md
   - docs/models/recipientupdatedocumentrecipientdocumentsrecipientsactionauth.md
+  - docs/models/recipientupdatedocumentrecipientdocumentsrecipientsissues.md
+  - docs/models/recipientupdatedocumentrecipientdocumentsrecipientsresponsebody.md
+  - docs/models/recipientupdatedocumentrecipientdocumentsrecipientsresponseresponsebody.md
   - docs/models/recipientupdatedocumentrecipientdocumentsrecipientsrole.md
   - docs/models/recipientupdatedocumentrecipientfieldmeta.md
   - docs/models/recipientupdatedocumentrecipientfieldmeta1.md
@@ -1018,6 +1145,7 @@ generatedFiles:
   - docs/models/recipientupdatedocumentrecipientfieldmetatype.md
   - docs/models/recipientupdatedocumentrecipientfieldmetavalues.md
   - docs/models/recipientupdatedocumentrecipientfields.md
+  - docs/models/recipientupdatedocumentrecipientissues.md
   - docs/models/recipientupdatedocumentrecipientreadstatus.md
   - docs/models/recipientupdatedocumentrecipientrecipient.md
   - docs/models/recipientupdatedocumentrecipientrequestbody.md
@@ -1028,7 +1156,10 @@ generatedFiles:
   - docs/models/recipientupdatedocumentrecipientsauthoptions.md
   - docs/models/recipientupdatedocumentrecipientsdocumentsrecipientsaccessauth.md
   - docs/models/recipientupdatedocumentrecipientsdocumentsrecipientsactionauth.md
+  - docs/models/recipientupdatedocumentrecipientsdocumentsrecipientsissues.md
   - docs/models/recipientupdatedocumentrecipientsdocumentsrecipientsrecipients.md
+  - docs/models/recipientupdatedocumentrecipientsdocumentsrecipientsresponsebody.md
+  - docs/models/recipientupdatedocumentrecipientsdocumentsrecipientsresponseresponsebody.md
   - docs/models/recipientupdatedocumentrecipientsdocumentsrecipientsrole.md
   - docs/models/recipientupdatedocumentrecipientsendstatus.md
   - docs/models/recipientupdatedocumentrecipientsfieldmeta.md
@@ -1055,6 +1186,7 @@ generatedFiles:
   - docs/models/recipientupdatedocumentrecipientsfieldmetavalues.md
   - docs/models/recipientupdatedocumentrecipientsfields.md
   - docs/models/recipientupdatedocumentrecipientsigningstatus.md
+  - docs/models/recipientupdatedocumentrecipientsissues.md
   - docs/models/recipientupdatedocumentrecipientsreadstatus.md
   - docs/models/recipientupdatedocumentrecipientsrecipients.md
   - docs/models/recipientupdatedocumentrecipientsrequestbody.md
@@ -1090,6 +1222,7 @@ generatedFiles:
   - docs/models/recipientupdatetemplaterecipientfieldmetatype.md
   - docs/models/recipientupdatetemplaterecipientfieldmetavalues.md
   - docs/models/recipientupdatetemplaterecipientfields.md
+  - docs/models/recipientupdatetemplaterecipientissues.md
   - docs/models/recipientupdatetemplaterecipientreadstatus.md
   - docs/models/recipientupdatetemplaterecipientrecipient.md
   - docs/models/recipientupdatetemplaterecipientrequestbody.md
@@ -1123,6 +1256,7 @@ generatedFiles:
   - docs/models/recipientupdatetemplaterecipientsfieldmetavalues.md
   - docs/models/recipientupdatetemplaterecipientsfields.md
   - docs/models/recipientupdatetemplaterecipientsigningstatus.md
+  - docs/models/recipientupdatetemplaterecipientsissues.md
   - docs/models/recipientupdatetemplaterecipientsreadstatus.md
   - docs/models/recipientupdatetemplaterecipientsrecipients.md
   - docs/models/recipientupdatetemplaterecipientsrequestbody.md
@@ -1132,11 +1266,17 @@ generatedFiles:
   - docs/models/recipientupdatetemplaterecipientssigningstatus.md
   - docs/models/recipientupdatetemplaterecipientstemplatesrecipientsaccessauth.md
   - docs/models/recipientupdatetemplaterecipientstemplatesrecipientsactionauth.md
+  - docs/models/recipientupdatetemplaterecipientstemplatesrecipientsissues.md
   - docs/models/recipientupdatetemplaterecipientstemplatesrecipientsrecipients.md
+  - docs/models/recipientupdatetemplaterecipientstemplatesrecipientsresponsebody.md
+  - docs/models/recipientupdatetemplaterecipientstemplatesrecipientsresponseresponsebody.md
   - docs/models/recipientupdatetemplaterecipientstemplatesrecipientsrole.md
   - docs/models/recipientupdatetemplaterecipientstype.md
   - docs/models/recipientupdatetemplaterecipienttemplatesrecipientsaccessauth.md
   - docs/models/recipientupdatetemplaterecipienttemplatesrecipientsactionauth.md
+  - docs/models/recipientupdatetemplaterecipienttemplatesrecipientsissues.md
+  - docs/models/recipientupdatetemplaterecipienttemplatesrecipientsresponsebody.md
+  - docs/models/recipientupdatetemplaterecipienttemplatesrecipientsresponseresponsebody.md
   - docs/models/recipientupdatetemplaterecipienttemplatesrecipientsrole.md
   - docs/models/recipientupdatetemplaterecipienttype.md
   - docs/models/role.md
@@ -1182,6 +1322,7 @@ generatedFiles:
   - docs/models/templatecreatedocumentfromtemplateformvalues.md
   - docs/models/templatecreatedocumentfromtemplateglobalaccessauth.md
   - docs/models/templatecreatedocumentfromtemplateglobalactionauth.md
+  - docs/models/templatecreatedocumentfromtemplateissues.md
   - docs/models/templatecreatedocumentfromtemplatereadstatus.md
   - docs/models/templatecreatedocumentfromtemplaterecipients.md
   - docs/models/templatecreatedocumentfromtemplaterequestbody.md
@@ -1193,22 +1334,41 @@ generatedFiles:
   - docs/models/templatecreatedocumentfromtemplatesource.md
   - docs/models/templatecreatedocumentfromtemplatestatus.md
   - docs/models/templatecreatedocumentfromtemplatetemplatesauthoptions.md
+  - docs/models/templatecreatedocumentfromtemplatetemplatesissues.md
   - docs/models/templatecreatedocumentfromtemplatetemplatesrecipients.md
+  - docs/models/templatecreatedocumentfromtemplatetemplatesresponsebody.md
+  - docs/models/templatecreatedocumentfromtemplatetemplatesresponseresponsebody.md
   - docs/models/templatecreatedocumentfromtemplatetemplatestype.md
   - docs/models/templatecreatedocumentfromtemplatetype.md
   - docs/models/templatecreatedocumentfromtemplatevisibility.md
+  - docs/models/templatecreatetemplatedirectlinkissues.md
   - docs/models/templatecreatetemplatedirectlinkrequestbody.md
   - docs/models/templatecreatetemplatedirectlinkresponsebody.md
+  - docs/models/templatecreatetemplatedirectlinktemplatesdirectlinkissues.md
+  - docs/models/templatecreatetemplatedirectlinktemplatesdirectlinkresponsebody.md
+  - docs/models/templatecreatetemplatedirectlinktemplatesdirectlinkresponseresponsebody.md
+  - docs/models/templatedeletetemplatedirectlinkissues.md
   - docs/models/templatedeletetemplatedirectlinkrequestbody.md
   - docs/models/templatedeletetemplatedirectlinkresponsebody.md
+  - docs/models/templatedeletetemplatedirectlinktemplatesdirectlinkissues.md
+  - docs/models/templatedeletetemplatedirectlinktemplatesdirectlinkresponsebody.md
+  - docs/models/templatedeletetemplatedirectlinktemplatesdirectlinkresponseresponsebody.md
+  - docs/models/templatedeletetemplateissues.md
   - docs/models/templatedeletetemplaterequestbody.md
   - docs/models/templatedeletetemplateresponsebody.md
+  - docs/models/templatedeletetemplatetemplatesissues.md
+  - docs/models/templatedeletetemplatetemplatesresponsebody.md
+  - docs/models/templatedeletetemplatetemplatesresponseresponsebody.md
   - docs/models/templatedocumentdata.md
   - docs/models/templateduplicatetemplateauthoptions.md
   - docs/models/templateduplicatetemplateglobalaccessauth.md
   - docs/models/templateduplicatetemplateglobalactionauth.md
+  - docs/models/templateduplicatetemplateissues.md
   - docs/models/templateduplicatetemplaterequestbody.md
   - docs/models/templateduplicatetemplateresponsebody.md
+  - docs/models/templateduplicatetemplatetemplatesissues.md
+  - docs/models/templateduplicatetemplatetemplatesresponsebody.md
+  - docs/models/templateduplicatetemplatetemplatesresponseresponsebody.md
   - docs/models/templateduplicatetemplatetype.md
   - docs/models/templateduplicatetemplatevisibility.md
   - docs/models/templatefindtemplatesaccessauth.md
@@ -1242,6 +1402,7 @@ generatedFiles:
   - docs/models/templatefindtemplatesfields.md
   - docs/models/templatefindtemplatesglobalaccessauth.md
   - docs/models/templatefindtemplatesglobalactionauth.md
+  - docs/models/templatefindtemplatesissues.md
   - docs/models/templatefindtemplatesreadstatus.md
   - docs/models/templatefindtemplatesrecipients.md
   - docs/models/templatefindtemplatesrequest.md
@@ -1253,6 +1414,11 @@ generatedFiles:
   - docs/models/templatefindtemplatesteam.md
   - docs/models/templatefindtemplatestemplatemeta.md
   - docs/models/templatefindtemplatestemplatesauthoptions.md
+  - docs/models/templatefindtemplatestemplatesissues.md
+  - docs/models/templatefindtemplatestemplatesresponse500responsebody.md
+  - docs/models/templatefindtemplatestemplatesresponsebody.md
+  - docs/models/templatefindtemplatestemplatesresponseissues.md
+  - docs/models/templatefindtemplatestemplatesresponseresponsebody.md
   - docs/models/templatefindtemplatestemplatestype.md
   - docs/models/templatefindtemplatestype.md
   - docs/models/templatefindtemplatesvisibility.md
@@ -1287,6 +1453,7 @@ generatedFiles:
   - docs/models/templategettemplatebyidfields.md
   - docs/models/templategettemplatebyidglobalaccessauth.md
   - docs/models/templategettemplatebyidglobalactionauth.md
+  - docs/models/templategettemplatebyidissues.md
   - docs/models/templategettemplatebyidreadstatus.md
   - docs/models/templategettemplatebyidrecipients.md
   - docs/models/templategettemplatebyidrequest.md
@@ -1296,6 +1463,11 @@ generatedFiles:
   - docs/models/templategettemplatebyidsigningorder.md
   - docs/models/templategettemplatebyidsigningstatus.md
   - docs/models/templategettemplatebyidtemplatesauthoptions.md
+  - docs/models/templategettemplatebyidtemplatesissues.md
+  - docs/models/templategettemplatebyidtemplatesresponse500responsebody.md
+  - docs/models/templategettemplatebyidtemplatesresponsebody.md
+  - docs/models/templategettemplatebyidtemplatesresponseissues.md
+  - docs/models/templategettemplatebyidtemplatesresponseresponsebody.md
   - docs/models/templategettemplatebyidtemplatesresponsetype.md
   - docs/models/templategettemplatebyidtemplatestype.md
   - docs/models/templategettemplatebyidtype.md
@@ -1304,12 +1476,20 @@ generatedFiles:
   - docs/models/templatemovetemplatetoteamauthoptions.md
   - docs/models/templatemovetemplatetoteamglobalaccessauth.md
   - docs/models/templatemovetemplatetoteamglobalactionauth.md
+  - docs/models/templatemovetemplatetoteamissues.md
   - docs/models/templatemovetemplatetoteamrequestbody.md
   - docs/models/templatemovetemplatetoteamresponsebody.md
+  - docs/models/templatemovetemplatetoteamtemplatesissues.md
+  - docs/models/templatemovetemplatetoteamtemplatesresponsebody.md
+  - docs/models/templatemovetemplatetoteamtemplatesresponseresponsebody.md
   - docs/models/templatemovetemplatetoteamtype.md
   - docs/models/templatemovetemplatetoteamvisibility.md
+  - docs/models/templatetoggletemplatedirectlinkissues.md
   - docs/models/templatetoggletemplatedirectlinkrequestbody.md
   - docs/models/templatetoggletemplatedirectlinkresponsebody.md
+  - docs/models/templatetoggletemplatedirectlinktemplatesdirectlinkissues.md
+  - docs/models/templatetoggletemplatedirectlinktemplatesdirectlinkresponsebody.md
+  - docs/models/templatetoggletemplatedirectlinktemplatesdirectlinkresponseresponsebody.md
   - docs/models/templateupdatetemplateauthoptions.md
   - docs/models/templateupdatetemplatedata.md
   - docs/models/templateupdatetemplatedateformat.md
@@ -1317,6 +1497,7 @@ generatedFiles:
   - docs/models/templateupdatetemplateemailsettings.md
   - docs/models/templateupdatetemplateglobalaccessauth.md
   - docs/models/templateupdatetemplateglobalactionauth.md
+  - docs/models/templateupdatetemplateissues.md
   - docs/models/templateupdatetemplatelanguage.md
   - docs/models/templateupdatetemplatemeta.md
   - docs/models/templateupdatetemplaterequestbody.md
@@ -1324,6 +1505,9 @@ generatedFiles:
   - docs/models/templateupdatetemplatesigningorder.md
   - docs/models/templateupdatetemplatetemplatesglobalaccessauth.md
   - docs/models/templateupdatetemplatetemplatesglobalactionauth.md
+  - docs/models/templateupdatetemplatetemplatesissues.md
+  - docs/models/templateupdatetemplatetemplatesresponsebody.md
+  - docs/models/templateupdatetemplatetemplatesresponseresponsebody.md
   - docs/models/templateupdatetemplatetemplatestype.md
   - docs/models/templateupdatetemplatetemplatesvisibility.md
   - docs/models/templateupdatetemplatetype.md
@@ -1373,9 +1557,6 @@ generatedFiles:
   - src/documenso_sdk/models/document_resenddocumentop.py
   - src/documenso_sdk/models/document_senddocumentop.py
   - src/documenso_sdk/models/document_setsettingsfordocumentop.py
-  - src/documenso_sdk/models/error_bad_request.py
-  - src/documenso_sdk/models/error_internal_server_error.py
-  - src/documenso_sdk/models/error_not_found.py
   - src/documenso_sdk/models/field_createdocumentfieldop.py
   - src/documenso_sdk/models/field_createdocumentfieldsop.py
   - src/documenso_sdk/models/field_createtemplatefieldop.py
@@ -1468,7 +1649,7 @@ examples:
         application/json: {"title": "<value>"}
       responses:
         "200":
-          application/json: {"document": {"visibility": "EVERYONE", "status": "COMPLETED", "source": "DOCUMENT", "id": 42952, "externalId": "<id>", "userId": 5373.96, "authOptions": {"globalAccessAuth": "ACCOUNT", "globalActionAuth": "ACCOUNT"}, "formValues": {"key": 4734.62, "key1": false, "key2": "<value>"}, "title": "<value>", "documentDataId": "<id>", "createdAt": "1728030182019", "updatedAt": "1737356648350", "completedAt": "<value>", "deletedAt": "<value>", "teamId": 357046, "templateId": 812006, "documentData": {"type": "BYTES", "id": "<id>", "data": "<value>", "initialData": "<value>"}, "documentMeta": {"signingOrder": "PARALLEL", "distributionMethod": "EMAIL", "id": "<id>", "subject": "<value>", "message": "<value>", "timezone": "America/Port-au-Prince", "password": "nDdQyEBdZkTA06U", "dateFormat": "<value>", "documentId": 901036, "redirectUrl": "https://scientific-cutover.biz/", "typedSignatureEnabled": true, "language": "<value>", "emailSettings": {"recipientSigningRequest": true, "recipientRemoved": true, "recipientSigned": true, "documentPending": true, "documentCompleted": true, "documentDeleted": true, "ownerDocumentCompleted": true}}, "recipients": [{"role": "VIEWER", "readStatus": "NOT_OPENED", "signingStatus": "SIGNED", "sendStatus": "NOT_SENT", "id": 504146, "documentId": 487425, "templateId": 415779, "email": "Roel80@yahoo.com", "name": "<value>", "token": "<value>", "documentDeletedAt": "<value>", "expired": "<value>", "signedAt": "<value>", "authOptions": {"accessAuth": "ACCOUNT", "actionAuth": "TWO_FACTOR_AUTH"}, "signingOrder": 700.38, "rejectionReason": "<value>"}, {"role": "APPROVER", "readStatus": "OPENED", "signingStatus": "NOT_SIGNED", "sendStatus": "NOT_SENT", "id": 713985, "documentId": 107633, "templateId": 731204, "email": "Anabel.Gleichner@hotmail.com", "name": "<value>", "token": "<value>", "documentDeletedAt": "<value>", "expired": "<value>", "signedAt": "<value>", "authOptions": {"accessAuth": "ACCOUNT", "actionAuth": "EXPLICIT_NONE"}, "signingOrder": 9547.02, "rejectionReason": "<value>"}], "fields": []}, "uploadUrl": "https://determined-technician.biz/"}
+          application/json: {"document": {"visibility": "EVERYONE", "status": "COMPLETED", "source": "DOCUMENT", "id": 42952, "externalId": "<id>", "userId": 5373.96, "authOptions": {"globalAccessAuth": "ACCOUNT", "globalActionAuth": "ACCOUNT"}, "formValues": {"key": 4734.62, "key1": "<value>", "key2": "<value>"}, "title": "<value>", "documentDataId": "<id>", "createdAt": "1728030182019", "updatedAt": "1737356648350", "completedAt": "<value>", "deletedAt": "<value>", "teamId": 357046, "templateId": 812006, "documentData": {"type": "BYTES", "id": "<id>", "data": "<value>", "initialData": "<value>"}, "documentMeta": {"signingOrder": "PARALLEL", "distributionMethod": "EMAIL", "id": "<id>", "subject": "<value>", "message": "<value>", "timezone": "America/Port-au-Prince", "password": "nDdQyEBdZkTA06U", "dateFormat": "<value>", "documentId": 901036, "redirectUrl": "https://scientific-cutover.biz/", "typedSignatureEnabled": true, "language": "<value>", "emailSettings": {"recipientSigningRequest": true, "recipientRemoved": true, "recipientSigned": true, "documentPending": true, "documentCompleted": true, "documentDeleted": true, "ownerDocumentCompleted": true}}, "recipients": [{"role": "VIEWER", "readStatus": "NOT_OPENED", "signingStatus": "SIGNED", "sendStatus": "NOT_SENT", "id": 504146, "documentId": 487425, "templateId": 415779, "email": "Roel80@yahoo.com", "name": "<value>", "token": "<value>", "documentDeletedAt": "<value>", "expired": "<value>", "signedAt": "<value>", "authOptions": {"accessAuth": "ACCOUNT", "actionAuth": "TWO_FACTOR_AUTH"}, "signingOrder": 700.38, "rejectionReason": "<value>"}, {"role": "APPROVER", "readStatus": "OPENED", "signingStatus": "NOT_SIGNED", "sendStatus": "NOT_SENT", "id": 713985, "documentId": 107633, "templateId": 731204, "email": "Anabel.Gleichner@hotmail.com", "name": "<value>", "token": "<value>", "documentDeletedAt": "<value>", "expired": "<value>", "signedAt": "<value>", "authOptions": {"accessAuth": "ACCOUNT", "actionAuth": "EXPLICIT_NONE"}, "signingOrder": 9547.02, "rejectionReason": "<value>"}], "fields": []}, "uploadUrl": "https://determined-technician.biz/"}
         "400":
           application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
         "500":
@@ -1479,7 +1660,7 @@ examples:
         application/json: {"documentId": 8574.78}
       responses:
         "200":
-          application/json: {"visibility": "MANAGER_AND_ABOVE", "status": "PENDING", "source": "TEMPLATE_DIRECT_LINK", "id": 627690, "externalId": "<id>", "userId": 4888.52, "authOptions": {"globalAccessAuth": "ACCOUNT", "globalActionAuth": "TWO_FACTOR_AUTH"}, "title": "<value>", "documentDataId": "<id>", "createdAt": "1734110098143", "updatedAt": "1737326276875", "completedAt": "<value>", "deletedAt": "<value>", "teamId": 311507, "templateId": 249440}
+          application/json: {"visibility": "MANAGER_AND_ABOVE", "status": "PENDING", "source": "TEMPLATE_DIRECT_LINK", "id": 627690, "externalId": "<id>", "userId": 4888.52, "authOptions": {"globalAccessAuth": "ACCOUNT", "globalActionAuth": "TWO_FACTOR_AUTH"}, "formValues": {"key": true, "key1": 6276.9, "key2": false}, "title": "<value>", "documentDataId": "<id>", "createdAt": "1734110098143", "updatedAt": "1737326276875", "completedAt": "<value>", "deletedAt": "<value>", "teamId": 311507, "templateId": 249440}
         "400":
           application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
         "500":
@@ -1501,7 +1682,7 @@ examples:
         application/json: {"documentId": 8301.72, "teamId": 6724.78}
       responses:
         "200":
-          application/json: {"visibility": "ADMIN", "status": "COMPLETED", "source": "TEMPLATE", "id": 775043, "externalId": "<id>", "userId": 780.73, "authOptions": {"globalAccessAuth": "ACCOUNT", "globalActionAuth": "ACCOUNT"}, "title": "<value>", "documentDataId": "<id>", "createdAt": "1711258577960", "updatedAt": "1737325397809", "completedAt": "<value>", "deletedAt": "<value>", "teamId": 700797, "templateId": 933634}
+          application/json: {"visibility": "ADMIN", "status": "COMPLETED", "source": "TEMPLATE", "id": 775043, "externalId": "<id>", "userId": 780.73, "authOptions": {"globalAccessAuth": "ACCOUNT", "globalActionAuth": "ACCOUNT"}, "formValues": {"key": 7264.87, "key1": 6341.95, "key2": 780.73}, "title": "<value>", "documentDataId": "<id>", "createdAt": "1711258577960", "updatedAt": "1737325397809", "completedAt": "<value>", "deletedAt": "<value>", "teamId": 700797, "templateId": 933634}
         "400":
           application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
         "500":
@@ -1512,7 +1693,7 @@ examples:
         application/json: {"documentId": 4115.92}
       responses:
         "200":
-          application/json: {"visibility": "ADMIN", "status": "DRAFT", "source": "TEMPLATE_DIRECT_LINK", "id": 265491, "externalId": "<id>", "userId": 6765.82, "authOptions": {"globalAccessAuth": "ACCOUNT", "globalActionAuth": "TWO_FACTOR_AUTH"}, "title": "<value>", "documentDataId": "<id>", "createdAt": "1733991179134", "updatedAt": "1737333372672", "completedAt": "<value>", "deletedAt": "<value>", "teamId": 296533, "templateId": 836846}
+          application/json: {"visibility": "ADMIN", "status": "DRAFT", "source": "TEMPLATE_DIRECT_LINK", "id": 265491, "externalId": "<id>", "userId": 6765.82, "authOptions": {"globalAccessAuth": "ACCOUNT", "globalActionAuth": "TWO_FACTOR_AUTH"}, "formValues": {"key": 1184.5}, "title": "<value>", "documentDataId": "<id>", "createdAt": "1733991179134", "updatedAt": "1737333372672", "completedAt": "<value>", "deletedAt": "<value>", "teamId": 296533, "templateId": 836846}
         "400":
           application/json: {"message": "Invalid input data", "code": "BAD_REQUEST", "issues": []}
         "500":

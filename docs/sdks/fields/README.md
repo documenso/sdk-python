@@ -46,12 +46,12 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ErrorNOTFOUND            | 404                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                         | Status Code                                                        | Content Type                                                       |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| models.FieldGetDocumentFieldDocumentsFieldsResponseBody            | 400                                                                | application/json                                                   |
+| models.FieldGetDocumentFieldDocumentsFieldsResponseResponseBody    | 404                                                                | application/json                                                   |
+| models.FieldGetDocumentFieldDocumentsFieldsResponse500ResponseBody | 500                                                                | application/json                                                   |
+| models.APIError                                                    | 4XX, 5XX                                                           | \*/\*                                                              |
 
 ## create
 
@@ -88,7 +88,7 @@ with Documenso(
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `document_id`                                                       | *float*                                                             | :heavy_check_mark:                                                  | N/A                                                                 |
-| `field`                                                             | [models.Field](../../models/field.md)                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `field`                                                             | [models.FieldT](../../models/fieldt.md)                             | :heavy_check_mark:                                                  | N/A                                                                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
@@ -97,11 +97,11 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                         | Status Code                                                        | Content Type                                                       |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| models.FieldCreateDocumentFieldDocumentsFieldsResponseBody         | 400                                                                | application/json                                                   |
+| models.FieldCreateDocumentFieldDocumentsFieldsResponseResponseBody | 500                                                                | application/json                                                   |
+| models.APIError                                                    | 4XX, 5XX                                                           | \*/\*                                                              |
 
 ## create_many
 
@@ -158,11 +158,11 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                          | Status Code                                                         | Content Type                                                        |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| models.FieldCreateDocumentFieldsDocumentsFieldsResponseBody         | 400                                                                 | application/json                                                    |
+| models.FieldCreateDocumentFieldsDocumentsFieldsResponseResponseBody | 500                                                                 | application/json                                                    |
+| models.APIError                                                     | 4XX, 5XX                                                            | \*/\*                                                               |
 
 ## update
 
@@ -203,11 +203,11 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                         | Status Code                                                        | Content Type                                                       |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| models.FieldUpdateDocumentFieldDocumentsFieldsResponseBody         | 400                                                                | application/json                                                   |
+| models.FieldUpdateDocumentFieldDocumentsFieldsResponseResponseBody | 500                                                                | application/json                                                   |
+| models.APIError                                                    | 4XX, 5XX                                                           | \*/\*                                                              |
 
 ## update_many
 
@@ -254,11 +254,11 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                          | Status Code                                                         | Content Type                                                        |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| models.FieldUpdateDocumentFieldsDocumentsFieldsResponseBody         | 400                                                                 | application/json                                                    |
+| models.FieldUpdateDocumentFieldsDocumentsFieldsResponseResponseBody | 500                                                                 | application/json                                                    |
+| models.APIError                                                     | 4XX, 5XX                                                            | \*/\*                                                               |
 
 ## delete
 
@@ -294,8 +294,8 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                         | Status Code                                                        | Content Type                                                       |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| models.FieldDeleteDocumentFieldDocumentsFieldsResponseBody         | 400                                                                | application/json                                                   |
+| models.FieldDeleteDocumentFieldDocumentsFieldsResponseResponseBody | 500                                                                | application/json                                                   |
+| models.APIError                                                    | 4XX, 5XX                                                           | \*/\*                                                              |

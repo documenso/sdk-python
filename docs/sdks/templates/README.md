@@ -50,12 +50,12 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ErrorNOTFOUND            | 404                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                   | Status Code                                                  | Content Type                                                 |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| models.TemplateFindTemplatesTemplatesResponseBody            | 400                                                          | application/json                                             |
+| models.TemplateFindTemplatesTemplatesResponseResponseBody    | 404                                                          | application/json                                             |
+| models.TemplateFindTemplatesTemplatesResponse500ResponseBody | 500                                                          | application/json                                             |
+| models.APIError                                              | 4XX, 5XX                                                     | \*/\*                                                        |
 
 ## get
 
@@ -91,12 +91,12 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ErrorNOTFOUND            | 404                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                     | Status Code                                                    | Content Type                                                   |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| models.TemplateGetTemplateByIDTemplatesResponseBody            | 400                                                            | application/json                                               |
+| models.TemplateGetTemplateByIDTemplatesResponseResponseBody    | 404                                                            | application/json                                               |
+| models.TemplateGetTemplateByIDTemplatesResponse500ResponseBody | 500                                                            | application/json                                               |
+| models.APIError                                                | 4XX, 5XX                                                       | \*/\*                                                          |
 
 ## update
 
@@ -134,11 +134,11 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                 | Status Code                                                | Content Type                                               |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| models.TemplateUpdateTemplateTemplatesResponseBody         | 400                                                        | application/json                                           |
+| models.TemplateUpdateTemplateTemplatesResponseResponseBody | 500                                                        | application/json                                           |
+| models.APIError                                            | 4XX, 5XX                                                   | \*/\*                                                      |
 
 ## duplicate
 
@@ -174,11 +174,11 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                    | Status Code                                                   | Content Type                                                  |
+| ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| models.TemplateDuplicateTemplateTemplatesResponseBody         | 400                                                           | application/json                                              |
+| models.TemplateDuplicateTemplateTemplatesResponseResponseBody | 500                                                           | application/json                                              |
+| models.APIError                                               | 4XX, 5XX                                                      | \*/\*                                                         |
 
 ## delete
 
@@ -214,11 +214,11 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                 | Status Code                                                | Content Type                                               |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| models.TemplateDeleteTemplateTemplatesResponseBody         | 400                                                        | application/json                                           |
+| models.TemplateDeleteTemplateTemplatesResponseResponseBody | 500                                                        | application/json                                           |
+| models.APIError                                            | 4XX, 5XX                                                   | \*/\*                                                      |
 
 ## use
 
@@ -266,11 +266,11 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                             | Status Code                                                            | Content Type                                                           |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| models.TemplateCreateDocumentFromTemplateTemplatesResponseBody         | 400                                                                    | application/json                                                       |
+| models.TemplateCreateDocumentFromTemplateTemplatesResponseResponseBody | 500                                                                    | application/json                                                       |
+| models.APIError                                                        | 4XX, 5XX                                                               | \*/\*                                                                  |
 
 ## move_to_team
 
@@ -307,8 +307,8 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                     | Status Code                                                    | Content Type                                                   |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| models.TemplateMoveTemplateToTeamTemplatesResponseBody         | 400                                                            | application/json                                               |
+| models.TemplateMoveTemplateToTeamTemplatesResponseResponseBody | 500                                                            | application/json                                               |
+| models.APIError                                                | 4XX, 5XX                                                       | \*/\*                                                          |
