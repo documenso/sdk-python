@@ -162,9 +162,7 @@ def upload_file_to_presigned_url(file_path: str, upload_url: str):
 
 async def main():
   with Documenso(
-      # api_key=os.getenv("DOCUMENSO_API_KEY", ""),
-      api_key="api_d61fxqsynan9ftcb",
-      server_url="https://stg-app.documenso.com/api/v2-beta",
+    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
   ) as documenso:
 
     # Create document with recipients and fields
