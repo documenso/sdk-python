@@ -77,22 +77,35 @@ class Fields(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.FieldGetDocumentFieldResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "404", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorNOTFOUNDData)
-            raise models.ErrorNOTFOUND(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldGetDocumentFieldDocumentsFieldsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.FieldGetDocumentFieldDocumentsFieldsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldGetDocumentFieldDocumentsFieldsResponseResponseBodyData,
+            )
+            raise models.FieldGetDocumentFieldDocumentsFieldsResponseResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldGetDocumentFieldDocumentsFieldsResponse500ResponseBodyData,
+            )
+            raise models.FieldGetDocumentFieldDocumentsFieldsResponse500ResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -181,22 +194,35 @@ class Fields(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.FieldGetDocumentFieldResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "404", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorNOTFOUNDData)
-            raise models.ErrorNOTFOUND(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldGetDocumentFieldDocumentsFieldsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.FieldGetDocumentFieldDocumentsFieldsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldGetDocumentFieldDocumentsFieldsResponseResponseBodyData,
+            )
+            raise models.FieldGetDocumentFieldDocumentsFieldsResponseResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldGetDocumentFieldDocumentsFieldsResponse500ResponseBodyData,
+            )
+            raise models.FieldGetDocumentFieldDocumentsFieldsResponse500ResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -221,7 +247,7 @@ class Fields(BaseSDK):
         self,
         *,
         document_id: float,
-        field: Union[models.Field, models.FieldTypedDict],
+        field: Union[models.FieldT, models.FieldTTypedDict],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -248,7 +274,7 @@ class Fields(BaseSDK):
 
         request = models.FieldCreateDocumentFieldRequestBody(
             document_id=document_id,
-            field=utils.get_pydantic_model(field, models.Field),
+            field=utils.get_pydantic_model(field, models.FieldT),
         )
 
         req = self._build_request(
@@ -295,19 +321,27 @@ class Fields(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.FieldCreateDocumentFieldResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldCreateDocumentFieldDocumentsFieldsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.FieldCreateDocumentFieldDocumentsFieldsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldCreateDocumentFieldDocumentsFieldsResponseResponseBodyData,
+            )
+            raise models.FieldCreateDocumentFieldDocumentsFieldsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -332,7 +366,7 @@ class Fields(BaseSDK):
         self,
         *,
         document_id: float,
-        field: Union[models.Field, models.FieldTypedDict],
+        field: Union[models.FieldT, models.FieldTTypedDict],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -359,7 +393,7 @@ class Fields(BaseSDK):
 
         request = models.FieldCreateDocumentFieldRequestBody(
             document_id=document_id,
-            field=utils.get_pydantic_model(field, models.Field),
+            field=utils.get_pydantic_model(field, models.FieldT),
         )
 
         req = self._build_request_async(
@@ -406,19 +440,27 @@ class Fields(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.FieldCreateDocumentFieldResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldCreateDocumentFieldDocumentsFieldsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.FieldCreateDocumentFieldDocumentsFieldsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldCreateDocumentFieldDocumentsFieldsResponseResponseBodyData,
+            )
+            raise models.FieldCreateDocumentFieldDocumentsFieldsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -522,19 +564,27 @@ class Fields(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.FieldCreateDocumentFieldsResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldCreateDocumentFieldsDocumentsFieldsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.FieldCreateDocumentFieldsDocumentsFieldsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldCreateDocumentFieldsDocumentsFieldsResponseResponseBodyData,
+            )
+            raise models.FieldCreateDocumentFieldsDocumentsFieldsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -638,19 +688,27 @@ class Fields(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.FieldCreateDocumentFieldsResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldCreateDocumentFieldsDocumentsFieldsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.FieldCreateDocumentFieldsDocumentsFieldsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldCreateDocumentFieldsDocumentsFieldsResponseResponseBodyData,
+            )
+            raise models.FieldCreateDocumentFieldsDocumentsFieldsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -752,19 +810,27 @@ class Fields(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.FieldUpdateDocumentFieldResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldUpdateDocumentFieldDocumentsFieldsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.FieldUpdateDocumentFieldDocumentsFieldsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldUpdateDocumentFieldDocumentsFieldsResponseResponseBodyData,
+            )
+            raise models.FieldUpdateDocumentFieldDocumentsFieldsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -866,19 +932,27 @@ class Fields(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.FieldUpdateDocumentFieldResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldUpdateDocumentFieldDocumentsFieldsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.FieldUpdateDocumentFieldDocumentsFieldsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldUpdateDocumentFieldDocumentsFieldsResponseResponseBodyData,
+            )
+            raise models.FieldUpdateDocumentFieldDocumentsFieldsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -982,19 +1056,27 @@ class Fields(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.FieldUpdateDocumentFieldsResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldUpdateDocumentFieldsDocumentsFieldsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.FieldUpdateDocumentFieldsDocumentsFieldsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldUpdateDocumentFieldsDocumentsFieldsResponseResponseBodyData,
+            )
+            raise models.FieldUpdateDocumentFieldsDocumentsFieldsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -1098,19 +1180,27 @@ class Fields(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.FieldUpdateDocumentFieldsResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldUpdateDocumentFieldsDocumentsFieldsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.FieldUpdateDocumentFieldsDocumentsFieldsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldUpdateDocumentFieldsDocumentsFieldsResponseResponseBodyData,
+            )
+            raise models.FieldUpdateDocumentFieldsDocumentsFieldsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -1204,19 +1294,27 @@ class Fields(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.FieldDeleteDocumentFieldResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldDeleteDocumentFieldDocumentsFieldsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.FieldDeleteDocumentFieldDocumentsFieldsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldDeleteDocumentFieldDocumentsFieldsResponseResponseBodyData,
+            )
+            raise models.FieldDeleteDocumentFieldDocumentsFieldsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -1310,19 +1408,27 @@ class Fields(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.FieldDeleteDocumentFieldResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldDeleteDocumentFieldDocumentsFieldsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.FieldDeleteDocumentFieldDocumentsFieldsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.FieldDeleteDocumentFieldDocumentsFieldsResponseResponseBodyData,
+            )
+            raise models.FieldDeleteDocumentFieldDocumentsFieldsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(

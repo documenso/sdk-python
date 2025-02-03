@@ -56,11 +56,11 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                         | Status Code                                                        | Content Type                                                       |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| models.FieldCreateTemplateFieldTemplatesFieldsResponseBody         | 400                                                                | application/json                                                   |
+| models.FieldCreateTemplateFieldTemplatesFieldsResponseResponseBody | 500                                                                | application/json                                                   |
+| models.APIError                                                    | 4XX, 5XX                                                           | \*/\*                                                              |
 
 ## get
 
@@ -96,12 +96,12 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ErrorNOTFOUND            | 404                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                         | Status Code                                                        | Content Type                                                       |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| models.FieldGetTemplateFieldTemplatesFieldsResponseBody            | 400                                                                | application/json                                                   |
+| models.FieldGetTemplateFieldTemplatesFieldsResponseResponseBody    | 404                                                                | application/json                                                   |
+| models.FieldGetTemplateFieldTemplatesFieldsResponse500ResponseBody | 500                                                                | application/json                                                   |
+| models.APIError                                                    | 4XX, 5XX                                                           | \*/\*                                                              |
 
 ## create_many
 
@@ -158,11 +158,11 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                          | Status Code                                                         | Content Type                                                        |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| models.FieldCreateTemplateFieldsTemplatesFieldsResponseBody         | 400                                                                 | application/json                                                    |
+| models.FieldCreateTemplateFieldsTemplatesFieldsResponseResponseBody | 500                                                                 | application/json                                                    |
+| models.APIError                                                     | 4XX, 5XX                                                            | \*/\*                                                               |
 
 ## update
 
@@ -203,11 +203,11 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                         | Status Code                                                        | Content Type                                                       |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| models.FieldUpdateTemplateFieldTemplatesFieldsResponseBody         | 400                                                                | application/json                                                   |
+| models.FieldUpdateTemplateFieldTemplatesFieldsResponseResponseBody | 500                                                                | application/json                                                   |
+| models.APIError                                                    | 4XX, 5XX                                                           | \*/\*                                                              |
 
 ## update_many
 
@@ -254,11 +254,11 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                          | Status Code                                                         | Content Type                                                        |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| models.FieldUpdateTemplateFieldsTemplatesFieldsResponseBody         | 400                                                                 | application/json                                                    |
+| models.FieldUpdateTemplateFieldsTemplatesFieldsResponseResponseBody | 500                                                                 | application/json                                                    |
+| models.APIError                                                     | 4XX, 5XX                                                            | \*/\*                                                               |
 
 ## delete
 
@@ -294,8 +294,8 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                         | Status Code                                                        | Content Type                                                       |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| models.FieldDeleteTemplateFieldTemplatesFieldsResponseBody         | 400                                                                | application/json                                                   |
+| models.FieldDeleteTemplateFieldTemplatesFieldsResponseResponseBody | 500                                                                | application/json                                                   |
+| models.APIError                                                    | 4XX, 5XX                                                           | \*/\*                                                              |

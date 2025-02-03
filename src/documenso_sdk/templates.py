@@ -104,22 +104,32 @@ class Templates(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.TemplateFindTemplatesResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "404", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorNOTFOUNDData)
-            raise models.ErrorNOTFOUND(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text, models.TemplateFindTemplatesTemplatesResponseBodyData
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.TemplateFindTemplatesTemplatesResponseBody(data=response_data)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.TemplateFindTemplatesTemplatesResponseResponseBodyData,
+            )
+            raise models.TemplateFindTemplatesTemplatesResponseResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.TemplateFindTemplatesTemplatesResponse500ResponseBodyData,
+            )
+            raise models.TemplateFindTemplatesTemplatesResponse500ResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -217,22 +227,32 @@ class Templates(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.TemplateFindTemplatesResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "404", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorNOTFOUNDData)
-            raise models.ErrorNOTFOUND(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text, models.TemplateFindTemplatesTemplatesResponseBodyData
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.TemplateFindTemplatesTemplatesResponseBody(data=response_data)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.TemplateFindTemplatesTemplatesResponseResponseBodyData,
+            )
+            raise models.TemplateFindTemplatesTemplatesResponseResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.TemplateFindTemplatesTemplatesResponse500ResponseBodyData,
+            )
+            raise models.TemplateFindTemplatesTemplatesResponse500ResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -319,22 +339,34 @@ class Templates(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.TemplateGetTemplateByIDResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "404", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorNOTFOUNDData)
-            raise models.ErrorNOTFOUND(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text, models.TemplateGetTemplateByIDTemplatesResponseBodyData
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.TemplateGetTemplateByIDTemplatesResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.TemplateGetTemplateByIDTemplatesResponseResponseBodyData,
+            )
+            raise models.TemplateGetTemplateByIDTemplatesResponseResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.TemplateGetTemplateByIDTemplatesResponse500ResponseBodyData,
+            )
+            raise models.TemplateGetTemplateByIDTemplatesResponse500ResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -421,22 +453,34 @@ class Templates(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.TemplateGetTemplateByIDResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "404", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorNOTFOUNDData)
-            raise models.ErrorNOTFOUND(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text, models.TemplateGetTemplateByIDTemplatesResponseBodyData
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.TemplateGetTemplateByIDTemplatesResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.TemplateGetTemplateByIDTemplatesResponseResponseBodyData,
+            )
+            raise models.TemplateGetTemplateByIDTemplatesResponseResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.TemplateGetTemplateByIDTemplatesResponse500ResponseBodyData,
+            )
+            raise models.TemplateGetTemplateByIDTemplatesResponse500ResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -546,19 +590,24 @@ class Templates(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.TemplateUpdateTemplateResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text, models.TemplateUpdateTemplateTemplatesResponseBodyData
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.TemplateUpdateTemplateTemplatesResponseBody(data=response_data)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.TemplateUpdateTemplateTemplatesResponseResponseBodyData,
+            )
+            raise models.TemplateUpdateTemplateTemplatesResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -668,19 +717,24 @@ class Templates(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.TemplateUpdateTemplateResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text, models.TemplateUpdateTemplateTemplatesResponseBodyData
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.TemplateUpdateTemplateTemplatesResponseBody(data=response_data)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.TemplateUpdateTemplateTemplatesResponseResponseBodyData,
+            )
+            raise models.TemplateUpdateTemplateTemplatesResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -774,19 +828,26 @@ class Templates(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.TemplateDuplicateTemplateResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text, models.TemplateDuplicateTemplateTemplatesResponseBodyData
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.TemplateDuplicateTemplateTemplatesResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.TemplateDuplicateTemplateTemplatesResponseResponseBodyData,
+            )
+            raise models.TemplateDuplicateTemplateTemplatesResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -880,19 +941,26 @@ class Templates(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.TemplateDuplicateTemplateResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text, models.TemplateDuplicateTemplateTemplatesResponseBodyData
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.TemplateDuplicateTemplateTemplatesResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.TemplateDuplicateTemplateTemplatesResponseResponseBodyData,
+            )
+            raise models.TemplateDuplicateTemplateTemplatesResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -982,19 +1050,24 @@ class Templates(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.TemplateDeleteTemplateResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text, models.TemplateDeleteTemplateTemplatesResponseBodyData
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.TemplateDeleteTemplateTemplatesResponseBody(data=response_data)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.TemplateDeleteTemplateTemplatesResponseResponseBodyData,
+            )
+            raise models.TemplateDeleteTemplateTemplatesResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -1084,19 +1157,24 @@ class Templates(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.TemplateDeleteTemplateResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text, models.TemplateDeleteTemplateTemplatesResponseBodyData
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.TemplateDeleteTemplateTemplatesResponseBody(data=response_data)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.TemplateDeleteTemplateTemplatesResponseResponseBodyData,
+            )
+            raise models.TemplateDeleteTemplateTemplatesResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -1206,19 +1284,27 @@ class Templates(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.TemplateCreateDocumentFromTemplateResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.TemplateCreateDocumentFromTemplateTemplatesResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.TemplateCreateDocumentFromTemplateTemplatesResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.TemplateCreateDocumentFromTemplateTemplatesResponseResponseBodyData,
+            )
+            raise models.TemplateCreateDocumentFromTemplateTemplatesResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -1328,19 +1414,27 @@ class Templates(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.TemplateCreateDocumentFromTemplateResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.TemplateCreateDocumentFromTemplateTemplatesResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.TemplateCreateDocumentFromTemplateTemplatesResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.TemplateCreateDocumentFromTemplateTemplatesResponseResponseBodyData,
+            )
+            raise models.TemplateCreateDocumentFromTemplateTemplatesResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -1439,19 +1533,27 @@ class Templates(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.TemplateMoveTemplateToTeamResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.TemplateMoveTemplateToTeamTemplatesResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.TemplateMoveTemplateToTeamTemplatesResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.TemplateMoveTemplateToTeamTemplatesResponseResponseBodyData,
+            )
+            raise models.TemplateMoveTemplateToTeamTemplatesResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -1550,19 +1652,27 @@ class Templates(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.TemplateMoveTemplateToTeamResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.TemplateMoveTemplateToTeamTemplatesResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.TemplateMoveTemplateToTeamTemplatesResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.TemplateMoveTemplateToTeamTemplatesResponseResponseBodyData,
+            )
+            raise models.TemplateMoveTemplateToTeamTemplatesResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(

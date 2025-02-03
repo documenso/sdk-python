@@ -46,12 +46,12 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ErrorNOTFOUND            | 404                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                                     | Status Code                                                                    | Content Type                                                                   |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| models.RecipientGetTemplateRecipientTemplatesRecipientsResponseBody            | 400                                                                            | application/json                                                               |
+| models.RecipientGetTemplateRecipientTemplatesRecipientsResponseResponseBody    | 404                                                                            | application/json                                                               |
+| models.RecipientGetTemplateRecipientTemplatesRecipientsResponse500ResponseBody | 500                                                                            | application/json                                                               |
+| models.APIError                                                                | 4XX, 5XX                                                                       | \*/\*                                                                          |
 
 ## create
 
@@ -93,11 +93,11 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                                     | Status Code                                                                    | Content Type                                                                   |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| models.RecipientCreateTemplateRecipientTemplatesRecipientsResponseBody         | 400                                                                            | application/json                                                               |
+| models.RecipientCreateTemplateRecipientTemplatesRecipientsResponseResponseBody | 500                                                                            | application/json                                                               |
+| models.APIError                                                                | 4XX, 5XX                                                                       | \*/\*                                                                          |
 
 ## create_many
 
@@ -146,11 +146,11 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                                      | Status Code                                                                     | Content Type                                                                    |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| models.RecipientCreateTemplateRecipientsTemplatesRecipientsResponseBody         | 400                                                                             | application/json                                                                |
+| models.RecipientCreateTemplateRecipientsTemplatesRecipientsResponseResponseBody | 500                                                                             | application/json                                                                |
+| models.APIError                                                                 | 4XX, 5XX                                                                        | \*/\*                                                                           |
 
 ## update
 
@@ -189,11 +189,11 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                                     | Status Code                                                                    | Content Type                                                                   |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| models.RecipientUpdateTemplateRecipientTemplatesRecipientsResponseBody         | 400                                                                            | application/json                                                               |
+| models.RecipientUpdateTemplateRecipientTemplatesRecipientsResponseResponseBody | 500                                                                            | application/json                                                               |
+| models.APIError                                                                | 4XX, 5XX                                                                       | \*/\*                                                                          |
 
 ## update_many
 
@@ -237,11 +237,11 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                                      | Status Code                                                                     | Content Type                                                                    |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| models.RecipientUpdateTemplateRecipientsTemplatesRecipientsResponseBody         | 400                                                                             | application/json                                                                |
+| models.RecipientUpdateTemplateRecipientsTemplatesRecipientsResponseResponseBody | 500                                                                             | application/json                                                                |
+| models.APIError                                                                 | 4XX, 5XX                                                                        | \*/\*                                                                           |
 
 ## delete
 
@@ -277,8 +277,8 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                                     | Status Code                                                                    | Content Type                                                                   |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| models.RecipientDeleteTemplateRecipientTemplatesRecipientsResponseBody         | 400                                                                            | application/json                                                               |
+| models.RecipientDeleteTemplateRecipientTemplatesRecipientsResponseResponseBody | 500                                                                            | application/json                                                               |
+| models.APIError                                                                | 4XX, 5XX                                                                       | \*/\*                                                                          |

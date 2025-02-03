@@ -115,22 +115,32 @@ class Documents(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.DocumentFindDocumentsResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "404", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorNOTFOUNDData)
-            raise models.ErrorNOTFOUND(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text, models.DocumentFindDocumentsDocumentsResponseBodyData
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.DocumentFindDocumentsDocumentsResponseBody(data=response_data)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentFindDocumentsDocumentsResponseResponseBodyData,
+            )
+            raise models.DocumentFindDocumentsDocumentsResponseResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentFindDocumentsDocumentsResponse500ResponseBodyData,
+            )
+            raise models.DocumentFindDocumentsDocumentsResponse500ResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -242,22 +252,32 @@ class Documents(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.DocumentFindDocumentsResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "404", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorNOTFOUNDData)
-            raise models.ErrorNOTFOUND(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text, models.DocumentFindDocumentsDocumentsResponseBodyData
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.DocumentFindDocumentsDocumentsResponseBody(data=response_data)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentFindDocumentsDocumentsResponseResponseBodyData,
+            )
+            raise models.DocumentFindDocumentsDocumentsResponseResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentFindDocumentsDocumentsResponse500ResponseBodyData,
+            )
+            raise models.DocumentFindDocumentsDocumentsResponse500ResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -346,22 +366,35 @@ class Documents(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.DocumentGetDocumentWithDetailsByIDResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "404", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorNOTFOUNDData)
-            raise models.ErrorNOTFOUND(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentGetDocumentWithDetailsByIDDocumentsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.DocumentGetDocumentWithDetailsByIDDocumentsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentGetDocumentWithDetailsByIDDocumentsResponseResponseBodyData,
+            )
+            raise models.DocumentGetDocumentWithDetailsByIDDocumentsResponseResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentGetDocumentWithDetailsByIDDocumentsResponse500ResponseBodyData,
+            )
+            raise models.DocumentGetDocumentWithDetailsByIDDocumentsResponse500ResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -450,22 +483,35 @@ class Documents(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.DocumentGetDocumentWithDetailsByIDResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "404", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorNOTFOUNDData)
-            raise models.ErrorNOTFOUND(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentGetDocumentWithDetailsByIDDocumentsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.DocumentGetDocumentWithDetailsByIDDocumentsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentGetDocumentWithDetailsByIDDocumentsResponseResponseBodyData,
+            )
+            raise models.DocumentGetDocumentWithDetailsByIDDocumentsResponseResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentGetDocumentWithDetailsByIDDocumentsResponse500ResponseBodyData,
+            )
+            raise models.DocumentGetDocumentWithDetailsByIDDocumentsResponse500ResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -592,19 +638,27 @@ class Documents(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.DocumentCreateDocumentTemporaryResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentCreateDocumentTemporaryDocumentsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.DocumentCreateDocumentTemporaryDocumentsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentCreateDocumentTemporaryDocumentsResponseResponseBodyData,
+            )
+            raise models.DocumentCreateDocumentTemporaryDocumentsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -731,19 +785,27 @@ class Documents(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.DocumentCreateDocumentTemporaryResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentCreateDocumentTemporaryDocumentsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.DocumentCreateDocumentTemporaryDocumentsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentCreateDocumentTemporaryDocumentsResponseResponseBodyData,
+            )
+            raise models.DocumentCreateDocumentTemporaryDocumentsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -850,19 +912,27 @@ class Documents(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.DocumentSetSettingsForDocumentResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentSetSettingsForDocumentDocumentsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.DocumentSetSettingsForDocumentDocumentsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentSetSettingsForDocumentDocumentsResponseResponseBodyData,
+            )
+            raise models.DocumentSetSettingsForDocumentDocumentsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -969,19 +1039,27 @@ class Documents(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.DocumentSetSettingsForDocumentResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentSetSettingsForDocumentDocumentsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.DocumentSetSettingsForDocumentDocumentsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentSetSettingsForDocumentDocumentsResponseResponseBodyData,
+            )
+            raise models.DocumentSetSettingsForDocumentDocumentsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -1071,19 +1149,24 @@ class Documents(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.DocumentDeleteDocumentResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text, models.DocumentDeleteDocumentDocumentsResponseBodyData
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.DocumentDeleteDocumentDocumentsResponseBody(data=response_data)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentDeleteDocumentDocumentsResponseResponseBodyData,
+            )
+            raise models.DocumentDeleteDocumentDocumentsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -1173,19 +1256,24 @@ class Documents(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.DocumentDeleteDocumentResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text, models.DocumentDeleteDocumentDocumentsResponseBodyData
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.DocumentDeleteDocumentDocumentsResponseBody(data=response_data)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentDeleteDocumentDocumentsResponseResponseBodyData,
+            )
+            raise models.DocumentDeleteDocumentDocumentsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -1284,19 +1372,27 @@ class Documents(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.DocumentMoveDocumentToTeamResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentMoveDocumentToTeamDocumentsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.DocumentMoveDocumentToTeamDocumentsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentMoveDocumentToTeamDocumentsResponseResponseBodyData,
+            )
+            raise models.DocumentMoveDocumentToTeamDocumentsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -1395,19 +1491,27 @@ class Documents(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.DocumentMoveDocumentToTeamResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentMoveDocumentToTeamDocumentsResponseBodyData,
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.DocumentMoveDocumentToTeamDocumentsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentMoveDocumentToTeamDocumentsResponseResponseBodyData,
+            )
+            raise models.DocumentMoveDocumentToTeamDocumentsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -1509,19 +1613,24 @@ class Documents(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.DocumentSendDocumentResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text, models.DocumentSendDocumentDocumentsResponseBodyData
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.DocumentSendDocumentDocumentsResponseBody(data=response_data)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentSendDocumentDocumentsResponseResponseBodyData,
+            )
+            raise models.DocumentSendDocumentDocumentsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -1623,19 +1732,24 @@ class Documents(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.DocumentSendDocumentResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text, models.DocumentSendDocumentDocumentsResponseBodyData
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.DocumentSendDocumentDocumentsResponseBody(data=response_data)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentSendDocumentDocumentsResponseResponseBodyData,
+            )
+            raise models.DocumentSendDocumentDocumentsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -1730,19 +1844,24 @@ class Documents(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.DocumentResendDocumentResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text, models.DocumentResendDocumentDocumentsResponseBodyData
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.DocumentResendDocumentDocumentsResponseBody(data=response_data)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentResendDocumentDocumentsResponseResponseBodyData,
+            )
+            raise models.DocumentResendDocumentDocumentsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -1837,19 +1956,24 @@ class Documents(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.DocumentResendDocumentResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text, models.DocumentResendDocumentDocumentsResponseBodyData
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.DocumentResendDocumentDocumentsResponseBody(data=response_data)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentResendDocumentDocumentsResponseResponseBodyData,
+            )
+            raise models.DocumentResendDocumentDocumentsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -1943,19 +2067,26 @@ class Documents(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.DocumentDuplicateDocumentResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text, models.DocumentDuplicateDocumentDocumentsResponseBodyData
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.DocumentDuplicateDocumentDocumentsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentDuplicateDocumentDocumentsResponseResponseBodyData,
+            )
+            raise models.DocumentDuplicateDocumentDocumentsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -2049,19 +2180,26 @@ class Documents(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
                 http_res.text, models.DocumentDuplicateDocumentResponseBody
             )
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorBADREQUESTData)
-            raise models.ErrorBADREQUEST(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(
-                http_res.text, models.ERRORINTERNALSERVERERRORData
+            response_data = utils.unmarshal_json(
+                http_res.text, models.DocumentDuplicateDocumentDocumentsResponseBodyData
             )
-            raise models.ERRORINTERNALSERVERERROR(data=data)
+            raise models.DocumentDuplicateDocumentDocumentsResponseBody(
+                data=response_data
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = utils.unmarshal_json(
+                http_res.text,
+                models.DocumentDuplicateDocumentDocumentsResponseResponseBodyData,
+            )
+            raise models.DocumentDuplicateDocumentDocumentsResponseResponseBody(
+                data=response_data
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(

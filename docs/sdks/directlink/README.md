@@ -44,11 +44,11 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                                     | Status Code                                                                    | Content Type                                                                   |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| models.TemplateCreateTemplateDirectLinkTemplatesDirectLinkResponseBody         | 400                                                                            | application/json                                                               |
+| models.TemplateCreateTemplateDirectLinkTemplatesDirectLinkResponseResponseBody | 500                                                                            | application/json                                                               |
+| models.APIError                                                                | 4XX, 5XX                                                                       | \*/\*                                                                          |
 
 ## delete
 
@@ -84,11 +84,11 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                                     | Status Code                                                                    | Content Type                                                                   |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| models.TemplateDeleteTemplateDirectLinkTemplatesDirectLinkResponseBody         | 400                                                                            | application/json                                                               |
+| models.TemplateDeleteTemplateDirectLinkTemplatesDirectLinkResponseResponseBody | 500                                                                            | application/json                                                               |
+| models.APIError                                                                | 4XX, 5XX                                                                       | \*/\*                                                                          |
 
 ## toggle
 
@@ -125,8 +125,8 @@ with Documenso(
 
 ### Errors
 
-| Error Type                      | Status Code                     | Content Type                    |
-| ------------------------------- | ------------------------------- | ------------------------------- |
-| models.ErrorBADREQUEST          | 400                             | application/json                |
-| models.ERRORINTERNALSERVERERROR | 500                             | application/json                |
-| models.APIError                 | 4XX, 5XX                        | \*/\*                           |
+| Error Type                                                                     | Status Code                                                                    | Content Type                                                                   |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| models.TemplateToggleTemplateDirectLinkTemplatesDirectLinkResponseBody         | 400                                                                            | application/json                                                               |
+| models.TemplateToggleTemplateDirectLinkTemplatesDirectLinkResponseResponseBody | 500                                                                            | application/json                                                               |
+| models.APIError                                                                | 4XX, 5XX                                                                       | \*/\*                                                                          |

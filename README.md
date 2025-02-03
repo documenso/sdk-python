@@ -48,6 +48,11 @@ To keep updated, please follow the discussions and issues here:
 > To finish publishing your SDK to PyPI you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
 
 
+> [!NOTE]
+> **Python version upgrade policy**
+>
+> Once a Python version reaches its [official end of life date](https://devguide.python.org/versions/), a 3-month grace period is provided for users to upgrade. Following this grace period, the minimum python version supported in the SDK will be updated.
+
 The SDK can be installed with either *pip* or *poetry* package managers.
 
 ### PIP
@@ -55,7 +60,7 @@ The SDK can be installed with either *pip* or *poetry* package managers.
 *PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
 
 ```bash
-pip install git+<UNSET>.git
+pip install git+https://github.com/documenso/sdk-python.git
 ```
 
 ### Poetry
@@ -63,8 +68,39 @@ pip install git+<UNSET>.git
 *Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
 
 ```bash
-poetry add git+<UNSET>.git
+poetry add git+https://github.com/documenso/sdk-python.git
 ```
+
+### Shell and script usage with `uv`
+
+You can use this SDK in a Python shell with [uv](https://docs.astral.sh/uv/) and the `uvx` command that comes with it like so:
+
+```shell
+uvx --from documenso_sdk python
+```
+
+It's also possible to write a standalone Python script without needing to set up a whole project like so:
+
+```python
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.9"
+# dependencies = [
+#     "documenso_sdk",
+# ]
+# ///
+
+from documenso_sdk import Documenso
+
+sdk = Documenso(
+  # SDK arguments
+)
+
+# Rest of script here...
+```
+
+Once that is saved to a file, you can run it with `uv run script.py` where
+`script.py` can be replaced with the actual file name.
 <!-- End SDK Installation [installation] -->
 
 <!-- Start IDE Support [idesupport] -->
@@ -192,7 +228,6 @@ Some of the endpoints in this SDK support retries. If you use the SDK without an
 
 To change the default retry strategy for a single API call, simply provide a `RetryConfig` object to the call:
 ```python
-import documenso_sdk
 from documenso_sdk import Documenso
 from documenso_sdk.utils import BackoffStrategy, RetryConfig
 import os
@@ -201,7 +236,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.find(order_by_direction=documenso_sdk.OrderByDirection.DESC,
+    res = documenso.documents.find(,
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
     # Handle response
@@ -211,7 +246,6 @@ with Documenso(
 
 If you'd like to override the default retry strategy for all operations that support retries, you can use the `retry_config` optional parameter when initializing the SDK:
 ```python
-import documenso_sdk
 from documenso_sdk import Documenso
 from documenso_sdk.utils import BackoffStrategy, RetryConfig
 import os
@@ -221,7 +255,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.find(order_by_direction=documenso_sdk.OrderByDirection.DESC)
+    res = documenso.documents.find()
 
     # Handle response
     print(res)
@@ -245,17 +279,16 @@ By default, an API error will raise a models.APIError exception, which has the f
 
 When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `find_async` method may raise the following exceptions:
 
-| Error Type                      | Status Code | Content Type     |
-| ------------------------------- | ----------- | ---------------- |
-| models.ErrorBADREQUEST          | 400         | application/json |
-| models.ErrorNOTFOUND            | 404         | application/json |
-| models.ERRORINTERNALSERVERERROR | 500         | application/json |
-| models.APIError                 | 4XX, 5XX    | \*/\*            |
+| Error Type                                                   | Status Code | Content Type     |
+| ------------------------------------------------------------ | ----------- | ---------------- |
+| models.DocumentFindDocumentsDocumentsResponseBody            | 400         | application/json |
+| models.DocumentFindDocumentsDocumentsResponseResponseBody    | 404         | application/json |
+| models.DocumentFindDocumentsDocumentsResponse500ResponseBody | 500         | application/json |
+| models.APIError                                              | 4XX, 5XX    | \*/\*            |
 
 ### Example
 
 ```python
-import documenso_sdk
 from documenso_sdk import Documenso, models
 import os
 
@@ -265,19 +298,19 @@ with Documenso(
     res = None
     try:
 
-        res = documenso.documents.find(order_by_direction=documenso_sdk.OrderByDirection.DESC)
+        res = documenso.documents.find()
 
         # Handle response
         print(res)
 
-    except models.ErrorBADREQUEST as e:
-        # handle e.data: models.ErrorBADREQUESTData
+    except models.DocumentFindDocumentsDocumentsResponseBody as e:
+        # handle e.data: models.DocumentFindDocumentsDocumentsResponseBodyData
         raise(e)
-    except models.ErrorNOTFOUND as e:
-        # handle e.data: models.ErrorNOTFOUNDData
+    except models.DocumentFindDocumentsDocumentsResponseResponseBody as e:
+        # handle e.data: models.DocumentFindDocumentsDocumentsResponseResponseBodyData
         raise(e)
-    except models.ERRORINTERNALSERVERERROR as e:
-        # handle e.data: models.ERRORINTERNALSERVERERRORData
+    except models.DocumentFindDocumentsDocumentsResponse500ResponseBody as e:
+        # handle e.data: models.DocumentFindDocumentsDocumentsResponse500ResponseBodyData
         raise(e)
     except models.APIError as e:
         # handle exception
@@ -287,6 +320,32 @@ with Documenso(
 
 <!-- No Server Selection [server] -->
 <!-- No Custom HTTP Client [http-client] -->
+
+<!-- Start Resource Management [resource-management] -->
+## Resource Management
+
+The `Documenso` class implements the context manager protocol and registers a finalizer function to close the underlying sync and async HTTPX clients it uses under the hood. This will close HTTP connections, release memory and free up other resources held by the SDK. In short-lived Python programs and notebooks that make a few SDK method calls, resource management may not be a concern. However, in longer-lived programs, it is beneficial to create a single SDK instance via a [context manager][context-manager] and reuse it across the application.
+
+[context-manager]: https://docs.python.org/3/reference/datamodel.html#context-managers
+
+```python
+from documenso_sdk import Documenso
+import os
+def main():
+    with Documenso(
+        api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    ) as documenso:
+        # Rest of application here...
+
+
+# Or when using async:
+async def amain():
+    async with Documenso(
+        api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    ) as documenso:
+        # Rest of application here...
+```
+<!-- End Resource Management [resource-management] -->
 
 <!-- Start Debugging [debug] -->
 ## Debugging

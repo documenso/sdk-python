@@ -1,19 +1,20 @@
-speakeasyVersion: 1.469.10
+speakeasyVersion: 1.481.1
 sources:
     documenso-OAS:
-        sourceNamespace: documenso-oas
-        sourceRevisionDigest: sha256:93ee78e094f9f5de4c126c6a06c363e22412c11a874255e545a8cb610b3bf047
-        sourceBlobDigest: sha256:b54d7f793fedc532b07ad3a417aa86f4af3d1b4f9e7496550ce6cf5a455187fb
+        sourceNamespace: documenso-v-2-beta-api
+        sourceRevisionDigest: sha256:167083b8ead58f1af1e1e4d0ac8e36779a26c8d14d03982a3379af79c7a1910b
+        sourceBlobDigest: sha256:1660a3a61f026b73adb9b2fdddc49fcbf66b8534c3394b38a434cf857333a785
         tags:
             - latest
+            - speakeasy-sdk-regen-1738368732
 targets:
     documenso:
         source: documenso-OAS
-        sourceNamespace: documenso-oas
-        sourceRevisionDigest: sha256:93ee78e094f9f5de4c126c6a06c363e22412c11a874255e545a8cb610b3bf047
-        sourceBlobDigest: sha256:b54d7f793fedc532b07ad3a417aa86f4af3d1b4f9e7496550ce6cf5a455187fb
+        sourceNamespace: documenso-v-2-beta-api
+        sourceRevisionDigest: sha256:167083b8ead58f1af1e1e4d0ac8e36779a26c8d14d03982a3379af79c7a1910b
+        sourceBlobDigest: sha256:1660a3a61f026b73adb9b2fdddc49fcbf66b8534c3394b38a434cf857333a785
         codeSamplesNamespace: documenso-oas-python-code-samples
-        codeSamplesRevisionDigest: sha256:9b99bf0034c33db16e98adde685b31bc76f65a98fa2815c09cbc3af97014619c
+        codeSamplesRevisionDigest: sha256:ded89ad8f552a5e7308c646fb076b023dfa0dcd929dedcf9a6a9f1cb711a8cea
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
