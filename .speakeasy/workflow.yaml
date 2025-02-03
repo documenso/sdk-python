@@ -10,6 +10,9 @@ targets:
     documenso:
         target: python
         source: documenso-OAS
+        publish:
+            pypi:
+                token: $pypi_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/documenso-inc/api/documenso-oas-python-code-samples
