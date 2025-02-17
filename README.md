@@ -402,7 +402,24 @@ with Documenso(
 ```
 <!-- End Error Handling [errors] -->
 
-<!-- No Server Selection [server] -->
+<!-- Start Server Selection [server] -->
+## Server Selection
+### Override Server URL Per-Client
+The default server can also be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
+```python
+import documenso_sdk
+from documenso_sdk import Documenso
+import os
+with Documenso(
+    server_url="https://app.documenso.com/api/v2-beta",
+    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+) as documenso:
+    res = documenso.documents.find(order_by_direction=documenso_sdk.OrderByDirection.DESC)
+    # Handle response
+    print(res)
+```
+<!-- End Server Selection [server] -->
+
 <!-- No Custom HTTP Client [http-client] -->
 
 <!-- Start Resource Management [resource-management] -->
