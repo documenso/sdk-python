@@ -250,23 +250,23 @@ if __name__ == "__main__":
 * [redistribute](docs/sdks/documents/README.md#redistribute) - Redistribute document
 * [duplicate](docs/sdks/documents/README.md#duplicate) - Duplicate document
 
-#### [documents.fields](docs/sdks/fields/README.md)
+#### [documents.fields](docs/sdks/documentsfields/README.md)
 
-* [get](docs/sdks/fields/README.md#get) - Get document field
-* [create](docs/sdks/fields/README.md#create) - Create document field
-* [create_many](docs/sdks/fields/README.md#create_many) - Create document fields
-* [update](docs/sdks/fields/README.md#update) - Update document field
-* [update_many](docs/sdks/fields/README.md#update_many) - Update document fields
-* [delete](docs/sdks/fields/README.md#delete) - Delete document field
+* [get](docs/sdks/documentsfields/README.md#get) - Get document field
+* [create](docs/sdks/documentsfields/README.md#create) - Create document field
+* [create_many](docs/sdks/documentsfields/README.md#create_many) - Create document fields
+* [update](docs/sdks/documentsfields/README.md#update) - Update document field
+* [update_many](docs/sdks/documentsfields/README.md#update_many) - Update document fields
+* [delete](docs/sdks/documentsfields/README.md#delete) - Delete document field
 
-#### [documents.recipients](docs/sdks/recipients/README.md)
+#### [documents.recipients](docs/sdks/documentsrecipients/README.md)
 
-* [get](docs/sdks/recipients/README.md#get) - Get document recipient
-* [create](docs/sdks/recipients/README.md#create) - Create document recipient
-* [create_many](docs/sdks/recipients/README.md#create_many) - Create document recipients
-* [update](docs/sdks/recipients/README.md#update) - Update document recipient
-* [update_many](docs/sdks/recipients/README.md#update_many) - Update document recipients
-* [delete](docs/sdks/recipients/README.md#delete) - Delete document recipient
+* [get](docs/sdks/documentsrecipients/README.md#get) - Get document recipient
+* [create](docs/sdks/documentsrecipients/README.md#create) - Create document recipient
+* [create_many](docs/sdks/documentsrecipients/README.md#create_many) - Create document recipients
+* [update](docs/sdks/documentsrecipients/README.md#update) - Update document recipient
+* [update_many](docs/sdks/documentsrecipients/README.md#update_many) - Update document recipients
+* [delete](docs/sdks/documentsrecipients/README.md#delete) - Delete document recipient
 
 ### [templates](docs/sdks/templates/README.md)
 
@@ -278,29 +278,29 @@ if __name__ == "__main__":
 * [use](docs/sdks/templates/README.md#use) - Use template
 * [move_to_team](docs/sdks/templates/README.md#move_to_team) - Move template
 
-#### [templates.direct_link](docs/sdks/directlink/README.md)
+#### [templates.direct_link](docs/sdks/directlinksdk/README.md)
 
-* [create](docs/sdks/directlink/README.md#create) - Create direct link
-* [delete](docs/sdks/directlink/README.md#delete) - Delete direct link
-* [toggle](docs/sdks/directlink/README.md#toggle) - Toggle direct link
+* [create](docs/sdks/directlinksdk/README.md#create) - Create direct link
+* [delete](docs/sdks/directlinksdk/README.md#delete) - Delete direct link
+* [toggle](docs/sdks/directlinksdk/README.md#toggle) - Toggle direct link
 
-#### [templates.fields](docs/sdks/documensofields/README.md)
+#### [templates.fields](docs/sdks/templatesfields/README.md)
 
-* [create](docs/sdks/documensofields/README.md#create) - Create template field
-* [get](docs/sdks/documensofields/README.md#get) - Get template field
-* [create_many](docs/sdks/documensofields/README.md#create_many) - Create template fields
-* [update](docs/sdks/documensofields/README.md#update) - Update template field
-* [update_many](docs/sdks/documensofields/README.md#update_many) - Update template fields
-* [delete](docs/sdks/documensofields/README.md#delete) - Delete template field
+* [create](docs/sdks/templatesfields/README.md#create) - Create template field
+* [get](docs/sdks/templatesfields/README.md#get) - Get template field
+* [create_many](docs/sdks/templatesfields/README.md#create_many) - Create template fields
+* [update](docs/sdks/templatesfields/README.md#update) - Update template field
+* [update_many](docs/sdks/templatesfields/README.md#update_many) - Update template fields
+* [delete](docs/sdks/templatesfields/README.md#delete) - Delete template field
 
-#### [templates.recipients](docs/sdks/documensorecipients/README.md)
+#### [templates.recipients](docs/sdks/templatesrecipients/README.md)
 
-* [get](docs/sdks/documensorecipients/README.md#get) - Get template recipient
-* [create](docs/sdks/documensorecipients/README.md#create) - Create template recipient
-* [create_many](docs/sdks/documensorecipients/README.md#create_many) - Create template recipients
-* [update](docs/sdks/documensorecipients/README.md#update) - Update template recipient
-* [update_many](docs/sdks/documensorecipients/README.md#update_many) - Update template recipients
-* [delete](docs/sdks/documensorecipients/README.md#delete) - Delete template recipient
+* [get](docs/sdks/templatesrecipients/README.md#get) - Get template recipient
+* [create](docs/sdks/templatesrecipients/README.md#create) - Create template recipient
+* [create_many](docs/sdks/templatesrecipients/README.md#create_many) - Create template recipients
+* [update](docs/sdks/templatesrecipients/README.md#update) - Update template recipient
+* [update_many](docs/sdks/templatesrecipients/README.md#update_many) - Update template recipients
+* [delete](docs/sdks/templatesrecipients/README.md#delete) - Delete template recipient
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -315,6 +315,7 @@ To change the default retry strategy for a single API call, simply provide a `Re
 from documenso_sdk import Documenso
 from documenso_sdk.utils import BackoffStrategy, RetryConfig
 import os
+
 
 with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
@@ -333,6 +334,7 @@ If you'd like to override the default retry strategy for all operations that sup
 from documenso_sdk import Documenso
 from documenso_sdk.utils import BackoffStrategy, RetryConfig
 import os
+
 
 with Documenso(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
@@ -363,18 +365,19 @@ By default, an API error will raise a models.APIError exception, which has the f
 
 When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `find_async` method may raise the following exceptions:
 
-| Error Type                                                   | Status Code | Content Type     |
-| ------------------------------------------------------------ | ----------- | ---------------- |
-| models.DocumentFindDocumentsDocumentsResponseBody            | 400         | application/json |
-| models.DocumentFindDocumentsDocumentsResponseResponseBody    | 404         | application/json |
-| models.DocumentFindDocumentsDocumentsResponse500ResponseBody | 500         | application/json |
-| models.APIError                                              | 4XX, 5XX    | \*/\*            |
+| Error Type                                      | Status Code | Content Type     |
+| ----------------------------------------------- | ----------- | ---------------- |
+| models.DocumentFindDocumentsBadRequestError     | 400         | application/json |
+| models.DocumentFindDocumentsNotFoundError       | 404         | application/json |
+| models.DocumentFindDocumentsInternalServerError | 500         | application/json |
+| models.APIError                                 | 4XX, 5XX    | \*/\*            |
 
 ### Example
 
 ```python
 from documenso_sdk import Documenso, models
 import os
+
 
 with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
@@ -387,14 +390,14 @@ with Documenso(
         # Handle response
         print(res)
 
-    except models.DocumentFindDocumentsDocumentsResponseBody as e:
-        # handle e.data: models.DocumentFindDocumentsDocumentsResponseBodyData
+    except models.DocumentFindDocumentsBadRequestError as e:
+        # handle e.data: models.DocumentFindDocumentsBadRequestErrorData
         raise(e)
-    except models.DocumentFindDocumentsDocumentsResponseResponseBody as e:
-        # handle e.data: models.DocumentFindDocumentsDocumentsResponseResponseBodyData
+    except models.DocumentFindDocumentsNotFoundError as e:
+        # handle e.data: models.DocumentFindDocumentsNotFoundErrorData
         raise(e)
-    except models.DocumentFindDocumentsDocumentsResponse500ResponseBody as e:
-        # handle e.data: models.DocumentFindDocumentsDocumentsResponse500ResponseBodyData
+    except models.DocumentFindDocumentsInternalServerError as e:
+        # handle e.data: models.DocumentFindDocumentsInternalServerErrorData
         raise(e)
     except models.APIError as e:
         # handle exception
@@ -404,19 +407,25 @@ with Documenso(
 
 <!-- Start Server Selection [server] -->
 ## Server Selection
+
 ### Override Server URL Per-Client
-The default server can also be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
+
+The default server can be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
 ```python
-import documenso_sdk
 from documenso_sdk import Documenso
 import os
+
+
 with Documenso(
     server_url="https://app.documenso.com/api/v2-beta",
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
-    res = documenso.documents.find(order_by_direction=documenso_sdk.OrderByDirection.DESC)
+
+    res = documenso.documents.find()
+
     # Handle response
     print(res)
+
 ```
 <!-- End Server Selection [server] -->
 
@@ -433,6 +442,7 @@ The `Documenso` class implements the context manager protocol and registers a fi
 from documenso_sdk import Documenso
 import os
 def main():
+
     with Documenso(
         api_key=os.getenv("DOCUMENSO_API_KEY", ""),
     ) as documenso:
@@ -441,6 +451,7 @@ def main():
 
 # Or when using async:
 async def amain():
+
     async with Documenso(
         api_key=os.getenv("DOCUMENSO_API_KEY", ""),
     ) as documenso:

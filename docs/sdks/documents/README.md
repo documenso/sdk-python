@@ -25,6 +25,7 @@ Find documents based on a search criteria
 from documenso_sdk import Documenso
 import os
 
+
 with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
@@ -44,24 +45,24 @@ with Documenso(
 | `page`                                                                | *Optional[float]*                                                     | :heavy_minus_sign:                                                    | The pagination page number, starts at 1.                              |
 | `per_page`                                                            | *Optional[float]*                                                     | :heavy_minus_sign:                                                    | The number of items per page.                                         |
 | `template_id`                                                         | *Optional[float]*                                                     | :heavy_minus_sign:                                                    | Filter documents by the template ID used to create it.                |
-| `source`                                                              | [Optional[models.Source]](../../models/source.md)                     | :heavy_minus_sign:                                                    | Filter documents by how it was created.                               |
-| `status`                                                              | [Optional[models.Status]](../../models/status.md)                     | :heavy_minus_sign:                                                    | Filter documents by the current status                                |
+| `source`                                                              | [Optional[models.QueryParamSource]](../../models/queryparamsource.md) | :heavy_minus_sign:                                                    | Filter documents by how it was created.                               |
+| `status`                                                              | [Optional[models.QueryParamStatus]](../../models/queryparamstatus.md) | :heavy_minus_sign:                                                    | Filter documents by the current status                                |
 | `order_by_column`                                                     | [Optional[models.OrderByColumn]](../../models/orderbycolumn.md)       | :heavy_minus_sign:                                                    | N/A                                                                   |
 | `order_by_direction`                                                  | [Optional[models.OrderByDirection]](../../models/orderbydirection.md) | :heavy_minus_sign:                                                    | N/A                                                                   |
 | `retries`                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)      | :heavy_minus_sign:                                                    | Configuration to override the default retry behavior of the client.   |
 
 ### Response
 
-**[models.DocumentFindDocumentsResponseBody](../../models/documentfinddocumentsresponsebody.md)**
+**[models.DocumentFindDocumentsResponse](../../models/documentfinddocumentsresponse.md)**
 
 ### Errors
 
-| Error Type                                                   | Status Code                                                  | Content Type                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| models.DocumentFindDocumentsDocumentsResponseBody            | 400                                                          | application/json                                             |
-| models.DocumentFindDocumentsDocumentsResponseResponseBody    | 404                                                          | application/json                                             |
-| models.DocumentFindDocumentsDocumentsResponse500ResponseBody | 500                                                          | application/json                                             |
-| models.APIError                                              | 4XX, 5XX                                                     | \*/\*                                                        |
+| Error Type                                      | Status Code                                     | Content Type                                    |
+| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| models.DocumentFindDocumentsBadRequestError     | 400                                             | application/json                                |
+| models.DocumentFindDocumentsNotFoundError       | 404                                             | application/json                                |
+| models.DocumentFindDocumentsInternalServerError | 500                                             | application/json                                |
+| models.APIError                                 | 4XX, 5XX                                        | \*/\*                                           |
 
 ## get
 
@@ -72,6 +73,7 @@ Returns a document given an ID
 ```python
 from documenso_sdk import Documenso
 import os
+
 
 with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
@@ -93,16 +95,16 @@ with Documenso(
 
 ### Response
 
-**[models.DocumentGetDocumentWithDetailsByIDResponseBody](../../models/documentgetdocumentwithdetailsbyidresponsebody.md)**
+**[models.DocumentGetDocumentWithDetailsByIDResponse](../../models/documentgetdocumentwithdetailsbyidresponse.md)**
 
 ### Errors
 
-| Error Type                                                                | Status Code                                                               | Content Type                                                              |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| models.DocumentGetDocumentWithDetailsByIDDocumentsResponseBody            | 400                                                                       | application/json                                                          |
-| models.DocumentGetDocumentWithDetailsByIDDocumentsResponseResponseBody    | 404                                                                       | application/json                                                          |
-| models.DocumentGetDocumentWithDetailsByIDDocumentsResponse500ResponseBody | 500                                                                       | application/json                                                          |
-| models.APIError                                                           | 4XX, 5XX                                                                  | \*/\*                                                                     |
+| Error Type                                                   | Status Code                                                  | Content Type                                                 |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| models.DocumentGetDocumentWithDetailsByIDBadRequestError     | 400                                                          | application/json                                             |
+| models.DocumentGetDocumentWithDetailsByIDNotFoundError       | 404                                                          | application/json                                             |
+| models.DocumentGetDocumentWithDetailsByIDInternalServerError | 500                                                          | application/json                                             |
+| models.APIError                                              | 4XX, 5XX                                                     | \*/\*                                                        |
 
 ## create_v0
 
@@ -113,6 +115,7 @@ You will need to upload the PDF to the provided URL returned. Note: Once V2 API 
 ```python
 from documenso_sdk import Documenso
 import os
+
 
 with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
@@ -127,29 +130,29 @@ with Documenso(
 
 ### Parameters
 
-| Parameter                                                                                                                           | Type                                                                                                                                | Required                                                                                                                            | Description                                                                                                                         |
-| ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `title`                                                                                                                             | *str*                                                                                                                               | :heavy_check_mark:                                                                                                                  | The title of the document.                                                                                                          |
-| `external_id`                                                                                                                       | *Optional[str]*                                                                                                                     | :heavy_minus_sign:                                                                                                                  | The external ID of the document.                                                                                                    |
-| `visibility`                                                                                                                        | [Optional[models.Visibility]](../../models/visibility.md)                                                                           | :heavy_minus_sign:                                                                                                                  | The visibility of the document.                                                                                                     |
-| `global_access_auth`                                                                                                                | [Optional[models.GlobalAccessAuth]](../../models/globalaccessauth.md)                                                               | :heavy_minus_sign:                                                                                                                  | The type of authentication required for the recipient to access the document.                                                       |
-| `global_action_auth`                                                                                                                | [Optional[models.GlobalActionAuth]](../../models/globalactionauth.md)                                                               | :heavy_minus_sign:                                                                                                                  | The type of authentication required for the recipient to sign the document. This field is restricted to Enterprise plan users only. |
-| `form_values`                                                                                                                       | Dict[str, [models.FormValues](../../models/formvalues.md)]                                                                          | :heavy_minus_sign:                                                                                                                  | N/A                                                                                                                                 |
-| `recipients`                                                                                                                        | List[[models.DocumentCreateDocumentTemporaryRecipients](../../models/documentcreatedocumenttemporaryrecipients.md)]                 | :heavy_minus_sign:                                                                                                                  | N/A                                                                                                                                 |
-| `meta`                                                                                                                              | [Optional[models.Meta]](../../models/meta.md)                                                                                       | :heavy_minus_sign:                                                                                                                  | N/A                                                                                                                                 |
-| `retries`                                                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                    | :heavy_minus_sign:                                                                                                                  | Configuration to override the default retry behavior of the client.                                                                 |
+| Parameter                                                                                                                                         | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `title`                                                                                                                                           | *str*                                                                                                                                             | :heavy_check_mark:                                                                                                                                | The title of the document.                                                                                                                        |
+| `external_id`                                                                                                                                     | *Optional[str]*                                                                                                                                   | :heavy_minus_sign:                                                                                                                                | The external ID of the document.                                                                                                                  |
+| `visibility`                                                                                                                                      | [Optional[models.VisibilityAccount]](../../models/visibilityaccount.md)                                                                           | :heavy_minus_sign:                                                                                                                                | The visibility of the document.                                                                                                                   |
+| `global_access_auth`                                                                                                                              | [Optional[models.DocumentCreateDocumentTemporaryGlobalAccessAuthRequest]](../../models/documentcreatedocumenttemporaryglobalaccessauthrequest.md) | :heavy_minus_sign:                                                                                                                                | The type of authentication required for the recipient to access the document.                                                                     |
+| `global_action_auth`                                                                                                                              | [Optional[models.GlobalActionAuthAccount]](../../models/globalactionauthaccount.md)                                                               | :heavy_minus_sign:                                                                                                                                | The type of authentication required for the recipient to sign the document. This field is restricted to Enterprise plan users only.               |
+| `form_values`                                                                                                                                     | Dict[str, [models.FormValuesRequest](../../models/formvaluesrequest.md)]                                                                          | :heavy_minus_sign:                                                                                                                                | N/A                                                                                                                                               |
+| `recipients`                                                                                                                                      | List[[models.RecipientAccount](../../models/recipientaccount.md)]                                                                                 | :heavy_minus_sign:                                                                                                                                | N/A                                                                                                                                               |
+| `meta`                                                                                                                                            | [Optional[models.DocumentCreateDocumentTemporaryMeta]](../../models/documentcreatedocumenttemporarymeta.md)                                       | :heavy_minus_sign:                                                                                                                                | N/A                                                                                                                                               |
+| `retries`                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                  | :heavy_minus_sign:                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                               |
 
 ### Response
 
-**[models.DocumentCreateDocumentTemporaryResponseBody](../../models/documentcreatedocumenttemporaryresponsebody.md)**
+**[models.DocumentCreateDocumentTemporaryResponse](../../models/documentcreatedocumenttemporaryresponse.md)**
 
 ### Errors
 
-| Error Type                                                          | Status Code                                                         | Content Type                                                        |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| models.DocumentCreateDocumentTemporaryDocumentsResponseBody         | 400                                                                 | application/json                                                    |
-| models.DocumentCreateDocumentTemporaryDocumentsResponseResponseBody | 500                                                                 | application/json                                                    |
-| models.APIError                                                     | 4XX, 5XX                                                            | \*/\*                                                               |
+| Error Type                                                | Status Code                                               | Content Type                                              |
+| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
+| models.DocumentCreateDocumentTemporaryBadRequestError     | 400                                                       | application/json                                          |
+| models.DocumentCreateDocumentTemporaryInternalServerError | 500                                                       | application/json                                          |
+| models.APIError                                           | 4XX, 5XX                                                  | \*/\*                                                     |
 
 ## update
 
@@ -160,6 +163,7 @@ Update document
 ```python
 from documenso_sdk import Documenso
 import os
+
 
 with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
@@ -174,24 +178,24 @@ with Documenso(
 
 ### Parameters
 
-| Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
-| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `document_id`                                                                                             | *float*                                                                                                   | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
-| `data`                                                                                                    | [Optional[models.Data]](../../models/data.md)                                                             | :heavy_minus_sign:                                                                                        | N/A                                                                                                       |
-| `meta`                                                                                                    | [Optional[models.DocumentSetSettingsForDocumentMeta]](../../models/documentsetsettingsfordocumentmeta.md) | :heavy_minus_sign:                                                                                        | N/A                                                                                                       |
-| `retries`                                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                          | :heavy_minus_sign:                                                                                        | Configuration to override the default retry behavior of the client.                                       |
+| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `document_id`                                                                             | *float*                                                                                   | :heavy_check_mark:                                                                        | N/A                                                                                       |
+| `data`                                                                                    | [Optional[models.DocumentUpdateDocumentData]](../../models/documentupdatedocumentdata.md) | :heavy_minus_sign:                                                                        | N/A                                                                                       |
+| `meta`                                                                                    | [Optional[models.DocumentUpdateDocumentMeta]](../../models/documentupdatedocumentmeta.md) | :heavy_minus_sign:                                                                        | N/A                                                                                       |
+| `retries`                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                          | :heavy_minus_sign:                                                                        | Configuration to override the default retry behavior of the client.                       |
 
 ### Response
 
-**[models.DocumentSetSettingsForDocumentResponseBody](../../models/documentsetsettingsfordocumentresponsebody.md)**
+**[models.DocumentUpdateDocumentResponse](../../models/documentupdatedocumentresponse.md)**
 
 ### Errors
 
-| Error Type                                                         | Status Code                                                        | Content Type                                                       |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| models.DocumentSetSettingsForDocumentDocumentsResponseBody         | 400                                                                | application/json                                                   |
-| models.DocumentSetSettingsForDocumentDocumentsResponseResponseBody | 500                                                                | application/json                                                   |
-| models.APIError                                                    | 4XX, 5XX                                                           | \*/\*                                                              |
+| Error Type                                       | Status Code                                      | Content Type                                     |
+| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
+| models.DocumentUpdateDocumentBadRequestError     | 400                                              | application/json                                 |
+| models.DocumentUpdateDocumentInternalServerError | 500                                              | application/json                                 |
+| models.APIError                                  | 4XX, 5XX                                         | \*/\*                                            |
 
 ## delete
 
@@ -202,6 +206,7 @@ Delete document
 ```python
 from documenso_sdk import Documenso
 import os
+
 
 with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
@@ -223,15 +228,15 @@ with Documenso(
 
 ### Response
 
-**[models.DocumentDeleteDocumentResponseBody](../../models/documentdeletedocumentresponsebody.md)**
+**[models.DocumentDeleteDocumentResponse](../../models/documentdeletedocumentresponse.md)**
 
 ### Errors
 
-| Error Type                                                 | Status Code                                                | Content Type                                               |
-| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| models.DocumentDeleteDocumentDocumentsResponseBody         | 400                                                        | application/json                                           |
-| models.DocumentDeleteDocumentDocumentsResponseResponseBody | 500                                                        | application/json                                           |
-| models.APIError                                            | 4XX, 5XX                                                   | \*/\*                                                      |
+| Error Type                                       | Status Code                                      | Content Type                                     |
+| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
+| models.DocumentDeleteDocumentBadRequestError     | 400                                              | application/json                                 |
+| models.DocumentDeleteDocumentInternalServerError | 500                                              | application/json                                 |
+| models.APIError                                  | 4XX, 5XX                                         | \*/\*                                            |
 
 ## move_to_team
 
@@ -242,6 +247,7 @@ Move a document from your personal account to a team
 ```python
 from documenso_sdk import Documenso
 import os
+
 
 with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
@@ -264,15 +270,15 @@ with Documenso(
 
 ### Response
 
-**[models.DocumentMoveDocumentToTeamResponseBody](../../models/documentmovedocumenttoteamresponsebody.md)**
+**[models.DocumentMoveDocumentToTeamResponse](../../models/documentmovedocumenttoteamresponse.md)**
 
 ### Errors
 
-| Error Type                                                     | Status Code                                                    | Content Type                                                   |
-| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
-| models.DocumentMoveDocumentToTeamDocumentsResponseBody         | 400                                                            | application/json                                               |
-| models.DocumentMoveDocumentToTeamDocumentsResponseResponseBody | 500                                                            | application/json                                               |
-| models.APIError                                                | 4XX, 5XX                                                       | \*/\*                                                          |
+| Error Type                                           | Status Code                                          | Content Type                                         |
+| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| models.DocumentMoveDocumentToTeamBadRequestError     | 400                                                  | application/json                                     |
+| models.DocumentMoveDocumentToTeamInternalServerError | 500                                                  | application/json                                     |
+| models.APIError                                      | 4XX, 5XX                                             | \*/\*                                                |
 
 ## distribute
 
@@ -283,6 +289,7 @@ Send the document out to recipients based on your distribution method
 ```python
 from documenso_sdk import Documenso
 import os
+
 
 with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
@@ -305,15 +312,15 @@ with Documenso(
 
 ### Response
 
-**[models.DocumentSendDocumentResponseBody](../../models/documentsenddocumentresponsebody.md)**
+**[models.DocumentSendDocumentResponse](../../models/documentsenddocumentresponse.md)**
 
 ### Errors
 
-| Error Type                                               | Status Code                                              | Content Type                                             |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| models.DocumentSendDocumentDocumentsResponseBody         | 400                                                      | application/json                                         |
-| models.DocumentSendDocumentDocumentsResponseResponseBody | 500                                                      | application/json                                         |
-| models.APIError                                          | 4XX, 5XX                                                 | \*/\*                                                    |
+| Error Type                                     | Status Code                                    | Content Type                                   |
+| ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
+| models.DocumentSendDocumentBadRequestError     | 400                                            | application/json                               |
+| models.DocumentSendDocumentInternalServerError | 500                                            | application/json                               |
+| models.APIError                                | 4XX, 5XX                                       | \*/\*                                          |
 
 ## redistribute
 
@@ -324,6 +331,7 @@ Redistribute the document to the provided recipients who have not actioned the d
 ```python
 from documenso_sdk import Documenso
 import os
+
 
 with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
@@ -348,15 +356,15 @@ with Documenso(
 
 ### Response
 
-**[models.DocumentResendDocumentResponseBody](../../models/documentresenddocumentresponsebody.md)**
+**[models.DocumentResendDocumentResponse](../../models/documentresenddocumentresponse.md)**
 
 ### Errors
 
-| Error Type                                                 | Status Code                                                | Content Type                                               |
-| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| models.DocumentResendDocumentDocumentsResponseBody         | 400                                                        | application/json                                           |
-| models.DocumentResendDocumentDocumentsResponseResponseBody | 500                                                        | application/json                                           |
-| models.APIError                                            | 4XX, 5XX                                                   | \*/\*                                                      |
+| Error Type                                       | Status Code                                      | Content Type                                     |
+| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
+| models.DocumentResendDocumentBadRequestError     | 400                                              | application/json                                 |
+| models.DocumentResendDocumentInternalServerError | 500                                              | application/json                                 |
+| models.APIError                                  | 4XX, 5XX                                         | \*/\*                                            |
 
 ## duplicate
 
@@ -367,6 +375,7 @@ Duplicate document
 ```python
 from documenso_sdk import Documenso
 import os
+
 
 with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
@@ -388,12 +397,12 @@ with Documenso(
 
 ### Response
 
-**[models.DocumentDuplicateDocumentResponseBody](../../models/documentduplicatedocumentresponsebody.md)**
+**[models.DocumentDuplicateDocumentResponse](../../models/documentduplicatedocumentresponse.md)**
 
 ### Errors
 
-| Error Type                                                    | Status Code                                                   | Content Type                                                  |
-| ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
-| models.DocumentDuplicateDocumentDocumentsResponseBody         | 400                                                           | application/json                                              |
-| models.DocumentDuplicateDocumentDocumentsResponseResponseBody | 500                                                           | application/json                                              |
-| models.APIError                                               | 4XX, 5XX                                                      | \*/\*                                                         |
+| Error Type                                          | Status Code                                         | Content Type                                        |
+| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
+| models.DocumentDuplicateDocumentBadRequestError     | 400                                                 | application/json                                    |
+| models.DocumentDuplicateDocumentInternalServerError | 500                                                 | application/json                                    |
+| models.APIError                                     | 4XX, 5XX                                            | \*/\*                                               |

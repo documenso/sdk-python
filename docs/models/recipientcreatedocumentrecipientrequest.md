@@ -1,0 +1,9 @@
+# RecipientCreateDocumentRecipientRequest
+
+
+## Fields
+
+| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `document_id`                                                                                              | *float*                                                                                                    | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `recipient`                                                                                                | [models.RecipientCreateDocumentRecipientRecipient](../models/recipientcreatedocumentrecipientrecipient.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |

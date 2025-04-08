@@ -8,94 +8,83 @@ from typing import List, Optional
 from typing_extensions import Annotated, TypedDict
 
 
-class RecipientDeleteDocumentRecipientRequestBodyTypedDict(TypedDict):
+class RecipientDeleteDocumentRecipientRequestTypedDict(TypedDict):
     recipient_id: float
 
 
-class RecipientDeleteDocumentRecipientRequestBody(BaseModel):
+class RecipientDeleteDocumentRecipientRequest(BaseModel):
     recipient_id: Annotated[float, pydantic.Field(alias="recipientId")]
 
 
-class RecipientDeleteDocumentRecipientDocumentsRecipientsIssuesTypedDict(TypedDict):
+class RecipientDeleteDocumentRecipientInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class RecipientDeleteDocumentRecipientDocumentsRecipientsIssues(BaseModel):
+class RecipientDeleteDocumentRecipientInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class RecipientDeleteDocumentRecipientDocumentsRecipientsResponseResponseBodyData(
-    BaseModel
-):
+class RecipientDeleteDocumentRecipientInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[
-        List[RecipientDeleteDocumentRecipientDocumentsRecipientsIssues]
-    ] = None
+    issues: Optional[List[RecipientDeleteDocumentRecipientInternalServerErrorIssue]] = (
+        None
+    )
 
 
-class RecipientDeleteDocumentRecipientDocumentsRecipientsResponseResponseBody(
-    Exception
-):
+class RecipientDeleteDocumentRecipientInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: RecipientDeleteDocumentRecipientDocumentsRecipientsResponseResponseBodyData
+    data: RecipientDeleteDocumentRecipientInternalServerErrorData
 
-    def __init__(
-        self,
-        data: RecipientDeleteDocumentRecipientDocumentsRecipientsResponseResponseBodyData,
-    ):
+    def __init__(self, data: RecipientDeleteDocumentRecipientInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data,
-            RecipientDeleteDocumentRecipientDocumentsRecipientsResponseResponseBodyData,
+            self.data, RecipientDeleteDocumentRecipientInternalServerErrorData
         )
 
 
-class RecipientDeleteDocumentRecipientIssuesTypedDict(TypedDict):
+class RecipientDeleteDocumentRecipientBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class RecipientDeleteDocumentRecipientIssues(BaseModel):
+class RecipientDeleteDocumentRecipientBadRequestIssue(BaseModel):
     message: str
 
 
-class RecipientDeleteDocumentRecipientDocumentsRecipientsResponseBodyData(BaseModel):
+class RecipientDeleteDocumentRecipientBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[RecipientDeleteDocumentRecipientIssues]] = None
+    issues: Optional[List[RecipientDeleteDocumentRecipientBadRequestIssue]] = None
 
 
-class RecipientDeleteDocumentRecipientDocumentsRecipientsResponseBody(Exception):
+class RecipientDeleteDocumentRecipientBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: RecipientDeleteDocumentRecipientDocumentsRecipientsResponseBodyData
+    data: RecipientDeleteDocumentRecipientBadRequestErrorData
 
-    def __init__(
-        self, data: RecipientDeleteDocumentRecipientDocumentsRecipientsResponseBodyData
-    ):
+    def __init__(self, data: RecipientDeleteDocumentRecipientBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data,
-            RecipientDeleteDocumentRecipientDocumentsRecipientsResponseBodyData,
+            self.data, RecipientDeleteDocumentRecipientBadRequestErrorData
         )
 
 
-class RecipientDeleteDocumentRecipientResponseBodyTypedDict(TypedDict):
+class RecipientDeleteDocumentRecipientResponseTypedDict(TypedDict):
     r"""Successful response"""
 
     success: bool
 
 
-class RecipientDeleteDocumentRecipientResponseBody(BaseModel):
+class RecipientDeleteDocumentRecipientResponse(BaseModel):
     r"""Successful response"""
 
     success: bool

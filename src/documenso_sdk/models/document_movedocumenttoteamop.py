@@ -10,14 +10,14 @@ from typing import Dict, List, Optional, Union
 from typing_extensions import Annotated, TypeAliasType, TypedDict
 
 
-class DocumentMoveDocumentToTeamRequestBodyTypedDict(TypedDict):
+class DocumentMoveDocumentToTeamRequestTypedDict(TypedDict):
     document_id: float
     r"""The ID of the document to move to a team."""
     team_id: float
     r"""The ID of the team to move the document to."""
 
 
-class DocumentMoveDocumentToTeamRequestBody(BaseModel):
+class DocumentMoveDocumentToTeamRequest(BaseModel):
     document_id: Annotated[float, pydantic.Field(alias="documentId")]
     r"""The ID of the document to move to a team."""
 
@@ -25,65 +25,63 @@ class DocumentMoveDocumentToTeamRequestBody(BaseModel):
     r"""The ID of the team to move the document to."""
 
 
-class DocumentMoveDocumentToTeamDocumentsIssuesTypedDict(TypedDict):
+class DocumentMoveDocumentToTeamInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class DocumentMoveDocumentToTeamDocumentsIssues(BaseModel):
+class DocumentMoveDocumentToTeamInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class DocumentMoveDocumentToTeamDocumentsResponseResponseBodyData(BaseModel):
+class DocumentMoveDocumentToTeamInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[DocumentMoveDocumentToTeamDocumentsIssues]] = None
+    issues: Optional[List[DocumentMoveDocumentToTeamInternalServerErrorIssue]] = None
 
 
-class DocumentMoveDocumentToTeamDocumentsResponseResponseBody(Exception):
+class DocumentMoveDocumentToTeamInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: DocumentMoveDocumentToTeamDocumentsResponseResponseBodyData
+    data: DocumentMoveDocumentToTeamInternalServerErrorData
 
-    def __init__(
-        self, data: DocumentMoveDocumentToTeamDocumentsResponseResponseBodyData
-    ):
+    def __init__(self, data: DocumentMoveDocumentToTeamInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, DocumentMoveDocumentToTeamDocumentsResponseResponseBodyData
+            self.data, DocumentMoveDocumentToTeamInternalServerErrorData
         )
 
 
-class DocumentMoveDocumentToTeamIssuesTypedDict(TypedDict):
+class DocumentMoveDocumentToTeamBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class DocumentMoveDocumentToTeamIssues(BaseModel):
+class DocumentMoveDocumentToTeamBadRequestIssue(BaseModel):
     message: str
 
 
-class DocumentMoveDocumentToTeamDocumentsResponseBodyData(BaseModel):
+class DocumentMoveDocumentToTeamBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[DocumentMoveDocumentToTeamIssues]] = None
+    issues: Optional[List[DocumentMoveDocumentToTeamBadRequestIssue]] = None
 
 
-class DocumentMoveDocumentToTeamDocumentsResponseBody(Exception):
+class DocumentMoveDocumentToTeamBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: DocumentMoveDocumentToTeamDocumentsResponseBodyData
+    data: DocumentMoveDocumentToTeamBadRequestErrorData
 
-    def __init__(self, data: DocumentMoveDocumentToTeamDocumentsResponseBodyData):
+    def __init__(self, data: DocumentMoveDocumentToTeamBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, DocumentMoveDocumentToTeamDocumentsResponseBodyData
+            self.data, DocumentMoveDocumentToTeamBadRequestErrorData
         )
 
 
@@ -97,6 +95,7 @@ class DocumentMoveDocumentToTeamStatus(str, Enum):
     DRAFT = "DRAFT"
     PENDING = "PENDING"
     COMPLETED = "COMPLETED"
+    REJECTED = "REJECTED"
 
 
 class DocumentMoveDocumentToTeamSource(str, Enum):
@@ -149,7 +148,7 @@ class DocumentMoveDocumentToTeamAuthOptions(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -180,13 +179,13 @@ DocumentMoveDocumentToTeamFormValues = TypeAliasType(
 )
 
 
-class DocumentMoveDocumentToTeamResponseBodyTypedDict(TypedDict):
+class DocumentMoveDocumentToTeamResponseTypedDict(TypedDict):
     r"""Successful response"""
 
     visibility: DocumentMoveDocumentToTeamVisibility
     status: DocumentMoveDocumentToTeamStatus
     source: DocumentMoveDocumentToTeamSource
-    id: int
+    id: float
     external_id: Nullable[str]
     r"""A custom external ID you can use to identify the document."""
     user_id: float
@@ -199,11 +198,11 @@ class DocumentMoveDocumentToTeamResponseBodyTypedDict(TypedDict):
     updated_at: str
     completed_at: Nullable[str]
     deleted_at: Nullable[str]
-    team_id: Nullable[int]
-    template_id: Nullable[int]
+    team_id: Nullable[float]
+    template_id: Nullable[float]
 
 
-class DocumentMoveDocumentToTeamResponseBody(BaseModel):
+class DocumentMoveDocumentToTeamResponse(BaseModel):
     r"""Successful response"""
 
     visibility: DocumentMoveDocumentToTeamVisibility
@@ -212,7 +211,7 @@ class DocumentMoveDocumentToTeamResponseBody(BaseModel):
 
     source: DocumentMoveDocumentToTeamSource
 
-    id: int
+    id: float
 
     external_id: Annotated[Nullable[str], pydantic.Field(alias="externalId")]
     r"""A custom external ID you can use to identify the document."""
@@ -242,9 +241,9 @@ class DocumentMoveDocumentToTeamResponseBody(BaseModel):
 
     deleted_at: Annotated[Nullable[str], pydantic.Field(alias="deletedAt")]
 
-    team_id: Annotated[Nullable[int], pydantic.Field(alias="teamId")]
+    team_id: Annotated[Nullable[float], pydantic.Field(alias="teamId")]
 
-    template_id: Annotated[Nullable[int], pydantic.Field(alias="templateId")]
+    template_id: Annotated[Nullable[float], pydantic.Field(alias="templateId")]
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -264,7 +263,7 @@ class DocumentMoveDocumentToTeamResponseBody(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

@@ -16,7 +16,7 @@ from typing import Any, Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-class Visibility(str, Enum):
+class VisibilityAccount(str, Enum):
     r"""The visibility of the document."""
 
     EVERYONE = "EVERYONE"
@@ -24,13 +24,13 @@ class Visibility(str, Enum):
     ADMIN = "ADMIN"
 
 
-class GlobalAccessAuth(str, Enum):
+class DocumentCreateDocumentTemporaryGlobalAccessAuthRequest(str, Enum):
     r"""The type of authentication required for the recipient to access the document."""
 
     ACCOUNT = "ACCOUNT"
 
 
-class GlobalActionAuth(str, Enum):
+class GlobalActionAuthAccount(str, Enum):
     r"""The type of authentication required for the recipient to sign the document. This field is restricted to Enterprise plan users only."""
 
     ACCOUNT = "ACCOUNT"
@@ -38,26 +38,29 @@ class GlobalActionAuth(str, Enum):
     TWO_FACTOR_AUTH = "TWO_FACTOR_AUTH"
 
 
-FormValuesTypedDict = TypeAliasType("FormValuesTypedDict", Union[str, bool, float])
+FormValuesRequestTypedDict = TypeAliasType(
+    "FormValuesRequestTypedDict", Union[str, bool, float]
+)
 
 
-FormValues = TypeAliasType("FormValues", Union[str, bool, float])
+FormValuesRequest = TypeAliasType("FormValuesRequest", Union[str, bool, float])
 
 
-class Role(str, Enum):
+class RoleAccount(str, Enum):
     CC = "CC"
     SIGNER = "SIGNER"
     VIEWER = "VIEWER"
     APPROVER = "APPROVER"
+    ASSISTANT = "ASSISTANT"
 
 
-class AccessAuth(str, Enum):
+class DocumentCreateDocumentTemporaryAccessAuthRequest(str, Enum):
     r"""The type of authentication required for the recipient to access the document."""
 
     ACCOUNT = "ACCOUNT"
 
 
-class ActionAuth(str, Enum):
+class ActionAuthAccount(str, Enum):
     r"""The type of authentication required for the recipient to sign the document."""
 
     ACCOUNT = "ACCOUNT"
@@ -66,42 +69,34 @@ class ActionAuth(str, Enum):
     EXPLICIT_NONE = "EXPLICIT_NONE"
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients11Type(
-    str, Enum
-):
+class TypeAccountDropdown1(str, Enum):
     DROPDOWN = "DROPDOWN"
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients11FieldMetaType(
-    str, Enum
-):
+class TypeAccountDropdown2(str, Enum):
     DROPDOWN = "dropdown"
 
 
-class DocumentCreateDocumentTemporaryFieldsValuesTypedDict(TypedDict):
+class ValueAccountDropdownTypedDict(TypedDict):
     value: str
 
 
-class DocumentCreateDocumentTemporaryFieldsValues(BaseModel):
+class ValueAccountDropdown(BaseModel):
     value: str
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients11FieldMetaTypedDict(
-    TypedDict
-):
-    type: DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients11FieldMetaType
+class FieldMetaAccountDropdownTypedDict(TypedDict):
+    type: TypeAccountDropdown2
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[List[DocumentCreateDocumentTemporaryFieldsValuesTypedDict]]
+    values: NotRequired[List[ValueAccountDropdownTypedDict]]
     default_value: NotRequired[str]
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients11FieldMeta(
-    BaseModel
-):
-    type: DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients11FieldMetaType
+class FieldMetaAccountDropdown(BaseModel):
+    type: TypeAccountDropdown2
 
     label: Optional[str] = None
 
@@ -111,15 +106,13 @@ class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[DocumentCreateDocumentTemporaryFieldsValues]] = None
+    values: Optional[List[ValueAccountDropdown]] = None
 
     default_value: Annotated[Optional[str], pydantic.Field(alias="defaultValue")] = None
 
 
-class ElevenTypedDict(TypedDict):
-    type: (
-        DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients11Type
-    )
+class FieldAccountDropdownTypedDict(TypedDict):
+    type: TypeAccountDropdown1
     page_number: float
     r"""The page number the field will be on."""
     page_x: float
@@ -130,15 +123,11 @@ class ElevenTypedDict(TypedDict):
     r"""The width of the field."""
     height: float
     r"""The height of the field."""
-    field_meta: NotRequired[
-        DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients11FieldMetaTypedDict
-    ]
+    field_meta: NotRequired[FieldMetaAccountDropdownTypedDict]
 
 
-class Eleven(BaseModel):
-    type: (
-        DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients11Type
-    )
+class FieldAccountDropdown(BaseModel):
+    type: TypeAccountDropdown1
 
     page_number: Annotated[float, pydantic.Field(alias="pageNumber")]
     r"""The page number the field will be on."""
@@ -156,32 +145,25 @@ class Eleven(BaseModel):
     r"""The height of the field."""
 
     field_meta: Annotated[
-        Optional[
-            DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients11FieldMeta
-        ],
-        pydantic.Field(alias="fieldMeta"),
+        Optional[FieldMetaAccountDropdown], pydantic.Field(alias="fieldMeta")
     ] = None
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients10Type(
-    str, Enum
-):
+class TypeAccountCheckbox1(str, Enum):
     CHECKBOX = "CHECKBOX"
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients10FieldMetaType(
-    str, Enum
-):
+class TypeAccountCheckbox2(str, Enum):
     CHECKBOX = "checkbox"
 
 
-class FieldsValuesTypedDict(TypedDict):
+class ValueAccountCheckboxTypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class FieldsValues(BaseModel):
+class ValueAccountCheckbox(BaseModel):
     id: float
 
     checked: bool
@@ -189,23 +171,19 @@ class FieldsValues(BaseModel):
     value: str
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients10FieldMetaTypedDict(
-    TypedDict
-):
-    type: DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients10FieldMetaType
+class FieldMetaAccountCheckboxTypedDict(TypedDict):
+    type: TypeAccountCheckbox2
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[List[FieldsValuesTypedDict]]
+    values: NotRequired[List[ValueAccountCheckboxTypedDict]]
     validation_rule: NotRequired[str]
     validation_length: NotRequired[float]
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients10FieldMeta(
-    BaseModel
-):
-    type: DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients10FieldMetaType
+class FieldMetaAccountCheckbox(BaseModel):
+    type: TypeAccountCheckbox2
 
     label: Optional[str] = None
 
@@ -215,7 +193,7 @@ class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[FieldsValues]] = None
+    values: Optional[List[ValueAccountCheckbox]] = None
 
     validation_rule: Annotated[
         Optional[str], pydantic.Field(alias="validationRule")
@@ -226,10 +204,8 @@ class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients
     ] = None
 
 
-class TenTypedDict(TypedDict):
-    type: (
-        DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients10Type
-    )
+class FieldAccountCheckboxTypedDict(TypedDict):
+    type: TypeAccountCheckbox1
     page_number: float
     r"""The page number the field will be on."""
     page_x: float
@@ -240,15 +216,11 @@ class TenTypedDict(TypedDict):
     r"""The width of the field."""
     height: float
     r"""The height of the field."""
-    field_meta: NotRequired[
-        DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients10FieldMetaTypedDict
-    ]
+    field_meta: NotRequired[FieldMetaAccountCheckboxTypedDict]
 
 
-class Ten(BaseModel):
-    type: (
-        DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients10Type
-    )
+class FieldAccountCheckbox(BaseModel):
+    type: TypeAccountCheckbox1
 
     page_number: Annotated[float, pydantic.Field(alias="pageNumber")]
     r"""The page number the field will be on."""
@@ -266,32 +238,25 @@ class Ten(BaseModel):
     r"""The height of the field."""
 
     field_meta: Annotated[
-        Optional[
-            DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients10FieldMeta
-        ],
-        pydantic.Field(alias="fieldMeta"),
+        Optional[FieldMetaAccountCheckbox], pydantic.Field(alias="fieldMeta")
     ] = None
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients9Type(
-    str, Enum
-):
+class TypeAccountRadio1(str, Enum):
     RADIO = "RADIO"
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients9FieldMetaType(
-    str, Enum
-):
+class TypeAccountRadio2(str, Enum):
     RADIO = "radio"
 
 
-class ValuesTypedDict(TypedDict):
+class ValueAccountRadioTypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class Values(BaseModel):
+class ValueAccountRadio(BaseModel):
     id: float
 
     checked: bool
@@ -299,21 +264,17 @@ class Values(BaseModel):
     value: str
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipientsFieldMetaTypedDict(
-    TypedDict
-):
-    type: DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients9FieldMetaType
+class FieldMetaAccountRadioTypedDict(TypedDict):
+    type: TypeAccountRadio2
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[List[ValuesTypedDict]]
+    values: NotRequired[List[ValueAccountRadioTypedDict]]
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipientsFieldMeta(
-    BaseModel
-):
-    type: DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients9FieldMetaType
+class FieldMetaAccountRadio(BaseModel):
+    type: TypeAccountRadio2
 
     label: Optional[str] = None
 
@@ -323,13 +284,11 @@ class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[Values]] = None
+    values: Optional[List[ValueAccountRadio]] = None
 
 
-class NineTypedDict(TypedDict):
-    type: (
-        DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients9Type
-    )
+class FieldAccountRadioTypedDict(TypedDict):
+    type: TypeAccountRadio1
     page_number: float
     r"""The page number the field will be on."""
     page_x: float
@@ -340,15 +299,11 @@ class NineTypedDict(TypedDict):
     r"""The width of the field."""
     height: float
     r"""The height of the field."""
-    field_meta: NotRequired[
-        DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipientsFieldMetaTypedDict
-    ]
+    field_meta: NotRequired[FieldMetaAccountRadioTypedDict]
 
 
-class Nine(BaseModel):
-    type: (
-        DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients9Type
-    )
+class FieldAccountRadio(BaseModel):
+    type: TypeAccountRadio1
 
     page_number: Annotated[float, pydantic.Field(alias="pageNumber")]
     r"""The page number the field will be on."""
@@ -366,29 +321,26 @@ class Nine(BaseModel):
     r"""The height of the field."""
 
     field_meta: Annotated[
-        Optional[
-            DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipientsFieldMeta
-        ],
-        pydantic.Field(alias="fieldMeta"),
+        Optional[FieldMetaAccountRadio], pydantic.Field(alias="fieldMeta")
     ] = None
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients8Type(
-    str, Enum
-):
+class TypeAccountNumber1(str, Enum):
     NUMBER = "NUMBER"
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients8FieldMetaType(
-    str, Enum
-):
+class TypeAccountNumber2(str, Enum):
     NUMBER = "number"
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyFieldMetaTypedDict(
-    TypedDict
-):
-    type: DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients8FieldMetaType
+class TextAlignAccountNumber(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldMetaAccountNumberTypedDict(TypedDict):
+    type: TypeAccountNumber2
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -398,12 +350,11 @@ class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyFieldMetaT
     min_value: NotRequired[float]
     max_value: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[TextAlignAccountNumber]
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyFieldMeta(
-    BaseModel
-):
-    type: DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients8FieldMetaType
+class FieldMetaAccountNumber(BaseModel):
+    type: TypeAccountNumber2
 
     label: Optional[str] = None
 
@@ -423,11 +374,13 @@ class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyFieldMeta(
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[TextAlignAccountNumber], pydantic.Field(alias="textAlign")
+    ] = None
 
-class EightTypedDict(TypedDict):
-    type: (
-        DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients8Type
-    )
+
+class FieldAccountNumberTypedDict(TypedDict):
+    type: TypeAccountNumber1
     page_number: float
     r"""The page number the field will be on."""
     page_x: float
@@ -438,15 +391,11 @@ class EightTypedDict(TypedDict):
     r"""The width of the field."""
     height: float
     r"""The height of the field."""
-    field_meta: NotRequired[
-        DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyFieldMetaTypedDict
-    ]
+    field_meta: NotRequired[FieldMetaAccountNumberTypedDict]
 
 
-class Eight(BaseModel):
-    type: (
-        DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients8Type
-    )
+class FieldAccountNumber(BaseModel):
+    type: TypeAccountNumber1
 
     page_number: Annotated[float, pydantic.Field(alias="pageNumber")]
     r"""The page number the field will be on."""
@@ -464,29 +413,26 @@ class Eight(BaseModel):
     r"""The height of the field."""
 
     field_meta: Annotated[
-        Optional[
-            DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyFieldMeta
-        ],
-        pydantic.Field(alias="fieldMeta"),
+        Optional[FieldMetaAccountNumber], pydantic.Field(alias="fieldMeta")
     ] = None
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients7Type(
-    str, Enum
-):
+class TypeAccountText1(str, Enum):
     TEXT = "TEXT"
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients7FieldMetaType(
-    str, Enum
-):
+class TypeAccountText2(str, Enum):
     TEXT = "text"
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestFieldMetaTypedDict(
-    TypedDict
-):
-    type: DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients7FieldMetaType
+class TextAlignAccountText(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldMetaAccountTextTypedDict(TypedDict):
+    type: TypeAccountText2
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -494,10 +440,11 @@ class DocumentCreateDocumentTemporaryFieldsDocumentsRequestFieldMetaTypedDict(
     text: NotRequired[str]
     character_limit: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[TextAlignAccountText]
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestFieldMeta(BaseModel):
-    type: DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients7FieldMetaType
+class FieldMetaAccountText(BaseModel):
+    type: TypeAccountText2
 
     label: Optional[str] = None
 
@@ -515,11 +462,13 @@ class DocumentCreateDocumentTemporaryFieldsDocumentsRequestFieldMeta(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[TextAlignAccountText], pydantic.Field(alias="textAlign")
+    ] = None
 
-class SevenTypedDict(TypedDict):
-    type: (
-        DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients7Type
-    )
+
+class FieldAccountTextTypedDict(TypedDict):
+    type: TypeAccountText1
     page_number: float
     r"""The page number the field will be on."""
     page_x: float
@@ -530,15 +479,11 @@ class SevenTypedDict(TypedDict):
     r"""The width of the field."""
     height: float
     r"""The height of the field."""
-    field_meta: NotRequired[
-        DocumentCreateDocumentTemporaryFieldsDocumentsRequestFieldMetaTypedDict
-    ]
+    field_meta: NotRequired[FieldMetaAccountTextTypedDict]
 
 
-class Seven(BaseModel):
-    type: (
-        DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients7Type
-    )
+class FieldAccountText(BaseModel):
+    type: TypeAccountText1
 
     page_number: Annotated[float, pydantic.Field(alias="pageNumber")]
     r"""The page number the field will be on."""
@@ -556,34 +501,36 @@ class Seven(BaseModel):
     r"""The height of the field."""
 
     field_meta: Annotated[
-        Optional[DocumentCreateDocumentTemporaryFieldsDocumentsRequestFieldMeta],
-        pydantic.Field(alias="fieldMeta"),
+        Optional[FieldMetaAccountText], pydantic.Field(alias="fieldMeta")
     ] = None
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients6Type(
-    str, Enum
-):
+class TypeAccountDate1(str, Enum):
     DATE = "DATE"
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients6FieldMetaType(
-    str, Enum
-):
+class TypeAccountDate2(str, Enum):
     DATE = "date"
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsFieldMetaTypedDict(TypedDict):
-    type: DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients6FieldMetaType
+class TextAlignAccountDate(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldMetaAccountDateTypedDict(TypedDict):
+    type: TypeAccountDate2
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[TextAlignAccountDate]
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsFieldMeta(BaseModel):
-    type: DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients6FieldMetaType
+class FieldMetaAccountDate(BaseModel):
+    type: TypeAccountDate2
 
     label: Optional[str] = None
 
@@ -595,11 +542,13 @@ class DocumentCreateDocumentTemporaryFieldsDocumentsFieldMeta(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[TextAlignAccountDate], pydantic.Field(alias="textAlign")
+    ] = None
 
-class SixTypedDict(TypedDict):
-    type: (
-        DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients6Type
-    )
+
+class FieldAccountDateTypedDict(TypedDict):
+    type: TypeAccountDate1
     page_number: float
     r"""The page number the field will be on."""
     page_x: float
@@ -610,15 +559,11 @@ class SixTypedDict(TypedDict):
     r"""The width of the field."""
     height: float
     r"""The height of the field."""
-    field_meta: NotRequired[
-        DocumentCreateDocumentTemporaryFieldsDocumentsFieldMetaTypedDict
-    ]
+    field_meta: NotRequired[FieldMetaAccountDateTypedDict]
 
 
-class Six(BaseModel):
-    type: (
-        DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients6Type
-    )
+class FieldAccountDate(BaseModel):
+    type: TypeAccountDate1
 
     page_number: Annotated[float, pydantic.Field(alias="pageNumber")]
     r"""The page number the field will be on."""
@@ -636,38 +581,36 @@ class Six(BaseModel):
     r"""The height of the field."""
 
     field_meta: Annotated[
-        Optional[DocumentCreateDocumentTemporaryFieldsDocumentsFieldMeta],
-        pydantic.Field(alias="fieldMeta"),
+        Optional[FieldMetaAccountDate], pydantic.Field(alias="fieldMeta")
     ] = None
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipientsType(
-    str, Enum
-):
+class TypeAccountEmail1(str, Enum):
     EMAIL = "EMAIL"
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients5Type(
-    str, Enum
-):
+class TypeAccountEmail2(str, Enum):
     EMAIL = "email"
 
 
-class DocumentCreateDocumentTemporaryFieldsFieldMetaTypedDict(TypedDict):
-    type: (
-        DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients5Type
-    )
+class TextAlignAccountEmail(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldMetaAccountEmailTypedDict(TypedDict):
+    type: TypeAccountEmail2
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[TextAlignAccountEmail]
 
 
-class DocumentCreateDocumentTemporaryFieldsFieldMeta(BaseModel):
-    type: (
-        DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipients5Type
-    )
+class FieldMetaAccountEmail(BaseModel):
+    type: TypeAccountEmail2
 
     label: Optional[str] = None
 
@@ -679,9 +622,13 @@ class DocumentCreateDocumentTemporaryFieldsFieldMeta(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[TextAlignAccountEmail], pydantic.Field(alias="textAlign")
+    ] = None
 
-class FiveTypedDict(TypedDict):
-    type: DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipientsType
+
+class FieldAccountEmailTypedDict(TypedDict):
+    type: TypeAccountEmail1
     page_number: float
     r"""The page number the field will be on."""
     page_x: float
@@ -692,11 +639,11 @@ class FiveTypedDict(TypedDict):
     r"""The width of the field."""
     height: float
     r"""The height of the field."""
-    field_meta: NotRequired[DocumentCreateDocumentTemporaryFieldsFieldMetaTypedDict]
+    field_meta: NotRequired[FieldMetaAccountEmailTypedDict]
 
 
-class Five(BaseModel):
-    type: DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyRecipientsType
+class FieldAccountEmail(BaseModel):
+    type: TypeAccountEmail1
 
     page_number: Annotated[float, pydantic.Field(alias="pageNumber")]
     r"""The page number the field will be on."""
@@ -714,30 +661,36 @@ class Five(BaseModel):
     r"""The height of the field."""
 
     field_meta: Annotated[
-        Optional[DocumentCreateDocumentTemporaryFieldsFieldMeta],
-        pydantic.Field(alias="fieldMeta"),
+        Optional[FieldMetaAccountEmail], pydantic.Field(alias="fieldMeta")
     ] = None
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestType(str, Enum):
+class TypeAccountName1(str, Enum):
     NAME = "NAME"
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyType(str, Enum):
+class TypeAccountName2(str, Enum):
     NAME = "name"
 
 
-class FieldsFieldMetaTypedDict(TypedDict):
-    type: DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyType
+class TextAlignAccountName(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldMetaAccountNameTypedDict(TypedDict):
+    type: TypeAccountName2
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[TextAlignAccountName]
 
 
-class FieldsFieldMeta(BaseModel):
-    type: DocumentCreateDocumentTemporaryFieldsDocumentsRequestRequestBodyType
+class FieldMetaAccountName(BaseModel):
+    type: TypeAccountName2
 
     label: Optional[str] = None
 
@@ -749,9 +702,13 @@ class FieldsFieldMeta(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[TextAlignAccountName], pydantic.Field(alias="textAlign")
+    ] = None
 
-class FourTypedDict(TypedDict):
-    type: DocumentCreateDocumentTemporaryFieldsDocumentsRequestType
+
+class FieldAccountNameTypedDict(TypedDict):
+    type: TypeAccountName1
     page_number: float
     r"""The page number the field will be on."""
     page_x: float
@@ -762,11 +719,11 @@ class FourTypedDict(TypedDict):
     r"""The width of the field."""
     height: float
     r"""The height of the field."""
-    field_meta: NotRequired[FieldsFieldMetaTypedDict]
+    field_meta: NotRequired[FieldMetaAccountNameTypedDict]
 
 
-class Four(BaseModel):
-    type: DocumentCreateDocumentTemporaryFieldsDocumentsRequestType
+class FieldAccountName(BaseModel):
+    type: TypeAccountName1
 
     page_number: Annotated[float, pydantic.Field(alias="pageNumber")]
     r"""The page number the field will be on."""
@@ -784,29 +741,36 @@ class Four(BaseModel):
     r"""The height of the field."""
 
     field_meta: Annotated[
-        Optional[FieldsFieldMeta], pydantic.Field(alias="fieldMeta")
+        Optional[FieldMetaAccountName], pydantic.Field(alias="fieldMeta")
     ] = None
 
 
-class DocumentCreateDocumentTemporaryFieldsType(str, Enum):
+class TypeAccountInitials1(str, Enum):
     INITIALS = "INITIALS"
 
 
-class DocumentCreateDocumentTemporaryFieldsDocumentsType(str, Enum):
+class TypeAccountInitials2(str, Enum):
     INITIALS = "initials"
 
 
-class FieldMetaTypedDict(TypedDict):
-    type: DocumentCreateDocumentTemporaryFieldsDocumentsType
+class TextAlignAccountInitials(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldMetaAccountInitialsTypedDict(TypedDict):
+    type: TypeAccountInitials2
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[TextAlignAccountInitials]
 
 
-class FieldMeta(BaseModel):
-    type: DocumentCreateDocumentTemporaryFieldsDocumentsType
+class FieldMetaAccountInitials(BaseModel):
+    type: TypeAccountInitials2
 
     label: Optional[str] = None
 
@@ -818,9 +782,13 @@ class FieldMeta(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[TextAlignAccountInitials], pydantic.Field(alias="textAlign")
+    ] = None
 
-class ThreeTypedDict(TypedDict):
-    type: DocumentCreateDocumentTemporaryFieldsType
+
+class FieldAccountInitialsTypedDict(TypedDict):
+    type: TypeAccountInitials1
     page_number: float
     r"""The page number the field will be on."""
     page_x: float
@@ -831,11 +799,11 @@ class ThreeTypedDict(TypedDict):
     r"""The width of the field."""
     height: float
     r"""The height of the field."""
-    field_meta: NotRequired[FieldMetaTypedDict]
+    field_meta: NotRequired[FieldMetaAccountInitialsTypedDict]
 
 
-class Three(BaseModel):
-    type: DocumentCreateDocumentTemporaryFieldsType
+class FieldAccountInitials(BaseModel):
+    type: TypeAccountInitials1
 
     page_number: Annotated[float, pydantic.Field(alias="pageNumber")]
     r"""The page number the field will be on."""
@@ -852,15 +820,17 @@ class Three(BaseModel):
     height: float
     r"""The height of the field."""
 
-    field_meta: Annotated[Optional[FieldMeta], pydantic.Field(alias="fieldMeta")] = None
+    field_meta: Annotated[
+        Optional[FieldMetaAccountInitials], pydantic.Field(alias="fieldMeta")
+    ] = None
 
 
-class FieldsType(str, Enum):
+class TypeAccountFreeSignature(str, Enum):
     FREE_SIGNATURE = "FREE_SIGNATURE"
 
 
-class TwoTypedDict(TypedDict):
-    type: FieldsType
+class FieldAccountFreeSignatureTypedDict(TypedDict):
+    type: TypeAccountFreeSignature
     page_number: float
     r"""The page number the field will be on."""
     page_x: float
@@ -873,8 +843,8 @@ class TwoTypedDict(TypedDict):
     r"""The height of the field."""
 
 
-class Two(BaseModel):
-    type: FieldsType
+class FieldAccountFreeSignature(BaseModel):
+    type: TypeAccountFreeSignature
 
     page_number: Annotated[float, pydantic.Field(alias="pageNumber")]
     r"""The page number the field will be on."""
@@ -892,12 +862,12 @@ class Two(BaseModel):
     r"""The height of the field."""
 
 
-class Type(str, Enum):
+class TypeAccountSignature(str, Enum):
     SIGNATURE = "SIGNATURE"
 
 
-class OneTypedDict(TypedDict):
-    type: Type
+class FieldAccountSignatureTypedDict(TypedDict):
+    type: TypeAccountSignature
     page_number: float
     r"""The page number the field will be on."""
     page_x: float
@@ -910,8 +880,8 @@ class OneTypedDict(TypedDict):
     r"""The height of the field."""
 
 
-class One(BaseModel):
-    type: Type
+class FieldAccountSignature(BaseModel):
+    type: TypeAccountSignature
 
     page_number: Annotated[float, pydantic.Field(alias="pageNumber")]
     r"""The page number the field will be on."""
@@ -929,64 +899,77 @@ class One(BaseModel):
     r"""The height of the field."""
 
 
-DocumentCreateDocumentTemporaryFieldsTypedDict = TypeAliasType(
-    "DocumentCreateDocumentTemporaryFieldsTypedDict",
+FieldAccountUnionTypedDict = TypeAliasType(
+    "FieldAccountUnionTypedDict",
     Union[
-        OneTypedDict,
-        TwoTypedDict,
-        ThreeTypedDict,
-        FourTypedDict,
-        FiveTypedDict,
-        SixTypedDict,
-        SevenTypedDict,
-        EightTypedDict,
-        NineTypedDict,
-        TenTypedDict,
-        ElevenTypedDict,
+        FieldAccountSignatureTypedDict,
+        FieldAccountFreeSignatureTypedDict,
+        FieldAccountInitialsTypedDict,
+        FieldAccountNameTypedDict,
+        FieldAccountEmailTypedDict,
+        FieldAccountDateTypedDict,
+        FieldAccountTextTypedDict,
+        FieldAccountNumberTypedDict,
+        FieldAccountRadioTypedDict,
+        FieldAccountCheckboxTypedDict,
+        FieldAccountDropdownTypedDict,
     ],
 )
 
 
-DocumentCreateDocumentTemporaryFields = TypeAliasType(
-    "DocumentCreateDocumentTemporaryFields",
-    Union[One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Eleven],
+FieldAccountUnion = TypeAliasType(
+    "FieldAccountUnion",
+    Union[
+        FieldAccountSignature,
+        FieldAccountFreeSignature,
+        FieldAccountInitials,
+        FieldAccountName,
+        FieldAccountEmail,
+        FieldAccountDate,
+        FieldAccountText,
+        FieldAccountNumber,
+        FieldAccountRadio,
+        FieldAccountCheckbox,
+        FieldAccountDropdown,
+    ],
 )
 
 
-class DocumentCreateDocumentTemporaryRecipientsTypedDict(TypedDict):
+class RecipientAccountTypedDict(TypedDict):
     email: str
     name: str
-    role: Role
+    role: RoleAccount
     signing_order: NotRequired[float]
-    access_auth: NotRequired[Nullable[AccessAuth]]
+    access_auth: NotRequired[Nullable[DocumentCreateDocumentTemporaryAccessAuthRequest]]
     r"""The type of authentication required for the recipient to access the document."""
-    action_auth: NotRequired[Nullable[ActionAuth]]
+    action_auth: NotRequired[Nullable[ActionAuthAccount]]
     r"""The type of authentication required for the recipient to sign the document."""
-    fields: NotRequired[List[DocumentCreateDocumentTemporaryFieldsTypedDict]]
+    fields: NotRequired[List[FieldAccountUnionTypedDict]]
 
 
-class DocumentCreateDocumentTemporaryRecipients(BaseModel):
+class RecipientAccount(BaseModel):
     email: str
 
     name: str
 
-    role: Role
+    role: RoleAccount
 
     signing_order: Annotated[Optional[float], pydantic.Field(alias="signingOrder")] = (
         None
     )
 
     access_auth: Annotated[
-        OptionalNullable[AccessAuth], pydantic.Field(alias="accessAuth")
+        OptionalNullable[DocumentCreateDocumentTemporaryAccessAuthRequest],
+        pydantic.Field(alias="accessAuth"),
     ] = UNSET
     r"""The type of authentication required for the recipient to access the document."""
 
     action_auth: Annotated[
-        OptionalNullable[ActionAuth], pydantic.Field(alias="actionAuth")
+        OptionalNullable[ActionAuthAccount], pydantic.Field(alias="actionAuth")
     ] = UNSET
     r"""The type of authentication required for the recipient to sign the document."""
 
-    fields: Optional[List[DocumentCreateDocumentTemporaryFields]] = None
+    fields: Optional[List[FieldAccountUnion]] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -998,7 +981,7 @@ class DocumentCreateDocumentTemporaryRecipients(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -1019,7 +1002,7 @@ class DocumentCreateDocumentTemporaryRecipients(BaseModel):
         return m
 
 
-class DateFormat(str, Enum):
+class DocumentCreateDocumentTemporaryDateFormat(str, Enum):
     r"""The date format to use for date fields and signing the document."""
 
     YYYY_MM_DD_HH_MM_A = "yyyy-MM-dd hh:mm a"
@@ -1034,28 +1017,30 @@ class DateFormat(str, Enum):
     YYYY_MM_DD_T_HH_MM_SS_SSSXXX = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
 
 
-class DistributionMethod(str, Enum):
+class DistributionMethodAccount(str, Enum):
     r"""The distribution method to use when sending the document to the recipients."""
 
     EMAIL = "EMAIL"
     NONE = "NONE"
 
 
-class SigningOrder(str, Enum):
+class SigningOrderAccount(str, Enum):
     PARALLEL = "PARALLEL"
     SEQUENTIAL = "SEQUENTIAL"
 
 
-class Language(str, Enum):
+class DocumentCreateDocumentTemporaryLanguage(str, Enum):
     r"""The language to use for email communications with recipients."""
 
     DE = "de"
     EN = "en"
     FR = "fr"
     ES = "es"
+    IT = "it"
+    PL = "pl"
 
 
-class EmailSettingsTypedDict(TypedDict):
+class EmailSettingsAccountTypedDict(TypedDict):
     recipient_signing_request: NotRequired[bool]
     r"""Whether to send an email to all recipients that the document is ready for them to sign."""
     recipient_removed: NotRequired[bool]
@@ -1072,7 +1057,7 @@ class EmailSettingsTypedDict(TypedDict):
     r"""Whether to send an email to the document owner when the document is complete."""
 
 
-class EmailSettings(BaseModel):
+class EmailSettingsAccount(BaseModel):
     recipient_signing_request: Annotated[
         Optional[bool], pydantic.Field(alias="recipientSigningRequest")
     ] = True
@@ -1109,28 +1094,32 @@ class EmailSettings(BaseModel):
     r"""Whether to send an email to the document owner when the document is complete."""
 
 
-class MetaTypedDict(TypedDict):
+class DocumentCreateDocumentTemporaryMetaTypedDict(TypedDict):
     subject: NotRequired[str]
     r"""The subject of the email that will be sent to the recipients."""
     message: NotRequired[str]
     r"""The message of the email that will be sent to the recipients."""
     timezone: NotRequired[str]
     r"""The timezone to use for date fields and signing the document. Example Etc/UTC, Australia/Melbourne"""
-    date_format: NotRequired[DateFormat]
+    date_format: NotRequired[DocumentCreateDocumentTemporaryDateFormat]
     r"""The date format to use for date fields and signing the document."""
-    distribution_method: NotRequired[DistributionMethod]
+    distribution_method: NotRequired[DistributionMethodAccount]
     r"""The distribution method to use when sending the document to the recipients."""
-    signing_order: NotRequired[SigningOrder]
+    signing_order: NotRequired[SigningOrderAccount]
     redirect_url: NotRequired[str]
     r"""The URL to which the recipient should be redirected after signing the document."""
-    language: NotRequired[Language]
+    language: NotRequired[DocumentCreateDocumentTemporaryLanguage]
     r"""The language to use for email communications with recipients."""
     typed_signature_enabled: NotRequired[bool]
     r"""Whether to allow recipients to sign using a typed signature."""
-    email_settings: NotRequired[EmailSettingsTypedDict]
+    draw_signature_enabled: NotRequired[bool]
+    r"""Whether to allow recipients to sign using a draw signature."""
+    upload_signature_enabled: NotRequired[bool]
+    r"""Whether to allow recipients to sign using an uploaded signature."""
+    email_settings: NotRequired[EmailSettingsAccountTypedDict]
 
 
-class Meta(BaseModel):
+class DocumentCreateDocumentTemporaryMeta(BaseModel):
     subject: Optional[str] = None
     r"""The subject of the email that will be sent to the recipients."""
 
@@ -1140,24 +1129,25 @@ class Meta(BaseModel):
     timezone: Optional[str] = None
     r"""The timezone to use for date fields and signing the document. Example Etc/UTC, Australia/Melbourne"""
 
-    date_format: Annotated[Optional[DateFormat], pydantic.Field(alias="dateFormat")] = (
-        None
-    )
+    date_format: Annotated[
+        Optional[DocumentCreateDocumentTemporaryDateFormat],
+        pydantic.Field(alias="dateFormat"),
+    ] = None
     r"""The date format to use for date fields and signing the document."""
 
     distribution_method: Annotated[
-        Optional[DistributionMethod], pydantic.Field(alias="distributionMethod")
+        Optional[DistributionMethodAccount], pydantic.Field(alias="distributionMethod")
     ] = None
     r"""The distribution method to use when sending the document to the recipients."""
 
     signing_order: Annotated[
-        Optional[SigningOrder], pydantic.Field(alias="signingOrder")
+        Optional[SigningOrderAccount], pydantic.Field(alias="signingOrder")
     ] = None
 
     redirect_url: Annotated[Optional[str], pydantic.Field(alias="redirectUrl")] = None
     r"""The URL to which the recipient should be redirected after signing the document."""
 
-    language: Optional[Language] = None
+    language: Optional[DocumentCreateDocumentTemporaryLanguage] = None
     r"""The language to use for email communications with recipients."""
 
     typed_signature_enabled: Annotated[
@@ -1165,119 +1155,132 @@ class Meta(BaseModel):
     ] = None
     r"""Whether to allow recipients to sign using a typed signature."""
 
+    draw_signature_enabled: Annotated[
+        Optional[bool], pydantic.Field(alias="drawSignatureEnabled")
+    ] = None
+    r"""Whether to allow recipients to sign using a draw signature."""
+
+    upload_signature_enabled: Annotated[
+        Optional[bool], pydantic.Field(alias="uploadSignatureEnabled")
+    ] = None
+    r"""Whether to allow recipients to sign using an uploaded signature."""
+
     email_settings: Annotated[
-        Optional[EmailSettings], pydantic.Field(alias="emailSettings")
+        Optional[EmailSettingsAccount], pydantic.Field(alias="emailSettings")
     ] = None
 
 
-class DocumentCreateDocumentTemporaryRequestBodyTypedDict(TypedDict):
+class DocumentCreateDocumentTemporaryRequestTypedDict(TypedDict):
     title: str
     r"""The title of the document."""
     external_id: NotRequired[str]
     r"""The external ID of the document."""
-    visibility: NotRequired[Visibility]
+    visibility: NotRequired[VisibilityAccount]
     r"""The visibility of the document."""
-    global_access_auth: NotRequired[GlobalAccessAuth]
+    global_access_auth: NotRequired[
+        DocumentCreateDocumentTemporaryGlobalAccessAuthRequest
+    ]
     r"""The type of authentication required for the recipient to access the document."""
-    global_action_auth: NotRequired[GlobalActionAuth]
+    global_action_auth: NotRequired[GlobalActionAuthAccount]
     r"""The type of authentication required for the recipient to sign the document. This field is restricted to Enterprise plan users only."""
-    form_values: NotRequired[Dict[str, FormValuesTypedDict]]
-    recipients: NotRequired[List[DocumentCreateDocumentTemporaryRecipientsTypedDict]]
-    meta: NotRequired[MetaTypedDict]
+    form_values: NotRequired[Dict[str, FormValuesRequestTypedDict]]
+    recipients: NotRequired[List[RecipientAccountTypedDict]]
+    meta: NotRequired[DocumentCreateDocumentTemporaryMetaTypedDict]
 
 
-class DocumentCreateDocumentTemporaryRequestBody(BaseModel):
+class DocumentCreateDocumentTemporaryRequest(BaseModel):
     title: str
     r"""The title of the document."""
 
     external_id: Annotated[Optional[str], pydantic.Field(alias="externalId")] = None
     r"""The external ID of the document."""
 
-    visibility: Optional[Visibility] = None
+    visibility: Optional[VisibilityAccount] = None
     r"""The visibility of the document."""
 
     global_access_auth: Annotated[
-        Optional[GlobalAccessAuth], pydantic.Field(alias="globalAccessAuth")
+        Optional[DocumentCreateDocumentTemporaryGlobalAccessAuthRequest],
+        pydantic.Field(alias="globalAccessAuth"),
     ] = None
     r"""The type of authentication required for the recipient to access the document."""
 
     global_action_auth: Annotated[
-        Optional[GlobalActionAuth], pydantic.Field(alias="globalActionAuth")
+        Optional[GlobalActionAuthAccount], pydantic.Field(alias="globalActionAuth")
     ] = None
     r"""The type of authentication required for the recipient to sign the document. This field is restricted to Enterprise plan users only."""
 
     form_values: Annotated[
-        Optional[Dict[str, FormValues]], pydantic.Field(alias="formValues")
+        Optional[Dict[str, FormValuesRequest]], pydantic.Field(alias="formValues")
     ] = None
 
-    recipients: Optional[List[DocumentCreateDocumentTemporaryRecipients]] = None
+    recipients: Optional[List[RecipientAccount]] = None
 
-    meta: Optional[Meta] = None
+    meta: Optional[DocumentCreateDocumentTemporaryMeta] = None
 
 
-class DocumentCreateDocumentTemporaryDocumentsIssuesTypedDict(TypedDict):
+class DocumentCreateDocumentTemporaryInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class DocumentCreateDocumentTemporaryDocumentsIssues(BaseModel):
+class DocumentCreateDocumentTemporaryInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class DocumentCreateDocumentTemporaryDocumentsResponseResponseBodyData(BaseModel):
+class DocumentCreateDocumentTemporaryInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[DocumentCreateDocumentTemporaryDocumentsIssues]] = None
+    issues: Optional[List[DocumentCreateDocumentTemporaryInternalServerErrorIssue]] = (
+        None
+    )
 
 
-class DocumentCreateDocumentTemporaryDocumentsResponseResponseBody(Exception):
+class DocumentCreateDocumentTemporaryInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: DocumentCreateDocumentTemporaryDocumentsResponseResponseBodyData
+    data: DocumentCreateDocumentTemporaryInternalServerErrorData
 
-    def __init__(
-        self, data: DocumentCreateDocumentTemporaryDocumentsResponseResponseBodyData
-    ):
+    def __init__(self, data: DocumentCreateDocumentTemporaryInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, DocumentCreateDocumentTemporaryDocumentsResponseResponseBodyData
+            self.data, DocumentCreateDocumentTemporaryInternalServerErrorData
         )
 
 
-class DocumentCreateDocumentTemporaryIssuesTypedDict(TypedDict):
+class DocumentCreateDocumentTemporaryBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class DocumentCreateDocumentTemporaryIssues(BaseModel):
+class DocumentCreateDocumentTemporaryBadRequestIssue(BaseModel):
     message: str
 
 
-class DocumentCreateDocumentTemporaryDocumentsResponseBodyData(BaseModel):
+class DocumentCreateDocumentTemporaryBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[DocumentCreateDocumentTemporaryIssues]] = None
+    issues: Optional[List[DocumentCreateDocumentTemporaryBadRequestIssue]] = None
 
 
-class DocumentCreateDocumentTemporaryDocumentsResponseBody(Exception):
+class DocumentCreateDocumentTemporaryBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: DocumentCreateDocumentTemporaryDocumentsResponseBodyData
+    data: DocumentCreateDocumentTemporaryBadRequestErrorData
 
-    def __init__(self, data: DocumentCreateDocumentTemporaryDocumentsResponseBodyData):
+    def __init__(self, data: DocumentCreateDocumentTemporaryBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, DocumentCreateDocumentTemporaryDocumentsResponseBodyData
+            self.data, DocumentCreateDocumentTemporaryBadRequestErrorData
         )
 
 
-class DocumentCreateDocumentTemporaryVisibility(str, Enum):
+class DocumentVisibility(str, Enum):
     EVERYONE = "EVERYONE"
     MANAGER_AND_ABOVE = "MANAGER_AND_ABOVE"
     ADMIN = "ADMIN"
@@ -1287,6 +1290,7 @@ class DocumentCreateDocumentTemporaryStatus(str, Enum):
     DRAFT = "DRAFT"
     PENDING = "PENDING"
     COMPLETED = "COMPLETED"
+    REJECTED = "REJECTED"
 
 
 class DocumentCreateDocumentTemporarySource(str, Enum):
@@ -1295,13 +1299,13 @@ class DocumentCreateDocumentTemporarySource(str, Enum):
     TEMPLATE_DIRECT_LINK = "TEMPLATE_DIRECT_LINK"
 
 
-class DocumentCreateDocumentTemporaryGlobalAccessAuth(str, Enum):
+class DocumentGlobalAccessAuth(str, Enum):
     r"""The type of authentication required for the recipient to access the document."""
 
     ACCOUNT = "ACCOUNT"
 
 
-class DocumentCreateDocumentTemporaryGlobalActionAuth(str, Enum):
+class DocumentGlobalActionAuth(str, Enum):
     r"""The type of authentication required for the recipient to sign the document. This field is restricted to Enterprise plan users only."""
 
     ACCOUNT = "ACCOUNT"
@@ -1310,22 +1314,20 @@ class DocumentCreateDocumentTemporaryGlobalActionAuth(str, Enum):
 
 
 class DocumentCreateDocumentTemporaryAuthOptionsTypedDict(TypedDict):
-    global_access_auth: Nullable[DocumentCreateDocumentTemporaryGlobalAccessAuth]
+    global_access_auth: Nullable[DocumentGlobalAccessAuth]
     r"""The type of authentication required for the recipient to access the document."""
-    global_action_auth: Nullable[DocumentCreateDocumentTemporaryGlobalActionAuth]
+    global_action_auth: Nullable[DocumentGlobalActionAuth]
     r"""The type of authentication required for the recipient to sign the document. This field is restricted to Enterprise plan users only."""
 
 
 class DocumentCreateDocumentTemporaryAuthOptions(BaseModel):
     global_access_auth: Annotated[
-        Nullable[DocumentCreateDocumentTemporaryGlobalAccessAuth],
-        pydantic.Field(alias="globalAccessAuth"),
+        Nullable[DocumentGlobalAccessAuth], pydantic.Field(alias="globalAccessAuth")
     ]
     r"""The type of authentication required for the recipient to access the document."""
 
     global_action_auth: Annotated[
-        Nullable[DocumentCreateDocumentTemporaryGlobalActionAuth],
-        pydantic.Field(alias="globalActionAuth"),
+        Nullable[DocumentGlobalActionAuth], pydantic.Field(alias="globalActionAuth")
     ]
     r"""The type of authentication required for the recipient to sign the document. This field is restricted to Enterprise plan users only."""
 
@@ -1339,7 +1341,7 @@ class DocumentCreateDocumentTemporaryAuthOptions(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -1360,31 +1362,29 @@ class DocumentCreateDocumentTemporaryAuthOptions(BaseModel):
         return m
 
 
-DocumentCreateDocumentTemporaryFormValuesTypedDict = TypeAliasType(
-    "DocumentCreateDocumentTemporaryFormValuesTypedDict", Union[str, bool, float]
+DocumentFormValuesTypedDict = TypeAliasType(
+    "DocumentFormValuesTypedDict", Union[str, bool, float]
 )
 
 
-DocumentCreateDocumentTemporaryFormValues = TypeAliasType(
-    "DocumentCreateDocumentTemporaryFormValues", Union[str, bool, float]
-)
+DocumentFormValues = TypeAliasType("DocumentFormValues", Union[str, bool, float])
 
 
-class DocumentCreateDocumentTemporaryType(str, Enum):
+class DocumentDocumentDataType(str, Enum):
     S3_PATH = "S3_PATH"
     BYTES = "BYTES"
     BYTES_64 = "BYTES_64"
 
 
 class DocumentCreateDocumentTemporaryDocumentDataTypedDict(TypedDict):
-    type: DocumentCreateDocumentTemporaryType
+    type: DocumentDocumentDataType
     id: str
     data: str
     initial_data: str
 
 
 class DocumentCreateDocumentTemporaryDocumentData(BaseModel):
-    type: DocumentCreateDocumentTemporaryType
+    type: DocumentDocumentDataType
 
     id: str
 
@@ -1393,17 +1393,17 @@ class DocumentCreateDocumentTemporaryDocumentData(BaseModel):
     initial_data: Annotated[str, pydantic.Field(alias="initialData")]
 
 
-class DocumentCreateDocumentTemporarySigningOrder(str, Enum):
+class DocumentSigningOrder(str, Enum):
     PARALLEL = "PARALLEL"
     SEQUENTIAL = "SEQUENTIAL"
 
 
-class DocumentCreateDocumentTemporaryDistributionMethod(str, Enum):
+class DocumentDistributionMethod(str, Enum):
     EMAIL = "EMAIL"
     NONE = "NONE"
 
 
-class DocumentCreateDocumentTemporaryEmailSettingsTypedDict(TypedDict):
+class DocumentEmailSettingsTypedDict(TypedDict):
     recipient_signing_request: NotRequired[bool]
     r"""Whether to send an email to all recipients that the document is ready for them to sign."""
     recipient_removed: NotRequired[bool]
@@ -1420,7 +1420,7 @@ class DocumentCreateDocumentTemporaryEmailSettingsTypedDict(TypedDict):
     r"""Whether to send an email to the document owner when the document is complete."""
 
 
-class DocumentCreateDocumentTemporaryEmailSettings(BaseModel):
+class DocumentEmailSettings(BaseModel):
     recipient_signing_request: Annotated[
         Optional[bool], pydantic.Field(alias="recipientSigningRequest")
     ] = True
@@ -1458,30 +1458,29 @@ class DocumentCreateDocumentTemporaryEmailSettings(BaseModel):
 
 
 class DocumentCreateDocumentTemporaryDocumentMetaTypedDict(TypedDict):
-    signing_order: DocumentCreateDocumentTemporarySigningOrder
-    distribution_method: DocumentCreateDocumentTemporaryDistributionMethod
+    signing_order: DocumentSigningOrder
+    distribution_method: DocumentDistributionMethod
     id: str
     subject: Nullable[str]
     message: Nullable[str]
     timezone: Nullable[str]
     password: Nullable[str]
     date_format: Nullable[str]
-    document_id: int
+    document_id: float
     redirect_url: Nullable[str]
     typed_signature_enabled: bool
+    upload_signature_enabled: bool
+    draw_signature_enabled: bool
+    allow_dictate_next_signer: bool
     language: str
-    email_settings: Nullable[DocumentCreateDocumentTemporaryEmailSettingsTypedDict]
+    email_settings: Nullable[DocumentEmailSettingsTypedDict]
 
 
 class DocumentCreateDocumentTemporaryDocumentMeta(BaseModel):
-    signing_order: Annotated[
-        DocumentCreateDocumentTemporarySigningOrder,
-        pydantic.Field(alias="signingOrder"),
-    ]
+    signing_order: Annotated[DocumentSigningOrder, pydantic.Field(alias="signingOrder")]
 
     distribution_method: Annotated[
-        DocumentCreateDocumentTemporaryDistributionMethod,
-        pydantic.Field(alias="distributionMethod"),
+        DocumentDistributionMethod, pydantic.Field(alias="distributionMethod")
     ]
 
     id: str
@@ -1496,7 +1495,7 @@ class DocumentCreateDocumentTemporaryDocumentMeta(BaseModel):
 
     date_format: Annotated[Nullable[str], pydantic.Field(alias="dateFormat")]
 
-    document_id: Annotated[int, pydantic.Field(alias="documentId")]
+    document_id: Annotated[float, pydantic.Field(alias="documentId")]
 
     redirect_url: Annotated[Nullable[str], pydantic.Field(alias="redirectUrl")]
 
@@ -1504,11 +1503,22 @@ class DocumentCreateDocumentTemporaryDocumentMeta(BaseModel):
         bool, pydantic.Field(alias="typedSignatureEnabled")
     ]
 
+    upload_signature_enabled: Annotated[
+        bool, pydantic.Field(alias="uploadSignatureEnabled")
+    ]
+
+    draw_signature_enabled: Annotated[
+        bool, pydantic.Field(alias="drawSignatureEnabled")
+    ]
+
+    allow_dictate_next_signer: Annotated[
+        bool, pydantic.Field(alias="allowDictateNextSigner")
+    ]
+
     language: str
 
     email_settings: Annotated[
-        Nullable[DocumentCreateDocumentTemporaryEmailSettings],
-        pydantic.Field(alias="emailSettings"),
+        Nullable[DocumentEmailSettings], pydantic.Field(alias="emailSettings")
     ]
 
     @model_serializer(mode="wrap")
@@ -1529,7 +1539,7 @@ class DocumentCreateDocumentTemporaryDocumentMeta(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -1550,11 +1560,12 @@ class DocumentCreateDocumentTemporaryDocumentMeta(BaseModel):
         return m
 
 
-class DocumentCreateDocumentTemporaryRole(str, Enum):
+class DocumentRole(str, Enum):
     CC = "CC"
     SIGNER = "SIGNER"
     VIEWER = "VIEWER"
     APPROVER = "APPROVER"
+    ASSISTANT = "ASSISTANT"
 
 
 class DocumentCreateDocumentTemporaryReadStatus(str, Enum):
@@ -1573,13 +1584,13 @@ class DocumentCreateDocumentTemporarySendStatus(str, Enum):
     SENT = "SENT"
 
 
-class DocumentCreateDocumentTemporaryAccessAuth(str, Enum):
+class DocumentAccessAuth(str, Enum):
     r"""The type of authentication required for the recipient to access the document."""
 
     ACCOUNT = "ACCOUNT"
 
 
-class DocumentCreateDocumentTemporaryActionAuth(str, Enum):
+class DocumentActionAuth(str, Enum):
     r"""The type of authentication required for the recipient to sign the document."""
 
     ACCOUNT = "ACCOUNT"
@@ -1588,23 +1599,21 @@ class DocumentCreateDocumentTemporaryActionAuth(str, Enum):
     EXPLICIT_NONE = "EXPLICIT_NONE"
 
 
-class DocumentCreateDocumentTemporaryDocumentsAuthOptionsTypedDict(TypedDict):
-    access_auth: Nullable[DocumentCreateDocumentTemporaryAccessAuth]
+class DocumentCreateDocumentTemporaryRecipientAuthOptionsTypedDict(TypedDict):
+    access_auth: Nullable[DocumentAccessAuth]
     r"""The type of authentication required for the recipient to access the document."""
-    action_auth: Nullable[DocumentCreateDocumentTemporaryActionAuth]
+    action_auth: Nullable[DocumentActionAuth]
     r"""The type of authentication required for the recipient to sign the document."""
 
 
-class DocumentCreateDocumentTemporaryDocumentsAuthOptions(BaseModel):
+class DocumentCreateDocumentTemporaryRecipientAuthOptions(BaseModel):
     access_auth: Annotated[
-        Nullable[DocumentCreateDocumentTemporaryAccessAuth],
-        pydantic.Field(alias="accessAuth"),
+        Nullable[DocumentAccessAuth], pydantic.Field(alias="accessAuth")
     ]
     r"""The type of authentication required for the recipient to access the document."""
 
     action_auth: Annotated[
-        Nullable[DocumentCreateDocumentTemporaryActionAuth],
-        pydantic.Field(alias="actionAuth"),
+        Nullable[DocumentActionAuth], pydantic.Field(alias="actionAuth")
     ]
     r"""The type of authentication required for the recipient to sign the document."""
 
@@ -1618,7 +1627,7 @@ class DocumentCreateDocumentTemporaryDocumentsAuthOptions(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -1639,28 +1648,28 @@ class DocumentCreateDocumentTemporaryDocumentsAuthOptions(BaseModel):
         return m
 
 
-class DocumentCreateDocumentTemporaryDocumentsRecipientsTypedDict(TypedDict):
-    role: DocumentCreateDocumentTemporaryRole
+class DocumentRecipientTypedDict(TypedDict):
+    role: DocumentRole
     read_status: DocumentCreateDocumentTemporaryReadStatus
     signing_status: DocumentCreateDocumentTemporarySigningStatus
     send_status: DocumentCreateDocumentTemporarySendStatus
-    id: int
-    document_id: Nullable[int]
-    template_id: Nullable[int]
+    id: float
+    document_id: Nullable[float]
+    template_id: Nullable[float]
     email: str
     name: str
     token: str
     document_deleted_at: Nullable[str]
     expired: Nullable[str]
     signed_at: Nullable[str]
-    auth_options: Nullable[DocumentCreateDocumentTemporaryDocumentsAuthOptionsTypedDict]
+    auth_options: Nullable[DocumentCreateDocumentTemporaryRecipientAuthOptionsTypedDict]
     signing_order: Nullable[float]
     r"""The order in which the recipient should sign the document. Only works if the document is set to sequential signing."""
     rejection_reason: Nullable[str]
 
 
-class DocumentCreateDocumentTemporaryDocumentsRecipients(BaseModel):
-    role: DocumentCreateDocumentTemporaryRole
+class DocumentRecipient(BaseModel):
+    role: DocumentRole
 
     read_status: Annotated[
         DocumentCreateDocumentTemporaryReadStatus, pydantic.Field(alias="readStatus")
@@ -1675,11 +1684,11 @@ class DocumentCreateDocumentTemporaryDocumentsRecipients(BaseModel):
         DocumentCreateDocumentTemporarySendStatus, pydantic.Field(alias="sendStatus")
     ]
 
-    id: int
+    id: float
 
-    document_id: Annotated[Nullable[int], pydantic.Field(alias="documentId")]
+    document_id: Annotated[Nullable[float], pydantic.Field(alias="documentId")]
 
-    template_id: Annotated[Nullable[int], pydantic.Field(alias="templateId")]
+    template_id: Annotated[Nullable[float], pydantic.Field(alias="templateId")]
 
     email: str
 
@@ -1696,7 +1705,7 @@ class DocumentCreateDocumentTemporaryDocumentsRecipients(BaseModel):
     signed_at: Annotated[Nullable[str], pydantic.Field(alias="signedAt")]
 
     auth_options: Annotated[
-        Nullable[DocumentCreateDocumentTemporaryDocumentsAuthOptions],
+        Nullable[DocumentCreateDocumentTemporaryRecipientAuthOptions],
         pydantic.Field(alias="authOptions"),
     ]
 
@@ -1724,7 +1733,7 @@ class DocumentCreateDocumentTemporaryDocumentsRecipients(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -1745,7 +1754,7 @@ class DocumentCreateDocumentTemporaryDocumentsRecipients(BaseModel):
         return m
 
 
-class DocumentCreateDocumentTemporaryDocumentsType(str, Enum):
+class DocumentFieldType(str, Enum):
     SIGNATURE = "SIGNATURE"
     FREE_SIGNATURE = "FREE_SIGNATURE"
     INITIALS = "INITIALS"
@@ -1759,36 +1768,30 @@ class DocumentCreateDocumentTemporaryDocumentsType(str, Enum):
     DROPDOWN = "DROPDOWN"
 
 
-class DocumentCreateDocumentTemporaryFieldMetaDocumentsResponse200ApplicationJSONResponseBodyDocumentFields9Type(
-    str, Enum
-):
+class DocumentTypeDropdown(str, Enum):
     DROPDOWN = "dropdown"
 
 
-class DocumentCreateDocumentTemporaryFieldMetaDocumentsResponseValuesTypedDict(
-    TypedDict
-):
+class DocumentValue3TypedDict(TypedDict):
     value: str
 
 
-class DocumentCreateDocumentTemporaryFieldMetaDocumentsResponseValues(BaseModel):
+class DocumentValue3(BaseModel):
     value: str
 
 
-class DocumentCreateDocumentTemporaryFieldMeta9TypedDict(TypedDict):
-    type: DocumentCreateDocumentTemporaryFieldMetaDocumentsResponse200ApplicationJSONResponseBodyDocumentFields9Type
+class FieldMetaDocumentDropdownTypedDict(TypedDict):
+    type: DocumentTypeDropdown
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[
-        List[DocumentCreateDocumentTemporaryFieldMetaDocumentsResponseValuesTypedDict]
-    ]
+    values: NotRequired[List[DocumentValue3TypedDict]]
     default_value: NotRequired[str]
 
 
-class DocumentCreateDocumentTemporaryFieldMeta9(BaseModel):
-    type: DocumentCreateDocumentTemporaryFieldMetaDocumentsResponse200ApplicationJSONResponseBodyDocumentFields9Type
+class FieldMetaDocumentDropdown(BaseModel):
+    type: DocumentTypeDropdown
 
     label: Optional[str] = None
 
@@ -1798,26 +1801,22 @@ class DocumentCreateDocumentTemporaryFieldMeta9(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[
-        List[DocumentCreateDocumentTemporaryFieldMetaDocumentsResponseValues]
-    ] = None
+    values: Optional[List[DocumentValue3]] = None
 
     default_value: Annotated[Optional[str], pydantic.Field(alias="defaultValue")] = None
 
 
-class DocumentCreateDocumentTemporaryFieldMetaDocumentsResponse200ApplicationJSONResponseBodyDocumentFieldsType(
-    str, Enum
-):
+class DocumentTypeCheckbox(str, Enum):
     CHECKBOX = "checkbox"
 
 
-class DocumentCreateDocumentTemporaryFieldMetaDocumentsValuesTypedDict(TypedDict):
+class DocumentValue2TypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class DocumentCreateDocumentTemporaryFieldMetaDocumentsValues(BaseModel):
+class DocumentValue2(BaseModel):
     id: float
 
     checked: bool
@@ -1825,21 +1824,19 @@ class DocumentCreateDocumentTemporaryFieldMetaDocumentsValues(BaseModel):
     value: str
 
 
-class DocumentCreateDocumentTemporaryFieldMeta8TypedDict(TypedDict):
-    type: DocumentCreateDocumentTemporaryFieldMetaDocumentsResponse200ApplicationJSONResponseBodyDocumentFieldsType
+class FieldMetaDocumentCheckboxTypedDict(TypedDict):
+    type: DocumentTypeCheckbox
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[
-        List[DocumentCreateDocumentTemporaryFieldMetaDocumentsValuesTypedDict]
-    ]
+    values: NotRequired[List[DocumentValue2TypedDict]]
     validation_rule: NotRequired[str]
     validation_length: NotRequired[float]
 
 
-class DocumentCreateDocumentTemporaryFieldMeta8(BaseModel):
-    type: DocumentCreateDocumentTemporaryFieldMetaDocumentsResponse200ApplicationJSONResponseBodyDocumentFieldsType
+class FieldMetaDocumentCheckbox(BaseModel):
+    type: DocumentTypeCheckbox
 
     label: Optional[str] = None
 
@@ -1849,9 +1846,7 @@ class DocumentCreateDocumentTemporaryFieldMeta8(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[DocumentCreateDocumentTemporaryFieldMetaDocumentsValues]] = (
-        None
-    )
+    values: Optional[List[DocumentValue2]] = None
 
     validation_rule: Annotated[
         Optional[str], pydantic.Field(alias="validationRule")
@@ -1862,19 +1857,17 @@ class DocumentCreateDocumentTemporaryFieldMeta8(BaseModel):
     ] = None
 
 
-class DocumentCreateDocumentTemporaryFieldMetaDocumentsResponse200ApplicationJSONResponseBodyDocumentType(
-    str, Enum
-):
+class DocumentTypeRadio(str, Enum):
     RADIO = "radio"
 
 
-class DocumentCreateDocumentTemporaryFieldMetaValuesTypedDict(TypedDict):
+class DocumentValue1TypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class DocumentCreateDocumentTemporaryFieldMetaValues(BaseModel):
+class DocumentValue1(BaseModel):
     id: float
 
     checked: bool
@@ -1882,17 +1875,17 @@ class DocumentCreateDocumentTemporaryFieldMetaValues(BaseModel):
     value: str
 
 
-class DocumentCreateDocumentTemporaryFieldMeta7TypedDict(TypedDict):
-    type: DocumentCreateDocumentTemporaryFieldMetaDocumentsResponse200ApplicationJSONResponseBodyDocumentType
+class FieldMetaDocumentRadioTypedDict(TypedDict):
+    type: DocumentTypeRadio
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[List[DocumentCreateDocumentTemporaryFieldMetaValuesTypedDict]]
+    values: NotRequired[List[DocumentValue1TypedDict]]
 
 
-class DocumentCreateDocumentTemporaryFieldMeta7(BaseModel):
-    type: DocumentCreateDocumentTemporaryFieldMetaDocumentsResponse200ApplicationJSONResponseBodyDocumentType
+class FieldMetaDocumentRadio(BaseModel):
+    type: DocumentTypeRadio
 
     label: Optional[str] = None
 
@@ -1902,17 +1895,21 @@ class DocumentCreateDocumentTemporaryFieldMeta7(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[DocumentCreateDocumentTemporaryFieldMetaValues]] = None
+    values: Optional[List[DocumentValue1]] = None
 
 
-class DocumentCreateDocumentTemporaryFieldMetaDocumentsResponse200ApplicationJSONResponseBodyType(
-    str, Enum
-):
+class DocumentTypeNumber(str, Enum):
     NUMBER = "number"
 
 
-class DocumentCreateDocumentTemporaryFieldMeta6TypedDict(TypedDict):
-    type: DocumentCreateDocumentTemporaryFieldMetaDocumentsResponse200ApplicationJSONResponseBodyType
+class DocumentTextAlign6(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldMetaDocumentNumberTypedDict(TypedDict):
+    type: DocumentTypeNumber
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -1922,10 +1919,11 @@ class DocumentCreateDocumentTemporaryFieldMeta6TypedDict(TypedDict):
     min_value: NotRequired[float]
     max_value: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[DocumentTextAlign6]
 
 
-class DocumentCreateDocumentTemporaryFieldMeta6(BaseModel):
-    type: DocumentCreateDocumentTemporaryFieldMetaDocumentsResponse200ApplicationJSONResponseBodyType
+class FieldMetaDocumentNumber(BaseModel):
+    type: DocumentTypeNumber
 
     label: Optional[str] = None
 
@@ -1945,17 +1943,23 @@ class DocumentCreateDocumentTemporaryFieldMeta6(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[DocumentTextAlign6], pydantic.Field(alias="textAlign")
+    ] = None
 
-class DocumentCreateDocumentTemporaryFieldMetaDocumentsResponse200ApplicationJSONType(
-    str, Enum
-):
+
+class DocumentTypeText(str, Enum):
     TEXT = "text"
 
 
-class DocumentCreateDocumentTemporaryFieldMeta5TypedDict(TypedDict):
-    type: (
-        DocumentCreateDocumentTemporaryFieldMetaDocumentsResponse200ApplicationJSONType
-    )
+class DocumentTextAlign5(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldMetaDocumentTextTypedDict(TypedDict):
+    type: DocumentTypeText
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -1963,12 +1967,11 @@ class DocumentCreateDocumentTemporaryFieldMeta5TypedDict(TypedDict):
     text: NotRequired[str]
     character_limit: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[DocumentTextAlign5]
 
 
-class DocumentCreateDocumentTemporaryFieldMeta5(BaseModel):
-    type: (
-        DocumentCreateDocumentTemporaryFieldMetaDocumentsResponse200ApplicationJSONType
-    )
+class FieldMetaDocumentText(BaseModel):
+    type: DocumentTypeText
 
     label: Optional[str] = None
 
@@ -1986,22 +1989,33 @@ class DocumentCreateDocumentTemporaryFieldMeta5(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[DocumentTextAlign5], pydantic.Field(alias="textAlign")
+    ] = None
 
-class DocumentCreateDocumentTemporaryFieldMetaDocumentsResponse200Type(str, Enum):
+
+class DocumentTypeDate(str, Enum):
     DATE = "date"
 
 
-class DocumentCreateDocumentTemporaryFieldMeta4TypedDict(TypedDict):
-    type: DocumentCreateDocumentTemporaryFieldMetaDocumentsResponse200Type
+class DocumentTextAlign4(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldMetaDocumentDateTypedDict(TypedDict):
+    type: DocumentTypeDate
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[DocumentTextAlign4]
 
 
-class DocumentCreateDocumentTemporaryFieldMeta4(BaseModel):
-    type: DocumentCreateDocumentTemporaryFieldMetaDocumentsResponse200Type
+class FieldMetaDocumentDate(BaseModel):
+    type: DocumentTypeDate
 
     label: Optional[str] = None
 
@@ -2013,22 +2027,33 @@ class DocumentCreateDocumentTemporaryFieldMeta4(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[DocumentTextAlign4], pydantic.Field(alias="textAlign")
+    ] = None
 
-class DocumentCreateDocumentTemporaryFieldMetaDocumentsResponseType(str, Enum):
+
+class DocumentTypeEmail(str, Enum):
     EMAIL = "email"
 
 
-class DocumentCreateDocumentTemporaryFieldMeta3TypedDict(TypedDict):
-    type: DocumentCreateDocumentTemporaryFieldMetaDocumentsResponseType
+class DocumentTextAlign3(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldMetaDocumentEmailTypedDict(TypedDict):
+    type: DocumentTypeEmail
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[DocumentTextAlign3]
 
 
-class DocumentCreateDocumentTemporaryFieldMeta3(BaseModel):
-    type: DocumentCreateDocumentTemporaryFieldMetaDocumentsResponseType
+class FieldMetaDocumentEmail(BaseModel):
+    type: DocumentTypeEmail
 
     label: Optional[str] = None
 
@@ -2040,22 +2065,33 @@ class DocumentCreateDocumentTemporaryFieldMeta3(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[DocumentTextAlign3], pydantic.Field(alias="textAlign")
+    ] = None
 
-class DocumentCreateDocumentTemporaryFieldMetaDocumentsType(str, Enum):
+
+class DocumentTypeName(str, Enum):
     NAME = "name"
 
 
-class DocumentCreateDocumentTemporaryFieldMeta2TypedDict(TypedDict):
-    type: DocumentCreateDocumentTemporaryFieldMetaDocumentsType
+class DocumentTextAlign2(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldMetaDocumentNameTypedDict(TypedDict):
+    type: DocumentTypeName
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[DocumentTextAlign2]
 
 
-class DocumentCreateDocumentTemporaryFieldMeta2(BaseModel):
-    type: DocumentCreateDocumentTemporaryFieldMetaDocumentsType
+class FieldMetaDocumentName(BaseModel):
+    type: DocumentTypeName
 
     label: Optional[str] = None
 
@@ -2067,22 +2103,33 @@ class DocumentCreateDocumentTemporaryFieldMeta2(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[DocumentTextAlign2], pydantic.Field(alias="textAlign")
+    ] = None
 
-class DocumentCreateDocumentTemporaryFieldMetaType(str, Enum):
+
+class DocumentTypeInitials(str, Enum):
     INITIALS = "initials"
 
 
-class DocumentCreateDocumentTemporaryFieldMeta1TypedDict(TypedDict):
-    type: DocumentCreateDocumentTemporaryFieldMetaType
+class DocumentTextAlign1(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldMetaDocumentInitialsTypedDict(TypedDict):
+    type: DocumentTypeInitials
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[DocumentTextAlign1]
 
 
-class DocumentCreateDocumentTemporaryFieldMeta1(BaseModel):
-    type: DocumentCreateDocumentTemporaryFieldMetaType
+class FieldMetaDocumentInitials(BaseModel):
+    type: DocumentTypeInitials
 
     label: Optional[str] = None
 
@@ -2094,69 +2141,73 @@ class DocumentCreateDocumentTemporaryFieldMeta1(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[DocumentTextAlign1], pydantic.Field(alias="textAlign")
+    ] = None
 
-DocumentCreateDocumentTemporaryFieldMetaTypedDict = TypeAliasType(
-    "DocumentCreateDocumentTemporaryFieldMetaTypedDict",
+
+DocumentFieldMetaUnionTypedDict = TypeAliasType(
+    "DocumentFieldMetaUnionTypedDict",
     Union[
-        DocumentCreateDocumentTemporaryFieldMeta1TypedDict,
-        DocumentCreateDocumentTemporaryFieldMeta2TypedDict,
-        DocumentCreateDocumentTemporaryFieldMeta3TypedDict,
-        DocumentCreateDocumentTemporaryFieldMeta4TypedDict,
-        DocumentCreateDocumentTemporaryFieldMeta7TypedDict,
-        DocumentCreateDocumentTemporaryFieldMeta9TypedDict,
-        DocumentCreateDocumentTemporaryFieldMeta5TypedDict,
-        DocumentCreateDocumentTemporaryFieldMeta8TypedDict,
-        DocumentCreateDocumentTemporaryFieldMeta6TypedDict,
+        FieldMetaDocumentRadioTypedDict,
+        FieldMetaDocumentInitialsTypedDict,
+        FieldMetaDocumentNameTypedDict,
+        FieldMetaDocumentEmailTypedDict,
+        FieldMetaDocumentDateTypedDict,
+        FieldMetaDocumentDropdownTypedDict,
+        FieldMetaDocumentCheckboxTypedDict,
+        FieldMetaDocumentTextTypedDict,
+        FieldMetaDocumentNumberTypedDict,
     ],
 )
 
 
-DocumentCreateDocumentTemporaryFieldMeta = TypeAliasType(
-    "DocumentCreateDocumentTemporaryFieldMeta",
+DocumentFieldMetaUnion = TypeAliasType(
+    "DocumentFieldMetaUnion",
     Union[
-        DocumentCreateDocumentTemporaryFieldMeta1,
-        DocumentCreateDocumentTemporaryFieldMeta2,
-        DocumentCreateDocumentTemporaryFieldMeta3,
-        DocumentCreateDocumentTemporaryFieldMeta4,
-        DocumentCreateDocumentTemporaryFieldMeta7,
-        DocumentCreateDocumentTemporaryFieldMeta9,
-        DocumentCreateDocumentTemporaryFieldMeta5,
-        DocumentCreateDocumentTemporaryFieldMeta8,
-        DocumentCreateDocumentTemporaryFieldMeta6,
+        FieldMetaDocumentRadio,
+        FieldMetaDocumentInitials,
+        FieldMetaDocumentName,
+        FieldMetaDocumentEmail,
+        FieldMetaDocumentDate,
+        FieldMetaDocumentDropdown,
+        FieldMetaDocumentCheckbox,
+        FieldMetaDocumentText,
+        FieldMetaDocumentNumber,
     ],
 )
 
 
-class DocumentCreateDocumentTemporaryDocumentsFieldsTypedDict(TypedDict):
-    type: DocumentCreateDocumentTemporaryDocumentsType
-    id: int
+class DocumentFieldTypedDict(TypedDict):
+    type: DocumentFieldType
+    id: float
     secondary_id: str
-    document_id: Nullable[int]
-    template_id: Nullable[int]
-    recipient_id: int
+    document_id: Nullable[float]
+    template_id: Nullable[float]
+    recipient_id: float
     page: float
     r"""The page number of the field on the document. Starts from 1."""
     custom_text: str
     inserted: bool
-    field_meta: Nullable[DocumentCreateDocumentTemporaryFieldMetaTypedDict]
+    field_meta: Nullable[DocumentFieldMetaUnionTypedDict]
     position_x: NotRequired[Any]
     position_y: NotRequired[Any]
     width: NotRequired[Any]
     height: NotRequired[Any]
 
 
-class DocumentCreateDocumentTemporaryDocumentsFields(BaseModel):
-    type: DocumentCreateDocumentTemporaryDocumentsType
+class DocumentField(BaseModel):
+    type: DocumentFieldType
 
-    id: int
+    id: float
 
     secondary_id: Annotated[str, pydantic.Field(alias="secondaryId")]
 
-    document_id: Annotated[Nullable[int], pydantic.Field(alias="documentId")]
+    document_id: Annotated[Nullable[float], pydantic.Field(alias="documentId")]
 
-    template_id: Annotated[Nullable[int], pydantic.Field(alias="templateId")]
+    template_id: Annotated[Nullable[float], pydantic.Field(alias="templateId")]
 
-    recipient_id: Annotated[int, pydantic.Field(alias="recipientId")]
+    recipient_id: Annotated[float, pydantic.Field(alias="recipientId")]
 
     page: float
     r"""The page number of the field on the document. Starts from 1."""
@@ -2166,8 +2217,7 @@ class DocumentCreateDocumentTemporaryDocumentsFields(BaseModel):
     inserted: bool
 
     field_meta: Annotated[
-        Nullable[DocumentCreateDocumentTemporaryFieldMeta],
-        pydantic.Field(alias="fieldMeta"),
+        Nullable[DocumentFieldMetaUnion], pydantic.Field(alias="fieldMeta")
     ]
 
     position_x: Annotated[Optional[Any], pydantic.Field(alias="positionX")] = None
@@ -2188,7 +2238,7 @@ class DocumentCreateDocumentTemporaryDocumentsFields(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -2210,38 +2260,38 @@ class DocumentCreateDocumentTemporaryDocumentsFields(BaseModel):
 
 
 class DocumentTypedDict(TypedDict):
-    visibility: DocumentCreateDocumentTemporaryVisibility
+    visibility: DocumentVisibility
     status: DocumentCreateDocumentTemporaryStatus
     source: DocumentCreateDocumentTemporarySource
-    id: int
+    id: float
     external_id: Nullable[str]
     r"""A custom external ID you can use to identify the document."""
     user_id: float
     r"""The ID of the user that created this document."""
     auth_options: Nullable[DocumentCreateDocumentTemporaryAuthOptionsTypedDict]
-    form_values: Nullable[Dict[str, DocumentCreateDocumentTemporaryFormValuesTypedDict]]
+    form_values: Nullable[Dict[str, DocumentFormValuesTypedDict]]
     title: str
     document_data_id: str
     created_at: str
     updated_at: str
     completed_at: Nullable[str]
     deleted_at: Nullable[str]
-    team_id: Nullable[int]
-    template_id: Nullable[int]
+    team_id: Nullable[float]
+    template_id: Nullable[float]
     document_data: DocumentCreateDocumentTemporaryDocumentDataTypedDict
     document_meta: Nullable[DocumentCreateDocumentTemporaryDocumentMetaTypedDict]
-    recipients: List[DocumentCreateDocumentTemporaryDocumentsRecipientsTypedDict]
-    fields: List[DocumentCreateDocumentTemporaryDocumentsFieldsTypedDict]
+    recipients: List[DocumentRecipientTypedDict]
+    fields: List[DocumentFieldTypedDict]
 
 
 class Document(BaseModel):
-    visibility: DocumentCreateDocumentTemporaryVisibility
+    visibility: DocumentVisibility
 
     status: DocumentCreateDocumentTemporaryStatus
 
     source: DocumentCreateDocumentTemporarySource
 
-    id: int
+    id: float
 
     external_id: Annotated[Nullable[str], pydantic.Field(alias="externalId")]
     r"""A custom external ID you can use to identify the document."""
@@ -2255,8 +2305,7 @@ class Document(BaseModel):
     ]
 
     form_values: Annotated[
-        Nullable[Dict[str, DocumentCreateDocumentTemporaryFormValues]],
-        pydantic.Field(alias="formValues"),
+        Nullable[Dict[str, DocumentFormValues]], pydantic.Field(alias="formValues")
     ]
 
     title: str
@@ -2271,9 +2320,9 @@ class Document(BaseModel):
 
     deleted_at: Annotated[Nullable[str], pydantic.Field(alias="deletedAt")]
 
-    team_id: Annotated[Nullable[int], pydantic.Field(alias="teamId")]
+    team_id: Annotated[Nullable[float], pydantic.Field(alias="teamId")]
 
-    template_id: Annotated[Nullable[int], pydantic.Field(alias="templateId")]
+    template_id: Annotated[Nullable[float], pydantic.Field(alias="templateId")]
 
     document_data: Annotated[
         DocumentCreateDocumentTemporaryDocumentData,
@@ -2285,9 +2334,9 @@ class Document(BaseModel):
         pydantic.Field(alias="documentMeta"),
     ]
 
-    recipients: List[DocumentCreateDocumentTemporaryDocumentsRecipients]
+    recipients: List[DocumentRecipient]
 
-    fields: List[DocumentCreateDocumentTemporaryDocumentsFields]
+    fields: List[DocumentField]
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -2308,7 +2357,7 @@ class Document(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -2329,7 +2378,7 @@ class Document(BaseModel):
         return m
 
 
-class DocumentCreateDocumentTemporaryResponseBodyTypedDict(TypedDict):
+class DocumentCreateDocumentTemporaryResponseTypedDict(TypedDict):
     r"""Successful response"""
 
     document: DocumentTypedDict
@@ -2337,7 +2386,7 @@ class DocumentCreateDocumentTemporaryResponseBodyTypedDict(TypedDict):
     r"""The URL to upload the document PDF to. Use a PUT request with the file via form-data"""
 
 
-class DocumentCreateDocumentTemporaryResponseBody(BaseModel):
+class DocumentCreateDocumentTemporaryResponse(BaseModel):
     r"""Successful response"""
 
     document: Document

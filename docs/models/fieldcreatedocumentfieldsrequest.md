@@ -1,0 +1,9 @@
+# FieldCreateDocumentFieldsRequest
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `document_id`                                                                                        | *float*                                                                                              | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `fields`                                                                                             | List[[models.FieldCreateDocumentFieldsFieldUnion](../models/fieldcreatedocumentfieldsfieldunion.md)] | :heavy_check_mark:                                                                                   | N/A                                                                                                  |

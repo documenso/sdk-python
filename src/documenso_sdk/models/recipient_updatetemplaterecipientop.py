@@ -16,20 +16,21 @@ from typing import Any, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-class RecipientUpdateTemplateRecipientRole(str, Enum):
+class RecipientUpdateTemplateRecipientRoleRequestBody(str, Enum):
     CC = "CC"
     SIGNER = "SIGNER"
     VIEWER = "VIEWER"
     APPROVER = "APPROVER"
+    ASSISTANT = "ASSISTANT"
 
 
-class RecipientUpdateTemplateRecipientAccessAuth(str, Enum):
+class RecipientUpdateTemplateRecipientAccessAuthRequestBody(str, Enum):
     r"""The type of authentication required for the recipient to access the document."""
 
     ACCOUNT = "ACCOUNT"
 
 
-class RecipientUpdateTemplateRecipientActionAuth(str, Enum):
+class RecipientUpdateTemplateRecipientActionAuthRequestBody(str, Enum):
     r"""The type of authentication required for the recipient to sign the document."""
 
     ACCOUNT = "ACCOUNT"
@@ -43,11 +44,15 @@ class RecipientUpdateTemplateRecipientRecipientTypedDict(TypedDict):
     r"""The ID of the recipient to update."""
     email: NotRequired[str]
     name: NotRequired[str]
-    role: NotRequired[RecipientUpdateTemplateRecipientRole]
+    role: NotRequired[RecipientUpdateTemplateRecipientRoleRequestBody]
     signing_order: NotRequired[float]
-    access_auth: NotRequired[Nullable[RecipientUpdateTemplateRecipientAccessAuth]]
+    access_auth: NotRequired[
+        Nullable[RecipientUpdateTemplateRecipientAccessAuthRequestBody]
+    ]
     r"""The type of authentication required for the recipient to access the document."""
-    action_auth: NotRequired[Nullable[RecipientUpdateTemplateRecipientActionAuth]]
+    action_auth: NotRequired[
+        Nullable[RecipientUpdateTemplateRecipientActionAuthRequestBody]
+    ]
     r"""The type of authentication required for the recipient to sign the document."""
 
 
@@ -59,20 +64,20 @@ class RecipientUpdateTemplateRecipientRecipient(BaseModel):
 
     name: Optional[str] = None
 
-    role: Optional[RecipientUpdateTemplateRecipientRole] = None
+    role: Optional[RecipientUpdateTemplateRecipientRoleRequestBody] = None
 
     signing_order: Annotated[Optional[float], pydantic.Field(alias="signingOrder")] = (
         None
     )
 
     access_auth: Annotated[
-        OptionalNullable[RecipientUpdateTemplateRecipientAccessAuth],
+        OptionalNullable[RecipientUpdateTemplateRecipientAccessAuthRequestBody],
         pydantic.Field(alias="accessAuth"),
     ] = UNSET
     r"""The type of authentication required for the recipient to access the document."""
 
     action_auth: Annotated[
-        OptionalNullable[RecipientUpdateTemplateRecipientActionAuth],
+        OptionalNullable[RecipientUpdateTemplateRecipientActionAuthRequestBody],
         pydantic.Field(alias="actionAuth"),
     ] = UNSET
     r"""The type of authentication required for the recipient to sign the document."""
@@ -94,7 +99,7 @@ class RecipientUpdateTemplateRecipientRecipient(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -115,95 +120,85 @@ class RecipientUpdateTemplateRecipientRecipient(BaseModel):
         return m
 
 
-class RecipientUpdateTemplateRecipientRequestBodyTypedDict(TypedDict):
+class RecipientUpdateTemplateRecipientRequestTypedDict(TypedDict):
     template_id: float
     recipient: RecipientUpdateTemplateRecipientRecipientTypedDict
 
 
-class RecipientUpdateTemplateRecipientRequestBody(BaseModel):
+class RecipientUpdateTemplateRecipientRequest(BaseModel):
     template_id: Annotated[float, pydantic.Field(alias="templateId")]
 
     recipient: RecipientUpdateTemplateRecipientRecipient
 
 
-class RecipientUpdateTemplateRecipientTemplatesRecipientsIssuesTypedDict(TypedDict):
+class RecipientUpdateTemplateRecipientInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class RecipientUpdateTemplateRecipientTemplatesRecipientsIssues(BaseModel):
+class RecipientUpdateTemplateRecipientInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class RecipientUpdateTemplateRecipientTemplatesRecipientsResponseResponseBodyData(
-    BaseModel
-):
+class RecipientUpdateTemplateRecipientInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[
-        List[RecipientUpdateTemplateRecipientTemplatesRecipientsIssues]
-    ] = None
+    issues: Optional[List[RecipientUpdateTemplateRecipientInternalServerErrorIssue]] = (
+        None
+    )
 
 
-class RecipientUpdateTemplateRecipientTemplatesRecipientsResponseResponseBody(
-    Exception
-):
+class RecipientUpdateTemplateRecipientInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: RecipientUpdateTemplateRecipientTemplatesRecipientsResponseResponseBodyData
+    data: RecipientUpdateTemplateRecipientInternalServerErrorData
 
-    def __init__(
-        self,
-        data: RecipientUpdateTemplateRecipientTemplatesRecipientsResponseResponseBodyData,
-    ):
+    def __init__(self, data: RecipientUpdateTemplateRecipientInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data,
-            RecipientUpdateTemplateRecipientTemplatesRecipientsResponseResponseBodyData,
+            self.data, RecipientUpdateTemplateRecipientInternalServerErrorData
         )
 
 
-class RecipientUpdateTemplateRecipientIssuesTypedDict(TypedDict):
+class RecipientUpdateTemplateRecipientBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class RecipientUpdateTemplateRecipientIssues(BaseModel):
+class RecipientUpdateTemplateRecipientBadRequestIssue(BaseModel):
     message: str
 
 
-class RecipientUpdateTemplateRecipientTemplatesRecipientsResponseBodyData(BaseModel):
+class RecipientUpdateTemplateRecipientBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[RecipientUpdateTemplateRecipientIssues]] = None
+    issues: Optional[List[RecipientUpdateTemplateRecipientBadRequestIssue]] = None
 
 
-class RecipientUpdateTemplateRecipientTemplatesRecipientsResponseBody(Exception):
+class RecipientUpdateTemplateRecipientBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: RecipientUpdateTemplateRecipientTemplatesRecipientsResponseBodyData
+    data: RecipientUpdateTemplateRecipientBadRequestErrorData
 
-    def __init__(
-        self, data: RecipientUpdateTemplateRecipientTemplatesRecipientsResponseBodyData
-    ):
+    def __init__(self, data: RecipientUpdateTemplateRecipientBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data,
-            RecipientUpdateTemplateRecipientTemplatesRecipientsResponseBodyData,
+            self.data, RecipientUpdateTemplateRecipientBadRequestErrorData
         )
 
 
-class RecipientUpdateTemplateRecipientTemplatesRecipientsRole(str, Enum):
+class RecipientUpdateTemplateRecipientRoleResponse(str, Enum):
     CC = "CC"
     SIGNER = "SIGNER"
     VIEWER = "VIEWER"
     APPROVER = "APPROVER"
+    ASSISTANT = "ASSISTANT"
 
 
 class RecipientUpdateTemplateRecipientReadStatus(str, Enum):
@@ -222,13 +217,13 @@ class RecipientUpdateTemplateRecipientSendStatus(str, Enum):
     SENT = "SENT"
 
 
-class RecipientUpdateTemplateRecipientTemplatesRecipientsAccessAuth(str, Enum):
+class RecipientUpdateTemplateRecipientAccessAuthResponse(str, Enum):
     r"""The type of authentication required for the recipient to access the document."""
 
     ACCOUNT = "ACCOUNT"
 
 
-class RecipientUpdateTemplateRecipientTemplatesRecipientsActionAuth(str, Enum):
+class RecipientUpdateTemplateRecipientActionAuthResponse(str, Enum):
     r"""The type of authentication required for the recipient to sign the document."""
 
     ACCOUNT = "ACCOUNT"
@@ -238,21 +233,21 @@ class RecipientUpdateTemplateRecipientTemplatesRecipientsActionAuth(str, Enum):
 
 
 class RecipientUpdateTemplateRecipientAuthOptionsTypedDict(TypedDict):
-    access_auth: Nullable[RecipientUpdateTemplateRecipientTemplatesRecipientsAccessAuth]
+    access_auth: Nullable[RecipientUpdateTemplateRecipientAccessAuthResponse]
     r"""The type of authentication required for the recipient to access the document."""
-    action_auth: Nullable[RecipientUpdateTemplateRecipientTemplatesRecipientsActionAuth]
+    action_auth: Nullable[RecipientUpdateTemplateRecipientActionAuthResponse]
     r"""The type of authentication required for the recipient to sign the document."""
 
 
 class RecipientUpdateTemplateRecipientAuthOptions(BaseModel):
     access_auth: Annotated[
-        Nullable[RecipientUpdateTemplateRecipientTemplatesRecipientsAccessAuth],
+        Nullable[RecipientUpdateTemplateRecipientAccessAuthResponse],
         pydantic.Field(alias="accessAuth"),
     ]
     r"""The type of authentication required for the recipient to access the document."""
 
     action_auth: Annotated[
-        Nullable[RecipientUpdateTemplateRecipientTemplatesRecipientsActionAuth],
+        Nullable[RecipientUpdateTemplateRecipientActionAuthResponse],
         pydantic.Field(alias="actionAuth"),
     ]
     r"""The type of authentication required for the recipient to sign the document."""
@@ -267,7 +262,7 @@ class RecipientUpdateTemplateRecipientAuthOptions(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -302,40 +297,30 @@ class RecipientUpdateTemplateRecipientType(str, Enum):
     DROPDOWN = "DROPDOWN"
 
 
-class RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsResponse200ApplicationJSONResponseBodyFields9Type(
-    str, Enum
-):
+class RecipientUpdateTemplateRecipientTypeDropdown(str, Enum):
     DROPDOWN = "dropdown"
 
 
-class RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsResponseValuesTypedDict(
-    TypedDict
-):
+class RecipientUpdateTemplateRecipientValue3TypedDict(TypedDict):
     value: str
 
 
-class RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsResponseValues(
-    BaseModel
-):
+class RecipientUpdateTemplateRecipientValue3(BaseModel):
     value: str
 
 
-class RecipientUpdateTemplateRecipientFieldMeta9TypedDict(TypedDict):
-    type: RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsResponse200ApplicationJSONResponseBodyFields9Type
+class RecipientUpdateTemplateRecipientFieldMetaDropdownTypedDict(TypedDict):
+    type: RecipientUpdateTemplateRecipientTypeDropdown
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[
-        List[
-            RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsResponseValuesTypedDict
-        ]
-    ]
+    values: NotRequired[List[RecipientUpdateTemplateRecipientValue3TypedDict]]
     default_value: NotRequired[str]
 
 
-class RecipientUpdateTemplateRecipientFieldMeta9(BaseModel):
-    type: RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsResponse200ApplicationJSONResponseBodyFields9Type
+class RecipientUpdateTemplateRecipientFieldMetaDropdown(BaseModel):
+    type: RecipientUpdateTemplateRecipientTypeDropdown
 
     label: Optional[str] = None
 
@@ -345,28 +330,22 @@ class RecipientUpdateTemplateRecipientFieldMeta9(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[
-        List[RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsResponseValues]
-    ] = None
+    values: Optional[List[RecipientUpdateTemplateRecipientValue3]] = None
 
     default_value: Annotated[Optional[str], pydantic.Field(alias="defaultValue")] = None
 
 
-class RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsResponse200ApplicationJSONResponseBodyFields8Type(
-    str, Enum
-):
+class RecipientUpdateTemplateRecipientTypeCheckbox(str, Enum):
     CHECKBOX = "checkbox"
 
 
-class RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsValuesTypedDict(
-    TypedDict
-):
+class RecipientUpdateTemplateRecipientValue2TypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsValues(BaseModel):
+class RecipientUpdateTemplateRecipientValue2(BaseModel):
     id: float
 
     checked: bool
@@ -374,23 +353,19 @@ class RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsValues(BaseMod
     value: str
 
 
-class RecipientUpdateTemplateRecipientFieldMeta8TypedDict(TypedDict):
-    type: RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsResponse200ApplicationJSONResponseBodyFields8Type
+class RecipientUpdateTemplateRecipientFieldMetaCheckboxTypedDict(TypedDict):
+    type: RecipientUpdateTemplateRecipientTypeCheckbox
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[
-        List[
-            RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsValuesTypedDict
-        ]
-    ]
+    values: NotRequired[List[RecipientUpdateTemplateRecipientValue2TypedDict]]
     validation_rule: NotRequired[str]
     validation_length: NotRequired[float]
 
 
-class RecipientUpdateTemplateRecipientFieldMeta8(BaseModel):
-    type: RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsResponse200ApplicationJSONResponseBodyFields8Type
+class RecipientUpdateTemplateRecipientFieldMetaCheckbox(BaseModel):
+    type: RecipientUpdateTemplateRecipientTypeCheckbox
 
     label: Optional[str] = None
 
@@ -400,9 +375,7 @@ class RecipientUpdateTemplateRecipientFieldMeta8(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[
-        List[RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsValues]
-    ] = None
+    values: Optional[List[RecipientUpdateTemplateRecipientValue2]] = None
 
     validation_rule: Annotated[
         Optional[str], pydantic.Field(alias="validationRule")
@@ -413,19 +386,17 @@ class RecipientUpdateTemplateRecipientFieldMeta8(BaseModel):
     ] = None
 
 
-class RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsResponse200ApplicationJSONResponseBodyFieldsType(
-    str, Enum
-):
+class RecipientUpdateTemplateRecipientTypeRadio(str, Enum):
     RADIO = "radio"
 
 
-class RecipientUpdateTemplateRecipientFieldMetaValuesTypedDict(TypedDict):
+class RecipientUpdateTemplateRecipientValue1TypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class RecipientUpdateTemplateRecipientFieldMetaValues(BaseModel):
+class RecipientUpdateTemplateRecipientValue1(BaseModel):
     id: float
 
     checked: bool
@@ -433,17 +404,17 @@ class RecipientUpdateTemplateRecipientFieldMetaValues(BaseModel):
     value: str
 
 
-class RecipientUpdateTemplateRecipientFieldMeta7TypedDict(TypedDict):
-    type: RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsResponse200ApplicationJSONResponseBodyFieldsType
+class RecipientUpdateTemplateRecipientFieldMetaRadioTypedDict(TypedDict):
+    type: RecipientUpdateTemplateRecipientTypeRadio
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[List[RecipientUpdateTemplateRecipientFieldMetaValuesTypedDict]]
+    values: NotRequired[List[RecipientUpdateTemplateRecipientValue1TypedDict]]
 
 
-class RecipientUpdateTemplateRecipientFieldMeta7(BaseModel):
-    type: RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsResponse200ApplicationJSONResponseBodyFieldsType
+class RecipientUpdateTemplateRecipientFieldMetaRadio(BaseModel):
+    type: RecipientUpdateTemplateRecipientTypeRadio
 
     label: Optional[str] = None
 
@@ -453,17 +424,21 @@ class RecipientUpdateTemplateRecipientFieldMeta7(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[RecipientUpdateTemplateRecipientFieldMetaValues]] = None
+    values: Optional[List[RecipientUpdateTemplateRecipientValue1]] = None
 
 
-class RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsResponse200ApplicationJSONResponseBodyType(
-    str, Enum
-):
+class RecipientUpdateTemplateRecipientTypeNumber(str, Enum):
     NUMBER = "number"
 
 
-class RecipientUpdateTemplateRecipientFieldMeta6TypedDict(TypedDict):
-    type: RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsResponse200ApplicationJSONResponseBodyType
+class RecipientUpdateTemplateRecipientTextAlign6(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class RecipientUpdateTemplateRecipientFieldMetaNumberTypedDict(TypedDict):
+    type: RecipientUpdateTemplateRecipientTypeNumber
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -473,10 +448,11 @@ class RecipientUpdateTemplateRecipientFieldMeta6TypedDict(TypedDict):
     min_value: NotRequired[float]
     max_value: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[RecipientUpdateTemplateRecipientTextAlign6]
 
 
-class RecipientUpdateTemplateRecipientFieldMeta6(BaseModel):
-    type: RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsResponse200ApplicationJSONResponseBodyType
+class RecipientUpdateTemplateRecipientFieldMetaNumber(BaseModel):
+    type: RecipientUpdateTemplateRecipientTypeNumber
 
     label: Optional[str] = None
 
@@ -496,15 +472,24 @@ class RecipientUpdateTemplateRecipientFieldMeta6(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[RecipientUpdateTemplateRecipientTextAlign6],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsResponse200ApplicationJSONType(
-    str, Enum
-):
+
+class RecipientUpdateTemplateRecipientTypeText(str, Enum):
     TEXT = "text"
 
 
-class RecipientUpdateTemplateRecipientFieldMeta5TypedDict(TypedDict):
-    type: RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsResponse200ApplicationJSONType
+class RecipientUpdateTemplateRecipientTextAlign5(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class RecipientUpdateTemplateRecipientFieldMetaTextTypedDict(TypedDict):
+    type: RecipientUpdateTemplateRecipientTypeText
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -512,10 +497,11 @@ class RecipientUpdateTemplateRecipientFieldMeta5TypedDict(TypedDict):
     text: NotRequired[str]
     character_limit: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[RecipientUpdateTemplateRecipientTextAlign5]
 
 
-class RecipientUpdateTemplateRecipientFieldMeta5(BaseModel):
-    type: RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsResponse200ApplicationJSONType
+class RecipientUpdateTemplateRecipientFieldMetaText(BaseModel):
+    type: RecipientUpdateTemplateRecipientTypeText
 
     label: Optional[str] = None
 
@@ -533,24 +519,34 @@ class RecipientUpdateTemplateRecipientFieldMeta5(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[RecipientUpdateTemplateRecipientTextAlign5],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsResponse200Type(
-    str, Enum
-):
+
+class RecipientUpdateTemplateRecipientTypeDate(str, Enum):
     DATE = "date"
 
 
-class RecipientUpdateTemplateRecipientFieldMeta4TypedDict(TypedDict):
-    type: RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsResponse200Type
+class RecipientUpdateTemplateRecipientTextAlign4(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class RecipientUpdateTemplateRecipientFieldMetaDateTypedDict(TypedDict):
+    type: RecipientUpdateTemplateRecipientTypeDate
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[RecipientUpdateTemplateRecipientTextAlign4]
 
 
-class RecipientUpdateTemplateRecipientFieldMeta4(BaseModel):
-    type: RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsResponse200Type
+class RecipientUpdateTemplateRecipientFieldMetaDate(BaseModel):
+    type: RecipientUpdateTemplateRecipientTypeDate
 
     label: Optional[str] = None
 
@@ -562,24 +558,34 @@ class RecipientUpdateTemplateRecipientFieldMeta4(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[RecipientUpdateTemplateRecipientTextAlign4],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsResponseType(
-    str, Enum
-):
+
+class RecipientUpdateTemplateRecipientTypeEmail(str, Enum):
     EMAIL = "email"
 
 
-class RecipientUpdateTemplateRecipientFieldMeta3TypedDict(TypedDict):
-    type: RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsResponseType
+class RecipientUpdateTemplateRecipientTextAlign3(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class RecipientUpdateTemplateRecipientFieldMetaEmailTypedDict(TypedDict):
+    type: RecipientUpdateTemplateRecipientTypeEmail
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[RecipientUpdateTemplateRecipientTextAlign3]
 
 
-class RecipientUpdateTemplateRecipientFieldMeta3(BaseModel):
-    type: RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsResponseType
+class RecipientUpdateTemplateRecipientFieldMetaEmail(BaseModel):
+    type: RecipientUpdateTemplateRecipientTypeEmail
 
     label: Optional[str] = None
 
@@ -591,22 +597,34 @@ class RecipientUpdateTemplateRecipientFieldMeta3(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[RecipientUpdateTemplateRecipientTextAlign3],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsType(str, Enum):
+
+class RecipientUpdateTemplateRecipientTypeName(str, Enum):
     NAME = "name"
 
 
-class RecipientUpdateTemplateRecipientFieldMeta2TypedDict(TypedDict):
-    type: RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsType
+class RecipientUpdateTemplateRecipientTextAlign2(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class RecipientUpdateTemplateRecipientFieldMetaNameTypedDict(TypedDict):
+    type: RecipientUpdateTemplateRecipientTypeName
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[RecipientUpdateTemplateRecipientTextAlign2]
 
 
-class RecipientUpdateTemplateRecipientFieldMeta2(BaseModel):
-    type: RecipientUpdateTemplateRecipientFieldMetaTemplatesRecipientsType
+class RecipientUpdateTemplateRecipientFieldMetaName(BaseModel):
+    type: RecipientUpdateTemplateRecipientTypeName
 
     label: Optional[str] = None
 
@@ -618,22 +636,34 @@ class RecipientUpdateTemplateRecipientFieldMeta2(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[RecipientUpdateTemplateRecipientTextAlign2],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class RecipientUpdateTemplateRecipientFieldMetaType(str, Enum):
+
+class RecipientUpdateTemplateRecipientTypeInitials(str, Enum):
     INITIALS = "initials"
 
 
-class RecipientUpdateTemplateRecipientFieldMeta1TypedDict(TypedDict):
-    type: RecipientUpdateTemplateRecipientFieldMetaType
+class RecipientUpdateTemplateRecipientTextAlign1(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class RecipientUpdateTemplateRecipientFieldMetaInitialsTypedDict(TypedDict):
+    type: RecipientUpdateTemplateRecipientTypeInitials
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[RecipientUpdateTemplateRecipientTextAlign1]
 
 
-class RecipientUpdateTemplateRecipientFieldMeta1(BaseModel):
-    type: RecipientUpdateTemplateRecipientFieldMetaType
+class RecipientUpdateTemplateRecipientFieldMetaInitials(BaseModel):
+    type: RecipientUpdateTemplateRecipientTypeInitials
 
     label: Optional[str] = None
 
@@ -645,69 +675,74 @@ class RecipientUpdateTemplateRecipientFieldMeta1(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[RecipientUpdateTemplateRecipientTextAlign1],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-RecipientUpdateTemplateRecipientFieldMetaTypedDict = TypeAliasType(
-    "RecipientUpdateTemplateRecipientFieldMetaTypedDict",
+
+RecipientUpdateTemplateRecipientFieldMetaUnionTypedDict = TypeAliasType(
+    "RecipientUpdateTemplateRecipientFieldMetaUnionTypedDict",
     Union[
-        RecipientUpdateTemplateRecipientFieldMeta1TypedDict,
-        RecipientUpdateTemplateRecipientFieldMeta2TypedDict,
-        RecipientUpdateTemplateRecipientFieldMeta3TypedDict,
-        RecipientUpdateTemplateRecipientFieldMeta4TypedDict,
-        RecipientUpdateTemplateRecipientFieldMeta7TypedDict,
-        RecipientUpdateTemplateRecipientFieldMeta9TypedDict,
-        RecipientUpdateTemplateRecipientFieldMeta5TypedDict,
-        RecipientUpdateTemplateRecipientFieldMeta8TypedDict,
-        RecipientUpdateTemplateRecipientFieldMeta6TypedDict,
+        RecipientUpdateTemplateRecipientFieldMetaRadioTypedDict,
+        RecipientUpdateTemplateRecipientFieldMetaInitialsTypedDict,
+        RecipientUpdateTemplateRecipientFieldMetaNameTypedDict,
+        RecipientUpdateTemplateRecipientFieldMetaEmailTypedDict,
+        RecipientUpdateTemplateRecipientFieldMetaDateTypedDict,
+        RecipientUpdateTemplateRecipientFieldMetaDropdownTypedDict,
+        RecipientUpdateTemplateRecipientFieldMetaCheckboxTypedDict,
+        RecipientUpdateTemplateRecipientFieldMetaTextTypedDict,
+        RecipientUpdateTemplateRecipientFieldMetaNumberTypedDict,
     ],
 )
 
 
-RecipientUpdateTemplateRecipientFieldMeta = TypeAliasType(
-    "RecipientUpdateTemplateRecipientFieldMeta",
+RecipientUpdateTemplateRecipientFieldMetaUnion = TypeAliasType(
+    "RecipientUpdateTemplateRecipientFieldMetaUnion",
     Union[
-        RecipientUpdateTemplateRecipientFieldMeta1,
-        RecipientUpdateTemplateRecipientFieldMeta2,
-        RecipientUpdateTemplateRecipientFieldMeta3,
-        RecipientUpdateTemplateRecipientFieldMeta4,
-        RecipientUpdateTemplateRecipientFieldMeta7,
-        RecipientUpdateTemplateRecipientFieldMeta9,
-        RecipientUpdateTemplateRecipientFieldMeta5,
-        RecipientUpdateTemplateRecipientFieldMeta8,
-        RecipientUpdateTemplateRecipientFieldMeta6,
+        RecipientUpdateTemplateRecipientFieldMetaRadio,
+        RecipientUpdateTemplateRecipientFieldMetaInitials,
+        RecipientUpdateTemplateRecipientFieldMetaName,
+        RecipientUpdateTemplateRecipientFieldMetaEmail,
+        RecipientUpdateTemplateRecipientFieldMetaDate,
+        RecipientUpdateTemplateRecipientFieldMetaDropdown,
+        RecipientUpdateTemplateRecipientFieldMetaCheckbox,
+        RecipientUpdateTemplateRecipientFieldMetaText,
+        RecipientUpdateTemplateRecipientFieldMetaNumber,
     ],
 )
 
 
-class RecipientUpdateTemplateRecipientFieldsTypedDict(TypedDict):
+class RecipientUpdateTemplateRecipientFieldTypedDict(TypedDict):
     type: RecipientUpdateTemplateRecipientType
-    id: int
+    id: float
     secondary_id: str
-    document_id: Nullable[int]
-    template_id: Nullable[int]
-    recipient_id: int
+    document_id: Nullable[float]
+    template_id: Nullable[float]
+    recipient_id: float
     page: float
     r"""The page number of the field on the document. Starts from 1."""
     custom_text: str
     inserted: bool
-    field_meta: Nullable[RecipientUpdateTemplateRecipientFieldMetaTypedDict]
+    field_meta: Nullable[RecipientUpdateTemplateRecipientFieldMetaUnionTypedDict]
     position_x: NotRequired[Any]
     position_y: NotRequired[Any]
     width: NotRequired[Any]
     height: NotRequired[Any]
 
 
-class RecipientUpdateTemplateRecipientFields(BaseModel):
+class RecipientUpdateTemplateRecipientField(BaseModel):
     type: RecipientUpdateTemplateRecipientType
 
-    id: int
+    id: float
 
     secondary_id: Annotated[str, pydantic.Field(alias="secondaryId")]
 
-    document_id: Annotated[Nullable[int], pydantic.Field(alias="documentId")]
+    document_id: Annotated[Nullable[float], pydantic.Field(alias="documentId")]
 
-    template_id: Annotated[Nullable[int], pydantic.Field(alias="templateId")]
+    template_id: Annotated[Nullable[float], pydantic.Field(alias="templateId")]
 
-    recipient_id: Annotated[int, pydantic.Field(alias="recipientId")]
+    recipient_id: Annotated[float, pydantic.Field(alias="recipientId")]
 
     page: float
     r"""The page number of the field on the document. Starts from 1."""
@@ -717,7 +752,7 @@ class RecipientUpdateTemplateRecipientFields(BaseModel):
     inserted: bool
 
     field_meta: Annotated[
-        Nullable[RecipientUpdateTemplateRecipientFieldMeta],
+        Nullable[RecipientUpdateTemplateRecipientFieldMetaUnion],
         pydantic.Field(alias="fieldMeta"),
     ]
 
@@ -739,7 +774,7 @@ class RecipientUpdateTemplateRecipientFields(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -760,16 +795,16 @@ class RecipientUpdateTemplateRecipientFields(BaseModel):
         return m
 
 
-class RecipientUpdateTemplateRecipientResponseBodyTypedDict(TypedDict):
+class RecipientUpdateTemplateRecipientResponseTypedDict(TypedDict):
     r"""Successful response"""
 
-    role: RecipientUpdateTemplateRecipientTemplatesRecipientsRole
+    role: RecipientUpdateTemplateRecipientRoleResponse
     read_status: RecipientUpdateTemplateRecipientReadStatus
     signing_status: RecipientUpdateTemplateRecipientSigningStatus
     send_status: RecipientUpdateTemplateRecipientSendStatus
-    id: int
-    document_id: Nullable[int]
-    template_id: Nullable[int]
+    id: float
+    document_id: Nullable[float]
+    template_id: Nullable[float]
     email: str
     name: str
     token: str
@@ -780,13 +815,13 @@ class RecipientUpdateTemplateRecipientResponseBodyTypedDict(TypedDict):
     signing_order: Nullable[float]
     r"""The order in which the recipient should sign the document. Only works if the document is set to sequential signing."""
     rejection_reason: Nullable[str]
-    fields: List[RecipientUpdateTemplateRecipientFieldsTypedDict]
+    fields: List[RecipientUpdateTemplateRecipientFieldTypedDict]
 
 
-class RecipientUpdateTemplateRecipientResponseBody(BaseModel):
+class RecipientUpdateTemplateRecipientResponse(BaseModel):
     r"""Successful response"""
 
-    role: RecipientUpdateTemplateRecipientTemplatesRecipientsRole
+    role: RecipientUpdateTemplateRecipientRoleResponse
 
     read_status: Annotated[
         RecipientUpdateTemplateRecipientReadStatus, pydantic.Field(alias="readStatus")
@@ -801,11 +836,11 @@ class RecipientUpdateTemplateRecipientResponseBody(BaseModel):
         RecipientUpdateTemplateRecipientSendStatus, pydantic.Field(alias="sendStatus")
     ]
 
-    id: int
+    id: float
 
-    document_id: Annotated[Nullable[int], pydantic.Field(alias="documentId")]
+    document_id: Annotated[Nullable[float], pydantic.Field(alias="documentId")]
 
-    template_id: Annotated[Nullable[int], pydantic.Field(alias="templateId")]
+    template_id: Annotated[Nullable[float], pydantic.Field(alias="templateId")]
 
     email: str
 
@@ -831,7 +866,7 @@ class RecipientUpdateTemplateRecipientResponseBody(BaseModel):
 
     rejection_reason: Annotated[Nullable[str], pydantic.Field(alias="rejectionReason")]
 
-    fields: List[RecipientUpdateTemplateRecipientFields]
+    fields: List[RecipientUpdateTemplateRecipientField]
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -852,7 +887,7 @@ class RecipientUpdateTemplateRecipientResponseBody(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

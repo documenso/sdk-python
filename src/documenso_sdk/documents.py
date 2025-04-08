@@ -4,16 +4,16 @@ from .basesdk import BaseSDK
 from .sdkconfiguration import SDKConfiguration
 from documenso_sdk import models, utils
 from documenso_sdk._hooks import HookContext
-from documenso_sdk.fields import Fields
-from documenso_sdk.recipients import Recipients
+from documenso_sdk.documents_fields import DocumentsFields
+from documenso_sdk.documents_recipients import DocumentsRecipients
 from documenso_sdk.types import OptionalNullable, UNSET
 from documenso_sdk.utils import get_security_from_env
 from typing import Any, Dict, List, Mapping, Optional, Union
 
 
 class Documents(BaseSDK):
-    fields: Fields
-    recipients: Recipients
+    fields: DocumentsFields
+    recipients: DocumentsRecipients
 
     def __init__(self, sdk_config: SDKConfiguration) -> None:
         BaseSDK.__init__(self, sdk_config)
@@ -21,8 +21,8 @@ class Documents(BaseSDK):
         self._init_sdks()
 
     def _init_sdks(self):
-        self.fields = Fields(self.sdk_configuration)
-        self.recipients = Recipients(self.sdk_configuration)
+        self.fields = DocumentsFields(self.sdk_configuration)
+        self.recipients = DocumentsRecipients(self.sdk_configuration)
 
     def find(
         self,
@@ -31,8 +31,8 @@ class Documents(BaseSDK):
         page: Optional[float] = None,
         per_page: Optional[float] = None,
         template_id: Optional[float] = None,
-        source: Optional[models.Source] = None,
-        status: Optional[models.Status] = None,
+        source: Optional[models.QueryParamSource] = None,
+        status: Optional[models.QueryParamStatus] = None,
         order_by_column: Optional[models.OrderByColumn] = None,
         order_by_direction: Optional[
             models.OrderByDirection
@@ -41,7 +41,7 @@ class Documents(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentFindDocumentsResponseBody:
+    ) -> models.DocumentFindDocumentsResponse:
         r"""Find documents
 
         Find documents based on a search criteria
@@ -66,6 +66,8 @@ class Documents(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DocumentFindDocumentsRequest(
             query=query,
@@ -104,6 +106,7 @@ class Documents(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="document-findDocuments",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -118,29 +121,23 @@ class Documents(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.DocumentFindDocumentsResponseBody
+                http_res.text, models.DocumentFindDocumentsResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text, models.DocumentFindDocumentsDocumentsResponseBodyData
+                http_res.text, models.DocumentFindDocumentsBadRequestErrorData
             )
-            raise models.DocumentFindDocumentsDocumentsResponseBody(data=response_data)
+            raise models.DocumentFindDocumentsBadRequestError(data=response_data)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.DocumentFindDocumentsDocumentsResponseResponseBodyData,
+                http_res.text, models.DocumentFindDocumentsNotFoundErrorData
             )
-            raise models.DocumentFindDocumentsDocumentsResponseResponseBody(
-                data=response_data
-            )
+            raise models.DocumentFindDocumentsNotFoundError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.DocumentFindDocumentsDocumentsResponse500ResponseBodyData,
+                http_res.text, models.DocumentFindDocumentsInternalServerErrorData
             )
-            raise models.DocumentFindDocumentsDocumentsResponse500ResponseBody(
-                data=response_data
-            )
+            raise models.DocumentFindDocumentsInternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -168,8 +165,8 @@ class Documents(BaseSDK):
         page: Optional[float] = None,
         per_page: Optional[float] = None,
         template_id: Optional[float] = None,
-        source: Optional[models.Source] = None,
-        status: Optional[models.Status] = None,
+        source: Optional[models.QueryParamSource] = None,
+        status: Optional[models.QueryParamStatus] = None,
         order_by_column: Optional[models.OrderByColumn] = None,
         order_by_direction: Optional[
             models.OrderByDirection
@@ -178,7 +175,7 @@ class Documents(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentFindDocumentsResponseBody:
+    ) -> models.DocumentFindDocumentsResponse:
         r"""Find documents
 
         Find documents based on a search criteria
@@ -203,6 +200,8 @@ class Documents(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DocumentFindDocumentsRequest(
             query=query,
@@ -241,6 +240,7 @@ class Documents(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="document-findDocuments",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -255,29 +255,23 @@ class Documents(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.DocumentFindDocumentsResponseBody
+                http_res.text, models.DocumentFindDocumentsResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text, models.DocumentFindDocumentsDocumentsResponseBodyData
+                http_res.text, models.DocumentFindDocumentsBadRequestErrorData
             )
-            raise models.DocumentFindDocumentsDocumentsResponseBody(data=response_data)
+            raise models.DocumentFindDocumentsBadRequestError(data=response_data)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.DocumentFindDocumentsDocumentsResponseResponseBodyData,
+                http_res.text, models.DocumentFindDocumentsNotFoundErrorData
             )
-            raise models.DocumentFindDocumentsDocumentsResponseResponseBody(
-                data=response_data
-            )
+            raise models.DocumentFindDocumentsNotFoundError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.DocumentFindDocumentsDocumentsResponse500ResponseBodyData,
+                http_res.text, models.DocumentFindDocumentsInternalServerErrorData
             )
-            raise models.DocumentFindDocumentsDocumentsResponse500ResponseBody(
-                data=response_data
-            )
+            raise models.DocumentFindDocumentsInternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -306,7 +300,7 @@ class Documents(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentGetDocumentWithDetailsByIDResponseBody:
+    ) -> models.DocumentGetDocumentWithDetailsByIDResponse:
         r"""Get document
 
         Returns a document given an ID
@@ -324,6 +318,8 @@ class Documents(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DocumentGetDocumentWithDetailsByIDRequest(
             document_id=document_id,
@@ -355,6 +351,7 @@ class Documents(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="document-getDocumentWithDetailsById",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -369,30 +366,30 @@ class Documents(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.DocumentGetDocumentWithDetailsByIDResponseBody
+                http_res.text, models.DocumentGetDocumentWithDetailsByIDResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
                 http_res.text,
-                models.DocumentGetDocumentWithDetailsByIDDocumentsResponseBodyData,
+                models.DocumentGetDocumentWithDetailsByIDBadRequestErrorData,
             )
-            raise models.DocumentGetDocumentWithDetailsByIDDocumentsResponseBody(
+            raise models.DocumentGetDocumentWithDetailsByIDBadRequestError(
                 data=response_data
             )
         if utils.match_response(http_res, "404", "application/json"):
             response_data = utils.unmarshal_json(
                 http_res.text,
-                models.DocumentGetDocumentWithDetailsByIDDocumentsResponseResponseBodyData,
+                models.DocumentGetDocumentWithDetailsByIDNotFoundErrorData,
             )
-            raise models.DocumentGetDocumentWithDetailsByIDDocumentsResponseResponseBody(
+            raise models.DocumentGetDocumentWithDetailsByIDNotFoundError(
                 data=response_data
             )
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
                 http_res.text,
-                models.DocumentGetDocumentWithDetailsByIDDocumentsResponse500ResponseBodyData,
+                models.DocumentGetDocumentWithDetailsByIDInternalServerErrorData,
             )
-            raise models.DocumentGetDocumentWithDetailsByIDDocumentsResponse500ResponseBody(
+            raise models.DocumentGetDocumentWithDetailsByIDInternalServerError(
                 data=response_data
             )
         if utils.match_response(http_res, "4XX", "*"):
@@ -423,7 +420,7 @@ class Documents(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentGetDocumentWithDetailsByIDResponseBody:
+    ) -> models.DocumentGetDocumentWithDetailsByIDResponse:
         r"""Get document
 
         Returns a document given an ID
@@ -441,6 +438,8 @@ class Documents(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DocumentGetDocumentWithDetailsByIDRequest(
             document_id=document_id,
@@ -472,6 +471,7 @@ class Documents(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="document-getDocumentWithDetailsById",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -486,30 +486,30 @@ class Documents(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.DocumentGetDocumentWithDetailsByIDResponseBody
+                http_res.text, models.DocumentGetDocumentWithDetailsByIDResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
                 http_res.text,
-                models.DocumentGetDocumentWithDetailsByIDDocumentsResponseBodyData,
+                models.DocumentGetDocumentWithDetailsByIDBadRequestErrorData,
             )
-            raise models.DocumentGetDocumentWithDetailsByIDDocumentsResponseBody(
+            raise models.DocumentGetDocumentWithDetailsByIDBadRequestError(
                 data=response_data
             )
         if utils.match_response(http_res, "404", "application/json"):
             response_data = utils.unmarshal_json(
                 http_res.text,
-                models.DocumentGetDocumentWithDetailsByIDDocumentsResponseResponseBodyData,
+                models.DocumentGetDocumentWithDetailsByIDNotFoundErrorData,
             )
-            raise models.DocumentGetDocumentWithDetailsByIDDocumentsResponseResponseBody(
+            raise models.DocumentGetDocumentWithDetailsByIDNotFoundError(
                 data=response_data
             )
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
                 http_res.text,
-                models.DocumentGetDocumentWithDetailsByIDDocumentsResponse500ResponseBodyData,
+                models.DocumentGetDocumentWithDetailsByIDInternalServerErrorData,
             )
-            raise models.DocumentGetDocumentWithDetailsByIDDocumentsResponse500ResponseBody(
+            raise models.DocumentGetDocumentWithDetailsByIDInternalServerError(
                 data=response_data
             )
         if utils.match_response(http_res, "4XX", "*"):
@@ -537,24 +537,31 @@ class Documents(BaseSDK):
         *,
         title: str,
         external_id: Optional[str] = None,
-        visibility: Optional[models.Visibility] = None,
-        global_access_auth: Optional[models.GlobalAccessAuth] = None,
-        global_action_auth: Optional[models.GlobalActionAuth] = None,
-        form_values: Optional[
-            Union[Dict[str, models.FormValues], Dict[str, models.FormValuesTypedDict]]
+        visibility: Optional[models.VisibilityAccount] = None,
+        global_access_auth: Optional[
+            models.DocumentCreateDocumentTemporaryGlobalAccessAuthRequest
         ] = None,
-        recipients: Optional[
+        global_action_auth: Optional[models.GlobalActionAuthAccount] = None,
+        form_values: Optional[
             Union[
-                List[models.DocumentCreateDocumentTemporaryRecipients],
-                List[models.DocumentCreateDocumentTemporaryRecipientsTypedDict],
+                Dict[str, models.FormValuesRequest],
+                Dict[str, models.FormValuesRequestTypedDict],
             ]
         ] = None,
-        meta: Optional[Union[models.Meta, models.MetaTypedDict]] = None,
+        recipients: Optional[
+            Union[List[models.RecipientAccount], List[models.RecipientAccountTypedDict]]
+        ] = None,
+        meta: Optional[
+            Union[
+                models.DocumentCreateDocumentTemporaryMeta,
+                models.DocumentCreateDocumentTemporaryMetaTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentCreateDocumentTemporaryResponseBody:
+    ) -> models.DocumentCreateDocumentTemporaryResponse:
         r"""Create document
 
         You will need to upload the PDF to the provided URL returned. Note: Once V2 API is released, this will be removed since we will allow direct uploads, instead of using an upload URL.
@@ -579,8 +586,10 @@ class Documents(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.DocumentCreateDocumentTemporaryRequestBody(
+        request = models.DocumentCreateDocumentTemporaryRequest(
             title=title,
             external_id=external_id,
             visibility=visibility,
@@ -588,10 +597,11 @@ class Documents(BaseSDK):
             global_action_auth=global_action_auth,
             form_values=form_values,
             recipients=utils.get_pydantic_model(
-                recipients,
-                Optional[List[models.DocumentCreateDocumentTemporaryRecipients]],
+                recipients, Optional[List[models.RecipientAccount]]
             ),
-            meta=utils.get_pydantic_model(meta, Optional[models.Meta]),
+            meta=utils.get_pydantic_model(
+                meta, Optional[models.DocumentCreateDocumentTemporaryMeta]
+            ),
         )
 
         req = self._build_request(
@@ -612,7 +622,7 @@ class Documents(BaseSDK):
                 False,
                 False,
                 "json",
-                models.DocumentCreateDocumentTemporaryRequestBody,
+                models.DocumentCreateDocumentTemporaryRequest,
             ),
             timeout_ms=timeout_ms,
         )
@@ -627,6 +637,7 @@ class Documents(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="document-createDocumentTemporary",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -641,22 +652,21 @@ class Documents(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.DocumentCreateDocumentTemporaryResponseBody
+                http_res.text, models.DocumentCreateDocumentTemporaryResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.DocumentCreateDocumentTemporaryDocumentsResponseBodyData,
+                http_res.text, models.DocumentCreateDocumentTemporaryBadRequestErrorData
             )
-            raise models.DocumentCreateDocumentTemporaryDocumentsResponseBody(
+            raise models.DocumentCreateDocumentTemporaryBadRequestError(
                 data=response_data
             )
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
                 http_res.text,
-                models.DocumentCreateDocumentTemporaryDocumentsResponseResponseBodyData,
+                models.DocumentCreateDocumentTemporaryInternalServerErrorData,
             )
-            raise models.DocumentCreateDocumentTemporaryDocumentsResponseResponseBody(
+            raise models.DocumentCreateDocumentTemporaryInternalServerError(
                 data=response_data
             )
         if utils.match_response(http_res, "4XX", "*"):
@@ -684,24 +694,31 @@ class Documents(BaseSDK):
         *,
         title: str,
         external_id: Optional[str] = None,
-        visibility: Optional[models.Visibility] = None,
-        global_access_auth: Optional[models.GlobalAccessAuth] = None,
-        global_action_auth: Optional[models.GlobalActionAuth] = None,
-        form_values: Optional[
-            Union[Dict[str, models.FormValues], Dict[str, models.FormValuesTypedDict]]
+        visibility: Optional[models.VisibilityAccount] = None,
+        global_access_auth: Optional[
+            models.DocumentCreateDocumentTemporaryGlobalAccessAuthRequest
         ] = None,
-        recipients: Optional[
+        global_action_auth: Optional[models.GlobalActionAuthAccount] = None,
+        form_values: Optional[
             Union[
-                List[models.DocumentCreateDocumentTemporaryRecipients],
-                List[models.DocumentCreateDocumentTemporaryRecipientsTypedDict],
+                Dict[str, models.FormValuesRequest],
+                Dict[str, models.FormValuesRequestTypedDict],
             ]
         ] = None,
-        meta: Optional[Union[models.Meta, models.MetaTypedDict]] = None,
+        recipients: Optional[
+            Union[List[models.RecipientAccount], List[models.RecipientAccountTypedDict]]
+        ] = None,
+        meta: Optional[
+            Union[
+                models.DocumentCreateDocumentTemporaryMeta,
+                models.DocumentCreateDocumentTemporaryMetaTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentCreateDocumentTemporaryResponseBody:
+    ) -> models.DocumentCreateDocumentTemporaryResponse:
         r"""Create document
 
         You will need to upload the PDF to the provided URL returned. Note: Once V2 API is released, this will be removed since we will allow direct uploads, instead of using an upload URL.
@@ -726,8 +743,10 @@ class Documents(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.DocumentCreateDocumentTemporaryRequestBody(
+        request = models.DocumentCreateDocumentTemporaryRequest(
             title=title,
             external_id=external_id,
             visibility=visibility,
@@ -735,10 +754,11 @@ class Documents(BaseSDK):
             global_action_auth=global_action_auth,
             form_values=form_values,
             recipients=utils.get_pydantic_model(
-                recipients,
-                Optional[List[models.DocumentCreateDocumentTemporaryRecipients]],
+                recipients, Optional[List[models.RecipientAccount]]
             ),
-            meta=utils.get_pydantic_model(meta, Optional[models.Meta]),
+            meta=utils.get_pydantic_model(
+                meta, Optional[models.DocumentCreateDocumentTemporaryMeta]
+            ),
         )
 
         req = self._build_request_async(
@@ -759,7 +779,7 @@ class Documents(BaseSDK):
                 False,
                 False,
                 "json",
-                models.DocumentCreateDocumentTemporaryRequestBody,
+                models.DocumentCreateDocumentTemporaryRequest,
             ),
             timeout_ms=timeout_ms,
         )
@@ -774,6 +794,7 @@ class Documents(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="document-createDocumentTemporary",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -788,22 +809,21 @@ class Documents(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.DocumentCreateDocumentTemporaryResponseBody
+                http_res.text, models.DocumentCreateDocumentTemporaryResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.DocumentCreateDocumentTemporaryDocumentsResponseBodyData,
+                http_res.text, models.DocumentCreateDocumentTemporaryBadRequestErrorData
             )
-            raise models.DocumentCreateDocumentTemporaryDocumentsResponseBody(
+            raise models.DocumentCreateDocumentTemporaryBadRequestError(
                 data=response_data
             )
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
                 http_res.text,
-                models.DocumentCreateDocumentTemporaryDocumentsResponseResponseBodyData,
+                models.DocumentCreateDocumentTemporaryInternalServerErrorData,
             )
-            raise models.DocumentCreateDocumentTemporaryDocumentsResponseResponseBody(
+            raise models.DocumentCreateDocumentTemporaryInternalServerError(
                 data=response_data
             )
         if utils.match_response(http_res, "4XX", "*"):
@@ -830,18 +850,23 @@ class Documents(BaseSDK):
         self,
         *,
         document_id: float,
-        data: Optional[Union[models.Data, models.DataTypedDict]] = None,
+        data: Optional[
+            Union[
+                models.DocumentUpdateDocumentData,
+                models.DocumentUpdateDocumentDataTypedDict,
+            ]
+        ] = None,
         meta: Optional[
             Union[
-                models.DocumentSetSettingsForDocumentMeta,
-                models.DocumentSetSettingsForDocumentMetaTypedDict,
+                models.DocumentUpdateDocumentMeta,
+                models.DocumentUpdateDocumentMetaTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentSetSettingsForDocumentResponseBody:
+    ) -> models.DocumentUpdateDocumentResponse:
         r"""Update document
 
         :param document_id:
@@ -859,12 +884,16 @@ class Documents(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.DocumentSetSettingsForDocumentRequestBody(
+        request = models.DocumentUpdateDocumentRequest(
             document_id=document_id,
-            data=utils.get_pydantic_model(data, Optional[models.Data]),
+            data=utils.get_pydantic_model(
+                data, Optional[models.DocumentUpdateDocumentData]
+            ),
             meta=utils.get_pydantic_model(
-                meta, Optional[models.DocumentSetSettingsForDocumentMeta]
+                meta, Optional[models.DocumentUpdateDocumentMeta]
             ),
         )
 
@@ -882,11 +911,7 @@ class Documents(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request,
-                False,
-                False,
-                "json",
-                models.DocumentSetSettingsForDocumentRequestBody,
+                request, False, False, "json", models.DocumentUpdateDocumentRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -901,7 +926,8 @@ class Documents(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="document-setSettingsForDocument",
+                base_url=base_url or "",
+                operation_id="document-updateDocument",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -915,24 +941,18 @@ class Documents(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.DocumentSetSettingsForDocumentResponseBody
+                http_res.text, models.DocumentUpdateDocumentResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.DocumentSetSettingsForDocumentDocumentsResponseBodyData,
+                http_res.text, models.DocumentUpdateDocumentBadRequestErrorData
             )
-            raise models.DocumentSetSettingsForDocumentDocumentsResponseBody(
-                data=response_data
-            )
+            raise models.DocumentUpdateDocumentBadRequestError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.DocumentSetSettingsForDocumentDocumentsResponseResponseBodyData,
+                http_res.text, models.DocumentUpdateDocumentInternalServerErrorData
             )
-            raise models.DocumentSetSettingsForDocumentDocumentsResponseResponseBody(
-                data=response_data
-            )
+            raise models.DocumentUpdateDocumentInternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -957,18 +977,23 @@ class Documents(BaseSDK):
         self,
         *,
         document_id: float,
-        data: Optional[Union[models.Data, models.DataTypedDict]] = None,
+        data: Optional[
+            Union[
+                models.DocumentUpdateDocumentData,
+                models.DocumentUpdateDocumentDataTypedDict,
+            ]
+        ] = None,
         meta: Optional[
             Union[
-                models.DocumentSetSettingsForDocumentMeta,
-                models.DocumentSetSettingsForDocumentMetaTypedDict,
+                models.DocumentUpdateDocumentMeta,
+                models.DocumentUpdateDocumentMetaTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentSetSettingsForDocumentResponseBody:
+    ) -> models.DocumentUpdateDocumentResponse:
         r"""Update document
 
         :param document_id:
@@ -986,12 +1011,16 @@ class Documents(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.DocumentSetSettingsForDocumentRequestBody(
+        request = models.DocumentUpdateDocumentRequest(
             document_id=document_id,
-            data=utils.get_pydantic_model(data, Optional[models.Data]),
+            data=utils.get_pydantic_model(
+                data, Optional[models.DocumentUpdateDocumentData]
+            ),
             meta=utils.get_pydantic_model(
-                meta, Optional[models.DocumentSetSettingsForDocumentMeta]
+                meta, Optional[models.DocumentUpdateDocumentMeta]
             ),
         )
 
@@ -1009,11 +1038,7 @@ class Documents(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request,
-                False,
-                False,
-                "json",
-                models.DocumentSetSettingsForDocumentRequestBody,
+                request, False, False, "json", models.DocumentUpdateDocumentRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -1028,7 +1053,8 @@ class Documents(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="document-setSettingsForDocument",
+                base_url=base_url or "",
+                operation_id="document-updateDocument",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -1042,24 +1068,18 @@ class Documents(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.DocumentSetSettingsForDocumentResponseBody
+                http_res.text, models.DocumentUpdateDocumentResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.DocumentSetSettingsForDocumentDocumentsResponseBodyData,
+                http_res.text, models.DocumentUpdateDocumentBadRequestErrorData
             )
-            raise models.DocumentSetSettingsForDocumentDocumentsResponseBody(
-                data=response_data
-            )
+            raise models.DocumentUpdateDocumentBadRequestError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.DocumentSetSettingsForDocumentDocumentsResponseResponseBodyData,
+                http_res.text, models.DocumentUpdateDocumentInternalServerErrorData
             )
-            raise models.DocumentSetSettingsForDocumentDocumentsResponseResponseBody(
-                data=response_data
-            )
+            raise models.DocumentUpdateDocumentInternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -1088,7 +1108,7 @@ class Documents(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentDeleteDocumentResponseBody:
+    ) -> models.DocumentDeleteDocumentResponse:
         r"""Delete document
 
         :param document_id:
@@ -1104,8 +1124,10 @@ class Documents(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.DocumentDeleteDocumentRequestBody(
+        request = models.DocumentDeleteDocumentRequest(
             document_id=document_id,
         )
 
@@ -1123,7 +1145,7 @@ class Documents(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DocumentDeleteDocumentRequestBody
+                request, False, False, "json", models.DocumentDeleteDocumentRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -1138,6 +1160,7 @@ class Documents(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="document-deleteDocument",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1152,21 +1175,18 @@ class Documents(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.DocumentDeleteDocumentResponseBody
+                http_res.text, models.DocumentDeleteDocumentResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text, models.DocumentDeleteDocumentDocumentsResponseBodyData
+                http_res.text, models.DocumentDeleteDocumentBadRequestErrorData
             )
-            raise models.DocumentDeleteDocumentDocumentsResponseBody(data=response_data)
+            raise models.DocumentDeleteDocumentBadRequestError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.DocumentDeleteDocumentDocumentsResponseResponseBodyData,
+                http_res.text, models.DocumentDeleteDocumentInternalServerErrorData
             )
-            raise models.DocumentDeleteDocumentDocumentsResponseResponseBody(
-                data=response_data
-            )
+            raise models.DocumentDeleteDocumentInternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -1195,7 +1215,7 @@ class Documents(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentDeleteDocumentResponseBody:
+    ) -> models.DocumentDeleteDocumentResponse:
         r"""Delete document
 
         :param document_id:
@@ -1211,8 +1231,10 @@ class Documents(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.DocumentDeleteDocumentRequestBody(
+        request = models.DocumentDeleteDocumentRequest(
             document_id=document_id,
         )
 
@@ -1230,7 +1252,7 @@ class Documents(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DocumentDeleteDocumentRequestBody
+                request, False, False, "json", models.DocumentDeleteDocumentRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -1245,6 +1267,7 @@ class Documents(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="document-deleteDocument",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1259,21 +1282,18 @@ class Documents(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.DocumentDeleteDocumentResponseBody
+                http_res.text, models.DocumentDeleteDocumentResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text, models.DocumentDeleteDocumentDocumentsResponseBodyData
+                http_res.text, models.DocumentDeleteDocumentBadRequestErrorData
             )
-            raise models.DocumentDeleteDocumentDocumentsResponseBody(data=response_data)
+            raise models.DocumentDeleteDocumentBadRequestError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.DocumentDeleteDocumentDocumentsResponseResponseBodyData,
+                http_res.text, models.DocumentDeleteDocumentInternalServerErrorData
             )
-            raise models.DocumentDeleteDocumentDocumentsResponseResponseBody(
-                data=response_data
-            )
+            raise models.DocumentDeleteDocumentInternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -1303,7 +1323,7 @@ class Documents(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentMoveDocumentToTeamResponseBody:
+    ) -> models.DocumentMoveDocumentToTeamResponse:
         r"""Move document
 
         Move a document from your personal account to a team
@@ -1322,8 +1342,10 @@ class Documents(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.DocumentMoveDocumentToTeamRequestBody(
+        request = models.DocumentMoveDocumentToTeamRequest(
             document_id=document_id,
             team_id=team_id,
         )
@@ -1342,11 +1364,7 @@ class Documents(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request,
-                False,
-                False,
-                "json",
-                models.DocumentMoveDocumentToTeamRequestBody,
+                request, False, False, "json", models.DocumentMoveDocumentToTeamRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -1361,6 +1379,7 @@ class Documents(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="document-moveDocumentToTeam",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1375,22 +1394,18 @@ class Documents(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.DocumentMoveDocumentToTeamResponseBody
+                http_res.text, models.DocumentMoveDocumentToTeamResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.DocumentMoveDocumentToTeamDocumentsResponseBodyData,
+                http_res.text, models.DocumentMoveDocumentToTeamBadRequestErrorData
             )
-            raise models.DocumentMoveDocumentToTeamDocumentsResponseBody(
-                data=response_data
-            )
+            raise models.DocumentMoveDocumentToTeamBadRequestError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.DocumentMoveDocumentToTeamDocumentsResponseResponseBodyData,
+                http_res.text, models.DocumentMoveDocumentToTeamInternalServerErrorData
             )
-            raise models.DocumentMoveDocumentToTeamDocumentsResponseResponseBody(
+            raise models.DocumentMoveDocumentToTeamInternalServerError(
                 data=response_data
             )
         if utils.match_response(http_res, "4XX", "*"):
@@ -1422,7 +1437,7 @@ class Documents(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentMoveDocumentToTeamResponseBody:
+    ) -> models.DocumentMoveDocumentToTeamResponse:
         r"""Move document
 
         Move a document from your personal account to a team
@@ -1441,8 +1456,10 @@ class Documents(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.DocumentMoveDocumentToTeamRequestBody(
+        request = models.DocumentMoveDocumentToTeamRequest(
             document_id=document_id,
             team_id=team_id,
         )
@@ -1461,11 +1478,7 @@ class Documents(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request,
-                False,
-                False,
-                "json",
-                models.DocumentMoveDocumentToTeamRequestBody,
+                request, False, False, "json", models.DocumentMoveDocumentToTeamRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -1480,6 +1493,7 @@ class Documents(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="document-moveDocumentToTeam",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1494,22 +1508,18 @@ class Documents(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.DocumentMoveDocumentToTeamResponseBody
+                http_res.text, models.DocumentMoveDocumentToTeamResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.DocumentMoveDocumentToTeamDocumentsResponseBodyData,
+                http_res.text, models.DocumentMoveDocumentToTeamBadRequestErrorData
             )
-            raise models.DocumentMoveDocumentToTeamDocumentsResponseBody(
-                data=response_data
-            )
+            raise models.DocumentMoveDocumentToTeamBadRequestError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.DocumentMoveDocumentToTeamDocumentsResponseResponseBodyData,
+                http_res.text, models.DocumentMoveDocumentToTeamInternalServerErrorData
             )
-            raise models.DocumentMoveDocumentToTeamDocumentsResponseResponseBody(
+            raise models.DocumentMoveDocumentToTeamInternalServerError(
                 data=response_data
             )
         if utils.match_response(http_res, "4XX", "*"):
@@ -1546,7 +1556,7 @@ class Documents(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentSendDocumentResponseBody:
+    ) -> models.DocumentSendDocumentResponse:
         r"""Distribute document
 
         Send the document out to recipients based on your distribution method
@@ -1565,8 +1575,10 @@ class Documents(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.DocumentSendDocumentRequestBody(
+        request = models.DocumentSendDocumentRequest(
             document_id=document_id,
             meta=utils.get_pydantic_model(
                 meta, Optional[models.DocumentSendDocumentMeta]
@@ -1587,7 +1599,7 @@ class Documents(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DocumentSendDocumentRequestBody
+                request, False, False, "json", models.DocumentSendDocumentRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -1602,6 +1614,7 @@ class Documents(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="document-sendDocument",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1616,21 +1629,18 @@ class Documents(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.DocumentSendDocumentResponseBody
+                http_res.text, models.DocumentSendDocumentResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text, models.DocumentSendDocumentDocumentsResponseBodyData
+                http_res.text, models.DocumentSendDocumentBadRequestErrorData
             )
-            raise models.DocumentSendDocumentDocumentsResponseBody(data=response_data)
+            raise models.DocumentSendDocumentBadRequestError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.DocumentSendDocumentDocumentsResponseResponseBodyData,
+                http_res.text, models.DocumentSendDocumentInternalServerErrorData
             )
-            raise models.DocumentSendDocumentDocumentsResponseResponseBody(
-                data=response_data
-            )
+            raise models.DocumentSendDocumentInternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -1665,7 +1675,7 @@ class Documents(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentSendDocumentResponseBody:
+    ) -> models.DocumentSendDocumentResponse:
         r"""Distribute document
 
         Send the document out to recipients based on your distribution method
@@ -1684,8 +1694,10 @@ class Documents(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.DocumentSendDocumentRequestBody(
+        request = models.DocumentSendDocumentRequest(
             document_id=document_id,
             meta=utils.get_pydantic_model(
                 meta, Optional[models.DocumentSendDocumentMeta]
@@ -1706,7 +1718,7 @@ class Documents(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DocumentSendDocumentRequestBody
+                request, False, False, "json", models.DocumentSendDocumentRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -1721,6 +1733,7 @@ class Documents(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="document-sendDocument",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1735,21 +1748,18 @@ class Documents(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.DocumentSendDocumentResponseBody
+                http_res.text, models.DocumentSendDocumentResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text, models.DocumentSendDocumentDocumentsResponseBodyData
+                http_res.text, models.DocumentSendDocumentBadRequestErrorData
             )
-            raise models.DocumentSendDocumentDocumentsResponseBody(data=response_data)
+            raise models.DocumentSendDocumentBadRequestError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.DocumentSendDocumentDocumentsResponseResponseBodyData,
+                http_res.text, models.DocumentSendDocumentInternalServerErrorData
             )
-            raise models.DocumentSendDocumentDocumentsResponseResponseBody(
-                data=response_data
-            )
+            raise models.DocumentSendDocumentInternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -1779,7 +1789,7 @@ class Documents(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentResendDocumentResponseBody:
+    ) -> models.DocumentResendDocumentResponse:
         r"""Redistribute document
 
         Redistribute the document to the provided recipients who have not actioned the document. Will use the distribution method set in the document
@@ -1798,8 +1808,10 @@ class Documents(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.DocumentResendDocumentRequestBody(
+        request = models.DocumentResendDocumentRequest(
             document_id=document_id,
             recipients=recipients,
         )
@@ -1818,7 +1830,7 @@ class Documents(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DocumentResendDocumentRequestBody
+                request, False, False, "json", models.DocumentResendDocumentRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -1833,6 +1845,7 @@ class Documents(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="document-resendDocument",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1847,21 +1860,18 @@ class Documents(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.DocumentResendDocumentResponseBody
+                http_res.text, models.DocumentResendDocumentResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text, models.DocumentResendDocumentDocumentsResponseBodyData
+                http_res.text, models.DocumentResendDocumentBadRequestErrorData
             )
-            raise models.DocumentResendDocumentDocumentsResponseBody(data=response_data)
+            raise models.DocumentResendDocumentBadRequestError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.DocumentResendDocumentDocumentsResponseResponseBodyData,
+                http_res.text, models.DocumentResendDocumentInternalServerErrorData
             )
-            raise models.DocumentResendDocumentDocumentsResponseResponseBody(
-                data=response_data
-            )
+            raise models.DocumentResendDocumentInternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -1891,7 +1901,7 @@ class Documents(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentResendDocumentResponseBody:
+    ) -> models.DocumentResendDocumentResponse:
         r"""Redistribute document
 
         Redistribute the document to the provided recipients who have not actioned the document. Will use the distribution method set in the document
@@ -1910,8 +1920,10 @@ class Documents(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.DocumentResendDocumentRequestBody(
+        request = models.DocumentResendDocumentRequest(
             document_id=document_id,
             recipients=recipients,
         )
@@ -1930,7 +1942,7 @@ class Documents(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DocumentResendDocumentRequestBody
+                request, False, False, "json", models.DocumentResendDocumentRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -1945,6 +1957,7 @@ class Documents(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="document-resendDocument",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1959,21 +1972,18 @@ class Documents(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.DocumentResendDocumentResponseBody
+                http_res.text, models.DocumentResendDocumentResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text, models.DocumentResendDocumentDocumentsResponseBodyData
+                http_res.text, models.DocumentResendDocumentBadRequestErrorData
             )
-            raise models.DocumentResendDocumentDocumentsResponseBody(data=response_data)
+            raise models.DocumentResendDocumentBadRequestError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.DocumentResendDocumentDocumentsResponseResponseBodyData,
+                http_res.text, models.DocumentResendDocumentInternalServerErrorData
             )
-            raise models.DocumentResendDocumentDocumentsResponseResponseBody(
-                data=response_data
-            )
+            raise models.DocumentResendDocumentInternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -2002,7 +2012,7 @@ class Documents(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentDuplicateDocumentResponseBody:
+    ) -> models.DocumentDuplicateDocumentResponse:
         r"""Duplicate document
 
         :param document_id:
@@ -2018,8 +2028,10 @@ class Documents(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.DocumentDuplicateDocumentRequestBody(
+        request = models.DocumentDuplicateDocumentRequest(
             document_id=document_id,
         )
 
@@ -2037,11 +2049,7 @@ class Documents(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request,
-                False,
-                False,
-                "json",
-                models.DocumentDuplicateDocumentRequestBody,
+                request, False, False, "json", models.DocumentDuplicateDocumentRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -2056,6 +2064,7 @@ class Documents(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="document-duplicateDocument",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -2070,21 +2079,18 @@ class Documents(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.DocumentDuplicateDocumentResponseBody
+                http_res.text, models.DocumentDuplicateDocumentResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text, models.DocumentDuplicateDocumentDocumentsResponseBodyData
+                http_res.text, models.DocumentDuplicateDocumentBadRequestErrorData
             )
-            raise models.DocumentDuplicateDocumentDocumentsResponseBody(
-                data=response_data
-            )
+            raise models.DocumentDuplicateDocumentBadRequestError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.DocumentDuplicateDocumentDocumentsResponseResponseBodyData,
+                http_res.text, models.DocumentDuplicateDocumentInternalServerErrorData
             )
-            raise models.DocumentDuplicateDocumentDocumentsResponseResponseBody(
+            raise models.DocumentDuplicateDocumentInternalServerError(
                 data=response_data
             )
         if utils.match_response(http_res, "4XX", "*"):
@@ -2115,7 +2121,7 @@ class Documents(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentDuplicateDocumentResponseBody:
+    ) -> models.DocumentDuplicateDocumentResponse:
         r"""Duplicate document
 
         :param document_id:
@@ -2131,8 +2137,10 @@ class Documents(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.DocumentDuplicateDocumentRequestBody(
+        request = models.DocumentDuplicateDocumentRequest(
             document_id=document_id,
         )
 
@@ -2150,11 +2158,7 @@ class Documents(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request,
-                False,
-                False,
-                "json",
-                models.DocumentDuplicateDocumentRequestBody,
+                request, False, False, "json", models.DocumentDuplicateDocumentRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -2169,6 +2173,7 @@ class Documents(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="document-duplicateDocument",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -2183,21 +2188,18 @@ class Documents(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.DocumentDuplicateDocumentResponseBody
+                http_res.text, models.DocumentDuplicateDocumentResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text, models.DocumentDuplicateDocumentDocumentsResponseBodyData
+                http_res.text, models.DocumentDuplicateDocumentBadRequestErrorData
             )
-            raise models.DocumentDuplicateDocumentDocumentsResponseBody(
-                data=response_data
-            )
+            raise models.DocumentDuplicateDocumentBadRequestError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.DocumentDuplicateDocumentDocumentsResponseResponseBodyData,
+                http_res.text, models.DocumentDuplicateDocumentInternalServerErrorData
             )
-            raise models.DocumentDuplicateDocumentDocumentsResponseResponseBody(
+            raise models.DocumentDuplicateDocumentInternalServerError(
                 data=response_data
             )
         if utils.match_response(http_res, "4XX", "*"):

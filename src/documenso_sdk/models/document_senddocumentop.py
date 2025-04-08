@@ -39,6 +39,8 @@ class DocumentSendDocumentLanguage(str, Enum):
     EN = "en"
     FR = "fr"
     ES = "es"
+    IT = "it"
+    PL = "pl"
 
 
 class DocumentSendDocumentEmailSettingsTypedDict(TypedDict):
@@ -146,77 +148,75 @@ class DocumentSendDocumentMeta(BaseModel):
     ] = None
 
 
-class DocumentSendDocumentRequestBodyTypedDict(TypedDict):
+class DocumentSendDocumentRequestTypedDict(TypedDict):
     document_id: float
     r"""The ID of the document to send."""
     meta: NotRequired[DocumentSendDocumentMetaTypedDict]
 
 
-class DocumentSendDocumentRequestBody(BaseModel):
+class DocumentSendDocumentRequest(BaseModel):
     document_id: Annotated[float, pydantic.Field(alias="documentId")]
     r"""The ID of the document to send."""
 
     meta: Optional[DocumentSendDocumentMeta] = None
 
 
-class DocumentSendDocumentDocumentsIssuesTypedDict(TypedDict):
+class DocumentSendDocumentInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class DocumentSendDocumentDocumentsIssues(BaseModel):
+class DocumentSendDocumentInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class DocumentSendDocumentDocumentsResponseResponseBodyData(BaseModel):
+class DocumentSendDocumentInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[DocumentSendDocumentDocumentsIssues]] = None
+    issues: Optional[List[DocumentSendDocumentInternalServerErrorIssue]] = None
 
 
-class DocumentSendDocumentDocumentsResponseResponseBody(Exception):
+class DocumentSendDocumentInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: DocumentSendDocumentDocumentsResponseResponseBodyData
+    data: DocumentSendDocumentInternalServerErrorData
 
-    def __init__(self, data: DocumentSendDocumentDocumentsResponseResponseBodyData):
+    def __init__(self, data: DocumentSendDocumentInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, DocumentSendDocumentDocumentsResponseResponseBodyData
+            self.data, DocumentSendDocumentInternalServerErrorData
         )
 
 
-class DocumentSendDocumentIssuesTypedDict(TypedDict):
+class DocumentSendDocumentBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class DocumentSendDocumentIssues(BaseModel):
+class DocumentSendDocumentBadRequestIssue(BaseModel):
     message: str
 
 
-class DocumentSendDocumentDocumentsResponseBodyData(BaseModel):
+class DocumentSendDocumentBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[DocumentSendDocumentIssues]] = None
+    issues: Optional[List[DocumentSendDocumentBadRequestIssue]] = None
 
 
-class DocumentSendDocumentDocumentsResponseBody(Exception):
+class DocumentSendDocumentBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: DocumentSendDocumentDocumentsResponseBodyData
+    data: DocumentSendDocumentBadRequestErrorData
 
-    def __init__(self, data: DocumentSendDocumentDocumentsResponseBodyData):
+    def __init__(self, data: DocumentSendDocumentBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
-        return utils.marshal_json(
-            self.data, DocumentSendDocumentDocumentsResponseBodyData
-        )
+        return utils.marshal_json(self.data, DocumentSendDocumentBadRequestErrorData)
 
 
 class DocumentSendDocumentVisibility(str, Enum):
@@ -229,6 +229,7 @@ class DocumentSendDocumentStatus(str, Enum):
     DRAFT = "DRAFT"
     PENDING = "PENDING"
     COMPLETED = "COMPLETED"
+    REJECTED = "REJECTED"
 
 
 class DocumentSendDocumentSource(str, Enum):
@@ -281,7 +282,7 @@ class DocumentSendDocumentAuthOptions(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -312,13 +313,13 @@ DocumentSendDocumentFormValues = TypeAliasType(
 )
 
 
-class DocumentSendDocumentResponseBodyTypedDict(TypedDict):
+class DocumentSendDocumentResponseTypedDict(TypedDict):
     r"""Successful response"""
 
     visibility: DocumentSendDocumentVisibility
     status: DocumentSendDocumentStatus
     source: DocumentSendDocumentSource
-    id: int
+    id: float
     external_id: Nullable[str]
     r"""A custom external ID you can use to identify the document."""
     user_id: float
@@ -331,11 +332,11 @@ class DocumentSendDocumentResponseBodyTypedDict(TypedDict):
     updated_at: str
     completed_at: Nullable[str]
     deleted_at: Nullable[str]
-    team_id: Nullable[int]
-    template_id: Nullable[int]
+    team_id: Nullable[float]
+    template_id: Nullable[float]
 
 
-class DocumentSendDocumentResponseBody(BaseModel):
+class DocumentSendDocumentResponse(BaseModel):
     r"""Successful response"""
 
     visibility: DocumentSendDocumentVisibility
@@ -344,7 +345,7 @@ class DocumentSendDocumentResponseBody(BaseModel):
 
     source: DocumentSendDocumentSource
 
-    id: int
+    id: float
 
     external_id: Annotated[Nullable[str], pydantic.Field(alias="externalId")]
     r"""A custom external ID you can use to identify the document."""
@@ -373,9 +374,9 @@ class DocumentSendDocumentResponseBody(BaseModel):
 
     deleted_at: Annotated[Nullable[str], pydantic.Field(alias="deletedAt")]
 
-    team_id: Annotated[Nullable[int], pydantic.Field(alias="teamId")]
+    team_id: Annotated[Nullable[float], pydantic.Field(alias="teamId")]
 
-    template_id: Annotated[Nullable[int], pydantic.Field(alias="templateId")]
+    template_id: Annotated[Nullable[float], pydantic.Field(alias="templateId")]
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -395,7 +396,7 @@ class DocumentSendDocumentResponseBody(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

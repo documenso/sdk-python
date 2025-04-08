@@ -4,6 +4,7 @@
 from documenso_sdk import Documenso
 import os
 
+
 with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
@@ -24,6 +25,7 @@ from documenso_sdk import Documenso
 import os
 
 async def main():
+
     async with Documenso(
         api_key=os.getenv("DOCUMENSO_API_KEY", ""),
     ) as documenso:

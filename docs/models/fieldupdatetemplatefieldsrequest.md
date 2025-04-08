@@ -1,0 +1,9 @@
+# FieldUpdateTemplateFieldsRequest
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `template_id`                                                                                        | *float*                                                                                              | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `fields`                                                                                             | List[[models.FieldUpdateTemplateFieldsFieldUnion](../models/fieldupdatetemplatefieldsfieldunion.md)] | :heavy_check_mark:                                                                                   | N/A                                                                                                  |

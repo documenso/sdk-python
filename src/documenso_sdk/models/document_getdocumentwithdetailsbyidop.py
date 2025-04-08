@@ -23,104 +23,95 @@ class DocumentGetDocumentWithDetailsByIDRequest(BaseModel):
     ]
 
 
-class DocumentGetDocumentWithDetailsByIDDocumentsResponseIssuesTypedDict(TypedDict):
+class DocumentGetDocumentWithDetailsByIDInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class DocumentGetDocumentWithDetailsByIDDocumentsResponseIssues(BaseModel):
+class DocumentGetDocumentWithDetailsByIDInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class DocumentGetDocumentWithDetailsByIDDocumentsResponse500ResponseBodyData(BaseModel):
+class DocumentGetDocumentWithDetailsByIDInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
     issues: Optional[
-        List[DocumentGetDocumentWithDetailsByIDDocumentsResponseIssues]
+        List[DocumentGetDocumentWithDetailsByIDInternalServerErrorIssue]
     ] = None
 
 
-class DocumentGetDocumentWithDetailsByIDDocumentsResponse500ResponseBody(Exception):
+class DocumentGetDocumentWithDetailsByIDInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: DocumentGetDocumentWithDetailsByIDDocumentsResponse500ResponseBodyData
+    data: DocumentGetDocumentWithDetailsByIDInternalServerErrorData
 
-    def __init__(
-        self,
-        data: DocumentGetDocumentWithDetailsByIDDocumentsResponse500ResponseBodyData,
-    ):
+    def __init__(self, data: DocumentGetDocumentWithDetailsByIDInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data,
-            DocumentGetDocumentWithDetailsByIDDocumentsResponse500ResponseBodyData,
+            self.data, DocumentGetDocumentWithDetailsByIDInternalServerErrorData
         )
 
 
-class DocumentGetDocumentWithDetailsByIDDocumentsIssuesTypedDict(TypedDict):
+class DocumentGetDocumentWithDetailsByIDNotFoundIssueTypedDict(TypedDict):
     message: str
 
 
-class DocumentGetDocumentWithDetailsByIDDocumentsIssues(BaseModel):
+class DocumentGetDocumentWithDetailsByIDNotFoundIssue(BaseModel):
     message: str
 
 
-class DocumentGetDocumentWithDetailsByIDDocumentsResponseResponseBodyData(BaseModel):
+class DocumentGetDocumentWithDetailsByIDNotFoundErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[DocumentGetDocumentWithDetailsByIDDocumentsIssues]] = None
+    issues: Optional[List[DocumentGetDocumentWithDetailsByIDNotFoundIssue]] = None
 
 
-class DocumentGetDocumentWithDetailsByIDDocumentsResponseResponseBody(Exception):
+class DocumentGetDocumentWithDetailsByIDNotFoundError(Exception):
     r"""Not found"""
 
-    data: DocumentGetDocumentWithDetailsByIDDocumentsResponseResponseBodyData
+    data: DocumentGetDocumentWithDetailsByIDNotFoundErrorData
 
-    def __init__(
-        self, data: DocumentGetDocumentWithDetailsByIDDocumentsResponseResponseBodyData
-    ):
+    def __init__(self, data: DocumentGetDocumentWithDetailsByIDNotFoundErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data,
-            DocumentGetDocumentWithDetailsByIDDocumentsResponseResponseBodyData,
+            self.data, DocumentGetDocumentWithDetailsByIDNotFoundErrorData
         )
 
 
-class DocumentGetDocumentWithDetailsByIDIssuesTypedDict(TypedDict):
+class DocumentGetDocumentWithDetailsByIDBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class DocumentGetDocumentWithDetailsByIDIssues(BaseModel):
+class DocumentGetDocumentWithDetailsByIDBadRequestIssue(BaseModel):
     message: str
 
 
-class DocumentGetDocumentWithDetailsByIDDocumentsResponseBodyData(BaseModel):
+class DocumentGetDocumentWithDetailsByIDBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[DocumentGetDocumentWithDetailsByIDIssues]] = None
+    issues: Optional[List[DocumentGetDocumentWithDetailsByIDBadRequestIssue]] = None
 
 
-class DocumentGetDocumentWithDetailsByIDDocumentsResponseBody(Exception):
+class DocumentGetDocumentWithDetailsByIDBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: DocumentGetDocumentWithDetailsByIDDocumentsResponseBodyData
+    data: DocumentGetDocumentWithDetailsByIDBadRequestErrorData
 
-    def __init__(
-        self, data: DocumentGetDocumentWithDetailsByIDDocumentsResponseBodyData
-    ):
+    def __init__(self, data: DocumentGetDocumentWithDetailsByIDBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, DocumentGetDocumentWithDetailsByIDDocumentsResponseBodyData
+            self.data, DocumentGetDocumentWithDetailsByIDBadRequestErrorData
         )
 
 
@@ -134,6 +125,7 @@ class DocumentGetDocumentWithDetailsByIDStatus(str, Enum):
     DRAFT = "DRAFT"
     PENDING = "PENDING"
     COMPLETED = "COMPLETED"
+    REJECTED = "REJECTED"
 
 
 class DocumentGetDocumentWithDetailsByIDSource(str, Enum):
@@ -156,14 +148,14 @@ class DocumentGetDocumentWithDetailsByIDGlobalActionAuth(str, Enum):
     TWO_FACTOR_AUTH = "TWO_FACTOR_AUTH"
 
 
-class AuthOptionsTypedDict(TypedDict):
+class DocumentGetDocumentWithDetailsByIDAuthOptionsTypedDict(TypedDict):
     global_access_auth: Nullable[DocumentGetDocumentWithDetailsByIDGlobalAccessAuth]
     r"""The type of authentication required for the recipient to access the document."""
     global_action_auth: Nullable[DocumentGetDocumentWithDetailsByIDGlobalActionAuth]
     r"""The type of authentication required for the recipient to sign the document. This field is restricted to Enterprise plan users only."""
 
 
-class AuthOptions(BaseModel):
+class DocumentGetDocumentWithDetailsByIDAuthOptions(BaseModel):
     global_access_auth: Annotated[
         Nullable[DocumentGetDocumentWithDetailsByIDGlobalAccessAuth],
         pydantic.Field(alias="globalAccessAuth"),
@@ -186,7 +178,7 @@ class AuthOptions(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -217,21 +209,21 @@ DocumentGetDocumentWithDetailsByIDFormValues = TypeAliasType(
 )
 
 
-class DocumentGetDocumentWithDetailsByIDDocumentsType(str, Enum):
+class DocumentGetDocumentWithDetailsByIDDocumentDataType(str, Enum):
     S3_PATH = "S3_PATH"
     BYTES = "BYTES"
     BYTES_64 = "BYTES_64"
 
 
-class DocumentDataTypedDict(TypedDict):
-    type: DocumentGetDocumentWithDetailsByIDDocumentsType
+class DocumentGetDocumentWithDetailsByIDDocumentDataTypedDict(TypedDict):
+    type: DocumentGetDocumentWithDetailsByIDDocumentDataType
     id: str
     data: str
     initial_data: str
 
 
-class DocumentData(BaseModel):
-    type: DocumentGetDocumentWithDetailsByIDDocumentsType
+class DocumentGetDocumentWithDetailsByIDDocumentData(BaseModel):
+    type: DocumentGetDocumentWithDetailsByIDDocumentDataType
 
     id: str
 
@@ -304,7 +296,7 @@ class DocumentGetDocumentWithDetailsByIDEmailSettings(BaseModel):
     r"""Whether to send an email to the document owner when the document is complete."""
 
 
-class DocumentMetaTypedDict(TypedDict):
+class DocumentGetDocumentWithDetailsByIDDocumentMetaTypedDict(TypedDict):
     signing_order: DocumentGetDocumentWithDetailsByIDSigningOrder
     distribution_method: DocumentGetDocumentWithDetailsByIDDistributionMethod
     id: str
@@ -313,14 +305,17 @@ class DocumentMetaTypedDict(TypedDict):
     timezone: Nullable[str]
     password: Nullable[str]
     date_format: Nullable[str]
-    document_id: int
+    document_id: float
     redirect_url: Nullable[str]
     typed_signature_enabled: bool
+    upload_signature_enabled: bool
+    draw_signature_enabled: bool
+    allow_dictate_next_signer: bool
     language: str
     email_settings: Nullable[DocumentGetDocumentWithDetailsByIDEmailSettingsTypedDict]
 
 
-class DocumentMeta(BaseModel):
+class DocumentGetDocumentWithDetailsByIDDocumentMeta(BaseModel):
     signing_order: Annotated[
         DocumentGetDocumentWithDetailsByIDSigningOrder,
         pydantic.Field(alias="signingOrder"),
@@ -343,12 +338,24 @@ class DocumentMeta(BaseModel):
 
     date_format: Annotated[Nullable[str], pydantic.Field(alias="dateFormat")]
 
-    document_id: Annotated[int, pydantic.Field(alias="documentId")]
+    document_id: Annotated[float, pydantic.Field(alias="documentId")]
 
     redirect_url: Annotated[Nullable[str], pydantic.Field(alias="redirectUrl")]
 
     typed_signature_enabled: Annotated[
         bool, pydantic.Field(alias="typedSignatureEnabled")
+    ]
+
+    upload_signature_enabled: Annotated[
+        bool, pydantic.Field(alias="uploadSignatureEnabled")
+    ]
+
+    draw_signature_enabled: Annotated[
+        bool, pydantic.Field(alias="drawSignatureEnabled")
+    ]
+
+    allow_dictate_next_signer: Annotated[
+        bool, pydantic.Field(alias="allowDictateNextSigner")
     ]
 
     language: str
@@ -376,7 +383,7 @@ class DocumentMeta(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -402,6 +409,7 @@ class DocumentGetDocumentWithDetailsByIDRole(str, Enum):
     SIGNER = "SIGNER"
     VIEWER = "VIEWER"
     APPROVER = "APPROVER"
+    ASSISTANT = "ASSISTANT"
 
 
 class DocumentGetDocumentWithDetailsByIDReadStatus(str, Enum):
@@ -435,14 +443,14 @@ class DocumentGetDocumentWithDetailsByIDActionAuth(str, Enum):
     EXPLICIT_NONE = "EXPLICIT_NONE"
 
 
-class DocumentGetDocumentWithDetailsByIDAuthOptionsTypedDict(TypedDict):
+class DocumentGetDocumentWithDetailsByIDRecipientAuthOptionsTypedDict(TypedDict):
     access_auth: Nullable[DocumentGetDocumentWithDetailsByIDAccessAuth]
     r"""The type of authentication required for the recipient to access the document."""
     action_auth: Nullable[DocumentGetDocumentWithDetailsByIDActionAuth]
     r"""The type of authentication required for the recipient to sign the document."""
 
 
-class DocumentGetDocumentWithDetailsByIDAuthOptions(BaseModel):
+class DocumentGetDocumentWithDetailsByIDRecipientAuthOptions(BaseModel):
     access_auth: Annotated[
         Nullable[DocumentGetDocumentWithDetailsByIDAccessAuth],
         pydantic.Field(alias="accessAuth"),
@@ -465,7 +473,7 @@ class DocumentGetDocumentWithDetailsByIDAuthOptions(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -486,27 +494,29 @@ class DocumentGetDocumentWithDetailsByIDAuthOptions(BaseModel):
         return m
 
 
-class DocumentGetDocumentWithDetailsByIDRecipientsTypedDict(TypedDict):
+class DocumentGetDocumentWithDetailsByIDRecipientTypedDict(TypedDict):
     role: DocumentGetDocumentWithDetailsByIDRole
     read_status: DocumentGetDocumentWithDetailsByIDReadStatus
     signing_status: DocumentGetDocumentWithDetailsByIDSigningStatus
     send_status: DocumentGetDocumentWithDetailsByIDSendStatus
-    id: int
-    document_id: Nullable[int]
-    template_id: Nullable[int]
+    id: float
+    document_id: Nullable[float]
+    template_id: Nullable[float]
     email: str
     name: str
     token: str
     document_deleted_at: Nullable[str]
     expired: Nullable[str]
     signed_at: Nullable[str]
-    auth_options: Nullable[DocumentGetDocumentWithDetailsByIDAuthOptionsTypedDict]
+    auth_options: Nullable[
+        DocumentGetDocumentWithDetailsByIDRecipientAuthOptionsTypedDict
+    ]
     signing_order: Nullable[float]
     r"""The order in which the recipient should sign the document. Only works if the document is set to sequential signing."""
     rejection_reason: Nullable[str]
 
 
-class DocumentGetDocumentWithDetailsByIDRecipients(BaseModel):
+class DocumentGetDocumentWithDetailsByIDRecipient(BaseModel):
     role: DocumentGetDocumentWithDetailsByIDRole
 
     read_status: Annotated[
@@ -522,11 +532,11 @@ class DocumentGetDocumentWithDetailsByIDRecipients(BaseModel):
         DocumentGetDocumentWithDetailsByIDSendStatus, pydantic.Field(alias="sendStatus")
     ]
 
-    id: int
+    id: float
 
-    document_id: Annotated[Nullable[int], pydantic.Field(alias="documentId")]
+    document_id: Annotated[Nullable[float], pydantic.Field(alias="documentId")]
 
-    template_id: Annotated[Nullable[int], pydantic.Field(alias="templateId")]
+    template_id: Annotated[Nullable[float], pydantic.Field(alias="templateId")]
 
     email: str
 
@@ -543,7 +553,7 @@ class DocumentGetDocumentWithDetailsByIDRecipients(BaseModel):
     signed_at: Annotated[Nullable[str], pydantic.Field(alias="signedAt")]
 
     auth_options: Annotated[
-        Nullable[DocumentGetDocumentWithDetailsByIDAuthOptions],
+        Nullable[DocumentGetDocumentWithDetailsByIDRecipientAuthOptions],
         pydantic.Field(alias="authOptions"),
     ]
 
@@ -571,7 +581,7 @@ class DocumentGetDocumentWithDetailsByIDRecipients(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -592,7 +602,7 @@ class DocumentGetDocumentWithDetailsByIDRecipients(BaseModel):
         return m
 
 
-class DocumentGetDocumentWithDetailsByIDType(str, Enum):
+class DocumentGetDocumentWithDetailsByIDFieldType(str, Enum):
     SIGNATURE = "SIGNATURE"
     FREE_SIGNATURE = "FREE_SIGNATURE"
     INITIALS = "INITIALS"
@@ -606,34 +616,30 @@ class DocumentGetDocumentWithDetailsByIDType(str, Enum):
     DROPDOWN = "DROPDOWN"
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponse200ApplicationJSONResponseBodyFields9Type(
-    str, Enum
-):
+class DocumentGetDocumentWithDetailsByIDTypeDropdown(str, Enum):
     DROPDOWN = "dropdown"
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMetaValuesTypedDict(TypedDict):
+class DocumentGetDocumentWithDetailsByIDValue3TypedDict(TypedDict):
     value: str
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMetaValues(BaseModel):
+class DocumentGetDocumentWithDetailsByIDValue3(BaseModel):
     value: str
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMeta9TypedDict(TypedDict):
-    type: DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponse200ApplicationJSONResponseBodyFields9Type
+class DocumentGetDocumentWithDetailsByIDFieldMetaDropdownTypedDict(TypedDict):
+    type: DocumentGetDocumentWithDetailsByIDTypeDropdown
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[
-        List[DocumentGetDocumentWithDetailsByIDFieldMetaValuesTypedDict]
-    ]
+    values: NotRequired[List[DocumentGetDocumentWithDetailsByIDValue3TypedDict]]
     default_value: NotRequired[str]
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMeta9(BaseModel):
-    type: DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponse200ApplicationJSONResponseBodyFields9Type
+class DocumentGetDocumentWithDetailsByIDFieldMetaDropdown(BaseModel):
+    type: DocumentGetDocumentWithDetailsByIDTypeDropdown
 
     label: Optional[str] = None
 
@@ -643,26 +649,22 @@ class DocumentGetDocumentWithDetailsByIDFieldMeta9(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[DocumentGetDocumentWithDetailsByIDFieldMetaValues]] = None
+    values: Optional[List[DocumentGetDocumentWithDetailsByIDValue3]] = None
 
     default_value: Annotated[Optional[str], pydantic.Field(alias="defaultValue")] = None
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponse200ApplicationJSONResponseBodyFieldsType(
-    str, Enum
-):
+class DocumentGetDocumentWithDetailsByIDTypeCheckbox(str, Enum):
     CHECKBOX = "checkbox"
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponseValuesTypedDict(
-    TypedDict
-):
+class DocumentGetDocumentWithDetailsByIDValue2TypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponseValues(BaseModel):
+class DocumentGetDocumentWithDetailsByIDValue2(BaseModel):
     id: float
 
     checked: bool
@@ -670,23 +672,19 @@ class DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponseValues(BaseMod
     value: str
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMeta8TypedDict(TypedDict):
-    type: DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponse200ApplicationJSONResponseBodyFieldsType
+class DocumentGetDocumentWithDetailsByIDFieldMetaCheckboxTypedDict(TypedDict):
+    type: DocumentGetDocumentWithDetailsByIDTypeCheckbox
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[
-        List[
-            DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponseValuesTypedDict
-        ]
-    ]
+    values: NotRequired[List[DocumentGetDocumentWithDetailsByIDValue2TypedDict]]
     validation_rule: NotRequired[str]
     validation_length: NotRequired[float]
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMeta8(BaseModel):
-    type: DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponse200ApplicationJSONResponseBodyFieldsType
+class DocumentGetDocumentWithDetailsByIDFieldMetaCheckbox(BaseModel):
+    type: DocumentGetDocumentWithDetailsByIDTypeCheckbox
 
     label: Optional[str] = None
 
@@ -696,9 +694,7 @@ class DocumentGetDocumentWithDetailsByIDFieldMeta8(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[
-        List[DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponseValues]
-    ] = None
+    values: Optional[List[DocumentGetDocumentWithDetailsByIDValue2]] = None
 
     validation_rule: Annotated[
         Optional[str], pydantic.Field(alias="validationRule")
@@ -709,19 +705,17 @@ class DocumentGetDocumentWithDetailsByIDFieldMeta8(BaseModel):
     ] = None
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponse200ApplicationJSONResponseBodyType(
-    str, Enum
-):
+class DocumentGetDocumentWithDetailsByIDTypeRadio(str, Enum):
     RADIO = "radio"
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsValuesTypedDict(TypedDict):
+class DocumentGetDocumentWithDetailsByIDValue1TypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsValues(BaseModel):
+class DocumentGetDocumentWithDetailsByIDValue1(BaseModel):
     id: float
 
     checked: bool
@@ -729,19 +723,17 @@ class DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsValues(BaseModel):
     value: str
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMeta7TypedDict(TypedDict):
-    type: DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponse200ApplicationJSONResponseBodyType
+class DocumentGetDocumentWithDetailsByIDFieldMetaRadioTypedDict(TypedDict):
+    type: DocumentGetDocumentWithDetailsByIDTypeRadio
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[
-        List[DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsValuesTypedDict]
-    ]
+    values: NotRequired[List[DocumentGetDocumentWithDetailsByIDValue1TypedDict]]
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMeta7(BaseModel):
-    type: DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponse200ApplicationJSONResponseBodyType
+class DocumentGetDocumentWithDetailsByIDFieldMetaRadio(BaseModel):
+    type: DocumentGetDocumentWithDetailsByIDTypeRadio
 
     label: Optional[str] = None
 
@@ -751,19 +743,21 @@ class DocumentGetDocumentWithDetailsByIDFieldMeta7(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[
-        List[DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsValues]
-    ] = None
+    values: Optional[List[DocumentGetDocumentWithDetailsByIDValue1]] = None
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponse200ApplicationJSONType(
-    str, Enum
-):
+class DocumentGetDocumentWithDetailsByIDTypeNumber(str, Enum):
     NUMBER = "number"
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMeta6TypedDict(TypedDict):
-    type: DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponse200ApplicationJSONType
+class DocumentGetDocumentWithDetailsByIDTextAlign6(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class DocumentGetDocumentWithDetailsByIDFieldMetaNumberTypedDict(TypedDict):
+    type: DocumentGetDocumentWithDetailsByIDTypeNumber
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -773,10 +767,11 @@ class DocumentGetDocumentWithDetailsByIDFieldMeta6TypedDict(TypedDict):
     min_value: NotRequired[float]
     max_value: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[DocumentGetDocumentWithDetailsByIDTextAlign6]
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMeta6(BaseModel):
-    type: DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponse200ApplicationJSONType
+class DocumentGetDocumentWithDetailsByIDFieldMetaNumber(BaseModel):
+    type: DocumentGetDocumentWithDetailsByIDTypeNumber
 
     label: Optional[str] = None
 
@@ -796,13 +791,24 @@ class DocumentGetDocumentWithDetailsByIDFieldMeta6(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[DocumentGetDocumentWithDetailsByIDTextAlign6],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponse200Type(str, Enum):
+
+class DocumentGetDocumentWithDetailsByIDTypeText(str, Enum):
     TEXT = "text"
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMeta5TypedDict(TypedDict):
-    type: DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponse200Type
+class DocumentGetDocumentWithDetailsByIDTextAlign5(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class DocumentGetDocumentWithDetailsByIDFieldMetaTextTypedDict(TypedDict):
+    type: DocumentGetDocumentWithDetailsByIDTypeText
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -810,10 +816,11 @@ class DocumentGetDocumentWithDetailsByIDFieldMeta5TypedDict(TypedDict):
     text: NotRequired[str]
     character_limit: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[DocumentGetDocumentWithDetailsByIDTextAlign5]
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMeta5(BaseModel):
-    type: DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponse200Type
+class DocumentGetDocumentWithDetailsByIDFieldMetaText(BaseModel):
+    type: DocumentGetDocumentWithDetailsByIDTypeText
 
     label: Optional[str] = None
 
@@ -831,22 +838,34 @@ class DocumentGetDocumentWithDetailsByIDFieldMeta5(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[DocumentGetDocumentWithDetailsByIDTextAlign5],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponseType(str, Enum):
+
+class DocumentGetDocumentWithDetailsByIDTypeDate(str, Enum):
     DATE = "date"
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMeta4TypedDict(TypedDict):
-    type: DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponseType
+class DocumentGetDocumentWithDetailsByIDTextAlign4(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class DocumentGetDocumentWithDetailsByIDFieldMetaDateTypedDict(TypedDict):
+    type: DocumentGetDocumentWithDetailsByIDTypeDate
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[DocumentGetDocumentWithDetailsByIDTextAlign4]
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMeta4(BaseModel):
-    type: DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponseType
+class DocumentGetDocumentWithDetailsByIDFieldMetaDate(BaseModel):
+    type: DocumentGetDocumentWithDetailsByIDTypeDate
 
     label: Optional[str] = None
 
@@ -858,22 +877,34 @@ class DocumentGetDocumentWithDetailsByIDFieldMeta4(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[DocumentGetDocumentWithDetailsByIDTextAlign4],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsType(str, Enum):
+
+class DocumentGetDocumentWithDetailsByIDTypeEmail(str, Enum):
     EMAIL = "email"
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMeta3TypedDict(TypedDict):
-    type: DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsType
+class DocumentGetDocumentWithDetailsByIDTextAlign3(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class DocumentGetDocumentWithDetailsByIDFieldMetaEmailTypedDict(TypedDict):
+    type: DocumentGetDocumentWithDetailsByIDTypeEmail
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[DocumentGetDocumentWithDetailsByIDTextAlign3]
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMeta3(BaseModel):
-    type: DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsType
+class DocumentGetDocumentWithDetailsByIDFieldMetaEmail(BaseModel):
+    type: DocumentGetDocumentWithDetailsByIDTypeEmail
 
     label: Optional[str] = None
 
@@ -885,22 +916,34 @@ class DocumentGetDocumentWithDetailsByIDFieldMeta3(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[DocumentGetDocumentWithDetailsByIDTextAlign3],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class DocumentGetDocumentWithDetailsByIDFieldMetaType(str, Enum):
+
+class DocumentGetDocumentWithDetailsByIDTypeName(str, Enum):
     NAME = "name"
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMeta2TypedDict(TypedDict):
-    type: DocumentGetDocumentWithDetailsByIDFieldMetaType
+class DocumentGetDocumentWithDetailsByIDTextAlign2(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class DocumentGetDocumentWithDetailsByIDFieldMetaNameTypedDict(TypedDict):
+    type: DocumentGetDocumentWithDetailsByIDTypeName
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[DocumentGetDocumentWithDetailsByIDTextAlign2]
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMeta2(BaseModel):
-    type: DocumentGetDocumentWithDetailsByIDFieldMetaType
+class DocumentGetDocumentWithDetailsByIDFieldMetaName(BaseModel):
+    type: DocumentGetDocumentWithDetailsByIDTypeName
 
     label: Optional[str] = None
 
@@ -912,24 +955,34 @@ class DocumentGetDocumentWithDetailsByIDFieldMeta2(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[DocumentGetDocumentWithDetailsByIDTextAlign2],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponse200ApplicationJSONResponseBodyFields1Type(
-    str, Enum
-):
+
+class DocumentGetDocumentWithDetailsByIDTypeInitials(str, Enum):
     INITIALS = "initials"
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMeta1TypedDict(TypedDict):
-    type: DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponse200ApplicationJSONResponseBodyFields1Type
+class DocumentGetDocumentWithDetailsByIDTextAlign1(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class DocumentGetDocumentWithDetailsByIDFieldMetaInitialsTypedDict(TypedDict):
+    type: DocumentGetDocumentWithDetailsByIDTypeInitials
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[DocumentGetDocumentWithDetailsByIDTextAlign1]
 
 
-class DocumentGetDocumentWithDetailsByIDFieldMeta1(BaseModel):
-    type: DocumentGetDocumentWithDetailsByIDFieldMetaDocumentsResponse200ApplicationJSONResponseBodyFields1Type
+class DocumentGetDocumentWithDetailsByIDFieldMetaInitials(BaseModel):
+    type: DocumentGetDocumentWithDetailsByIDTypeInitials
 
     label: Optional[str] = None
 
@@ -941,69 +994,74 @@ class DocumentGetDocumentWithDetailsByIDFieldMeta1(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[DocumentGetDocumentWithDetailsByIDTextAlign1],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-DocumentGetDocumentWithDetailsByIDFieldMetaTypedDict = TypeAliasType(
-    "DocumentGetDocumentWithDetailsByIDFieldMetaTypedDict",
+
+DocumentGetDocumentWithDetailsByIDFieldMetaUnionTypedDict = TypeAliasType(
+    "DocumentGetDocumentWithDetailsByIDFieldMetaUnionTypedDict",
     Union[
-        DocumentGetDocumentWithDetailsByIDFieldMeta1TypedDict,
-        DocumentGetDocumentWithDetailsByIDFieldMeta2TypedDict,
-        DocumentGetDocumentWithDetailsByIDFieldMeta3TypedDict,
-        DocumentGetDocumentWithDetailsByIDFieldMeta4TypedDict,
-        DocumentGetDocumentWithDetailsByIDFieldMeta7TypedDict,
-        DocumentGetDocumentWithDetailsByIDFieldMeta9TypedDict,
-        DocumentGetDocumentWithDetailsByIDFieldMeta5TypedDict,
-        DocumentGetDocumentWithDetailsByIDFieldMeta8TypedDict,
-        DocumentGetDocumentWithDetailsByIDFieldMeta6TypedDict,
+        DocumentGetDocumentWithDetailsByIDFieldMetaRadioTypedDict,
+        DocumentGetDocumentWithDetailsByIDFieldMetaInitialsTypedDict,
+        DocumentGetDocumentWithDetailsByIDFieldMetaNameTypedDict,
+        DocumentGetDocumentWithDetailsByIDFieldMetaEmailTypedDict,
+        DocumentGetDocumentWithDetailsByIDFieldMetaDateTypedDict,
+        DocumentGetDocumentWithDetailsByIDFieldMetaDropdownTypedDict,
+        DocumentGetDocumentWithDetailsByIDFieldMetaCheckboxTypedDict,
+        DocumentGetDocumentWithDetailsByIDFieldMetaTextTypedDict,
+        DocumentGetDocumentWithDetailsByIDFieldMetaNumberTypedDict,
     ],
 )
 
 
-DocumentGetDocumentWithDetailsByIDFieldMeta = TypeAliasType(
-    "DocumentGetDocumentWithDetailsByIDFieldMeta",
+DocumentGetDocumentWithDetailsByIDFieldMetaUnion = TypeAliasType(
+    "DocumentGetDocumentWithDetailsByIDFieldMetaUnion",
     Union[
-        DocumentGetDocumentWithDetailsByIDFieldMeta1,
-        DocumentGetDocumentWithDetailsByIDFieldMeta2,
-        DocumentGetDocumentWithDetailsByIDFieldMeta3,
-        DocumentGetDocumentWithDetailsByIDFieldMeta4,
-        DocumentGetDocumentWithDetailsByIDFieldMeta7,
-        DocumentGetDocumentWithDetailsByIDFieldMeta9,
-        DocumentGetDocumentWithDetailsByIDFieldMeta5,
-        DocumentGetDocumentWithDetailsByIDFieldMeta8,
-        DocumentGetDocumentWithDetailsByIDFieldMeta6,
+        DocumentGetDocumentWithDetailsByIDFieldMetaRadio,
+        DocumentGetDocumentWithDetailsByIDFieldMetaInitials,
+        DocumentGetDocumentWithDetailsByIDFieldMetaName,
+        DocumentGetDocumentWithDetailsByIDFieldMetaEmail,
+        DocumentGetDocumentWithDetailsByIDFieldMetaDate,
+        DocumentGetDocumentWithDetailsByIDFieldMetaDropdown,
+        DocumentGetDocumentWithDetailsByIDFieldMetaCheckbox,
+        DocumentGetDocumentWithDetailsByIDFieldMetaText,
+        DocumentGetDocumentWithDetailsByIDFieldMetaNumber,
     ],
 )
 
 
-class DocumentGetDocumentWithDetailsByIDFieldsTypedDict(TypedDict):
-    type: DocumentGetDocumentWithDetailsByIDType
-    id: int
+class DocumentGetDocumentWithDetailsByIDFieldTypedDict(TypedDict):
+    type: DocumentGetDocumentWithDetailsByIDFieldType
+    id: float
     secondary_id: str
-    document_id: Nullable[int]
-    template_id: Nullable[int]
-    recipient_id: int
+    document_id: Nullable[float]
+    template_id: Nullable[float]
+    recipient_id: float
     page: float
     r"""The page number of the field on the document. Starts from 1."""
     custom_text: str
     inserted: bool
-    field_meta: Nullable[DocumentGetDocumentWithDetailsByIDFieldMetaTypedDict]
+    field_meta: Nullable[DocumentGetDocumentWithDetailsByIDFieldMetaUnionTypedDict]
     position_x: NotRequired[Any]
     position_y: NotRequired[Any]
     width: NotRequired[Any]
     height: NotRequired[Any]
 
 
-class DocumentGetDocumentWithDetailsByIDFields(BaseModel):
-    type: DocumentGetDocumentWithDetailsByIDType
+class DocumentGetDocumentWithDetailsByIDField(BaseModel):
+    type: DocumentGetDocumentWithDetailsByIDFieldType
 
-    id: int
+    id: float
 
     secondary_id: Annotated[str, pydantic.Field(alias="secondaryId")]
 
-    document_id: Annotated[Nullable[int], pydantic.Field(alias="documentId")]
+    document_id: Annotated[Nullable[float], pydantic.Field(alias="documentId")]
 
-    template_id: Annotated[Nullable[int], pydantic.Field(alias="templateId")]
+    template_id: Annotated[Nullable[float], pydantic.Field(alias="templateId")]
 
-    recipient_id: Annotated[int, pydantic.Field(alias="recipientId")]
+    recipient_id: Annotated[float, pydantic.Field(alias="recipientId")]
 
     page: float
     r"""The page number of the field on the document. Starts from 1."""
@@ -1013,7 +1071,7 @@ class DocumentGetDocumentWithDetailsByIDFields(BaseModel):
     inserted: bool
 
     field_meta: Annotated[
-        Nullable[DocumentGetDocumentWithDetailsByIDFieldMeta],
+        Nullable[DocumentGetDocumentWithDetailsByIDFieldMetaUnion],
         pydantic.Field(alias="fieldMeta"),
     ]
 
@@ -1035,7 +1093,7 @@ class DocumentGetDocumentWithDetailsByIDFields(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -1056,18 +1114,18 @@ class DocumentGetDocumentWithDetailsByIDFields(BaseModel):
         return m
 
 
-class DocumentGetDocumentWithDetailsByIDResponseBodyTypedDict(TypedDict):
+class DocumentGetDocumentWithDetailsByIDResponseTypedDict(TypedDict):
     r"""Successful response"""
 
     visibility: DocumentGetDocumentWithDetailsByIDVisibility
     status: DocumentGetDocumentWithDetailsByIDStatus
     source: DocumentGetDocumentWithDetailsByIDSource
-    id: int
+    id: float
     external_id: Nullable[str]
     r"""A custom external ID you can use to identify the document."""
     user_id: float
     r"""The ID of the user that created this document."""
-    auth_options: Nullable[AuthOptionsTypedDict]
+    auth_options: Nullable[DocumentGetDocumentWithDetailsByIDAuthOptionsTypedDict]
     form_values: Nullable[
         Dict[str, DocumentGetDocumentWithDetailsByIDFormValuesTypedDict]
     ]
@@ -1077,15 +1135,15 @@ class DocumentGetDocumentWithDetailsByIDResponseBodyTypedDict(TypedDict):
     updated_at: str
     completed_at: Nullable[str]
     deleted_at: Nullable[str]
-    team_id: Nullable[int]
-    template_id: Nullable[int]
-    document_data: DocumentDataTypedDict
-    document_meta: Nullable[DocumentMetaTypedDict]
-    recipients: List[DocumentGetDocumentWithDetailsByIDRecipientsTypedDict]
-    fields: List[DocumentGetDocumentWithDetailsByIDFieldsTypedDict]
+    team_id: Nullable[float]
+    template_id: Nullable[float]
+    document_data: DocumentGetDocumentWithDetailsByIDDocumentDataTypedDict
+    document_meta: Nullable[DocumentGetDocumentWithDetailsByIDDocumentMetaTypedDict]
+    recipients: List[DocumentGetDocumentWithDetailsByIDRecipientTypedDict]
+    fields: List[DocumentGetDocumentWithDetailsByIDFieldTypedDict]
 
 
-class DocumentGetDocumentWithDetailsByIDResponseBody(BaseModel):
+class DocumentGetDocumentWithDetailsByIDResponse(BaseModel):
     r"""Successful response"""
 
     visibility: DocumentGetDocumentWithDetailsByIDVisibility
@@ -1094,7 +1152,7 @@ class DocumentGetDocumentWithDetailsByIDResponseBody(BaseModel):
 
     source: DocumentGetDocumentWithDetailsByIDSource
 
-    id: int
+    id: float
 
     external_id: Annotated[Nullable[str], pydantic.Field(alias="externalId")]
     r"""A custom external ID you can use to identify the document."""
@@ -1102,7 +1160,10 @@ class DocumentGetDocumentWithDetailsByIDResponseBody(BaseModel):
     user_id: Annotated[float, pydantic.Field(alias="userId")]
     r"""The ID of the user that created this document."""
 
-    auth_options: Annotated[Nullable[AuthOptions], pydantic.Field(alias="authOptions")]
+    auth_options: Annotated[
+        Nullable[DocumentGetDocumentWithDetailsByIDAuthOptions],
+        pydantic.Field(alias="authOptions"),
+    ]
 
     form_values: Annotated[
         Nullable[Dict[str, DocumentGetDocumentWithDetailsByIDFormValues]],
@@ -1121,19 +1182,23 @@ class DocumentGetDocumentWithDetailsByIDResponseBody(BaseModel):
 
     deleted_at: Annotated[Nullable[str], pydantic.Field(alias="deletedAt")]
 
-    team_id: Annotated[Nullable[int], pydantic.Field(alias="teamId")]
+    team_id: Annotated[Nullable[float], pydantic.Field(alias="teamId")]
 
-    template_id: Annotated[Nullable[int], pydantic.Field(alias="templateId")]
+    template_id: Annotated[Nullable[float], pydantic.Field(alias="templateId")]
 
-    document_data: Annotated[DocumentData, pydantic.Field(alias="documentData")]
-
-    document_meta: Annotated[
-        Nullable[DocumentMeta], pydantic.Field(alias="documentMeta")
+    document_data: Annotated[
+        DocumentGetDocumentWithDetailsByIDDocumentData,
+        pydantic.Field(alias="documentData"),
     ]
 
-    recipients: List[DocumentGetDocumentWithDetailsByIDRecipients]
+    document_meta: Annotated[
+        Nullable[DocumentGetDocumentWithDetailsByIDDocumentMeta],
+        pydantic.Field(alias="documentMeta"),
+    ]
 
-    fields: List[DocumentGetDocumentWithDetailsByIDFields]
+    recipients: List[DocumentGetDocumentWithDetailsByIDRecipient]
+
+    fields: List[DocumentGetDocumentWithDetailsByIDField]
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -1154,7 +1219,7 @@ class DocumentGetDocumentWithDetailsByIDResponseBody(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

@@ -8,107 +8,96 @@ from typing import List, Optional
 from typing_extensions import Annotated, TypedDict
 
 
-class TemplateToggleTemplateDirectLinkRequestBodyTypedDict(TypedDict):
+class TemplateToggleTemplateDirectLinkRequestTypedDict(TypedDict):
     template_id: float
     enabled: bool
 
 
-class TemplateToggleTemplateDirectLinkRequestBody(BaseModel):
+class TemplateToggleTemplateDirectLinkRequest(BaseModel):
     template_id: Annotated[float, pydantic.Field(alias="templateId")]
 
     enabled: bool
 
 
-class TemplateToggleTemplateDirectLinkTemplatesDirectLinkIssuesTypedDict(TypedDict):
+class TemplateToggleTemplateDirectLinkInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class TemplateToggleTemplateDirectLinkTemplatesDirectLinkIssues(BaseModel):
+class TemplateToggleTemplateDirectLinkInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class TemplateToggleTemplateDirectLinkTemplatesDirectLinkResponseResponseBodyData(
-    BaseModel
-):
+class TemplateToggleTemplateDirectLinkInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[
-        List[TemplateToggleTemplateDirectLinkTemplatesDirectLinkIssues]
-    ] = None
+    issues: Optional[List[TemplateToggleTemplateDirectLinkInternalServerErrorIssue]] = (
+        None
+    )
 
 
-class TemplateToggleTemplateDirectLinkTemplatesDirectLinkResponseResponseBody(
-    Exception
-):
+class TemplateToggleTemplateDirectLinkInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: TemplateToggleTemplateDirectLinkTemplatesDirectLinkResponseResponseBodyData
+    data: TemplateToggleTemplateDirectLinkInternalServerErrorData
 
-    def __init__(
-        self,
-        data: TemplateToggleTemplateDirectLinkTemplatesDirectLinkResponseResponseBodyData,
-    ):
+    def __init__(self, data: TemplateToggleTemplateDirectLinkInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data,
-            TemplateToggleTemplateDirectLinkTemplatesDirectLinkResponseResponseBodyData,
+            self.data, TemplateToggleTemplateDirectLinkInternalServerErrorData
         )
 
 
-class TemplateToggleTemplateDirectLinkIssuesTypedDict(TypedDict):
+class TemplateToggleTemplateDirectLinkBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class TemplateToggleTemplateDirectLinkIssues(BaseModel):
+class TemplateToggleTemplateDirectLinkBadRequestIssue(BaseModel):
     message: str
 
 
-class TemplateToggleTemplateDirectLinkTemplatesDirectLinkResponseBodyData(BaseModel):
+class TemplateToggleTemplateDirectLinkBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[TemplateToggleTemplateDirectLinkIssues]] = None
+    issues: Optional[List[TemplateToggleTemplateDirectLinkBadRequestIssue]] = None
 
 
-class TemplateToggleTemplateDirectLinkTemplatesDirectLinkResponseBody(Exception):
+class TemplateToggleTemplateDirectLinkBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: TemplateToggleTemplateDirectLinkTemplatesDirectLinkResponseBodyData
+    data: TemplateToggleTemplateDirectLinkBadRequestErrorData
 
-    def __init__(
-        self, data: TemplateToggleTemplateDirectLinkTemplatesDirectLinkResponseBodyData
-    ):
+    def __init__(self, data: TemplateToggleTemplateDirectLinkBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data,
-            TemplateToggleTemplateDirectLinkTemplatesDirectLinkResponseBodyData,
+            self.data, TemplateToggleTemplateDirectLinkBadRequestErrorData
         )
 
 
-class TemplateToggleTemplateDirectLinkResponseBodyTypedDict(TypedDict):
+class TemplateToggleTemplateDirectLinkResponseTypedDict(TypedDict):
     r"""Successful response"""
 
     id: str
-    template_id: int
+    template_id: float
     token: str
     created_at: str
     enabled: bool
-    direct_template_recipient_id: int
+    direct_template_recipient_id: float
 
 
-class TemplateToggleTemplateDirectLinkResponseBody(BaseModel):
+class TemplateToggleTemplateDirectLinkResponse(BaseModel):
     r"""Successful response"""
 
     id: str
 
-    template_id: Annotated[int, pydantic.Field(alias="templateId")]
+    template_id: Annotated[float, pydantic.Field(alias="templateId")]
 
     token: str
 
@@ -117,5 +106,5 @@ class TemplateToggleTemplateDirectLinkResponseBody(BaseModel):
     enabled: bool
 
     direct_template_recipient_id: Annotated[
-        int, pydantic.Field(alias="directTemplateRecipientId")
+        float, pydantic.Field(alias="directTemplateRecipientId")
     ]

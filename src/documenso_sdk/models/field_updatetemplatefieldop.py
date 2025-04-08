@@ -10,42 +10,34 @@ from typing import Any, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody11Type(str, Enum):
+class FieldUpdateTemplateFieldTypeDropdownRequestBody1(str, Enum):
     DROPDOWN = "DROPDOWN"
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody11FieldMetaType(
-    str, Enum
-):
+class FieldUpdateTemplateFieldTypeDropdownRequestBody2(str, Enum):
     DROPDOWN = "dropdown"
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestValuesTypedDict(TypedDict):
+class FieldUpdateTemplateFieldValueDropdownTypedDict(TypedDict):
     value: str
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestValues(BaseModel):
+class FieldUpdateTemplateFieldValueDropdown(BaseModel):
     value: str
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody11FieldMetaTypedDict(
-    TypedDict
-):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody11FieldMetaType
+class FieldUpdateTemplateFieldFieldMetaDropdownRequestBodyTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldTypeDropdownRequestBody2
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[
-        List[FieldUpdateTemplateFieldFieldTemplatesFieldsRequestValuesTypedDict]
-    ]
+    values: NotRequired[List[FieldUpdateTemplateFieldValueDropdownTypedDict]]
     default_value: NotRequired[str]
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody11FieldMeta(
-    BaseModel
-):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody11FieldMetaType
+class FieldUpdateTemplateFieldFieldMetaDropdownRequestBody(BaseModel):
+    type: FieldUpdateTemplateFieldTypeDropdownRequestBody2
 
     label: Optional[str] = None
 
@@ -55,19 +47,17 @@ class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody11FieldMeta(
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[
-        List[FieldUpdateTemplateFieldFieldTemplatesFieldsRequestValues]
-    ] = None
+    values: Optional[List[FieldUpdateTemplateFieldValueDropdown]] = None
 
     default_value: Annotated[Optional[str], pydantic.Field(alias="defaultValue")] = None
 
 
-class FieldUpdateTemplateFieldField11TypedDict(TypedDict):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody11Type
+class FieldUpdateTemplateFieldFieldDropdownTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldTypeDropdownRequestBody1
     id: float
     r"""The ID of the field to update."""
     field_meta: NotRequired[
-        FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody11FieldMetaTypedDict
+        FieldUpdateTemplateFieldFieldMetaDropdownRequestBodyTypedDict
     ]
     page_number: NotRequired[float]
     r"""The page number the field will be on."""
@@ -81,16 +71,14 @@ class FieldUpdateTemplateFieldField11TypedDict(TypedDict):
     r"""The height of the field."""
 
 
-class FieldUpdateTemplateFieldField11(BaseModel):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody11Type
+class FieldUpdateTemplateFieldFieldDropdown(BaseModel):
+    type: FieldUpdateTemplateFieldTypeDropdownRequestBody1
 
     id: float
     r"""The ID of the field to update."""
 
     field_meta: Annotated[
-        Optional[
-            FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody11FieldMeta
-        ],
+        Optional[FieldUpdateTemplateFieldFieldMetaDropdownRequestBody],
         pydantic.Field(alias="fieldMeta"),
     ] = None
 
@@ -110,23 +98,21 @@ class FieldUpdateTemplateFieldField11(BaseModel):
     r"""The height of the field."""
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody10Type(str, Enum):
+class FieldUpdateTemplateFieldTypeCheckboxRequestBody1(str, Enum):
     CHECKBOX = "CHECKBOX"
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody10FieldMetaType(
-    str, Enum
-):
+class FieldUpdateTemplateFieldTypeCheckboxRequestBody2(str, Enum):
     CHECKBOX = "checkbox"
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsValuesTypedDict(TypedDict):
+class FieldUpdateTemplateFieldValueCheckboxTypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsValues(BaseModel):
+class FieldUpdateTemplateFieldValueCheckbox(BaseModel):
     id: float
 
     checked: bool
@@ -134,25 +120,19 @@ class FieldUpdateTemplateFieldFieldTemplatesFieldsValues(BaseModel):
     value: str
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody10FieldMetaTypedDict(
-    TypedDict
-):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody10FieldMetaType
+class FieldUpdateTemplateFieldFieldMetaCheckboxRequestBodyTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldTypeCheckboxRequestBody2
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[
-        List[FieldUpdateTemplateFieldFieldTemplatesFieldsValuesTypedDict]
-    ]
+    values: NotRequired[List[FieldUpdateTemplateFieldValueCheckboxTypedDict]]
     validation_rule: NotRequired[str]
     validation_length: NotRequired[float]
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody10FieldMeta(
-    BaseModel
-):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody10FieldMetaType
+class FieldUpdateTemplateFieldFieldMetaCheckboxRequestBody(BaseModel):
+    type: FieldUpdateTemplateFieldTypeCheckboxRequestBody2
 
     label: Optional[str] = None
 
@@ -162,7 +142,7 @@ class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody10FieldMeta(
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[FieldUpdateTemplateFieldFieldTemplatesFieldsValues]] = None
+    values: Optional[List[FieldUpdateTemplateFieldValueCheckbox]] = None
 
     validation_rule: Annotated[
         Optional[str], pydantic.Field(alias="validationRule")
@@ -173,12 +153,12 @@ class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody10FieldMeta(
     ] = None
 
 
-class FieldUpdateTemplateFieldField10TypedDict(TypedDict):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody10Type
+class FieldUpdateTemplateFieldFieldCheckboxTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldTypeCheckboxRequestBody1
     id: float
     r"""The ID of the field to update."""
     field_meta: NotRequired[
-        FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody10FieldMetaTypedDict
+        FieldUpdateTemplateFieldFieldMetaCheckboxRequestBodyTypedDict
     ]
     page_number: NotRequired[float]
     r"""The page number the field will be on."""
@@ -192,16 +172,14 @@ class FieldUpdateTemplateFieldField10TypedDict(TypedDict):
     r"""The height of the field."""
 
 
-class FieldUpdateTemplateFieldField10(BaseModel):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody10Type
+class FieldUpdateTemplateFieldFieldCheckbox(BaseModel):
+    type: FieldUpdateTemplateFieldTypeCheckboxRequestBody1
 
     id: float
     r"""The ID of the field to update."""
 
     field_meta: Annotated[
-        Optional[
-            FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody10FieldMeta
-        ],
+        Optional[FieldUpdateTemplateFieldFieldMetaCheckboxRequestBody],
         pydantic.Field(alias="fieldMeta"),
     ] = None
 
@@ -221,23 +199,21 @@ class FieldUpdateTemplateFieldField10(BaseModel):
     r"""The height of the field."""
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody9Type(str, Enum):
+class FieldUpdateTemplateFieldTypeRadioRequestBody1(str, Enum):
     RADIO = "RADIO"
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody9FieldMetaType(
-    str, Enum
-):
+class FieldUpdateTemplateFieldTypeRadioRequestBody2(str, Enum):
     RADIO = "radio"
 
 
-class FieldUpdateTemplateFieldFieldValuesTypedDict(TypedDict):
+class FieldUpdateTemplateFieldValueRadioTypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class FieldUpdateTemplateFieldFieldValues(BaseModel):
+class FieldUpdateTemplateFieldValueRadio(BaseModel):
     id: float
 
     checked: bool
@@ -245,21 +221,17 @@ class FieldUpdateTemplateFieldFieldValues(BaseModel):
     value: str
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody9FieldMetaTypedDict(
-    TypedDict
-):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody9FieldMetaType
+class FieldUpdateTemplateFieldFieldMetaRadioRequestBodyTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldTypeRadioRequestBody2
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[List[FieldUpdateTemplateFieldFieldValuesTypedDict]]
+    values: NotRequired[List[FieldUpdateTemplateFieldValueRadioTypedDict]]
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody9FieldMeta(
-    BaseModel
-):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody9FieldMetaType
+class FieldUpdateTemplateFieldFieldMetaRadioRequestBody(BaseModel):
+    type: FieldUpdateTemplateFieldTypeRadioRequestBody2
 
     label: Optional[str] = None
 
@@ -269,16 +241,14 @@ class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody9FieldMeta(
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[FieldUpdateTemplateFieldFieldValues]] = None
+    values: Optional[List[FieldUpdateTemplateFieldValueRadio]] = None
 
 
-class FieldUpdateTemplateFieldField9TypedDict(TypedDict):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody9Type
+class FieldUpdateTemplateFieldFieldRadioTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldTypeRadioRequestBody1
     id: float
     r"""The ID of the field to update."""
-    field_meta: NotRequired[
-        FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody9FieldMetaTypedDict
-    ]
+    field_meta: NotRequired[FieldUpdateTemplateFieldFieldMetaRadioRequestBodyTypedDict]
     page_number: NotRequired[float]
     r"""The page number the field will be on."""
     page_x: NotRequired[float]
@@ -291,16 +261,14 @@ class FieldUpdateTemplateFieldField9TypedDict(TypedDict):
     r"""The height of the field."""
 
 
-class FieldUpdateTemplateFieldField9(BaseModel):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody9Type
+class FieldUpdateTemplateFieldFieldRadio(BaseModel):
+    type: FieldUpdateTemplateFieldTypeRadioRequestBody1
 
     id: float
     r"""The ID of the field to update."""
 
     field_meta: Annotated[
-        Optional[
-            FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody9FieldMeta
-        ],
+        Optional[FieldUpdateTemplateFieldFieldMetaRadioRequestBody],
         pydantic.Field(alias="fieldMeta"),
     ] = None
 
@@ -320,20 +288,22 @@ class FieldUpdateTemplateFieldField9(BaseModel):
     r"""The height of the field."""
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody8Type(str, Enum):
+class FieldUpdateTemplateFieldTypeNumberRequestBody1(str, Enum):
     NUMBER = "NUMBER"
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody8FieldMetaType(
-    str, Enum
-):
+class FieldUpdateTemplateFieldTypeNumberRequestBody2(str, Enum):
     NUMBER = "number"
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody8FieldMetaTypedDict(
-    TypedDict
-):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody8FieldMetaType
+class FieldUpdateTemplateFieldTextAlignNumber(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldUpdateTemplateFieldFieldMetaNumberRequestBodyTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldTypeNumberRequestBody2
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -343,12 +313,11 @@ class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody8FieldMetaTy
     min_value: NotRequired[float]
     max_value: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldUpdateTemplateFieldTextAlignNumber]
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody8FieldMeta(
-    BaseModel
-):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody8FieldMetaType
+class FieldUpdateTemplateFieldFieldMetaNumberRequestBody(BaseModel):
+    type: FieldUpdateTemplateFieldTypeNumberRequestBody2
 
     label: Optional[str] = None
 
@@ -368,14 +337,17 @@ class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody8FieldMeta(
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldUpdateTemplateFieldTextAlignNumber],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class FieldUpdateTemplateFieldField8TypedDict(TypedDict):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody8Type
+
+class FieldUpdateTemplateFieldFieldNumberTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldTypeNumberRequestBody1
     id: float
     r"""The ID of the field to update."""
-    field_meta: NotRequired[
-        FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody8FieldMetaTypedDict
-    ]
+    field_meta: NotRequired[FieldUpdateTemplateFieldFieldMetaNumberRequestBodyTypedDict]
     page_number: NotRequired[float]
     r"""The page number the field will be on."""
     page_x: NotRequired[float]
@@ -388,16 +360,14 @@ class FieldUpdateTemplateFieldField8TypedDict(TypedDict):
     r"""The height of the field."""
 
 
-class FieldUpdateTemplateFieldField8(BaseModel):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody8Type
+class FieldUpdateTemplateFieldFieldNumber(BaseModel):
+    type: FieldUpdateTemplateFieldTypeNumberRequestBody1
 
     id: float
     r"""The ID of the field to update."""
 
     field_meta: Annotated[
-        Optional[
-            FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody8FieldMeta
-        ],
+        Optional[FieldUpdateTemplateFieldFieldMetaNumberRequestBody],
         pydantic.Field(alias="fieldMeta"),
     ] = None
 
@@ -417,20 +387,22 @@ class FieldUpdateTemplateFieldField8(BaseModel):
     r"""The height of the field."""
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody7Type(str, Enum):
+class FieldUpdateTemplateFieldTypeTextRequestBody1(str, Enum):
     TEXT = "TEXT"
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody7FieldMetaType(
-    str, Enum
-):
+class FieldUpdateTemplateFieldTypeTextRequestBody2(str, Enum):
     TEXT = "text"
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody7FieldMetaTypedDict(
-    TypedDict
-):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody7FieldMetaType
+class FieldUpdateTemplateFieldTextAlignText(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldUpdateTemplateFieldFieldMetaTextRequestBodyTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldTypeTextRequestBody2
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -438,12 +410,11 @@ class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody7FieldMetaTy
     text: NotRequired[str]
     character_limit: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldUpdateTemplateFieldTextAlignText]
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody7FieldMeta(
-    BaseModel
-):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody7FieldMetaType
+class FieldUpdateTemplateFieldFieldMetaTextRequestBody(BaseModel):
+    type: FieldUpdateTemplateFieldTypeTextRequestBody2
 
     label: Optional[str] = None
 
@@ -461,14 +432,17 @@ class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody7FieldMeta(
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldUpdateTemplateFieldTextAlignText],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class FieldUpdateTemplateFieldField7TypedDict(TypedDict):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody7Type
+
+class FieldUpdateTemplateFieldFieldTextTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldTypeTextRequestBody1
     id: float
     r"""The ID of the field to update."""
-    field_meta: NotRequired[
-        FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody7FieldMetaTypedDict
-    ]
+    field_meta: NotRequired[FieldUpdateTemplateFieldFieldMetaTextRequestBodyTypedDict]
     page_number: NotRequired[float]
     r"""The page number the field will be on."""
     page_x: NotRequired[float]
@@ -481,16 +455,14 @@ class FieldUpdateTemplateFieldField7TypedDict(TypedDict):
     r"""The height of the field."""
 
 
-class FieldUpdateTemplateFieldField7(BaseModel):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody7Type
+class FieldUpdateTemplateFieldFieldText(BaseModel):
+    type: FieldUpdateTemplateFieldTypeTextRequestBody1
 
     id: float
     r"""The ID of the field to update."""
 
     field_meta: Annotated[
-        Optional[
-            FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody7FieldMeta
-        ],
+        Optional[FieldUpdateTemplateFieldFieldMetaTextRequestBody],
         pydantic.Field(alias="fieldMeta"),
     ] = None
 
@@ -510,31 +482,32 @@ class FieldUpdateTemplateFieldField7(BaseModel):
     r"""The height of the field."""
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody6Type(str, Enum):
+class FieldUpdateTemplateFieldTypeDateRequestBody1(str, Enum):
     DATE = "DATE"
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody6FieldMetaType(
-    str, Enum
-):
+class FieldUpdateTemplateFieldTypeDateRequestBody2(str, Enum):
     DATE = "date"
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBodyFieldMetaTypedDict(
-    TypedDict
-):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody6FieldMetaType
+class FieldUpdateTemplateFieldTextAlignDate(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldUpdateTemplateFieldFieldMetaDateRequestBodyTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldTypeDateRequestBody2
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldUpdateTemplateFieldTextAlignDate]
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBodyFieldMeta(
-    BaseModel
-):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody6FieldMetaType
+class FieldUpdateTemplateFieldFieldMetaDateRequestBody(BaseModel):
+    type: FieldUpdateTemplateFieldTypeDateRequestBody2
 
     label: Optional[str] = None
 
@@ -546,14 +519,17 @@ class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBodyFieldMeta(
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldUpdateTemplateFieldTextAlignDate],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class FieldUpdateTemplateFieldField6TypedDict(TypedDict):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody6Type
+
+class FieldUpdateTemplateFieldFieldDateTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldTypeDateRequestBody1
     id: float
     r"""The ID of the field to update."""
-    field_meta: NotRequired[
-        FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBodyFieldMetaTypedDict
-    ]
+    field_meta: NotRequired[FieldUpdateTemplateFieldFieldMetaDateRequestBodyTypedDict]
     page_number: NotRequired[float]
     r"""The page number the field will be on."""
     page_x: NotRequired[float]
@@ -566,16 +542,14 @@ class FieldUpdateTemplateFieldField6TypedDict(TypedDict):
     r"""The height of the field."""
 
 
-class FieldUpdateTemplateFieldField6(BaseModel):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody6Type
+class FieldUpdateTemplateFieldFieldDate(BaseModel):
+    type: FieldUpdateTemplateFieldTypeDateRequestBody1
 
     id: float
     r"""The ID of the field to update."""
 
     field_meta: Annotated[
-        Optional[
-            FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBodyFieldMeta
-        ],
+        Optional[FieldUpdateTemplateFieldFieldMetaDateRequestBody],
         pydantic.Field(alias="fieldMeta"),
     ] = None
 
@@ -595,27 +569,32 @@ class FieldUpdateTemplateFieldField6(BaseModel):
     r"""The height of the field."""
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody5Type(str, Enum):
+class FieldUpdateTemplateFieldTypeEmailRequestBody1(str, Enum):
     EMAIL = "EMAIL"
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody5FieldMetaType(
-    str, Enum
-):
+class FieldUpdateTemplateFieldTypeEmailRequestBody2(str, Enum):
     EMAIL = "email"
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestFieldMetaTypedDict(TypedDict):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody5FieldMetaType
+class FieldUpdateTemplateFieldTextAlignEmail(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldUpdateTemplateFieldFieldMetaEmailRequestBodyTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldTypeEmailRequestBody2
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldUpdateTemplateFieldTextAlignEmail]
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestFieldMeta(BaseModel):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody5FieldMetaType
+class FieldUpdateTemplateFieldFieldMetaEmailRequestBody(BaseModel):
+    type: FieldUpdateTemplateFieldTypeEmailRequestBody2
 
     label: Optional[str] = None
 
@@ -627,14 +606,17 @@ class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestFieldMeta(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldUpdateTemplateFieldTextAlignEmail],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class FieldUpdateTemplateFieldField5TypedDict(TypedDict):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody5Type
+
+class FieldUpdateTemplateFieldFieldEmailTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldTypeEmailRequestBody1
     id: float
     r"""The ID of the field to update."""
-    field_meta: NotRequired[
-        FieldUpdateTemplateFieldFieldTemplatesFieldsRequestFieldMetaTypedDict
-    ]
+    field_meta: NotRequired[FieldUpdateTemplateFieldFieldMetaEmailRequestBodyTypedDict]
     page_number: NotRequired[float]
     r"""The page number the field will be on."""
     page_x: NotRequired[float]
@@ -647,14 +629,14 @@ class FieldUpdateTemplateFieldField5TypedDict(TypedDict):
     r"""The height of the field."""
 
 
-class FieldUpdateTemplateFieldField5(BaseModel):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody5Type
+class FieldUpdateTemplateFieldFieldEmail(BaseModel):
+    type: FieldUpdateTemplateFieldTypeEmailRequestBody1
 
     id: float
     r"""The ID of the field to update."""
 
     field_meta: Annotated[
-        Optional[FieldUpdateTemplateFieldFieldTemplatesFieldsRequestFieldMeta],
+        Optional[FieldUpdateTemplateFieldFieldMetaEmailRequestBody],
         pydantic.Field(alias="fieldMeta"),
     ] = None
 
@@ -674,27 +656,32 @@ class FieldUpdateTemplateFieldField5(BaseModel):
     r"""The height of the field."""
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody4Type(str, Enum):
+class FieldUpdateTemplateFieldTypeNameRequestBody1(str, Enum):
     NAME = "NAME"
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody4FieldMetaType(
-    str, Enum
-):
+class FieldUpdateTemplateFieldTypeNameRequestBody2(str, Enum):
     NAME = "name"
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsFieldMetaTypedDict(TypedDict):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody4FieldMetaType
+class FieldUpdateTemplateFieldTextAlignName(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldUpdateTemplateFieldFieldMetaNameRequestBodyTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldTypeNameRequestBody2
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldUpdateTemplateFieldTextAlignName]
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsFieldMeta(BaseModel):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody4FieldMetaType
+class FieldUpdateTemplateFieldFieldMetaNameRequestBody(BaseModel):
+    type: FieldUpdateTemplateFieldTypeNameRequestBody2
 
     label: Optional[str] = None
 
@@ -706,13 +693,105 @@ class FieldUpdateTemplateFieldFieldTemplatesFieldsFieldMeta(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldUpdateTemplateFieldTextAlignName],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class FieldUpdateTemplateFieldField4TypedDict(TypedDict):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody4Type
+
+class FieldUpdateTemplateFieldFieldNameTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldTypeNameRequestBody1
+    id: float
+    r"""The ID of the field to update."""
+    field_meta: NotRequired[FieldUpdateTemplateFieldFieldMetaNameRequestBodyTypedDict]
+    page_number: NotRequired[float]
+    r"""The page number the field will be on."""
+    page_x: NotRequired[float]
+    r"""The X coordinate of where the field will be placed."""
+    page_y: NotRequired[float]
+    r"""The Y coordinate of where the field will be placed."""
+    width: NotRequired[float]
+    r"""The width of the field."""
+    height: NotRequired[float]
+    r"""The height of the field."""
+
+
+class FieldUpdateTemplateFieldFieldName(BaseModel):
+    type: FieldUpdateTemplateFieldTypeNameRequestBody1
+
+    id: float
+    r"""The ID of the field to update."""
+
+    field_meta: Annotated[
+        Optional[FieldUpdateTemplateFieldFieldMetaNameRequestBody],
+        pydantic.Field(alias="fieldMeta"),
+    ] = None
+
+    page_number: Annotated[Optional[float], pydantic.Field(alias="pageNumber")] = None
+    r"""The page number the field will be on."""
+
+    page_x: Annotated[Optional[float], pydantic.Field(alias="pageX")] = None
+    r"""The X coordinate of where the field will be placed."""
+
+    page_y: Annotated[Optional[float], pydantic.Field(alias="pageY")] = None
+    r"""The Y coordinate of where the field will be placed."""
+
+    width: Optional[float] = None
+    r"""The width of the field."""
+
+    height: Optional[float] = None
+    r"""The height of the field."""
+
+
+class FieldUpdateTemplateFieldTypeInitialsRequestBody1(str, Enum):
+    INITIALS = "INITIALS"
+
+
+class FieldUpdateTemplateFieldTypeInitialsRequestBody2(str, Enum):
+    INITIALS = "initials"
+
+
+class FieldUpdateTemplateFieldTextAlignInitials(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldUpdateTemplateFieldFieldMetaInitialsRequestBodyTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldTypeInitialsRequestBody2
+    label: NotRequired[str]
+    placeholder: NotRequired[str]
+    required: NotRequired[bool]
+    read_only: NotRequired[bool]
+    font_size: NotRequired[float]
+    text_align: NotRequired[FieldUpdateTemplateFieldTextAlignInitials]
+
+
+class FieldUpdateTemplateFieldFieldMetaInitialsRequestBody(BaseModel):
+    type: FieldUpdateTemplateFieldTypeInitialsRequestBody2
+
+    label: Optional[str] = None
+
+    placeholder: Optional[str] = None
+
+    required: Optional[bool] = None
+
+    read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
+
+    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
+
+    text_align: Annotated[
+        Optional[FieldUpdateTemplateFieldTextAlignInitials],
+        pydantic.Field(alias="textAlign"),
+    ] = None
+
+
+class FieldUpdateTemplateFieldFieldInitialsTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldTypeInitialsRequestBody1
     id: float
     r"""The ID of the field to update."""
     field_meta: NotRequired[
-        FieldUpdateTemplateFieldFieldTemplatesFieldsFieldMetaTypedDict
+        FieldUpdateTemplateFieldFieldMetaInitialsRequestBodyTypedDict
     ]
     page_number: NotRequired[float]
     r"""The page number the field will be on."""
@@ -726,14 +805,14 @@ class FieldUpdateTemplateFieldField4TypedDict(TypedDict):
     r"""The height of the field."""
 
 
-class FieldUpdateTemplateFieldField4(BaseModel):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBody4Type
+class FieldUpdateTemplateFieldFieldInitials(BaseModel):
+    type: FieldUpdateTemplateFieldTypeInitialsRequestBody1
 
     id: float
     r"""The ID of the field to update."""
 
     field_meta: Annotated[
-        Optional[FieldUpdateTemplateFieldFieldTemplatesFieldsFieldMeta],
+        Optional[FieldUpdateTemplateFieldFieldMetaInitialsRequestBody],
         pydantic.Field(alias="fieldMeta"),
     ] = None
 
@@ -753,87 +832,12 @@ class FieldUpdateTemplateFieldField4(BaseModel):
     r"""The height of the field."""
 
 
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestType(str, Enum):
-    INITIALS = "INITIALS"
-
-
-class FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBodyType(str, Enum):
-    INITIALS = "initials"
-
-
-class FieldUpdateTemplateFieldFieldFieldMetaTypedDict(TypedDict):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBodyType
-    label: NotRequired[str]
-    placeholder: NotRequired[str]
-    required: NotRequired[bool]
-    read_only: NotRequired[bool]
-    font_size: NotRequired[float]
-
-
-class FieldUpdateTemplateFieldFieldFieldMeta(BaseModel):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestRequestBodyType
-
-    label: Optional[str] = None
-
-    placeholder: Optional[str] = None
-
-    required: Optional[bool] = None
-
-    read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
-
-    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
-
-
-class FieldUpdateTemplateFieldField3TypedDict(TypedDict):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestType
-    id: float
-    r"""The ID of the field to update."""
-    field_meta: NotRequired[FieldUpdateTemplateFieldFieldFieldMetaTypedDict]
-    page_number: NotRequired[float]
-    r"""The page number the field will be on."""
-    page_x: NotRequired[float]
-    r"""The X coordinate of where the field will be placed."""
-    page_y: NotRequired[float]
-    r"""The Y coordinate of where the field will be placed."""
-    width: NotRequired[float]
-    r"""The width of the field."""
-    height: NotRequired[float]
-    r"""The height of the field."""
-
-
-class FieldUpdateTemplateFieldField3(BaseModel):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsRequestType
-
-    id: float
-    r"""The ID of the field to update."""
-
-    field_meta: Annotated[
-        Optional[FieldUpdateTemplateFieldFieldFieldMeta],
-        pydantic.Field(alias="fieldMeta"),
-    ] = None
-
-    page_number: Annotated[Optional[float], pydantic.Field(alias="pageNumber")] = None
-    r"""The page number the field will be on."""
-
-    page_x: Annotated[Optional[float], pydantic.Field(alias="pageX")] = None
-    r"""The X coordinate of where the field will be placed."""
-
-    page_y: Annotated[Optional[float], pydantic.Field(alias="pageY")] = None
-    r"""The Y coordinate of where the field will be placed."""
-
-    width: Optional[float] = None
-    r"""The width of the field."""
-
-    height: Optional[float] = None
-    r"""The height of the field."""
-
-
-class FieldUpdateTemplateFieldFieldTemplatesFieldsType(str, Enum):
+class FieldUpdateTemplateFieldTypeFreeSignature(str, Enum):
     FREE_SIGNATURE = "FREE_SIGNATURE"
 
 
-class FieldUpdateTemplateFieldField2TypedDict(TypedDict):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsType
+class FieldUpdateTemplateFieldFieldFreeSignatureTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldTypeFreeSignature
     id: float
     r"""The ID of the field to update."""
     page_number: NotRequired[float]
@@ -848,8 +852,8 @@ class FieldUpdateTemplateFieldField2TypedDict(TypedDict):
     r"""The height of the field."""
 
 
-class FieldUpdateTemplateFieldField2(BaseModel):
-    type: FieldUpdateTemplateFieldFieldTemplatesFieldsType
+class FieldUpdateTemplateFieldFieldFreeSignature(BaseModel):
+    type: FieldUpdateTemplateFieldTypeFreeSignature
 
     id: float
     r"""The ID of the field to update."""
@@ -870,12 +874,12 @@ class FieldUpdateTemplateFieldField2(BaseModel):
     r"""The height of the field."""
 
 
-class FieldUpdateTemplateFieldFieldType(str, Enum):
+class FieldUpdateTemplateFieldTypeSignature(str, Enum):
     SIGNATURE = "SIGNATURE"
 
 
-class FieldUpdateTemplateFieldField1TypedDict(TypedDict):
-    type: FieldUpdateTemplateFieldFieldType
+class FieldUpdateTemplateFieldFieldSignatureTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldTypeSignature
     id: float
     r"""The ID of the field to update."""
     page_number: NotRequired[float]
@@ -890,8 +894,8 @@ class FieldUpdateTemplateFieldField1TypedDict(TypedDict):
     r"""The height of the field."""
 
 
-class FieldUpdateTemplateFieldField1(BaseModel):
-    type: FieldUpdateTemplateFieldFieldType
+class FieldUpdateTemplateFieldFieldSignature(BaseModel):
+    type: FieldUpdateTemplateFieldTypeSignature
 
     id: float
     r"""The ID of the field to update."""
@@ -912,116 +916,114 @@ class FieldUpdateTemplateFieldField1(BaseModel):
     r"""The height of the field."""
 
 
-FieldUpdateTemplateFieldFieldTypedDict = TypeAliasType(
-    "FieldUpdateTemplateFieldFieldTypedDict",
+FieldUpdateTemplateFieldFieldUnionTypedDict = TypeAliasType(
+    "FieldUpdateTemplateFieldFieldUnionTypedDict",
     Union[
-        FieldUpdateTemplateFieldField1TypedDict,
-        FieldUpdateTemplateFieldField2TypedDict,
-        FieldUpdateTemplateFieldField3TypedDict,
-        FieldUpdateTemplateFieldField4TypedDict,
-        FieldUpdateTemplateFieldField5TypedDict,
-        FieldUpdateTemplateFieldField6TypedDict,
-        FieldUpdateTemplateFieldField7TypedDict,
-        FieldUpdateTemplateFieldField8TypedDict,
-        FieldUpdateTemplateFieldField9TypedDict,
-        FieldUpdateTemplateFieldField10TypedDict,
-        FieldUpdateTemplateFieldField11TypedDict,
+        FieldUpdateTemplateFieldFieldSignatureTypedDict,
+        FieldUpdateTemplateFieldFieldFreeSignatureTypedDict,
+        FieldUpdateTemplateFieldFieldInitialsTypedDict,
+        FieldUpdateTemplateFieldFieldNameTypedDict,
+        FieldUpdateTemplateFieldFieldEmailTypedDict,
+        FieldUpdateTemplateFieldFieldDateTypedDict,
+        FieldUpdateTemplateFieldFieldTextTypedDict,
+        FieldUpdateTemplateFieldFieldNumberTypedDict,
+        FieldUpdateTemplateFieldFieldRadioTypedDict,
+        FieldUpdateTemplateFieldFieldCheckboxTypedDict,
+        FieldUpdateTemplateFieldFieldDropdownTypedDict,
     ],
 )
 
 
-FieldUpdateTemplateFieldField = TypeAliasType(
-    "FieldUpdateTemplateFieldField",
+FieldUpdateTemplateFieldFieldUnion = TypeAliasType(
+    "FieldUpdateTemplateFieldFieldUnion",
     Union[
-        FieldUpdateTemplateFieldField1,
-        FieldUpdateTemplateFieldField2,
-        FieldUpdateTemplateFieldField3,
-        FieldUpdateTemplateFieldField4,
-        FieldUpdateTemplateFieldField5,
-        FieldUpdateTemplateFieldField6,
-        FieldUpdateTemplateFieldField7,
-        FieldUpdateTemplateFieldField8,
-        FieldUpdateTemplateFieldField9,
-        FieldUpdateTemplateFieldField10,
-        FieldUpdateTemplateFieldField11,
+        FieldUpdateTemplateFieldFieldSignature,
+        FieldUpdateTemplateFieldFieldFreeSignature,
+        FieldUpdateTemplateFieldFieldInitials,
+        FieldUpdateTemplateFieldFieldName,
+        FieldUpdateTemplateFieldFieldEmail,
+        FieldUpdateTemplateFieldFieldDate,
+        FieldUpdateTemplateFieldFieldText,
+        FieldUpdateTemplateFieldFieldNumber,
+        FieldUpdateTemplateFieldFieldRadio,
+        FieldUpdateTemplateFieldFieldCheckbox,
+        FieldUpdateTemplateFieldFieldDropdown,
     ],
 )
 
 
-class FieldUpdateTemplateFieldRequestBodyTypedDict(TypedDict):
+class FieldUpdateTemplateFieldRequestTypedDict(TypedDict):
     template_id: float
-    field: FieldUpdateTemplateFieldFieldTypedDict
+    field: FieldUpdateTemplateFieldFieldUnionTypedDict
 
 
-class FieldUpdateTemplateFieldRequestBody(BaseModel):
+class FieldUpdateTemplateFieldRequest(BaseModel):
     template_id: Annotated[float, pydantic.Field(alias="templateId")]
 
-    field: FieldUpdateTemplateFieldField
+    field: FieldUpdateTemplateFieldFieldUnion
 
 
-class FieldUpdateTemplateFieldTemplatesFieldsIssuesTypedDict(TypedDict):
+class FieldUpdateTemplateFieldInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class FieldUpdateTemplateFieldTemplatesFieldsIssues(BaseModel):
+class FieldUpdateTemplateFieldInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class FieldUpdateTemplateFieldTemplatesFieldsResponseResponseBodyData(BaseModel):
+class FieldUpdateTemplateFieldInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[FieldUpdateTemplateFieldTemplatesFieldsIssues]] = None
+    issues: Optional[List[FieldUpdateTemplateFieldInternalServerErrorIssue]] = None
 
 
-class FieldUpdateTemplateFieldTemplatesFieldsResponseResponseBody(Exception):
+class FieldUpdateTemplateFieldInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: FieldUpdateTemplateFieldTemplatesFieldsResponseResponseBodyData
+    data: FieldUpdateTemplateFieldInternalServerErrorData
 
-    def __init__(
-        self, data: FieldUpdateTemplateFieldTemplatesFieldsResponseResponseBodyData
-    ):
+    def __init__(self, data: FieldUpdateTemplateFieldInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, FieldUpdateTemplateFieldTemplatesFieldsResponseResponseBodyData
+            self.data, FieldUpdateTemplateFieldInternalServerErrorData
         )
 
 
-class FieldUpdateTemplateFieldIssuesTypedDict(TypedDict):
+class FieldUpdateTemplateFieldBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class FieldUpdateTemplateFieldIssues(BaseModel):
+class FieldUpdateTemplateFieldBadRequestIssue(BaseModel):
     message: str
 
 
-class FieldUpdateTemplateFieldTemplatesFieldsResponseBodyData(BaseModel):
+class FieldUpdateTemplateFieldBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[FieldUpdateTemplateFieldIssues]] = None
+    issues: Optional[List[FieldUpdateTemplateFieldBadRequestIssue]] = None
 
 
-class FieldUpdateTemplateFieldTemplatesFieldsResponseBody(Exception):
+class FieldUpdateTemplateFieldBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: FieldUpdateTemplateFieldTemplatesFieldsResponseBodyData
+    data: FieldUpdateTemplateFieldBadRequestErrorData
 
-    def __init__(self, data: FieldUpdateTemplateFieldTemplatesFieldsResponseBodyData):
+    def __init__(self, data: FieldUpdateTemplateFieldBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, FieldUpdateTemplateFieldTemplatesFieldsResponseBodyData
+            self.data, FieldUpdateTemplateFieldBadRequestErrorData
         )
 
 
-class FieldUpdateTemplateFieldType(str, Enum):
+class FieldUpdateTemplateFieldTypeResponse(str, Enum):
     SIGNATURE = "SIGNATURE"
     FREE_SIGNATURE = "FREE_SIGNATURE"
     INITIALS = "INITIALS"
@@ -1035,36 +1037,30 @@ class FieldUpdateTemplateFieldType(str, Enum):
     DROPDOWN = "DROPDOWN"
 
 
-class FieldUpdateTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONResponseBody9Type(
-    str, Enum
-):
+class FieldUpdateTemplateFieldFieldMetaTypeDropdown(str, Enum):
     DROPDOWN = "dropdown"
 
 
-class FieldUpdateTemplateFieldFieldMetaTemplatesFieldsResponseValuesTypedDict(
-    TypedDict
-):
+class FieldUpdateTemplateFieldValueResponse3TypedDict(TypedDict):
     value: str
 
 
-class FieldUpdateTemplateFieldFieldMetaTemplatesFieldsResponseValues(BaseModel):
+class FieldUpdateTemplateFieldValueResponse3(BaseModel):
     value: str
 
 
-class FieldUpdateTemplateFieldFieldMeta9TypedDict(TypedDict):
-    type: FieldUpdateTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONResponseBody9Type
+class FieldUpdateTemplateFieldFieldMetaDropdownResponseTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldFieldMetaTypeDropdown
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[
-        List[FieldUpdateTemplateFieldFieldMetaTemplatesFieldsResponseValuesTypedDict]
-    ]
+    values: NotRequired[List[FieldUpdateTemplateFieldValueResponse3TypedDict]]
     default_value: NotRequired[str]
 
 
-class FieldUpdateTemplateFieldFieldMeta9(BaseModel):
-    type: FieldUpdateTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONResponseBody9Type
+class FieldUpdateTemplateFieldFieldMetaDropdownResponse(BaseModel):
+    type: FieldUpdateTemplateFieldFieldMetaTypeDropdown
 
     label: Optional[str] = None
 
@@ -1074,26 +1070,22 @@ class FieldUpdateTemplateFieldFieldMeta9(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[
-        List[FieldUpdateTemplateFieldFieldMetaTemplatesFieldsResponseValues]
-    ] = None
+    values: Optional[List[FieldUpdateTemplateFieldValueResponse3]] = None
 
     default_value: Annotated[Optional[str], pydantic.Field(alias="defaultValue")] = None
 
 
-class FieldUpdateTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONResponseBody8Type(
-    str, Enum
-):
+class FieldUpdateTemplateFieldFieldMetaTypeCheckbox(str, Enum):
     CHECKBOX = "checkbox"
 
 
-class FieldUpdateTemplateFieldFieldMetaTemplatesFieldsValuesTypedDict(TypedDict):
+class FieldUpdateTemplateFieldValueResponse2TypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class FieldUpdateTemplateFieldFieldMetaTemplatesFieldsValues(BaseModel):
+class FieldUpdateTemplateFieldValueResponse2(BaseModel):
     id: float
 
     checked: bool
@@ -1101,21 +1093,19 @@ class FieldUpdateTemplateFieldFieldMetaTemplatesFieldsValues(BaseModel):
     value: str
 
 
-class FieldUpdateTemplateFieldFieldMeta8TypedDict(TypedDict):
-    type: FieldUpdateTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONResponseBody8Type
+class FieldUpdateTemplateFieldFieldMetaCheckboxResponseTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldFieldMetaTypeCheckbox
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[
-        List[FieldUpdateTemplateFieldFieldMetaTemplatesFieldsValuesTypedDict]
-    ]
+    values: NotRequired[List[FieldUpdateTemplateFieldValueResponse2TypedDict]]
     validation_rule: NotRequired[str]
     validation_length: NotRequired[float]
 
 
-class FieldUpdateTemplateFieldFieldMeta8(BaseModel):
-    type: FieldUpdateTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONResponseBody8Type
+class FieldUpdateTemplateFieldFieldMetaCheckboxResponse(BaseModel):
+    type: FieldUpdateTemplateFieldFieldMetaTypeCheckbox
 
     label: Optional[str] = None
 
@@ -1125,9 +1115,7 @@ class FieldUpdateTemplateFieldFieldMeta8(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[FieldUpdateTemplateFieldFieldMetaTemplatesFieldsValues]] = (
-        None
-    )
+    values: Optional[List[FieldUpdateTemplateFieldValueResponse2]] = None
 
     validation_rule: Annotated[
         Optional[str], pydantic.Field(alias="validationRule")
@@ -1138,19 +1126,17 @@ class FieldUpdateTemplateFieldFieldMeta8(BaseModel):
     ] = None
 
 
-class FieldUpdateTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONResponseBody7Type(
-    str, Enum
-):
+class FieldUpdateTemplateFieldFieldMetaTypeRadio(str, Enum):
     RADIO = "radio"
 
 
-class FieldUpdateTemplateFieldFieldMetaValuesTypedDict(TypedDict):
+class FieldUpdateTemplateFieldValueResponse1TypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class FieldUpdateTemplateFieldFieldMetaValues(BaseModel):
+class FieldUpdateTemplateFieldValueResponse1(BaseModel):
     id: float
 
     checked: bool
@@ -1158,17 +1144,17 @@ class FieldUpdateTemplateFieldFieldMetaValues(BaseModel):
     value: str
 
 
-class FieldUpdateTemplateFieldFieldMeta7TypedDict(TypedDict):
-    type: FieldUpdateTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONResponseBody7Type
+class FieldUpdateTemplateFieldFieldMetaRadioResponseTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldFieldMetaTypeRadio
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[List[FieldUpdateTemplateFieldFieldMetaValuesTypedDict]]
+    values: NotRequired[List[FieldUpdateTemplateFieldValueResponse1TypedDict]]
 
 
-class FieldUpdateTemplateFieldFieldMeta7(BaseModel):
-    type: FieldUpdateTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONResponseBody7Type
+class FieldUpdateTemplateFieldFieldMetaRadioResponse(BaseModel):
+    type: FieldUpdateTemplateFieldFieldMetaTypeRadio
 
     label: Optional[str] = None
 
@@ -1178,17 +1164,21 @@ class FieldUpdateTemplateFieldFieldMeta7(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[FieldUpdateTemplateFieldFieldMetaValues]] = None
+    values: Optional[List[FieldUpdateTemplateFieldValueResponse1]] = None
 
 
-class FieldUpdateTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONResponseBodyType(
-    str, Enum
-):
+class FieldUpdateTemplateFieldFieldMetaTypeNumber(str, Enum):
     NUMBER = "number"
 
 
-class FieldUpdateTemplateFieldFieldMeta6TypedDict(TypedDict):
-    type: FieldUpdateTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONResponseBodyType
+class FieldUpdateTemplateFieldTextAlignResponse6(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldUpdateTemplateFieldFieldMetaNumberResponseTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldFieldMetaTypeNumber
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -1198,10 +1188,11 @@ class FieldUpdateTemplateFieldFieldMeta6TypedDict(TypedDict):
     min_value: NotRequired[float]
     max_value: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldUpdateTemplateFieldTextAlignResponse6]
 
 
-class FieldUpdateTemplateFieldFieldMeta6(BaseModel):
-    type: FieldUpdateTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONResponseBodyType
+class FieldUpdateTemplateFieldFieldMetaNumberResponse(BaseModel):
+    type: FieldUpdateTemplateFieldFieldMetaTypeNumber
 
     label: Optional[str] = None
 
@@ -1221,15 +1212,24 @@ class FieldUpdateTemplateFieldFieldMeta6(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldUpdateTemplateFieldTextAlignResponse6],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class FieldUpdateTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONType(
-    str, Enum
-):
+
+class FieldUpdateTemplateFieldFieldMetaTypeText(str, Enum):
     TEXT = "text"
 
 
-class FieldUpdateTemplateFieldFieldMeta5TypedDict(TypedDict):
-    type: FieldUpdateTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONType
+class FieldUpdateTemplateFieldTextAlignResponse5(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldUpdateTemplateFieldFieldMetaTextResponseTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldFieldMetaTypeText
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -1237,10 +1237,11 @@ class FieldUpdateTemplateFieldFieldMeta5TypedDict(TypedDict):
     text: NotRequired[str]
     character_limit: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldUpdateTemplateFieldTextAlignResponse5]
 
 
-class FieldUpdateTemplateFieldFieldMeta5(BaseModel):
-    type: FieldUpdateTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONType
+class FieldUpdateTemplateFieldFieldMetaTextResponse(BaseModel):
+    type: FieldUpdateTemplateFieldFieldMetaTypeText
 
     label: Optional[str] = None
 
@@ -1258,22 +1259,34 @@ class FieldUpdateTemplateFieldFieldMeta5(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldUpdateTemplateFieldTextAlignResponse5],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class FieldUpdateTemplateFieldFieldMetaTemplatesFieldsResponse200Type(str, Enum):
+
+class FieldUpdateTemplateFieldFieldMetaTypeDate(str, Enum):
     DATE = "date"
 
 
-class FieldUpdateTemplateFieldFieldMeta4TypedDict(TypedDict):
-    type: FieldUpdateTemplateFieldFieldMetaTemplatesFieldsResponse200Type
+class FieldUpdateTemplateFieldTextAlignResponse4(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldUpdateTemplateFieldFieldMetaDateResponseTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldFieldMetaTypeDate
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldUpdateTemplateFieldTextAlignResponse4]
 
 
-class FieldUpdateTemplateFieldFieldMeta4(BaseModel):
-    type: FieldUpdateTemplateFieldFieldMetaTemplatesFieldsResponse200Type
+class FieldUpdateTemplateFieldFieldMetaDateResponse(BaseModel):
+    type: FieldUpdateTemplateFieldFieldMetaTypeDate
 
     label: Optional[str] = None
 
@@ -1285,22 +1298,34 @@ class FieldUpdateTemplateFieldFieldMeta4(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldUpdateTemplateFieldTextAlignResponse4],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class FieldUpdateTemplateFieldFieldMetaTemplatesFieldsResponseType(str, Enum):
+
+class FieldUpdateTemplateFieldFieldMetaTypeEmail(str, Enum):
     EMAIL = "email"
 
 
-class FieldUpdateTemplateFieldFieldMeta3TypedDict(TypedDict):
-    type: FieldUpdateTemplateFieldFieldMetaTemplatesFieldsResponseType
+class FieldUpdateTemplateFieldTextAlignResponse3(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldUpdateTemplateFieldFieldMetaEmailResponseTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldFieldMetaTypeEmail
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldUpdateTemplateFieldTextAlignResponse3]
 
 
-class FieldUpdateTemplateFieldFieldMeta3(BaseModel):
-    type: FieldUpdateTemplateFieldFieldMetaTemplatesFieldsResponseType
+class FieldUpdateTemplateFieldFieldMetaEmailResponse(BaseModel):
+    type: FieldUpdateTemplateFieldFieldMetaTypeEmail
 
     label: Optional[str] = None
 
@@ -1312,22 +1337,34 @@ class FieldUpdateTemplateFieldFieldMeta3(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldUpdateTemplateFieldTextAlignResponse3],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class FieldUpdateTemplateFieldFieldMetaTemplatesFieldsType(str, Enum):
+
+class FieldUpdateTemplateFieldFieldMetaTypeName(str, Enum):
     NAME = "name"
 
 
-class FieldUpdateTemplateFieldFieldMeta2TypedDict(TypedDict):
-    type: FieldUpdateTemplateFieldFieldMetaTemplatesFieldsType
+class FieldUpdateTemplateFieldTextAlignResponse2(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldUpdateTemplateFieldFieldMetaNameResponseTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldFieldMetaTypeName
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldUpdateTemplateFieldTextAlignResponse2]
 
 
-class FieldUpdateTemplateFieldFieldMeta2(BaseModel):
-    type: FieldUpdateTemplateFieldFieldMetaTemplatesFieldsType
+class FieldUpdateTemplateFieldFieldMetaNameResponse(BaseModel):
+    type: FieldUpdateTemplateFieldFieldMetaTypeName
 
     label: Optional[str] = None
 
@@ -1339,22 +1376,34 @@ class FieldUpdateTemplateFieldFieldMeta2(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldUpdateTemplateFieldTextAlignResponse2],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class FieldUpdateTemplateFieldFieldMetaType(str, Enum):
+
+class FieldUpdateTemplateFieldFieldMetaTypeInitials(str, Enum):
     INITIALS = "initials"
 
 
-class FieldUpdateTemplateFieldFieldMeta1TypedDict(TypedDict):
-    type: FieldUpdateTemplateFieldFieldMetaType
+class FieldUpdateTemplateFieldTextAlignResponse1(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldUpdateTemplateFieldFieldMetaInitialsResponseTypedDict(TypedDict):
+    type: FieldUpdateTemplateFieldFieldMetaTypeInitials
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldUpdateTemplateFieldTextAlignResponse1]
 
 
-class FieldUpdateTemplateFieldFieldMeta1(BaseModel):
-    type: FieldUpdateTemplateFieldFieldMetaType
+class FieldUpdateTemplateFieldFieldMetaInitialsResponse(BaseModel):
+    type: FieldUpdateTemplateFieldFieldMetaTypeInitials
 
     label: Optional[str] = None
 
@@ -1366,73 +1415,78 @@ class FieldUpdateTemplateFieldFieldMeta1(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldUpdateTemplateFieldTextAlignResponse1],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-FieldUpdateTemplateFieldFieldMetaTypedDict = TypeAliasType(
-    "FieldUpdateTemplateFieldFieldMetaTypedDict",
+
+FieldUpdateTemplateFieldFieldMetaUnionTypedDict = TypeAliasType(
+    "FieldUpdateTemplateFieldFieldMetaUnionTypedDict",
     Union[
-        FieldUpdateTemplateFieldFieldMeta1TypedDict,
-        FieldUpdateTemplateFieldFieldMeta2TypedDict,
-        FieldUpdateTemplateFieldFieldMeta3TypedDict,
-        FieldUpdateTemplateFieldFieldMeta4TypedDict,
-        FieldUpdateTemplateFieldFieldMeta7TypedDict,
-        FieldUpdateTemplateFieldFieldMeta9TypedDict,
-        FieldUpdateTemplateFieldFieldMeta5TypedDict,
-        FieldUpdateTemplateFieldFieldMeta8TypedDict,
-        FieldUpdateTemplateFieldFieldMeta6TypedDict,
+        FieldUpdateTemplateFieldFieldMetaRadioResponseTypedDict,
+        FieldUpdateTemplateFieldFieldMetaInitialsResponseTypedDict,
+        FieldUpdateTemplateFieldFieldMetaNameResponseTypedDict,
+        FieldUpdateTemplateFieldFieldMetaEmailResponseTypedDict,
+        FieldUpdateTemplateFieldFieldMetaDateResponseTypedDict,
+        FieldUpdateTemplateFieldFieldMetaDropdownResponseTypedDict,
+        FieldUpdateTemplateFieldFieldMetaCheckboxResponseTypedDict,
+        FieldUpdateTemplateFieldFieldMetaTextResponseTypedDict,
+        FieldUpdateTemplateFieldFieldMetaNumberResponseTypedDict,
     ],
 )
 
 
-FieldUpdateTemplateFieldFieldMeta = TypeAliasType(
-    "FieldUpdateTemplateFieldFieldMeta",
+FieldUpdateTemplateFieldFieldMetaUnion = TypeAliasType(
+    "FieldUpdateTemplateFieldFieldMetaUnion",
     Union[
-        FieldUpdateTemplateFieldFieldMeta1,
-        FieldUpdateTemplateFieldFieldMeta2,
-        FieldUpdateTemplateFieldFieldMeta3,
-        FieldUpdateTemplateFieldFieldMeta4,
-        FieldUpdateTemplateFieldFieldMeta7,
-        FieldUpdateTemplateFieldFieldMeta9,
-        FieldUpdateTemplateFieldFieldMeta5,
-        FieldUpdateTemplateFieldFieldMeta8,
-        FieldUpdateTemplateFieldFieldMeta6,
+        FieldUpdateTemplateFieldFieldMetaRadioResponse,
+        FieldUpdateTemplateFieldFieldMetaInitialsResponse,
+        FieldUpdateTemplateFieldFieldMetaNameResponse,
+        FieldUpdateTemplateFieldFieldMetaEmailResponse,
+        FieldUpdateTemplateFieldFieldMetaDateResponse,
+        FieldUpdateTemplateFieldFieldMetaDropdownResponse,
+        FieldUpdateTemplateFieldFieldMetaCheckboxResponse,
+        FieldUpdateTemplateFieldFieldMetaTextResponse,
+        FieldUpdateTemplateFieldFieldMetaNumberResponse,
     ],
 )
 
 
-class FieldUpdateTemplateFieldResponseBodyTypedDict(TypedDict):
+class FieldUpdateTemplateFieldResponseTypedDict(TypedDict):
     r"""Successful response"""
 
-    type: FieldUpdateTemplateFieldType
-    id: int
+    type: FieldUpdateTemplateFieldTypeResponse
+    id: float
     secondary_id: str
-    document_id: Nullable[int]
-    template_id: Nullable[int]
-    recipient_id: int
+    document_id: Nullable[float]
+    template_id: Nullable[float]
+    recipient_id: float
     page: float
     r"""The page number of the field on the document. Starts from 1."""
     custom_text: str
     inserted: bool
-    field_meta: Nullable[FieldUpdateTemplateFieldFieldMetaTypedDict]
+    field_meta: Nullable[FieldUpdateTemplateFieldFieldMetaUnionTypedDict]
     position_x: NotRequired[Any]
     position_y: NotRequired[Any]
     width: NotRequired[Any]
     height: NotRequired[Any]
 
 
-class FieldUpdateTemplateFieldResponseBody(BaseModel):
+class FieldUpdateTemplateFieldResponse(BaseModel):
     r"""Successful response"""
 
-    type: FieldUpdateTemplateFieldType
+    type: FieldUpdateTemplateFieldTypeResponse
 
-    id: int
+    id: float
 
     secondary_id: Annotated[str, pydantic.Field(alias="secondaryId")]
 
-    document_id: Annotated[Nullable[int], pydantic.Field(alias="documentId")]
+    document_id: Annotated[Nullable[float], pydantic.Field(alias="documentId")]
 
-    template_id: Annotated[Nullable[int], pydantic.Field(alias="templateId")]
+    template_id: Annotated[Nullable[float], pydantic.Field(alias="templateId")]
 
-    recipient_id: Annotated[int, pydantic.Field(alias="recipientId")]
+    recipient_id: Annotated[float, pydantic.Field(alias="recipientId")]
 
     page: float
     r"""The page number of the field on the document. Starts from 1."""
@@ -1442,7 +1496,8 @@ class FieldUpdateTemplateFieldResponseBody(BaseModel):
     inserted: bool
 
     field_meta: Annotated[
-        Nullable[FieldUpdateTemplateFieldFieldMeta], pydantic.Field(alias="fieldMeta")
+        Nullable[FieldUpdateTemplateFieldFieldMetaUnion],
+        pydantic.Field(alias="fieldMeta"),
     ]
 
     position_x: Annotated[Optional[Any], pydantic.Field(alias="positionX")] = None
@@ -1463,7 +1518,7 @@ class FieldUpdateTemplateFieldResponseBody(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

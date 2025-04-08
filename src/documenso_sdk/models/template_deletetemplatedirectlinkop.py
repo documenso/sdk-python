@@ -8,94 +8,83 @@ from typing import List, Optional
 from typing_extensions import Annotated, TypedDict
 
 
-class TemplateDeleteTemplateDirectLinkRequestBodyTypedDict(TypedDict):
+class TemplateDeleteTemplateDirectLinkRequestTypedDict(TypedDict):
     template_id: float
 
 
-class TemplateDeleteTemplateDirectLinkRequestBody(BaseModel):
+class TemplateDeleteTemplateDirectLinkRequest(BaseModel):
     template_id: Annotated[float, pydantic.Field(alias="templateId")]
 
 
-class TemplateDeleteTemplateDirectLinkTemplatesDirectLinkIssuesTypedDict(TypedDict):
+class TemplateDeleteTemplateDirectLinkInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class TemplateDeleteTemplateDirectLinkTemplatesDirectLinkIssues(BaseModel):
+class TemplateDeleteTemplateDirectLinkInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class TemplateDeleteTemplateDirectLinkTemplatesDirectLinkResponseResponseBodyData(
-    BaseModel
-):
+class TemplateDeleteTemplateDirectLinkInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[
-        List[TemplateDeleteTemplateDirectLinkTemplatesDirectLinkIssues]
-    ] = None
+    issues: Optional[List[TemplateDeleteTemplateDirectLinkInternalServerErrorIssue]] = (
+        None
+    )
 
 
-class TemplateDeleteTemplateDirectLinkTemplatesDirectLinkResponseResponseBody(
-    Exception
-):
+class TemplateDeleteTemplateDirectLinkInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: TemplateDeleteTemplateDirectLinkTemplatesDirectLinkResponseResponseBodyData
+    data: TemplateDeleteTemplateDirectLinkInternalServerErrorData
 
-    def __init__(
-        self,
-        data: TemplateDeleteTemplateDirectLinkTemplatesDirectLinkResponseResponseBodyData,
-    ):
+    def __init__(self, data: TemplateDeleteTemplateDirectLinkInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data,
-            TemplateDeleteTemplateDirectLinkTemplatesDirectLinkResponseResponseBodyData,
+            self.data, TemplateDeleteTemplateDirectLinkInternalServerErrorData
         )
 
 
-class TemplateDeleteTemplateDirectLinkIssuesTypedDict(TypedDict):
+class TemplateDeleteTemplateDirectLinkBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class TemplateDeleteTemplateDirectLinkIssues(BaseModel):
+class TemplateDeleteTemplateDirectLinkBadRequestIssue(BaseModel):
     message: str
 
 
-class TemplateDeleteTemplateDirectLinkTemplatesDirectLinkResponseBodyData(BaseModel):
+class TemplateDeleteTemplateDirectLinkBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[TemplateDeleteTemplateDirectLinkIssues]] = None
+    issues: Optional[List[TemplateDeleteTemplateDirectLinkBadRequestIssue]] = None
 
 
-class TemplateDeleteTemplateDirectLinkTemplatesDirectLinkResponseBody(Exception):
+class TemplateDeleteTemplateDirectLinkBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: TemplateDeleteTemplateDirectLinkTemplatesDirectLinkResponseBodyData
+    data: TemplateDeleteTemplateDirectLinkBadRequestErrorData
 
-    def __init__(
-        self, data: TemplateDeleteTemplateDirectLinkTemplatesDirectLinkResponseBodyData
-    ):
+    def __init__(self, data: TemplateDeleteTemplateDirectLinkBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data,
-            TemplateDeleteTemplateDirectLinkTemplatesDirectLinkResponseBodyData,
+            self.data, TemplateDeleteTemplateDirectLinkBadRequestErrorData
         )
 
 
-class TemplateDeleteTemplateDirectLinkResponseBodyTypedDict(TypedDict):
+class TemplateDeleteTemplateDirectLinkResponseTypedDict(TypedDict):
     r"""Successful response"""
 
     success: bool
 
 
-class TemplateDeleteTemplateDirectLinkResponseBody(BaseModel):
+class TemplateDeleteTemplateDirectLinkResponse(BaseModel):
     r"""Successful response"""
 
     success: bool

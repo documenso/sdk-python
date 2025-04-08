@@ -8,81 +8,79 @@ from typing import List, Optional
 from typing_extensions import Annotated, TypedDict
 
 
-class DocumentDeleteDocumentRequestBodyTypedDict(TypedDict):
+class DocumentDeleteDocumentRequestTypedDict(TypedDict):
     document_id: float
 
 
-class DocumentDeleteDocumentRequestBody(BaseModel):
+class DocumentDeleteDocumentRequest(BaseModel):
     document_id: Annotated[float, pydantic.Field(alias="documentId")]
 
 
-class DocumentDeleteDocumentDocumentsIssuesTypedDict(TypedDict):
+class DocumentDeleteDocumentInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class DocumentDeleteDocumentDocumentsIssues(BaseModel):
+class DocumentDeleteDocumentInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class DocumentDeleteDocumentDocumentsResponseResponseBodyData(BaseModel):
+class DocumentDeleteDocumentInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[DocumentDeleteDocumentDocumentsIssues]] = None
+    issues: Optional[List[DocumentDeleteDocumentInternalServerErrorIssue]] = None
 
 
-class DocumentDeleteDocumentDocumentsResponseResponseBody(Exception):
+class DocumentDeleteDocumentInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: DocumentDeleteDocumentDocumentsResponseResponseBodyData
+    data: DocumentDeleteDocumentInternalServerErrorData
 
-    def __init__(self, data: DocumentDeleteDocumentDocumentsResponseResponseBodyData):
+    def __init__(self, data: DocumentDeleteDocumentInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, DocumentDeleteDocumentDocumentsResponseResponseBodyData
+            self.data, DocumentDeleteDocumentInternalServerErrorData
         )
 
 
-class DocumentDeleteDocumentIssuesTypedDict(TypedDict):
+class DocumentDeleteDocumentBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class DocumentDeleteDocumentIssues(BaseModel):
+class DocumentDeleteDocumentBadRequestIssue(BaseModel):
     message: str
 
 
-class DocumentDeleteDocumentDocumentsResponseBodyData(BaseModel):
+class DocumentDeleteDocumentBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[DocumentDeleteDocumentIssues]] = None
+    issues: Optional[List[DocumentDeleteDocumentBadRequestIssue]] = None
 
 
-class DocumentDeleteDocumentDocumentsResponseBody(Exception):
+class DocumentDeleteDocumentBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: DocumentDeleteDocumentDocumentsResponseBodyData
+    data: DocumentDeleteDocumentBadRequestErrorData
 
-    def __init__(self, data: DocumentDeleteDocumentDocumentsResponseBodyData):
+    def __init__(self, data: DocumentDeleteDocumentBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
-        return utils.marshal_json(
-            self.data, DocumentDeleteDocumentDocumentsResponseBodyData
-        )
+        return utils.marshal_json(self.data, DocumentDeleteDocumentBadRequestErrorData)
 
 
-class DocumentDeleteDocumentResponseBodyTypedDict(TypedDict):
+class DocumentDeleteDocumentResponseTypedDict(TypedDict):
     r"""Successful response"""
 
     success: bool
 
 
-class DocumentDeleteDocumentResponseBody(BaseModel):
+class DocumentDeleteDocumentResponse(BaseModel):
     r"""Successful response"""
 
     success: bool

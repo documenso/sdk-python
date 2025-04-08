@@ -13,11 +13,12 @@ generation:
     nameResolutionFeb2025: true
     parameterOrderingFeb2024: true
     requestResponseComponentNamesFeb2024: true
+    securityFeb2025: false
   auth:
     oAuth2ClientCredentialsEnabled: false
     oAuth2PasswordEnabled: false
 python:
-  version: 0.0.3
+  version: 0.1.0
   additionalDependencies:
     dev: {}
     main: {}
@@ -47,5 +48,6 @@ python:
   methodArguments: infer-optional-args
   outputModelSuffix: output
   packageName: documenso_sdk
+  pytestTimeout: 0
   responseFormat: flat
   templateVersion: v2

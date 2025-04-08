@@ -10,73 +10,71 @@ from typing import List, Optional
 from typing_extensions import Annotated, TypedDict
 
 
-class TemplateDuplicateTemplateRequestBodyTypedDict(TypedDict):
+class TemplateDuplicateTemplateRequestTypedDict(TypedDict):
     template_id: float
 
 
-class TemplateDuplicateTemplateRequestBody(BaseModel):
+class TemplateDuplicateTemplateRequest(BaseModel):
     template_id: Annotated[float, pydantic.Field(alias="templateId")]
 
 
-class TemplateDuplicateTemplateTemplatesIssuesTypedDict(TypedDict):
+class TemplateDuplicateTemplateInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class TemplateDuplicateTemplateTemplatesIssues(BaseModel):
+class TemplateDuplicateTemplateInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class TemplateDuplicateTemplateTemplatesResponseResponseBodyData(BaseModel):
+class TemplateDuplicateTemplateInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[TemplateDuplicateTemplateTemplatesIssues]] = None
+    issues: Optional[List[TemplateDuplicateTemplateInternalServerErrorIssue]] = None
 
 
-class TemplateDuplicateTemplateTemplatesResponseResponseBody(Exception):
+class TemplateDuplicateTemplateInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: TemplateDuplicateTemplateTemplatesResponseResponseBodyData
+    data: TemplateDuplicateTemplateInternalServerErrorData
 
-    def __init__(
-        self, data: TemplateDuplicateTemplateTemplatesResponseResponseBodyData
-    ):
+    def __init__(self, data: TemplateDuplicateTemplateInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, TemplateDuplicateTemplateTemplatesResponseResponseBodyData
+            self.data, TemplateDuplicateTemplateInternalServerErrorData
         )
 
 
-class TemplateDuplicateTemplateIssuesTypedDict(TypedDict):
+class TemplateDuplicateTemplateBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class TemplateDuplicateTemplateIssues(BaseModel):
+class TemplateDuplicateTemplateBadRequestIssue(BaseModel):
     message: str
 
 
-class TemplateDuplicateTemplateTemplatesResponseBodyData(BaseModel):
+class TemplateDuplicateTemplateBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[TemplateDuplicateTemplateIssues]] = None
+    issues: Optional[List[TemplateDuplicateTemplateBadRequestIssue]] = None
 
 
-class TemplateDuplicateTemplateTemplatesResponseBody(Exception):
+class TemplateDuplicateTemplateBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: TemplateDuplicateTemplateTemplatesResponseBodyData
+    data: TemplateDuplicateTemplateBadRequestErrorData
 
-    def __init__(self, data: TemplateDuplicateTemplateTemplatesResponseBodyData):
+    def __init__(self, data: TemplateDuplicateTemplateBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, TemplateDuplicateTemplateTemplatesResponseBodyData
+            self.data, TemplateDuplicateTemplateBadRequestErrorData
         )
 
 
@@ -135,7 +133,7 @@ class TemplateDuplicateTemplateAuthOptions(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -156,16 +154,16 @@ class TemplateDuplicateTemplateAuthOptions(BaseModel):
         return m
 
 
-class TemplateDuplicateTemplateResponseBodyTypedDict(TypedDict):
+class TemplateDuplicateTemplateResponseTypedDict(TypedDict):
     r"""Successful response"""
 
     type: TemplateDuplicateTemplateType
     visibility: TemplateDuplicateTemplateVisibility
-    id: int
+    id: float
     external_id: Nullable[str]
     title: str
-    user_id: int
-    team_id: Nullable[int]
+    user_id: float
+    team_id: Nullable[float]
     auth_options: Nullable[TemplateDuplicateTemplateAuthOptionsTypedDict]
     template_document_data_id: str
     created_at: str
@@ -174,22 +172,22 @@ class TemplateDuplicateTemplateResponseBodyTypedDict(TypedDict):
     public_description: str
 
 
-class TemplateDuplicateTemplateResponseBody(BaseModel):
+class TemplateDuplicateTemplateResponse(BaseModel):
     r"""Successful response"""
 
     type: TemplateDuplicateTemplateType
 
     visibility: TemplateDuplicateTemplateVisibility
 
-    id: int
+    id: float
 
     external_id: Annotated[Nullable[str], pydantic.Field(alias="externalId")]
 
     title: str
 
-    user_id: Annotated[int, pydantic.Field(alias="userId")]
+    user_id: Annotated[float, pydantic.Field(alias="userId")]
 
-    team_id: Annotated[Nullable[int], pydantic.Field(alias="teamId")]
+    team_id: Annotated[Nullable[float], pydantic.Field(alias="teamId")]
 
     auth_options: Annotated[
         Nullable[TemplateDuplicateTemplateAuthOptions],
@@ -218,7 +216,7 @@ class TemplateDuplicateTemplateResponseBody(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

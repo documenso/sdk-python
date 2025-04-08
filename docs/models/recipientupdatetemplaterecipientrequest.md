@@ -1,0 +1,9 @@
+# RecipientUpdateTemplateRecipientRequest
+
+
+## Fields
+
+| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `template_id`                                                                                              | *float*                                                                                                    | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `recipient`                                                                                                | [models.RecipientUpdateTemplateRecipientRecipient](../models/recipientupdatetemplaterecipientrecipient.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |

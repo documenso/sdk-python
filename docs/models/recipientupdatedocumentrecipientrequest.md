@@ -1,0 +1,9 @@
+# RecipientUpdateDocumentRecipientRequest
+
+
+## Fields
+
+| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `document_id`                                                                                              | *float*                                                                                                    | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `recipient`                                                                                                | [models.RecipientUpdateDocumentRecipientRecipient](../models/recipientupdatedocumentrecipientrecipient.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |

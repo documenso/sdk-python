@@ -23,96 +23,90 @@ class TemplateGetTemplateByIDRequest(BaseModel):
     ]
 
 
-class TemplateGetTemplateByIDTemplatesResponseIssuesTypedDict(TypedDict):
+class TemplateGetTemplateByIDInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class TemplateGetTemplateByIDTemplatesResponseIssues(BaseModel):
+class TemplateGetTemplateByIDInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class TemplateGetTemplateByIDTemplatesResponse500ResponseBodyData(BaseModel):
+class TemplateGetTemplateByIDInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[TemplateGetTemplateByIDTemplatesResponseIssues]] = None
+    issues: Optional[List[TemplateGetTemplateByIDInternalServerErrorIssue]] = None
 
 
-class TemplateGetTemplateByIDTemplatesResponse500ResponseBody(Exception):
+class TemplateGetTemplateByIDInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: TemplateGetTemplateByIDTemplatesResponse500ResponseBodyData
+    data: TemplateGetTemplateByIDInternalServerErrorData
 
-    def __init__(
-        self, data: TemplateGetTemplateByIDTemplatesResponse500ResponseBodyData
-    ):
+    def __init__(self, data: TemplateGetTemplateByIDInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, TemplateGetTemplateByIDTemplatesResponse500ResponseBodyData
+            self.data, TemplateGetTemplateByIDInternalServerErrorData
         )
 
 
-class TemplateGetTemplateByIDTemplatesIssuesTypedDict(TypedDict):
+class TemplateGetTemplateByIDNotFoundIssueTypedDict(TypedDict):
     message: str
 
 
-class TemplateGetTemplateByIDTemplatesIssues(BaseModel):
+class TemplateGetTemplateByIDNotFoundIssue(BaseModel):
     message: str
 
 
-class TemplateGetTemplateByIDTemplatesResponseResponseBodyData(BaseModel):
+class TemplateGetTemplateByIDNotFoundErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[TemplateGetTemplateByIDTemplatesIssues]] = None
+    issues: Optional[List[TemplateGetTemplateByIDNotFoundIssue]] = None
 
 
-class TemplateGetTemplateByIDTemplatesResponseResponseBody(Exception):
+class TemplateGetTemplateByIDNotFoundError(Exception):
     r"""Not found"""
 
-    data: TemplateGetTemplateByIDTemplatesResponseResponseBodyData
+    data: TemplateGetTemplateByIDNotFoundErrorData
 
-    def __init__(self, data: TemplateGetTemplateByIDTemplatesResponseResponseBodyData):
+    def __init__(self, data: TemplateGetTemplateByIDNotFoundErrorData):
         self.data = data
 
     def __str__(self) -> str:
-        return utils.marshal_json(
-            self.data, TemplateGetTemplateByIDTemplatesResponseResponseBodyData
-        )
+        return utils.marshal_json(self.data, TemplateGetTemplateByIDNotFoundErrorData)
 
 
-class TemplateGetTemplateByIDIssuesTypedDict(TypedDict):
+class TemplateGetTemplateByIDBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class TemplateGetTemplateByIDIssues(BaseModel):
+class TemplateGetTemplateByIDBadRequestIssue(BaseModel):
     message: str
 
 
-class TemplateGetTemplateByIDTemplatesResponseBodyData(BaseModel):
+class TemplateGetTemplateByIDBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[TemplateGetTemplateByIDIssues]] = None
+    issues: Optional[List[TemplateGetTemplateByIDBadRequestIssue]] = None
 
 
-class TemplateGetTemplateByIDTemplatesResponseBody(Exception):
+class TemplateGetTemplateByIDBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: TemplateGetTemplateByIDTemplatesResponseBodyData
+    data: TemplateGetTemplateByIDBadRequestErrorData
 
-    def __init__(self, data: TemplateGetTemplateByIDTemplatesResponseBodyData):
+    def __init__(self, data: TemplateGetTemplateByIDBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
-        return utils.marshal_json(
-            self.data, TemplateGetTemplateByIDTemplatesResponseBodyData
-        )
+        return utils.marshal_json(self.data, TemplateGetTemplateByIDBadRequestErrorData)
 
 
 class TemplateGetTemplateByIDType(str, Enum):
@@ -170,7 +164,7 @@ class TemplateGetTemplateByIDAuthOptions(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -191,21 +185,21 @@ class TemplateGetTemplateByIDAuthOptions(BaseModel):
         return m
 
 
-class TemplateGetTemplateByIDTemplatesType(str, Enum):
+class TemplateDocumentDataType(str, Enum):
     S3_PATH = "S3_PATH"
     BYTES = "BYTES"
     BYTES_64 = "BYTES_64"
 
 
 class TemplateDocumentDataTypedDict(TypedDict):
-    type: TemplateGetTemplateByIDTemplatesType
+    type: TemplateDocumentDataType
     id: str
     data: str
     initial_data: str
 
 
 class TemplateDocumentData(BaseModel):
-    type: TemplateGetTemplateByIDTemplatesType
+    type: TemplateDocumentDataType
 
     id: str
 
@@ -278,7 +272,7 @@ class TemplateGetTemplateByIDEmailSettings(BaseModel):
     r"""Whether to send an email to the document owner when the document is complete."""
 
 
-class TemplateMetaTypedDict(TypedDict):
+class TemplateGetTemplateByIDTemplateMetaTypedDict(TypedDict):
     id: str
     subject: Nullable[str]
     message: Nullable[str]
@@ -286,14 +280,17 @@ class TemplateMetaTypedDict(TypedDict):
     date_format: Nullable[str]
     signing_order: Nullable[TemplateGetTemplateByIDSigningOrder]
     typed_signature_enabled: bool
+    upload_signature_enabled: bool
+    draw_signature_enabled: bool
+    allow_dictate_next_signer: bool
     distribution_method: TemplateGetTemplateByIDDistributionMethod
-    template_id: int
+    template_id: float
     redirect_url: Nullable[str]
     language: str
     email_settings: Nullable[TemplateGetTemplateByIDEmailSettingsTypedDict]
 
 
-class TemplateMeta(BaseModel):
+class TemplateGetTemplateByIDTemplateMeta(BaseModel):
     id: str
 
     subject: Nullable[str]
@@ -313,12 +310,24 @@ class TemplateMeta(BaseModel):
         bool, pydantic.Field(alias="typedSignatureEnabled")
     ]
 
+    upload_signature_enabled: Annotated[
+        bool, pydantic.Field(alias="uploadSignatureEnabled")
+    ]
+
+    draw_signature_enabled: Annotated[
+        bool, pydantic.Field(alias="drawSignatureEnabled")
+    ]
+
+    allow_dictate_next_signer: Annotated[
+        bool, pydantic.Field(alias="allowDictateNextSigner")
+    ]
+
     distribution_method: Annotated[
         TemplateGetTemplateByIDDistributionMethod,
         pydantic.Field(alias="distributionMethod"),
     ]
 
-    template_id: Annotated[int, pydantic.Field(alias="templateId")]
+    template_id: Annotated[float, pydantic.Field(alias="templateId")]
 
     redirect_url: Annotated[Nullable[str], pydantic.Field(alias="redirectUrl")]
 
@@ -347,7 +356,7 @@ class TemplateMeta(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -370,17 +379,17 @@ class TemplateMeta(BaseModel):
 
 class TemplateGetTemplateByIDDirectLinkTypedDict(TypedDict):
     id: str
-    template_id: int
+    template_id: float
     token: str
     created_at: str
     enabled: bool
-    direct_template_recipient_id: int
+    direct_template_recipient_id: float
 
 
 class TemplateGetTemplateByIDDirectLink(BaseModel):
     id: str
 
-    template_id: Annotated[int, pydantic.Field(alias="templateId")]
+    template_id: Annotated[float, pydantic.Field(alias="templateId")]
 
     token: str
 
@@ -389,18 +398,18 @@ class TemplateGetTemplateByIDDirectLink(BaseModel):
     enabled: bool
 
     direct_template_recipient_id: Annotated[
-        int, pydantic.Field(alias="directTemplateRecipientId")
+        float, pydantic.Field(alias="directTemplateRecipientId")
     ]
 
 
-class UserTypedDict(TypedDict):
-    id: int
+class TemplateGetTemplateByIDUserTypedDict(TypedDict):
+    id: float
     name: Nullable[str]
     email: str
 
 
-class User(BaseModel):
-    id: int
+class TemplateGetTemplateByIDUser(BaseModel):
+    id: float
 
     name: Nullable[str]
 
@@ -416,7 +425,7 @@ class User(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -442,6 +451,7 @@ class TemplateGetTemplateByIDRole(str, Enum):
     SIGNER = "SIGNER"
     VIEWER = "VIEWER"
     APPROVER = "APPROVER"
+    ASSISTANT = "ASSISTANT"
 
 
 class TemplateGetTemplateByIDReadStatus(str, Enum):
@@ -475,14 +485,14 @@ class TemplateGetTemplateByIDActionAuth(str, Enum):
     EXPLICIT_NONE = "EXPLICIT_NONE"
 
 
-class TemplateGetTemplateByIDTemplatesAuthOptionsTypedDict(TypedDict):
+class TemplateGetTemplateByIDRecipientAuthOptionsTypedDict(TypedDict):
     access_auth: Nullable[TemplateGetTemplateByIDAccessAuth]
     r"""The type of authentication required for the recipient to access the document."""
     action_auth: Nullable[TemplateGetTemplateByIDActionAuth]
     r"""The type of authentication required for the recipient to sign the document."""
 
 
-class TemplateGetTemplateByIDTemplatesAuthOptions(BaseModel):
+class TemplateGetTemplateByIDRecipientAuthOptions(BaseModel):
     access_auth: Annotated[
         Nullable[TemplateGetTemplateByIDAccessAuth], pydantic.Field(alias="accessAuth")
     ]
@@ -503,7 +513,7 @@ class TemplateGetTemplateByIDTemplatesAuthOptions(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -524,27 +534,27 @@ class TemplateGetTemplateByIDTemplatesAuthOptions(BaseModel):
         return m
 
 
-class TemplateGetTemplateByIDRecipientsTypedDict(TypedDict):
+class TemplateGetTemplateByIDRecipientTypedDict(TypedDict):
     role: TemplateGetTemplateByIDRole
     read_status: TemplateGetTemplateByIDReadStatus
     signing_status: TemplateGetTemplateByIDSigningStatus
     send_status: TemplateGetTemplateByIDSendStatus
-    id: int
-    document_id: Nullable[int]
-    template_id: Nullable[int]
+    id: float
+    document_id: Nullable[float]
+    template_id: Nullable[float]
     email: str
     name: str
     token: str
     document_deleted_at: Nullable[str]
     expired: Nullable[str]
     signed_at: Nullable[str]
-    auth_options: Nullable[TemplateGetTemplateByIDTemplatesAuthOptionsTypedDict]
+    auth_options: Nullable[TemplateGetTemplateByIDRecipientAuthOptionsTypedDict]
     signing_order: Nullable[float]
     r"""The order in which the recipient should sign the document. Only works if the document is set to sequential signing."""
     rejection_reason: Nullable[str]
 
 
-class TemplateGetTemplateByIDRecipients(BaseModel):
+class TemplateGetTemplateByIDRecipient(BaseModel):
     role: TemplateGetTemplateByIDRole
 
     read_status: Annotated[
@@ -559,11 +569,11 @@ class TemplateGetTemplateByIDRecipients(BaseModel):
         TemplateGetTemplateByIDSendStatus, pydantic.Field(alias="sendStatus")
     ]
 
-    id: int
+    id: float
 
-    document_id: Annotated[Nullable[int], pydantic.Field(alias="documentId")]
+    document_id: Annotated[Nullable[float], pydantic.Field(alias="documentId")]
 
-    template_id: Annotated[Nullable[int], pydantic.Field(alias="templateId")]
+    template_id: Annotated[Nullable[float], pydantic.Field(alias="templateId")]
 
     email: str
 
@@ -580,7 +590,7 @@ class TemplateGetTemplateByIDRecipients(BaseModel):
     signed_at: Annotated[Nullable[str], pydantic.Field(alias="signedAt")]
 
     auth_options: Annotated[
-        Nullable[TemplateGetTemplateByIDTemplatesAuthOptions],
+        Nullable[TemplateGetTemplateByIDRecipientAuthOptions],
         pydantic.Field(alias="authOptions"),
     ]
 
@@ -608,7 +618,7 @@ class TemplateGetTemplateByIDRecipients(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -629,7 +639,7 @@ class TemplateGetTemplateByIDRecipients(BaseModel):
         return m
 
 
-class TemplateGetTemplateByIDTemplatesResponseType(str, Enum):
+class TemplateGetTemplateByIDFieldType(str, Enum):
     SIGNATURE = "SIGNATURE"
     FREE_SIGNATURE = "FREE_SIGNATURE"
     INITIALS = "INITIALS"
@@ -643,34 +653,30 @@ class TemplateGetTemplateByIDTemplatesResponseType(str, Enum):
     DROPDOWN = "DROPDOWN"
 
 
-class TemplateGetTemplateByIDFieldMetaTemplatesResponse200ApplicationJSONResponseBodyFields9Type(
-    str, Enum
-):
+class TemplateGetTemplateByIDTypeDropdown(str, Enum):
     DROPDOWN = "dropdown"
 
 
-class TemplateGetTemplateByIDFieldMetaTemplatesResponseValuesTypedDict(TypedDict):
+class TemplateGetTemplateByIDValue3TypedDict(TypedDict):
     value: str
 
 
-class TemplateGetTemplateByIDFieldMetaTemplatesResponseValues(BaseModel):
+class TemplateGetTemplateByIDValue3(BaseModel):
     value: str
 
 
-class TemplateGetTemplateByIDFieldMeta9TypedDict(TypedDict):
-    type: TemplateGetTemplateByIDFieldMetaTemplatesResponse200ApplicationJSONResponseBodyFields9Type
+class TemplateGetTemplateByIDFieldMetaDropdownTypedDict(TypedDict):
+    type: TemplateGetTemplateByIDTypeDropdown
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[
-        List[TemplateGetTemplateByIDFieldMetaTemplatesResponseValuesTypedDict]
-    ]
+    values: NotRequired[List[TemplateGetTemplateByIDValue3TypedDict]]
     default_value: NotRequired[str]
 
 
-class TemplateGetTemplateByIDFieldMeta9(BaseModel):
-    type: TemplateGetTemplateByIDFieldMetaTemplatesResponse200ApplicationJSONResponseBodyFields9Type
+class TemplateGetTemplateByIDFieldMetaDropdown(BaseModel):
+    type: TemplateGetTemplateByIDTypeDropdown
 
     label: Optional[str] = None
 
@@ -680,26 +686,22 @@ class TemplateGetTemplateByIDFieldMeta9(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[TemplateGetTemplateByIDFieldMetaTemplatesResponseValues]] = (
-        None
-    )
+    values: Optional[List[TemplateGetTemplateByIDValue3]] = None
 
     default_value: Annotated[Optional[str], pydantic.Field(alias="defaultValue")] = None
 
 
-class TemplateGetTemplateByIDFieldMetaTemplatesResponse200ApplicationJSONResponseBodyFields8Type(
-    str, Enum
-):
+class TemplateGetTemplateByIDTypeCheckbox(str, Enum):
     CHECKBOX = "checkbox"
 
 
-class TemplateGetTemplateByIDFieldMetaTemplatesValuesTypedDict(TypedDict):
+class TemplateGetTemplateByIDValue2TypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class TemplateGetTemplateByIDFieldMetaTemplatesValues(BaseModel):
+class TemplateGetTemplateByIDValue2(BaseModel):
     id: float
 
     checked: bool
@@ -707,19 +709,19 @@ class TemplateGetTemplateByIDFieldMetaTemplatesValues(BaseModel):
     value: str
 
 
-class TemplateGetTemplateByIDFieldMeta8TypedDict(TypedDict):
-    type: TemplateGetTemplateByIDFieldMetaTemplatesResponse200ApplicationJSONResponseBodyFields8Type
+class TemplateGetTemplateByIDFieldMetaCheckboxTypedDict(TypedDict):
+    type: TemplateGetTemplateByIDTypeCheckbox
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[List[TemplateGetTemplateByIDFieldMetaTemplatesValuesTypedDict]]
+    values: NotRequired[List[TemplateGetTemplateByIDValue2TypedDict]]
     validation_rule: NotRequired[str]
     validation_length: NotRequired[float]
 
 
-class TemplateGetTemplateByIDFieldMeta8(BaseModel):
-    type: TemplateGetTemplateByIDFieldMetaTemplatesResponse200ApplicationJSONResponseBodyFields8Type
+class TemplateGetTemplateByIDFieldMetaCheckbox(BaseModel):
+    type: TemplateGetTemplateByIDTypeCheckbox
 
     label: Optional[str] = None
 
@@ -729,7 +731,7 @@ class TemplateGetTemplateByIDFieldMeta8(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[TemplateGetTemplateByIDFieldMetaTemplatesValues]] = None
+    values: Optional[List[TemplateGetTemplateByIDValue2]] = None
 
     validation_rule: Annotated[
         Optional[str], pydantic.Field(alias="validationRule")
@@ -740,19 +742,17 @@ class TemplateGetTemplateByIDFieldMeta8(BaseModel):
     ] = None
 
 
-class TemplateGetTemplateByIDFieldMetaTemplatesResponse200ApplicationJSONResponseBodyFieldsType(
-    str, Enum
-):
+class TemplateGetTemplateByIDTypeRadio(str, Enum):
     RADIO = "radio"
 
 
-class TemplateGetTemplateByIDFieldMetaValuesTypedDict(TypedDict):
+class TemplateGetTemplateByIDValue1TypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class TemplateGetTemplateByIDFieldMetaValues(BaseModel):
+class TemplateGetTemplateByIDValue1(BaseModel):
     id: float
 
     checked: bool
@@ -760,17 +760,17 @@ class TemplateGetTemplateByIDFieldMetaValues(BaseModel):
     value: str
 
 
-class TemplateGetTemplateByIDFieldMeta7TypedDict(TypedDict):
-    type: TemplateGetTemplateByIDFieldMetaTemplatesResponse200ApplicationJSONResponseBodyFieldsType
+class TemplateGetTemplateByIDFieldMetaRadioTypedDict(TypedDict):
+    type: TemplateGetTemplateByIDTypeRadio
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[List[TemplateGetTemplateByIDFieldMetaValuesTypedDict]]
+    values: NotRequired[List[TemplateGetTemplateByIDValue1TypedDict]]
 
 
-class TemplateGetTemplateByIDFieldMeta7(BaseModel):
-    type: TemplateGetTemplateByIDFieldMetaTemplatesResponse200ApplicationJSONResponseBodyFieldsType
+class TemplateGetTemplateByIDFieldMetaRadio(BaseModel):
+    type: TemplateGetTemplateByIDTypeRadio
 
     label: Optional[str] = None
 
@@ -780,17 +780,21 @@ class TemplateGetTemplateByIDFieldMeta7(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[TemplateGetTemplateByIDFieldMetaValues]] = None
+    values: Optional[List[TemplateGetTemplateByIDValue1]] = None
 
 
-class TemplateGetTemplateByIDFieldMetaTemplatesResponse200ApplicationJSONResponseBodyType(
-    str, Enum
-):
+class TemplateGetTemplateByIDTypeNumber(str, Enum):
     NUMBER = "number"
 
 
-class TemplateGetTemplateByIDFieldMeta6TypedDict(TypedDict):
-    type: TemplateGetTemplateByIDFieldMetaTemplatesResponse200ApplicationJSONResponseBodyType
+class TemplateGetTemplateByIDTextAlign6(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class TemplateGetTemplateByIDFieldMetaNumberTypedDict(TypedDict):
+    type: TemplateGetTemplateByIDTypeNumber
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -800,10 +804,11 @@ class TemplateGetTemplateByIDFieldMeta6TypedDict(TypedDict):
     min_value: NotRequired[float]
     max_value: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[TemplateGetTemplateByIDTextAlign6]
 
 
-class TemplateGetTemplateByIDFieldMeta6(BaseModel):
-    type: TemplateGetTemplateByIDFieldMetaTemplatesResponse200ApplicationJSONResponseBodyType
+class TemplateGetTemplateByIDFieldMetaNumber(BaseModel):
+    type: TemplateGetTemplateByIDTypeNumber
 
     label: Optional[str] = None
 
@@ -823,15 +828,23 @@ class TemplateGetTemplateByIDFieldMeta6(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[TemplateGetTemplateByIDTextAlign6], pydantic.Field(alias="textAlign")
+    ] = None
 
-class TemplateGetTemplateByIDFieldMetaTemplatesResponse200ApplicationJSONType(
-    str, Enum
-):
+
+class TemplateGetTemplateByIDTypeText(str, Enum):
     TEXT = "text"
 
 
-class TemplateGetTemplateByIDFieldMeta5TypedDict(TypedDict):
-    type: TemplateGetTemplateByIDFieldMetaTemplatesResponse200ApplicationJSONType
+class TemplateGetTemplateByIDTextAlign5(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class TemplateGetTemplateByIDFieldMetaTextTypedDict(TypedDict):
+    type: TemplateGetTemplateByIDTypeText
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -839,10 +852,11 @@ class TemplateGetTemplateByIDFieldMeta5TypedDict(TypedDict):
     text: NotRequired[str]
     character_limit: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[TemplateGetTemplateByIDTextAlign5]
 
 
-class TemplateGetTemplateByIDFieldMeta5(BaseModel):
-    type: TemplateGetTemplateByIDFieldMetaTemplatesResponse200ApplicationJSONType
+class TemplateGetTemplateByIDFieldMetaText(BaseModel):
+    type: TemplateGetTemplateByIDTypeText
 
     label: Optional[str] = None
 
@@ -860,22 +874,33 @@ class TemplateGetTemplateByIDFieldMeta5(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[TemplateGetTemplateByIDTextAlign5], pydantic.Field(alias="textAlign")
+    ] = None
 
-class TemplateGetTemplateByIDFieldMetaTemplatesResponse200Type(str, Enum):
+
+class TemplateGetTemplateByIDTypeDate(str, Enum):
     DATE = "date"
 
 
-class TemplateGetTemplateByIDFieldMeta4TypedDict(TypedDict):
-    type: TemplateGetTemplateByIDFieldMetaTemplatesResponse200Type
+class TemplateGetTemplateByIDTextAlign4(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class TemplateGetTemplateByIDFieldMetaDateTypedDict(TypedDict):
+    type: TemplateGetTemplateByIDTypeDate
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[TemplateGetTemplateByIDTextAlign4]
 
 
-class TemplateGetTemplateByIDFieldMeta4(BaseModel):
-    type: TemplateGetTemplateByIDFieldMetaTemplatesResponse200Type
+class TemplateGetTemplateByIDFieldMetaDate(BaseModel):
+    type: TemplateGetTemplateByIDTypeDate
 
     label: Optional[str] = None
 
@@ -887,22 +912,33 @@ class TemplateGetTemplateByIDFieldMeta4(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[TemplateGetTemplateByIDTextAlign4], pydantic.Field(alias="textAlign")
+    ] = None
 
-class TemplateGetTemplateByIDFieldMetaTemplatesResponseType(str, Enum):
+
+class TemplateGetTemplateByIDTypeEmail(str, Enum):
     EMAIL = "email"
 
 
-class TemplateGetTemplateByIDFieldMeta3TypedDict(TypedDict):
-    type: TemplateGetTemplateByIDFieldMetaTemplatesResponseType
+class TemplateGetTemplateByIDTextAlign3(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class TemplateGetTemplateByIDFieldMetaEmailTypedDict(TypedDict):
+    type: TemplateGetTemplateByIDTypeEmail
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[TemplateGetTemplateByIDTextAlign3]
 
 
-class TemplateGetTemplateByIDFieldMeta3(BaseModel):
-    type: TemplateGetTemplateByIDFieldMetaTemplatesResponseType
+class TemplateGetTemplateByIDFieldMetaEmail(BaseModel):
+    type: TemplateGetTemplateByIDTypeEmail
 
     label: Optional[str] = None
 
@@ -914,22 +950,33 @@ class TemplateGetTemplateByIDFieldMeta3(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[TemplateGetTemplateByIDTextAlign3], pydantic.Field(alias="textAlign")
+    ] = None
 
-class TemplateGetTemplateByIDFieldMetaTemplatesType(str, Enum):
+
+class TemplateGetTemplateByIDTypeName(str, Enum):
     NAME = "name"
 
 
-class TemplateGetTemplateByIDFieldMeta2TypedDict(TypedDict):
-    type: TemplateGetTemplateByIDFieldMetaTemplatesType
+class TemplateGetTemplateByIDTextAlign2(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class TemplateGetTemplateByIDFieldMetaNameTypedDict(TypedDict):
+    type: TemplateGetTemplateByIDTypeName
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[TemplateGetTemplateByIDTextAlign2]
 
 
-class TemplateGetTemplateByIDFieldMeta2(BaseModel):
-    type: TemplateGetTemplateByIDFieldMetaTemplatesType
+class TemplateGetTemplateByIDFieldMetaName(BaseModel):
+    type: TemplateGetTemplateByIDTypeName
 
     label: Optional[str] = None
 
@@ -941,22 +988,33 @@ class TemplateGetTemplateByIDFieldMeta2(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[TemplateGetTemplateByIDTextAlign2], pydantic.Field(alias="textAlign")
+    ] = None
 
-class TemplateGetTemplateByIDFieldMetaType(str, Enum):
+
+class TemplateGetTemplateByIDTypeInitials(str, Enum):
     INITIALS = "initials"
 
 
-class TemplateGetTemplateByIDFieldMeta1TypedDict(TypedDict):
-    type: TemplateGetTemplateByIDFieldMetaType
+class TemplateGetTemplateByIDTextAlign1(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class TemplateGetTemplateByIDFieldMetaInitialsTypedDict(TypedDict):
+    type: TemplateGetTemplateByIDTypeInitials
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[TemplateGetTemplateByIDTextAlign1]
 
 
-class TemplateGetTemplateByIDFieldMeta1(BaseModel):
-    type: TemplateGetTemplateByIDFieldMetaType
+class TemplateGetTemplateByIDFieldMetaInitials(BaseModel):
+    type: TemplateGetTemplateByIDTypeInitials
 
     label: Optional[str] = None
 
@@ -968,69 +1026,73 @@ class TemplateGetTemplateByIDFieldMeta1(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[TemplateGetTemplateByIDTextAlign1], pydantic.Field(alias="textAlign")
+    ] = None
 
-TemplateGetTemplateByIDFieldMetaTypedDict = TypeAliasType(
-    "TemplateGetTemplateByIDFieldMetaTypedDict",
+
+TemplateGetTemplateByIDFieldMetaUnionTypedDict = TypeAliasType(
+    "TemplateGetTemplateByIDFieldMetaUnionTypedDict",
     Union[
-        TemplateGetTemplateByIDFieldMeta1TypedDict,
-        TemplateGetTemplateByIDFieldMeta2TypedDict,
-        TemplateGetTemplateByIDFieldMeta3TypedDict,
-        TemplateGetTemplateByIDFieldMeta4TypedDict,
-        TemplateGetTemplateByIDFieldMeta7TypedDict,
-        TemplateGetTemplateByIDFieldMeta9TypedDict,
-        TemplateGetTemplateByIDFieldMeta5TypedDict,
-        TemplateGetTemplateByIDFieldMeta8TypedDict,
-        TemplateGetTemplateByIDFieldMeta6TypedDict,
+        TemplateGetTemplateByIDFieldMetaRadioTypedDict,
+        TemplateGetTemplateByIDFieldMetaInitialsTypedDict,
+        TemplateGetTemplateByIDFieldMetaNameTypedDict,
+        TemplateGetTemplateByIDFieldMetaEmailTypedDict,
+        TemplateGetTemplateByIDFieldMetaDateTypedDict,
+        TemplateGetTemplateByIDFieldMetaDropdownTypedDict,
+        TemplateGetTemplateByIDFieldMetaCheckboxTypedDict,
+        TemplateGetTemplateByIDFieldMetaTextTypedDict,
+        TemplateGetTemplateByIDFieldMetaNumberTypedDict,
     ],
 )
 
 
-TemplateGetTemplateByIDFieldMeta = TypeAliasType(
-    "TemplateGetTemplateByIDFieldMeta",
+TemplateGetTemplateByIDFieldMetaUnion = TypeAliasType(
+    "TemplateGetTemplateByIDFieldMetaUnion",
     Union[
-        TemplateGetTemplateByIDFieldMeta1,
-        TemplateGetTemplateByIDFieldMeta2,
-        TemplateGetTemplateByIDFieldMeta3,
-        TemplateGetTemplateByIDFieldMeta4,
-        TemplateGetTemplateByIDFieldMeta7,
-        TemplateGetTemplateByIDFieldMeta9,
-        TemplateGetTemplateByIDFieldMeta5,
-        TemplateGetTemplateByIDFieldMeta8,
-        TemplateGetTemplateByIDFieldMeta6,
+        TemplateGetTemplateByIDFieldMetaRadio,
+        TemplateGetTemplateByIDFieldMetaInitials,
+        TemplateGetTemplateByIDFieldMetaName,
+        TemplateGetTemplateByIDFieldMetaEmail,
+        TemplateGetTemplateByIDFieldMetaDate,
+        TemplateGetTemplateByIDFieldMetaDropdown,
+        TemplateGetTemplateByIDFieldMetaCheckbox,
+        TemplateGetTemplateByIDFieldMetaText,
+        TemplateGetTemplateByIDFieldMetaNumber,
     ],
 )
 
 
-class TemplateGetTemplateByIDFieldsTypedDict(TypedDict):
-    type: TemplateGetTemplateByIDTemplatesResponseType
-    id: int
+class TemplateGetTemplateByIDFieldTypedDict(TypedDict):
+    type: TemplateGetTemplateByIDFieldType
+    id: float
     secondary_id: str
-    document_id: Nullable[int]
-    template_id: Nullable[int]
-    recipient_id: int
+    document_id: Nullable[float]
+    template_id: Nullable[float]
+    recipient_id: float
     page: float
     r"""The page number of the field on the document. Starts from 1."""
     custom_text: str
     inserted: bool
-    field_meta: Nullable[TemplateGetTemplateByIDFieldMetaTypedDict]
+    field_meta: Nullable[TemplateGetTemplateByIDFieldMetaUnionTypedDict]
     position_x: NotRequired[Any]
     position_y: NotRequired[Any]
     width: NotRequired[Any]
     height: NotRequired[Any]
 
 
-class TemplateGetTemplateByIDFields(BaseModel):
-    type: TemplateGetTemplateByIDTemplatesResponseType
+class TemplateGetTemplateByIDField(BaseModel):
+    type: TemplateGetTemplateByIDFieldType
 
-    id: int
+    id: float
 
     secondary_id: Annotated[str, pydantic.Field(alias="secondaryId")]
 
-    document_id: Annotated[Nullable[int], pydantic.Field(alias="documentId")]
+    document_id: Annotated[Nullable[float], pydantic.Field(alias="documentId")]
 
-    template_id: Annotated[Nullable[int], pydantic.Field(alias="templateId")]
+    template_id: Annotated[Nullable[float], pydantic.Field(alias="templateId")]
 
-    recipient_id: Annotated[int, pydantic.Field(alias="recipientId")]
+    recipient_id: Annotated[float, pydantic.Field(alias="recipientId")]
 
     page: float
     r"""The page number of the field on the document. Starts from 1."""
@@ -1040,7 +1102,8 @@ class TemplateGetTemplateByIDFields(BaseModel):
     inserted: bool
 
     field_meta: Annotated[
-        Nullable[TemplateGetTemplateByIDFieldMeta], pydantic.Field(alias="fieldMeta")
+        Nullable[TemplateGetTemplateByIDFieldMetaUnion],
+        pydantic.Field(alias="fieldMeta"),
     ]
 
     position_x: Annotated[Optional[Any], pydantic.Field(alias="positionX")] = None
@@ -1061,7 +1124,7 @@ class TemplateGetTemplateByIDFields(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -1082,16 +1145,16 @@ class TemplateGetTemplateByIDFields(BaseModel):
         return m
 
 
-class TemplateGetTemplateByIDResponseBodyTypedDict(TypedDict):
+class TemplateGetTemplateByIDResponseTypedDict(TypedDict):
     r"""Successful response"""
 
     type: TemplateGetTemplateByIDType
     visibility: TemplateGetTemplateByIDVisibility
-    id: int
+    id: float
     external_id: Nullable[str]
     title: str
-    user_id: int
-    team_id: Nullable[int]
+    user_id: float
+    team_id: Nullable[float]
     auth_options: Nullable[TemplateGetTemplateByIDAuthOptionsTypedDict]
     template_document_data_id: str
     created_at: str
@@ -1099,29 +1162,29 @@ class TemplateGetTemplateByIDResponseBodyTypedDict(TypedDict):
     public_title: str
     public_description: str
     template_document_data: TemplateDocumentDataTypedDict
-    template_meta: Nullable[TemplateMetaTypedDict]
+    template_meta: Nullable[TemplateGetTemplateByIDTemplateMetaTypedDict]
     direct_link: Nullable[TemplateGetTemplateByIDDirectLinkTypedDict]
-    user: UserTypedDict
-    recipients: List[TemplateGetTemplateByIDRecipientsTypedDict]
-    fields: List[TemplateGetTemplateByIDFieldsTypedDict]
+    user: TemplateGetTemplateByIDUserTypedDict
+    recipients: List[TemplateGetTemplateByIDRecipientTypedDict]
+    fields: List[TemplateGetTemplateByIDFieldTypedDict]
 
 
-class TemplateGetTemplateByIDResponseBody(BaseModel):
+class TemplateGetTemplateByIDResponse(BaseModel):
     r"""Successful response"""
 
     type: TemplateGetTemplateByIDType
 
     visibility: TemplateGetTemplateByIDVisibility
 
-    id: int
+    id: float
 
     external_id: Annotated[Nullable[str], pydantic.Field(alias="externalId")]
 
     title: str
 
-    user_id: Annotated[int, pydantic.Field(alias="userId")]
+    user_id: Annotated[float, pydantic.Field(alias="userId")]
 
-    team_id: Annotated[Nullable[int], pydantic.Field(alias="teamId")]
+    team_id: Annotated[Nullable[float], pydantic.Field(alias="teamId")]
 
     auth_options: Annotated[
         Nullable[TemplateGetTemplateByIDAuthOptions],
@@ -1145,18 +1208,19 @@ class TemplateGetTemplateByIDResponseBody(BaseModel):
     ]
 
     template_meta: Annotated[
-        Nullable[TemplateMeta], pydantic.Field(alias="templateMeta")
+        Nullable[TemplateGetTemplateByIDTemplateMeta],
+        pydantic.Field(alias="templateMeta"),
     ]
 
     direct_link: Annotated[
         Nullable[TemplateGetTemplateByIDDirectLink], pydantic.Field(alias="directLink")
     ]
 
-    user: User
+    user: TemplateGetTemplateByIDUser
 
-    recipients: List[TemplateGetTemplateByIDRecipients]
+    recipients: List[TemplateGetTemplateByIDRecipient]
 
-    fields: List[TemplateGetTemplateByIDFields]
+    fields: List[TemplateGetTemplateByIDField]
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -1174,7 +1238,7 @@ class TemplateGetTemplateByIDResponseBody(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

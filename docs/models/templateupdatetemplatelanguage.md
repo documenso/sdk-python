@@ -11,3 +11,5 @@ The language to use for email communications with recipients.
 | `EN`  | en    |
 | `FR`  | fr    |
 | `ES`  | es    |
+| `IT`  | it    |
+| `PL`  | pl    |

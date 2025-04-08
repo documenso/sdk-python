@@ -56,97 +56,93 @@ class TemplateFindTemplatesRequest(BaseModel):
     r"""Filter templates by type."""
 
 
-class TemplateFindTemplatesTemplatesResponseIssuesTypedDict(TypedDict):
+class TemplateFindTemplatesInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class TemplateFindTemplatesTemplatesResponseIssues(BaseModel):
+class TemplateFindTemplatesInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class TemplateFindTemplatesTemplatesResponse500ResponseBodyData(BaseModel):
+class TemplateFindTemplatesInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[TemplateFindTemplatesTemplatesResponseIssues]] = None
+    issues: Optional[List[TemplateFindTemplatesInternalServerErrorIssue]] = None
 
 
-class TemplateFindTemplatesTemplatesResponse500ResponseBody(Exception):
+class TemplateFindTemplatesInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: TemplateFindTemplatesTemplatesResponse500ResponseBodyData
+    data: TemplateFindTemplatesInternalServerErrorData
 
-    def __init__(self, data: TemplateFindTemplatesTemplatesResponse500ResponseBodyData):
+    def __init__(self, data: TemplateFindTemplatesInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, TemplateFindTemplatesTemplatesResponse500ResponseBodyData
+            self.data, TemplateFindTemplatesInternalServerErrorData
         )
 
 
-class TemplateFindTemplatesTemplatesIssuesTypedDict(TypedDict):
+class TemplateFindTemplatesNotFoundIssueTypedDict(TypedDict):
     message: str
 
 
-class TemplateFindTemplatesTemplatesIssues(BaseModel):
+class TemplateFindTemplatesNotFoundIssue(BaseModel):
     message: str
 
 
-class TemplateFindTemplatesTemplatesResponseResponseBodyData(BaseModel):
+class TemplateFindTemplatesNotFoundErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[TemplateFindTemplatesTemplatesIssues]] = None
+    issues: Optional[List[TemplateFindTemplatesNotFoundIssue]] = None
 
 
-class TemplateFindTemplatesTemplatesResponseResponseBody(Exception):
+class TemplateFindTemplatesNotFoundError(Exception):
     r"""Not found"""
 
-    data: TemplateFindTemplatesTemplatesResponseResponseBodyData
+    data: TemplateFindTemplatesNotFoundErrorData
 
-    def __init__(self, data: TemplateFindTemplatesTemplatesResponseResponseBodyData):
+    def __init__(self, data: TemplateFindTemplatesNotFoundErrorData):
         self.data = data
 
     def __str__(self) -> str:
-        return utils.marshal_json(
-            self.data, TemplateFindTemplatesTemplatesResponseResponseBodyData
-        )
+        return utils.marshal_json(self.data, TemplateFindTemplatesNotFoundErrorData)
 
 
-class TemplateFindTemplatesIssuesTypedDict(TypedDict):
+class TemplateFindTemplatesBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class TemplateFindTemplatesIssues(BaseModel):
+class TemplateFindTemplatesBadRequestIssue(BaseModel):
     message: str
 
 
-class TemplateFindTemplatesTemplatesResponseBodyData(BaseModel):
+class TemplateFindTemplatesBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[TemplateFindTemplatesIssues]] = None
+    issues: Optional[List[TemplateFindTemplatesBadRequestIssue]] = None
 
 
-class TemplateFindTemplatesTemplatesResponseBody(Exception):
+class TemplateFindTemplatesBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: TemplateFindTemplatesTemplatesResponseBodyData
+    data: TemplateFindTemplatesBadRequestErrorData
 
-    def __init__(self, data: TemplateFindTemplatesTemplatesResponseBodyData):
+    def __init__(self, data: TemplateFindTemplatesBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
-        return utils.marshal_json(
-            self.data, TemplateFindTemplatesTemplatesResponseBodyData
-        )
+        return utils.marshal_json(self.data, TemplateFindTemplatesBadRequestErrorData)
 
 
-class TemplateFindTemplatesType(str, Enum):
+class TemplateFindTemplatesDataType(str, Enum):
     PUBLIC = "PUBLIC"
     PRIVATE = "PRIVATE"
 
@@ -201,7 +197,7 @@ class TemplateFindTemplatesAuthOptions(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -223,17 +219,17 @@ class TemplateFindTemplatesAuthOptions(BaseModel):
 
 
 class TemplateFindTemplatesTeamTypedDict(TypedDict):
-    id: int
+    id: float
     url: str
 
 
 class TemplateFindTemplatesTeam(BaseModel):
-    id: int
+    id: float
 
     url: str
 
 
-class TemplateFindTemplatesTemplatesType(str, Enum):
+class TemplateFindTemplatesFieldType(str, Enum):
     SIGNATURE = "SIGNATURE"
     FREE_SIGNATURE = "FREE_SIGNATURE"
     INITIALS = "INITIALS"
@@ -247,34 +243,30 @@ class TemplateFindTemplatesTemplatesType(str, Enum):
     DROPDOWN = "DROPDOWN"
 
 
-class TemplateFindTemplatesFieldMetaTemplatesResponse200ApplicationJSONResponseBodyDataFields9Type(
-    str, Enum
-):
+class TemplateFindTemplatesTypeDropdown(str, Enum):
     DROPDOWN = "dropdown"
 
 
-class TemplateFindTemplatesFieldMetaTemplatesResponseValuesTypedDict(TypedDict):
+class TemplateFindTemplatesValue3TypedDict(TypedDict):
     value: str
 
 
-class TemplateFindTemplatesFieldMetaTemplatesResponseValues(BaseModel):
+class TemplateFindTemplatesValue3(BaseModel):
     value: str
 
 
-class TemplateFindTemplatesFieldMeta9TypedDict(TypedDict):
-    type: TemplateFindTemplatesFieldMetaTemplatesResponse200ApplicationJSONResponseBodyDataFields9Type
+class TemplateFindTemplatesFieldMetaDropdownTypedDict(TypedDict):
+    type: TemplateFindTemplatesTypeDropdown
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[
-        List[TemplateFindTemplatesFieldMetaTemplatesResponseValuesTypedDict]
-    ]
+    values: NotRequired[List[TemplateFindTemplatesValue3TypedDict]]
     default_value: NotRequired[str]
 
 
-class TemplateFindTemplatesFieldMeta9(BaseModel):
-    type: TemplateFindTemplatesFieldMetaTemplatesResponse200ApplicationJSONResponseBodyDataFields9Type
+class TemplateFindTemplatesFieldMetaDropdown(BaseModel):
+    type: TemplateFindTemplatesTypeDropdown
 
     label: Optional[str] = None
 
@@ -284,24 +276,22 @@ class TemplateFindTemplatesFieldMeta9(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[TemplateFindTemplatesFieldMetaTemplatesResponseValues]] = None
+    values: Optional[List[TemplateFindTemplatesValue3]] = None
 
     default_value: Annotated[Optional[str], pydantic.Field(alias="defaultValue")] = None
 
 
-class TemplateFindTemplatesFieldMetaTemplatesResponse200ApplicationJSONResponseBodyDataFieldsType(
-    str, Enum
-):
+class TemplateFindTemplatesTypeCheckbox(str, Enum):
     CHECKBOX = "checkbox"
 
 
-class TemplateFindTemplatesFieldMetaTemplatesValuesTypedDict(TypedDict):
+class TemplateFindTemplatesValue2TypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class TemplateFindTemplatesFieldMetaTemplatesValues(BaseModel):
+class TemplateFindTemplatesValue2(BaseModel):
     id: float
 
     checked: bool
@@ -309,19 +299,19 @@ class TemplateFindTemplatesFieldMetaTemplatesValues(BaseModel):
     value: str
 
 
-class TemplateFindTemplatesFieldMeta8TypedDict(TypedDict):
-    type: TemplateFindTemplatesFieldMetaTemplatesResponse200ApplicationJSONResponseBodyDataFieldsType
+class TemplateFindTemplatesFieldMetaCheckboxTypedDict(TypedDict):
+    type: TemplateFindTemplatesTypeCheckbox
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[List[TemplateFindTemplatesFieldMetaTemplatesValuesTypedDict]]
+    values: NotRequired[List[TemplateFindTemplatesValue2TypedDict]]
     validation_rule: NotRequired[str]
     validation_length: NotRequired[float]
 
 
-class TemplateFindTemplatesFieldMeta8(BaseModel):
-    type: TemplateFindTemplatesFieldMetaTemplatesResponse200ApplicationJSONResponseBodyDataFieldsType
+class TemplateFindTemplatesFieldMetaCheckbox(BaseModel):
+    type: TemplateFindTemplatesTypeCheckbox
 
     label: Optional[str] = None
 
@@ -331,7 +321,7 @@ class TemplateFindTemplatesFieldMeta8(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[TemplateFindTemplatesFieldMetaTemplatesValues]] = None
+    values: Optional[List[TemplateFindTemplatesValue2]] = None
 
     validation_rule: Annotated[
         Optional[str], pydantic.Field(alias="validationRule")
@@ -342,19 +332,17 @@ class TemplateFindTemplatesFieldMeta8(BaseModel):
     ] = None
 
 
-class TemplateFindTemplatesFieldMetaTemplatesResponse200ApplicationJSONResponseBodyDataType(
-    str, Enum
-):
+class TemplateFindTemplatesTypeRadio(str, Enum):
     RADIO = "radio"
 
 
-class TemplateFindTemplatesFieldMetaValuesTypedDict(TypedDict):
+class TemplateFindTemplatesValue1TypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class TemplateFindTemplatesFieldMetaValues(BaseModel):
+class TemplateFindTemplatesValue1(BaseModel):
     id: float
 
     checked: bool
@@ -362,17 +350,17 @@ class TemplateFindTemplatesFieldMetaValues(BaseModel):
     value: str
 
 
-class TemplateFindTemplatesFieldMeta7TypedDict(TypedDict):
-    type: TemplateFindTemplatesFieldMetaTemplatesResponse200ApplicationJSONResponseBodyDataType
+class TemplateFindTemplatesFieldMetaRadioTypedDict(TypedDict):
+    type: TemplateFindTemplatesTypeRadio
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[List[TemplateFindTemplatesFieldMetaValuesTypedDict]]
+    values: NotRequired[List[TemplateFindTemplatesValue1TypedDict]]
 
 
-class TemplateFindTemplatesFieldMeta7(BaseModel):
-    type: TemplateFindTemplatesFieldMetaTemplatesResponse200ApplicationJSONResponseBodyDataType
+class TemplateFindTemplatesFieldMetaRadio(BaseModel):
+    type: TemplateFindTemplatesTypeRadio
 
     label: Optional[str] = None
 
@@ -382,17 +370,21 @@ class TemplateFindTemplatesFieldMeta7(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[TemplateFindTemplatesFieldMetaValues]] = None
+    values: Optional[List[TemplateFindTemplatesValue1]] = None
 
 
-class TemplateFindTemplatesFieldMetaTemplatesResponse200ApplicationJSONResponseBodyType(
-    str, Enum
-):
+class TemplateFindTemplatesTypeNumber(str, Enum):
     NUMBER = "number"
 
 
-class TemplateFindTemplatesFieldMeta6TypedDict(TypedDict):
-    type: TemplateFindTemplatesFieldMetaTemplatesResponse200ApplicationJSONResponseBodyType
+class TemplateFindTemplatesTextAlign6(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class TemplateFindTemplatesFieldMetaNumberTypedDict(TypedDict):
+    type: TemplateFindTemplatesTypeNumber
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -402,10 +394,11 @@ class TemplateFindTemplatesFieldMeta6TypedDict(TypedDict):
     min_value: NotRequired[float]
     max_value: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[TemplateFindTemplatesTextAlign6]
 
 
-class TemplateFindTemplatesFieldMeta6(BaseModel):
-    type: TemplateFindTemplatesFieldMetaTemplatesResponse200ApplicationJSONResponseBodyType
+class TemplateFindTemplatesFieldMetaNumber(BaseModel):
+    type: TemplateFindTemplatesTypeNumber
 
     label: Optional[str] = None
 
@@ -425,13 +418,23 @@ class TemplateFindTemplatesFieldMeta6(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[TemplateFindTemplatesTextAlign6], pydantic.Field(alias="textAlign")
+    ] = None
 
-class TemplateFindTemplatesFieldMetaTemplatesResponse200ApplicationJSONType(str, Enum):
+
+class TemplateFindTemplatesTypeText(str, Enum):
     TEXT = "text"
 
 
-class TemplateFindTemplatesFieldMeta5TypedDict(TypedDict):
-    type: TemplateFindTemplatesFieldMetaTemplatesResponse200ApplicationJSONType
+class TemplateFindTemplatesTextAlign5(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class TemplateFindTemplatesFieldMetaTextTypedDict(TypedDict):
+    type: TemplateFindTemplatesTypeText
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -439,10 +442,11 @@ class TemplateFindTemplatesFieldMeta5TypedDict(TypedDict):
     text: NotRequired[str]
     character_limit: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[TemplateFindTemplatesTextAlign5]
 
 
-class TemplateFindTemplatesFieldMeta5(BaseModel):
-    type: TemplateFindTemplatesFieldMetaTemplatesResponse200ApplicationJSONType
+class TemplateFindTemplatesFieldMetaText(BaseModel):
+    type: TemplateFindTemplatesTypeText
 
     label: Optional[str] = None
 
@@ -460,22 +464,33 @@ class TemplateFindTemplatesFieldMeta5(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[TemplateFindTemplatesTextAlign5], pydantic.Field(alias="textAlign")
+    ] = None
 
-class TemplateFindTemplatesFieldMetaTemplatesResponse200Type(str, Enum):
+
+class TemplateFindTemplatesTypeDate(str, Enum):
     DATE = "date"
 
 
-class TemplateFindTemplatesFieldMeta4TypedDict(TypedDict):
-    type: TemplateFindTemplatesFieldMetaTemplatesResponse200Type
+class TemplateFindTemplatesTextAlign4(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class TemplateFindTemplatesFieldMetaDateTypedDict(TypedDict):
+    type: TemplateFindTemplatesTypeDate
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[TemplateFindTemplatesTextAlign4]
 
 
-class TemplateFindTemplatesFieldMeta4(BaseModel):
-    type: TemplateFindTemplatesFieldMetaTemplatesResponse200Type
+class TemplateFindTemplatesFieldMetaDate(BaseModel):
+    type: TemplateFindTemplatesTypeDate
 
     label: Optional[str] = None
 
@@ -487,22 +502,33 @@ class TemplateFindTemplatesFieldMeta4(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[TemplateFindTemplatesTextAlign4], pydantic.Field(alias="textAlign")
+    ] = None
 
-class TemplateFindTemplatesFieldMetaTemplatesResponseType(str, Enum):
+
+class TemplateFindTemplatesTypeEmail(str, Enum):
     EMAIL = "email"
 
 
-class TemplateFindTemplatesFieldMeta3TypedDict(TypedDict):
-    type: TemplateFindTemplatesFieldMetaTemplatesResponseType
+class TemplateFindTemplatesTextAlign3(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class TemplateFindTemplatesFieldMetaEmailTypedDict(TypedDict):
+    type: TemplateFindTemplatesTypeEmail
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[TemplateFindTemplatesTextAlign3]
 
 
-class TemplateFindTemplatesFieldMeta3(BaseModel):
-    type: TemplateFindTemplatesFieldMetaTemplatesResponseType
+class TemplateFindTemplatesFieldMetaEmail(BaseModel):
+    type: TemplateFindTemplatesTypeEmail
 
     label: Optional[str] = None
 
@@ -514,22 +540,33 @@ class TemplateFindTemplatesFieldMeta3(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[TemplateFindTemplatesTextAlign3], pydantic.Field(alias="textAlign")
+    ] = None
 
-class TemplateFindTemplatesFieldMetaTemplatesType(str, Enum):
+
+class TemplateFindTemplatesTypeName(str, Enum):
     NAME = "name"
 
 
-class TemplateFindTemplatesFieldMeta2TypedDict(TypedDict):
-    type: TemplateFindTemplatesFieldMetaTemplatesType
+class TemplateFindTemplatesTextAlign2(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class TemplateFindTemplatesFieldMetaNameTypedDict(TypedDict):
+    type: TemplateFindTemplatesTypeName
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[TemplateFindTemplatesTextAlign2]
 
 
-class TemplateFindTemplatesFieldMeta2(BaseModel):
-    type: TemplateFindTemplatesFieldMetaTemplatesType
+class TemplateFindTemplatesFieldMetaName(BaseModel):
+    type: TemplateFindTemplatesTypeName
 
     label: Optional[str] = None
 
@@ -541,22 +578,33 @@ class TemplateFindTemplatesFieldMeta2(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[TemplateFindTemplatesTextAlign2], pydantic.Field(alias="textAlign")
+    ] = None
 
-class TemplateFindTemplatesFieldMetaType(str, Enum):
+
+class TemplateFindTemplatesTypeInitials(str, Enum):
     INITIALS = "initials"
 
 
-class TemplateFindTemplatesFieldMeta1TypedDict(TypedDict):
-    type: TemplateFindTemplatesFieldMetaType
+class TemplateFindTemplatesTextAlign1(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class TemplateFindTemplatesFieldMetaInitialsTypedDict(TypedDict):
+    type: TemplateFindTemplatesTypeInitials
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[TemplateFindTemplatesTextAlign1]
 
 
-class TemplateFindTemplatesFieldMeta1(BaseModel):
-    type: TemplateFindTemplatesFieldMetaType
+class TemplateFindTemplatesFieldMetaInitials(BaseModel):
+    type: TemplateFindTemplatesTypeInitials
 
     label: Optional[str] = None
 
@@ -568,69 +616,73 @@ class TemplateFindTemplatesFieldMeta1(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[TemplateFindTemplatesTextAlign1], pydantic.Field(alias="textAlign")
+    ] = None
 
-TemplateFindTemplatesFieldMetaTypedDict = TypeAliasType(
-    "TemplateFindTemplatesFieldMetaTypedDict",
+
+TemplateFindTemplatesFieldMetaUnionTypedDict = TypeAliasType(
+    "TemplateFindTemplatesFieldMetaUnionTypedDict",
     Union[
-        TemplateFindTemplatesFieldMeta1TypedDict,
-        TemplateFindTemplatesFieldMeta2TypedDict,
-        TemplateFindTemplatesFieldMeta3TypedDict,
-        TemplateFindTemplatesFieldMeta4TypedDict,
-        TemplateFindTemplatesFieldMeta7TypedDict,
-        TemplateFindTemplatesFieldMeta9TypedDict,
-        TemplateFindTemplatesFieldMeta5TypedDict,
-        TemplateFindTemplatesFieldMeta8TypedDict,
-        TemplateFindTemplatesFieldMeta6TypedDict,
+        TemplateFindTemplatesFieldMetaRadioTypedDict,
+        TemplateFindTemplatesFieldMetaInitialsTypedDict,
+        TemplateFindTemplatesFieldMetaNameTypedDict,
+        TemplateFindTemplatesFieldMetaEmailTypedDict,
+        TemplateFindTemplatesFieldMetaDateTypedDict,
+        TemplateFindTemplatesFieldMetaDropdownTypedDict,
+        TemplateFindTemplatesFieldMetaCheckboxTypedDict,
+        TemplateFindTemplatesFieldMetaTextTypedDict,
+        TemplateFindTemplatesFieldMetaNumberTypedDict,
     ],
 )
 
 
-TemplateFindTemplatesFieldMeta = TypeAliasType(
-    "TemplateFindTemplatesFieldMeta",
+TemplateFindTemplatesFieldMetaUnion = TypeAliasType(
+    "TemplateFindTemplatesFieldMetaUnion",
     Union[
-        TemplateFindTemplatesFieldMeta1,
-        TemplateFindTemplatesFieldMeta2,
-        TemplateFindTemplatesFieldMeta3,
-        TemplateFindTemplatesFieldMeta4,
-        TemplateFindTemplatesFieldMeta7,
-        TemplateFindTemplatesFieldMeta9,
-        TemplateFindTemplatesFieldMeta5,
-        TemplateFindTemplatesFieldMeta8,
-        TemplateFindTemplatesFieldMeta6,
+        TemplateFindTemplatesFieldMetaRadio,
+        TemplateFindTemplatesFieldMetaInitials,
+        TemplateFindTemplatesFieldMetaName,
+        TemplateFindTemplatesFieldMetaEmail,
+        TemplateFindTemplatesFieldMetaDate,
+        TemplateFindTemplatesFieldMetaDropdown,
+        TemplateFindTemplatesFieldMetaCheckbox,
+        TemplateFindTemplatesFieldMetaText,
+        TemplateFindTemplatesFieldMetaNumber,
     ],
 )
 
 
-class TemplateFindTemplatesFieldsTypedDict(TypedDict):
-    type: TemplateFindTemplatesTemplatesType
-    id: int
+class TemplateFindTemplatesFieldTypedDict(TypedDict):
+    type: TemplateFindTemplatesFieldType
+    id: float
     secondary_id: str
-    document_id: Nullable[int]
-    template_id: Nullable[int]
-    recipient_id: int
+    document_id: Nullable[float]
+    template_id: Nullable[float]
+    recipient_id: float
     page: float
     r"""The page number of the field on the document. Starts from 1."""
     custom_text: str
     inserted: bool
-    field_meta: Nullable[TemplateFindTemplatesFieldMetaTypedDict]
+    field_meta: Nullable[TemplateFindTemplatesFieldMetaUnionTypedDict]
     position_x: NotRequired[Any]
     position_y: NotRequired[Any]
     width: NotRequired[Any]
     height: NotRequired[Any]
 
 
-class TemplateFindTemplatesFields(BaseModel):
-    type: TemplateFindTemplatesTemplatesType
+class TemplateFindTemplatesField(BaseModel):
+    type: TemplateFindTemplatesFieldType
 
-    id: int
+    id: float
 
     secondary_id: Annotated[str, pydantic.Field(alias="secondaryId")]
 
-    document_id: Annotated[Nullable[int], pydantic.Field(alias="documentId")]
+    document_id: Annotated[Nullable[float], pydantic.Field(alias="documentId")]
 
-    template_id: Annotated[Nullable[int], pydantic.Field(alias="templateId")]
+    template_id: Annotated[Nullable[float], pydantic.Field(alias="templateId")]
 
-    recipient_id: Annotated[int, pydantic.Field(alias="recipientId")]
+    recipient_id: Annotated[float, pydantic.Field(alias="recipientId")]
 
     page: float
     r"""The page number of the field on the document. Starts from 1."""
@@ -640,7 +692,7 @@ class TemplateFindTemplatesFields(BaseModel):
     inserted: bool
 
     field_meta: Annotated[
-        Nullable[TemplateFindTemplatesFieldMeta], pydantic.Field(alias="fieldMeta")
+        Nullable[TemplateFindTemplatesFieldMetaUnion], pydantic.Field(alias="fieldMeta")
     ]
 
     position_x: Annotated[Optional[Any], pydantic.Field(alias="positionX")] = None
@@ -661,7 +713,7 @@ class TemplateFindTemplatesFields(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -687,6 +739,7 @@ class TemplateFindTemplatesRole(str, Enum):
     SIGNER = "SIGNER"
     VIEWER = "VIEWER"
     APPROVER = "APPROVER"
+    ASSISTANT = "ASSISTANT"
 
 
 class TemplateFindTemplatesReadStatus(str, Enum):
@@ -720,14 +773,14 @@ class TemplateFindTemplatesActionAuth(str, Enum):
     EXPLICIT_NONE = "EXPLICIT_NONE"
 
 
-class TemplateFindTemplatesTemplatesAuthOptionsTypedDict(TypedDict):
+class TemplateFindTemplatesRecipientAuthOptionsTypedDict(TypedDict):
     access_auth: Nullable[TemplateFindTemplatesAccessAuth]
     r"""The type of authentication required for the recipient to access the document."""
     action_auth: Nullable[TemplateFindTemplatesActionAuth]
     r"""The type of authentication required for the recipient to sign the document."""
 
 
-class TemplateFindTemplatesTemplatesAuthOptions(BaseModel):
+class TemplateFindTemplatesRecipientAuthOptions(BaseModel):
     access_auth: Annotated[
         Nullable[TemplateFindTemplatesAccessAuth], pydantic.Field(alias="accessAuth")
     ]
@@ -748,7 +801,7 @@ class TemplateFindTemplatesTemplatesAuthOptions(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -769,27 +822,27 @@ class TemplateFindTemplatesTemplatesAuthOptions(BaseModel):
         return m
 
 
-class TemplateFindTemplatesRecipientsTypedDict(TypedDict):
+class TemplateFindTemplatesRecipientTypedDict(TypedDict):
     role: TemplateFindTemplatesRole
     read_status: TemplateFindTemplatesReadStatus
     signing_status: TemplateFindTemplatesSigningStatus
     send_status: TemplateFindTemplatesSendStatus
-    id: int
-    document_id: Nullable[int]
-    template_id: Nullable[int]
+    id: float
+    document_id: Nullable[float]
+    template_id: Nullable[float]
     email: str
     name: str
     token: str
     document_deleted_at: Nullable[str]
     expired: Nullable[str]
     signed_at: Nullable[str]
-    auth_options: Nullable[TemplateFindTemplatesTemplatesAuthOptionsTypedDict]
+    auth_options: Nullable[TemplateFindTemplatesRecipientAuthOptionsTypedDict]
     signing_order: Nullable[float]
     r"""The order in which the recipient should sign the document. Only works if the document is set to sequential signing."""
     rejection_reason: Nullable[str]
 
 
-class TemplateFindTemplatesRecipients(BaseModel):
+class TemplateFindTemplatesRecipient(BaseModel):
     role: TemplateFindTemplatesRole
 
     read_status: Annotated[
@@ -804,11 +857,11 @@ class TemplateFindTemplatesRecipients(BaseModel):
         TemplateFindTemplatesSendStatus, pydantic.Field(alias="sendStatus")
     ]
 
-    id: int
+    id: float
 
-    document_id: Annotated[Nullable[int], pydantic.Field(alias="documentId")]
+    document_id: Annotated[Nullable[float], pydantic.Field(alias="documentId")]
 
-    template_id: Annotated[Nullable[int], pydantic.Field(alias="templateId")]
+    template_id: Annotated[Nullable[float], pydantic.Field(alias="templateId")]
 
     email: str
 
@@ -825,7 +878,7 @@ class TemplateFindTemplatesRecipients(BaseModel):
     signed_at: Annotated[Nullable[str], pydantic.Field(alias="signedAt")]
 
     auth_options: Annotated[
-        Nullable[TemplateFindTemplatesTemplatesAuthOptions],
+        Nullable[TemplateFindTemplatesRecipientAuthOptions],
         pydantic.Field(alias="authOptions"),
     ]
 
@@ -853,7 +906,7 @@ class TemplateFindTemplatesRecipients(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -910,7 +963,7 @@ class TemplateFindTemplatesTemplateMeta(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -943,13 +996,13 @@ class TemplateFindTemplatesDirectLink(BaseModel):
 
 
 class TemplateFindTemplatesDataTypedDict(TypedDict):
-    type: TemplateFindTemplatesType
+    type: TemplateFindTemplatesDataType
     visibility: TemplateFindTemplatesVisibility
-    id: int
+    id: float
     external_id: Nullable[str]
     title: str
-    user_id: int
-    team_id: Nullable[int]
+    user_id: float
+    team_id: Nullable[float]
     auth_options: Nullable[TemplateFindTemplatesAuthOptionsTypedDict]
     template_document_data_id: str
     created_at: str
@@ -957,26 +1010,26 @@ class TemplateFindTemplatesDataTypedDict(TypedDict):
     public_title: str
     public_description: str
     team: Nullable[TemplateFindTemplatesTeamTypedDict]
-    fields: List[TemplateFindTemplatesFieldsTypedDict]
-    recipients: List[TemplateFindTemplatesRecipientsTypedDict]
+    fields: List[TemplateFindTemplatesFieldTypedDict]
+    recipients: List[TemplateFindTemplatesRecipientTypedDict]
     template_meta: Nullable[TemplateFindTemplatesTemplateMetaTypedDict]
     direct_link: Nullable[TemplateFindTemplatesDirectLinkTypedDict]
 
 
 class TemplateFindTemplatesData(BaseModel):
-    type: TemplateFindTemplatesType
+    type: TemplateFindTemplatesDataType
 
     visibility: TemplateFindTemplatesVisibility
 
-    id: int
+    id: float
 
     external_id: Annotated[Nullable[str], pydantic.Field(alias="externalId")]
 
     title: str
 
-    user_id: Annotated[int, pydantic.Field(alias="userId")]
+    user_id: Annotated[float, pydantic.Field(alias="userId")]
 
-    team_id: Annotated[Nullable[int], pydantic.Field(alias="teamId")]
+    team_id: Annotated[Nullable[float], pydantic.Field(alias="teamId")]
 
     auth_options: Annotated[
         Nullable[TemplateFindTemplatesAuthOptions], pydantic.Field(alias="authOptions")
@@ -996,9 +1049,9 @@ class TemplateFindTemplatesData(BaseModel):
 
     team: Nullable[TemplateFindTemplatesTeam]
 
-    fields: List[TemplateFindTemplatesFields]
+    fields: List[TemplateFindTemplatesField]
 
-    recipients: List[TemplateFindTemplatesRecipients]
+    recipients: List[TemplateFindTemplatesRecipient]
 
     template_meta: Annotated[
         Nullable[TemplateFindTemplatesTemplateMeta],
@@ -1026,7 +1079,7 @@ class TemplateFindTemplatesData(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -1047,7 +1100,7 @@ class TemplateFindTemplatesData(BaseModel):
         return m
 
 
-class TemplateFindTemplatesResponseBodyTypedDict(TypedDict):
+class TemplateFindTemplatesResponseTypedDict(TypedDict):
     r"""Successful response"""
 
     data: List[TemplateFindTemplatesDataTypedDict]
@@ -1061,7 +1114,7 @@ class TemplateFindTemplatesResponseBodyTypedDict(TypedDict):
     r"""The total number of pages."""
 
 
-class TemplateFindTemplatesResponseBody(BaseModel):
+class TemplateFindTemplatesResponse(BaseModel):
     r"""Successful response"""
 
     data: List[TemplateFindTemplatesData]

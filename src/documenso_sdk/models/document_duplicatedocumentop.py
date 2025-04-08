@@ -8,83 +8,81 @@ from typing import List, Optional
 from typing_extensions import Annotated, TypedDict
 
 
-class DocumentDuplicateDocumentRequestBodyTypedDict(TypedDict):
+class DocumentDuplicateDocumentRequestTypedDict(TypedDict):
     document_id: float
 
 
-class DocumentDuplicateDocumentRequestBody(BaseModel):
+class DocumentDuplicateDocumentRequest(BaseModel):
     document_id: Annotated[float, pydantic.Field(alias="documentId")]
 
 
-class DocumentDuplicateDocumentDocumentsIssuesTypedDict(TypedDict):
+class DocumentDuplicateDocumentInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class DocumentDuplicateDocumentDocumentsIssues(BaseModel):
+class DocumentDuplicateDocumentInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class DocumentDuplicateDocumentDocumentsResponseResponseBodyData(BaseModel):
+class DocumentDuplicateDocumentInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[DocumentDuplicateDocumentDocumentsIssues]] = None
+    issues: Optional[List[DocumentDuplicateDocumentInternalServerErrorIssue]] = None
 
 
-class DocumentDuplicateDocumentDocumentsResponseResponseBody(Exception):
+class DocumentDuplicateDocumentInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: DocumentDuplicateDocumentDocumentsResponseResponseBodyData
+    data: DocumentDuplicateDocumentInternalServerErrorData
 
-    def __init__(
-        self, data: DocumentDuplicateDocumentDocumentsResponseResponseBodyData
-    ):
+    def __init__(self, data: DocumentDuplicateDocumentInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, DocumentDuplicateDocumentDocumentsResponseResponseBodyData
+            self.data, DocumentDuplicateDocumentInternalServerErrorData
         )
 
 
-class DocumentDuplicateDocumentIssuesTypedDict(TypedDict):
+class DocumentDuplicateDocumentBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class DocumentDuplicateDocumentIssues(BaseModel):
+class DocumentDuplicateDocumentBadRequestIssue(BaseModel):
     message: str
 
 
-class DocumentDuplicateDocumentDocumentsResponseBodyData(BaseModel):
+class DocumentDuplicateDocumentBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[DocumentDuplicateDocumentIssues]] = None
+    issues: Optional[List[DocumentDuplicateDocumentBadRequestIssue]] = None
 
 
-class DocumentDuplicateDocumentDocumentsResponseBody(Exception):
+class DocumentDuplicateDocumentBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: DocumentDuplicateDocumentDocumentsResponseBodyData
+    data: DocumentDuplicateDocumentBadRequestErrorData
 
-    def __init__(self, data: DocumentDuplicateDocumentDocumentsResponseBodyData):
+    def __init__(self, data: DocumentDuplicateDocumentBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, DocumentDuplicateDocumentDocumentsResponseBodyData
+            self.data, DocumentDuplicateDocumentBadRequestErrorData
         )
 
 
-class DocumentDuplicateDocumentResponseBodyTypedDict(TypedDict):
+class DocumentDuplicateDocumentResponseTypedDict(TypedDict):
     r"""Successful response"""
 
     document_id: float
 
 
-class DocumentDuplicateDocumentResponseBody(BaseModel):
+class DocumentDuplicateDocumentResponse(BaseModel):
     r"""Successful response"""
 
     document_id: Annotated[float, pydantic.Field(alias="documentId")]

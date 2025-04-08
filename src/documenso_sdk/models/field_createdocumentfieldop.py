@@ -10,42 +10,34 @@ from typing import Any, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody11Type(str, Enum):
+class FieldCreateDocumentFieldTypeDropdownRequestBody1(str, Enum):
     DROPDOWN = "DROPDOWN"
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody11FieldMetaType(
-    str, Enum
-):
+class FieldCreateDocumentFieldTypeDropdownRequestBody2(str, Enum):
     DROPDOWN = "dropdown"
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsValuesTypedDict(TypedDict):
+class FieldCreateDocumentFieldValueDropdownTypedDict(TypedDict):
     value: str
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsValues(BaseModel):
+class FieldCreateDocumentFieldValueDropdown(BaseModel):
     value: str
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody11FieldMetaTypedDict(
-    TypedDict
-):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody11FieldMetaType
+class FieldCreateDocumentFieldFieldMetaDropdownRequestBodyTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldTypeDropdownRequestBody2
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[
-        List[FieldCreateDocumentFieldFieldDocumentsFieldsValuesTypedDict]
-    ]
+    values: NotRequired[List[FieldCreateDocumentFieldValueDropdownTypedDict]]
     default_value: NotRequired[str]
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody11FieldMeta(
-    BaseModel
-):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody11FieldMetaType
+class FieldCreateDocumentFieldFieldMetaDropdownRequestBody(BaseModel):
+    type: FieldCreateDocumentFieldTypeDropdownRequestBody2
 
     label: Optional[str] = None
 
@@ -55,13 +47,13 @@ class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody11FieldMeta(
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[FieldCreateDocumentFieldFieldDocumentsFieldsValues]] = None
+    values: Optional[List[FieldCreateDocumentFieldValueDropdown]] = None
 
     default_value: Annotated[Optional[str], pydantic.Field(alias="defaultValue")] = None
 
 
-class Field11TypedDict(TypedDict):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody11Type
+class FieldCreateDocumentFieldFieldDropdownTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldTypeDropdownRequestBody1
     recipient_id: float
     r"""The ID of the recipient to create the field for."""
     page_number: float
@@ -75,12 +67,12 @@ class Field11TypedDict(TypedDict):
     height: float
     r"""The height of the field."""
     field_meta: NotRequired[
-        FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody11FieldMetaTypedDict
+        FieldCreateDocumentFieldFieldMetaDropdownRequestBodyTypedDict
     ]
 
 
-class Field11(BaseModel):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody11Type
+class FieldCreateDocumentFieldFieldDropdown(BaseModel):
+    type: FieldCreateDocumentFieldTypeDropdownRequestBody1
 
     recipient_id: Annotated[float, pydantic.Field(alias="recipientId")]
     r"""The ID of the recipient to create the field for."""
@@ -101,30 +93,26 @@ class Field11(BaseModel):
     r"""The height of the field."""
 
     field_meta: Annotated[
-        Optional[
-            FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody11FieldMeta
-        ],
+        Optional[FieldCreateDocumentFieldFieldMetaDropdownRequestBody],
         pydantic.Field(alias="fieldMeta"),
     ] = None
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody10Type(str, Enum):
+class FieldCreateDocumentFieldTypeCheckboxRequestBody1(str, Enum):
     CHECKBOX = "CHECKBOX"
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody10FieldMetaType(
-    str, Enum
-):
+class FieldCreateDocumentFieldTypeCheckboxRequestBody2(str, Enum):
     CHECKBOX = "checkbox"
 
 
-class FieldCreateDocumentFieldFieldValuesTypedDict(TypedDict):
+class FieldCreateDocumentFieldValueCheckboxTypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class FieldCreateDocumentFieldFieldValues(BaseModel):
+class FieldCreateDocumentFieldValueCheckbox(BaseModel):
     id: float
 
     checked: bool
@@ -132,23 +120,19 @@ class FieldCreateDocumentFieldFieldValues(BaseModel):
     value: str
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody10FieldMetaTypedDict(
-    TypedDict
-):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody10FieldMetaType
+class FieldCreateDocumentFieldFieldMetaCheckboxRequestBodyTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldTypeCheckboxRequestBody2
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[List[FieldCreateDocumentFieldFieldValuesTypedDict]]
+    values: NotRequired[List[FieldCreateDocumentFieldValueCheckboxTypedDict]]
     validation_rule: NotRequired[str]
     validation_length: NotRequired[float]
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody10FieldMeta(
-    BaseModel
-):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody10FieldMetaType
+class FieldCreateDocumentFieldFieldMetaCheckboxRequestBody(BaseModel):
+    type: FieldCreateDocumentFieldTypeCheckboxRequestBody2
 
     label: Optional[str] = None
 
@@ -158,7 +142,7 @@ class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody10FieldMeta(
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[FieldCreateDocumentFieldFieldValues]] = None
+    values: Optional[List[FieldCreateDocumentFieldValueCheckbox]] = None
 
     validation_rule: Annotated[
         Optional[str], pydantic.Field(alias="validationRule")
@@ -169,8 +153,8 @@ class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody10FieldMeta(
     ] = None
 
 
-class Field10TypedDict(TypedDict):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody10Type
+class FieldCreateDocumentFieldFieldCheckboxTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldTypeCheckboxRequestBody1
     recipient_id: float
     r"""The ID of the recipient to create the field for."""
     page_number: float
@@ -184,12 +168,12 @@ class Field10TypedDict(TypedDict):
     height: float
     r"""The height of the field."""
     field_meta: NotRequired[
-        FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody10FieldMetaTypedDict
+        FieldCreateDocumentFieldFieldMetaCheckboxRequestBodyTypedDict
     ]
 
 
-class Field10(BaseModel):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody10Type
+class FieldCreateDocumentFieldFieldCheckbox(BaseModel):
+    type: FieldCreateDocumentFieldTypeCheckboxRequestBody1
 
     recipient_id: Annotated[float, pydantic.Field(alias="recipientId")]
     r"""The ID of the recipient to create the field for."""
@@ -210,30 +194,26 @@ class Field10(BaseModel):
     r"""The height of the field."""
 
     field_meta: Annotated[
-        Optional[
-            FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody10FieldMeta
-        ],
+        Optional[FieldCreateDocumentFieldFieldMetaCheckboxRequestBody],
         pydantic.Field(alias="fieldMeta"),
     ] = None
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody9Type(str, Enum):
+class FieldCreateDocumentFieldTypeRadioRequestBody1(str, Enum):
     RADIO = "RADIO"
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody9FieldMetaType(
-    str, Enum
-):
+class FieldCreateDocumentFieldTypeRadioRequestBody2(str, Enum):
     RADIO = "radio"
 
 
-class FieldValuesTypedDict(TypedDict):
+class FieldCreateDocumentFieldValueRadioTypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class FieldValues(BaseModel):
+class FieldCreateDocumentFieldValueRadio(BaseModel):
     id: float
 
     checked: bool
@@ -241,21 +221,17 @@ class FieldValues(BaseModel):
     value: str
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody9FieldMetaTypedDict(
-    TypedDict
-):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody9FieldMetaType
+class FieldCreateDocumentFieldFieldMetaRadioRequestBodyTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldTypeRadioRequestBody2
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[List[FieldValuesTypedDict]]
+    values: NotRequired[List[FieldCreateDocumentFieldValueRadioTypedDict]]
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody9FieldMeta(
-    BaseModel
-):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody9FieldMetaType
+class FieldCreateDocumentFieldFieldMetaRadioRequestBody(BaseModel):
+    type: FieldCreateDocumentFieldTypeRadioRequestBody2
 
     label: Optional[str] = None
 
@@ -265,11 +241,11 @@ class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody9FieldMeta(
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[FieldValues]] = None
+    values: Optional[List[FieldCreateDocumentFieldValueRadio]] = None
 
 
-class Field9TypedDict(TypedDict):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody9Type
+class FieldCreateDocumentFieldFieldRadioTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldTypeRadioRequestBody1
     recipient_id: float
     r"""The ID of the recipient to create the field for."""
     page_number: float
@@ -282,13 +258,11 @@ class Field9TypedDict(TypedDict):
     r"""The width of the field."""
     height: float
     r"""The height of the field."""
-    field_meta: NotRequired[
-        FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody9FieldMetaTypedDict
-    ]
+    field_meta: NotRequired[FieldCreateDocumentFieldFieldMetaRadioRequestBodyTypedDict]
 
 
-class Field9(BaseModel):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody9Type
+class FieldCreateDocumentFieldFieldRadio(BaseModel):
+    type: FieldCreateDocumentFieldTypeRadioRequestBody1
 
     recipient_id: Annotated[float, pydantic.Field(alias="recipientId")]
     r"""The ID of the recipient to create the field for."""
@@ -309,27 +283,27 @@ class Field9(BaseModel):
     r"""The height of the field."""
 
     field_meta: Annotated[
-        Optional[
-            FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody9FieldMeta
-        ],
+        Optional[FieldCreateDocumentFieldFieldMetaRadioRequestBody],
         pydantic.Field(alias="fieldMeta"),
     ] = None
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody8Type(str, Enum):
+class FieldCreateDocumentFieldTypeNumberRequestBody1(str, Enum):
     NUMBER = "NUMBER"
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody8FieldMetaType(
-    str, Enum
-):
+class FieldCreateDocumentFieldTypeNumberRequestBody2(str, Enum):
     NUMBER = "number"
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody8FieldMetaTypedDict(
-    TypedDict
-):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody8FieldMetaType
+class FieldCreateDocumentFieldTextAlignNumber(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldCreateDocumentFieldFieldMetaNumberRequestBodyTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldTypeNumberRequestBody2
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -339,12 +313,11 @@ class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody8FieldMetaTy
     min_value: NotRequired[float]
     max_value: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldCreateDocumentFieldTextAlignNumber]
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody8FieldMeta(
-    BaseModel
-):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody8FieldMetaType
+class FieldCreateDocumentFieldFieldMetaNumberRequestBody(BaseModel):
+    type: FieldCreateDocumentFieldTypeNumberRequestBody2
 
     label: Optional[str] = None
 
@@ -364,9 +337,14 @@ class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody8FieldMeta(
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldCreateDocumentFieldTextAlignNumber],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class Field8TypedDict(TypedDict):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody8Type
+
+class FieldCreateDocumentFieldFieldNumberTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldTypeNumberRequestBody1
     recipient_id: float
     r"""The ID of the recipient to create the field for."""
     page_number: float
@@ -379,13 +357,11 @@ class Field8TypedDict(TypedDict):
     r"""The width of the field."""
     height: float
     r"""The height of the field."""
-    field_meta: NotRequired[
-        FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody8FieldMetaTypedDict
-    ]
+    field_meta: NotRequired[FieldCreateDocumentFieldFieldMetaNumberRequestBodyTypedDict]
 
 
-class Field8(BaseModel):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody8Type
+class FieldCreateDocumentFieldFieldNumber(BaseModel):
+    type: FieldCreateDocumentFieldTypeNumberRequestBody1
 
     recipient_id: Annotated[float, pydantic.Field(alias="recipientId")]
     r"""The ID of the recipient to create the field for."""
@@ -406,27 +382,27 @@ class Field8(BaseModel):
     r"""The height of the field."""
 
     field_meta: Annotated[
-        Optional[
-            FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody8FieldMeta
-        ],
+        Optional[FieldCreateDocumentFieldFieldMetaNumberRequestBody],
         pydantic.Field(alias="fieldMeta"),
     ] = None
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody7Type(str, Enum):
+class FieldCreateDocumentFieldTypeTextRequestBody1(str, Enum):
     TEXT = "TEXT"
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody7FieldMetaType(
-    str, Enum
-):
+class FieldCreateDocumentFieldTypeTextRequestBody2(str, Enum):
     TEXT = "text"
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBodyFieldMetaTypedDict(
-    TypedDict
-):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody7FieldMetaType
+class FieldCreateDocumentFieldTextAlignText(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldCreateDocumentFieldFieldMetaTextRequestBodyTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldTypeTextRequestBody2
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -434,12 +410,11 @@ class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBodyFieldMetaTyp
     text: NotRequired[str]
     character_limit: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldCreateDocumentFieldTextAlignText]
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBodyFieldMeta(
-    BaseModel
-):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody7FieldMetaType
+class FieldCreateDocumentFieldFieldMetaTextRequestBody(BaseModel):
+    type: FieldCreateDocumentFieldTypeTextRequestBody2
 
     label: Optional[str] = None
 
@@ -457,9 +432,14 @@ class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBodyFieldMeta(
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldCreateDocumentFieldTextAlignText],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class Field7TypedDict(TypedDict):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody7Type
+
+class FieldCreateDocumentFieldFieldTextTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldTypeTextRequestBody1
     recipient_id: float
     r"""The ID of the recipient to create the field for."""
     page_number: float
@@ -472,13 +452,11 @@ class Field7TypedDict(TypedDict):
     r"""The width of the field."""
     height: float
     r"""The height of the field."""
-    field_meta: NotRequired[
-        FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBodyFieldMetaTypedDict
-    ]
+    field_meta: NotRequired[FieldCreateDocumentFieldFieldMetaTextRequestBodyTypedDict]
 
 
-class Field7(BaseModel):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody7Type
+class FieldCreateDocumentFieldFieldText(BaseModel):
+    type: FieldCreateDocumentFieldTypeTextRequestBody1
 
     recipient_id: Annotated[float, pydantic.Field(alias="recipientId")]
     r"""The ID of the recipient to create the field for."""
@@ -499,34 +477,37 @@ class Field7(BaseModel):
     r"""The height of the field."""
 
     field_meta: Annotated[
-        Optional[
-            FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBodyFieldMeta
-        ],
+        Optional[FieldCreateDocumentFieldFieldMetaTextRequestBody],
         pydantic.Field(alias="fieldMeta"),
     ] = None
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody6Type(str, Enum):
+class FieldCreateDocumentFieldTypeDateRequestBody1(str, Enum):
     DATE = "DATE"
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody6FieldMetaType(
-    str, Enum
-):
+class FieldCreateDocumentFieldTypeDateRequestBody2(str, Enum):
     DATE = "date"
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestFieldMetaTypedDict(TypedDict):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody6FieldMetaType
+class FieldCreateDocumentFieldTextAlignDate(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldCreateDocumentFieldFieldMetaDateRequestBodyTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldTypeDateRequestBody2
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldCreateDocumentFieldTextAlignDate]
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestFieldMeta(BaseModel):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody6FieldMetaType
+class FieldCreateDocumentFieldFieldMetaDateRequestBody(BaseModel):
+    type: FieldCreateDocumentFieldTypeDateRequestBody2
 
     label: Optional[str] = None
 
@@ -538,9 +519,14 @@ class FieldCreateDocumentFieldFieldDocumentsFieldsRequestFieldMeta(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldCreateDocumentFieldTextAlignDate],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class Field6TypedDict(TypedDict):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody6Type
+
+class FieldCreateDocumentFieldFieldDateTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldTypeDateRequestBody1
     recipient_id: float
     r"""The ID of the recipient to create the field for."""
     page_number: float
@@ -553,13 +539,11 @@ class Field6TypedDict(TypedDict):
     r"""The width of the field."""
     height: float
     r"""The height of the field."""
-    field_meta: NotRequired[
-        FieldCreateDocumentFieldFieldDocumentsFieldsRequestFieldMetaTypedDict
-    ]
+    field_meta: NotRequired[FieldCreateDocumentFieldFieldMetaDateRequestBodyTypedDict]
 
 
-class Field6(BaseModel):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody6Type
+class FieldCreateDocumentFieldFieldDate(BaseModel):
+    type: FieldCreateDocumentFieldTypeDateRequestBody1
 
     recipient_id: Annotated[float, pydantic.Field(alias="recipientId")]
     r"""The ID of the recipient to create the field for."""
@@ -580,32 +564,37 @@ class Field6(BaseModel):
     r"""The height of the field."""
 
     field_meta: Annotated[
-        Optional[FieldCreateDocumentFieldFieldDocumentsFieldsRequestFieldMeta],
+        Optional[FieldCreateDocumentFieldFieldMetaDateRequestBody],
         pydantic.Field(alias="fieldMeta"),
     ] = None
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody5Type(str, Enum):
+class FieldCreateDocumentFieldTypeEmailRequestBody1(str, Enum):
     EMAIL = "EMAIL"
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody5FieldMetaType(
-    str, Enum
-):
+class FieldCreateDocumentFieldTypeEmailRequestBody2(str, Enum):
     EMAIL = "email"
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsFieldMetaTypedDict(TypedDict):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody5FieldMetaType
+class FieldCreateDocumentFieldTextAlignEmail(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldCreateDocumentFieldFieldMetaEmailRequestBodyTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldTypeEmailRequestBody2
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldCreateDocumentFieldTextAlignEmail]
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsFieldMeta(BaseModel):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody5FieldMetaType
+class FieldCreateDocumentFieldFieldMetaEmailRequestBody(BaseModel):
+    type: FieldCreateDocumentFieldTypeEmailRequestBody2
 
     label: Optional[str] = None
 
@@ -617,9 +606,188 @@ class FieldCreateDocumentFieldFieldDocumentsFieldsFieldMeta(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldCreateDocumentFieldTextAlignEmail],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class Field5TypedDict(TypedDict):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody5Type
+
+class FieldCreateDocumentFieldFieldEmailTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldTypeEmailRequestBody1
+    recipient_id: float
+    r"""The ID of the recipient to create the field for."""
+    page_number: float
+    r"""The page number the field will be on."""
+    page_x: float
+    r"""The X coordinate of where the field will be placed."""
+    page_y: float
+    r"""The Y coordinate of where the field will be placed."""
+    width: float
+    r"""The width of the field."""
+    height: float
+    r"""The height of the field."""
+    field_meta: NotRequired[FieldCreateDocumentFieldFieldMetaEmailRequestBodyTypedDict]
+
+
+class FieldCreateDocumentFieldFieldEmail(BaseModel):
+    type: FieldCreateDocumentFieldTypeEmailRequestBody1
+
+    recipient_id: Annotated[float, pydantic.Field(alias="recipientId")]
+    r"""The ID of the recipient to create the field for."""
+
+    page_number: Annotated[float, pydantic.Field(alias="pageNumber")]
+    r"""The page number the field will be on."""
+
+    page_x: Annotated[float, pydantic.Field(alias="pageX")]
+    r"""The X coordinate of where the field will be placed."""
+
+    page_y: Annotated[float, pydantic.Field(alias="pageY")]
+    r"""The Y coordinate of where the field will be placed."""
+
+    width: float
+    r"""The width of the field."""
+
+    height: float
+    r"""The height of the field."""
+
+    field_meta: Annotated[
+        Optional[FieldCreateDocumentFieldFieldMetaEmailRequestBody],
+        pydantic.Field(alias="fieldMeta"),
+    ] = None
+
+
+class FieldCreateDocumentFieldTypeNameRequestBody1(str, Enum):
+    NAME = "NAME"
+
+
+class FieldCreateDocumentFieldTypeNameRequestBody2(str, Enum):
+    NAME = "name"
+
+
+class FieldCreateDocumentFieldTextAlignName(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldCreateDocumentFieldFieldMetaNameRequestBodyTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldTypeNameRequestBody2
+    label: NotRequired[str]
+    placeholder: NotRequired[str]
+    required: NotRequired[bool]
+    read_only: NotRequired[bool]
+    font_size: NotRequired[float]
+    text_align: NotRequired[FieldCreateDocumentFieldTextAlignName]
+
+
+class FieldCreateDocumentFieldFieldMetaNameRequestBody(BaseModel):
+    type: FieldCreateDocumentFieldTypeNameRequestBody2
+
+    label: Optional[str] = None
+
+    placeholder: Optional[str] = None
+
+    required: Optional[bool] = None
+
+    read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
+
+    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
+
+    text_align: Annotated[
+        Optional[FieldCreateDocumentFieldTextAlignName],
+        pydantic.Field(alias="textAlign"),
+    ] = None
+
+
+class FieldCreateDocumentFieldFieldNameTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldTypeNameRequestBody1
+    recipient_id: float
+    r"""The ID of the recipient to create the field for."""
+    page_number: float
+    r"""The page number the field will be on."""
+    page_x: float
+    r"""The X coordinate of where the field will be placed."""
+    page_y: float
+    r"""The Y coordinate of where the field will be placed."""
+    width: float
+    r"""The width of the field."""
+    height: float
+    r"""The height of the field."""
+    field_meta: NotRequired[FieldCreateDocumentFieldFieldMetaNameRequestBodyTypedDict]
+
+
+class FieldCreateDocumentFieldFieldName(BaseModel):
+    type: FieldCreateDocumentFieldTypeNameRequestBody1
+
+    recipient_id: Annotated[float, pydantic.Field(alias="recipientId")]
+    r"""The ID of the recipient to create the field for."""
+
+    page_number: Annotated[float, pydantic.Field(alias="pageNumber")]
+    r"""The page number the field will be on."""
+
+    page_x: Annotated[float, pydantic.Field(alias="pageX")]
+    r"""The X coordinate of where the field will be placed."""
+
+    page_y: Annotated[float, pydantic.Field(alias="pageY")]
+    r"""The Y coordinate of where the field will be placed."""
+
+    width: float
+    r"""The width of the field."""
+
+    height: float
+    r"""The height of the field."""
+
+    field_meta: Annotated[
+        Optional[FieldCreateDocumentFieldFieldMetaNameRequestBody],
+        pydantic.Field(alias="fieldMeta"),
+    ] = None
+
+
+class FieldCreateDocumentFieldTypeInitialsRequestBody1(str, Enum):
+    INITIALS = "INITIALS"
+
+
+class FieldCreateDocumentFieldTypeInitialsRequestBody2(str, Enum):
+    INITIALS = "initials"
+
+
+class FieldCreateDocumentFieldTextAlignInitials(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldCreateDocumentFieldFieldMetaInitialsRequestBodyTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldTypeInitialsRequestBody2
+    label: NotRequired[str]
+    placeholder: NotRequired[str]
+    required: NotRequired[bool]
+    read_only: NotRequired[bool]
+    font_size: NotRequired[float]
+    text_align: NotRequired[FieldCreateDocumentFieldTextAlignInitials]
+
+
+class FieldCreateDocumentFieldFieldMetaInitialsRequestBody(BaseModel):
+    type: FieldCreateDocumentFieldTypeInitialsRequestBody2
+
+    label: Optional[str] = None
+
+    placeholder: Optional[str] = None
+
+    required: Optional[bool] = None
+
+    read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
+
+    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
+
+    text_align: Annotated[
+        Optional[FieldCreateDocumentFieldTextAlignInitials],
+        pydantic.Field(alias="textAlign"),
+    ] = None
+
+
+class FieldCreateDocumentFieldFieldInitialsTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldTypeInitialsRequestBody1
     recipient_id: float
     r"""The ID of the recipient to create the field for."""
     page_number: float
@@ -633,12 +801,12 @@ class Field5TypedDict(TypedDict):
     height: float
     r"""The height of the field."""
     field_meta: NotRequired[
-        FieldCreateDocumentFieldFieldDocumentsFieldsFieldMetaTypedDict
+        FieldCreateDocumentFieldFieldMetaInitialsRequestBodyTypedDict
     ]
 
 
-class Field5(BaseModel):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody5Type
+class FieldCreateDocumentFieldFieldInitials(BaseModel):
+    type: FieldCreateDocumentFieldTypeInitialsRequestBody1
 
     recipient_id: Annotated[float, pydantic.Field(alias="recipientId")]
     r"""The ID of the recipient to create the field for."""
@@ -659,166 +827,17 @@ class Field5(BaseModel):
     r"""The height of the field."""
 
     field_meta: Annotated[
-        Optional[FieldCreateDocumentFieldFieldDocumentsFieldsFieldMeta],
+        Optional[FieldCreateDocumentFieldFieldMetaInitialsRequestBody],
         pydantic.Field(alias="fieldMeta"),
     ] = None
 
 
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBodyType(str, Enum):
-    NAME = "NAME"
-
-
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody4Type(str, Enum):
-    NAME = "name"
-
-
-class FieldCreateDocumentFieldFieldFieldMetaTypedDict(TypedDict):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody4Type
-    label: NotRequired[str]
-    placeholder: NotRequired[str]
-    required: NotRequired[bool]
-    read_only: NotRequired[bool]
-    font_size: NotRequired[float]
-
-
-class FieldCreateDocumentFieldFieldFieldMeta(BaseModel):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBody4Type
-
-    label: Optional[str] = None
-
-    placeholder: Optional[str] = None
-
-    required: Optional[bool] = None
-
-    read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
-
-    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
-
-
-class Field4TypedDict(TypedDict):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBodyType
-    recipient_id: float
-    r"""The ID of the recipient to create the field for."""
-    page_number: float
-    r"""The page number the field will be on."""
-    page_x: float
-    r"""The X coordinate of where the field will be placed."""
-    page_y: float
-    r"""The Y coordinate of where the field will be placed."""
-    width: float
-    r"""The width of the field."""
-    height: float
-    r"""The height of the field."""
-    field_meta: NotRequired[FieldCreateDocumentFieldFieldFieldMetaTypedDict]
-
-
-class Field4(BaseModel):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestRequestBodyType
-
-    recipient_id: Annotated[float, pydantic.Field(alias="recipientId")]
-    r"""The ID of the recipient to create the field for."""
-
-    page_number: Annotated[float, pydantic.Field(alias="pageNumber")]
-    r"""The page number the field will be on."""
-
-    page_x: Annotated[float, pydantic.Field(alias="pageX")]
-    r"""The X coordinate of where the field will be placed."""
-
-    page_y: Annotated[float, pydantic.Field(alias="pageY")]
-    r"""The Y coordinate of where the field will be placed."""
-
-    width: float
-    r"""The width of the field."""
-
-    height: float
-    r"""The height of the field."""
-
-    field_meta: Annotated[
-        Optional[FieldCreateDocumentFieldFieldFieldMeta],
-        pydantic.Field(alias="fieldMeta"),
-    ] = None
-
-
-class FieldCreateDocumentFieldFieldDocumentsFieldsType(str, Enum):
-    INITIALS = "INITIALS"
-
-
-class FieldCreateDocumentFieldFieldDocumentsFieldsRequestType(str, Enum):
-    INITIALS = "initials"
-
-
-class FieldFieldMetaTypedDict(TypedDict):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestType
-    label: NotRequired[str]
-    placeholder: NotRequired[str]
-    required: NotRequired[bool]
-    read_only: NotRequired[bool]
-    font_size: NotRequired[float]
-
-
-class FieldFieldMeta(BaseModel):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsRequestType
-
-    label: Optional[str] = None
-
-    placeholder: Optional[str] = None
-
-    required: Optional[bool] = None
-
-    read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
-
-    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
-
-
-class Field3TypedDict(TypedDict):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsType
-    recipient_id: float
-    r"""The ID of the recipient to create the field for."""
-    page_number: float
-    r"""The page number the field will be on."""
-    page_x: float
-    r"""The X coordinate of where the field will be placed."""
-    page_y: float
-    r"""The Y coordinate of where the field will be placed."""
-    width: float
-    r"""The width of the field."""
-    height: float
-    r"""The height of the field."""
-    field_meta: NotRequired[FieldFieldMetaTypedDict]
-
-
-class Field3(BaseModel):
-    type: FieldCreateDocumentFieldFieldDocumentsFieldsType
-
-    recipient_id: Annotated[float, pydantic.Field(alias="recipientId")]
-    r"""The ID of the recipient to create the field for."""
-
-    page_number: Annotated[float, pydantic.Field(alias="pageNumber")]
-    r"""The page number the field will be on."""
-
-    page_x: Annotated[float, pydantic.Field(alias="pageX")]
-    r"""The X coordinate of where the field will be placed."""
-
-    page_y: Annotated[float, pydantic.Field(alias="pageY")]
-    r"""The Y coordinate of where the field will be placed."""
-
-    width: float
-    r"""The width of the field."""
-
-    height: float
-    r"""The height of the field."""
-
-    field_meta: Annotated[
-        Optional[FieldFieldMeta], pydantic.Field(alias="fieldMeta")
-    ] = None
-
-
-class FieldCreateDocumentFieldFieldType(str, Enum):
+class FieldCreateDocumentFieldTypeFreeSignature(str, Enum):
     FREE_SIGNATURE = "FREE_SIGNATURE"
 
 
-class Field2TypedDict(TypedDict):
-    type: FieldCreateDocumentFieldFieldType
+class FieldCreateDocumentFieldFieldFreeSignatureTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldTypeFreeSignature
     recipient_id: float
     r"""The ID of the recipient to create the field for."""
     page_number: float
@@ -833,8 +852,8 @@ class Field2TypedDict(TypedDict):
     r"""The height of the field."""
 
 
-class Field2(BaseModel):
-    type: FieldCreateDocumentFieldFieldType
+class FieldCreateDocumentFieldFieldFreeSignature(BaseModel):
+    type: FieldCreateDocumentFieldTypeFreeSignature
 
     recipient_id: Annotated[float, pydantic.Field(alias="recipientId")]
     r"""The ID of the recipient to create the field for."""
@@ -855,12 +874,12 @@ class Field2(BaseModel):
     r"""The height of the field."""
 
 
-class FieldType(str, Enum):
+class FieldCreateDocumentFieldTypeSignature(str, Enum):
     SIGNATURE = "SIGNATURE"
 
 
-class Field1TypedDict(TypedDict):
-    type: FieldType
+class FieldCreateDocumentFieldFieldSignatureTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldTypeSignature
     recipient_id: float
     r"""The ID of the recipient to create the field for."""
     page_number: float
@@ -875,8 +894,8 @@ class Field1TypedDict(TypedDict):
     r"""The height of the field."""
 
 
-class Field1(BaseModel):
-    type: FieldType
+class FieldCreateDocumentFieldFieldSignature(BaseModel):
+    type: FieldCreateDocumentFieldTypeSignature
 
     recipient_id: Annotated[float, pydantic.Field(alias="recipientId")]
     r"""The ID of the recipient to create the field for."""
@@ -897,116 +916,114 @@ class Field1(BaseModel):
     r"""The height of the field."""
 
 
-FieldTTypedDict = TypeAliasType(
-    "FieldTTypedDict",
+FieldCreateDocumentFieldFieldUnionTypedDict = TypeAliasType(
+    "FieldCreateDocumentFieldFieldUnionTypedDict",
     Union[
-        Field1TypedDict,
-        Field2TypedDict,
-        Field3TypedDict,
-        Field4TypedDict,
-        Field5TypedDict,
-        Field6TypedDict,
-        Field7TypedDict,
-        Field8TypedDict,
-        Field9TypedDict,
-        Field10TypedDict,
-        Field11TypedDict,
+        FieldCreateDocumentFieldFieldSignatureTypedDict,
+        FieldCreateDocumentFieldFieldFreeSignatureTypedDict,
+        FieldCreateDocumentFieldFieldInitialsTypedDict,
+        FieldCreateDocumentFieldFieldNameTypedDict,
+        FieldCreateDocumentFieldFieldEmailTypedDict,
+        FieldCreateDocumentFieldFieldDateTypedDict,
+        FieldCreateDocumentFieldFieldTextTypedDict,
+        FieldCreateDocumentFieldFieldNumberTypedDict,
+        FieldCreateDocumentFieldFieldRadioTypedDict,
+        FieldCreateDocumentFieldFieldCheckboxTypedDict,
+        FieldCreateDocumentFieldFieldDropdownTypedDict,
     ],
 )
 
 
-FieldT = TypeAliasType(
-    "FieldT",
+FieldCreateDocumentFieldFieldUnion = TypeAliasType(
+    "FieldCreateDocumentFieldFieldUnion",
     Union[
-        Field1,
-        Field2,
-        Field3,
-        Field4,
-        Field5,
-        Field6,
-        Field7,
-        Field8,
-        Field9,
-        Field10,
-        Field11,
+        FieldCreateDocumentFieldFieldSignature,
+        FieldCreateDocumentFieldFieldFreeSignature,
+        FieldCreateDocumentFieldFieldInitials,
+        FieldCreateDocumentFieldFieldName,
+        FieldCreateDocumentFieldFieldEmail,
+        FieldCreateDocumentFieldFieldDate,
+        FieldCreateDocumentFieldFieldText,
+        FieldCreateDocumentFieldFieldNumber,
+        FieldCreateDocumentFieldFieldRadio,
+        FieldCreateDocumentFieldFieldCheckbox,
+        FieldCreateDocumentFieldFieldDropdown,
     ],
 )
 
 
-class FieldCreateDocumentFieldRequestBodyTypedDict(TypedDict):
+class FieldCreateDocumentFieldRequestTypedDict(TypedDict):
     document_id: float
-    field: FieldTTypedDict
+    field: FieldCreateDocumentFieldFieldUnionTypedDict
 
 
-class FieldCreateDocumentFieldRequestBody(BaseModel):
+class FieldCreateDocumentFieldRequest(BaseModel):
     document_id: Annotated[float, pydantic.Field(alias="documentId")]
 
-    field: FieldT
+    field: FieldCreateDocumentFieldFieldUnion
 
 
-class FieldCreateDocumentFieldDocumentsFieldsIssuesTypedDict(TypedDict):
+class FieldCreateDocumentFieldInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class FieldCreateDocumentFieldDocumentsFieldsIssues(BaseModel):
+class FieldCreateDocumentFieldInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class FieldCreateDocumentFieldDocumentsFieldsResponseResponseBodyData(BaseModel):
+class FieldCreateDocumentFieldInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[FieldCreateDocumentFieldDocumentsFieldsIssues]] = None
+    issues: Optional[List[FieldCreateDocumentFieldInternalServerErrorIssue]] = None
 
 
-class FieldCreateDocumentFieldDocumentsFieldsResponseResponseBody(Exception):
+class FieldCreateDocumentFieldInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: FieldCreateDocumentFieldDocumentsFieldsResponseResponseBodyData
+    data: FieldCreateDocumentFieldInternalServerErrorData
 
-    def __init__(
-        self, data: FieldCreateDocumentFieldDocumentsFieldsResponseResponseBodyData
-    ):
+    def __init__(self, data: FieldCreateDocumentFieldInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, FieldCreateDocumentFieldDocumentsFieldsResponseResponseBodyData
+            self.data, FieldCreateDocumentFieldInternalServerErrorData
         )
 
 
-class FieldCreateDocumentFieldIssuesTypedDict(TypedDict):
+class FieldCreateDocumentFieldBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class FieldCreateDocumentFieldIssues(BaseModel):
+class FieldCreateDocumentFieldBadRequestIssue(BaseModel):
     message: str
 
 
-class FieldCreateDocumentFieldDocumentsFieldsResponseBodyData(BaseModel):
+class FieldCreateDocumentFieldBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[FieldCreateDocumentFieldIssues]] = None
+    issues: Optional[List[FieldCreateDocumentFieldBadRequestIssue]] = None
 
 
-class FieldCreateDocumentFieldDocumentsFieldsResponseBody(Exception):
+class FieldCreateDocumentFieldBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: FieldCreateDocumentFieldDocumentsFieldsResponseBodyData
+    data: FieldCreateDocumentFieldBadRequestErrorData
 
-    def __init__(self, data: FieldCreateDocumentFieldDocumentsFieldsResponseBodyData):
+    def __init__(self, data: FieldCreateDocumentFieldBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, FieldCreateDocumentFieldDocumentsFieldsResponseBodyData
+            self.data, FieldCreateDocumentFieldBadRequestErrorData
         )
 
 
-class FieldCreateDocumentFieldType(str, Enum):
+class FieldCreateDocumentFieldTypeResponse(str, Enum):
     SIGNATURE = "SIGNATURE"
     FREE_SIGNATURE = "FREE_SIGNATURE"
     INITIALS = "INITIALS"
@@ -1020,36 +1037,30 @@ class FieldCreateDocumentFieldType(str, Enum):
     DROPDOWN = "DROPDOWN"
 
 
-class FieldCreateDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONResponseBody9Type(
-    str, Enum
-):
+class FieldCreateDocumentFieldFieldMetaTypeDropdown(str, Enum):
     DROPDOWN = "dropdown"
 
 
-class FieldCreateDocumentFieldFieldMetaDocumentsFieldsResponseValuesTypedDict(
-    TypedDict
-):
+class FieldCreateDocumentFieldValueResponse3TypedDict(TypedDict):
     value: str
 
 
-class FieldCreateDocumentFieldFieldMetaDocumentsFieldsResponseValues(BaseModel):
+class FieldCreateDocumentFieldValueResponse3(BaseModel):
     value: str
 
 
-class FieldCreateDocumentFieldFieldMeta9TypedDict(TypedDict):
-    type: FieldCreateDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONResponseBody9Type
+class FieldCreateDocumentFieldFieldMetaDropdownResponseTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldFieldMetaTypeDropdown
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[
-        List[FieldCreateDocumentFieldFieldMetaDocumentsFieldsResponseValuesTypedDict]
-    ]
+    values: NotRequired[List[FieldCreateDocumentFieldValueResponse3TypedDict]]
     default_value: NotRequired[str]
 
 
-class FieldCreateDocumentFieldFieldMeta9(BaseModel):
-    type: FieldCreateDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONResponseBody9Type
+class FieldCreateDocumentFieldFieldMetaDropdownResponse(BaseModel):
+    type: FieldCreateDocumentFieldFieldMetaTypeDropdown
 
     label: Optional[str] = None
 
@@ -1059,26 +1070,22 @@ class FieldCreateDocumentFieldFieldMeta9(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[
-        List[FieldCreateDocumentFieldFieldMetaDocumentsFieldsResponseValues]
-    ] = None
+    values: Optional[List[FieldCreateDocumentFieldValueResponse3]] = None
 
     default_value: Annotated[Optional[str], pydantic.Field(alias="defaultValue")] = None
 
 
-class FieldCreateDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONResponseBody8Type(
-    str, Enum
-):
+class FieldCreateDocumentFieldFieldMetaTypeCheckbox(str, Enum):
     CHECKBOX = "checkbox"
 
 
-class FieldCreateDocumentFieldFieldMetaDocumentsFieldsValuesTypedDict(TypedDict):
+class FieldCreateDocumentFieldValueResponse2TypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class FieldCreateDocumentFieldFieldMetaDocumentsFieldsValues(BaseModel):
+class FieldCreateDocumentFieldValueResponse2(BaseModel):
     id: float
 
     checked: bool
@@ -1086,21 +1093,19 @@ class FieldCreateDocumentFieldFieldMetaDocumentsFieldsValues(BaseModel):
     value: str
 
 
-class FieldCreateDocumentFieldFieldMeta8TypedDict(TypedDict):
-    type: FieldCreateDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONResponseBody8Type
+class FieldCreateDocumentFieldFieldMetaCheckboxResponseTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldFieldMetaTypeCheckbox
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[
-        List[FieldCreateDocumentFieldFieldMetaDocumentsFieldsValuesTypedDict]
-    ]
+    values: NotRequired[List[FieldCreateDocumentFieldValueResponse2TypedDict]]
     validation_rule: NotRequired[str]
     validation_length: NotRequired[float]
 
 
-class FieldCreateDocumentFieldFieldMeta8(BaseModel):
-    type: FieldCreateDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONResponseBody8Type
+class FieldCreateDocumentFieldFieldMetaCheckboxResponse(BaseModel):
+    type: FieldCreateDocumentFieldFieldMetaTypeCheckbox
 
     label: Optional[str] = None
 
@@ -1110,9 +1115,7 @@ class FieldCreateDocumentFieldFieldMeta8(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[FieldCreateDocumentFieldFieldMetaDocumentsFieldsValues]] = (
-        None
-    )
+    values: Optional[List[FieldCreateDocumentFieldValueResponse2]] = None
 
     validation_rule: Annotated[
         Optional[str], pydantic.Field(alias="validationRule")
@@ -1123,19 +1126,17 @@ class FieldCreateDocumentFieldFieldMeta8(BaseModel):
     ] = None
 
 
-class FieldCreateDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONResponseBody7Type(
-    str, Enum
-):
+class FieldCreateDocumentFieldFieldMetaTypeRadio(str, Enum):
     RADIO = "radio"
 
 
-class FieldCreateDocumentFieldFieldMetaValuesTypedDict(TypedDict):
+class FieldCreateDocumentFieldValueResponse1TypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class FieldCreateDocumentFieldFieldMetaValues(BaseModel):
+class FieldCreateDocumentFieldValueResponse1(BaseModel):
     id: float
 
     checked: bool
@@ -1143,17 +1144,17 @@ class FieldCreateDocumentFieldFieldMetaValues(BaseModel):
     value: str
 
 
-class FieldCreateDocumentFieldFieldMeta7TypedDict(TypedDict):
-    type: FieldCreateDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONResponseBody7Type
+class FieldCreateDocumentFieldFieldMetaRadioResponseTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldFieldMetaTypeRadio
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[List[FieldCreateDocumentFieldFieldMetaValuesTypedDict]]
+    values: NotRequired[List[FieldCreateDocumentFieldValueResponse1TypedDict]]
 
 
-class FieldCreateDocumentFieldFieldMeta7(BaseModel):
-    type: FieldCreateDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONResponseBody7Type
+class FieldCreateDocumentFieldFieldMetaRadioResponse(BaseModel):
+    type: FieldCreateDocumentFieldFieldMetaTypeRadio
 
     label: Optional[str] = None
 
@@ -1163,17 +1164,21 @@ class FieldCreateDocumentFieldFieldMeta7(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[FieldCreateDocumentFieldFieldMetaValues]] = None
+    values: Optional[List[FieldCreateDocumentFieldValueResponse1]] = None
 
 
-class FieldCreateDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONResponseBodyType(
-    str, Enum
-):
+class FieldCreateDocumentFieldFieldMetaTypeNumber(str, Enum):
     NUMBER = "number"
 
 
-class FieldCreateDocumentFieldFieldMeta6TypedDict(TypedDict):
-    type: FieldCreateDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONResponseBodyType
+class FieldCreateDocumentFieldTextAlignResponse6(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldCreateDocumentFieldFieldMetaNumberResponseTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldFieldMetaTypeNumber
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -1183,10 +1188,11 @@ class FieldCreateDocumentFieldFieldMeta6TypedDict(TypedDict):
     min_value: NotRequired[float]
     max_value: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldCreateDocumentFieldTextAlignResponse6]
 
 
-class FieldCreateDocumentFieldFieldMeta6(BaseModel):
-    type: FieldCreateDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONResponseBodyType
+class FieldCreateDocumentFieldFieldMetaNumberResponse(BaseModel):
+    type: FieldCreateDocumentFieldFieldMetaTypeNumber
 
     label: Optional[str] = None
 
@@ -1206,15 +1212,24 @@ class FieldCreateDocumentFieldFieldMeta6(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldCreateDocumentFieldTextAlignResponse6],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class FieldCreateDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONType(
-    str, Enum
-):
+
+class FieldCreateDocumentFieldFieldMetaTypeText(str, Enum):
     TEXT = "text"
 
 
-class FieldCreateDocumentFieldFieldMeta5TypedDict(TypedDict):
-    type: FieldCreateDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONType
+class FieldCreateDocumentFieldTextAlignResponse5(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldCreateDocumentFieldFieldMetaTextResponseTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldFieldMetaTypeText
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -1222,10 +1237,11 @@ class FieldCreateDocumentFieldFieldMeta5TypedDict(TypedDict):
     text: NotRequired[str]
     character_limit: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldCreateDocumentFieldTextAlignResponse5]
 
 
-class FieldCreateDocumentFieldFieldMeta5(BaseModel):
-    type: FieldCreateDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONType
+class FieldCreateDocumentFieldFieldMetaTextResponse(BaseModel):
+    type: FieldCreateDocumentFieldFieldMetaTypeText
 
     label: Optional[str] = None
 
@@ -1243,22 +1259,34 @@ class FieldCreateDocumentFieldFieldMeta5(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldCreateDocumentFieldTextAlignResponse5],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class FieldCreateDocumentFieldFieldMetaDocumentsFieldsResponse200Type(str, Enum):
+
+class FieldCreateDocumentFieldFieldMetaTypeDate(str, Enum):
     DATE = "date"
 
 
-class FieldCreateDocumentFieldFieldMeta4TypedDict(TypedDict):
-    type: FieldCreateDocumentFieldFieldMetaDocumentsFieldsResponse200Type
+class FieldCreateDocumentFieldTextAlignResponse4(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldCreateDocumentFieldFieldMetaDateResponseTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldFieldMetaTypeDate
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldCreateDocumentFieldTextAlignResponse4]
 
 
-class FieldCreateDocumentFieldFieldMeta4(BaseModel):
-    type: FieldCreateDocumentFieldFieldMetaDocumentsFieldsResponse200Type
+class FieldCreateDocumentFieldFieldMetaDateResponse(BaseModel):
+    type: FieldCreateDocumentFieldFieldMetaTypeDate
 
     label: Optional[str] = None
 
@@ -1270,22 +1298,34 @@ class FieldCreateDocumentFieldFieldMeta4(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldCreateDocumentFieldTextAlignResponse4],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class FieldCreateDocumentFieldFieldMetaDocumentsFieldsResponseType(str, Enum):
+
+class FieldCreateDocumentFieldFieldMetaTypeEmail(str, Enum):
     EMAIL = "email"
 
 
-class FieldCreateDocumentFieldFieldMeta3TypedDict(TypedDict):
-    type: FieldCreateDocumentFieldFieldMetaDocumentsFieldsResponseType
+class FieldCreateDocumentFieldTextAlignResponse3(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldCreateDocumentFieldFieldMetaEmailResponseTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldFieldMetaTypeEmail
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldCreateDocumentFieldTextAlignResponse3]
 
 
-class FieldCreateDocumentFieldFieldMeta3(BaseModel):
-    type: FieldCreateDocumentFieldFieldMetaDocumentsFieldsResponseType
+class FieldCreateDocumentFieldFieldMetaEmailResponse(BaseModel):
+    type: FieldCreateDocumentFieldFieldMetaTypeEmail
 
     label: Optional[str] = None
 
@@ -1297,22 +1337,34 @@ class FieldCreateDocumentFieldFieldMeta3(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldCreateDocumentFieldTextAlignResponse3],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class FieldCreateDocumentFieldFieldMetaDocumentsFieldsType(str, Enum):
+
+class FieldCreateDocumentFieldFieldMetaTypeName(str, Enum):
     NAME = "name"
 
 
-class FieldCreateDocumentFieldFieldMeta2TypedDict(TypedDict):
-    type: FieldCreateDocumentFieldFieldMetaDocumentsFieldsType
+class FieldCreateDocumentFieldTextAlignResponse2(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldCreateDocumentFieldFieldMetaNameResponseTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldFieldMetaTypeName
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldCreateDocumentFieldTextAlignResponse2]
 
 
-class FieldCreateDocumentFieldFieldMeta2(BaseModel):
-    type: FieldCreateDocumentFieldFieldMetaDocumentsFieldsType
+class FieldCreateDocumentFieldFieldMetaNameResponse(BaseModel):
+    type: FieldCreateDocumentFieldFieldMetaTypeName
 
     label: Optional[str] = None
 
@@ -1324,22 +1376,34 @@ class FieldCreateDocumentFieldFieldMeta2(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldCreateDocumentFieldTextAlignResponse2],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class FieldCreateDocumentFieldFieldMetaType(str, Enum):
+
+class FieldCreateDocumentFieldFieldMetaTypeInitials(str, Enum):
     INITIALS = "initials"
 
 
-class FieldCreateDocumentFieldFieldMeta1TypedDict(TypedDict):
-    type: FieldCreateDocumentFieldFieldMetaType
+class FieldCreateDocumentFieldTextAlignResponse1(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldCreateDocumentFieldFieldMetaInitialsResponseTypedDict(TypedDict):
+    type: FieldCreateDocumentFieldFieldMetaTypeInitials
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldCreateDocumentFieldTextAlignResponse1]
 
 
-class FieldCreateDocumentFieldFieldMeta1(BaseModel):
-    type: FieldCreateDocumentFieldFieldMetaType
+class FieldCreateDocumentFieldFieldMetaInitialsResponse(BaseModel):
+    type: FieldCreateDocumentFieldFieldMetaTypeInitials
 
     label: Optional[str] = None
 
@@ -1351,73 +1415,78 @@ class FieldCreateDocumentFieldFieldMeta1(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldCreateDocumentFieldTextAlignResponse1],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-FieldCreateDocumentFieldFieldMetaTypedDict = TypeAliasType(
-    "FieldCreateDocumentFieldFieldMetaTypedDict",
+
+FieldCreateDocumentFieldFieldMetaUnionTypedDict = TypeAliasType(
+    "FieldCreateDocumentFieldFieldMetaUnionTypedDict",
     Union[
-        FieldCreateDocumentFieldFieldMeta1TypedDict,
-        FieldCreateDocumentFieldFieldMeta2TypedDict,
-        FieldCreateDocumentFieldFieldMeta3TypedDict,
-        FieldCreateDocumentFieldFieldMeta4TypedDict,
-        FieldCreateDocumentFieldFieldMeta7TypedDict,
-        FieldCreateDocumentFieldFieldMeta9TypedDict,
-        FieldCreateDocumentFieldFieldMeta5TypedDict,
-        FieldCreateDocumentFieldFieldMeta8TypedDict,
-        FieldCreateDocumentFieldFieldMeta6TypedDict,
+        FieldCreateDocumentFieldFieldMetaRadioResponseTypedDict,
+        FieldCreateDocumentFieldFieldMetaInitialsResponseTypedDict,
+        FieldCreateDocumentFieldFieldMetaNameResponseTypedDict,
+        FieldCreateDocumentFieldFieldMetaEmailResponseTypedDict,
+        FieldCreateDocumentFieldFieldMetaDateResponseTypedDict,
+        FieldCreateDocumentFieldFieldMetaDropdownResponseTypedDict,
+        FieldCreateDocumentFieldFieldMetaCheckboxResponseTypedDict,
+        FieldCreateDocumentFieldFieldMetaTextResponseTypedDict,
+        FieldCreateDocumentFieldFieldMetaNumberResponseTypedDict,
     ],
 )
 
 
-FieldCreateDocumentFieldFieldMeta = TypeAliasType(
-    "FieldCreateDocumentFieldFieldMeta",
+FieldCreateDocumentFieldFieldMetaUnion = TypeAliasType(
+    "FieldCreateDocumentFieldFieldMetaUnion",
     Union[
-        FieldCreateDocumentFieldFieldMeta1,
-        FieldCreateDocumentFieldFieldMeta2,
-        FieldCreateDocumentFieldFieldMeta3,
-        FieldCreateDocumentFieldFieldMeta4,
-        FieldCreateDocumentFieldFieldMeta7,
-        FieldCreateDocumentFieldFieldMeta9,
-        FieldCreateDocumentFieldFieldMeta5,
-        FieldCreateDocumentFieldFieldMeta8,
-        FieldCreateDocumentFieldFieldMeta6,
+        FieldCreateDocumentFieldFieldMetaRadioResponse,
+        FieldCreateDocumentFieldFieldMetaInitialsResponse,
+        FieldCreateDocumentFieldFieldMetaNameResponse,
+        FieldCreateDocumentFieldFieldMetaEmailResponse,
+        FieldCreateDocumentFieldFieldMetaDateResponse,
+        FieldCreateDocumentFieldFieldMetaDropdownResponse,
+        FieldCreateDocumentFieldFieldMetaCheckboxResponse,
+        FieldCreateDocumentFieldFieldMetaTextResponse,
+        FieldCreateDocumentFieldFieldMetaNumberResponse,
     ],
 )
 
 
-class FieldCreateDocumentFieldResponseBodyTypedDict(TypedDict):
+class FieldCreateDocumentFieldResponseTypedDict(TypedDict):
     r"""Successful response"""
 
-    type: FieldCreateDocumentFieldType
-    id: int
+    type: FieldCreateDocumentFieldTypeResponse
+    id: float
     secondary_id: str
-    document_id: Nullable[int]
-    template_id: Nullable[int]
-    recipient_id: int
+    document_id: Nullable[float]
+    template_id: Nullable[float]
+    recipient_id: float
     page: float
     r"""The page number of the field on the document. Starts from 1."""
     custom_text: str
     inserted: bool
-    field_meta: Nullable[FieldCreateDocumentFieldFieldMetaTypedDict]
+    field_meta: Nullable[FieldCreateDocumentFieldFieldMetaUnionTypedDict]
     position_x: NotRequired[Any]
     position_y: NotRequired[Any]
     width: NotRequired[Any]
     height: NotRequired[Any]
 
 
-class FieldCreateDocumentFieldResponseBody(BaseModel):
+class FieldCreateDocumentFieldResponse(BaseModel):
     r"""Successful response"""
 
-    type: FieldCreateDocumentFieldType
+    type: FieldCreateDocumentFieldTypeResponse
 
-    id: int
+    id: float
 
     secondary_id: Annotated[str, pydantic.Field(alias="secondaryId")]
 
-    document_id: Annotated[Nullable[int], pydantic.Field(alias="documentId")]
+    document_id: Annotated[Nullable[float], pydantic.Field(alias="documentId")]
 
-    template_id: Annotated[Nullable[int], pydantic.Field(alias="templateId")]
+    template_id: Annotated[Nullable[float], pydantic.Field(alias="templateId")]
 
-    recipient_id: Annotated[int, pydantic.Field(alias="recipientId")]
+    recipient_id: Annotated[float, pydantic.Field(alias="recipientId")]
 
     page: float
     r"""The page number of the field on the document. Starts from 1."""
@@ -1427,7 +1496,8 @@ class FieldCreateDocumentFieldResponseBody(BaseModel):
     inserted: bool
 
     field_meta: Annotated[
-        Nullable[FieldCreateDocumentFieldFieldMeta], pydantic.Field(alias="fieldMeta")
+        Nullable[FieldCreateDocumentFieldFieldMetaUnion],
+        pydantic.Field(alias="fieldMeta"),
     ]
 
     position_x: Annotated[Optional[Any], pydantic.Field(alias="positionX")] = None
@@ -1448,7 +1518,7 @@ class FieldCreateDocumentFieldResponseBody(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

@@ -8,81 +8,79 @@ from typing import List, Optional
 from typing_extensions import Annotated, TypedDict
 
 
-class TemplateDeleteTemplateRequestBodyTypedDict(TypedDict):
+class TemplateDeleteTemplateRequestTypedDict(TypedDict):
     template_id: float
 
 
-class TemplateDeleteTemplateRequestBody(BaseModel):
+class TemplateDeleteTemplateRequest(BaseModel):
     template_id: Annotated[float, pydantic.Field(alias="templateId")]
 
 
-class TemplateDeleteTemplateTemplatesIssuesTypedDict(TypedDict):
+class TemplateDeleteTemplateInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class TemplateDeleteTemplateTemplatesIssues(BaseModel):
+class TemplateDeleteTemplateInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class TemplateDeleteTemplateTemplatesResponseResponseBodyData(BaseModel):
+class TemplateDeleteTemplateInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[TemplateDeleteTemplateTemplatesIssues]] = None
+    issues: Optional[List[TemplateDeleteTemplateInternalServerErrorIssue]] = None
 
 
-class TemplateDeleteTemplateTemplatesResponseResponseBody(Exception):
+class TemplateDeleteTemplateInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: TemplateDeleteTemplateTemplatesResponseResponseBodyData
+    data: TemplateDeleteTemplateInternalServerErrorData
 
-    def __init__(self, data: TemplateDeleteTemplateTemplatesResponseResponseBodyData):
+    def __init__(self, data: TemplateDeleteTemplateInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, TemplateDeleteTemplateTemplatesResponseResponseBodyData
+            self.data, TemplateDeleteTemplateInternalServerErrorData
         )
 
 
-class TemplateDeleteTemplateIssuesTypedDict(TypedDict):
+class TemplateDeleteTemplateBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class TemplateDeleteTemplateIssues(BaseModel):
+class TemplateDeleteTemplateBadRequestIssue(BaseModel):
     message: str
 
 
-class TemplateDeleteTemplateTemplatesResponseBodyData(BaseModel):
+class TemplateDeleteTemplateBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[TemplateDeleteTemplateIssues]] = None
+    issues: Optional[List[TemplateDeleteTemplateBadRequestIssue]] = None
 
 
-class TemplateDeleteTemplateTemplatesResponseBody(Exception):
+class TemplateDeleteTemplateBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: TemplateDeleteTemplateTemplatesResponseBodyData
+    data: TemplateDeleteTemplateBadRequestErrorData
 
-    def __init__(self, data: TemplateDeleteTemplateTemplatesResponseBodyData):
+    def __init__(self, data: TemplateDeleteTemplateBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
-        return utils.marshal_json(
-            self.data, TemplateDeleteTemplateTemplatesResponseBodyData
-        )
+        return utils.marshal_json(self.data, TemplateDeleteTemplateBadRequestErrorData)
 
 
-class TemplateDeleteTemplateResponseBodyTypedDict(TypedDict):
+class TemplateDeleteTemplateResponseTypedDict(TypedDict):
     r"""Successful response"""
 
     success: bool
 
 
-class TemplateDeleteTemplateResponseBody(BaseModel):
+class TemplateDeleteTemplateResponse(BaseModel):
     r"""Successful response"""
 
     success: bool

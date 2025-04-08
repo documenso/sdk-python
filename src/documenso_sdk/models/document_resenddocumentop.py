@@ -8,86 +8,84 @@ from typing import List, Optional
 from typing_extensions import Annotated, TypedDict
 
 
-class DocumentResendDocumentRequestBodyTypedDict(TypedDict):
+class DocumentResendDocumentRequestTypedDict(TypedDict):
     document_id: float
     recipients: List[float]
     r"""The IDs of the recipients to redistribute the document to."""
 
 
-class DocumentResendDocumentRequestBody(BaseModel):
+class DocumentResendDocumentRequest(BaseModel):
     document_id: Annotated[float, pydantic.Field(alias="documentId")]
 
     recipients: List[float]
     r"""The IDs of the recipients to redistribute the document to."""
 
 
-class DocumentResendDocumentDocumentsIssuesTypedDict(TypedDict):
+class DocumentResendDocumentInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class DocumentResendDocumentDocumentsIssues(BaseModel):
+class DocumentResendDocumentInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class DocumentResendDocumentDocumentsResponseResponseBodyData(BaseModel):
+class DocumentResendDocumentInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[DocumentResendDocumentDocumentsIssues]] = None
+    issues: Optional[List[DocumentResendDocumentInternalServerErrorIssue]] = None
 
 
-class DocumentResendDocumentDocumentsResponseResponseBody(Exception):
+class DocumentResendDocumentInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: DocumentResendDocumentDocumentsResponseResponseBodyData
+    data: DocumentResendDocumentInternalServerErrorData
 
-    def __init__(self, data: DocumentResendDocumentDocumentsResponseResponseBodyData):
+    def __init__(self, data: DocumentResendDocumentInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, DocumentResendDocumentDocumentsResponseResponseBodyData
+            self.data, DocumentResendDocumentInternalServerErrorData
         )
 
 
-class DocumentResendDocumentIssuesTypedDict(TypedDict):
+class DocumentResendDocumentBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class DocumentResendDocumentIssues(BaseModel):
+class DocumentResendDocumentBadRequestIssue(BaseModel):
     message: str
 
 
-class DocumentResendDocumentDocumentsResponseBodyData(BaseModel):
+class DocumentResendDocumentBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[DocumentResendDocumentIssues]] = None
+    issues: Optional[List[DocumentResendDocumentBadRequestIssue]] = None
 
 
-class DocumentResendDocumentDocumentsResponseBody(Exception):
+class DocumentResendDocumentBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: DocumentResendDocumentDocumentsResponseBodyData
+    data: DocumentResendDocumentBadRequestErrorData
 
-    def __init__(self, data: DocumentResendDocumentDocumentsResponseBodyData):
+    def __init__(self, data: DocumentResendDocumentBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
-        return utils.marshal_json(
-            self.data, DocumentResendDocumentDocumentsResponseBodyData
-        )
+        return utils.marshal_json(self.data, DocumentResendDocumentBadRequestErrorData)
 
 
-class DocumentResendDocumentResponseBodyTypedDict(TypedDict):
+class DocumentResendDocumentResponseTypedDict(TypedDict):
     r"""Successful response"""
 
     success: bool
 
 
-class DocumentResendDocumentResponseBody(BaseModel):
+class DocumentResendDocumentResponse(BaseModel):
     r"""Successful response"""
 
     success: bool

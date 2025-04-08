@@ -23,98 +23,90 @@ class FieldGetTemplateFieldRequest(BaseModel):
     ]
 
 
-class FieldGetTemplateFieldTemplatesFieldsResponseIssuesTypedDict(TypedDict):
+class FieldGetTemplateFieldInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class FieldGetTemplateFieldTemplatesFieldsResponseIssues(BaseModel):
+class FieldGetTemplateFieldInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class FieldGetTemplateFieldTemplatesFieldsResponse500ResponseBodyData(BaseModel):
+class FieldGetTemplateFieldInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[FieldGetTemplateFieldTemplatesFieldsResponseIssues]] = None
+    issues: Optional[List[FieldGetTemplateFieldInternalServerErrorIssue]] = None
 
 
-class FieldGetTemplateFieldTemplatesFieldsResponse500ResponseBody(Exception):
+class FieldGetTemplateFieldInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: FieldGetTemplateFieldTemplatesFieldsResponse500ResponseBodyData
+    data: FieldGetTemplateFieldInternalServerErrorData
 
-    def __init__(
-        self, data: FieldGetTemplateFieldTemplatesFieldsResponse500ResponseBodyData
-    ):
+    def __init__(self, data: FieldGetTemplateFieldInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, FieldGetTemplateFieldTemplatesFieldsResponse500ResponseBodyData
+            self.data, FieldGetTemplateFieldInternalServerErrorData
         )
 
 
-class FieldGetTemplateFieldTemplatesFieldsIssuesTypedDict(TypedDict):
+class FieldGetTemplateFieldNotFoundIssueTypedDict(TypedDict):
     message: str
 
 
-class FieldGetTemplateFieldTemplatesFieldsIssues(BaseModel):
+class FieldGetTemplateFieldNotFoundIssue(BaseModel):
     message: str
 
 
-class FieldGetTemplateFieldTemplatesFieldsResponseResponseBodyData(BaseModel):
+class FieldGetTemplateFieldNotFoundErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[FieldGetTemplateFieldTemplatesFieldsIssues]] = None
+    issues: Optional[List[FieldGetTemplateFieldNotFoundIssue]] = None
 
 
-class FieldGetTemplateFieldTemplatesFieldsResponseResponseBody(Exception):
+class FieldGetTemplateFieldNotFoundError(Exception):
     r"""Not found"""
 
-    data: FieldGetTemplateFieldTemplatesFieldsResponseResponseBodyData
+    data: FieldGetTemplateFieldNotFoundErrorData
 
-    def __init__(
-        self, data: FieldGetTemplateFieldTemplatesFieldsResponseResponseBodyData
-    ):
+    def __init__(self, data: FieldGetTemplateFieldNotFoundErrorData):
         self.data = data
 
     def __str__(self) -> str:
-        return utils.marshal_json(
-            self.data, FieldGetTemplateFieldTemplatesFieldsResponseResponseBodyData
-        )
+        return utils.marshal_json(self.data, FieldGetTemplateFieldNotFoundErrorData)
 
 
-class FieldGetTemplateFieldIssuesTypedDict(TypedDict):
+class FieldGetTemplateFieldBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class FieldGetTemplateFieldIssues(BaseModel):
+class FieldGetTemplateFieldBadRequestIssue(BaseModel):
     message: str
 
 
-class FieldGetTemplateFieldTemplatesFieldsResponseBodyData(BaseModel):
+class FieldGetTemplateFieldBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[FieldGetTemplateFieldIssues]] = None
+    issues: Optional[List[FieldGetTemplateFieldBadRequestIssue]] = None
 
 
-class FieldGetTemplateFieldTemplatesFieldsResponseBody(Exception):
+class FieldGetTemplateFieldBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: FieldGetTemplateFieldTemplatesFieldsResponseBodyData
+    data: FieldGetTemplateFieldBadRequestErrorData
 
-    def __init__(self, data: FieldGetTemplateFieldTemplatesFieldsResponseBodyData):
+    def __init__(self, data: FieldGetTemplateFieldBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
-        return utils.marshal_json(
-            self.data, FieldGetTemplateFieldTemplatesFieldsResponseBodyData
-        )
+        return utils.marshal_json(self.data, FieldGetTemplateFieldBadRequestErrorData)
 
 
 class FieldGetTemplateFieldType(str, Enum):
@@ -131,34 +123,30 @@ class FieldGetTemplateFieldType(str, Enum):
     DROPDOWN = "DROPDOWN"
 
 
-class FieldGetTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONResponseBody9Type(
-    str, Enum
-):
+class FieldGetTemplateFieldTypeDropdown(str, Enum):
     DROPDOWN = "dropdown"
 
 
-class FieldGetTemplateFieldFieldMetaTemplatesFieldsResponseValuesTypedDict(TypedDict):
+class FieldGetTemplateFieldValue3TypedDict(TypedDict):
     value: str
 
 
-class FieldGetTemplateFieldFieldMetaTemplatesFieldsResponseValues(BaseModel):
+class FieldGetTemplateFieldValue3(BaseModel):
     value: str
 
 
-class FieldGetTemplateFieldFieldMeta9TypedDict(TypedDict):
-    type: FieldGetTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONResponseBody9Type
+class FieldGetTemplateFieldFieldMetaDropdownTypedDict(TypedDict):
+    type: FieldGetTemplateFieldTypeDropdown
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[
-        List[FieldGetTemplateFieldFieldMetaTemplatesFieldsResponseValuesTypedDict]
-    ]
+    values: NotRequired[List[FieldGetTemplateFieldValue3TypedDict]]
     default_value: NotRequired[str]
 
 
-class FieldGetTemplateFieldFieldMeta9(BaseModel):
-    type: FieldGetTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONResponseBody9Type
+class FieldGetTemplateFieldFieldMetaDropdown(BaseModel):
+    type: FieldGetTemplateFieldTypeDropdown
 
     label: Optional[str] = None
 
@@ -168,26 +156,22 @@ class FieldGetTemplateFieldFieldMeta9(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[
-        List[FieldGetTemplateFieldFieldMetaTemplatesFieldsResponseValues]
-    ] = None
+    values: Optional[List[FieldGetTemplateFieldValue3]] = None
 
     default_value: Annotated[Optional[str], pydantic.Field(alias="defaultValue")] = None
 
 
-class FieldGetTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONResponseBody8Type(
-    str, Enum
-):
+class FieldGetTemplateFieldTypeCheckbox(str, Enum):
     CHECKBOX = "checkbox"
 
 
-class FieldGetTemplateFieldFieldMetaTemplatesFieldsValuesTypedDict(TypedDict):
+class FieldGetTemplateFieldValue2TypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class FieldGetTemplateFieldFieldMetaTemplatesFieldsValues(BaseModel):
+class FieldGetTemplateFieldValue2(BaseModel):
     id: float
 
     checked: bool
@@ -195,21 +179,19 @@ class FieldGetTemplateFieldFieldMetaTemplatesFieldsValues(BaseModel):
     value: str
 
 
-class FieldGetTemplateFieldFieldMeta8TypedDict(TypedDict):
-    type: FieldGetTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONResponseBody8Type
+class FieldGetTemplateFieldFieldMetaCheckboxTypedDict(TypedDict):
+    type: FieldGetTemplateFieldTypeCheckbox
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[
-        List[FieldGetTemplateFieldFieldMetaTemplatesFieldsValuesTypedDict]
-    ]
+    values: NotRequired[List[FieldGetTemplateFieldValue2TypedDict]]
     validation_rule: NotRequired[str]
     validation_length: NotRequired[float]
 
 
-class FieldGetTemplateFieldFieldMeta8(BaseModel):
-    type: FieldGetTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONResponseBody8Type
+class FieldGetTemplateFieldFieldMetaCheckbox(BaseModel):
+    type: FieldGetTemplateFieldTypeCheckbox
 
     label: Optional[str] = None
 
@@ -219,7 +201,7 @@ class FieldGetTemplateFieldFieldMeta8(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[FieldGetTemplateFieldFieldMetaTemplatesFieldsValues]] = None
+    values: Optional[List[FieldGetTemplateFieldValue2]] = None
 
     validation_rule: Annotated[
         Optional[str], pydantic.Field(alias="validationRule")
@@ -230,19 +212,17 @@ class FieldGetTemplateFieldFieldMeta8(BaseModel):
     ] = None
 
 
-class FieldGetTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONResponseBody7Type(
-    str, Enum
-):
+class FieldGetTemplateFieldTypeRadio(str, Enum):
     RADIO = "radio"
 
 
-class FieldGetTemplateFieldFieldMetaValuesTypedDict(TypedDict):
+class FieldGetTemplateFieldValue1TypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class FieldGetTemplateFieldFieldMetaValues(BaseModel):
+class FieldGetTemplateFieldValue1(BaseModel):
     id: float
 
     checked: bool
@@ -250,17 +230,17 @@ class FieldGetTemplateFieldFieldMetaValues(BaseModel):
     value: str
 
 
-class FieldGetTemplateFieldFieldMeta7TypedDict(TypedDict):
-    type: FieldGetTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONResponseBody7Type
+class FieldGetTemplateFieldFieldMetaRadioTypedDict(TypedDict):
+    type: FieldGetTemplateFieldTypeRadio
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[List[FieldGetTemplateFieldFieldMetaValuesTypedDict]]
+    values: NotRequired[List[FieldGetTemplateFieldValue1TypedDict]]
 
 
-class FieldGetTemplateFieldFieldMeta7(BaseModel):
-    type: FieldGetTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONResponseBody7Type
+class FieldGetTemplateFieldFieldMetaRadio(BaseModel):
+    type: FieldGetTemplateFieldTypeRadio
 
     label: Optional[str] = None
 
@@ -270,17 +250,21 @@ class FieldGetTemplateFieldFieldMeta7(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[FieldGetTemplateFieldFieldMetaValues]] = None
+    values: Optional[List[FieldGetTemplateFieldValue1]] = None
 
 
-class FieldGetTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONResponseBodyType(
-    str, Enum
-):
+class FieldGetTemplateFieldTypeNumber(str, Enum):
     NUMBER = "number"
 
 
-class FieldGetTemplateFieldFieldMeta6TypedDict(TypedDict):
-    type: FieldGetTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONResponseBodyType
+class FieldGetTemplateFieldTextAlign6(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldGetTemplateFieldFieldMetaNumberTypedDict(TypedDict):
+    type: FieldGetTemplateFieldTypeNumber
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -290,10 +274,11 @@ class FieldGetTemplateFieldFieldMeta6TypedDict(TypedDict):
     min_value: NotRequired[float]
     max_value: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldGetTemplateFieldTextAlign6]
 
 
-class FieldGetTemplateFieldFieldMeta6(BaseModel):
-    type: FieldGetTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONResponseBodyType
+class FieldGetTemplateFieldFieldMetaNumber(BaseModel):
+    type: FieldGetTemplateFieldTypeNumber
 
     label: Optional[str] = None
 
@@ -313,15 +298,23 @@ class FieldGetTemplateFieldFieldMeta6(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldGetTemplateFieldTextAlign6], pydantic.Field(alias="textAlign")
+    ] = None
 
-class FieldGetTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONType(
-    str, Enum
-):
+
+class FieldGetTemplateFieldTypeText(str, Enum):
     TEXT = "text"
 
 
-class FieldGetTemplateFieldFieldMeta5TypedDict(TypedDict):
-    type: FieldGetTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONType
+class FieldGetTemplateFieldTextAlign5(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldGetTemplateFieldFieldMetaTextTypedDict(TypedDict):
+    type: FieldGetTemplateFieldTypeText
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -329,10 +322,11 @@ class FieldGetTemplateFieldFieldMeta5TypedDict(TypedDict):
     text: NotRequired[str]
     character_limit: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldGetTemplateFieldTextAlign5]
 
 
-class FieldGetTemplateFieldFieldMeta5(BaseModel):
-    type: FieldGetTemplateFieldFieldMetaTemplatesFieldsResponse200ApplicationJSONType
+class FieldGetTemplateFieldFieldMetaText(BaseModel):
+    type: FieldGetTemplateFieldTypeText
 
     label: Optional[str] = None
 
@@ -350,22 +344,33 @@ class FieldGetTemplateFieldFieldMeta5(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldGetTemplateFieldTextAlign5], pydantic.Field(alias="textAlign")
+    ] = None
 
-class FieldGetTemplateFieldFieldMetaTemplatesFieldsResponse200Type(str, Enum):
+
+class FieldGetTemplateFieldTypeDate(str, Enum):
     DATE = "date"
 
 
-class FieldGetTemplateFieldFieldMeta4TypedDict(TypedDict):
-    type: FieldGetTemplateFieldFieldMetaTemplatesFieldsResponse200Type
+class FieldGetTemplateFieldTextAlign4(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldGetTemplateFieldFieldMetaDateTypedDict(TypedDict):
+    type: FieldGetTemplateFieldTypeDate
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldGetTemplateFieldTextAlign4]
 
 
-class FieldGetTemplateFieldFieldMeta4(BaseModel):
-    type: FieldGetTemplateFieldFieldMetaTemplatesFieldsResponse200Type
+class FieldGetTemplateFieldFieldMetaDate(BaseModel):
+    type: FieldGetTemplateFieldTypeDate
 
     label: Optional[str] = None
 
@@ -377,22 +382,33 @@ class FieldGetTemplateFieldFieldMeta4(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldGetTemplateFieldTextAlign4], pydantic.Field(alias="textAlign")
+    ] = None
 
-class FieldGetTemplateFieldFieldMetaTemplatesFieldsResponseType(str, Enum):
+
+class FieldGetTemplateFieldTypeEmail(str, Enum):
     EMAIL = "email"
 
 
-class FieldGetTemplateFieldFieldMeta3TypedDict(TypedDict):
-    type: FieldGetTemplateFieldFieldMetaTemplatesFieldsResponseType
+class FieldGetTemplateFieldTextAlign3(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldGetTemplateFieldFieldMetaEmailTypedDict(TypedDict):
+    type: FieldGetTemplateFieldTypeEmail
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldGetTemplateFieldTextAlign3]
 
 
-class FieldGetTemplateFieldFieldMeta3(BaseModel):
-    type: FieldGetTemplateFieldFieldMetaTemplatesFieldsResponseType
+class FieldGetTemplateFieldFieldMetaEmail(BaseModel):
+    type: FieldGetTemplateFieldTypeEmail
 
     label: Optional[str] = None
 
@@ -404,22 +420,33 @@ class FieldGetTemplateFieldFieldMeta3(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldGetTemplateFieldTextAlign3], pydantic.Field(alias="textAlign")
+    ] = None
 
-class FieldGetTemplateFieldFieldMetaTemplatesFieldsType(str, Enum):
+
+class FieldGetTemplateFieldTypeName(str, Enum):
     NAME = "name"
 
 
-class FieldGetTemplateFieldFieldMeta2TypedDict(TypedDict):
-    type: FieldGetTemplateFieldFieldMetaTemplatesFieldsType
+class FieldGetTemplateFieldTextAlign2(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldGetTemplateFieldFieldMetaNameTypedDict(TypedDict):
+    type: FieldGetTemplateFieldTypeName
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldGetTemplateFieldTextAlign2]
 
 
-class FieldGetTemplateFieldFieldMeta2(BaseModel):
-    type: FieldGetTemplateFieldFieldMetaTemplatesFieldsType
+class FieldGetTemplateFieldFieldMetaName(BaseModel):
+    type: FieldGetTemplateFieldTypeName
 
     label: Optional[str] = None
 
@@ -431,22 +458,33 @@ class FieldGetTemplateFieldFieldMeta2(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldGetTemplateFieldTextAlign2], pydantic.Field(alias="textAlign")
+    ] = None
 
-class FieldGetTemplateFieldFieldMetaType(str, Enum):
+
+class FieldGetTemplateFieldTypeInitials(str, Enum):
     INITIALS = "initials"
 
 
-class FieldGetTemplateFieldFieldMeta1TypedDict(TypedDict):
-    type: FieldGetTemplateFieldFieldMetaType
+class FieldGetTemplateFieldTextAlign1(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldGetTemplateFieldFieldMetaInitialsTypedDict(TypedDict):
+    type: FieldGetTemplateFieldTypeInitials
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldGetTemplateFieldTextAlign1]
 
 
-class FieldGetTemplateFieldFieldMeta1(BaseModel):
-    type: FieldGetTemplateFieldFieldMetaType
+class FieldGetTemplateFieldFieldMetaInitials(BaseModel):
+    type: FieldGetTemplateFieldTypeInitials
 
     label: Optional[str] = None
 
@@ -458,73 +496,77 @@ class FieldGetTemplateFieldFieldMeta1(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldGetTemplateFieldTextAlign1], pydantic.Field(alias="textAlign")
+    ] = None
 
-FieldGetTemplateFieldFieldMetaTypedDict = TypeAliasType(
-    "FieldGetTemplateFieldFieldMetaTypedDict",
+
+FieldGetTemplateFieldFieldMetaUnionTypedDict = TypeAliasType(
+    "FieldGetTemplateFieldFieldMetaUnionTypedDict",
     Union[
-        FieldGetTemplateFieldFieldMeta1TypedDict,
-        FieldGetTemplateFieldFieldMeta2TypedDict,
-        FieldGetTemplateFieldFieldMeta3TypedDict,
-        FieldGetTemplateFieldFieldMeta4TypedDict,
-        FieldGetTemplateFieldFieldMeta7TypedDict,
-        FieldGetTemplateFieldFieldMeta9TypedDict,
-        FieldGetTemplateFieldFieldMeta5TypedDict,
-        FieldGetTemplateFieldFieldMeta8TypedDict,
-        FieldGetTemplateFieldFieldMeta6TypedDict,
+        FieldGetTemplateFieldFieldMetaRadioTypedDict,
+        FieldGetTemplateFieldFieldMetaInitialsTypedDict,
+        FieldGetTemplateFieldFieldMetaNameTypedDict,
+        FieldGetTemplateFieldFieldMetaEmailTypedDict,
+        FieldGetTemplateFieldFieldMetaDateTypedDict,
+        FieldGetTemplateFieldFieldMetaDropdownTypedDict,
+        FieldGetTemplateFieldFieldMetaCheckboxTypedDict,
+        FieldGetTemplateFieldFieldMetaTextTypedDict,
+        FieldGetTemplateFieldFieldMetaNumberTypedDict,
     ],
 )
 
 
-FieldGetTemplateFieldFieldMeta = TypeAliasType(
-    "FieldGetTemplateFieldFieldMeta",
+FieldGetTemplateFieldFieldMetaUnion = TypeAliasType(
+    "FieldGetTemplateFieldFieldMetaUnion",
     Union[
-        FieldGetTemplateFieldFieldMeta1,
-        FieldGetTemplateFieldFieldMeta2,
-        FieldGetTemplateFieldFieldMeta3,
-        FieldGetTemplateFieldFieldMeta4,
-        FieldGetTemplateFieldFieldMeta7,
-        FieldGetTemplateFieldFieldMeta9,
-        FieldGetTemplateFieldFieldMeta5,
-        FieldGetTemplateFieldFieldMeta8,
-        FieldGetTemplateFieldFieldMeta6,
+        FieldGetTemplateFieldFieldMetaRadio,
+        FieldGetTemplateFieldFieldMetaInitials,
+        FieldGetTemplateFieldFieldMetaName,
+        FieldGetTemplateFieldFieldMetaEmail,
+        FieldGetTemplateFieldFieldMetaDate,
+        FieldGetTemplateFieldFieldMetaDropdown,
+        FieldGetTemplateFieldFieldMetaCheckbox,
+        FieldGetTemplateFieldFieldMetaText,
+        FieldGetTemplateFieldFieldMetaNumber,
     ],
 )
 
 
-class FieldGetTemplateFieldResponseBodyTypedDict(TypedDict):
+class FieldGetTemplateFieldResponseTypedDict(TypedDict):
     r"""Successful response"""
 
     type: FieldGetTemplateFieldType
-    id: int
+    id: float
     secondary_id: str
-    document_id: Nullable[int]
-    template_id: Nullable[int]
-    recipient_id: int
+    document_id: Nullable[float]
+    template_id: Nullable[float]
+    recipient_id: float
     page: float
     r"""The page number of the field on the document. Starts from 1."""
     custom_text: str
     inserted: bool
-    field_meta: Nullable[FieldGetTemplateFieldFieldMetaTypedDict]
+    field_meta: Nullable[FieldGetTemplateFieldFieldMetaUnionTypedDict]
     position_x: NotRequired[Any]
     position_y: NotRequired[Any]
     width: NotRequired[Any]
     height: NotRequired[Any]
 
 
-class FieldGetTemplateFieldResponseBody(BaseModel):
+class FieldGetTemplateFieldResponse(BaseModel):
     r"""Successful response"""
 
     type: FieldGetTemplateFieldType
 
-    id: int
+    id: float
 
     secondary_id: Annotated[str, pydantic.Field(alias="secondaryId")]
 
-    document_id: Annotated[Nullable[int], pydantic.Field(alias="documentId")]
+    document_id: Annotated[Nullable[float], pydantic.Field(alias="documentId")]
 
-    template_id: Annotated[Nullable[int], pydantic.Field(alias="templateId")]
+    template_id: Annotated[Nullable[float], pydantic.Field(alias="templateId")]
 
-    recipient_id: Annotated[int, pydantic.Field(alias="recipientId")]
+    recipient_id: Annotated[float, pydantic.Field(alias="recipientId")]
 
     page: float
     r"""The page number of the field on the document. Starts from 1."""
@@ -534,7 +576,7 @@ class FieldGetTemplateFieldResponseBody(BaseModel):
     inserted: bool
 
     field_meta: Annotated[
-        Nullable[FieldGetTemplateFieldFieldMeta], pydantic.Field(alias="fieldMeta")
+        Nullable[FieldGetTemplateFieldFieldMetaUnion], pydantic.Field(alias="fieldMeta")
     ]
 
     position_x: Annotated[Optional[Any], pydantic.Field(alias="positionX")] = None
@@ -555,7 +597,7 @@ class FieldGetTemplateFieldResponseBody(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

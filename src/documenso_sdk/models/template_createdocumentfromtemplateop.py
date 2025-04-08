@@ -10,14 +10,14 @@ from typing import Any, Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-class TemplateCreateDocumentFromTemplateRecipientsTypedDict(TypedDict):
+class TemplateCreateDocumentFromTemplateRecipientRequestBodyTypedDict(TypedDict):
     id: float
     r"""The ID of the recipient in the template."""
     email: str
     name: NotRequired[str]
 
 
-class TemplateCreateDocumentFromTemplateRecipients(BaseModel):
+class TemplateCreateDocumentFromTemplateRecipientRequestBody(BaseModel):
     id: float
     r"""The ID of the recipient in the template."""
 
@@ -26,20 +26,157 @@ class TemplateCreateDocumentFromTemplateRecipients(BaseModel):
     name: Optional[str] = None
 
 
-class TemplateCreateDocumentFromTemplateRequestBodyTypedDict(TypedDict):
+class PrefillFieldTypeDropdown(str, Enum):
+    DROPDOWN = "dropdown"
+
+
+class PrefillFieldDropdownTypedDict(TypedDict):
+    type: PrefillFieldTypeDropdown
+    id: float
+    label: NotRequired[str]
+    value: NotRequired[str]
+
+
+class PrefillFieldDropdown(BaseModel):
+    type: PrefillFieldTypeDropdown
+
+    id: float
+
+    label: Optional[str] = None
+
+    value: Optional[str] = None
+
+
+class PrefillFieldTypeCheckbox(str, Enum):
+    CHECKBOX = "checkbox"
+
+
+class PrefillFieldCheckboxTypedDict(TypedDict):
+    type: PrefillFieldTypeCheckbox
+    id: float
+    label: NotRequired[str]
+    value: NotRequired[List[str]]
+
+
+class PrefillFieldCheckbox(BaseModel):
+    type: PrefillFieldTypeCheckbox
+
+    id: float
+
+    label: Optional[str] = None
+
+    value: Optional[List[str]] = None
+
+
+class PrefillFieldTypeRadio(str, Enum):
+    RADIO = "radio"
+
+
+class PrefillFieldRadioTypedDict(TypedDict):
+    type: PrefillFieldTypeRadio
+    id: float
+    label: NotRequired[str]
+    value: NotRequired[str]
+
+
+class PrefillFieldRadio(BaseModel):
+    type: PrefillFieldTypeRadio
+
+    id: float
+
+    label: Optional[str] = None
+
+    value: Optional[str] = None
+
+
+class PrefillFieldTypeNumber(str, Enum):
+    NUMBER = "number"
+
+
+class PrefillFieldNumberTypedDict(TypedDict):
+    type: PrefillFieldTypeNumber
+    id: float
+    label: NotRequired[str]
+    placeholder: NotRequired[str]
+    value: NotRequired[str]
+
+
+class PrefillFieldNumber(BaseModel):
+    type: PrefillFieldTypeNumber
+
+    id: float
+
+    label: Optional[str] = None
+
+    placeholder: Optional[str] = None
+
+    value: Optional[str] = None
+
+
+class PrefillFieldTypeText(str, Enum):
+    TEXT = "text"
+
+
+class PrefillFieldTextTypedDict(TypedDict):
+    type: PrefillFieldTypeText
+    id: float
+    label: NotRequired[str]
+    placeholder: NotRequired[str]
+    value: NotRequired[str]
+
+
+class PrefillFieldText(BaseModel):
+    type: PrefillFieldTypeText
+
+    id: float
+
+    label: Optional[str] = None
+
+    placeholder: Optional[str] = None
+
+    value: Optional[str] = None
+
+
+PrefillFieldTypedDict = TypeAliasType(
+    "PrefillFieldTypedDict",
+    Union[
+        PrefillFieldRadioTypedDict,
+        PrefillFieldCheckboxTypedDict,
+        PrefillFieldDropdownTypedDict,
+        PrefillFieldTextTypedDict,
+        PrefillFieldNumberTypedDict,
+    ],
+)
+
+
+PrefillField = TypeAliasType(
+    "PrefillField",
+    Union[
+        PrefillFieldRadio,
+        PrefillFieldCheckbox,
+        PrefillFieldDropdown,
+        PrefillFieldText,
+        PrefillFieldNumber,
+    ],
+)
+
+
+class TemplateCreateDocumentFromTemplateRequestTypedDict(TypedDict):
     template_id: float
-    recipients: List[TemplateCreateDocumentFromTemplateRecipientsTypedDict]
+    recipients: List[TemplateCreateDocumentFromTemplateRecipientRequestBodyTypedDict]
     r"""The information of the recipients to create the document with."""
     distribute_document: NotRequired[bool]
     r"""Whether to create the document as pending and distribute it to recipients."""
     custom_document_data_id: NotRequired[str]
     r"""The data ID of an alternative PDF to use when creating the document. If not provided, the PDF attached to the template will be used."""
+    prefill_fields: NotRequired[List[PrefillFieldTypedDict]]
+    r"""The fields to prefill on the document before sending it out. Useful when you want to create a document from an existing template and pre-fill the fields with specific values."""
 
 
-class TemplateCreateDocumentFromTemplateRequestBody(BaseModel):
+class TemplateCreateDocumentFromTemplateRequest(BaseModel):
     template_id: Annotated[float, pydantic.Field(alias="templateId")]
 
-    recipients: List[TemplateCreateDocumentFromTemplateRecipients]
+    recipients: List[TemplateCreateDocumentFromTemplateRecipientRequestBody]
     r"""The information of the recipients to create the document with."""
 
     distribute_document: Annotated[
@@ -52,69 +189,71 @@ class TemplateCreateDocumentFromTemplateRequestBody(BaseModel):
     ] = None
     r"""The data ID of an alternative PDF to use when creating the document. If not provided, the PDF attached to the template will be used."""
 
+    prefill_fields: Annotated[
+        Optional[List[PrefillField]], pydantic.Field(alias="prefillFields")
+    ] = None
+    r"""The fields to prefill on the document before sending it out. Useful when you want to create a document from an existing template and pre-fill the fields with specific values."""
 
-class TemplateCreateDocumentFromTemplateTemplatesIssuesTypedDict(TypedDict):
+
+class TemplateCreateDocumentFromTemplateInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class TemplateCreateDocumentFromTemplateTemplatesIssues(BaseModel):
+class TemplateCreateDocumentFromTemplateInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class TemplateCreateDocumentFromTemplateTemplatesResponseResponseBodyData(BaseModel):
+class TemplateCreateDocumentFromTemplateInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[TemplateCreateDocumentFromTemplateTemplatesIssues]] = None
+    issues: Optional[
+        List[TemplateCreateDocumentFromTemplateInternalServerErrorIssue]
+    ] = None
 
 
-class TemplateCreateDocumentFromTemplateTemplatesResponseResponseBody(Exception):
+class TemplateCreateDocumentFromTemplateInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: TemplateCreateDocumentFromTemplateTemplatesResponseResponseBodyData
+    data: TemplateCreateDocumentFromTemplateInternalServerErrorData
 
-    def __init__(
-        self, data: TemplateCreateDocumentFromTemplateTemplatesResponseResponseBodyData
-    ):
+    def __init__(self, data: TemplateCreateDocumentFromTemplateInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data,
-            TemplateCreateDocumentFromTemplateTemplatesResponseResponseBodyData,
+            self.data, TemplateCreateDocumentFromTemplateInternalServerErrorData
         )
 
 
-class TemplateCreateDocumentFromTemplateIssuesTypedDict(TypedDict):
+class TemplateCreateDocumentFromTemplateBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class TemplateCreateDocumentFromTemplateIssues(BaseModel):
+class TemplateCreateDocumentFromTemplateBadRequestIssue(BaseModel):
     message: str
 
 
-class TemplateCreateDocumentFromTemplateTemplatesResponseBodyData(BaseModel):
+class TemplateCreateDocumentFromTemplateBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[TemplateCreateDocumentFromTemplateIssues]] = None
+    issues: Optional[List[TemplateCreateDocumentFromTemplateBadRequestIssue]] = None
 
 
-class TemplateCreateDocumentFromTemplateTemplatesResponseBody(Exception):
+class TemplateCreateDocumentFromTemplateBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: TemplateCreateDocumentFromTemplateTemplatesResponseBodyData
+    data: TemplateCreateDocumentFromTemplateBadRequestErrorData
 
-    def __init__(
-        self, data: TemplateCreateDocumentFromTemplateTemplatesResponseBodyData
-    ):
+    def __init__(self, data: TemplateCreateDocumentFromTemplateBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, TemplateCreateDocumentFromTemplateTemplatesResponseBodyData
+            self.data, TemplateCreateDocumentFromTemplateBadRequestErrorData
         )
 
 
@@ -128,6 +267,7 @@ class TemplateCreateDocumentFromTemplateStatus(str, Enum):
     DRAFT = "DRAFT"
     PENDING = "PENDING"
     COMPLETED = "COMPLETED"
+    REJECTED = "REJECTED"
 
 
 class TemplateCreateDocumentFromTemplateSource(str, Enum):
@@ -180,7 +320,7 @@ class TemplateCreateDocumentFromTemplateAuthOptions(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -211,21 +351,21 @@ TemplateCreateDocumentFromTemplateFormValues = TypeAliasType(
 )
 
 
-class TemplateCreateDocumentFromTemplateType(str, Enum):
+class TemplateCreateDocumentFromTemplateDocumentDataType(str, Enum):
     S3_PATH = "S3_PATH"
     BYTES = "BYTES"
     BYTES_64 = "BYTES_64"
 
 
 class TemplateCreateDocumentFromTemplateDocumentDataTypedDict(TypedDict):
-    type: TemplateCreateDocumentFromTemplateType
+    type: TemplateCreateDocumentFromTemplateDocumentDataType
     id: str
     data: str
     initial_data: str
 
 
 class TemplateCreateDocumentFromTemplateDocumentData(BaseModel):
-    type: TemplateCreateDocumentFromTemplateType
+    type: TemplateCreateDocumentFromTemplateDocumentDataType
 
     id: str
 
@@ -307,9 +447,12 @@ class TemplateCreateDocumentFromTemplateDocumentMetaTypedDict(TypedDict):
     timezone: Nullable[str]
     password: Nullable[str]
     date_format: Nullable[str]
-    document_id: int
+    document_id: float
     redirect_url: Nullable[str]
     typed_signature_enabled: bool
+    upload_signature_enabled: bool
+    draw_signature_enabled: bool
+    allow_dictate_next_signer: bool
     language: str
     email_settings: Nullable[TemplateCreateDocumentFromTemplateEmailSettingsTypedDict]
 
@@ -337,12 +480,24 @@ class TemplateCreateDocumentFromTemplateDocumentMeta(BaseModel):
 
     date_format: Annotated[Nullable[str], pydantic.Field(alias="dateFormat")]
 
-    document_id: Annotated[int, pydantic.Field(alias="documentId")]
+    document_id: Annotated[float, pydantic.Field(alias="documentId")]
 
     redirect_url: Annotated[Nullable[str], pydantic.Field(alias="redirectUrl")]
 
     typed_signature_enabled: Annotated[
         bool, pydantic.Field(alias="typedSignatureEnabled")
+    ]
+
+    upload_signature_enabled: Annotated[
+        bool, pydantic.Field(alias="uploadSignatureEnabled")
+    ]
+
+    draw_signature_enabled: Annotated[
+        bool, pydantic.Field(alias="drawSignatureEnabled")
+    ]
+
+    allow_dictate_next_signer: Annotated[
+        bool, pydantic.Field(alias="allowDictateNextSigner")
     ]
 
     language: str
@@ -370,7 +525,7 @@ class TemplateCreateDocumentFromTemplateDocumentMeta(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -396,6 +551,7 @@ class TemplateCreateDocumentFromTemplateRole(str, Enum):
     SIGNER = "SIGNER"
     VIEWER = "VIEWER"
     APPROVER = "APPROVER"
+    ASSISTANT = "ASSISTANT"
 
 
 class TemplateCreateDocumentFromTemplateReadStatus(str, Enum):
@@ -429,14 +585,14 @@ class TemplateCreateDocumentFromTemplateActionAuth(str, Enum):
     EXPLICIT_NONE = "EXPLICIT_NONE"
 
 
-class TemplateCreateDocumentFromTemplateTemplatesAuthOptionsTypedDict(TypedDict):
+class TemplateCreateDocumentFromTemplateRecipientAuthOptionsTypedDict(TypedDict):
     access_auth: Nullable[TemplateCreateDocumentFromTemplateAccessAuth]
     r"""The type of authentication required for the recipient to access the document."""
     action_auth: Nullable[TemplateCreateDocumentFromTemplateActionAuth]
     r"""The type of authentication required for the recipient to sign the document."""
 
 
-class TemplateCreateDocumentFromTemplateTemplatesAuthOptions(BaseModel):
+class TemplateCreateDocumentFromTemplateRecipientAuthOptions(BaseModel):
     access_auth: Annotated[
         Nullable[TemplateCreateDocumentFromTemplateAccessAuth],
         pydantic.Field(alias="accessAuth"),
@@ -459,7 +615,7 @@ class TemplateCreateDocumentFromTemplateTemplatesAuthOptions(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -480,14 +636,14 @@ class TemplateCreateDocumentFromTemplateTemplatesAuthOptions(BaseModel):
         return m
 
 
-class TemplateCreateDocumentFromTemplateTemplatesRecipientsTypedDict(TypedDict):
+class TemplateCreateDocumentFromTemplateRecipientResponseTypedDict(TypedDict):
     role: TemplateCreateDocumentFromTemplateRole
     read_status: TemplateCreateDocumentFromTemplateReadStatus
     signing_status: TemplateCreateDocumentFromTemplateSigningStatus
     send_status: TemplateCreateDocumentFromTemplateSendStatus
-    id: int
-    document_id: Nullable[int]
-    template_id: Nullable[int]
+    id: float
+    document_id: Nullable[float]
+    template_id: Nullable[float]
     email: str
     name: str
     token: str
@@ -495,14 +651,14 @@ class TemplateCreateDocumentFromTemplateTemplatesRecipientsTypedDict(TypedDict):
     expired: Nullable[str]
     signed_at: Nullable[str]
     auth_options: Nullable[
-        TemplateCreateDocumentFromTemplateTemplatesAuthOptionsTypedDict
+        TemplateCreateDocumentFromTemplateRecipientAuthOptionsTypedDict
     ]
     signing_order: Nullable[float]
     r"""The order in which the recipient should sign the document. Only works if the document is set to sequential signing."""
     rejection_reason: Nullable[str]
 
 
-class TemplateCreateDocumentFromTemplateTemplatesRecipients(BaseModel):
+class TemplateCreateDocumentFromTemplateRecipientResponse(BaseModel):
     role: TemplateCreateDocumentFromTemplateRole
 
     read_status: Annotated[
@@ -518,11 +674,11 @@ class TemplateCreateDocumentFromTemplateTemplatesRecipients(BaseModel):
         TemplateCreateDocumentFromTemplateSendStatus, pydantic.Field(alias="sendStatus")
     ]
 
-    id: int
+    id: float
 
-    document_id: Annotated[Nullable[int], pydantic.Field(alias="documentId")]
+    document_id: Annotated[Nullable[float], pydantic.Field(alias="documentId")]
 
-    template_id: Annotated[Nullable[int], pydantic.Field(alias="templateId")]
+    template_id: Annotated[Nullable[float], pydantic.Field(alias="templateId")]
 
     email: str
 
@@ -539,7 +695,7 @@ class TemplateCreateDocumentFromTemplateTemplatesRecipients(BaseModel):
     signed_at: Annotated[Nullable[str], pydantic.Field(alias="signedAt")]
 
     auth_options: Annotated[
-        Nullable[TemplateCreateDocumentFromTemplateTemplatesAuthOptions],
+        Nullable[TemplateCreateDocumentFromTemplateRecipientAuthOptions],
         pydantic.Field(alias="authOptions"),
     ]
 
@@ -567,7 +723,7 @@ class TemplateCreateDocumentFromTemplateTemplatesRecipients(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -588,7 +744,7 @@ class TemplateCreateDocumentFromTemplateTemplatesRecipients(BaseModel):
         return m
 
 
-class TemplateCreateDocumentFromTemplateTemplatesType(str, Enum):
+class TemplateCreateDocumentFromTemplateFieldType(str, Enum):
     SIGNATURE = "SIGNATURE"
     FREE_SIGNATURE = "FREE_SIGNATURE"
     INITIALS = "INITIALS"
@@ -602,38 +758,30 @@ class TemplateCreateDocumentFromTemplateTemplatesType(str, Enum):
     DROPDOWN = "DROPDOWN"
 
 
-class TemplateCreateDocumentFromTemplateFieldMetaTemplatesResponse200ApplicationJSONResponseBodyFields9Type(
-    str, Enum
-):
+class TemplateCreateDocumentFromTemplateFieldMetaTypeDropdown(str, Enum):
     DROPDOWN = "dropdown"
 
 
-class TemplateCreateDocumentFromTemplateFieldMetaTemplatesResponseValuesTypedDict(
-    TypedDict
-):
+class TemplateCreateDocumentFromTemplateValue3TypedDict(TypedDict):
     value: str
 
 
-class TemplateCreateDocumentFromTemplateFieldMetaTemplatesResponseValues(BaseModel):
+class TemplateCreateDocumentFromTemplateValue3(BaseModel):
     value: str
 
 
-class TemplateCreateDocumentFromTemplateFieldMeta9TypedDict(TypedDict):
-    type: TemplateCreateDocumentFromTemplateFieldMetaTemplatesResponse200ApplicationJSONResponseBodyFields9Type
+class TemplateCreateDocumentFromTemplateFieldMetaDropdownTypedDict(TypedDict):
+    type: TemplateCreateDocumentFromTemplateFieldMetaTypeDropdown
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[
-        List[
-            TemplateCreateDocumentFromTemplateFieldMetaTemplatesResponseValuesTypedDict
-        ]
-    ]
+    values: NotRequired[List[TemplateCreateDocumentFromTemplateValue3TypedDict]]
     default_value: NotRequired[str]
 
 
-class TemplateCreateDocumentFromTemplateFieldMeta9(BaseModel):
-    type: TemplateCreateDocumentFromTemplateFieldMetaTemplatesResponse200ApplicationJSONResponseBodyFields9Type
+class TemplateCreateDocumentFromTemplateFieldMetaDropdown(BaseModel):
+    type: TemplateCreateDocumentFromTemplateFieldMetaTypeDropdown
 
     label: Optional[str] = None
 
@@ -643,26 +791,22 @@ class TemplateCreateDocumentFromTemplateFieldMeta9(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[
-        List[TemplateCreateDocumentFromTemplateFieldMetaTemplatesResponseValues]
-    ] = None
+    values: Optional[List[TemplateCreateDocumentFromTemplateValue3]] = None
 
     default_value: Annotated[Optional[str], pydantic.Field(alias="defaultValue")] = None
 
 
-class TemplateCreateDocumentFromTemplateFieldMetaTemplatesResponse200ApplicationJSONResponseBodyFields8Type(
-    str, Enum
-):
+class TemplateCreateDocumentFromTemplateFieldMetaTypeCheckbox(str, Enum):
     CHECKBOX = "checkbox"
 
 
-class TemplateCreateDocumentFromTemplateFieldMetaTemplatesValuesTypedDict(TypedDict):
+class TemplateCreateDocumentFromTemplateValue2TypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class TemplateCreateDocumentFromTemplateFieldMetaTemplatesValues(BaseModel):
+class TemplateCreateDocumentFromTemplateValue2(BaseModel):
     id: float
 
     checked: bool
@@ -670,21 +814,19 @@ class TemplateCreateDocumentFromTemplateFieldMetaTemplatesValues(BaseModel):
     value: str
 
 
-class TemplateCreateDocumentFromTemplateFieldMeta8TypedDict(TypedDict):
-    type: TemplateCreateDocumentFromTemplateFieldMetaTemplatesResponse200ApplicationJSONResponseBodyFields8Type
+class TemplateCreateDocumentFromTemplateFieldMetaCheckboxTypedDict(TypedDict):
+    type: TemplateCreateDocumentFromTemplateFieldMetaTypeCheckbox
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[
-        List[TemplateCreateDocumentFromTemplateFieldMetaTemplatesValuesTypedDict]
-    ]
+    values: NotRequired[List[TemplateCreateDocumentFromTemplateValue2TypedDict]]
     validation_rule: NotRequired[str]
     validation_length: NotRequired[float]
 
 
-class TemplateCreateDocumentFromTemplateFieldMeta8(BaseModel):
-    type: TemplateCreateDocumentFromTemplateFieldMetaTemplatesResponse200ApplicationJSONResponseBodyFields8Type
+class TemplateCreateDocumentFromTemplateFieldMetaCheckbox(BaseModel):
+    type: TemplateCreateDocumentFromTemplateFieldMetaTypeCheckbox
 
     label: Optional[str] = None
 
@@ -694,9 +836,7 @@ class TemplateCreateDocumentFromTemplateFieldMeta8(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[
-        List[TemplateCreateDocumentFromTemplateFieldMetaTemplatesValues]
-    ] = None
+    values: Optional[List[TemplateCreateDocumentFromTemplateValue2]] = None
 
     validation_rule: Annotated[
         Optional[str], pydantic.Field(alias="validationRule")
@@ -707,19 +847,17 @@ class TemplateCreateDocumentFromTemplateFieldMeta8(BaseModel):
     ] = None
 
 
-class TemplateCreateDocumentFromTemplateFieldMetaTemplatesResponse200ApplicationJSONResponseBodyFieldsType(
-    str, Enum
-):
+class TemplateCreateDocumentFromTemplateFieldMetaTypeRadio(str, Enum):
     RADIO = "radio"
 
 
-class TemplateCreateDocumentFromTemplateFieldMetaValuesTypedDict(TypedDict):
+class TemplateCreateDocumentFromTemplateValue1TypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class TemplateCreateDocumentFromTemplateFieldMetaValues(BaseModel):
+class TemplateCreateDocumentFromTemplateValue1(BaseModel):
     id: float
 
     checked: bool
@@ -727,19 +865,17 @@ class TemplateCreateDocumentFromTemplateFieldMetaValues(BaseModel):
     value: str
 
 
-class TemplateCreateDocumentFromTemplateFieldMeta7TypedDict(TypedDict):
-    type: TemplateCreateDocumentFromTemplateFieldMetaTemplatesResponse200ApplicationJSONResponseBodyFieldsType
+class TemplateCreateDocumentFromTemplateFieldMetaRadioTypedDict(TypedDict):
+    type: TemplateCreateDocumentFromTemplateFieldMetaTypeRadio
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[
-        List[TemplateCreateDocumentFromTemplateFieldMetaValuesTypedDict]
-    ]
+    values: NotRequired[List[TemplateCreateDocumentFromTemplateValue1TypedDict]]
 
 
-class TemplateCreateDocumentFromTemplateFieldMeta7(BaseModel):
-    type: TemplateCreateDocumentFromTemplateFieldMetaTemplatesResponse200ApplicationJSONResponseBodyFieldsType
+class TemplateCreateDocumentFromTemplateFieldMetaRadio(BaseModel):
+    type: TemplateCreateDocumentFromTemplateFieldMetaTypeRadio
 
     label: Optional[str] = None
 
@@ -749,17 +885,21 @@ class TemplateCreateDocumentFromTemplateFieldMeta7(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[TemplateCreateDocumentFromTemplateFieldMetaValues]] = None
+    values: Optional[List[TemplateCreateDocumentFromTemplateValue1]] = None
 
 
-class TemplateCreateDocumentFromTemplateFieldMetaTemplatesResponse200ApplicationJSONResponseBodyType(
-    str, Enum
-):
+class TemplateCreateDocumentFromTemplateFieldMetaTypeNumber(str, Enum):
     NUMBER = "number"
 
 
-class TemplateCreateDocumentFromTemplateFieldMeta6TypedDict(TypedDict):
-    type: TemplateCreateDocumentFromTemplateFieldMetaTemplatesResponse200ApplicationJSONResponseBodyType
+class TemplateCreateDocumentFromTemplateTextAlign6(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class TemplateCreateDocumentFromTemplateFieldMetaNumberTypedDict(TypedDict):
+    type: TemplateCreateDocumentFromTemplateFieldMetaTypeNumber
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -769,10 +909,11 @@ class TemplateCreateDocumentFromTemplateFieldMeta6TypedDict(TypedDict):
     min_value: NotRequired[float]
     max_value: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[TemplateCreateDocumentFromTemplateTextAlign6]
 
 
-class TemplateCreateDocumentFromTemplateFieldMeta6(BaseModel):
-    type: TemplateCreateDocumentFromTemplateFieldMetaTemplatesResponse200ApplicationJSONResponseBodyType
+class TemplateCreateDocumentFromTemplateFieldMetaNumber(BaseModel):
+    type: TemplateCreateDocumentFromTemplateFieldMetaTypeNumber
 
     label: Optional[str] = None
 
@@ -792,15 +933,24 @@ class TemplateCreateDocumentFromTemplateFieldMeta6(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[TemplateCreateDocumentFromTemplateTextAlign6],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class TemplateCreateDocumentFromTemplateFieldMetaTemplatesResponse200ApplicationJSONType(
-    str, Enum
-):
+
+class TemplateCreateDocumentFromTemplateFieldMetaTypeText(str, Enum):
     TEXT = "text"
 
 
-class TemplateCreateDocumentFromTemplateFieldMeta5TypedDict(TypedDict):
-    type: TemplateCreateDocumentFromTemplateFieldMetaTemplatesResponse200ApplicationJSONType
+class TemplateCreateDocumentFromTemplateTextAlign5(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class TemplateCreateDocumentFromTemplateFieldMetaTextTypedDict(TypedDict):
+    type: TemplateCreateDocumentFromTemplateFieldMetaTypeText
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -808,10 +958,11 @@ class TemplateCreateDocumentFromTemplateFieldMeta5TypedDict(TypedDict):
     text: NotRequired[str]
     character_limit: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[TemplateCreateDocumentFromTemplateTextAlign5]
 
 
-class TemplateCreateDocumentFromTemplateFieldMeta5(BaseModel):
-    type: TemplateCreateDocumentFromTemplateFieldMetaTemplatesResponse200ApplicationJSONType
+class TemplateCreateDocumentFromTemplateFieldMetaText(BaseModel):
+    type: TemplateCreateDocumentFromTemplateFieldMetaTypeText
 
     label: Optional[str] = None
 
@@ -829,22 +980,34 @@ class TemplateCreateDocumentFromTemplateFieldMeta5(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[TemplateCreateDocumentFromTemplateTextAlign5],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class TemplateCreateDocumentFromTemplateFieldMetaTemplatesResponse200Type(str, Enum):
+
+class TemplateCreateDocumentFromTemplateTypeDate(str, Enum):
     DATE = "date"
 
 
-class TemplateCreateDocumentFromTemplateFieldMeta4TypedDict(TypedDict):
-    type: TemplateCreateDocumentFromTemplateFieldMetaTemplatesResponse200Type
+class TemplateCreateDocumentFromTemplateTextAlign4(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class TemplateCreateDocumentFromTemplateFieldMetaDateTypedDict(TypedDict):
+    type: TemplateCreateDocumentFromTemplateTypeDate
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[TemplateCreateDocumentFromTemplateTextAlign4]
 
 
-class TemplateCreateDocumentFromTemplateFieldMeta4(BaseModel):
-    type: TemplateCreateDocumentFromTemplateFieldMetaTemplatesResponse200Type
+class TemplateCreateDocumentFromTemplateFieldMetaDate(BaseModel):
+    type: TemplateCreateDocumentFromTemplateTypeDate
 
     label: Optional[str] = None
 
@@ -856,22 +1019,34 @@ class TemplateCreateDocumentFromTemplateFieldMeta4(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[TemplateCreateDocumentFromTemplateTextAlign4],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class TemplateCreateDocumentFromTemplateFieldMetaTemplatesResponseType(str, Enum):
+
+class TemplateCreateDocumentFromTemplateTypeEmail(str, Enum):
     EMAIL = "email"
 
 
-class TemplateCreateDocumentFromTemplateFieldMeta3TypedDict(TypedDict):
-    type: TemplateCreateDocumentFromTemplateFieldMetaTemplatesResponseType
+class TemplateCreateDocumentFromTemplateTextAlign3(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class TemplateCreateDocumentFromTemplateFieldMetaEmailTypedDict(TypedDict):
+    type: TemplateCreateDocumentFromTemplateTypeEmail
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[TemplateCreateDocumentFromTemplateTextAlign3]
 
 
-class TemplateCreateDocumentFromTemplateFieldMeta3(BaseModel):
-    type: TemplateCreateDocumentFromTemplateFieldMetaTemplatesResponseType
+class TemplateCreateDocumentFromTemplateFieldMetaEmail(BaseModel):
+    type: TemplateCreateDocumentFromTemplateTypeEmail
 
     label: Optional[str] = None
 
@@ -883,22 +1058,34 @@ class TemplateCreateDocumentFromTemplateFieldMeta3(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[TemplateCreateDocumentFromTemplateTextAlign3],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class TemplateCreateDocumentFromTemplateFieldMetaTemplatesType(str, Enum):
+
+class TemplateCreateDocumentFromTemplateTypeName(str, Enum):
     NAME = "name"
 
 
-class TemplateCreateDocumentFromTemplateFieldMeta2TypedDict(TypedDict):
-    type: TemplateCreateDocumentFromTemplateFieldMetaTemplatesType
+class TemplateCreateDocumentFromTemplateTextAlign2(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class TemplateCreateDocumentFromTemplateFieldMetaNameTypedDict(TypedDict):
+    type: TemplateCreateDocumentFromTemplateTypeName
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[TemplateCreateDocumentFromTemplateTextAlign2]
 
 
-class TemplateCreateDocumentFromTemplateFieldMeta2(BaseModel):
-    type: TemplateCreateDocumentFromTemplateFieldMetaTemplatesType
+class TemplateCreateDocumentFromTemplateFieldMetaName(BaseModel):
+    type: TemplateCreateDocumentFromTemplateTypeName
 
     label: Optional[str] = None
 
@@ -910,22 +1097,34 @@ class TemplateCreateDocumentFromTemplateFieldMeta2(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[TemplateCreateDocumentFromTemplateTextAlign2],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-class TemplateCreateDocumentFromTemplateFieldMetaType(str, Enum):
+
+class TemplateCreateDocumentFromTemplateTypeInitials(str, Enum):
     INITIALS = "initials"
 
 
-class TemplateCreateDocumentFromTemplateFieldMeta1TypedDict(TypedDict):
-    type: TemplateCreateDocumentFromTemplateFieldMetaType
+class TemplateCreateDocumentFromTemplateTextAlign1(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class TemplateCreateDocumentFromTemplateFieldMetaInitialsTypedDict(TypedDict):
+    type: TemplateCreateDocumentFromTemplateTypeInitials
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[TemplateCreateDocumentFromTemplateTextAlign1]
 
 
-class TemplateCreateDocumentFromTemplateFieldMeta1(BaseModel):
-    type: TemplateCreateDocumentFromTemplateFieldMetaType
+class TemplateCreateDocumentFromTemplateFieldMetaInitials(BaseModel):
+    type: TemplateCreateDocumentFromTemplateTypeInitials
 
     label: Optional[str] = None
 
@@ -937,69 +1136,74 @@ class TemplateCreateDocumentFromTemplateFieldMeta1(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[TemplateCreateDocumentFromTemplateTextAlign1],
+        pydantic.Field(alias="textAlign"),
+    ] = None
 
-TemplateCreateDocumentFromTemplateFieldMetaTypedDict = TypeAliasType(
-    "TemplateCreateDocumentFromTemplateFieldMetaTypedDict",
+
+TemplateCreateDocumentFromTemplateFieldMetaUnionTypedDict = TypeAliasType(
+    "TemplateCreateDocumentFromTemplateFieldMetaUnionTypedDict",
     Union[
-        TemplateCreateDocumentFromTemplateFieldMeta1TypedDict,
-        TemplateCreateDocumentFromTemplateFieldMeta2TypedDict,
-        TemplateCreateDocumentFromTemplateFieldMeta3TypedDict,
-        TemplateCreateDocumentFromTemplateFieldMeta4TypedDict,
-        TemplateCreateDocumentFromTemplateFieldMeta7TypedDict,
-        TemplateCreateDocumentFromTemplateFieldMeta9TypedDict,
-        TemplateCreateDocumentFromTemplateFieldMeta5TypedDict,
-        TemplateCreateDocumentFromTemplateFieldMeta8TypedDict,
-        TemplateCreateDocumentFromTemplateFieldMeta6TypedDict,
+        TemplateCreateDocumentFromTemplateFieldMetaRadioTypedDict,
+        TemplateCreateDocumentFromTemplateFieldMetaInitialsTypedDict,
+        TemplateCreateDocumentFromTemplateFieldMetaNameTypedDict,
+        TemplateCreateDocumentFromTemplateFieldMetaEmailTypedDict,
+        TemplateCreateDocumentFromTemplateFieldMetaDateTypedDict,
+        TemplateCreateDocumentFromTemplateFieldMetaDropdownTypedDict,
+        TemplateCreateDocumentFromTemplateFieldMetaCheckboxTypedDict,
+        TemplateCreateDocumentFromTemplateFieldMetaTextTypedDict,
+        TemplateCreateDocumentFromTemplateFieldMetaNumberTypedDict,
     ],
 )
 
 
-TemplateCreateDocumentFromTemplateFieldMeta = TypeAliasType(
-    "TemplateCreateDocumentFromTemplateFieldMeta",
+TemplateCreateDocumentFromTemplateFieldMetaUnion = TypeAliasType(
+    "TemplateCreateDocumentFromTemplateFieldMetaUnion",
     Union[
-        TemplateCreateDocumentFromTemplateFieldMeta1,
-        TemplateCreateDocumentFromTemplateFieldMeta2,
-        TemplateCreateDocumentFromTemplateFieldMeta3,
-        TemplateCreateDocumentFromTemplateFieldMeta4,
-        TemplateCreateDocumentFromTemplateFieldMeta7,
-        TemplateCreateDocumentFromTemplateFieldMeta9,
-        TemplateCreateDocumentFromTemplateFieldMeta5,
-        TemplateCreateDocumentFromTemplateFieldMeta8,
-        TemplateCreateDocumentFromTemplateFieldMeta6,
+        TemplateCreateDocumentFromTemplateFieldMetaRadio,
+        TemplateCreateDocumentFromTemplateFieldMetaInitials,
+        TemplateCreateDocumentFromTemplateFieldMetaName,
+        TemplateCreateDocumentFromTemplateFieldMetaEmail,
+        TemplateCreateDocumentFromTemplateFieldMetaDate,
+        TemplateCreateDocumentFromTemplateFieldMetaDropdown,
+        TemplateCreateDocumentFromTemplateFieldMetaCheckbox,
+        TemplateCreateDocumentFromTemplateFieldMetaText,
+        TemplateCreateDocumentFromTemplateFieldMetaNumber,
     ],
 )
 
 
-class TemplateCreateDocumentFromTemplateFieldsTypedDict(TypedDict):
-    type: TemplateCreateDocumentFromTemplateTemplatesType
-    id: int
+class TemplateCreateDocumentFromTemplateFieldTypedDict(TypedDict):
+    type: TemplateCreateDocumentFromTemplateFieldType
+    id: float
     secondary_id: str
-    document_id: Nullable[int]
-    template_id: Nullable[int]
-    recipient_id: int
+    document_id: Nullable[float]
+    template_id: Nullable[float]
+    recipient_id: float
     page: float
     r"""The page number of the field on the document. Starts from 1."""
     custom_text: str
     inserted: bool
-    field_meta: Nullable[TemplateCreateDocumentFromTemplateFieldMetaTypedDict]
+    field_meta: Nullable[TemplateCreateDocumentFromTemplateFieldMetaUnionTypedDict]
     position_x: NotRequired[Any]
     position_y: NotRequired[Any]
     width: NotRequired[Any]
     height: NotRequired[Any]
 
 
-class TemplateCreateDocumentFromTemplateFields(BaseModel):
-    type: TemplateCreateDocumentFromTemplateTemplatesType
+class TemplateCreateDocumentFromTemplateField(BaseModel):
+    type: TemplateCreateDocumentFromTemplateFieldType
 
-    id: int
+    id: float
 
     secondary_id: Annotated[str, pydantic.Field(alias="secondaryId")]
 
-    document_id: Annotated[Nullable[int], pydantic.Field(alias="documentId")]
+    document_id: Annotated[Nullable[float], pydantic.Field(alias="documentId")]
 
-    template_id: Annotated[Nullable[int], pydantic.Field(alias="templateId")]
+    template_id: Annotated[Nullable[float], pydantic.Field(alias="templateId")]
 
-    recipient_id: Annotated[int, pydantic.Field(alias="recipientId")]
+    recipient_id: Annotated[float, pydantic.Field(alias="recipientId")]
 
     page: float
     r"""The page number of the field on the document. Starts from 1."""
@@ -1009,7 +1213,7 @@ class TemplateCreateDocumentFromTemplateFields(BaseModel):
     inserted: bool
 
     field_meta: Annotated[
-        Nullable[TemplateCreateDocumentFromTemplateFieldMeta],
+        Nullable[TemplateCreateDocumentFromTemplateFieldMetaUnion],
         pydantic.Field(alias="fieldMeta"),
     ]
 
@@ -1031,7 +1235,7 @@ class TemplateCreateDocumentFromTemplateFields(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -1052,13 +1256,13 @@ class TemplateCreateDocumentFromTemplateFields(BaseModel):
         return m
 
 
-class TemplateCreateDocumentFromTemplateResponseBodyTypedDict(TypedDict):
+class TemplateCreateDocumentFromTemplateResponseTypedDict(TypedDict):
     r"""Successful response"""
 
     visibility: TemplateCreateDocumentFromTemplateVisibility
     status: TemplateCreateDocumentFromTemplateStatus
     source: TemplateCreateDocumentFromTemplateSource
-    id: int
+    id: float
     external_id: Nullable[str]
     r"""A custom external ID you can use to identify the document."""
     user_id: float
@@ -1073,15 +1277,15 @@ class TemplateCreateDocumentFromTemplateResponseBodyTypedDict(TypedDict):
     updated_at: str
     completed_at: Nullable[str]
     deleted_at: Nullable[str]
-    team_id: Nullable[int]
-    template_id: Nullable[int]
+    team_id: Nullable[float]
+    template_id: Nullable[float]
     document_data: TemplateCreateDocumentFromTemplateDocumentDataTypedDict
     document_meta: Nullable[TemplateCreateDocumentFromTemplateDocumentMetaTypedDict]
-    recipients: List[TemplateCreateDocumentFromTemplateTemplatesRecipientsTypedDict]
-    fields: List[TemplateCreateDocumentFromTemplateFieldsTypedDict]
+    recipients: List[TemplateCreateDocumentFromTemplateRecipientResponseTypedDict]
+    fields: List[TemplateCreateDocumentFromTemplateFieldTypedDict]
 
 
-class TemplateCreateDocumentFromTemplateResponseBody(BaseModel):
+class TemplateCreateDocumentFromTemplateResponse(BaseModel):
     r"""Successful response"""
 
     visibility: TemplateCreateDocumentFromTemplateVisibility
@@ -1090,7 +1294,7 @@ class TemplateCreateDocumentFromTemplateResponseBody(BaseModel):
 
     source: TemplateCreateDocumentFromTemplateSource
 
-    id: int
+    id: float
 
     external_id: Annotated[Nullable[str], pydantic.Field(alias="externalId")]
     r"""A custom external ID you can use to identify the document."""
@@ -1120,9 +1324,9 @@ class TemplateCreateDocumentFromTemplateResponseBody(BaseModel):
 
     deleted_at: Annotated[Nullable[str], pydantic.Field(alias="deletedAt")]
 
-    team_id: Annotated[Nullable[int], pydantic.Field(alias="teamId")]
+    team_id: Annotated[Nullable[float], pydantic.Field(alias="teamId")]
 
-    template_id: Annotated[Nullable[int], pydantic.Field(alias="templateId")]
+    template_id: Annotated[Nullable[float], pydantic.Field(alias="templateId")]
 
     document_data: Annotated[
         TemplateCreateDocumentFromTemplateDocumentData,
@@ -1134,9 +1338,9 @@ class TemplateCreateDocumentFromTemplateResponseBody(BaseModel):
         pydantic.Field(alias="documentMeta"),
     ]
 
-    recipients: List[TemplateCreateDocumentFromTemplateTemplatesRecipients]
+    recipients: List[TemplateCreateDocumentFromTemplateRecipientResponse]
 
-    fields: List[TemplateCreateDocumentFromTemplateFields]
+    fields: List[TemplateCreateDocumentFromTemplateField]
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -1157,7 +1361,7 @@ class TemplateCreateDocumentFromTemplateResponseBody(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

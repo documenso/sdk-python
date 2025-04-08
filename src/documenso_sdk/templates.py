@@ -4,18 +4,18 @@ from .basesdk import BaseSDK
 from .sdkconfiguration import SDKConfiguration
 from documenso_sdk import models, utils
 from documenso_sdk._hooks import HookContext
-from documenso_sdk.directlink import DirectLink
-from documenso_sdk.documenso_fields import DocumensoFields
-from documenso_sdk.documenso_recipients import DocumensoRecipients
+from documenso_sdk.directlink_sdk import DirectLinkSDK
+from documenso_sdk.templates_fields import TemplatesFields
+from documenso_sdk.templates_recipients import TemplatesRecipients
 from documenso_sdk.types import OptionalNullable, UNSET
 from documenso_sdk.utils import get_security_from_env
 from typing import Any, List, Mapping, Optional, Union
 
 
 class Templates(BaseSDK):
-    fields: DocumensoFields
-    recipients: DocumensoRecipients
-    direct_link: DirectLink
+    fields: TemplatesFields
+    recipients: TemplatesRecipients
+    direct_link: DirectLinkSDK
 
     def __init__(self, sdk_config: SDKConfiguration) -> None:
         BaseSDK.__init__(self, sdk_config)
@@ -23,9 +23,9 @@ class Templates(BaseSDK):
         self._init_sdks()
 
     def _init_sdks(self):
-        self.fields = DocumensoFields(self.sdk_configuration)
-        self.recipients = DocumensoRecipients(self.sdk_configuration)
-        self.direct_link = DirectLink(self.sdk_configuration)
+        self.fields = TemplatesFields(self.sdk_configuration)
+        self.recipients = TemplatesRecipients(self.sdk_configuration)
+        self.direct_link = DirectLinkSDK(self.sdk_configuration)
 
     def find(
         self,
@@ -38,7 +38,7 @@ class Templates(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TemplateFindTemplatesResponseBody:
+    ) -> models.TemplateFindTemplatesResponse:
         r"""Find templates
 
         Find templates based on a search criteria
@@ -59,6 +59,8 @@ class Templates(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.TemplateFindTemplatesRequest(
             query=query,
@@ -93,6 +95,7 @@ class Templates(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="template-findTemplates",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -107,29 +110,23 @@ class Templates(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.TemplateFindTemplatesResponseBody
+                http_res.text, models.TemplateFindTemplatesResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateFindTemplatesTemplatesResponseBodyData
+                http_res.text, models.TemplateFindTemplatesBadRequestErrorData
             )
-            raise models.TemplateFindTemplatesTemplatesResponseBody(data=response_data)
+            raise models.TemplateFindTemplatesBadRequestError(data=response_data)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.TemplateFindTemplatesTemplatesResponseResponseBodyData,
+                http_res.text, models.TemplateFindTemplatesNotFoundErrorData
             )
-            raise models.TemplateFindTemplatesTemplatesResponseResponseBody(
-                data=response_data
-            )
+            raise models.TemplateFindTemplatesNotFoundError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.TemplateFindTemplatesTemplatesResponse500ResponseBodyData,
+                http_res.text, models.TemplateFindTemplatesInternalServerErrorData
             )
-            raise models.TemplateFindTemplatesTemplatesResponse500ResponseBody(
-                data=response_data
-            )
+            raise models.TemplateFindTemplatesInternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -161,7 +158,7 @@ class Templates(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TemplateFindTemplatesResponseBody:
+    ) -> models.TemplateFindTemplatesResponse:
         r"""Find templates
 
         Find templates based on a search criteria
@@ -182,6 +179,8 @@ class Templates(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.TemplateFindTemplatesRequest(
             query=query,
@@ -216,6 +215,7 @@ class Templates(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="template-findTemplates",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -230,29 +230,23 @@ class Templates(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.TemplateFindTemplatesResponseBody
+                http_res.text, models.TemplateFindTemplatesResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateFindTemplatesTemplatesResponseBodyData
+                http_res.text, models.TemplateFindTemplatesBadRequestErrorData
             )
-            raise models.TemplateFindTemplatesTemplatesResponseBody(data=response_data)
+            raise models.TemplateFindTemplatesBadRequestError(data=response_data)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.TemplateFindTemplatesTemplatesResponseResponseBodyData,
+                http_res.text, models.TemplateFindTemplatesNotFoundErrorData
             )
-            raise models.TemplateFindTemplatesTemplatesResponseResponseBody(
-                data=response_data
-            )
+            raise models.TemplateFindTemplatesNotFoundError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.TemplateFindTemplatesTemplatesResponse500ResponseBodyData,
+                http_res.text, models.TemplateFindTemplatesInternalServerErrorData
             )
-            raise models.TemplateFindTemplatesTemplatesResponse500ResponseBody(
-                data=response_data
-            )
+            raise models.TemplateFindTemplatesInternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -281,7 +275,7 @@ class Templates(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TemplateGetTemplateByIDResponseBody:
+    ) -> models.TemplateGetTemplateByIDResponse:
         r"""Get template
 
         :param template_id:
@@ -297,6 +291,8 @@ class Templates(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.TemplateGetTemplateByIDRequest(
             template_id=template_id,
@@ -328,6 +324,7 @@ class Templates(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="template-getTemplateById",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -342,31 +339,23 @@ class Templates(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.TemplateGetTemplateByIDResponseBody
+                http_res.text, models.TemplateGetTemplateByIDResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateGetTemplateByIDTemplatesResponseBodyData
+                http_res.text, models.TemplateGetTemplateByIDBadRequestErrorData
             )
-            raise models.TemplateGetTemplateByIDTemplatesResponseBody(
-                data=response_data
-            )
+            raise models.TemplateGetTemplateByIDBadRequestError(data=response_data)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.TemplateGetTemplateByIDTemplatesResponseResponseBodyData,
+                http_res.text, models.TemplateGetTemplateByIDNotFoundErrorData
             )
-            raise models.TemplateGetTemplateByIDTemplatesResponseResponseBody(
-                data=response_data
-            )
+            raise models.TemplateGetTemplateByIDNotFoundError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.TemplateGetTemplateByIDTemplatesResponse500ResponseBodyData,
+                http_res.text, models.TemplateGetTemplateByIDInternalServerErrorData
             )
-            raise models.TemplateGetTemplateByIDTemplatesResponse500ResponseBody(
-                data=response_data
-            )
+            raise models.TemplateGetTemplateByIDInternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -395,7 +384,7 @@ class Templates(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TemplateGetTemplateByIDResponseBody:
+    ) -> models.TemplateGetTemplateByIDResponse:
         r"""Get template
 
         :param template_id:
@@ -411,6 +400,8 @@ class Templates(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.TemplateGetTemplateByIDRequest(
             template_id=template_id,
@@ -442,6 +433,7 @@ class Templates(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="template-getTemplateById",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -456,31 +448,23 @@ class Templates(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.TemplateGetTemplateByIDResponseBody
+                http_res.text, models.TemplateGetTemplateByIDResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateGetTemplateByIDTemplatesResponseBodyData
+                http_res.text, models.TemplateGetTemplateByIDBadRequestErrorData
             )
-            raise models.TemplateGetTemplateByIDTemplatesResponseBody(
-                data=response_data
-            )
+            raise models.TemplateGetTemplateByIDBadRequestError(data=response_data)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.TemplateGetTemplateByIDTemplatesResponseResponseBodyData,
+                http_res.text, models.TemplateGetTemplateByIDNotFoundErrorData
             )
-            raise models.TemplateGetTemplateByIDTemplatesResponseResponseBody(
-                data=response_data
-            )
+            raise models.TemplateGetTemplateByIDNotFoundError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.TemplateGetTemplateByIDTemplatesResponse500ResponseBodyData,
+                http_res.text, models.TemplateGetTemplateByIDInternalServerErrorData
             )
-            raise models.TemplateGetTemplateByIDTemplatesResponse500ResponseBody(
-                data=response_data
-            )
+            raise models.TemplateGetTemplateByIDInternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -521,7 +505,7 @@ class Templates(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TemplateUpdateTemplateResponseBody:
+    ) -> models.TemplateUpdateTemplateResponse:
         r"""Update template
 
         :param template_id:
@@ -539,8 +523,10 @@ class Templates(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.TemplateUpdateTemplateRequestBody(
+        request = models.TemplateUpdateTemplateRequest(
             template_id=template_id,
             data=utils.get_pydantic_model(
                 data, Optional[models.TemplateUpdateTemplateData]
@@ -564,7 +550,7 @@ class Templates(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TemplateUpdateTemplateRequestBody
+                request, False, False, "json", models.TemplateUpdateTemplateRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -579,6 +565,7 @@ class Templates(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="template-updateTemplate",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -593,21 +580,18 @@ class Templates(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.TemplateUpdateTemplateResponseBody
+                http_res.text, models.TemplateUpdateTemplateResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateUpdateTemplateTemplatesResponseBodyData
+                http_res.text, models.TemplateUpdateTemplateBadRequestErrorData
             )
-            raise models.TemplateUpdateTemplateTemplatesResponseBody(data=response_data)
+            raise models.TemplateUpdateTemplateBadRequestError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.TemplateUpdateTemplateTemplatesResponseResponseBodyData,
+                http_res.text, models.TemplateUpdateTemplateInternalServerErrorData
             )
-            raise models.TemplateUpdateTemplateTemplatesResponseResponseBody(
-                data=response_data
-            )
+            raise models.TemplateUpdateTemplateInternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -648,7 +632,7 @@ class Templates(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TemplateUpdateTemplateResponseBody:
+    ) -> models.TemplateUpdateTemplateResponse:
         r"""Update template
 
         :param template_id:
@@ -666,8 +650,10 @@ class Templates(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.TemplateUpdateTemplateRequestBody(
+        request = models.TemplateUpdateTemplateRequest(
             template_id=template_id,
             data=utils.get_pydantic_model(
                 data, Optional[models.TemplateUpdateTemplateData]
@@ -691,7 +677,7 @@ class Templates(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TemplateUpdateTemplateRequestBody
+                request, False, False, "json", models.TemplateUpdateTemplateRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -706,6 +692,7 @@ class Templates(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="template-updateTemplate",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -720,21 +707,18 @@ class Templates(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.TemplateUpdateTemplateResponseBody
+                http_res.text, models.TemplateUpdateTemplateResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateUpdateTemplateTemplatesResponseBodyData
+                http_res.text, models.TemplateUpdateTemplateBadRequestErrorData
             )
-            raise models.TemplateUpdateTemplateTemplatesResponseBody(data=response_data)
+            raise models.TemplateUpdateTemplateBadRequestError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.TemplateUpdateTemplateTemplatesResponseResponseBodyData,
+                http_res.text, models.TemplateUpdateTemplateInternalServerErrorData
             )
-            raise models.TemplateUpdateTemplateTemplatesResponseResponseBody(
-                data=response_data
-            )
+            raise models.TemplateUpdateTemplateInternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -763,7 +747,7 @@ class Templates(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TemplateDuplicateTemplateResponseBody:
+    ) -> models.TemplateDuplicateTemplateResponse:
         r"""Duplicate template
 
         :param template_id:
@@ -779,8 +763,10 @@ class Templates(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.TemplateDuplicateTemplateRequestBody(
+        request = models.TemplateDuplicateTemplateRequest(
             template_id=template_id,
         )
 
@@ -798,11 +784,7 @@ class Templates(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request,
-                False,
-                False,
-                "json",
-                models.TemplateDuplicateTemplateRequestBody,
+                request, False, False, "json", models.TemplateDuplicateTemplateRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -817,6 +799,7 @@ class Templates(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="template-duplicateTemplate",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -831,21 +814,18 @@ class Templates(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.TemplateDuplicateTemplateResponseBody
+                http_res.text, models.TemplateDuplicateTemplateResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateDuplicateTemplateTemplatesResponseBodyData
+                http_res.text, models.TemplateDuplicateTemplateBadRequestErrorData
             )
-            raise models.TemplateDuplicateTemplateTemplatesResponseBody(
-                data=response_data
-            )
+            raise models.TemplateDuplicateTemplateBadRequestError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.TemplateDuplicateTemplateTemplatesResponseResponseBodyData,
+                http_res.text, models.TemplateDuplicateTemplateInternalServerErrorData
             )
-            raise models.TemplateDuplicateTemplateTemplatesResponseResponseBody(
+            raise models.TemplateDuplicateTemplateInternalServerError(
                 data=response_data
             )
         if utils.match_response(http_res, "4XX", "*"):
@@ -876,7 +856,7 @@ class Templates(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TemplateDuplicateTemplateResponseBody:
+    ) -> models.TemplateDuplicateTemplateResponse:
         r"""Duplicate template
 
         :param template_id:
@@ -892,8 +872,10 @@ class Templates(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.TemplateDuplicateTemplateRequestBody(
+        request = models.TemplateDuplicateTemplateRequest(
             template_id=template_id,
         )
 
@@ -911,11 +893,7 @@ class Templates(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request,
-                False,
-                False,
-                "json",
-                models.TemplateDuplicateTemplateRequestBody,
+                request, False, False, "json", models.TemplateDuplicateTemplateRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -930,6 +908,7 @@ class Templates(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="template-duplicateTemplate",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -944,21 +923,18 @@ class Templates(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.TemplateDuplicateTemplateResponseBody
+                http_res.text, models.TemplateDuplicateTemplateResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateDuplicateTemplateTemplatesResponseBodyData
+                http_res.text, models.TemplateDuplicateTemplateBadRequestErrorData
             )
-            raise models.TemplateDuplicateTemplateTemplatesResponseBody(
-                data=response_data
-            )
+            raise models.TemplateDuplicateTemplateBadRequestError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.TemplateDuplicateTemplateTemplatesResponseResponseBodyData,
+                http_res.text, models.TemplateDuplicateTemplateInternalServerErrorData
             )
-            raise models.TemplateDuplicateTemplateTemplatesResponseResponseBody(
+            raise models.TemplateDuplicateTemplateInternalServerError(
                 data=response_data
             )
         if utils.match_response(http_res, "4XX", "*"):
@@ -989,7 +965,7 @@ class Templates(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TemplateDeleteTemplateResponseBody:
+    ) -> models.TemplateDeleteTemplateResponse:
         r"""Delete template
 
         :param template_id:
@@ -1005,8 +981,10 @@ class Templates(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.TemplateDeleteTemplateRequestBody(
+        request = models.TemplateDeleteTemplateRequest(
             template_id=template_id,
         )
 
@@ -1024,7 +1002,7 @@ class Templates(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TemplateDeleteTemplateRequestBody
+                request, False, False, "json", models.TemplateDeleteTemplateRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -1039,6 +1017,7 @@ class Templates(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="template-deleteTemplate",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1053,21 +1032,18 @@ class Templates(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.TemplateDeleteTemplateResponseBody
+                http_res.text, models.TemplateDeleteTemplateResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateDeleteTemplateTemplatesResponseBodyData
+                http_res.text, models.TemplateDeleteTemplateBadRequestErrorData
             )
-            raise models.TemplateDeleteTemplateTemplatesResponseBody(data=response_data)
+            raise models.TemplateDeleteTemplateBadRequestError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.TemplateDeleteTemplateTemplatesResponseResponseBodyData,
+                http_res.text, models.TemplateDeleteTemplateInternalServerErrorData
             )
-            raise models.TemplateDeleteTemplateTemplatesResponseResponseBody(
-                data=response_data
-            )
+            raise models.TemplateDeleteTemplateInternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -1096,7 +1072,7 @@ class Templates(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TemplateDeleteTemplateResponseBody:
+    ) -> models.TemplateDeleteTemplateResponse:
         r"""Delete template
 
         :param template_id:
@@ -1112,8 +1088,10 @@ class Templates(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.TemplateDeleteTemplateRequestBody(
+        request = models.TemplateDeleteTemplateRequest(
             template_id=template_id,
         )
 
@@ -1131,7 +1109,7 @@ class Templates(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TemplateDeleteTemplateRequestBody
+                request, False, False, "json", models.TemplateDeleteTemplateRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -1146,6 +1124,7 @@ class Templates(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="template-deleteTemplate",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1160,21 +1139,18 @@ class Templates(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.TemplateDeleteTemplateResponseBody
+                http_res.text, models.TemplateDeleteTemplateResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateDeleteTemplateTemplatesResponseBodyData
+                http_res.text, models.TemplateDeleteTemplateBadRequestErrorData
             )
-            raise models.TemplateDeleteTemplateTemplatesResponseBody(data=response_data)
+            raise models.TemplateDeleteTemplateBadRequestError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.TemplateDeleteTemplateTemplatesResponseResponseBodyData,
+                http_res.text, models.TemplateDeleteTemplateInternalServerErrorData
             )
-            raise models.TemplateDeleteTemplateTemplatesResponseResponseBody(
-                data=response_data
-            )
+            raise models.TemplateDeleteTemplateInternalServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -1200,16 +1176,21 @@ class Templates(BaseSDK):
         *,
         template_id: float,
         recipients: Union[
-            List[models.TemplateCreateDocumentFromTemplateRecipients],
-            List[models.TemplateCreateDocumentFromTemplateRecipientsTypedDict],
+            List[models.TemplateCreateDocumentFromTemplateRecipientRequestBody],
+            List[
+                models.TemplateCreateDocumentFromTemplateRecipientRequestBodyTypedDict
+            ],
         ],
         distribute_document: Optional[bool] = None,
         custom_document_data_id: Optional[str] = None,
+        prefill_fields: Optional[
+            Union[List[models.PrefillField], List[models.PrefillFieldTypedDict]]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TemplateCreateDocumentFromTemplateResponseBody:
+    ) -> models.TemplateCreateDocumentFromTemplateResponse:
         r"""Use template
 
         Use the template to create a document
@@ -1218,6 +1199,7 @@ class Templates(BaseSDK):
         :param recipients: The information of the recipients to create the document with.
         :param distribute_document: Whether to create the document as pending and distribute it to recipients.
         :param custom_document_data_id: The data ID of an alternative PDF to use when creating the document. If not provided, the PDF attached to the template will be used.
+        :param prefill_fields: The fields to prefill on the document before sending it out. Useful when you want to create a document from an existing template and pre-fill the fields with specific values.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1230,14 +1212,20 @@ class Templates(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.TemplateCreateDocumentFromTemplateRequestBody(
+        request = models.TemplateCreateDocumentFromTemplateRequest(
             template_id=template_id,
             recipients=utils.get_pydantic_model(
-                recipients, List[models.TemplateCreateDocumentFromTemplateRecipients]
+                recipients,
+                List[models.TemplateCreateDocumentFromTemplateRecipientRequestBody],
             ),
             distribute_document=distribute_document,
             custom_document_data_id=custom_document_data_id,
+            prefill_fields=utils.get_pydantic_model(
+                prefill_fields, Optional[List[models.PrefillField]]
+            ),
         )
 
         req = self._build_request(
@@ -1258,7 +1246,7 @@ class Templates(BaseSDK):
                 False,
                 False,
                 "json",
-                models.TemplateCreateDocumentFromTemplateRequestBody,
+                models.TemplateCreateDocumentFromTemplateRequest,
             ),
             timeout_ms=timeout_ms,
         )
@@ -1273,6 +1261,7 @@ class Templates(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="template-createDocumentFromTemplate",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1287,22 +1276,22 @@ class Templates(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.TemplateCreateDocumentFromTemplateResponseBody
+                http_res.text, models.TemplateCreateDocumentFromTemplateResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
                 http_res.text,
-                models.TemplateCreateDocumentFromTemplateTemplatesResponseBodyData,
+                models.TemplateCreateDocumentFromTemplateBadRequestErrorData,
             )
-            raise models.TemplateCreateDocumentFromTemplateTemplatesResponseBody(
+            raise models.TemplateCreateDocumentFromTemplateBadRequestError(
                 data=response_data
             )
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
                 http_res.text,
-                models.TemplateCreateDocumentFromTemplateTemplatesResponseResponseBodyData,
+                models.TemplateCreateDocumentFromTemplateInternalServerErrorData,
             )
-            raise models.TemplateCreateDocumentFromTemplateTemplatesResponseResponseBody(
+            raise models.TemplateCreateDocumentFromTemplateInternalServerError(
                 data=response_data
             )
         if utils.match_response(http_res, "4XX", "*"):
@@ -1330,16 +1319,21 @@ class Templates(BaseSDK):
         *,
         template_id: float,
         recipients: Union[
-            List[models.TemplateCreateDocumentFromTemplateRecipients],
-            List[models.TemplateCreateDocumentFromTemplateRecipientsTypedDict],
+            List[models.TemplateCreateDocumentFromTemplateRecipientRequestBody],
+            List[
+                models.TemplateCreateDocumentFromTemplateRecipientRequestBodyTypedDict
+            ],
         ],
         distribute_document: Optional[bool] = None,
         custom_document_data_id: Optional[str] = None,
+        prefill_fields: Optional[
+            Union[List[models.PrefillField], List[models.PrefillFieldTypedDict]]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TemplateCreateDocumentFromTemplateResponseBody:
+    ) -> models.TemplateCreateDocumentFromTemplateResponse:
         r"""Use template
 
         Use the template to create a document
@@ -1348,6 +1342,7 @@ class Templates(BaseSDK):
         :param recipients: The information of the recipients to create the document with.
         :param distribute_document: Whether to create the document as pending and distribute it to recipients.
         :param custom_document_data_id: The data ID of an alternative PDF to use when creating the document. If not provided, the PDF attached to the template will be used.
+        :param prefill_fields: The fields to prefill on the document before sending it out. Useful when you want to create a document from an existing template and pre-fill the fields with specific values.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1360,14 +1355,20 @@ class Templates(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.TemplateCreateDocumentFromTemplateRequestBody(
+        request = models.TemplateCreateDocumentFromTemplateRequest(
             template_id=template_id,
             recipients=utils.get_pydantic_model(
-                recipients, List[models.TemplateCreateDocumentFromTemplateRecipients]
+                recipients,
+                List[models.TemplateCreateDocumentFromTemplateRecipientRequestBody],
             ),
             distribute_document=distribute_document,
             custom_document_data_id=custom_document_data_id,
+            prefill_fields=utils.get_pydantic_model(
+                prefill_fields, Optional[List[models.PrefillField]]
+            ),
         )
 
         req = self._build_request_async(
@@ -1388,7 +1389,7 @@ class Templates(BaseSDK):
                 False,
                 False,
                 "json",
-                models.TemplateCreateDocumentFromTemplateRequestBody,
+                models.TemplateCreateDocumentFromTemplateRequest,
             ),
             timeout_ms=timeout_ms,
         )
@@ -1403,6 +1404,7 @@ class Templates(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="template-createDocumentFromTemplate",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1417,22 +1419,22 @@ class Templates(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.TemplateCreateDocumentFromTemplateResponseBody
+                http_res.text, models.TemplateCreateDocumentFromTemplateResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
                 http_res.text,
-                models.TemplateCreateDocumentFromTemplateTemplatesResponseBodyData,
+                models.TemplateCreateDocumentFromTemplateBadRequestErrorData,
             )
-            raise models.TemplateCreateDocumentFromTemplateTemplatesResponseBody(
+            raise models.TemplateCreateDocumentFromTemplateBadRequestError(
                 data=response_data
             )
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
                 http_res.text,
-                models.TemplateCreateDocumentFromTemplateTemplatesResponseResponseBodyData,
+                models.TemplateCreateDocumentFromTemplateInternalServerErrorData,
             )
-            raise models.TemplateCreateDocumentFromTemplateTemplatesResponseResponseBody(
+            raise models.TemplateCreateDocumentFromTemplateInternalServerError(
                 data=response_data
             )
         if utils.match_response(http_res, "4XX", "*"):
@@ -1464,7 +1466,7 @@ class Templates(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TemplateMoveTemplateToTeamResponseBody:
+    ) -> models.TemplateMoveTemplateToTeamResponse:
         r"""Move template
 
         Move a template to a team
@@ -1483,8 +1485,10 @@ class Templates(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.TemplateMoveTemplateToTeamRequestBody(
+        request = models.TemplateMoveTemplateToTeamRequest(
             template_id=template_id,
             team_id=team_id,
         )
@@ -1503,11 +1507,7 @@ class Templates(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request,
-                False,
-                False,
-                "json",
-                models.TemplateMoveTemplateToTeamRequestBody,
+                request, False, False, "json", models.TemplateMoveTemplateToTeamRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -1522,6 +1522,7 @@ class Templates(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="template-moveTemplateToTeam",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1536,22 +1537,18 @@ class Templates(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.TemplateMoveTemplateToTeamResponseBody
+                http_res.text, models.TemplateMoveTemplateToTeamResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.TemplateMoveTemplateToTeamTemplatesResponseBodyData,
+                http_res.text, models.TemplateMoveTemplateToTeamBadRequestErrorData
             )
-            raise models.TemplateMoveTemplateToTeamTemplatesResponseBody(
-                data=response_data
-            )
+            raise models.TemplateMoveTemplateToTeamBadRequestError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.TemplateMoveTemplateToTeamTemplatesResponseResponseBodyData,
+                http_res.text, models.TemplateMoveTemplateToTeamInternalServerErrorData
             )
-            raise models.TemplateMoveTemplateToTeamTemplatesResponseResponseBody(
+            raise models.TemplateMoveTemplateToTeamInternalServerError(
                 data=response_data
             )
         if utils.match_response(http_res, "4XX", "*"):
@@ -1583,7 +1580,7 @@ class Templates(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TemplateMoveTemplateToTeamResponseBody:
+    ) -> models.TemplateMoveTemplateToTeamResponse:
         r"""Move template
 
         Move a template to a team
@@ -1602,8 +1599,10 @@ class Templates(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.TemplateMoveTemplateToTeamRequestBody(
+        request = models.TemplateMoveTemplateToTeamRequest(
             template_id=template_id,
             team_id=team_id,
         )
@@ -1622,11 +1621,7 @@ class Templates(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request,
-                False,
-                False,
-                "json",
-                models.TemplateMoveTemplateToTeamRequestBody,
+                request, False, False, "json", models.TemplateMoveTemplateToTeamRequest
             ),
             timeout_ms=timeout_ms,
         )
@@ -1641,6 +1636,7 @@ class Templates(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="template-moveTemplateToTeam",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1655,22 +1651,18 @@ class Templates(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, models.TemplateMoveTemplateToTeamResponseBody
+                http_res.text, models.TemplateMoveTemplateToTeamResponse
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.TemplateMoveTemplateToTeamTemplatesResponseBodyData,
+                http_res.text, models.TemplateMoveTemplateToTeamBadRequestErrorData
             )
-            raise models.TemplateMoveTemplateToTeamTemplatesResponseBody(
-                data=response_data
-            )
+            raise models.TemplateMoveTemplateToTeamBadRequestError(data=response_data)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = utils.unmarshal_json(
-                http_res.text,
-                models.TemplateMoveTemplateToTeamTemplatesResponseResponseBodyData,
+                http_res.text, models.TemplateMoveTemplateToTeamInternalServerErrorData
             )
-            raise models.TemplateMoveTemplateToTeamTemplatesResponseResponseBody(
+            raise models.TemplateMoveTemplateToTeamInternalServerError(
                 data=response_data
             )
         if utils.match_response(http_res, "4XX", "*"):

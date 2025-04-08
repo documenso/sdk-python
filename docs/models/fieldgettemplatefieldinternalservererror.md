@@ -1,0 +1,12 @@
+# FieldGetTemplateFieldInternalServerError
+
+Internal server error
+
+
+## Fields
+
+| Field                                                                                                                    | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `message`                                                                                                                | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |
+| `code`                                                                                                                   | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |
+| `issues`                                                                                                                 | List[[models.FieldGetTemplateFieldInternalServerErrorIssue](../models/fieldgettemplatefieldinternalservererrorissue.md)] | :heavy_minus_sign:                                                                                                       | N/A                                                                                                                      |

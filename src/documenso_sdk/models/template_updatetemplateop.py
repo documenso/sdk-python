@@ -16,19 +16,19 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class TemplateUpdateTemplateVisibility(str, Enum):
+class TemplateUpdateTemplateVisibilityRequestBody(str, Enum):
     EVERYONE = "EVERYONE"
     MANAGER_AND_ABOVE = "MANAGER_AND_ABOVE"
     ADMIN = "ADMIN"
 
 
-class TemplateUpdateTemplateGlobalAccessAuth(str, Enum):
+class TemplateUpdateTemplateGlobalAccessAuthRequestBody(str, Enum):
     r"""The type of authentication required for the recipient to access the document."""
 
     ACCOUNT = "ACCOUNT"
 
 
-class TemplateUpdateTemplateGlobalActionAuth(str, Enum):
+class TemplateUpdateTemplateGlobalActionAuthRequestBody(str, Enum):
     r"""The type of authentication required for the recipient to sign the document. This field is restricted to Enterprise plan users only."""
 
     ACCOUNT = "ACCOUNT"
@@ -36,7 +36,7 @@ class TemplateUpdateTemplateGlobalActionAuth(str, Enum):
     TWO_FACTOR_AUTH = "TWO_FACTOR_AUTH"
 
 
-class TemplateUpdateTemplateType(str, Enum):
+class TemplateUpdateTemplateDataType(str, Enum):
     PUBLIC = "PUBLIC"
     PRIVATE = "PRIVATE"
 
@@ -44,16 +44,20 @@ class TemplateUpdateTemplateType(str, Enum):
 class TemplateUpdateTemplateDataTypedDict(TypedDict):
     title: NotRequired[str]
     external_id: NotRequired[Nullable[str]]
-    visibility: NotRequired[TemplateUpdateTemplateVisibility]
-    global_access_auth: NotRequired[Nullable[TemplateUpdateTemplateGlobalAccessAuth]]
+    visibility: NotRequired[TemplateUpdateTemplateVisibilityRequestBody]
+    global_access_auth: NotRequired[
+        Nullable[TemplateUpdateTemplateGlobalAccessAuthRequestBody]
+    ]
     r"""The type of authentication required for the recipient to access the document."""
-    global_action_auth: NotRequired[Nullable[TemplateUpdateTemplateGlobalActionAuth]]
+    global_action_auth: NotRequired[
+        Nullable[TemplateUpdateTemplateGlobalActionAuthRequestBody]
+    ]
     r"""The type of authentication required for the recipient to sign the document. This field is restricted to Enterprise plan users only."""
     public_title: NotRequired[str]
     r"""The title of the template that will be displayed to the public. Only applicable for public templates."""
     public_description: NotRequired[str]
     r"""The description of the template that will be displayed to the public. Only applicable for public templates."""
-    type: NotRequired[TemplateUpdateTemplateType]
+    type: NotRequired[TemplateUpdateTemplateDataType]
 
 
 class TemplateUpdateTemplateData(BaseModel):
@@ -63,16 +67,16 @@ class TemplateUpdateTemplateData(BaseModel):
         OptionalNullable[str], pydantic.Field(alias="externalId")
     ] = UNSET
 
-    visibility: Optional[TemplateUpdateTemplateVisibility] = None
+    visibility: Optional[TemplateUpdateTemplateVisibilityRequestBody] = None
 
     global_access_auth: Annotated[
-        OptionalNullable[TemplateUpdateTemplateGlobalAccessAuth],
+        OptionalNullable[TemplateUpdateTemplateGlobalAccessAuthRequestBody],
         pydantic.Field(alias="globalAccessAuth"),
     ] = UNSET
     r"""The type of authentication required for the recipient to access the document."""
 
     global_action_auth: Annotated[
-        OptionalNullable[TemplateUpdateTemplateGlobalActionAuth],
+        OptionalNullable[TemplateUpdateTemplateGlobalActionAuthRequestBody],
         pydantic.Field(alias="globalActionAuth"),
     ] = UNSET
     r"""The type of authentication required for the recipient to sign the document. This field is restricted to Enterprise plan users only."""
@@ -85,7 +89,7 @@ class TemplateUpdateTemplateData(BaseModel):
     ] = None
     r"""The description of the template that will be displayed to the public. Only applicable for public templates."""
 
-    type: Optional[TemplateUpdateTemplateType] = None
+    type: Optional[TemplateUpdateTemplateDataType] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -106,7 +110,7 @@ class TemplateUpdateTemplateData(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -210,6 +214,8 @@ class TemplateUpdateTemplateLanguage(str, Enum):
     EN = "en"
     FR = "fr"
     ES = "es"
+    IT = "it"
+    PL = "pl"
 
 
 class TemplateUpdateTemplateSigningOrder(str, Enum):
@@ -235,7 +241,12 @@ class TemplateUpdateTemplateMetaTypedDict(TypedDict):
     r"""The language to use for email communications with recipients."""
     typed_signature_enabled: NotRequired[bool]
     r"""Whether to allow recipients to sign using a typed signature."""
+    upload_signature_enabled: NotRequired[bool]
+    r"""Whether to allow recipients to sign using an uploaded signature."""
+    draw_signature_enabled: NotRequired[bool]
+    r"""Whether to allow recipients to sign using a draw signature."""
     signing_order: NotRequired[TemplateUpdateTemplateSigningOrder]
+    allow_dictate_next_signer: NotRequired[bool]
 
 
 class TemplateUpdateTemplateMeta(BaseModel):
@@ -275,19 +286,33 @@ class TemplateUpdateTemplateMeta(BaseModel):
     ] = None
     r"""Whether to allow recipients to sign using a typed signature."""
 
+    upload_signature_enabled: Annotated[
+        Optional[bool], pydantic.Field(alias="uploadSignatureEnabled")
+    ] = None
+    r"""Whether to allow recipients to sign using an uploaded signature."""
+
+    draw_signature_enabled: Annotated[
+        Optional[bool], pydantic.Field(alias="drawSignatureEnabled")
+    ] = None
+    r"""Whether to allow recipients to sign using a draw signature."""
+
     signing_order: Annotated[
         Optional[TemplateUpdateTemplateSigningOrder],
         pydantic.Field(alias="signingOrder"),
     ] = None
 
+    allow_dictate_next_signer: Annotated[
+        Optional[bool], pydantic.Field(alias="allowDictateNextSigner")
+    ] = None
 
-class TemplateUpdateTemplateRequestBodyTypedDict(TypedDict):
+
+class TemplateUpdateTemplateRequestTypedDict(TypedDict):
     template_id: float
     data: NotRequired[TemplateUpdateTemplateDataTypedDict]
     meta: NotRequired[TemplateUpdateTemplateMetaTypedDict]
 
 
-class TemplateUpdateTemplateRequestBody(BaseModel):
+class TemplateUpdateTemplateRequest(BaseModel):
     template_id: Annotated[float, pydantic.Field(alias="templateId")]
 
     data: Optional[TemplateUpdateTemplateData] = None
@@ -295,84 +320,82 @@ class TemplateUpdateTemplateRequestBody(BaseModel):
     meta: Optional[TemplateUpdateTemplateMeta] = None
 
 
-class TemplateUpdateTemplateTemplatesIssuesTypedDict(TypedDict):
+class TemplateUpdateTemplateInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class TemplateUpdateTemplateTemplatesIssues(BaseModel):
+class TemplateUpdateTemplateInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class TemplateUpdateTemplateTemplatesResponseResponseBodyData(BaseModel):
+class TemplateUpdateTemplateInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[TemplateUpdateTemplateTemplatesIssues]] = None
+    issues: Optional[List[TemplateUpdateTemplateInternalServerErrorIssue]] = None
 
 
-class TemplateUpdateTemplateTemplatesResponseResponseBody(Exception):
+class TemplateUpdateTemplateInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: TemplateUpdateTemplateTemplatesResponseResponseBodyData
+    data: TemplateUpdateTemplateInternalServerErrorData
 
-    def __init__(self, data: TemplateUpdateTemplateTemplatesResponseResponseBodyData):
+    def __init__(self, data: TemplateUpdateTemplateInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, TemplateUpdateTemplateTemplatesResponseResponseBodyData
+            self.data, TemplateUpdateTemplateInternalServerErrorData
         )
 
 
-class TemplateUpdateTemplateIssuesTypedDict(TypedDict):
+class TemplateUpdateTemplateBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class TemplateUpdateTemplateIssues(BaseModel):
+class TemplateUpdateTemplateBadRequestIssue(BaseModel):
     message: str
 
 
-class TemplateUpdateTemplateTemplatesResponseBodyData(BaseModel):
+class TemplateUpdateTemplateBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[TemplateUpdateTemplateIssues]] = None
+    issues: Optional[List[TemplateUpdateTemplateBadRequestIssue]] = None
 
 
-class TemplateUpdateTemplateTemplatesResponseBody(Exception):
+class TemplateUpdateTemplateBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: TemplateUpdateTemplateTemplatesResponseBodyData
+    data: TemplateUpdateTemplateBadRequestErrorData
 
-    def __init__(self, data: TemplateUpdateTemplateTemplatesResponseBodyData):
+    def __init__(self, data: TemplateUpdateTemplateBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
-        return utils.marshal_json(
-            self.data, TemplateUpdateTemplateTemplatesResponseBodyData
-        )
+        return utils.marshal_json(self.data, TemplateUpdateTemplateBadRequestErrorData)
 
 
-class TemplateUpdateTemplateTemplatesType(str, Enum):
+class TemplateUpdateTemplateTypeResponse(str, Enum):
     PUBLIC = "PUBLIC"
     PRIVATE = "PRIVATE"
 
 
-class TemplateUpdateTemplateTemplatesVisibility(str, Enum):
+class TemplateUpdateTemplateVisibilityResponse(str, Enum):
     EVERYONE = "EVERYONE"
     MANAGER_AND_ABOVE = "MANAGER_AND_ABOVE"
     ADMIN = "ADMIN"
 
 
-class TemplateUpdateTemplateTemplatesGlobalAccessAuth(str, Enum):
+class TemplateUpdateTemplateGlobalAccessAuthResponse(str, Enum):
     r"""The type of authentication required for the recipient to access the document."""
 
     ACCOUNT = "ACCOUNT"
 
 
-class TemplateUpdateTemplateTemplatesGlobalActionAuth(str, Enum):
+class TemplateUpdateTemplateGlobalActionAuthResponse(str, Enum):
     r"""The type of authentication required for the recipient to sign the document. This field is restricted to Enterprise plan users only."""
 
     ACCOUNT = "ACCOUNT"
@@ -381,21 +404,21 @@ class TemplateUpdateTemplateTemplatesGlobalActionAuth(str, Enum):
 
 
 class TemplateUpdateTemplateAuthOptionsTypedDict(TypedDict):
-    global_access_auth: Nullable[TemplateUpdateTemplateTemplatesGlobalAccessAuth]
+    global_access_auth: Nullable[TemplateUpdateTemplateGlobalAccessAuthResponse]
     r"""The type of authentication required for the recipient to access the document."""
-    global_action_auth: Nullable[TemplateUpdateTemplateTemplatesGlobalActionAuth]
+    global_action_auth: Nullable[TemplateUpdateTemplateGlobalActionAuthResponse]
     r"""The type of authentication required for the recipient to sign the document. This field is restricted to Enterprise plan users only."""
 
 
 class TemplateUpdateTemplateAuthOptions(BaseModel):
     global_access_auth: Annotated[
-        Nullable[TemplateUpdateTemplateTemplatesGlobalAccessAuth],
+        Nullable[TemplateUpdateTemplateGlobalAccessAuthResponse],
         pydantic.Field(alias="globalAccessAuth"),
     ]
     r"""The type of authentication required for the recipient to access the document."""
 
     global_action_auth: Annotated[
-        Nullable[TemplateUpdateTemplateTemplatesGlobalActionAuth],
+        Nullable[TemplateUpdateTemplateGlobalActionAuthResponse],
         pydantic.Field(alias="globalActionAuth"),
     ]
     r"""The type of authentication required for the recipient to sign the document. This field is restricted to Enterprise plan users only."""
@@ -410,7 +433,7 @@ class TemplateUpdateTemplateAuthOptions(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -431,16 +454,16 @@ class TemplateUpdateTemplateAuthOptions(BaseModel):
         return m
 
 
-class TemplateUpdateTemplateResponseBodyTypedDict(TypedDict):
+class TemplateUpdateTemplateResponseTypedDict(TypedDict):
     r"""Successful response"""
 
-    type: TemplateUpdateTemplateTemplatesType
-    visibility: TemplateUpdateTemplateTemplatesVisibility
-    id: int
+    type: TemplateUpdateTemplateTypeResponse
+    visibility: TemplateUpdateTemplateVisibilityResponse
+    id: float
     external_id: Nullable[str]
     title: str
-    user_id: int
-    team_id: Nullable[int]
+    user_id: float
+    team_id: Nullable[float]
     auth_options: Nullable[TemplateUpdateTemplateAuthOptionsTypedDict]
     template_document_data_id: str
     created_at: str
@@ -449,22 +472,22 @@ class TemplateUpdateTemplateResponseBodyTypedDict(TypedDict):
     public_description: str
 
 
-class TemplateUpdateTemplateResponseBody(BaseModel):
+class TemplateUpdateTemplateResponse(BaseModel):
     r"""Successful response"""
 
-    type: TemplateUpdateTemplateTemplatesType
+    type: TemplateUpdateTemplateTypeResponse
 
-    visibility: TemplateUpdateTemplateTemplatesVisibility
+    visibility: TemplateUpdateTemplateVisibilityResponse
 
-    id: int
+    id: float
 
     external_id: Annotated[Nullable[str], pydantic.Field(alias="externalId")]
 
     title: str
 
-    user_id: Annotated[int, pydantic.Field(alias="userId")]
+    user_id: Annotated[float, pydantic.Field(alias="userId")]
 
-    team_id: Annotated[Nullable[int], pydantic.Field(alias="teamId")]
+    team_id: Annotated[Nullable[float], pydantic.Field(alias="teamId")]
 
     auth_options: Annotated[
         Nullable[TemplateUpdateTemplateAuthOptions], pydantic.Field(alias="authOptions")
@@ -492,7 +515,7 @@ class TemplateUpdateTemplateResponseBody(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

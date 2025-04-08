@@ -23,6 +23,7 @@ Find templates based on a search criteria
 from documenso_sdk import Documenso
 import os
 
+
 with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
@@ -46,16 +47,16 @@ with Documenso(
 
 ### Response
 
-**[models.TemplateFindTemplatesResponseBody](../../models/templatefindtemplatesresponsebody.md)**
+**[models.TemplateFindTemplatesResponse](../../models/templatefindtemplatesresponse.md)**
 
 ### Errors
 
-| Error Type                                                   | Status Code                                                  | Content Type                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| models.TemplateFindTemplatesTemplatesResponseBody            | 400                                                          | application/json                                             |
-| models.TemplateFindTemplatesTemplatesResponseResponseBody    | 404                                                          | application/json                                             |
-| models.TemplateFindTemplatesTemplatesResponse500ResponseBody | 500                                                          | application/json                                             |
-| models.APIError                                              | 4XX, 5XX                                                     | \*/\*                                                        |
+| Error Type                                      | Status Code                                     | Content Type                                    |
+| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| models.TemplateFindTemplatesBadRequestError     | 400                                             | application/json                                |
+| models.TemplateFindTemplatesNotFoundError       | 404                                             | application/json                                |
+| models.TemplateFindTemplatesInternalServerError | 500                                             | application/json                                |
+| models.APIError                                 | 4XX, 5XX                                        | \*/\*                                           |
 
 ## get
 
@@ -66,6 +67,7 @@ Get template
 ```python
 from documenso_sdk import Documenso
 import os
+
 
 with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
@@ -87,16 +89,16 @@ with Documenso(
 
 ### Response
 
-**[models.TemplateGetTemplateByIDResponseBody](../../models/templategettemplatebyidresponsebody.md)**
+**[models.TemplateGetTemplateByIDResponse](../../models/templategettemplatebyidresponse.md)**
 
 ### Errors
 
-| Error Type                                                     | Status Code                                                    | Content Type                                                   |
-| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
-| models.TemplateGetTemplateByIDTemplatesResponseBody            | 400                                                            | application/json                                               |
-| models.TemplateGetTemplateByIDTemplatesResponseResponseBody    | 404                                                            | application/json                                               |
-| models.TemplateGetTemplateByIDTemplatesResponse500ResponseBody | 500                                                            | application/json                                               |
-| models.APIError                                                | 4XX, 5XX                                                       | \*/\*                                                          |
+| Error Type                                        | Status Code                                       | Content Type                                      |
+| ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
+| models.TemplateGetTemplateByIDBadRequestError     | 400                                               | application/json                                  |
+| models.TemplateGetTemplateByIDNotFoundError       | 404                                               | application/json                                  |
+| models.TemplateGetTemplateByIDInternalServerError | 500                                               | application/json                                  |
+| models.APIError                                   | 4XX, 5XX                                          | \*/\*                                             |
 
 ## update
 
@@ -107,6 +109,7 @@ Update template
 ```python
 from documenso_sdk import Documenso
 import os
+
 
 with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
@@ -130,15 +133,15 @@ with Documenso(
 
 ### Response
 
-**[models.TemplateUpdateTemplateResponseBody](../../models/templateupdatetemplateresponsebody.md)**
+**[models.TemplateUpdateTemplateResponse](../../models/templateupdatetemplateresponse.md)**
 
 ### Errors
 
-| Error Type                                                 | Status Code                                                | Content Type                                               |
-| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| models.TemplateUpdateTemplateTemplatesResponseBody         | 400                                                        | application/json                                           |
-| models.TemplateUpdateTemplateTemplatesResponseResponseBody | 500                                                        | application/json                                           |
-| models.APIError                                            | 4XX, 5XX                                                   | \*/\*                                                      |
+| Error Type                                       | Status Code                                      | Content Type                                     |
+| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
+| models.TemplateUpdateTemplateBadRequestError     | 400                                              | application/json                                 |
+| models.TemplateUpdateTemplateInternalServerError | 500                                              | application/json                                 |
+| models.APIError                                  | 4XX, 5XX                                         | \*/\*                                            |
 
 ## duplicate
 
@@ -149,6 +152,7 @@ Duplicate template
 ```python
 from documenso_sdk import Documenso
 import os
+
 
 with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
@@ -170,15 +174,15 @@ with Documenso(
 
 ### Response
 
-**[models.TemplateDuplicateTemplateResponseBody](../../models/templateduplicatetemplateresponsebody.md)**
+**[models.TemplateDuplicateTemplateResponse](../../models/templateduplicatetemplateresponse.md)**
 
 ### Errors
 
-| Error Type                                                    | Status Code                                                   | Content Type                                                  |
-| ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
-| models.TemplateDuplicateTemplateTemplatesResponseBody         | 400                                                           | application/json                                              |
-| models.TemplateDuplicateTemplateTemplatesResponseResponseBody | 500                                                           | application/json                                              |
-| models.APIError                                               | 4XX, 5XX                                                      | \*/\*                                                         |
+| Error Type                                          | Status Code                                         | Content Type                                        |
+| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
+| models.TemplateDuplicateTemplateBadRequestError     | 400                                                 | application/json                                    |
+| models.TemplateDuplicateTemplateInternalServerError | 500                                                 | application/json                                    |
+| models.APIError                                     | 4XX, 5XX                                            | \*/\*                                               |
 
 ## delete
 
@@ -189,6 +193,7 @@ Delete template
 ```python
 from documenso_sdk import Documenso
 import os
+
 
 with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
@@ -210,15 +215,15 @@ with Documenso(
 
 ### Response
 
-**[models.TemplateDeleteTemplateResponseBody](../../models/templatedeletetemplateresponsebody.md)**
+**[models.TemplateDeleteTemplateResponse](../../models/templatedeletetemplateresponse.md)**
 
 ### Errors
 
-| Error Type                                                 | Status Code                                                | Content Type                                               |
-| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| models.TemplateDeleteTemplateTemplatesResponseBody         | 400                                                        | application/json                                           |
-| models.TemplateDeleteTemplateTemplatesResponseResponseBody | 500                                                        | application/json                                           |
-| models.APIError                                            | 4XX, 5XX                                                   | \*/\*                                                      |
+| Error Type                                       | Status Code                                      | Content Type                                     |
+| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
+| models.TemplateDeleteTemplateBadRequestError     | 400                                              | application/json                                 |
+| models.TemplateDeleteTemplateInternalServerError | 500                                              | application/json                                 |
+| models.APIError                                  | 4XX, 5XX                                         | \*/\*                                            |
 
 ## use
 
@@ -229,6 +234,7 @@ Use the template to create a document
 ```python
 from documenso_sdk import Documenso
 import os
+
 
 with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
@@ -252,25 +258,26 @@ with Documenso(
 
 ### Parameters
 
-| Parameter                                                                                                                            | Type                                                                                                                                 | Required                                                                                                                             | Description                                                                                                                          |
-| ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `template_id`                                                                                                                        | *float*                                                                                                                              | :heavy_check_mark:                                                                                                                   | N/A                                                                                                                                  |
-| `recipients`                                                                                                                         | List[[models.TemplateCreateDocumentFromTemplateRecipients](../../models/templatecreatedocumentfromtemplaterecipients.md)]            | :heavy_check_mark:                                                                                                                   | The information of the recipients to create the document with.                                                                       |
-| `distribute_document`                                                                                                                | *Optional[bool]*                                                                                                                     | :heavy_minus_sign:                                                                                                                   | Whether to create the document as pending and distribute it to recipients.                                                           |
-| `custom_document_data_id`                                                                                                            | *Optional[str]*                                                                                                                      | :heavy_minus_sign:                                                                                                                   | The data ID of an alternative PDF to use when creating the document. If not provided, the PDF attached to the template will be used. |
-| `retries`                                                                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                     | :heavy_minus_sign:                                                                                                                   | Configuration to override the default retry behavior of the client.                                                                  |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `template_id`                                                                                                                                                                  | *float*                                                                                                                                                                        | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |
+| `recipients`                                                                                                                                                                   | List[[models.TemplateCreateDocumentFromTemplateRecipientRequestBody](../../models/templatecreatedocumentfromtemplaterecipientrequestbody.md)]                                  | :heavy_check_mark:                                                                                                                                                             | The information of the recipients to create the document with.                                                                                                                 |
+| `distribute_document`                                                                                                                                                          | *Optional[bool]*                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                             | Whether to create the document as pending and distribute it to recipients.                                                                                                     |
+| `custom_document_data_id`                                                                                                                                                      | *Optional[str]*                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                             | The data ID of an alternative PDF to use when creating the document. If not provided, the PDF attached to the template will be used.                                           |
+| `prefill_fields`                                                                                                                                                               | List[[models.PrefillField](../../models/prefillfield.md)]                                                                                                                      | :heavy_minus_sign:                                                                                                                                                             | The fields to prefill on the document before sending it out. Useful when you want to create a document from an existing template and pre-fill the fields with specific values. |
+| `retries`                                                                                                                                                                      | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                               | :heavy_minus_sign:                                                                                                                                                             | Configuration to override the default retry behavior of the client.                                                                                                            |
 
 ### Response
 
-**[models.TemplateCreateDocumentFromTemplateResponseBody](../../models/templatecreatedocumentfromtemplateresponsebody.md)**
+**[models.TemplateCreateDocumentFromTemplateResponse](../../models/templatecreatedocumentfromtemplateresponse.md)**
 
 ### Errors
 
-| Error Type                                                             | Status Code                                                            | Content Type                                                           |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| models.TemplateCreateDocumentFromTemplateTemplatesResponseBody         | 400                                                                    | application/json                                                       |
-| models.TemplateCreateDocumentFromTemplateTemplatesResponseResponseBody | 500                                                                    | application/json                                                       |
-| models.APIError                                                        | 4XX, 5XX                                                               | \*/\*                                                                  |
+| Error Type                                                   | Status Code                                                  | Content Type                                                 |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| models.TemplateCreateDocumentFromTemplateBadRequestError     | 400                                                          | application/json                                             |
+| models.TemplateCreateDocumentFromTemplateInternalServerError | 500                                                          | application/json                                             |
+| models.APIError                                              | 4XX, 5XX                                                     | \*/\*                                                        |
 
 ## move_to_team
 
@@ -281,6 +288,7 @@ Move a template to a team
 ```python
 from documenso_sdk import Documenso
 import os
+
 
 with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
@@ -303,12 +311,12 @@ with Documenso(
 
 ### Response
 
-**[models.TemplateMoveTemplateToTeamResponseBody](../../models/templatemovetemplatetoteamresponsebody.md)**
+**[models.TemplateMoveTemplateToTeamResponse](../../models/templatemovetemplatetoteamresponse.md)**
 
 ### Errors
 
-| Error Type                                                     | Status Code                                                    | Content Type                                                   |
-| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
-| models.TemplateMoveTemplateToTeamTemplatesResponseBody         | 400                                                            | application/json                                               |
-| models.TemplateMoveTemplateToTeamTemplatesResponseResponseBody | 500                                                            | application/json                                               |
-| models.APIError                                                | 4XX, 5XX                                                       | \*/\*                                                          |
+| Error Type                                           | Status Code                                          | Content Type                                         |
+| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| models.TemplateMoveTemplateToTeamBadRequestError     | 400                                                  | application/json                                     |
+| models.TemplateMoveTemplateToTeamInternalServerError | 500                                                  | application/json                                     |
+| models.APIError                                      | 4XX, 5XX                                             | \*/\*                                                |

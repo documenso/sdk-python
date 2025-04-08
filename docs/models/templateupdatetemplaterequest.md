@@ -1,0 +1,10 @@
+# TemplateUpdateTemplateRequest
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `template_id`                                                                          | *float*                                                                                | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `data`                                                                                 | [Optional[models.TemplateUpdateTemplateData]](../models/templateupdatetemplatedata.md) | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `meta`                                                                                 | [Optional[models.TemplateUpdateTemplateMeta]](../models/templateupdatetemplatemeta.md) | :heavy_minus_sign:                                                                     | N/A                                                                                    |

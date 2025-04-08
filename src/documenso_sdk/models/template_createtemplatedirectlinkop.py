@@ -8,13 +8,13 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class TemplateCreateTemplateDirectLinkRequestBodyTypedDict(TypedDict):
+class TemplateCreateTemplateDirectLinkRequestTypedDict(TypedDict):
     template_id: float
     direct_recipient_id: NotRequired[float]
     r"""The of the recipient in the current template to transform into the primary recipient when the template is used."""
 
 
-class TemplateCreateTemplateDirectLinkRequestBody(BaseModel):
+class TemplateCreateTemplateDirectLinkRequest(BaseModel):
     template_id: Annotated[float, pydantic.Field(alias="templateId")]
 
     direct_recipient_id: Annotated[
@@ -23,96 +23,85 @@ class TemplateCreateTemplateDirectLinkRequestBody(BaseModel):
     r"""The of the recipient in the current template to transform into the primary recipient when the template is used."""
 
 
-class TemplateCreateTemplateDirectLinkTemplatesDirectLinkIssuesTypedDict(TypedDict):
+class TemplateCreateTemplateDirectLinkInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class TemplateCreateTemplateDirectLinkTemplatesDirectLinkIssues(BaseModel):
+class TemplateCreateTemplateDirectLinkInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class TemplateCreateTemplateDirectLinkTemplatesDirectLinkResponseResponseBodyData(
-    BaseModel
-):
+class TemplateCreateTemplateDirectLinkInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[
-        List[TemplateCreateTemplateDirectLinkTemplatesDirectLinkIssues]
-    ] = None
+    issues: Optional[List[TemplateCreateTemplateDirectLinkInternalServerErrorIssue]] = (
+        None
+    )
 
 
-class TemplateCreateTemplateDirectLinkTemplatesDirectLinkResponseResponseBody(
-    Exception
-):
+class TemplateCreateTemplateDirectLinkInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: TemplateCreateTemplateDirectLinkTemplatesDirectLinkResponseResponseBodyData
+    data: TemplateCreateTemplateDirectLinkInternalServerErrorData
 
-    def __init__(
-        self,
-        data: TemplateCreateTemplateDirectLinkTemplatesDirectLinkResponseResponseBodyData,
-    ):
+    def __init__(self, data: TemplateCreateTemplateDirectLinkInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data,
-            TemplateCreateTemplateDirectLinkTemplatesDirectLinkResponseResponseBodyData,
+            self.data, TemplateCreateTemplateDirectLinkInternalServerErrorData
         )
 
 
-class TemplateCreateTemplateDirectLinkIssuesTypedDict(TypedDict):
+class TemplateCreateTemplateDirectLinkBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class TemplateCreateTemplateDirectLinkIssues(BaseModel):
+class TemplateCreateTemplateDirectLinkBadRequestIssue(BaseModel):
     message: str
 
 
-class TemplateCreateTemplateDirectLinkTemplatesDirectLinkResponseBodyData(BaseModel):
+class TemplateCreateTemplateDirectLinkBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[TemplateCreateTemplateDirectLinkIssues]] = None
+    issues: Optional[List[TemplateCreateTemplateDirectLinkBadRequestIssue]] = None
 
 
-class TemplateCreateTemplateDirectLinkTemplatesDirectLinkResponseBody(Exception):
+class TemplateCreateTemplateDirectLinkBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: TemplateCreateTemplateDirectLinkTemplatesDirectLinkResponseBodyData
+    data: TemplateCreateTemplateDirectLinkBadRequestErrorData
 
-    def __init__(
-        self, data: TemplateCreateTemplateDirectLinkTemplatesDirectLinkResponseBodyData
-    ):
+    def __init__(self, data: TemplateCreateTemplateDirectLinkBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data,
-            TemplateCreateTemplateDirectLinkTemplatesDirectLinkResponseBodyData,
+            self.data, TemplateCreateTemplateDirectLinkBadRequestErrorData
         )
 
 
-class TemplateCreateTemplateDirectLinkResponseBodyTypedDict(TypedDict):
+class TemplateCreateTemplateDirectLinkResponseTypedDict(TypedDict):
     r"""Successful response"""
 
     id: str
-    template_id: int
+    template_id: float
     token: str
     created_at: str
     enabled: bool
-    direct_template_recipient_id: int
+    direct_template_recipient_id: float
 
 
-class TemplateCreateTemplateDirectLinkResponseBody(BaseModel):
+class TemplateCreateTemplateDirectLinkResponse(BaseModel):
     r"""Successful response"""
 
     id: str
 
-    template_id: Annotated[int, pydantic.Field(alias="templateId")]
+    template_id: Annotated[float, pydantic.Field(alias="templateId")]
 
     token: str
 
@@ -121,5 +110,5 @@ class TemplateCreateTemplateDirectLinkResponseBody(BaseModel):
     enabled: bool
 
     direct_template_recipient_id: Annotated[
-        int, pydantic.Field(alias="directTemplateRecipientId")
+        float, pydantic.Field(alias="directTemplateRecipientId")
     ]

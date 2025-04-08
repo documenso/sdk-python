@@ -11,7 +11,7 @@ from typing import Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-class Source(str, Enum):
+class QueryParamSource(str, Enum):
     r"""Filter documents by how it was created."""
 
     DOCUMENT = "DOCUMENT"
@@ -19,12 +19,13 @@ class Source(str, Enum):
     TEMPLATE_DIRECT_LINK = "TEMPLATE_DIRECT_LINK"
 
 
-class Status(str, Enum):
+class QueryParamStatus(str, Enum):
     r"""Filter documents by the current status"""
 
     DRAFT = "DRAFT"
     PENDING = "PENDING"
     COMPLETED = "COMPLETED"
+    REJECTED = "REJECTED"
 
 
 class OrderByColumn(str, Enum):
@@ -45,9 +46,9 @@ class DocumentFindDocumentsRequestTypedDict(TypedDict):
     r"""The number of items per page."""
     template_id: NotRequired[float]
     r"""Filter documents by the template ID used to create it."""
-    source: NotRequired[Source]
+    source: NotRequired[QueryParamSource]
     r"""Filter documents by how it was created."""
-    status: NotRequired[Status]
+    status: NotRequired[QueryParamStatus]
     r"""Filter documents by the current status"""
     order_by_column: NotRequired[OrderByColumn]
     order_by_direction: NotRequired[OrderByDirection]
@@ -81,13 +82,13 @@ class DocumentFindDocumentsRequest(BaseModel):
     r"""Filter documents by the template ID used to create it."""
 
     source: Annotated[
-        Optional[Source],
+        Optional[QueryParamSource],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Filter documents by how it was created."""
 
     status: Annotated[
-        Optional[Status],
+        Optional[QueryParamStatus],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Filter documents by the current status"""
@@ -105,94 +106,90 @@ class DocumentFindDocumentsRequest(BaseModel):
     ] = OrderByDirection.DESC
 
 
-class DocumentFindDocumentsDocumentsIssuesTypedDict(TypedDict):
+class DocumentFindDocumentsInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class DocumentFindDocumentsDocumentsIssues(BaseModel):
+class DocumentFindDocumentsInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class DocumentFindDocumentsDocumentsResponse500ResponseBodyData(BaseModel):
+class DocumentFindDocumentsInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[DocumentFindDocumentsDocumentsIssues]] = None
+    issues: Optional[List[DocumentFindDocumentsInternalServerErrorIssue]] = None
 
 
-class DocumentFindDocumentsDocumentsResponse500ResponseBody(Exception):
+class DocumentFindDocumentsInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: DocumentFindDocumentsDocumentsResponse500ResponseBodyData
+    data: DocumentFindDocumentsInternalServerErrorData
 
-    def __init__(self, data: DocumentFindDocumentsDocumentsResponse500ResponseBodyData):
+    def __init__(self, data: DocumentFindDocumentsInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, DocumentFindDocumentsDocumentsResponse500ResponseBodyData
+            self.data, DocumentFindDocumentsInternalServerErrorData
         )
 
 
-class DocumentFindDocumentsIssuesTypedDict(TypedDict):
+class DocumentFindDocumentsNotFoundIssueTypedDict(TypedDict):
     message: str
 
 
-class DocumentFindDocumentsIssues(BaseModel):
+class DocumentFindDocumentsNotFoundIssue(BaseModel):
     message: str
 
 
-class DocumentFindDocumentsDocumentsResponseResponseBodyData(BaseModel):
+class DocumentFindDocumentsNotFoundErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[DocumentFindDocumentsIssues]] = None
+    issues: Optional[List[DocumentFindDocumentsNotFoundIssue]] = None
 
 
-class DocumentFindDocumentsDocumentsResponseResponseBody(Exception):
+class DocumentFindDocumentsNotFoundError(Exception):
     r"""Not found"""
 
-    data: DocumentFindDocumentsDocumentsResponseResponseBodyData
+    data: DocumentFindDocumentsNotFoundErrorData
 
-    def __init__(self, data: DocumentFindDocumentsDocumentsResponseResponseBodyData):
+    def __init__(self, data: DocumentFindDocumentsNotFoundErrorData):
         self.data = data
 
     def __str__(self) -> str:
-        return utils.marshal_json(
-            self.data, DocumentFindDocumentsDocumentsResponseResponseBodyData
-        )
+        return utils.marshal_json(self.data, DocumentFindDocumentsNotFoundErrorData)
 
 
-class IssuesTypedDict(TypedDict):
+class DocumentFindDocumentsBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class Issues(BaseModel):
+class DocumentFindDocumentsBadRequestIssue(BaseModel):
     message: str
 
 
-class DocumentFindDocumentsDocumentsResponseBodyData(BaseModel):
+class DocumentFindDocumentsBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[Issues]] = None
+    issues: Optional[List[DocumentFindDocumentsBadRequestIssue]] = None
 
 
-class DocumentFindDocumentsDocumentsResponseBody(Exception):
+class DocumentFindDocumentsBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: DocumentFindDocumentsDocumentsResponseBodyData
+    data: DocumentFindDocumentsBadRequestErrorData
 
-    def __init__(self, data: DocumentFindDocumentsDocumentsResponseBodyData):
+    def __init__(self, data: DocumentFindDocumentsBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
-        return utils.marshal_json(
-            self.data, DocumentFindDocumentsDocumentsResponseBodyData
-        )
+        return utils.marshal_json(self.data, DocumentFindDocumentsBadRequestErrorData)
 
 
 class DocumentFindDocumentsVisibility(str, Enum):
@@ -201,13 +198,14 @@ class DocumentFindDocumentsVisibility(str, Enum):
     ADMIN = "ADMIN"
 
 
-class DocumentFindDocumentsStatus(str, Enum):
+class DataStatus(str, Enum):
     DRAFT = "DRAFT"
     PENDING = "PENDING"
     COMPLETED = "COMPLETED"
+    REJECTED = "REJECTED"
 
 
-class DocumentFindDocumentsSource(str, Enum):
+class DataSource(str, Enum):
     DOCUMENT = "DOCUMENT"
     TEMPLATE = "TEMPLATE"
     TEMPLATE_DIRECT_LINK = "TEMPLATE_DIRECT_LINK"
@@ -257,7 +255,7 @@ class DocumentFindDocumentsAuthOptions(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -289,13 +287,13 @@ DocumentFindDocumentsFormValues = TypeAliasType(
 
 
 class DocumentFindDocumentsUserTypedDict(TypedDict):
-    id: int
+    id: float
     name: Nullable[str]
     email: str
 
 
 class DocumentFindDocumentsUser(BaseModel):
-    id: int
+    id: float
 
     name: Nullable[str]
 
@@ -311,7 +309,7 @@ class DocumentFindDocumentsUser(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -337,6 +335,7 @@ class DocumentFindDocumentsRole(str, Enum):
     SIGNER = "SIGNER"
     VIEWER = "VIEWER"
     APPROVER = "APPROVER"
+    ASSISTANT = "ASSISTANT"
 
 
 class DocumentFindDocumentsReadStatus(str, Enum):
@@ -370,14 +369,14 @@ class DocumentFindDocumentsActionAuth(str, Enum):
     EXPLICIT_NONE = "EXPLICIT_NONE"
 
 
-class DocumentFindDocumentsDocumentsAuthOptionsTypedDict(TypedDict):
+class DocumentFindDocumentsRecipientAuthOptionsTypedDict(TypedDict):
     access_auth: Nullable[DocumentFindDocumentsAccessAuth]
     r"""The type of authentication required for the recipient to access the document."""
     action_auth: Nullable[DocumentFindDocumentsActionAuth]
     r"""The type of authentication required for the recipient to sign the document."""
 
 
-class DocumentFindDocumentsDocumentsAuthOptions(BaseModel):
+class DocumentFindDocumentsRecipientAuthOptions(BaseModel):
     access_auth: Annotated[
         Nullable[DocumentFindDocumentsAccessAuth], pydantic.Field(alias="accessAuth")
     ]
@@ -398,7 +397,7 @@ class DocumentFindDocumentsDocumentsAuthOptions(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -419,27 +418,27 @@ class DocumentFindDocumentsDocumentsAuthOptions(BaseModel):
         return m
 
 
-class DocumentFindDocumentsRecipientsTypedDict(TypedDict):
+class DocumentFindDocumentsRecipientTypedDict(TypedDict):
     role: DocumentFindDocumentsRole
     read_status: DocumentFindDocumentsReadStatus
     signing_status: DocumentFindDocumentsSigningStatus
     send_status: DocumentFindDocumentsSendStatus
-    id: int
-    document_id: Nullable[int]
-    template_id: Nullable[int]
+    id: float
+    document_id: Nullable[float]
+    template_id: Nullable[float]
     email: str
     name: str
     token: str
     document_deleted_at: Nullable[str]
     expired: Nullable[str]
     signed_at: Nullable[str]
-    auth_options: Nullable[DocumentFindDocumentsDocumentsAuthOptionsTypedDict]
+    auth_options: Nullable[DocumentFindDocumentsRecipientAuthOptionsTypedDict]
     signing_order: Nullable[float]
     r"""The order in which the recipient should sign the document. Only works if the document is set to sequential signing."""
     rejection_reason: Nullable[str]
 
 
-class DocumentFindDocumentsRecipients(BaseModel):
+class DocumentFindDocumentsRecipient(BaseModel):
     role: DocumentFindDocumentsRole
 
     read_status: Annotated[
@@ -454,11 +453,11 @@ class DocumentFindDocumentsRecipients(BaseModel):
         DocumentFindDocumentsSendStatus, pydantic.Field(alias="sendStatus")
     ]
 
-    id: int
+    id: float
 
-    document_id: Annotated[Nullable[int], pydantic.Field(alias="documentId")]
+    document_id: Annotated[Nullable[float], pydantic.Field(alias="documentId")]
 
-    template_id: Annotated[Nullable[int], pydantic.Field(alias="templateId")]
+    template_id: Annotated[Nullable[float], pydantic.Field(alias="templateId")]
 
     email: str
 
@@ -475,7 +474,7 @@ class DocumentFindDocumentsRecipients(BaseModel):
     signed_at: Annotated[Nullable[str], pydantic.Field(alias="signedAt")]
 
     auth_options: Annotated[
-        Nullable[DocumentFindDocumentsDocumentsAuthOptions],
+        Nullable[DocumentFindDocumentsRecipientAuthOptions],
         pydantic.Field(alias="authOptions"),
     ]
 
@@ -503,7 +502,7 @@ class DocumentFindDocumentsRecipients(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -524,22 +523,22 @@ class DocumentFindDocumentsRecipients(BaseModel):
         return m
 
 
-class TeamTypedDict(TypedDict):
-    id: int
+class DocumentFindDocumentsTeamTypedDict(TypedDict):
+    id: float
     url: str
 
 
-class Team(BaseModel):
-    id: int
+class DocumentFindDocumentsTeam(BaseModel):
+    id: float
 
     url: str
 
 
 class DocumentFindDocumentsDataTypedDict(TypedDict):
     visibility: DocumentFindDocumentsVisibility
-    status: DocumentFindDocumentsStatus
-    source: DocumentFindDocumentsSource
-    id: int
+    status: DataStatus
+    source: DataSource
+    id: float
     external_id: Nullable[str]
     r"""A custom external ID you can use to identify the document."""
     user_id: float
@@ -552,21 +551,21 @@ class DocumentFindDocumentsDataTypedDict(TypedDict):
     updated_at: str
     completed_at: Nullable[str]
     deleted_at: Nullable[str]
-    team_id: Nullable[int]
-    template_id: Nullable[int]
+    team_id: Nullable[float]
+    template_id: Nullable[float]
     user: DocumentFindDocumentsUserTypedDict
-    recipients: List[DocumentFindDocumentsRecipientsTypedDict]
-    team: Nullable[TeamTypedDict]
+    recipients: List[DocumentFindDocumentsRecipientTypedDict]
+    team: Nullable[DocumentFindDocumentsTeamTypedDict]
 
 
 class DocumentFindDocumentsData(BaseModel):
     visibility: DocumentFindDocumentsVisibility
 
-    status: DocumentFindDocumentsStatus
+    status: DataStatus
 
-    source: DocumentFindDocumentsSource
+    source: DataSource
 
-    id: int
+    id: float
 
     external_id: Annotated[Nullable[str], pydantic.Field(alias="externalId")]
     r"""A custom external ID you can use to identify the document."""
@@ -595,15 +594,15 @@ class DocumentFindDocumentsData(BaseModel):
 
     deleted_at: Annotated[Nullable[str], pydantic.Field(alias="deletedAt")]
 
-    team_id: Annotated[Nullable[int], pydantic.Field(alias="teamId")]
+    team_id: Annotated[Nullable[float], pydantic.Field(alias="teamId")]
 
-    template_id: Annotated[Nullable[int], pydantic.Field(alias="templateId")]
+    template_id: Annotated[Nullable[float], pydantic.Field(alias="templateId")]
 
     user: DocumentFindDocumentsUser
 
-    recipients: List[DocumentFindDocumentsRecipients]
+    recipients: List[DocumentFindDocumentsRecipient]
 
-    team: Nullable[Team]
+    team: Nullable[DocumentFindDocumentsTeam]
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -624,7 +623,7 @@ class DocumentFindDocumentsData(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -645,7 +644,7 @@ class DocumentFindDocumentsData(BaseModel):
         return m
 
 
-class DocumentFindDocumentsResponseBodyTypedDict(TypedDict):
+class DocumentFindDocumentsResponseTypedDict(TypedDict):
     r"""Successful response"""
 
     data: List[DocumentFindDocumentsDataTypedDict]
@@ -659,7 +658,7 @@ class DocumentFindDocumentsResponseBodyTypedDict(TypedDict):
     r"""The total number of pages."""
 
 
-class DocumentFindDocumentsResponseBody(BaseModel):
+class DocumentFindDocumentsResponse(BaseModel):
     r"""Successful response"""
 
     data: List[DocumentFindDocumentsData]

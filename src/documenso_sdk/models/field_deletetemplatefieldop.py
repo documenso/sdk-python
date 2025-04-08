@@ -8,83 +8,81 @@ from typing import List, Optional
 from typing_extensions import Annotated, TypedDict
 
 
-class FieldDeleteTemplateFieldRequestBodyTypedDict(TypedDict):
+class FieldDeleteTemplateFieldRequestTypedDict(TypedDict):
     field_id: float
 
 
-class FieldDeleteTemplateFieldRequestBody(BaseModel):
+class FieldDeleteTemplateFieldRequest(BaseModel):
     field_id: Annotated[float, pydantic.Field(alias="fieldId")]
 
 
-class FieldDeleteTemplateFieldTemplatesFieldsIssuesTypedDict(TypedDict):
+class FieldDeleteTemplateFieldInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class FieldDeleteTemplateFieldTemplatesFieldsIssues(BaseModel):
+class FieldDeleteTemplateFieldInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class FieldDeleteTemplateFieldTemplatesFieldsResponseResponseBodyData(BaseModel):
+class FieldDeleteTemplateFieldInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[FieldDeleteTemplateFieldTemplatesFieldsIssues]] = None
+    issues: Optional[List[FieldDeleteTemplateFieldInternalServerErrorIssue]] = None
 
 
-class FieldDeleteTemplateFieldTemplatesFieldsResponseResponseBody(Exception):
+class FieldDeleteTemplateFieldInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: FieldDeleteTemplateFieldTemplatesFieldsResponseResponseBodyData
+    data: FieldDeleteTemplateFieldInternalServerErrorData
 
-    def __init__(
-        self, data: FieldDeleteTemplateFieldTemplatesFieldsResponseResponseBodyData
-    ):
+    def __init__(self, data: FieldDeleteTemplateFieldInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, FieldDeleteTemplateFieldTemplatesFieldsResponseResponseBodyData
+            self.data, FieldDeleteTemplateFieldInternalServerErrorData
         )
 
 
-class FieldDeleteTemplateFieldIssuesTypedDict(TypedDict):
+class FieldDeleteTemplateFieldBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class FieldDeleteTemplateFieldIssues(BaseModel):
+class FieldDeleteTemplateFieldBadRequestIssue(BaseModel):
     message: str
 
 
-class FieldDeleteTemplateFieldTemplatesFieldsResponseBodyData(BaseModel):
+class FieldDeleteTemplateFieldBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[FieldDeleteTemplateFieldIssues]] = None
+    issues: Optional[List[FieldDeleteTemplateFieldBadRequestIssue]] = None
 
 
-class FieldDeleteTemplateFieldTemplatesFieldsResponseBody(Exception):
+class FieldDeleteTemplateFieldBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: FieldDeleteTemplateFieldTemplatesFieldsResponseBodyData
+    data: FieldDeleteTemplateFieldBadRequestErrorData
 
-    def __init__(self, data: FieldDeleteTemplateFieldTemplatesFieldsResponseBodyData):
+    def __init__(self, data: FieldDeleteTemplateFieldBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, FieldDeleteTemplateFieldTemplatesFieldsResponseBodyData
+            self.data, FieldDeleteTemplateFieldBadRequestErrorData
         )
 
 
-class FieldDeleteTemplateFieldResponseBodyTypedDict(TypedDict):
+class FieldDeleteTemplateFieldResponseTypedDict(TypedDict):
     r"""Successful response"""
 
     success: bool
 
 
-class FieldDeleteTemplateFieldResponseBody(BaseModel):
+class FieldDeleteTemplateFieldResponse(BaseModel):
     r"""Successful response"""
 
     success: bool

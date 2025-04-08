@@ -10,14 +10,14 @@ from typing import List, Optional
 from typing_extensions import Annotated, TypedDict
 
 
-class TemplateMoveTemplateToTeamRequestBodyTypedDict(TypedDict):
+class TemplateMoveTemplateToTeamRequestTypedDict(TypedDict):
     template_id: float
     r"""The ID of the template to move to."""
     team_id: float
     r"""The ID of the team to move the template to."""
 
 
-class TemplateMoveTemplateToTeamRequestBody(BaseModel):
+class TemplateMoveTemplateToTeamRequest(BaseModel):
     template_id: Annotated[float, pydantic.Field(alias="templateId")]
     r"""The ID of the template to move to."""
 
@@ -25,65 +25,63 @@ class TemplateMoveTemplateToTeamRequestBody(BaseModel):
     r"""The ID of the team to move the template to."""
 
 
-class TemplateMoveTemplateToTeamTemplatesIssuesTypedDict(TypedDict):
+class TemplateMoveTemplateToTeamInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class TemplateMoveTemplateToTeamTemplatesIssues(BaseModel):
+class TemplateMoveTemplateToTeamInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class TemplateMoveTemplateToTeamTemplatesResponseResponseBodyData(BaseModel):
+class TemplateMoveTemplateToTeamInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[TemplateMoveTemplateToTeamTemplatesIssues]] = None
+    issues: Optional[List[TemplateMoveTemplateToTeamInternalServerErrorIssue]] = None
 
 
-class TemplateMoveTemplateToTeamTemplatesResponseResponseBody(Exception):
+class TemplateMoveTemplateToTeamInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: TemplateMoveTemplateToTeamTemplatesResponseResponseBodyData
+    data: TemplateMoveTemplateToTeamInternalServerErrorData
 
-    def __init__(
-        self, data: TemplateMoveTemplateToTeamTemplatesResponseResponseBodyData
-    ):
+    def __init__(self, data: TemplateMoveTemplateToTeamInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, TemplateMoveTemplateToTeamTemplatesResponseResponseBodyData
+            self.data, TemplateMoveTemplateToTeamInternalServerErrorData
         )
 
 
-class TemplateMoveTemplateToTeamIssuesTypedDict(TypedDict):
+class TemplateMoveTemplateToTeamBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class TemplateMoveTemplateToTeamIssues(BaseModel):
+class TemplateMoveTemplateToTeamBadRequestIssue(BaseModel):
     message: str
 
 
-class TemplateMoveTemplateToTeamTemplatesResponseBodyData(BaseModel):
+class TemplateMoveTemplateToTeamBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[TemplateMoveTemplateToTeamIssues]] = None
+    issues: Optional[List[TemplateMoveTemplateToTeamBadRequestIssue]] = None
 
 
-class TemplateMoveTemplateToTeamTemplatesResponseBody(Exception):
+class TemplateMoveTemplateToTeamBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: TemplateMoveTemplateToTeamTemplatesResponseBodyData
+    data: TemplateMoveTemplateToTeamBadRequestErrorData
 
-    def __init__(self, data: TemplateMoveTemplateToTeamTemplatesResponseBodyData):
+    def __init__(self, data: TemplateMoveTemplateToTeamBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, TemplateMoveTemplateToTeamTemplatesResponseBodyData
+            self.data, TemplateMoveTemplateToTeamBadRequestErrorData
         )
 
 
@@ -142,7 +140,7 @@ class TemplateMoveTemplateToTeamAuthOptions(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -163,16 +161,16 @@ class TemplateMoveTemplateToTeamAuthOptions(BaseModel):
         return m
 
 
-class TemplateMoveTemplateToTeamResponseBodyTypedDict(TypedDict):
+class TemplateMoveTemplateToTeamResponseTypedDict(TypedDict):
     r"""Successful response"""
 
     type: TemplateMoveTemplateToTeamType
     visibility: TemplateMoveTemplateToTeamVisibility
-    id: int
+    id: float
     external_id: Nullable[str]
     title: str
-    user_id: int
-    team_id: Nullable[int]
+    user_id: float
+    team_id: Nullable[float]
     auth_options: Nullable[TemplateMoveTemplateToTeamAuthOptionsTypedDict]
     template_document_data_id: str
     created_at: str
@@ -181,22 +179,22 @@ class TemplateMoveTemplateToTeamResponseBodyTypedDict(TypedDict):
     public_description: str
 
 
-class TemplateMoveTemplateToTeamResponseBody(BaseModel):
+class TemplateMoveTemplateToTeamResponse(BaseModel):
     r"""Successful response"""
 
     type: TemplateMoveTemplateToTeamType
 
     visibility: TemplateMoveTemplateToTeamVisibility
 
-    id: int
+    id: float
 
     external_id: Annotated[Nullable[str], pydantic.Field(alias="externalId")]
 
     title: str
 
-    user_id: Annotated[int, pydantic.Field(alias="userId")]
+    user_id: Annotated[float, pydantic.Field(alias="userId")]
 
-    team_id: Annotated[Nullable[int], pydantic.Field(alias="teamId")]
+    team_id: Annotated[Nullable[float], pydantic.Field(alias="teamId")]
 
     auth_options: Annotated[
         Nullable[TemplateMoveTemplateToTeamAuthOptions],
@@ -225,7 +223,7 @@ class TemplateMoveTemplateToTeamResponseBody(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

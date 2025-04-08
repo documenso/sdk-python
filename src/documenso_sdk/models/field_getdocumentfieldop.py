@@ -23,98 +23,90 @@ class FieldGetDocumentFieldRequest(BaseModel):
     ]
 
 
-class FieldGetDocumentFieldDocumentsFieldsResponseIssuesTypedDict(TypedDict):
+class FieldGetDocumentFieldInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class FieldGetDocumentFieldDocumentsFieldsResponseIssues(BaseModel):
+class FieldGetDocumentFieldInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class FieldGetDocumentFieldDocumentsFieldsResponse500ResponseBodyData(BaseModel):
+class FieldGetDocumentFieldInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[FieldGetDocumentFieldDocumentsFieldsResponseIssues]] = None
+    issues: Optional[List[FieldGetDocumentFieldInternalServerErrorIssue]] = None
 
 
-class FieldGetDocumentFieldDocumentsFieldsResponse500ResponseBody(Exception):
+class FieldGetDocumentFieldInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: FieldGetDocumentFieldDocumentsFieldsResponse500ResponseBodyData
+    data: FieldGetDocumentFieldInternalServerErrorData
 
-    def __init__(
-        self, data: FieldGetDocumentFieldDocumentsFieldsResponse500ResponseBodyData
-    ):
+    def __init__(self, data: FieldGetDocumentFieldInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data, FieldGetDocumentFieldDocumentsFieldsResponse500ResponseBodyData
+            self.data, FieldGetDocumentFieldInternalServerErrorData
         )
 
 
-class FieldGetDocumentFieldDocumentsFieldsIssuesTypedDict(TypedDict):
+class FieldGetDocumentFieldNotFoundIssueTypedDict(TypedDict):
     message: str
 
 
-class FieldGetDocumentFieldDocumentsFieldsIssues(BaseModel):
+class FieldGetDocumentFieldNotFoundIssue(BaseModel):
     message: str
 
 
-class FieldGetDocumentFieldDocumentsFieldsResponseResponseBodyData(BaseModel):
+class FieldGetDocumentFieldNotFoundErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[FieldGetDocumentFieldDocumentsFieldsIssues]] = None
+    issues: Optional[List[FieldGetDocumentFieldNotFoundIssue]] = None
 
 
-class FieldGetDocumentFieldDocumentsFieldsResponseResponseBody(Exception):
+class FieldGetDocumentFieldNotFoundError(Exception):
     r"""Not found"""
 
-    data: FieldGetDocumentFieldDocumentsFieldsResponseResponseBodyData
+    data: FieldGetDocumentFieldNotFoundErrorData
 
-    def __init__(
-        self, data: FieldGetDocumentFieldDocumentsFieldsResponseResponseBodyData
-    ):
+    def __init__(self, data: FieldGetDocumentFieldNotFoundErrorData):
         self.data = data
 
     def __str__(self) -> str:
-        return utils.marshal_json(
-            self.data, FieldGetDocumentFieldDocumentsFieldsResponseResponseBodyData
-        )
+        return utils.marshal_json(self.data, FieldGetDocumentFieldNotFoundErrorData)
 
 
-class FieldGetDocumentFieldIssuesTypedDict(TypedDict):
+class FieldGetDocumentFieldBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class FieldGetDocumentFieldIssues(BaseModel):
+class FieldGetDocumentFieldBadRequestIssue(BaseModel):
     message: str
 
 
-class FieldGetDocumentFieldDocumentsFieldsResponseBodyData(BaseModel):
+class FieldGetDocumentFieldBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[FieldGetDocumentFieldIssues]] = None
+    issues: Optional[List[FieldGetDocumentFieldBadRequestIssue]] = None
 
 
-class FieldGetDocumentFieldDocumentsFieldsResponseBody(Exception):
+class FieldGetDocumentFieldBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: FieldGetDocumentFieldDocumentsFieldsResponseBodyData
+    data: FieldGetDocumentFieldBadRequestErrorData
 
-    def __init__(self, data: FieldGetDocumentFieldDocumentsFieldsResponseBodyData):
+    def __init__(self, data: FieldGetDocumentFieldBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
-        return utils.marshal_json(
-            self.data, FieldGetDocumentFieldDocumentsFieldsResponseBodyData
-        )
+        return utils.marshal_json(self.data, FieldGetDocumentFieldBadRequestErrorData)
 
 
 class FieldGetDocumentFieldType(str, Enum):
@@ -131,34 +123,30 @@ class FieldGetDocumentFieldType(str, Enum):
     DROPDOWN = "DROPDOWN"
 
 
-class FieldGetDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONResponseBody9Type(
-    str, Enum
-):
+class FieldGetDocumentFieldTypeDropdown(str, Enum):
     DROPDOWN = "dropdown"
 
 
-class FieldGetDocumentFieldFieldMetaDocumentsFieldsValuesTypedDict(TypedDict):
+class FieldGetDocumentFieldValue3TypedDict(TypedDict):
     value: str
 
 
-class FieldGetDocumentFieldFieldMetaDocumentsFieldsValues(BaseModel):
+class FieldGetDocumentFieldValue3(BaseModel):
     value: str
 
 
-class FieldMeta9TypedDict(TypedDict):
-    type: FieldGetDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONResponseBody9Type
+class FieldGetDocumentFieldFieldMetaDropdownTypedDict(TypedDict):
+    type: FieldGetDocumentFieldTypeDropdown
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[
-        List[FieldGetDocumentFieldFieldMetaDocumentsFieldsValuesTypedDict]
-    ]
+    values: NotRequired[List[FieldGetDocumentFieldValue3TypedDict]]
     default_value: NotRequired[str]
 
 
-class FieldMeta9(BaseModel):
-    type: FieldGetDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONResponseBody9Type
+class FieldGetDocumentFieldFieldMetaDropdown(BaseModel):
+    type: FieldGetDocumentFieldTypeDropdown
 
     label: Optional[str] = None
 
@@ -168,24 +156,22 @@ class FieldMeta9(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[FieldGetDocumentFieldFieldMetaDocumentsFieldsValues]] = None
+    values: Optional[List[FieldGetDocumentFieldValue3]] = None
 
     default_value: Annotated[Optional[str], pydantic.Field(alias="defaultValue")] = None
 
 
-class FieldGetDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONResponseBody8Type(
-    str, Enum
-):
+class FieldGetDocumentFieldTypeCheckbox(str, Enum):
     CHECKBOX = "checkbox"
 
 
-class FieldGetDocumentFieldFieldMetaValuesTypedDict(TypedDict):
+class FieldGetDocumentFieldValue2TypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class FieldGetDocumentFieldFieldMetaValues(BaseModel):
+class FieldGetDocumentFieldValue2(BaseModel):
     id: float
 
     checked: bool
@@ -193,19 +179,19 @@ class FieldGetDocumentFieldFieldMetaValues(BaseModel):
     value: str
 
 
-class FieldMeta8TypedDict(TypedDict):
-    type: FieldGetDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONResponseBody8Type
+class FieldGetDocumentFieldFieldMetaCheckboxTypedDict(TypedDict):
+    type: FieldGetDocumentFieldTypeCheckbox
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[List[FieldGetDocumentFieldFieldMetaValuesTypedDict]]
+    values: NotRequired[List[FieldGetDocumentFieldValue2TypedDict]]
     validation_rule: NotRequired[str]
     validation_length: NotRequired[float]
 
 
-class FieldMeta8(BaseModel):
-    type: FieldGetDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONResponseBody8Type
+class FieldGetDocumentFieldFieldMetaCheckbox(BaseModel):
+    type: FieldGetDocumentFieldTypeCheckbox
 
     label: Optional[str] = None
 
@@ -215,7 +201,7 @@ class FieldMeta8(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[FieldGetDocumentFieldFieldMetaValues]] = None
+    values: Optional[List[FieldGetDocumentFieldValue2]] = None
 
     validation_rule: Annotated[
         Optional[str], pydantic.Field(alias="validationRule")
@@ -226,19 +212,17 @@ class FieldMeta8(BaseModel):
     ] = None
 
 
-class FieldGetDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONResponseBodyType(
-    str, Enum
-):
+class FieldGetDocumentFieldTypeRadio(str, Enum):
     RADIO = "radio"
 
 
-class FieldMetaValuesTypedDict(TypedDict):
+class FieldGetDocumentFieldValue1TypedDict(TypedDict):
     id: float
     checked: bool
     value: str
 
 
-class FieldMetaValues(BaseModel):
+class FieldGetDocumentFieldValue1(BaseModel):
     id: float
 
     checked: bool
@@ -246,17 +230,17 @@ class FieldMetaValues(BaseModel):
     value: str
 
 
-class FieldMeta7TypedDict(TypedDict):
-    type: FieldGetDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONResponseBodyType
+class FieldGetDocumentFieldFieldMetaRadioTypedDict(TypedDict):
+    type: FieldGetDocumentFieldTypeRadio
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
-    values: NotRequired[List[FieldMetaValuesTypedDict]]
+    values: NotRequired[List[FieldGetDocumentFieldValue1TypedDict]]
 
 
-class FieldMeta7(BaseModel):
-    type: FieldGetDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONResponseBodyType
+class FieldGetDocumentFieldFieldMetaRadio(BaseModel):
+    type: FieldGetDocumentFieldTypeRadio
 
     label: Optional[str] = None
 
@@ -266,17 +250,21 @@ class FieldMeta7(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    values: Optional[List[FieldMetaValues]] = None
+    values: Optional[List[FieldGetDocumentFieldValue1]] = None
 
 
-class FieldGetDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONType(
-    str, Enum
-):
+class FieldGetDocumentFieldTypeNumber(str, Enum):
     NUMBER = "number"
 
 
-class FieldMeta6TypedDict(TypedDict):
-    type: FieldGetDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONType
+class FieldGetDocumentFieldTextAlign6(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldGetDocumentFieldFieldMetaNumberTypedDict(TypedDict):
+    type: FieldGetDocumentFieldTypeNumber
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -286,10 +274,11 @@ class FieldMeta6TypedDict(TypedDict):
     min_value: NotRequired[float]
     max_value: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldGetDocumentFieldTextAlign6]
 
 
-class FieldMeta6(BaseModel):
-    type: FieldGetDocumentFieldFieldMetaDocumentsFieldsResponse200ApplicationJSONType
+class FieldGetDocumentFieldFieldMetaNumber(BaseModel):
+    type: FieldGetDocumentFieldTypeNumber
 
     label: Optional[str] = None
 
@@ -309,13 +298,23 @@ class FieldMeta6(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldGetDocumentFieldTextAlign6], pydantic.Field(alias="textAlign")
+    ] = None
 
-class FieldGetDocumentFieldFieldMetaDocumentsFieldsResponse200Type(str, Enum):
+
+class FieldGetDocumentFieldTypeText(str, Enum):
     TEXT = "text"
 
 
-class FieldMeta5TypedDict(TypedDict):
-    type: FieldGetDocumentFieldFieldMetaDocumentsFieldsResponse200Type
+class FieldGetDocumentFieldTextAlign5(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldGetDocumentFieldFieldMetaTextTypedDict(TypedDict):
+    type: FieldGetDocumentFieldTypeText
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
@@ -323,10 +322,11 @@ class FieldMeta5TypedDict(TypedDict):
     text: NotRequired[str]
     character_limit: NotRequired[float]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldGetDocumentFieldTextAlign5]
 
 
-class FieldMeta5(BaseModel):
-    type: FieldGetDocumentFieldFieldMetaDocumentsFieldsResponse200Type
+class FieldGetDocumentFieldFieldMetaText(BaseModel):
+    type: FieldGetDocumentFieldTypeText
 
     label: Optional[str] = None
 
@@ -344,22 +344,33 @@ class FieldMeta5(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldGetDocumentFieldTextAlign5], pydantic.Field(alias="textAlign")
+    ] = None
 
-class FieldGetDocumentFieldFieldMetaDocumentsFieldsResponseType(str, Enum):
+
+class FieldGetDocumentFieldTypeDate(str, Enum):
     DATE = "date"
 
 
-class FieldMeta4TypedDict(TypedDict):
-    type: FieldGetDocumentFieldFieldMetaDocumentsFieldsResponseType
+class FieldGetDocumentFieldTextAlign4(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldGetDocumentFieldFieldMetaDateTypedDict(TypedDict):
+    type: FieldGetDocumentFieldTypeDate
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldGetDocumentFieldTextAlign4]
 
 
-class FieldMeta4(BaseModel):
-    type: FieldGetDocumentFieldFieldMetaDocumentsFieldsResponseType
+class FieldGetDocumentFieldFieldMetaDate(BaseModel):
+    type: FieldGetDocumentFieldTypeDate
 
     label: Optional[str] = None
 
@@ -371,22 +382,33 @@ class FieldMeta4(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldGetDocumentFieldTextAlign4], pydantic.Field(alias="textAlign")
+    ] = None
 
-class FieldGetDocumentFieldFieldMetaDocumentsFieldsType(str, Enum):
+
+class FieldGetDocumentFieldTypeEmail(str, Enum):
     EMAIL = "email"
 
 
-class FieldMeta3TypedDict(TypedDict):
-    type: FieldGetDocumentFieldFieldMetaDocumentsFieldsType
+class FieldGetDocumentFieldTextAlign3(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldGetDocumentFieldFieldMetaEmailTypedDict(TypedDict):
+    type: FieldGetDocumentFieldTypeEmail
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldGetDocumentFieldTextAlign3]
 
 
-class FieldMeta3(BaseModel):
-    type: FieldGetDocumentFieldFieldMetaDocumentsFieldsType
+class FieldGetDocumentFieldFieldMetaEmail(BaseModel):
+    type: FieldGetDocumentFieldTypeEmail
 
     label: Optional[str] = None
 
@@ -398,22 +420,33 @@ class FieldMeta3(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldGetDocumentFieldTextAlign3], pydantic.Field(alias="textAlign")
+    ] = None
 
-class FieldGetDocumentFieldFieldMetaType(str, Enum):
+
+class FieldGetDocumentFieldTypeName(str, Enum):
     NAME = "name"
 
 
-class FieldMeta2TypedDict(TypedDict):
-    type: FieldGetDocumentFieldFieldMetaType
+class FieldGetDocumentFieldTextAlign2(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldGetDocumentFieldFieldMetaNameTypedDict(TypedDict):
+    type: FieldGetDocumentFieldTypeName
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldGetDocumentFieldTextAlign2]
 
 
-class FieldMeta2(BaseModel):
-    type: FieldGetDocumentFieldFieldMetaType
+class FieldGetDocumentFieldFieldMetaName(BaseModel):
+    type: FieldGetDocumentFieldTypeName
 
     label: Optional[str] = None
 
@@ -425,22 +458,33 @@ class FieldMeta2(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldGetDocumentFieldTextAlign2], pydantic.Field(alias="textAlign")
+    ] = None
 
-class FieldMetaType(str, Enum):
+
+class FieldGetDocumentFieldTypeInitials(str, Enum):
     INITIALS = "initials"
 
 
-class FieldMeta1TypedDict(TypedDict):
-    type: FieldMetaType
+class FieldGetDocumentFieldTextAlign1(str, Enum):
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+
+
+class FieldGetDocumentFieldFieldMetaInitialsTypedDict(TypedDict):
+    type: FieldGetDocumentFieldTypeInitials
     label: NotRequired[str]
     placeholder: NotRequired[str]
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    text_align: NotRequired[FieldGetDocumentFieldTextAlign1]
 
 
-class FieldMeta1(BaseModel):
-    type: FieldMetaType
+class FieldGetDocumentFieldFieldMetaInitials(BaseModel):
+    type: FieldGetDocumentFieldTypeInitials
 
     label: Optional[str] = None
 
@@ -452,73 +496,77 @@ class FieldMeta1(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = None
 
+    text_align: Annotated[
+        Optional[FieldGetDocumentFieldTextAlign1], pydantic.Field(alias="textAlign")
+    ] = None
 
-FieldGetDocumentFieldFieldMetaTypedDict = TypeAliasType(
-    "FieldGetDocumentFieldFieldMetaTypedDict",
+
+FieldGetDocumentFieldFieldMetaUnionTypedDict = TypeAliasType(
+    "FieldGetDocumentFieldFieldMetaUnionTypedDict",
     Union[
-        FieldMeta1TypedDict,
-        FieldMeta2TypedDict,
-        FieldMeta3TypedDict,
-        FieldMeta4TypedDict,
-        FieldMeta7TypedDict,
-        FieldMeta9TypedDict,
-        FieldMeta5TypedDict,
-        FieldMeta8TypedDict,
-        FieldMeta6TypedDict,
+        FieldGetDocumentFieldFieldMetaRadioTypedDict,
+        FieldGetDocumentFieldFieldMetaInitialsTypedDict,
+        FieldGetDocumentFieldFieldMetaNameTypedDict,
+        FieldGetDocumentFieldFieldMetaEmailTypedDict,
+        FieldGetDocumentFieldFieldMetaDateTypedDict,
+        FieldGetDocumentFieldFieldMetaDropdownTypedDict,
+        FieldGetDocumentFieldFieldMetaCheckboxTypedDict,
+        FieldGetDocumentFieldFieldMetaTextTypedDict,
+        FieldGetDocumentFieldFieldMetaNumberTypedDict,
     ],
 )
 
 
-FieldGetDocumentFieldFieldMeta = TypeAliasType(
-    "FieldGetDocumentFieldFieldMeta",
+FieldGetDocumentFieldFieldMetaUnion = TypeAliasType(
+    "FieldGetDocumentFieldFieldMetaUnion",
     Union[
-        FieldMeta1,
-        FieldMeta2,
-        FieldMeta3,
-        FieldMeta4,
-        FieldMeta7,
-        FieldMeta9,
-        FieldMeta5,
-        FieldMeta8,
-        FieldMeta6,
+        FieldGetDocumentFieldFieldMetaRadio,
+        FieldGetDocumentFieldFieldMetaInitials,
+        FieldGetDocumentFieldFieldMetaName,
+        FieldGetDocumentFieldFieldMetaEmail,
+        FieldGetDocumentFieldFieldMetaDate,
+        FieldGetDocumentFieldFieldMetaDropdown,
+        FieldGetDocumentFieldFieldMetaCheckbox,
+        FieldGetDocumentFieldFieldMetaText,
+        FieldGetDocumentFieldFieldMetaNumber,
     ],
 )
 
 
-class FieldGetDocumentFieldResponseBodyTypedDict(TypedDict):
+class FieldGetDocumentFieldResponseTypedDict(TypedDict):
     r"""Successful response"""
 
     type: FieldGetDocumentFieldType
-    id: int
+    id: float
     secondary_id: str
-    document_id: Nullable[int]
-    template_id: Nullable[int]
-    recipient_id: int
+    document_id: Nullable[float]
+    template_id: Nullable[float]
+    recipient_id: float
     page: float
     r"""The page number of the field on the document. Starts from 1."""
     custom_text: str
     inserted: bool
-    field_meta: Nullable[FieldGetDocumentFieldFieldMetaTypedDict]
+    field_meta: Nullable[FieldGetDocumentFieldFieldMetaUnionTypedDict]
     position_x: NotRequired[Any]
     position_y: NotRequired[Any]
     width: NotRequired[Any]
     height: NotRequired[Any]
 
 
-class FieldGetDocumentFieldResponseBody(BaseModel):
+class FieldGetDocumentFieldResponse(BaseModel):
     r"""Successful response"""
 
     type: FieldGetDocumentFieldType
 
-    id: int
+    id: float
 
     secondary_id: Annotated[str, pydantic.Field(alias="secondaryId")]
 
-    document_id: Annotated[Nullable[int], pydantic.Field(alias="documentId")]
+    document_id: Annotated[Nullable[float], pydantic.Field(alias="documentId")]
 
-    template_id: Annotated[Nullable[int], pydantic.Field(alias="templateId")]
+    template_id: Annotated[Nullable[float], pydantic.Field(alias="templateId")]
 
-    recipient_id: Annotated[int, pydantic.Field(alias="recipientId")]
+    recipient_id: Annotated[float, pydantic.Field(alias="recipientId")]
 
     page: float
     r"""The page number of the field on the document. Starts from 1."""
@@ -528,7 +576,7 @@ class FieldGetDocumentFieldResponseBody(BaseModel):
     inserted: bool
 
     field_meta: Annotated[
-        Nullable[FieldGetDocumentFieldFieldMeta], pydantic.Field(alias="fieldMeta")
+        Nullable[FieldGetDocumentFieldFieldMetaUnion], pydantic.Field(alias="fieldMeta")
     ]
 
     position_x: Annotated[Optional[Any], pydantic.Field(alias="positionX")] = None
@@ -549,7 +597,7 @@ class FieldGetDocumentFieldResponseBody(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)

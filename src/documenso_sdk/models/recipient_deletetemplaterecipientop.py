@@ -8,94 +8,83 @@ from typing import List, Optional
 from typing_extensions import Annotated, TypedDict
 
 
-class RecipientDeleteTemplateRecipientRequestBodyTypedDict(TypedDict):
+class RecipientDeleteTemplateRecipientRequestTypedDict(TypedDict):
     recipient_id: float
 
 
-class RecipientDeleteTemplateRecipientRequestBody(BaseModel):
+class RecipientDeleteTemplateRecipientRequest(BaseModel):
     recipient_id: Annotated[float, pydantic.Field(alias="recipientId")]
 
 
-class RecipientDeleteTemplateRecipientTemplatesRecipientsIssuesTypedDict(TypedDict):
+class RecipientDeleteTemplateRecipientInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class RecipientDeleteTemplateRecipientTemplatesRecipientsIssues(BaseModel):
+class RecipientDeleteTemplateRecipientInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class RecipientDeleteTemplateRecipientTemplatesRecipientsResponseResponseBodyData(
-    BaseModel
-):
+class RecipientDeleteTemplateRecipientInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[
-        List[RecipientDeleteTemplateRecipientTemplatesRecipientsIssues]
-    ] = None
+    issues: Optional[List[RecipientDeleteTemplateRecipientInternalServerErrorIssue]] = (
+        None
+    )
 
 
-class RecipientDeleteTemplateRecipientTemplatesRecipientsResponseResponseBody(
-    Exception
-):
+class RecipientDeleteTemplateRecipientInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: RecipientDeleteTemplateRecipientTemplatesRecipientsResponseResponseBodyData
+    data: RecipientDeleteTemplateRecipientInternalServerErrorData
 
-    def __init__(
-        self,
-        data: RecipientDeleteTemplateRecipientTemplatesRecipientsResponseResponseBodyData,
-    ):
+    def __init__(self, data: RecipientDeleteTemplateRecipientInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data,
-            RecipientDeleteTemplateRecipientTemplatesRecipientsResponseResponseBodyData,
+            self.data, RecipientDeleteTemplateRecipientInternalServerErrorData
         )
 
 
-class RecipientDeleteTemplateRecipientIssuesTypedDict(TypedDict):
+class RecipientDeleteTemplateRecipientBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class RecipientDeleteTemplateRecipientIssues(BaseModel):
+class RecipientDeleteTemplateRecipientBadRequestIssue(BaseModel):
     message: str
 
 
-class RecipientDeleteTemplateRecipientTemplatesRecipientsResponseBodyData(BaseModel):
+class RecipientDeleteTemplateRecipientBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[RecipientDeleteTemplateRecipientIssues]] = None
+    issues: Optional[List[RecipientDeleteTemplateRecipientBadRequestIssue]] = None
 
 
-class RecipientDeleteTemplateRecipientTemplatesRecipientsResponseBody(Exception):
+class RecipientDeleteTemplateRecipientBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: RecipientDeleteTemplateRecipientTemplatesRecipientsResponseBodyData
+    data: RecipientDeleteTemplateRecipientBadRequestErrorData
 
-    def __init__(
-        self, data: RecipientDeleteTemplateRecipientTemplatesRecipientsResponseBodyData
-    ):
+    def __init__(self, data: RecipientDeleteTemplateRecipientBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data,
-            RecipientDeleteTemplateRecipientTemplatesRecipientsResponseBodyData,
+            self.data, RecipientDeleteTemplateRecipientBadRequestErrorData
         )
 
 
-class RecipientDeleteTemplateRecipientResponseBodyTypedDict(TypedDict):
+class RecipientDeleteTemplateRecipientResponseTypedDict(TypedDict):
     r"""Successful response"""
 
     success: bool
 
 
-class RecipientDeleteTemplateRecipientResponseBody(BaseModel):
+class RecipientDeleteTemplateRecipientResponse(BaseModel):
     r"""Successful response"""
 
     success: bool

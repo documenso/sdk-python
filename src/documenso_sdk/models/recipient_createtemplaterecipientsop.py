@@ -16,20 +16,21 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class RecipientCreateTemplateRecipientsRole(str, Enum):
+class RecipientCreateTemplateRecipientsRoleRequestBody(str, Enum):
     CC = "CC"
     SIGNER = "SIGNER"
     VIEWER = "VIEWER"
     APPROVER = "APPROVER"
+    ASSISTANT = "ASSISTANT"
 
 
-class RecipientCreateTemplateRecipientsAccessAuth(str, Enum):
+class RecipientCreateTemplateRecipientsAccessAuthRequestBody(str, Enum):
     r"""The type of authentication required for the recipient to access the document."""
 
     ACCOUNT = "ACCOUNT"
 
 
-class RecipientCreateTemplateRecipientsActionAuth(str, Enum):
+class RecipientCreateTemplateRecipientsActionAuthRequestBody(str, Enum):
     r"""The type of authentication required for the recipient to sign the document."""
 
     ACCOUNT = "ACCOUNT"
@@ -38,36 +39,40 @@ class RecipientCreateTemplateRecipientsActionAuth(str, Enum):
     EXPLICIT_NONE = "EXPLICIT_NONE"
 
 
-class RecipientCreateTemplateRecipientsRecipientsTypedDict(TypedDict):
+class RecipientCreateTemplateRecipientsRecipientRequestBodyTypedDict(TypedDict):
     email: str
     name: str
-    role: RecipientCreateTemplateRecipientsRole
+    role: RecipientCreateTemplateRecipientsRoleRequestBody
     signing_order: NotRequired[float]
-    access_auth: NotRequired[Nullable[RecipientCreateTemplateRecipientsAccessAuth]]
+    access_auth: NotRequired[
+        Nullable[RecipientCreateTemplateRecipientsAccessAuthRequestBody]
+    ]
     r"""The type of authentication required for the recipient to access the document."""
-    action_auth: NotRequired[Nullable[RecipientCreateTemplateRecipientsActionAuth]]
+    action_auth: NotRequired[
+        Nullable[RecipientCreateTemplateRecipientsActionAuthRequestBody]
+    ]
     r"""The type of authentication required for the recipient to sign the document."""
 
 
-class RecipientCreateTemplateRecipientsRecipients(BaseModel):
+class RecipientCreateTemplateRecipientsRecipientRequestBody(BaseModel):
     email: str
 
     name: str
 
-    role: RecipientCreateTemplateRecipientsRole
+    role: RecipientCreateTemplateRecipientsRoleRequestBody
 
     signing_order: Annotated[Optional[float], pydantic.Field(alias="signingOrder")] = (
         None
     )
 
     access_auth: Annotated[
-        OptionalNullable[RecipientCreateTemplateRecipientsAccessAuth],
+        OptionalNullable[RecipientCreateTemplateRecipientsAccessAuthRequestBody],
         pydantic.Field(alias="accessAuth"),
     ] = UNSET
     r"""The type of authentication required for the recipient to access the document."""
 
     action_auth: Annotated[
-        OptionalNullable[RecipientCreateTemplateRecipientsActionAuth],
+        OptionalNullable[RecipientCreateTemplateRecipientsActionAuthRequestBody],
         pydantic.Field(alias="actionAuth"),
     ] = UNSET
     r"""The type of authentication required for the recipient to sign the document."""
@@ -82,7 +87,7 @@ class RecipientCreateTemplateRecipientsRecipients(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -103,95 +108,85 @@ class RecipientCreateTemplateRecipientsRecipients(BaseModel):
         return m
 
 
-class RecipientCreateTemplateRecipientsRequestBodyTypedDict(TypedDict):
+class RecipientCreateTemplateRecipientsRequestTypedDict(TypedDict):
     template_id: float
-    recipients: List[RecipientCreateTemplateRecipientsRecipientsTypedDict]
+    recipients: List[RecipientCreateTemplateRecipientsRecipientRequestBodyTypedDict]
 
 
-class RecipientCreateTemplateRecipientsRequestBody(BaseModel):
+class RecipientCreateTemplateRecipientsRequest(BaseModel):
     template_id: Annotated[float, pydantic.Field(alias="templateId")]
 
-    recipients: List[RecipientCreateTemplateRecipientsRecipients]
+    recipients: List[RecipientCreateTemplateRecipientsRecipientRequestBody]
 
 
-class RecipientCreateTemplateRecipientsTemplatesRecipientsIssuesTypedDict(TypedDict):
+class RecipientCreateTemplateRecipientsInternalServerErrorIssueTypedDict(TypedDict):
     message: str
 
 
-class RecipientCreateTemplateRecipientsTemplatesRecipientsIssues(BaseModel):
+class RecipientCreateTemplateRecipientsInternalServerErrorIssue(BaseModel):
     message: str
 
 
-class RecipientCreateTemplateRecipientsTemplatesRecipientsResponseResponseBodyData(
-    BaseModel
-):
+class RecipientCreateTemplateRecipientsInternalServerErrorData(BaseModel):
     message: str
 
     code: str
 
     issues: Optional[
-        List[RecipientCreateTemplateRecipientsTemplatesRecipientsIssues]
+        List[RecipientCreateTemplateRecipientsInternalServerErrorIssue]
     ] = None
 
 
-class RecipientCreateTemplateRecipientsTemplatesRecipientsResponseResponseBody(
-    Exception
-):
+class RecipientCreateTemplateRecipientsInternalServerError(Exception):
     r"""Internal server error"""
 
-    data: RecipientCreateTemplateRecipientsTemplatesRecipientsResponseResponseBodyData
+    data: RecipientCreateTemplateRecipientsInternalServerErrorData
 
-    def __init__(
-        self,
-        data: RecipientCreateTemplateRecipientsTemplatesRecipientsResponseResponseBodyData,
-    ):
+    def __init__(self, data: RecipientCreateTemplateRecipientsInternalServerErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data,
-            RecipientCreateTemplateRecipientsTemplatesRecipientsResponseResponseBodyData,
+            self.data, RecipientCreateTemplateRecipientsInternalServerErrorData
         )
 
 
-class RecipientCreateTemplateRecipientsIssuesTypedDict(TypedDict):
+class RecipientCreateTemplateRecipientsBadRequestIssueTypedDict(TypedDict):
     message: str
 
 
-class RecipientCreateTemplateRecipientsIssues(BaseModel):
+class RecipientCreateTemplateRecipientsBadRequestIssue(BaseModel):
     message: str
 
 
-class RecipientCreateTemplateRecipientsTemplatesRecipientsResponseBodyData(BaseModel):
+class RecipientCreateTemplateRecipientsBadRequestErrorData(BaseModel):
     message: str
 
     code: str
 
-    issues: Optional[List[RecipientCreateTemplateRecipientsIssues]] = None
+    issues: Optional[List[RecipientCreateTemplateRecipientsBadRequestIssue]] = None
 
 
-class RecipientCreateTemplateRecipientsTemplatesRecipientsResponseBody(Exception):
+class RecipientCreateTemplateRecipientsBadRequestError(Exception):
     r"""Invalid input data"""
 
-    data: RecipientCreateTemplateRecipientsTemplatesRecipientsResponseBodyData
+    data: RecipientCreateTemplateRecipientsBadRequestErrorData
 
-    def __init__(
-        self, data: RecipientCreateTemplateRecipientsTemplatesRecipientsResponseBodyData
-    ):
+    def __init__(self, data: RecipientCreateTemplateRecipientsBadRequestErrorData):
         self.data = data
 
     def __str__(self) -> str:
         return utils.marshal_json(
-            self.data,
-            RecipientCreateTemplateRecipientsTemplatesRecipientsResponseBodyData,
+            self.data, RecipientCreateTemplateRecipientsBadRequestErrorData
         )
 
 
-class RecipientCreateTemplateRecipientsTemplatesRecipientsRole(str, Enum):
+class RecipientCreateTemplateRecipientsRoleResponse(str, Enum):
     CC = "CC"
     SIGNER = "SIGNER"
     VIEWER = "VIEWER"
     APPROVER = "APPROVER"
+    ASSISTANT = "ASSISTANT"
 
 
 class RecipientCreateTemplateRecipientsReadStatus(str, Enum):
@@ -210,13 +205,13 @@ class RecipientCreateTemplateRecipientsSendStatus(str, Enum):
     SENT = "SENT"
 
 
-class RecipientCreateTemplateRecipientsTemplatesRecipientsAccessAuth(str, Enum):
+class RecipientCreateTemplateRecipientsAccessAuthResponse(str, Enum):
     r"""The type of authentication required for the recipient to access the document."""
 
     ACCOUNT = "ACCOUNT"
 
 
-class RecipientCreateTemplateRecipientsTemplatesRecipientsActionAuth(str, Enum):
+class RecipientCreateTemplateRecipientsActionAuthResponse(str, Enum):
     r"""The type of authentication required for the recipient to sign the document."""
 
     ACCOUNT = "ACCOUNT"
@@ -226,25 +221,21 @@ class RecipientCreateTemplateRecipientsTemplatesRecipientsActionAuth(str, Enum):
 
 
 class RecipientCreateTemplateRecipientsAuthOptionsTypedDict(TypedDict):
-    access_auth: Nullable[
-        RecipientCreateTemplateRecipientsTemplatesRecipientsAccessAuth
-    ]
+    access_auth: Nullable[RecipientCreateTemplateRecipientsAccessAuthResponse]
     r"""The type of authentication required for the recipient to access the document."""
-    action_auth: Nullable[
-        RecipientCreateTemplateRecipientsTemplatesRecipientsActionAuth
-    ]
+    action_auth: Nullable[RecipientCreateTemplateRecipientsActionAuthResponse]
     r"""The type of authentication required for the recipient to sign the document."""
 
 
 class RecipientCreateTemplateRecipientsAuthOptions(BaseModel):
     access_auth: Annotated[
-        Nullable[RecipientCreateTemplateRecipientsTemplatesRecipientsAccessAuth],
+        Nullable[RecipientCreateTemplateRecipientsAccessAuthResponse],
         pydantic.Field(alias="accessAuth"),
     ]
     r"""The type of authentication required for the recipient to access the document."""
 
     action_auth: Annotated[
-        Nullable[RecipientCreateTemplateRecipientsTemplatesRecipientsActionAuth],
+        Nullable[RecipientCreateTemplateRecipientsActionAuthResponse],
         pydantic.Field(alias="actionAuth"),
     ]
     r"""The type of authentication required for the recipient to sign the document."""
@@ -259,7 +250,7 @@ class RecipientCreateTemplateRecipientsAuthOptions(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -280,16 +271,14 @@ class RecipientCreateTemplateRecipientsAuthOptions(BaseModel):
         return m
 
 
-class RecipientCreateTemplateRecipientsTemplatesRecipientsRecipientsTypedDict(
-    TypedDict
-):
-    role: RecipientCreateTemplateRecipientsTemplatesRecipientsRole
+class RecipientCreateTemplateRecipientsRecipientResponseTypedDict(TypedDict):
+    role: RecipientCreateTemplateRecipientsRoleResponse
     read_status: RecipientCreateTemplateRecipientsReadStatus
     signing_status: RecipientCreateTemplateRecipientsSigningStatus
     send_status: RecipientCreateTemplateRecipientsSendStatus
-    id: int
-    document_id: Nullable[int]
-    template_id: Nullable[int]
+    id: float
+    document_id: Nullable[float]
+    template_id: Nullable[float]
     email: str
     name: str
     token: str
@@ -302,8 +291,8 @@ class RecipientCreateTemplateRecipientsTemplatesRecipientsRecipientsTypedDict(
     rejection_reason: Nullable[str]
 
 
-class RecipientCreateTemplateRecipientsTemplatesRecipientsRecipients(BaseModel):
-    role: RecipientCreateTemplateRecipientsTemplatesRecipientsRole
+class RecipientCreateTemplateRecipientsRecipientResponse(BaseModel):
+    role: RecipientCreateTemplateRecipientsRoleResponse
 
     read_status: Annotated[
         RecipientCreateTemplateRecipientsReadStatus, pydantic.Field(alias="readStatus")
@@ -318,11 +307,11 @@ class RecipientCreateTemplateRecipientsTemplatesRecipientsRecipients(BaseModel):
         RecipientCreateTemplateRecipientsSendStatus, pydantic.Field(alias="sendStatus")
     ]
 
-    id: int
+    id: float
 
-    document_id: Annotated[Nullable[int], pydantic.Field(alias="documentId")]
+    document_id: Annotated[Nullable[float], pydantic.Field(alias="documentId")]
 
-    template_id: Annotated[Nullable[int], pydantic.Field(alias="templateId")]
+    template_id: Annotated[Nullable[float], pydantic.Field(alias="templateId")]
 
     email: str
 
@@ -367,7 +356,7 @@ class RecipientCreateTemplateRecipientsTemplatesRecipientsRecipients(BaseModel):
 
         m = {}
 
-        for n, f in self.model_fields.items():
+        for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
             serialized.pop(k, None)
@@ -388,15 +377,13 @@ class RecipientCreateTemplateRecipientsTemplatesRecipientsRecipients(BaseModel):
         return m
 
 
-class RecipientCreateTemplateRecipientsResponseBodyTypedDict(TypedDict):
+class RecipientCreateTemplateRecipientsResponseTypedDict(TypedDict):
     r"""Successful response"""
 
-    recipients: List[
-        RecipientCreateTemplateRecipientsTemplatesRecipientsRecipientsTypedDict
-    ]
+    recipients: List[RecipientCreateTemplateRecipientsRecipientResponseTypedDict]
 
 
-class RecipientCreateTemplateRecipientsResponseBody(BaseModel):
+class RecipientCreateTemplateRecipientsResponse(BaseModel):
     r"""Successful response"""
 
-    recipients: List[RecipientCreateTemplateRecipientsTemplatesRecipientsRecipients]
+    recipients: List[RecipientCreateTemplateRecipientsRecipientResponse]
