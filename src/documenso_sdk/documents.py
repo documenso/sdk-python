@@ -106,6 +106,7 @@ class Documents(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="document-findDocuments",
                 oauth2_scopes=[],
@@ -240,6 +241,7 @@ class Documents(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="document-findDocuments",
                 oauth2_scopes=[],
@@ -351,6 +353,7 @@ class Documents(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="document-getDocumentWithDetailsById",
                 oauth2_scopes=[],
@@ -471,6 +474,7 @@ class Documents(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="document-getDocumentWithDetailsById",
                 oauth2_scopes=[],
@@ -637,6 +641,7 @@ class Documents(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="document-createDocumentTemporary",
                 oauth2_scopes=[],
@@ -794,6 +799,7 @@ class Documents(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="document-createDocumentTemporary",
                 oauth2_scopes=[],
@@ -926,6 +932,7 @@ class Documents(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="document-updateDocument",
                 oauth2_scopes=[],
@@ -1053,6 +1060,7 @@ class Documents(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="document-updateDocument",
                 oauth2_scopes=[],
@@ -1160,6 +1168,7 @@ class Documents(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="document-deleteDocument",
                 oauth2_scopes=[],
@@ -1267,6 +1276,7 @@ class Documents(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="document-deleteDocument",
                 oauth2_scopes=[],
@@ -1379,6 +1389,7 @@ class Documents(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="document-moveDocumentToTeam",
                 oauth2_scopes=[],
@@ -1493,6 +1504,7 @@ class Documents(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="document-moveDocumentToTeam",
                 oauth2_scopes=[],
@@ -1614,6 +1626,7 @@ class Documents(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="document-sendDocument",
                 oauth2_scopes=[],
@@ -1733,6 +1746,7 @@ class Documents(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="document-sendDocument",
                 oauth2_scopes=[],
@@ -1845,6 +1859,7 @@ class Documents(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="document-resendDocument",
                 oauth2_scopes=[],
@@ -1957,6 +1972,7 @@ class Documents(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="document-resendDocument",
                 oauth2_scopes=[],
@@ -2064,6 +2080,7 @@ class Documents(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="document-duplicateDocument",
                 oauth2_scopes=[],
@@ -2173,6 +2190,7 @@ class Documents(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="document-duplicateDocument",
                 oauth2_scopes=[],

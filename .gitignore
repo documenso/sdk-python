@@ -1,3 +1,6 @@
+**/__pycache__/
+**/.speakeasy/temp/
+**/.speakeasy/logs/
 .venv/
 venv/
 src/*.egg-info/

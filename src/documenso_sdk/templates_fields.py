@@ -79,6 +79,7 @@ class TemplatesFields(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-createTemplateField",
                 oauth2_scopes=[],
@@ -196,6 +197,7 @@ class TemplatesFields(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-createTemplateField",
                 oauth2_scopes=[],
@@ -302,6 +304,7 @@ class TemplatesFields(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-getTemplateField",
                 oauth2_scopes=[],
@@ -413,6 +416,7 @@ class TemplatesFields(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-getTemplateField",
                 oauth2_scopes=[],
@@ -535,6 +539,7 @@ class TemplatesFields(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-createTemplateFields",
                 oauth2_scopes=[],
@@ -654,6 +659,7 @@ class TemplatesFields(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-createTemplateFields",
                 oauth2_scopes=[],
@@ -773,6 +779,7 @@ class TemplatesFields(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-updateTemplateField",
                 oauth2_scopes=[],
@@ -890,6 +897,7 @@ class TemplatesFields(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-updateTemplateField",
                 oauth2_scopes=[],
@@ -1007,6 +1015,7 @@ class TemplatesFields(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-updateTemplateFields",
                 oauth2_scopes=[],
@@ -1126,6 +1135,7 @@ class TemplatesFields(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-updateTemplateFields",
                 oauth2_scopes=[],
@@ -1235,6 +1245,7 @@ class TemplatesFields(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-deleteTemplateField",
                 oauth2_scopes=[],
@@ -1342,6 +1353,7 @@ class TemplatesFields(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-deleteTemplateField",
                 oauth2_scopes=[],

@@ -312,6 +312,7 @@ Some of the endpoints in this SDK support retries. If you use the SDK without an
 
 To change the default retry strategy for a single API call, simply provide a `RetryConfig` object to the call:
 ```python
+import documenso_sdk
 from documenso_sdk import Documenso
 from documenso_sdk.utils import BackoffStrategy, RetryConfig
 import os
@@ -321,7 +322,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.find(,
+    res = documenso.documents.find(order_by_direction=documenso_sdk.OrderByDirection.DESC,
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
     # Handle response
@@ -331,6 +332,7 @@ with Documenso(
 
 If you'd like to override the default retry strategy for all operations that support retries, you can use the `retry_config` optional parameter when initializing the SDK:
 ```python
+import documenso_sdk
 from documenso_sdk import Documenso
 from documenso_sdk.utils import BackoffStrategy, RetryConfig
 import os
@@ -341,7 +343,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.find()
+    res = documenso.documents.find(order_by_direction=documenso_sdk.OrderByDirection.DESC)
 
     # Handle response
     print(res)
@@ -375,6 +377,7 @@ When custom error responses are specified for an operation, the SDK may also rai
 ### Example
 
 ```python
+import documenso_sdk
 from documenso_sdk import Documenso, models
 import os
 
@@ -385,7 +388,7 @@ with Documenso(
     res = None
     try:
 
-        res = documenso.documents.find()
+        res = documenso.documents.find(order_by_direction=documenso_sdk.OrderByDirection.DESC)
 
         # Handle response
         print(res)
@@ -412,6 +415,7 @@ with Documenso(
 
 The default server can be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
 ```python
+import documenso_sdk
 from documenso_sdk import Documenso
 import os
 
@@ -421,7 +425,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.find()
+    res = documenso.documents.find(order_by_direction=documenso_sdk.OrderByDirection.DESC)
 
     # Handle response
     print(res)

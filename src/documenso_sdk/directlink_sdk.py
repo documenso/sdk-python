@@ -78,6 +78,7 @@ class DirectLinkSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-createTemplateDirectLink",
                 oauth2_scopes=[],
@@ -200,6 +201,7 @@ class DirectLinkSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-createTemplateDirectLink",
                 oauth2_scopes=[],
@@ -319,6 +321,7 @@ class DirectLinkSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-deleteTemplateDirectLink",
                 oauth2_scopes=[],
@@ -438,6 +441,7 @@ class DirectLinkSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-deleteTemplateDirectLink",
                 oauth2_scopes=[],
@@ -560,6 +564,7 @@ class DirectLinkSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-toggleTemplateDirectLink",
                 oauth2_scopes=[],
@@ -682,6 +687,7 @@ class DirectLinkSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-toggleTemplateDirectLink",
                 oauth2_scopes=[],

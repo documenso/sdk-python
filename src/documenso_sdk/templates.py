@@ -95,6 +95,7 @@ class Templates(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-findTemplates",
                 oauth2_scopes=[],
@@ -215,6 +216,7 @@ class Templates(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-findTemplates",
                 oauth2_scopes=[],
@@ -324,6 +326,7 @@ class Templates(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-getTemplateById",
                 oauth2_scopes=[],
@@ -433,6 +436,7 @@ class Templates(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-getTemplateById",
                 oauth2_scopes=[],
@@ -565,6 +569,7 @@ class Templates(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-updateTemplate",
                 oauth2_scopes=[],
@@ -692,6 +697,7 @@ class Templates(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-updateTemplate",
                 oauth2_scopes=[],
@@ -799,6 +805,7 @@ class Templates(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-duplicateTemplate",
                 oauth2_scopes=[],
@@ -908,6 +915,7 @@ class Templates(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-duplicateTemplate",
                 oauth2_scopes=[],
@@ -1017,6 +1025,7 @@ class Templates(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-deleteTemplate",
                 oauth2_scopes=[],
@@ -1124,6 +1133,7 @@ class Templates(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-deleteTemplate",
                 oauth2_scopes=[],
@@ -1261,6 +1271,7 @@ class Templates(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-createDocumentFromTemplate",
                 oauth2_scopes=[],
@@ -1404,6 +1415,7 @@ class Templates(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-createDocumentFromTemplate",
                 oauth2_scopes=[],
@@ -1522,6 +1534,7 @@ class Templates(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-moveTemplateToTeam",
                 oauth2_scopes=[],
@@ -1636,6 +1649,7 @@ class Templates(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-moveTemplateToTeam",
                 oauth2_scopes=[],

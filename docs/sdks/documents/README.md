@@ -22,6 +22,7 @@ Find documents based on a search criteria
 ### Example Usage
 
 ```python
+import documenso_sdk
 from documenso_sdk import Documenso
 import os
 
@@ -30,7 +31,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.find()
+    res = documenso.documents.find(order_by_direction=documenso_sdk.OrderByDirection.DESC)
 
     # Handle response
     print(res)
@@ -79,7 +80,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.get(document_id=7003.47)
+    res = documenso.documents.get(document_id=7491.86)
 
     # Handle response
     print(res)
@@ -169,7 +170,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.update(document_id=8574.78)
+    res = documenso.documents.update(document_id=9701.92)
 
     # Handle response
     print(res)
@@ -212,7 +213,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.delete(document_id=5459.07)
+    res = documenso.documents.delete(document_id=4054.62)
 
     # Handle response
     print(res)
@@ -253,7 +254,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.move_to_team(document_id=8301.72, team_id=6724.78)
+    res = documenso.documents.move_to_team(document_id=7184.15, team_id=4855.19)
 
     # Handle response
     print(res)
@@ -295,7 +296,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.distribute(document_id=4115.92)
+    res = documenso.documents.distribute(document_id=7930.82)
 
     # Handle response
     print(res)
@@ -337,9 +338,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.redistribute(document_id=5758.65, recipients=[
-
-    ])
+    res = documenso.documents.redistribute(document_id=2824.22, recipients=[])
 
     # Handle response
     print(res)
@@ -381,7 +380,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.duplicate(document_id=3523.11)
+    res = documenso.documents.duplicate(document_id=309.05)
 
     # Handle response
     print(res)

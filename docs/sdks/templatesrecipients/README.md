@@ -27,7 +27,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.templates.recipients.get(recipient_id=7003.47)
+    res = documenso.templates.recipients.get(recipient_id=9436.42)
 
     # Handle response
     print(res)
@@ -70,10 +70,10 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.templates.recipients.create(template_id=4865.89, recipient={
-        "email": "Haylie_Bernhard95@yahoo.com",
+    res = documenso.templates.recipients.create(template_id=5712.95, recipient={
+        "email": "Gerhard88@yahoo.com",
         "name": "<value>",
-        "role": documenso_sdk.RecipientCreateTemplateRecipientRoleRequestBody.CC,
+        "role": documenso_sdk.RecipientCreateTemplateRecipientRoleRequestBody.SIGNER,
     })
 
     # Handle response
@@ -108,7 +108,6 @@ Create multiple recipients for a template.
 ### Example Usage
 
 ```python
-import documenso_sdk
 from documenso_sdk import Documenso
 import os
 
@@ -117,18 +116,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.templates.recipients.create_many(template_id=5158.41, recipients=[
-        {
-            "email": "Demetrius.Sanford35@hotmail.com",
-            "name": "<value>",
-            "role": documenso_sdk.RecipientCreateTemplateRecipientsRoleRequestBody.APPROVER,
-        },
-        {
-            "email": "Lyla50@yahoo.com",
-            "name": "<value>",
-            "role": documenso_sdk.RecipientCreateTemplateRecipientsRoleRequestBody.APPROVER,
-        },
-    ])
+    res = documenso.templates.recipients.create_many(template_id=5642.48, recipients=[])
 
     # Handle response
     print(res)
@@ -170,8 +158,8 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.templates.recipients.update(template_id=8574.78, recipient={
-        "id": 5971.29,
+    res = documenso.templates.recipients.update(template_id=2984.61, recipient={
+        "id": 8617.99,
     })
 
     # Handle response
@@ -214,12 +202,9 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.templates.recipients.update_many(template_id=4057.69, recipients=[
+    res = documenso.templates.recipients.update_many(template_id=5597.58, recipients=[
         {
-            "id": 5359.16,
-        },
-        {
-            "id": 8982.15,
+            "id": 1630.42,
         },
     ])
 
@@ -263,7 +248,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.templates.recipients.delete(recipient_id=5459.07)
+    res = documenso.templates.recipients.delete(recipient_id=312.69)
 
     # Handle response
     print(res)

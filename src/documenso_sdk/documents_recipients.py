@@ -68,6 +68,7 @@ class DocumentsRecipients(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-getDocumentRecipient",
                 oauth2_scopes=[],
@@ -184,6 +185,7 @@ class DocumentsRecipients(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-getDocumentRecipient",
                 oauth2_scopes=[],
@@ -315,6 +317,7 @@ class DocumentsRecipients(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-createDocumentRecipient",
                 oauth2_scopes=[],
@@ -442,6 +445,7 @@ class DocumentsRecipients(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-createDocumentRecipient",
                 oauth2_scopes=[],
@@ -570,6 +574,7 @@ class DocumentsRecipients(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-createDocumentRecipients",
                 oauth2_scopes=[],
@@ -698,6 +703,7 @@ class DocumentsRecipients(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-createDocumentRecipients",
                 oauth2_scopes=[],
@@ -825,6 +831,7 @@ class DocumentsRecipients(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-updateDocumentRecipient",
                 oauth2_scopes=[],
@@ -952,6 +959,7 @@ class DocumentsRecipients(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-updateDocumentRecipient",
                 oauth2_scopes=[],
@@ -1080,6 +1088,7 @@ class DocumentsRecipients(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-updateDocumentRecipients",
                 oauth2_scopes=[],
@@ -1208,6 +1217,7 @@ class DocumentsRecipients(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-updateDocumentRecipients",
                 oauth2_scopes=[],
@@ -1325,6 +1335,7 @@ class DocumentsRecipients(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-deleteDocumentRecipient",
                 oauth2_scopes=[],
@@ -1442,6 +1453,7 @@ class DocumentsRecipients(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-deleteDocumentRecipient",
                 oauth2_scopes=[],
