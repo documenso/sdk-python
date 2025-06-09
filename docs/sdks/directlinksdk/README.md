@@ -24,7 +24,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.templates.direct_link.create(template_id=4865.89)
+    res = documenso.templates.direct_link.create(template_id=5094.31)
 
     # Handle response
     print(res)
@@ -66,7 +66,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.templates.direct_link.delete(template_id=5459.07)
+    res = documenso.templates.direct_link.delete(template_id=9950.03)
 
     # Handle response
     print(res)
@@ -107,7 +107,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.templates.direct_link.toggle(template_id=722.9, enabled=True)
+    res = documenso.templates.direct_link.toggle(template_id=6583.54, enabled=False)
 
     # Handle response
     print(res)

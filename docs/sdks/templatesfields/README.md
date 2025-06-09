@@ -28,14 +28,14 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.templates.fields.create(template_id=4865.89, field={
-        "type": documenso_sdk.FieldCreateTemplateFieldTypeNumberRequestBody1.NUMBER,
-        "recipient_id": 4174.58,
-        "page_number": 1343.65,
-        "page_x": 690.25,
-        "page_y": 7964.74,
-        "width": 9510.62,
-        "height": 0.86,
+    res = documenso.templates.fields.create(template_id=1203.71, field={
+        "type": documenso_sdk.FieldCreateTemplateFieldTypeDateRequestBody1.DATE,
+        "recipient_id": 2738.54,
+        "page_number": 5735.12,
+        "page_x": 2936.28,
+        "page_y": 8594.41,
+        "width": 7589.39,
+        "height": 3122.23,
     })
 
     # Handle response
@@ -78,7 +78,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.templates.fields.get(field_id=7003.47)
+    res = documenso.templates.fields.get(field_id=1152.82)
 
     # Handle response
     print(res)
@@ -121,24 +121,15 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.templates.fields.create_many(template_id=5158.41, fields=[
+    res = documenso.templates.fields.create_many(template_id=586.2, fields=[
         {
-            "type": documenso_sdk.FieldCreateTemplateFieldsTypeCheckboxRequestBody1.CHECKBOX,
-            "recipient_id": 2516.72,
-            "page_number": 2304.17,
-            "page_x": 7760.32,
-            "page_y": 3376.66,
-            "width": 3566.94,
-            "height": 2768.94,
-        },
-        {
-            "type": documenso_sdk.FieldCreateTemplateFieldsTypeNumberRequestBody1.NUMBER,
-            "recipient_id": 5689.64,
-            "page_number": 6483.69,
-            "page_x": 7271.79,
-            "page_y": 1891.56,
-            "width": 7263.21,
-            "height": 5043.41,
+            "type": documenso_sdk.FieldCreateTemplateFieldsTypeSignature.SIGNATURE,
+            "recipient_id": 6990.12,
+            "page_number": 3472.45,
+            "page_x": 4747.87,
+            "page_y": 1673.94,
+            "width": 7215.37,
+            "height": 9417.43,
         },
     ])
 
@@ -183,9 +174,9 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.templates.fields.update(template_id=8574.78, field={
+    res = documenso.templates.fields.update(template_id=5083.07, field={
         "type": documenso_sdk.FieldUpdateTemplateFieldTypeTextRequestBody1.TEXT,
-        "id": 3446.2,
+        "id": 1792.29,
     })
 
     # Handle response
@@ -229,14 +220,10 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.templates.fields.update_many(template_id=4057.69, fields=[
+    res = documenso.templates.fields.update_many(template_id=3969.1, fields=[
         {
-            "type": documenso_sdk.FieldUpdateTemplateFieldsTypeDateRequestBody1.DATE,
-            "id": 8982.15,
-        },
-        {
-            "type": documenso_sdk.FieldUpdateTemplateFieldsTypeNameRequestBody1.NAME,
-            "id": 310.19,
+            "type": documenso_sdk.FieldUpdateTemplateFieldsTypeDropdownRequestBody1.DROPDOWN,
+            "id": 2460.72,
         },
     ])
 
@@ -280,7 +267,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.templates.fields.delete(field_id=5459.07)
+    res = documenso.templates.fields.delete(field_id=7996.49)
 
     # Handle response
     print(res)

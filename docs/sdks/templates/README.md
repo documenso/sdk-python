@@ -73,7 +73,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.templates.get(template_id=7003.47)
+    res = documenso.templates.get(template_id=2128.54)
 
     # Handle response
     print(res)
@@ -115,7 +115,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.templates.update(template_id=8574.78)
+    res = documenso.templates.update(template_id=9404.77)
 
     # Handle response
     print(res)
@@ -158,7 +158,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.templates.duplicate(template_id=3523.11)
+    res = documenso.templates.duplicate(template_id=2490.16)
 
     # Handle response
     print(res)
@@ -199,7 +199,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.templates.delete(template_id=5459.07)
+    res = documenso.templates.delete(template_id=536.89)
 
     # Handle response
     print(res)
@@ -240,16 +240,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.templates.use(template_id=6626.9, recipients=[
-        {
-            "id": 6473.53,
-            "email": "August_Schmeler68@yahoo.com",
-        },
-        {
-            "id": 3772.31,
-            "email": "Angeline.Purdy@gmail.com",
-        },
-    ])
+    res = documenso.templates.use(template_id=7392.96, recipients=[])
 
     # Handle response
     print(res)
@@ -294,7 +285,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.templates.move_to_team(template_id=8301.72, team_id=6724.78)
+    res = documenso.templates.move_to_team(template_id=9124, team_id=6200.73)
 
     # Handle response
     print(res)

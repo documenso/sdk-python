@@ -27,7 +27,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.fields.get(field_id=7003.47)
+    res = documenso.documents.fields.get(field_id=6077.81)
 
     # Handle response
     print(res)
@@ -70,14 +70,14 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.fields.create(document_id=4865.89, field={
-        "type": documenso_sdk.FieldCreateDocumentFieldTypeNumberRequestBody1.NUMBER,
-        "recipient_id": 4174.58,
-        "page_number": 1343.65,
-        "page_x": 690.25,
-        "page_y": 7964.74,
-        "width": 9510.62,
-        "height": 0.86,
+    res = documenso.documents.fields.create(document_id=8001.93, field={
+        "type": documenso_sdk.FieldCreateDocumentFieldTypeNameRequestBody1.NAME,
+        "recipient_id": 2564.68,
+        "page_number": 791.77,
+        "page_x": 7845.22,
+        "page_y": 6843.16,
+        "width": 3932.15,
+        "height": 8879.89,
     })
 
     # Handle response
@@ -121,24 +121,15 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.fields.create_many(document_id=5158.41, fields=[
+    res = documenso.documents.fields.create_many(document_id=6257.51, fields=[
         {
-            "type": documenso_sdk.FieldCreateDocumentFieldsTypeCheckboxRequestBody1.CHECKBOX,
-            "recipient_id": 2516.72,
-            "page_number": 2304.17,
-            "page_x": 7760.32,
-            "page_y": 3376.66,
-            "width": 3566.94,
-            "height": 2768.94,
-        },
-        {
-            "type": documenso_sdk.FieldCreateDocumentFieldsTypeNumberRequestBody1.NUMBER,
-            "recipient_id": 5689.64,
-            "page_number": 6483.69,
-            "page_x": 7271.79,
-            "page_y": 1891.56,
-            "width": 7263.21,
-            "height": 5043.41,
+            "type": documenso_sdk.FieldCreateDocumentFieldsTypeFreeSignature.FREE_SIGNATURE,
+            "recipient_id": 679.35,
+            "page_number": 5914.59,
+            "page_x": 7253.11,
+            "page_y": 8426.91,
+            "width": 8995.55,
+            "height": 9808.97,
         },
     ])
 
@@ -183,9 +174,9 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.fields.update(document_id=8574.78, field={
-        "type": documenso_sdk.FieldUpdateDocumentFieldTypeTextRequestBody1.TEXT,
-        "id": 3446.2,
+    res = documenso.documents.fields.update(document_id=5956.26, field={
+        "type": documenso_sdk.FieldUpdateDocumentFieldTypeFreeSignature.FREE_SIGNATURE,
+        "id": 6955.16,
     })
 
     # Handle response
@@ -220,7 +211,6 @@ Update multiple fields for a document.
 ### Example Usage
 
 ```python
-import documenso_sdk
 from documenso_sdk import Documenso
 import os
 
@@ -229,16 +219,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.fields.update_many(document_id=4057.69, fields=[
-        {
-            "type": documenso_sdk.FieldUpdateDocumentFieldsTypeDateRequestBody1.DATE,
-            "id": 8982.15,
-        },
-        {
-            "type": documenso_sdk.FieldUpdateDocumentFieldsTypeNameRequestBody1.NAME,
-            "id": 310.19,
-        },
-    ])
+    res = documenso.documents.fields.update_many(document_id=9317.43, fields=[])
 
     # Handle response
     print(res)
@@ -280,7 +261,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.fields.delete(field_id=5459.07)
+    res = documenso.documents.fields.delete(field_id=4748.27)
 
     # Handle response
     print(res)

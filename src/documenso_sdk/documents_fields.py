@@ -68,6 +68,7 @@ class DocumentsFields(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-getDocumentField",
                 oauth2_scopes=[],
@@ -179,6 +180,7 @@ class DocumentsFields(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-getDocumentField",
                 oauth2_scopes=[],
@@ -301,6 +303,7 @@ class DocumentsFields(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-createDocumentField",
                 oauth2_scopes=[],
@@ -418,6 +421,7 @@ class DocumentsFields(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-createDocumentField",
                 oauth2_scopes=[],
@@ -535,6 +539,7 @@ class DocumentsFields(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-createDocumentFields",
                 oauth2_scopes=[],
@@ -654,6 +659,7 @@ class DocumentsFields(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-createDocumentFields",
                 oauth2_scopes=[],
@@ -773,6 +779,7 @@ class DocumentsFields(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-updateDocumentField",
                 oauth2_scopes=[],
@@ -890,6 +897,7 @@ class DocumentsFields(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-updateDocumentField",
                 oauth2_scopes=[],
@@ -1007,6 +1015,7 @@ class DocumentsFields(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-updateDocumentFields",
                 oauth2_scopes=[],
@@ -1126,6 +1135,7 @@ class DocumentsFields(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-updateDocumentFields",
                 oauth2_scopes=[],
@@ -1235,6 +1245,7 @@ class DocumentsFields(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-deleteDocumentField",
                 oauth2_scopes=[],
@@ -1342,6 +1353,7 @@ class DocumentsFields(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-deleteDocumentField",
                 oauth2_scopes=[],

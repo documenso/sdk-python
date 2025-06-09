@@ -27,7 +27,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.recipients.get(recipient_id=7003.47)
+    res = documenso.documents.recipients.get(recipient_id=874.3)
 
     # Handle response
     print(res)
@@ -70,10 +70,10 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.recipients.create(document_id=4865.89, recipient={
-        "email": "Haylie_Bernhard95@yahoo.com",
+    res = documenso.documents.recipients.create(document_id=3058.31, recipient={
+        "email": "Ila.Steuber@yahoo.com",
         "name": "<value>",
-        "role": documenso_sdk.RecipientCreateDocumentRecipientRoleRequestBody.CC,
+        "role": documenso_sdk.RecipientCreateDocumentRecipientRoleRequestBody.ASSISTANT,
     })
 
     # Handle response
@@ -117,16 +117,11 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.recipients.create_many(document_id=5158.41, recipients=[
+    res = documenso.documents.recipients.create_many(document_id=9983.95, recipients=[
         {
-            "email": "Demetrius.Sanford35@hotmail.com",
+            "email": "Roosevelt_Baumbach@yahoo.com",
             "name": "<value>",
-            "role": documenso_sdk.RecipientCreateDocumentRecipientsRoleRequestBody.APPROVER,
-        },
-        {
-            "email": "Lyla50@yahoo.com",
-            "name": "<value>",
-            "role": documenso_sdk.RecipientCreateDocumentRecipientsRoleRequestBody.APPROVER,
+            "role": documenso_sdk.RecipientCreateDocumentRecipientsRoleRequestBody.CC,
         },
     ])
 
@@ -170,8 +165,8 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.recipients.update(document_id=8574.78, recipient={
-        "id": 5971.29,
+    res = documenso.documents.recipients.update(document_id=7045.62, recipient={
+        "id": 2224.05,
     })
 
     # Handle response
@@ -214,14 +209,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.recipients.update_many(document_id=4057.69, recipients=[
-        {
-            "id": 5359.16,
-        },
-        {
-            "id": 8982.15,
-        },
-    ])
+    res = documenso.documents.recipients.update_many(document_id=3189.76, recipients=[])
 
     # Handle response
     print(res)
@@ -263,7 +251,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.recipients.delete(recipient_id=5459.07)
+    res = documenso.documents.recipients.delete(recipient_id=5490.43)
 
     # Handle response
     print(res)

@@ -13,40 +13,39 @@
 
 A SDK for seamless integration with Documenso v2 API.
 
-The full Documenso API can be viewed here (**todo**), which includes examples.
+The full Documenso API can be viewed [here](https://openapi.documenso.com/), which includes examples.
 
 ## ⚠️ Warning
 
 Documenso v2 API and SDKs are currently in beta. There may be to breaking changes.
 
-To keep updated, please follow the discussions and issues here:
-- Discussion -> Todo
-- Breaking change alerts -> Todo
+To keep updated, please follow the discussions here:
+
+- [Feedback](https://github.com/documenso/documenso/discussions/1611)
+- [Breaking change alerts](https://github.com/documenso/documenso/discussions/1612)
 <!-- No Summary [summary] -->
 
 ## Table of Contents
+
 <!-- $toc-max-depth=2 -->
-* [Overview](https://github.com/documenso/sdk-python/blob/master/#documenso-python-sdk)
-  * [SDK Installation](https://github.com/documenso/sdk-python/blob/master/#sdk-installation)
-  * [IDE Support](https://github.com/documenso/sdk-python/blob/master/#ide-support)
-  * [Authentication](https://github.com/documenso/sdk-python/blob/master/#authentication)
-  * [Document creation example](https://github.com/documenso/sdk-python/blob/master/#document-creation-example)
-  * [Available Resources and Operations](https://github.com/documenso/sdk-python/blob/master/#available-resources-and-operations)
-  * [Retries](https://github.com/documenso/sdk-python/blob/master/#retries)
-  * [Error Handling](https://github.com/documenso/sdk-python/blob/master/#error-handling)
-  * [Debugging](https://github.com/documenso/sdk-python/blob/master/#debugging)
-* [Development](https://github.com/documenso/sdk-python/blob/master/#development)
-  * [Maturity](https://github.com/documenso/sdk-python/blob/master/#maturity)
-  * [Contributions](https://github.com/documenso/sdk-python/blob/master/#contributions)
+
+- [Overview](https://github.com/documenso/sdk-python/blob/master/#documenso-python-sdk)
+  - [SDK Installation](https://github.com/documenso/sdk-python/blob/master/#sdk-installation)
+  - [IDE Support](https://github.com/documenso/sdk-python/blob/master/#ide-support)
+  - [Authentication](https://github.com/documenso/sdk-python/blob/master/#authentication)
+  - [Document creation example](https://github.com/documenso/sdk-python/blob/master/#document-creation-example)
+  - [Available Resources and Operations](https://github.com/documenso/sdk-python/blob/master/#available-resources-and-operations)
+  - [Retries](https://github.com/documenso/sdk-python/blob/master/#retries)
+  - [Error Handling](https://github.com/documenso/sdk-python/blob/master/#error-handling)
+  - [Debugging](https://github.com/documenso/sdk-python/blob/master/#debugging)
+- [Development](https://github.com/documenso/sdk-python/blob/master/#development)
+  - [Maturity](https://github.com/documenso/sdk-python/blob/master/#maturity)
+  - [Contributions](https://github.com/documenso/sdk-python/blob/master/#contributions)
 
 <!-- No Table of Contents [toc] -->
 
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
-
-> [!TIP]
-> To finish publishing your SDK to PyPI you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
-
 
 > [!NOTE]
 > **Python version upgrade policy**
@@ -60,7 +59,7 @@ The SDK can be installed with either *pip* or *poetry* package managers.
 *PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
 
 ```bash
-pip install git+https://github.com/documenso/sdk-python.git
+pip install documenso_sdk
 ```
 
 ### Poetry
@@ -68,7 +67,7 @@ pip install git+https://github.com/documenso/sdk-python.git
 *Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
 
 ```bash
-poetry add git+https://github.com/documenso/sdk-python.git
+poetry add documenso_sdk
 ```
 
 ### Shell and script usage with `uv`
@@ -115,8 +114,7 @@ Generally, the SDK will work well with most IDEs out of the box. However, when u
 
 ## Authentication
 
-To use the SDK, you will need a Documenso API key which can be created [here](https://docs.documenso.com/developers/public-api/authentication#creating-an-api-key
-).
+To use the SDK, you will need a Documenso API key which can be created [here](https://docs.documenso.com/developers/public-api/authentication#creating-an-api-key).
 
 ```python
 import documenso_sdk
@@ -127,6 +125,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 ```
+
 <!-- No Authentication [security] -->
 
 ## Document creation example
@@ -136,15 +135,100 @@ Currently creating a document involves two steps:
 1. Create the document
 2. Upload the PDF
 
-This is a temporary measure, in the near future prior to the full release we will merge these two tasks into one request. 
+This is a temporary measure, in the near future prior to the full release we will merge these two tasks into one request.
 
 Here is a full example of the document creation process which you can copy and run.
 
-Note that the function is temporarily called `createV0`, which will be replaced by `create` once we resolve the 2 step workaround.
+Note that the function is temporarily called `create_v0`, which will be replaced by `create` once we resolve the 2 step workaround.
 
 ```python
-# Todo
+from documenso_sdk import Documenso
+import os
+import requests
+
+def upload_file_to_presigned_url(file_path: str, upload_url: str):
+  """Upload a file to a pre-signed URL."""
+  with open(file_path, 'rb') as file:
+      file_content = file.read()
+
+  response = requests.put(
+      upload_url,
+      data=file_content,
+      headers={"Content-Type": "application/octet-stream"}
+  )
+
+  if not response.ok:
+      raise Exception(f"Upload failed with status: {response.status_code}")
+
+async def main():
+  with Documenso(
+    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+  ) as documenso:
+
+    # Create document with recipients and fields
+    create_document_response = documenso.documents.create_v0(
+      title="Document title",
+      recipients=[
+        {
+          "email": "example@documenso.com",
+          "name": "Example Doe",
+          "role": "SIGNER",
+          "fields": [
+            {
+              "type": "SIGNATURE",
+              "pageNumber": 1,
+              "pageX": 10,
+              "pageY": 10,
+              "width": 10,
+              "height": 10
+            },
+              {
+                "type": "INITIALS",
+                "pageNumber": 1,
+                "pageX": 20,
+                "pageY": 20,
+                "width": 10,
+                "height": 10
+            }
+          ]
+        },
+        {
+          "email": "admin@documenso.com",
+          "name": "Admin Doe",
+          "role": "APPROVER",
+          "fields": [
+            {
+              "type": "SIGNATURE",
+              "pageNumber": 1,
+              "pageX": 10,
+              "pageY": 50,
+              "width": 10,
+              "height": 10
+            }
+          ]
+        }
+      ],
+      meta={
+        "timezone": "Australia/Melbourne",
+        "dateFormat": "MM/dd/yyyy hh:mm a",
+        "language": "de",
+        "subject": "Email subject",
+        "message": "Email message",
+        "emailSettings": {
+            "recipientRemoved": False
+        }
+      }
+    )
+
+    # Upload the PDF file
+    upload_file_to_presigned_url("./demo.pdf", create_document_response.upload_url)
+
+
+if __name__ == "__main__":
+  import asyncio
+  asyncio.run(main())
 ```
+
 <!-- No SDK Example Usage [usage] -->
 
 <!-- Start Available Resources and Operations [operations] -->
@@ -166,23 +250,23 @@ Note that the function is temporarily called `createV0`, which will be replaced 
 * [redistribute](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documents/README.md#redistribute) - Redistribute document
 * [duplicate](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documents/README.md#duplicate) - Duplicate document
 
-#### [documents.fields](https://github.com/documenso/sdk-python/blob/master/docs/sdks/fields/README.md)
+#### [documents.fields](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documentsfields/README.md)
 
-* [get](https://github.com/documenso/sdk-python/blob/master/docs/sdks/fields/README.md#get) - Get document field
-* [create](https://github.com/documenso/sdk-python/blob/master/docs/sdks/fields/README.md#create) - Create document field
-* [create_many](https://github.com/documenso/sdk-python/blob/master/docs/sdks/fields/README.md#create_many) - Create document fields
-* [update](https://github.com/documenso/sdk-python/blob/master/docs/sdks/fields/README.md#update) - Update document field
-* [update_many](https://github.com/documenso/sdk-python/blob/master/docs/sdks/fields/README.md#update_many) - Update document fields
-* [delete](https://github.com/documenso/sdk-python/blob/master/docs/sdks/fields/README.md#delete) - Delete document field
+* [get](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documentsfields/README.md#get) - Get document field
+* [create](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documentsfields/README.md#create) - Create document field
+* [create_many](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documentsfields/README.md#create_many) - Create document fields
+* [update](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documentsfields/README.md#update) - Update document field
+* [update_many](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documentsfields/README.md#update_many) - Update document fields
+* [delete](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documentsfields/README.md#delete) - Delete document field
 
-#### [documents.recipients](https://github.com/documenso/sdk-python/blob/master/docs/sdks/recipients/README.md)
+#### [documents.recipients](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documentsrecipients/README.md)
 
-* [get](https://github.com/documenso/sdk-python/blob/master/docs/sdks/recipients/README.md#get) - Get document recipient
-* [create](https://github.com/documenso/sdk-python/blob/master/docs/sdks/recipients/README.md#create) - Create document recipient
-* [create_many](https://github.com/documenso/sdk-python/blob/master/docs/sdks/recipients/README.md#create_many) - Create document recipients
-* [update](https://github.com/documenso/sdk-python/blob/master/docs/sdks/recipients/README.md#update) - Update document recipient
-* [update_many](https://github.com/documenso/sdk-python/blob/master/docs/sdks/recipients/README.md#update_many) - Update document recipients
-* [delete](https://github.com/documenso/sdk-python/blob/master/docs/sdks/recipients/README.md#delete) - Delete document recipient
+* [get](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documentsrecipients/README.md#get) - Get document recipient
+* [create](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documentsrecipients/README.md#create) - Create document recipient
+* [create_many](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documentsrecipients/README.md#create_many) - Create document recipients
+* [update](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documentsrecipients/README.md#update) - Update document recipient
+* [update_many](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documentsrecipients/README.md#update_many) - Update document recipients
+* [delete](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documentsrecipients/README.md#delete) - Delete document recipient
 
 ### [templates](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templates/README.md)
 
@@ -194,29 +278,29 @@ Note that the function is temporarily called `createV0`, which will be replaced 
 * [use](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templates/README.md#use) - Use template
 * [move_to_team](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templates/README.md#move_to_team) - Move template
 
-#### [templates.direct_link](https://github.com/documenso/sdk-python/blob/master/docs/sdks/directlink/README.md)
+#### [templates.direct_link](https://github.com/documenso/sdk-python/blob/master/docs/sdks/directlinksdk/README.md)
 
-* [create](https://github.com/documenso/sdk-python/blob/master/docs/sdks/directlink/README.md#create) - Create direct link
-* [delete](https://github.com/documenso/sdk-python/blob/master/docs/sdks/directlink/README.md#delete) - Delete direct link
-* [toggle](https://github.com/documenso/sdk-python/blob/master/docs/sdks/directlink/README.md#toggle) - Toggle direct link
+* [create](https://github.com/documenso/sdk-python/blob/master/docs/sdks/directlinksdk/README.md#create) - Create direct link
+* [delete](https://github.com/documenso/sdk-python/blob/master/docs/sdks/directlinksdk/README.md#delete) - Delete direct link
+* [toggle](https://github.com/documenso/sdk-python/blob/master/docs/sdks/directlinksdk/README.md#toggle) - Toggle direct link
 
-#### [templates.fields](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documensofields/README.md)
+#### [templates.fields](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templatesfields/README.md)
 
-* [create](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documensofields/README.md#create) - Create template field
-* [get](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documensofields/README.md#get) - Get template field
-* [create_many](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documensofields/README.md#create_many) - Create template fields
-* [update](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documensofields/README.md#update) - Update template field
-* [update_many](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documensofields/README.md#update_many) - Update template fields
-* [delete](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documensofields/README.md#delete) - Delete template field
+* [create](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templatesfields/README.md#create) - Create template field
+* [get](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templatesfields/README.md#get) - Get template field
+* [create_many](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templatesfields/README.md#create_many) - Create template fields
+* [update](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templatesfields/README.md#update) - Update template field
+* [update_many](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templatesfields/README.md#update_many) - Update template fields
+* [delete](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templatesfields/README.md#delete) - Delete template field
 
-#### [templates.recipients](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documensorecipients/README.md)
+#### [templates.recipients](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templatesrecipients/README.md)
 
-* [get](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documensorecipients/README.md#get) - Get template recipient
-* [create](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documensorecipients/README.md#create) - Create template recipient
-* [create_many](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documensorecipients/README.md#create_many) - Create template recipients
-* [update](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documensorecipients/README.md#update) - Update template recipient
-* [update_many](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documensorecipients/README.md#update_many) - Update template recipients
-* [delete](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documensorecipients/README.md#delete) - Delete template recipient
+* [get](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templatesrecipients/README.md#get) - Get template recipient
+* [create](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templatesrecipients/README.md#create) - Create template recipient
+* [create_many](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templatesrecipients/README.md#create_many) - Create template recipients
+* [update](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templatesrecipients/README.md#update) - Update template recipient
+* [update_many](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templatesrecipients/README.md#update_many) - Update template recipients
+* [delete](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templatesrecipients/README.md#delete) - Delete template recipient
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -228,15 +312,17 @@ Some of the endpoints in this SDK support retries. If you use the SDK without an
 
 To change the default retry strategy for a single API call, simply provide a `RetryConfig` object to the call:
 ```python
+import documenso_sdk
 from documenso_sdk import Documenso
 from documenso_sdk.utils import BackoffStrategy, RetryConfig
 import os
+
 
 with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.find(,
+    res = documenso.documents.find(order_by_direction=documenso_sdk.OrderByDirection.DESC,
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
     # Handle response
@@ -246,16 +332,18 @@ with Documenso(
 
 If you'd like to override the default retry strategy for all operations that support retries, you can use the `retry_config` optional parameter when initializing the SDK:
 ```python
+import documenso_sdk
 from documenso_sdk import Documenso
 from documenso_sdk.utils import BackoffStrategy, RetryConfig
 import os
+
 
 with Documenso(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.find()
+    res = documenso.documents.find(order_by_direction=documenso_sdk.OrderByDirection.DESC)
 
     # Handle response
     print(res)
@@ -279,18 +367,20 @@ By default, an API error will raise a models.APIError exception, which has the f
 
 When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `find_async` method may raise the following exceptions:
 
-| Error Type                                                   | Status Code | Content Type     |
-| ------------------------------------------------------------ | ----------- | ---------------- |
-| models.DocumentFindDocumentsDocumentsResponseBody            | 400         | application/json |
-| models.DocumentFindDocumentsDocumentsResponseResponseBody    | 404         | application/json |
-| models.DocumentFindDocumentsDocumentsResponse500ResponseBody | 500         | application/json |
-| models.APIError                                              | 4XX, 5XX    | \*/\*            |
+| Error Type                                      | Status Code | Content Type     |
+| ----------------------------------------------- | ----------- | ---------------- |
+| models.DocumentFindDocumentsBadRequestError     | 400         | application/json |
+| models.DocumentFindDocumentsNotFoundError       | 404         | application/json |
+| models.DocumentFindDocumentsInternalServerError | 500         | application/json |
+| models.APIError                                 | 4XX, 5XX    | \*/\*            |
 
 ### Example
 
 ```python
+import documenso_sdk
 from documenso_sdk import Documenso, models
 import os
+
 
 with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
@@ -298,19 +388,19 @@ with Documenso(
     res = None
     try:
 
-        res = documenso.documents.find()
+        res = documenso.documents.find(order_by_direction=documenso_sdk.OrderByDirection.DESC)
 
         # Handle response
         print(res)
 
-    except models.DocumentFindDocumentsDocumentsResponseBody as e:
-        # handle e.data: models.DocumentFindDocumentsDocumentsResponseBodyData
+    except models.DocumentFindDocumentsBadRequestError as e:
+        # handle e.data: models.DocumentFindDocumentsBadRequestErrorData
         raise(e)
-    except models.DocumentFindDocumentsDocumentsResponseResponseBody as e:
-        # handle e.data: models.DocumentFindDocumentsDocumentsResponseResponseBodyData
+    except models.DocumentFindDocumentsNotFoundError as e:
+        # handle e.data: models.DocumentFindDocumentsNotFoundErrorData
         raise(e)
-    except models.DocumentFindDocumentsDocumentsResponse500ResponseBody as e:
-        # handle e.data: models.DocumentFindDocumentsDocumentsResponse500ResponseBodyData
+    except models.DocumentFindDocumentsInternalServerError as e:
+        # handle e.data: models.DocumentFindDocumentsInternalServerErrorData
         raise(e)
     except models.APIError as e:
         # handle exception
@@ -318,7 +408,31 @@ with Documenso(
 ```
 <!-- End Error Handling [errors] -->
 
-<!-- No Server Selection [server] -->
+<!-- Start Server Selection [server] -->
+## Server Selection
+
+### Override Server URL Per-Client
+
+The default server can be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
+```python
+import documenso_sdk
+from documenso_sdk import Documenso
+import os
+
+
+with Documenso(
+    server_url="https://app.documenso.com/api/v2-beta",
+    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+) as documenso:
+
+    res = documenso.documents.find(order_by_direction=documenso_sdk.OrderByDirection.DESC)
+
+    # Handle response
+    print(res)
+
+```
+<!-- End Server Selection [server] -->
+
 <!-- No Custom HTTP Client [http-client] -->
 
 <!-- Start Resource Management [resource-management] -->
@@ -332,6 +446,7 @@ The `Documenso` class implements the context manager protocol and registers a fi
 from documenso_sdk import Documenso
 import os
 def main():
+
     with Documenso(
         api_key=os.getenv("DOCUMENSO_API_KEY", ""),
     ) as documenso:
@@ -340,6 +455,7 @@ def main():
 
 # Or when using async:
 async def amain():
+
     async with Documenso(
         api_key=os.getenv("DOCUMENSO_API_KEY", ""),
     ) as documenso:
@@ -376,7 +492,7 @@ looking for the latest version.
 
 ## Contributions
 
-While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation. 
-We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release. 
+While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation.
+We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release.
 
 ### SDK Created by [Speakeasy](https://www.speakeasy.com/?utm_source=documenso-sdk&utm_campaign=python)
