@@ -18,6 +18,7 @@ Returns a single recipient. If you want to retrieve all the recipients for a doc
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="recipient-getDocumentRecipient" method="get" path="/document/recipient/{recipientId}" -->
 ```python
 from documenso_sdk import Documenso
 import os
@@ -60,6 +61,7 @@ Create a single recipient for a document.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="recipient-createDocumentRecipient" method="post" path="/document/recipient/create" -->
 ```python
 import documenso_sdk
 from documenso_sdk import Documenso
@@ -73,7 +75,7 @@ with Documenso(
     res = documenso.documents.recipients.create(document_id=3058.31, recipient={
         "email": "Ila.Steuber@yahoo.com",
         "name": "<value>",
-        "role": documenso_sdk.RecipientCreateDocumentRecipientRoleRequestBody.ASSISTANT,
+        "role": documenso_sdk.RecipientCreateDocumentRecipientRoleRequest.ASSISTANT,
     })
 
     # Handle response
@@ -107,6 +109,7 @@ Create multiple recipients for a document.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="recipient-createDocumentRecipients" method="post" path="/document/recipient/create-many" -->
 ```python
 import documenso_sdk
 from documenso_sdk import Documenso
@@ -121,7 +124,7 @@ with Documenso(
         {
             "email": "Roosevelt_Baumbach@yahoo.com",
             "name": "<value>",
-            "role": documenso_sdk.RecipientCreateDocumentRecipientsRoleRequestBody.CC,
+            "role": documenso_sdk.RecipientCreateDocumentRecipientsRoleRequest.CC,
         },
     ])
 
@@ -132,11 +135,11 @@ with Documenso(
 
 ### Parameters
 
-| Parameter                                                                                                                                   | Type                                                                                                                                        | Required                                                                                                                                    | Description                                                                                                                                 |
-| ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `document_id`                                                                                                                               | *float*                                                                                                                                     | :heavy_check_mark:                                                                                                                          | N/A                                                                                                                                         |
-| `recipients`                                                                                                                                | List[[models.RecipientCreateDocumentRecipientsRecipientRequestBody](../../models/recipientcreatedocumentrecipientsrecipientrequestbody.md)] | :heavy_check_mark:                                                                                                                          | N/A                                                                                                                                         |
-| `retries`                                                                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                            | :heavy_minus_sign:                                                                                                                          | Configuration to override the default retry behavior of the client.                                                                         |
+| Parameter                                                                                                                           | Type                                                                                                                                | Required                                                                                                                            | Description                                                                                                                         |
+| ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `document_id`                                                                                                                       | *float*                                                                                                                             | :heavy_check_mark:                                                                                                                  | N/A                                                                                                                                 |
+| `recipients`                                                                                                                        | List[[models.RecipientCreateDocumentRecipientsRecipientRequest](../../models/recipientcreatedocumentrecipientsrecipientrequest.md)] | :heavy_check_mark:                                                                                                                  | N/A                                                                                                                                 |
+| `retries`                                                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                    | :heavy_minus_sign:                                                                                                                  | Configuration to override the default retry behavior of the client.                                                                 |
 
 ### Response
 
@@ -156,6 +159,7 @@ Update a single recipient for a document.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="recipient-updateDocumentRecipient" method="post" path="/document/recipient/update" -->
 ```python
 from documenso_sdk import Documenso
 import os
@@ -200,6 +204,7 @@ Update multiple recipients for a document.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="recipient-updateDocumentRecipients" method="post" path="/document/recipient/update-many" -->
 ```python
 from documenso_sdk import Documenso
 import os
@@ -218,11 +223,11 @@ with Documenso(
 
 ### Parameters
 
-| Parameter                                                                                                                                   | Type                                                                                                                                        | Required                                                                                                                                    | Description                                                                                                                                 |
-| ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `document_id`                                                                                                                               | *float*                                                                                                                                     | :heavy_check_mark:                                                                                                                          | N/A                                                                                                                                         |
-| `recipients`                                                                                                                                | List[[models.RecipientUpdateDocumentRecipientsRecipientRequestBody](../../models/recipientupdatedocumentrecipientsrecipientrequestbody.md)] | :heavy_check_mark:                                                                                                                          | N/A                                                                                                                                         |
-| `retries`                                                                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                            | :heavy_minus_sign:                                                                                                                          | Configuration to override the default retry behavior of the client.                                                                         |
+| Parameter                                                                                                                           | Type                                                                                                                                | Required                                                                                                                            | Description                                                                                                                         |
+| ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `document_id`                                                                                                                       | *float*                                                                                                                             | :heavy_check_mark:                                                                                                                  | N/A                                                                                                                                 |
+| `recipients`                                                                                                                        | List[[models.RecipientUpdateDocumentRecipientsRecipientRequest](../../models/recipientupdatedocumentrecipientsrecipientrequest.md)] | :heavy_check_mark:                                                                                                                  | N/A                                                                                                                                 |
+| `retries`                                                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                    | :heavy_minus_sign:                                                                                                                  | Configuration to override the default retry behavior of the client.                                                                 |
 
 ### Response
 
@@ -242,6 +247,7 @@ Delete document recipient
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="recipient-deleteDocumentRecipient" method="post" path="/document/recipient/delete" -->
 ```python
 from documenso_sdk import Documenso
 import os

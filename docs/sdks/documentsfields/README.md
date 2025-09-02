@@ -18,6 +18,7 @@ Returns a single field. If you want to retrieve all the fields for a document, u
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="field-getDocumentField" method="get" path="/document/field/{fieldId}" -->
 ```python
 from documenso_sdk import Documenso
 import os
@@ -60,6 +61,7 @@ Create a single field for a document.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="field-createDocumentField" method="post" path="/document/field/create" -->
 ```python
 import documenso_sdk
 from documenso_sdk import Documenso
@@ -71,7 +73,7 @@ with Documenso(
 ) as documenso:
 
     res = documenso.documents.fields.create(document_id=8001.93, field={
-        "type": documenso_sdk.FieldCreateDocumentFieldTypeNameRequestBody1.NAME,
+        "type": documenso_sdk.FieldCreateDocumentFieldTypeNameRequest1.NAME,
         "recipient_id": 2564.68,
         "page_number": 791.77,
         "page_x": 7845.22,
@@ -111,6 +113,7 @@ Create multiple fields for a document.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="field-createDocumentFields" method="post" path="/document/field/create-many" -->
 ```python
 import documenso_sdk
 from documenso_sdk import Documenso
@@ -164,6 +167,7 @@ Update a single field for a document.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="field-updateDocumentField" method="post" path="/document/field/update" -->
 ```python
 import documenso_sdk
 from documenso_sdk import Documenso
@@ -210,6 +214,7 @@ Update multiple fields for a document.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="field-updateDocumentFields" method="post" path="/document/field/update-many" -->
 ```python
 from documenso_sdk import Documenso
 import os
@@ -252,6 +257,7 @@ Delete document field
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="field-deleteDocumentField" method="post" path="/document/field/delete" -->
 ```python
 from documenso_sdk import Documenso
 import os

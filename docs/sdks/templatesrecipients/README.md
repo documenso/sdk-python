@@ -18,6 +18,7 @@ Returns a single recipient. If you want to retrieve all the recipients for a tem
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="recipient-getTemplateRecipient" method="get" path="/template/recipient/{recipientId}" -->
 ```python
 from documenso_sdk import Documenso
 import os
@@ -60,6 +61,7 @@ Create a single recipient for a template.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="recipient-createTemplateRecipient" method="post" path="/template/recipient/create" -->
 ```python
 import documenso_sdk
 from documenso_sdk import Documenso
@@ -73,7 +75,7 @@ with Documenso(
     res = documenso.templates.recipients.create(template_id=5712.95, recipient={
         "email": "Gerhard88@yahoo.com",
         "name": "<value>",
-        "role": documenso_sdk.RecipientCreateTemplateRecipientRoleRequestBody.SIGNER,
+        "role": documenso_sdk.RecipientCreateTemplateRecipientRoleRequest.SIGNER,
     })
 
     # Handle response
@@ -107,6 +109,7 @@ Create multiple recipients for a template.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="recipient-createTemplateRecipients" method="post" path="/template/recipient/create-many" -->
 ```python
 from documenso_sdk import Documenso
 import os
@@ -125,11 +128,11 @@ with Documenso(
 
 ### Parameters
 
-| Parameter                                                                                                                                   | Type                                                                                                                                        | Required                                                                                                                                    | Description                                                                                                                                 |
-| ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `template_id`                                                                                                                               | *float*                                                                                                                                     | :heavy_check_mark:                                                                                                                          | N/A                                                                                                                                         |
-| `recipients`                                                                                                                                | List[[models.RecipientCreateTemplateRecipientsRecipientRequestBody](../../models/recipientcreatetemplaterecipientsrecipientrequestbody.md)] | :heavy_check_mark:                                                                                                                          | N/A                                                                                                                                         |
-| `retries`                                                                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                            | :heavy_minus_sign:                                                                                                                          | Configuration to override the default retry behavior of the client.                                                                         |
+| Parameter                                                                                                                           | Type                                                                                                                                | Required                                                                                                                            | Description                                                                                                                         |
+| ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `template_id`                                                                                                                       | *float*                                                                                                                             | :heavy_check_mark:                                                                                                                  | N/A                                                                                                                                 |
+| `recipients`                                                                                                                        | List[[models.RecipientCreateTemplateRecipientsRecipientRequest](../../models/recipientcreatetemplaterecipientsrecipientrequest.md)] | :heavy_check_mark:                                                                                                                  | N/A                                                                                                                                 |
+| `retries`                                                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                    | :heavy_minus_sign:                                                                                                                  | Configuration to override the default retry behavior of the client.                                                                 |
 
 ### Response
 
@@ -149,6 +152,7 @@ Update a single recipient for a template.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="recipient-updateTemplateRecipient" method="post" path="/template/recipient/update" -->
 ```python
 from documenso_sdk import Documenso
 import os
@@ -193,6 +197,7 @@ Update multiple recipients for a template.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="recipient-updateTemplateRecipients" method="post" path="/template/recipient/update-many" -->
 ```python
 from documenso_sdk import Documenso
 import os
@@ -215,11 +220,11 @@ with Documenso(
 
 ### Parameters
 
-| Parameter                                                                                                                                   | Type                                                                                                                                        | Required                                                                                                                                    | Description                                                                                                                                 |
-| ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `template_id`                                                                                                                               | *float*                                                                                                                                     | :heavy_check_mark:                                                                                                                          | N/A                                                                                                                                         |
-| `recipients`                                                                                                                                | List[[models.RecipientUpdateTemplateRecipientsRecipientRequestBody](../../models/recipientupdatetemplaterecipientsrecipientrequestbody.md)] | :heavy_check_mark:                                                                                                                          | N/A                                                                                                                                         |
-| `retries`                                                                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                            | :heavy_minus_sign:                                                                                                                          | Configuration to override the default retry behavior of the client.                                                                         |
+| Parameter                                                                                                                           | Type                                                                                                                                | Required                                                                                                                            | Description                                                                                                                         |
+| ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `template_id`                                                                                                                       | *float*                                                                                                                             | :heavy_check_mark:                                                                                                                  | N/A                                                                                                                                 |
+| `recipients`                                                                                                                        | List[[models.RecipientUpdateTemplateRecipientsRecipientRequest](../../models/recipientupdatetemplaterecipientsrecipientrequest.md)] | :heavy_check_mark:                                                                                                                  | N/A                                                                                                                                 |
+| `retries`                                                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                    | :heavy_minus_sign:                                                                                                                  | Configuration to override the default retry behavior of the client.                                                                 |
 
 ### Response
 
@@ -239,6 +244,7 @@ Delete template recipient
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="recipient-deleteTemplateRecipient" method="post" path="/template/recipient/delete" -->
 ```python
 from documenso_sdk import Documenso
 import os

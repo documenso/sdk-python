@@ -5,6 +5,7 @@ from documenso_sdk import models, utils
 from documenso_sdk._hooks import HookContext
 from documenso_sdk.types import OptionalNullable, UNSET
 from documenso_sdk.utils import get_security_from_env
+from documenso_sdk.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, List, Mapping, Optional, Union
 
 
@@ -83,43 +84,34 @@ class DocumentsFields(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.FieldGetDocumentFieldResponse
+            return unmarshal_json_response(
+                models.FieldGetDocumentFieldResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldGetDocumentFieldBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.FieldGetDocumentFieldBadRequestErrorData, http_res
             )
-            raise models.FieldGetDocumentFieldBadRequestError(data=response_data)
+            raise models.FieldGetDocumentFieldBadRequestError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldGetDocumentFieldNotFoundErrorData
+            response_data = unmarshal_json_response(
+                models.FieldGetDocumentFieldNotFoundErrorData, http_res
             )
-            raise models.FieldGetDocumentFieldNotFoundError(data=response_data)
+            raise models.FieldGetDocumentFieldNotFoundError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldGetDocumentFieldInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.FieldGetDocumentFieldInternalServerErrorData, http_res
             )
-            raise models.FieldGetDocumentFieldInternalServerError(data=response_data)
+            raise models.FieldGetDocumentFieldInternalServerError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def get_async(
         self,
@@ -195,43 +187,34 @@ class DocumentsFields(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.FieldGetDocumentFieldResponse
+            return unmarshal_json_response(
+                models.FieldGetDocumentFieldResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldGetDocumentFieldBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.FieldGetDocumentFieldBadRequestErrorData, http_res
             )
-            raise models.FieldGetDocumentFieldBadRequestError(data=response_data)
+            raise models.FieldGetDocumentFieldBadRequestError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldGetDocumentFieldNotFoundErrorData
+            response_data = unmarshal_json_response(
+                models.FieldGetDocumentFieldNotFoundErrorData, http_res
             )
-            raise models.FieldGetDocumentFieldNotFoundError(data=response_data)
+            raise models.FieldGetDocumentFieldNotFoundError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldGetDocumentFieldInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.FieldGetDocumentFieldInternalServerErrorData, http_res
             )
-            raise models.FieldGetDocumentFieldInternalServerError(data=response_data)
+            raise models.FieldGetDocumentFieldInternalServerError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def create(
         self,
@@ -318,38 +301,31 @@ class DocumentsFields(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.FieldCreateDocumentFieldResponse
+            return unmarshal_json_response(
+                models.FieldCreateDocumentFieldResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldCreateDocumentFieldBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.FieldCreateDocumentFieldBadRequestErrorData, http_res
             )
-            raise models.FieldCreateDocumentFieldBadRequestError(data=response_data)
+            raise models.FieldCreateDocumentFieldBadRequestError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldCreateDocumentFieldInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.FieldCreateDocumentFieldInternalServerErrorData, http_res
             )
-            raise models.FieldCreateDocumentFieldInternalServerError(data=response_data)
+            raise models.FieldCreateDocumentFieldInternalServerError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def create_async(
         self,
@@ -436,38 +412,31 @@ class DocumentsFields(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.FieldCreateDocumentFieldResponse
+            return unmarshal_json_response(
+                models.FieldCreateDocumentFieldResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldCreateDocumentFieldBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.FieldCreateDocumentFieldBadRequestErrorData, http_res
             )
-            raise models.FieldCreateDocumentFieldBadRequestError(data=response_data)
+            raise models.FieldCreateDocumentFieldBadRequestError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldCreateDocumentFieldInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.FieldCreateDocumentFieldInternalServerErrorData, http_res
             )
-            raise models.FieldCreateDocumentFieldInternalServerError(data=response_data)
+            raise models.FieldCreateDocumentFieldInternalServerError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def create_many(
         self,
@@ -554,40 +523,31 @@ class DocumentsFields(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.FieldCreateDocumentFieldsResponse
+            return unmarshal_json_response(
+                models.FieldCreateDocumentFieldsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldCreateDocumentFieldsBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.FieldCreateDocumentFieldsBadRequestErrorData, http_res
             )
-            raise models.FieldCreateDocumentFieldsBadRequestError(data=response_data)
+            raise models.FieldCreateDocumentFieldsBadRequestError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldCreateDocumentFieldsInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.FieldCreateDocumentFieldsInternalServerErrorData, http_res
             )
             raise models.FieldCreateDocumentFieldsInternalServerError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def create_many_async(
         self,
@@ -674,40 +634,31 @@ class DocumentsFields(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.FieldCreateDocumentFieldsResponse
+            return unmarshal_json_response(
+                models.FieldCreateDocumentFieldsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldCreateDocumentFieldsBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.FieldCreateDocumentFieldsBadRequestErrorData, http_res
             )
-            raise models.FieldCreateDocumentFieldsBadRequestError(data=response_data)
+            raise models.FieldCreateDocumentFieldsBadRequestError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldCreateDocumentFieldsInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.FieldCreateDocumentFieldsInternalServerErrorData, http_res
             )
             raise models.FieldCreateDocumentFieldsInternalServerError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def update(
         self,
@@ -794,38 +745,31 @@ class DocumentsFields(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.FieldUpdateDocumentFieldResponse
+            return unmarshal_json_response(
+                models.FieldUpdateDocumentFieldResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldUpdateDocumentFieldBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.FieldUpdateDocumentFieldBadRequestErrorData, http_res
             )
-            raise models.FieldUpdateDocumentFieldBadRequestError(data=response_data)
+            raise models.FieldUpdateDocumentFieldBadRequestError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldUpdateDocumentFieldInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.FieldUpdateDocumentFieldInternalServerErrorData, http_res
             )
-            raise models.FieldUpdateDocumentFieldInternalServerError(data=response_data)
+            raise models.FieldUpdateDocumentFieldInternalServerError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def update_async(
         self,
@@ -912,38 +856,31 @@ class DocumentsFields(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.FieldUpdateDocumentFieldResponse
+            return unmarshal_json_response(
+                models.FieldUpdateDocumentFieldResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldUpdateDocumentFieldBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.FieldUpdateDocumentFieldBadRequestErrorData, http_res
             )
-            raise models.FieldUpdateDocumentFieldBadRequestError(data=response_data)
+            raise models.FieldUpdateDocumentFieldBadRequestError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldUpdateDocumentFieldInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.FieldUpdateDocumentFieldInternalServerErrorData, http_res
             )
-            raise models.FieldUpdateDocumentFieldInternalServerError(data=response_data)
+            raise models.FieldUpdateDocumentFieldInternalServerError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def update_many(
         self,
@@ -1030,40 +967,31 @@ class DocumentsFields(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.FieldUpdateDocumentFieldsResponse
+            return unmarshal_json_response(
+                models.FieldUpdateDocumentFieldsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldUpdateDocumentFieldsBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.FieldUpdateDocumentFieldsBadRequestErrorData, http_res
             )
-            raise models.FieldUpdateDocumentFieldsBadRequestError(data=response_data)
+            raise models.FieldUpdateDocumentFieldsBadRequestError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldUpdateDocumentFieldsInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.FieldUpdateDocumentFieldsInternalServerErrorData, http_res
             )
             raise models.FieldUpdateDocumentFieldsInternalServerError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def update_many_async(
         self,
@@ -1150,40 +1078,31 @@ class DocumentsFields(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.FieldUpdateDocumentFieldsResponse
+            return unmarshal_json_response(
+                models.FieldUpdateDocumentFieldsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldUpdateDocumentFieldsBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.FieldUpdateDocumentFieldsBadRequestErrorData, http_res
             )
-            raise models.FieldUpdateDocumentFieldsBadRequestError(data=response_data)
+            raise models.FieldUpdateDocumentFieldsBadRequestError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldUpdateDocumentFieldsInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.FieldUpdateDocumentFieldsInternalServerErrorData, http_res
             )
             raise models.FieldUpdateDocumentFieldsInternalServerError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def delete(
         self,
@@ -1260,38 +1179,31 @@ class DocumentsFields(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.FieldDeleteDocumentFieldResponse
+            return unmarshal_json_response(
+                models.FieldDeleteDocumentFieldResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldDeleteDocumentFieldBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.FieldDeleteDocumentFieldBadRequestErrorData, http_res
             )
-            raise models.FieldDeleteDocumentFieldBadRequestError(data=response_data)
+            raise models.FieldDeleteDocumentFieldBadRequestError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldDeleteDocumentFieldInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.FieldDeleteDocumentFieldInternalServerErrorData, http_res
             )
-            raise models.FieldDeleteDocumentFieldInternalServerError(data=response_data)
+            raise models.FieldDeleteDocumentFieldInternalServerError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def delete_async(
         self,
@@ -1368,35 +1280,28 @@ class DocumentsFields(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.FieldDeleteDocumentFieldResponse
+            return unmarshal_json_response(
+                models.FieldDeleteDocumentFieldResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldDeleteDocumentFieldBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.FieldDeleteDocumentFieldBadRequestErrorData, http_res
             )
-            raise models.FieldDeleteDocumentFieldBadRequestError(data=response_data)
+            raise models.FieldDeleteDocumentFieldBadRequestError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldDeleteDocumentFieldInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.FieldDeleteDocumentFieldInternalServerErrorData, http_res
             )
-            raise models.FieldDeleteDocumentFieldInternalServerError(data=response_data)
+            raise models.FieldDeleteDocumentFieldInternalServerError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)

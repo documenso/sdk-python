@@ -33,3 +33,9 @@ value: models.PrefillFieldCheckbox = /* values here */
 value: models.PrefillFieldDropdown = /* values here */
 ```
 
+### `models.PrefillFieldDate`
+
+```python
+value: models.PrefillFieldDate = /* values here */
+```
+

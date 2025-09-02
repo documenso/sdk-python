@@ -5,6 +5,7 @@ from documenso_sdk import models, utils
 from documenso_sdk._hooks import HookContext
 from documenso_sdk.types import OptionalNullable, UNSET
 from documenso_sdk.utils import get_security_from_env
+from documenso_sdk.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, List, Mapping, Optional, Union
 
 
@@ -83,48 +84,38 @@ class DocumentsRecipients(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.RecipientGetDocumentRecipientResponse
+            return unmarshal_json_response(
+                models.RecipientGetDocumentRecipientResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.RecipientGetDocumentRecipientBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.RecipientGetDocumentRecipientBadRequestErrorData, http_res
             )
             raise models.RecipientGetDocumentRecipientBadRequestError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.RecipientGetDocumentRecipientNotFoundErrorData
+            response_data = unmarshal_json_response(
+                models.RecipientGetDocumentRecipientNotFoundErrorData, http_res
             )
-            raise models.RecipientGetDocumentRecipientNotFoundError(data=response_data)
+            raise models.RecipientGetDocumentRecipientNotFoundError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
-                models.RecipientGetDocumentRecipientInternalServerErrorData,
+            response_data = unmarshal_json_response(
+                models.RecipientGetDocumentRecipientInternalServerErrorData, http_res
             )
             raise models.RecipientGetDocumentRecipientInternalServerError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def get_async(
         self,
@@ -200,48 +191,38 @@ class DocumentsRecipients(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.RecipientGetDocumentRecipientResponse
+            return unmarshal_json_response(
+                models.RecipientGetDocumentRecipientResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.RecipientGetDocumentRecipientBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.RecipientGetDocumentRecipientBadRequestErrorData, http_res
             )
             raise models.RecipientGetDocumentRecipientBadRequestError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.RecipientGetDocumentRecipientNotFoundErrorData
+            response_data = unmarshal_json_response(
+                models.RecipientGetDocumentRecipientNotFoundErrorData, http_res
             )
-            raise models.RecipientGetDocumentRecipientNotFoundError(data=response_data)
+            raise models.RecipientGetDocumentRecipientNotFoundError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
-                models.RecipientGetDocumentRecipientInternalServerErrorData,
+            response_data = unmarshal_json_response(
+                models.RecipientGetDocumentRecipientInternalServerErrorData, http_res
             )
             raise models.RecipientGetDocumentRecipientInternalServerError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def create(
         self,
@@ -332,44 +313,31 @@ class DocumentsRecipients(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.RecipientCreateDocumentRecipientResponse
+            return unmarshal_json_response(
+                models.RecipientCreateDocumentRecipientResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
-                models.RecipientCreateDocumentRecipientBadRequestErrorData,
+            response_data = unmarshal_json_response(
+                models.RecipientCreateDocumentRecipientBadRequestErrorData, http_res
             )
             raise models.RecipientCreateDocumentRecipientBadRequestError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
-                models.RecipientCreateDocumentRecipientInternalServerErrorData,
+            response_data = unmarshal_json_response(
+                models.RecipientCreateDocumentRecipientInternalServerErrorData, http_res
             )
             raise models.RecipientCreateDocumentRecipientInternalServerError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def create_async(
         self,
@@ -460,52 +428,39 @@ class DocumentsRecipients(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.RecipientCreateDocumentRecipientResponse
+            return unmarshal_json_response(
+                models.RecipientCreateDocumentRecipientResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
-                models.RecipientCreateDocumentRecipientBadRequestErrorData,
+            response_data = unmarshal_json_response(
+                models.RecipientCreateDocumentRecipientBadRequestErrorData, http_res
             )
             raise models.RecipientCreateDocumentRecipientBadRequestError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
-                models.RecipientCreateDocumentRecipientInternalServerErrorData,
+            response_data = unmarshal_json_response(
+                models.RecipientCreateDocumentRecipientInternalServerErrorData, http_res
             )
             raise models.RecipientCreateDocumentRecipientInternalServerError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def create_many(
         self,
         *,
         document_id: float,
         recipients: Union[
-            List[models.RecipientCreateDocumentRecipientsRecipientRequestBody],
-            List[models.RecipientCreateDocumentRecipientsRecipientRequestBodyTypedDict],
+            List[models.RecipientCreateDocumentRecipientsRecipientRequest],
+            List[models.RecipientCreateDocumentRecipientsRecipientRequestTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -537,7 +492,7 @@ class DocumentsRecipients(BaseSDK):
             document_id=document_id,
             recipients=utils.get_pydantic_model(
                 recipients,
-                List[models.RecipientCreateDocumentRecipientsRecipientRequestBody],
+                List[models.RecipientCreateDocumentRecipientsRecipientRequest],
             ),
         )
 
@@ -589,52 +544,40 @@ class DocumentsRecipients(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.RecipientCreateDocumentRecipientsResponse
+            return unmarshal_json_response(
+                models.RecipientCreateDocumentRecipientsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
-                models.RecipientCreateDocumentRecipientsBadRequestErrorData,
+            response_data = unmarshal_json_response(
+                models.RecipientCreateDocumentRecipientsBadRequestErrorData, http_res
             )
             raise models.RecipientCreateDocumentRecipientsBadRequestError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
+            response_data = unmarshal_json_response(
                 models.RecipientCreateDocumentRecipientsInternalServerErrorData,
+                http_res,
             )
             raise models.RecipientCreateDocumentRecipientsInternalServerError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def create_many_async(
         self,
         *,
         document_id: float,
         recipients: Union[
-            List[models.RecipientCreateDocumentRecipientsRecipientRequestBody],
-            List[models.RecipientCreateDocumentRecipientsRecipientRequestBodyTypedDict],
+            List[models.RecipientCreateDocumentRecipientsRecipientRequest],
+            List[models.RecipientCreateDocumentRecipientsRecipientRequestTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -666,7 +609,7 @@ class DocumentsRecipients(BaseSDK):
             document_id=document_id,
             recipients=utils.get_pydantic_model(
                 recipients,
-                List[models.RecipientCreateDocumentRecipientsRecipientRequestBody],
+                List[models.RecipientCreateDocumentRecipientsRecipientRequest],
             ),
         )
 
@@ -718,44 +661,32 @@ class DocumentsRecipients(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.RecipientCreateDocumentRecipientsResponse
+            return unmarshal_json_response(
+                models.RecipientCreateDocumentRecipientsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
-                models.RecipientCreateDocumentRecipientsBadRequestErrorData,
+            response_data = unmarshal_json_response(
+                models.RecipientCreateDocumentRecipientsBadRequestErrorData, http_res
             )
             raise models.RecipientCreateDocumentRecipientsBadRequestError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
+            response_data = unmarshal_json_response(
                 models.RecipientCreateDocumentRecipientsInternalServerErrorData,
+                http_res,
             )
             raise models.RecipientCreateDocumentRecipientsInternalServerError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def update(
         self,
@@ -846,44 +777,31 @@ class DocumentsRecipients(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.RecipientUpdateDocumentRecipientResponse
+            return unmarshal_json_response(
+                models.RecipientUpdateDocumentRecipientResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
-                models.RecipientUpdateDocumentRecipientBadRequestErrorData,
+            response_data = unmarshal_json_response(
+                models.RecipientUpdateDocumentRecipientBadRequestErrorData, http_res
             )
             raise models.RecipientUpdateDocumentRecipientBadRequestError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
-                models.RecipientUpdateDocumentRecipientInternalServerErrorData,
+            response_data = unmarshal_json_response(
+                models.RecipientUpdateDocumentRecipientInternalServerErrorData, http_res
             )
             raise models.RecipientUpdateDocumentRecipientInternalServerError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def update_async(
         self,
@@ -974,52 +892,39 @@ class DocumentsRecipients(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.RecipientUpdateDocumentRecipientResponse
+            return unmarshal_json_response(
+                models.RecipientUpdateDocumentRecipientResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
-                models.RecipientUpdateDocumentRecipientBadRequestErrorData,
+            response_data = unmarshal_json_response(
+                models.RecipientUpdateDocumentRecipientBadRequestErrorData, http_res
             )
             raise models.RecipientUpdateDocumentRecipientBadRequestError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
-                models.RecipientUpdateDocumentRecipientInternalServerErrorData,
+            response_data = unmarshal_json_response(
+                models.RecipientUpdateDocumentRecipientInternalServerErrorData, http_res
             )
             raise models.RecipientUpdateDocumentRecipientInternalServerError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def update_many(
         self,
         *,
         document_id: float,
         recipients: Union[
-            List[models.RecipientUpdateDocumentRecipientsRecipientRequestBody],
-            List[models.RecipientUpdateDocumentRecipientsRecipientRequestBodyTypedDict],
+            List[models.RecipientUpdateDocumentRecipientsRecipientRequest],
+            List[models.RecipientUpdateDocumentRecipientsRecipientRequestTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1051,7 +956,7 @@ class DocumentsRecipients(BaseSDK):
             document_id=document_id,
             recipients=utils.get_pydantic_model(
                 recipients,
-                List[models.RecipientUpdateDocumentRecipientsRecipientRequestBody],
+                List[models.RecipientUpdateDocumentRecipientsRecipientRequest],
             ),
         )
 
@@ -1103,52 +1008,40 @@ class DocumentsRecipients(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.RecipientUpdateDocumentRecipientsResponse
+            return unmarshal_json_response(
+                models.RecipientUpdateDocumentRecipientsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
-                models.RecipientUpdateDocumentRecipientsBadRequestErrorData,
+            response_data = unmarshal_json_response(
+                models.RecipientUpdateDocumentRecipientsBadRequestErrorData, http_res
             )
             raise models.RecipientUpdateDocumentRecipientsBadRequestError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
+            response_data = unmarshal_json_response(
                 models.RecipientUpdateDocumentRecipientsInternalServerErrorData,
+                http_res,
             )
             raise models.RecipientUpdateDocumentRecipientsInternalServerError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def update_many_async(
         self,
         *,
         document_id: float,
         recipients: Union[
-            List[models.RecipientUpdateDocumentRecipientsRecipientRequestBody],
-            List[models.RecipientUpdateDocumentRecipientsRecipientRequestBodyTypedDict],
+            List[models.RecipientUpdateDocumentRecipientsRecipientRequest],
+            List[models.RecipientUpdateDocumentRecipientsRecipientRequestTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1180,7 +1073,7 @@ class DocumentsRecipients(BaseSDK):
             document_id=document_id,
             recipients=utils.get_pydantic_model(
                 recipients,
-                List[models.RecipientUpdateDocumentRecipientsRecipientRequestBody],
+                List[models.RecipientUpdateDocumentRecipientsRecipientRequest],
             ),
         )
 
@@ -1232,44 +1125,32 @@ class DocumentsRecipients(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.RecipientUpdateDocumentRecipientsResponse
+            return unmarshal_json_response(
+                models.RecipientUpdateDocumentRecipientsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
-                models.RecipientUpdateDocumentRecipientsBadRequestErrorData,
+            response_data = unmarshal_json_response(
+                models.RecipientUpdateDocumentRecipientsBadRequestErrorData, http_res
             )
             raise models.RecipientUpdateDocumentRecipientsBadRequestError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
+            response_data = unmarshal_json_response(
                 models.RecipientUpdateDocumentRecipientsInternalServerErrorData,
+                http_res,
             )
             raise models.RecipientUpdateDocumentRecipientsInternalServerError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def delete(
         self,
@@ -1350,44 +1231,31 @@ class DocumentsRecipients(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.RecipientDeleteDocumentRecipientResponse
+            return unmarshal_json_response(
+                models.RecipientDeleteDocumentRecipientResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
-                models.RecipientDeleteDocumentRecipientBadRequestErrorData,
+            response_data = unmarshal_json_response(
+                models.RecipientDeleteDocumentRecipientBadRequestErrorData, http_res
             )
             raise models.RecipientDeleteDocumentRecipientBadRequestError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
-                models.RecipientDeleteDocumentRecipientInternalServerErrorData,
+            response_data = unmarshal_json_response(
+                models.RecipientDeleteDocumentRecipientInternalServerErrorData, http_res
             )
             raise models.RecipientDeleteDocumentRecipientInternalServerError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def delete_async(
         self,
@@ -1468,41 +1336,28 @@ class DocumentsRecipients(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.RecipientDeleteDocumentRecipientResponse
+            return unmarshal_json_response(
+                models.RecipientDeleteDocumentRecipientResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
-                models.RecipientDeleteDocumentRecipientBadRequestErrorData,
+            response_data = unmarshal_json_response(
+                models.RecipientDeleteDocumentRecipientBadRequestErrorData, http_res
             )
             raise models.RecipientDeleteDocumentRecipientBadRequestError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
-                models.RecipientDeleteDocumentRecipientInternalServerErrorData,
+            response_data = unmarshal_json_response(
+                models.RecipientDeleteDocumentRecipientInternalServerErrorData, http_res
             )
             raise models.RecipientDeleteDocumentRecipientInternalServerError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)

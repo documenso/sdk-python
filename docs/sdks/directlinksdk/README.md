@@ -15,6 +15,7 @@ Create a direct link for a template
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="template-createTemplateDirectLink" method="post" path="/template/direct/create" -->
 ```python
 from documenso_sdk import Documenso
 import os
@@ -57,6 +58,7 @@ Delete a direct link for a template
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="template-deleteTemplateDirectLink" method="post" path="/template/direct/delete" -->
 ```python
 from documenso_sdk import Documenso
 import os
@@ -98,6 +100,7 @@ Enable or disable a direct link for a template
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="template-toggleTemplateDirectLink" method="post" path="/template/direct/toggle" -->
 ```python
 from documenso_sdk import Documenso
 import os
