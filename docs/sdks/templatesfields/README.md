@@ -18,6 +18,7 @@ Create a single field for a template.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="field-createTemplateField" method="post" path="/template/field/create" -->
 ```python
 import documenso_sdk
 from documenso_sdk import Documenso
@@ -29,7 +30,7 @@ with Documenso(
 ) as documenso:
 
     res = documenso.templates.fields.create(template_id=1203.71, field={
-        "type": documenso_sdk.FieldCreateTemplateFieldTypeDateRequestBody1.DATE,
+        "type": documenso_sdk.FieldCreateTemplateFieldTypeDateRequest1.DATE,
         "recipient_id": 2738.54,
         "page_number": 5735.12,
         "page_x": 2936.28,
@@ -69,6 +70,7 @@ Returns a single field. If you want to retrieve all the fields for a template, u
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="field-getTemplateField" method="get" path="/template/field/{fieldId}" -->
 ```python
 from documenso_sdk import Documenso
 import os
@@ -111,6 +113,7 @@ Create multiple fields for a template.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="field-createTemplateFields" method="post" path="/template/field/create-many" -->
 ```python
 import documenso_sdk
 from documenso_sdk import Documenso
@@ -164,6 +167,7 @@ Update a single field for a template.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="field-updateTemplateField" method="post" path="/template/field/update" -->
 ```python
 import documenso_sdk
 from documenso_sdk import Documenso
@@ -175,7 +179,7 @@ with Documenso(
 ) as documenso:
 
     res = documenso.templates.fields.update(template_id=5083.07, field={
-        "type": documenso_sdk.FieldUpdateTemplateFieldTypeTextRequestBody1.TEXT,
+        "type": documenso_sdk.FieldUpdateTemplateFieldTypeTextRequest1.TEXT,
         "id": 1792.29,
     })
 
@@ -210,6 +214,7 @@ Update multiple fields for a template.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="field-updateTemplateFields" method="post" path="/template/field/update-many" -->
 ```python
 import documenso_sdk
 from documenso_sdk import Documenso
@@ -222,7 +227,7 @@ with Documenso(
 
     res = documenso.templates.fields.update_many(template_id=3969.1, fields=[
         {
-            "type": documenso_sdk.FieldUpdateTemplateFieldsTypeDropdownRequestBody1.DROPDOWN,
+            "type": documenso_sdk.FieldUpdateTemplateFieldsTypeDropdownRequest1.DROPDOWN,
             "id": 2460.72,
         },
     ])
@@ -258,6 +263,7 @@ Delete template field
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="field-deleteTemplateField" method="post" path="/template/field/delete" -->
 ```python
 from documenso_sdk import Documenso
 import os

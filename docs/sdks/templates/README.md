@@ -11,7 +11,6 @@
 * [duplicate](#duplicate) - Duplicate template
 * [delete](#delete) - Delete template
 * [use](#use) - Use template
-* [move_to_team](#move_to_team) - Move template
 
 ## find
 
@@ -19,6 +18,7 @@ Find templates based on a search criteria
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="template-findTemplates" method="get" path="/template" -->
 ```python
 from documenso_sdk import Documenso
 import os
@@ -43,6 +43,7 @@ with Documenso(
 | `page`                                                              | *Optional[float]*                                                   | :heavy_minus_sign:                                                  | The pagination page number, starts at 1.                            |
 | `per_page`                                                          | *Optional[float]*                                                   | :heavy_minus_sign:                                                  | The number of items per page.                                       |
 | `type`                                                              | [Optional[models.QueryParamType]](../../models/queryparamtype.md)   | :heavy_minus_sign:                                                  | Filter templates by type.                                           |
+| `folder_id`                                                         | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | The ID of the folder to filter templates by.                        |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
@@ -64,6 +65,7 @@ Get template
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="template-getTemplateById" method="get" path="/template/{templateId}" -->
 ```python
 from documenso_sdk import Documenso
 import os
@@ -106,6 +108,7 @@ Update template
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="template-updateTemplate" method="post" path="/template/update" -->
 ```python
 from documenso_sdk import Documenso
 import os
@@ -149,6 +152,7 @@ Duplicate template
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="template-duplicateTemplate" method="post" path="/template/duplicate" -->
 ```python
 from documenso_sdk import Documenso
 import os
@@ -190,6 +194,7 @@ Delete template
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="template-deleteTemplate" method="post" path="/template/delete" -->
 ```python
 from documenso_sdk import Documenso
 import os
@@ -231,6 +236,7 @@ Use the template to create a document
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="template-createDocumentFromTemplate" method="post" path="/template/use" -->
 ```python
 from documenso_sdk import Documenso
 import os
@@ -252,7 +258,7 @@ with Documenso(
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `template_id`                                                                                                                                                                  | *float*                                                                                                                                                                        | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |
-| `recipients`                                                                                                                                                                   | List[[models.TemplateCreateDocumentFromTemplateRecipientRequestBody](../../models/templatecreatedocumentfromtemplaterecipientrequestbody.md)]                                  | :heavy_check_mark:                                                                                                                                                             | The information of the recipients to create the document with.                                                                                                                 |
+| `recipients`                                                                                                                                                                   | List[[models.TemplateCreateDocumentFromTemplateRecipientRequest](../../models/templatecreatedocumentfromtemplaterecipientrequest.md)]                                          | :heavy_check_mark:                                                                                                                                                             | The information of the recipients to create the document with.                                                                                                                 |
 | `distribute_document`                                                                                                                                                          | *Optional[bool]*                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                             | Whether to create the document as pending and distribute it to recipients.                                                                                                     |
 | `custom_document_data_id`                                                                                                                                                      | *Optional[str]*                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                             | The data ID of an alternative PDF to use when creating the document. If not provided, the PDF attached to the template will be used.                                           |
 | `prefill_fields`                                                                                                                                                               | List[[models.PrefillField](../../models/prefillfield.md)]                                                                                                                      | :heavy_minus_sign:                                                                                                                                                             | The fields to prefill on the document before sending it out. Useful when you want to create a document from an existing template and pre-fill the fields with specific values. |
@@ -269,45 +275,3 @@ with Documenso(
 | models.TemplateCreateDocumentFromTemplateBadRequestError     | 400                                                          | application/json                                             |
 | models.TemplateCreateDocumentFromTemplateInternalServerError | 500                                                          | application/json                                             |
 | models.APIError                                              | 4XX, 5XX                                                     | \*/\*                                                        |
-
-## move_to_team
-
-Move a template to a team
-
-### Example Usage
-
-```python
-from documenso_sdk import Documenso
-import os
-
-
-with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
-) as documenso:
-
-    res = documenso.templates.move_to_team(template_id=9124, team_id=6200.73)
-
-    # Handle response
-    print(res)
-
-```
-
-### Parameters
-
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `template_id`                                                       | *float*                                                             | :heavy_check_mark:                                                  | The ID of the template to move to.                                  |
-| `team_id`                                                           | *float*                                                             | :heavy_check_mark:                                                  | The ID of the team to move the template to.                         |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
-
-### Response
-
-**[models.TemplateMoveTemplateToTeamResponse](../../models/templatemovetemplatetoteamresponse.md)**
-
-### Errors
-
-| Error Type                                           | Status Code                                          | Content Type                                         |
-| ---------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
-| models.TemplateMoveTemplateToTeamBadRequestError     | 400                                                  | application/json                                     |
-| models.TemplateMoveTemplateToTeamInternalServerError | 500                                                  | application/json                                     |
-| models.APIError                                      | 4XX, 5XX                                             | \*/\*                                                |

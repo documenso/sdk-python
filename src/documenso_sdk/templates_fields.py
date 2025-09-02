@@ -5,6 +5,7 @@ from documenso_sdk import models, utils
 from documenso_sdk._hooks import HookContext
 from documenso_sdk.types import OptionalNullable, UNSET
 from documenso_sdk.utils import get_security_from_env
+from documenso_sdk.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, List, Mapping, Optional, Union
 
 
@@ -94,38 +95,31 @@ class TemplatesFields(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.FieldCreateTemplateFieldResponse
+            return unmarshal_json_response(
+                models.FieldCreateTemplateFieldResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldCreateTemplateFieldBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.FieldCreateTemplateFieldBadRequestErrorData, http_res
             )
-            raise models.FieldCreateTemplateFieldBadRequestError(data=response_data)
+            raise models.FieldCreateTemplateFieldBadRequestError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldCreateTemplateFieldInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.FieldCreateTemplateFieldInternalServerErrorData, http_res
             )
-            raise models.FieldCreateTemplateFieldInternalServerError(data=response_data)
+            raise models.FieldCreateTemplateFieldInternalServerError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def create_async(
         self,
@@ -212,38 +206,31 @@ class TemplatesFields(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.FieldCreateTemplateFieldResponse
+            return unmarshal_json_response(
+                models.FieldCreateTemplateFieldResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldCreateTemplateFieldBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.FieldCreateTemplateFieldBadRequestErrorData, http_res
             )
-            raise models.FieldCreateTemplateFieldBadRequestError(data=response_data)
+            raise models.FieldCreateTemplateFieldBadRequestError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldCreateTemplateFieldInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.FieldCreateTemplateFieldInternalServerErrorData, http_res
             )
-            raise models.FieldCreateTemplateFieldInternalServerError(data=response_data)
+            raise models.FieldCreateTemplateFieldInternalServerError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def get(
         self,
@@ -319,43 +306,34 @@ class TemplatesFields(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.FieldGetTemplateFieldResponse
+            return unmarshal_json_response(
+                models.FieldGetTemplateFieldResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldGetTemplateFieldBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.FieldGetTemplateFieldBadRequestErrorData, http_res
             )
-            raise models.FieldGetTemplateFieldBadRequestError(data=response_data)
+            raise models.FieldGetTemplateFieldBadRequestError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldGetTemplateFieldNotFoundErrorData
+            response_data = unmarshal_json_response(
+                models.FieldGetTemplateFieldNotFoundErrorData, http_res
             )
-            raise models.FieldGetTemplateFieldNotFoundError(data=response_data)
+            raise models.FieldGetTemplateFieldNotFoundError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldGetTemplateFieldInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.FieldGetTemplateFieldInternalServerErrorData, http_res
             )
-            raise models.FieldGetTemplateFieldInternalServerError(data=response_data)
+            raise models.FieldGetTemplateFieldInternalServerError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def get_async(
         self,
@@ -431,43 +409,34 @@ class TemplatesFields(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.FieldGetTemplateFieldResponse
+            return unmarshal_json_response(
+                models.FieldGetTemplateFieldResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldGetTemplateFieldBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.FieldGetTemplateFieldBadRequestErrorData, http_res
             )
-            raise models.FieldGetTemplateFieldBadRequestError(data=response_data)
+            raise models.FieldGetTemplateFieldBadRequestError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldGetTemplateFieldNotFoundErrorData
+            response_data = unmarshal_json_response(
+                models.FieldGetTemplateFieldNotFoundErrorData, http_res
             )
-            raise models.FieldGetTemplateFieldNotFoundError(data=response_data)
+            raise models.FieldGetTemplateFieldNotFoundError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldGetTemplateFieldInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.FieldGetTemplateFieldInternalServerErrorData, http_res
             )
-            raise models.FieldGetTemplateFieldInternalServerError(data=response_data)
+            raise models.FieldGetTemplateFieldInternalServerError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def create_many(
         self,
@@ -554,40 +523,31 @@ class TemplatesFields(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.FieldCreateTemplateFieldsResponse
+            return unmarshal_json_response(
+                models.FieldCreateTemplateFieldsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldCreateTemplateFieldsBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.FieldCreateTemplateFieldsBadRequestErrorData, http_res
             )
-            raise models.FieldCreateTemplateFieldsBadRequestError(data=response_data)
+            raise models.FieldCreateTemplateFieldsBadRequestError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldCreateTemplateFieldsInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.FieldCreateTemplateFieldsInternalServerErrorData, http_res
             )
             raise models.FieldCreateTemplateFieldsInternalServerError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def create_many_async(
         self,
@@ -674,40 +634,31 @@ class TemplatesFields(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.FieldCreateTemplateFieldsResponse
+            return unmarshal_json_response(
+                models.FieldCreateTemplateFieldsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldCreateTemplateFieldsBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.FieldCreateTemplateFieldsBadRequestErrorData, http_res
             )
-            raise models.FieldCreateTemplateFieldsBadRequestError(data=response_data)
+            raise models.FieldCreateTemplateFieldsBadRequestError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldCreateTemplateFieldsInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.FieldCreateTemplateFieldsInternalServerErrorData, http_res
             )
             raise models.FieldCreateTemplateFieldsInternalServerError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def update(
         self,
@@ -794,38 +745,31 @@ class TemplatesFields(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.FieldUpdateTemplateFieldResponse
+            return unmarshal_json_response(
+                models.FieldUpdateTemplateFieldResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldUpdateTemplateFieldBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.FieldUpdateTemplateFieldBadRequestErrorData, http_res
             )
-            raise models.FieldUpdateTemplateFieldBadRequestError(data=response_data)
+            raise models.FieldUpdateTemplateFieldBadRequestError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldUpdateTemplateFieldInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.FieldUpdateTemplateFieldInternalServerErrorData, http_res
             )
-            raise models.FieldUpdateTemplateFieldInternalServerError(data=response_data)
+            raise models.FieldUpdateTemplateFieldInternalServerError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def update_async(
         self,
@@ -912,38 +856,31 @@ class TemplatesFields(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.FieldUpdateTemplateFieldResponse
+            return unmarshal_json_response(
+                models.FieldUpdateTemplateFieldResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldUpdateTemplateFieldBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.FieldUpdateTemplateFieldBadRequestErrorData, http_res
             )
-            raise models.FieldUpdateTemplateFieldBadRequestError(data=response_data)
+            raise models.FieldUpdateTemplateFieldBadRequestError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldUpdateTemplateFieldInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.FieldUpdateTemplateFieldInternalServerErrorData, http_res
             )
-            raise models.FieldUpdateTemplateFieldInternalServerError(data=response_data)
+            raise models.FieldUpdateTemplateFieldInternalServerError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def update_many(
         self,
@@ -1030,40 +967,31 @@ class TemplatesFields(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.FieldUpdateTemplateFieldsResponse
+            return unmarshal_json_response(
+                models.FieldUpdateTemplateFieldsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldUpdateTemplateFieldsBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.FieldUpdateTemplateFieldsBadRequestErrorData, http_res
             )
-            raise models.FieldUpdateTemplateFieldsBadRequestError(data=response_data)
+            raise models.FieldUpdateTemplateFieldsBadRequestError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldUpdateTemplateFieldsInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.FieldUpdateTemplateFieldsInternalServerErrorData, http_res
             )
             raise models.FieldUpdateTemplateFieldsInternalServerError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def update_many_async(
         self,
@@ -1150,40 +1078,31 @@ class TemplatesFields(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.FieldUpdateTemplateFieldsResponse
+            return unmarshal_json_response(
+                models.FieldUpdateTemplateFieldsResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldUpdateTemplateFieldsBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.FieldUpdateTemplateFieldsBadRequestErrorData, http_res
             )
-            raise models.FieldUpdateTemplateFieldsBadRequestError(data=response_data)
+            raise models.FieldUpdateTemplateFieldsBadRequestError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldUpdateTemplateFieldsInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.FieldUpdateTemplateFieldsInternalServerErrorData, http_res
             )
             raise models.FieldUpdateTemplateFieldsInternalServerError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def delete(
         self,
@@ -1260,38 +1179,31 @@ class TemplatesFields(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.FieldDeleteTemplateFieldResponse
+            return unmarshal_json_response(
+                models.FieldDeleteTemplateFieldResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldDeleteTemplateFieldBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.FieldDeleteTemplateFieldBadRequestErrorData, http_res
             )
-            raise models.FieldDeleteTemplateFieldBadRequestError(data=response_data)
+            raise models.FieldDeleteTemplateFieldBadRequestError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldDeleteTemplateFieldInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.FieldDeleteTemplateFieldInternalServerErrorData, http_res
             )
-            raise models.FieldDeleteTemplateFieldInternalServerError(data=response_data)
+            raise models.FieldDeleteTemplateFieldInternalServerError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def delete_async(
         self,
@@ -1368,35 +1280,28 @@ class TemplatesFields(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.FieldDeleteTemplateFieldResponse
+            return unmarshal_json_response(
+                models.FieldDeleteTemplateFieldResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldDeleteTemplateFieldBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.FieldDeleteTemplateFieldBadRequestErrorData, http_res
             )
-            raise models.FieldDeleteTemplateFieldBadRequestError(data=response_data)
+            raise models.FieldDeleteTemplateFieldBadRequestError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.FieldDeleteTemplateFieldInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.FieldDeleteTemplateFieldInternalServerErrorData, http_res
             )
-            raise models.FieldDeleteTemplateFieldInternalServerError(data=response_data)
+            raise models.FieldDeleteTemplateFieldInternalServerError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)

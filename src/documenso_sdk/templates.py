@@ -9,6 +9,7 @@ from documenso_sdk.templates_fields import TemplatesFields
 from documenso_sdk.templates_recipients import TemplatesRecipients
 from documenso_sdk.types import OptionalNullable, UNSET
 from documenso_sdk.utils import get_security_from_env
+from documenso_sdk.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, List, Mapping, Optional, Union
 
 
@@ -17,15 +18,23 @@ class Templates(BaseSDK):
     recipients: TemplatesRecipients
     direct_link: DirectLinkSDK
 
-    def __init__(self, sdk_config: SDKConfiguration) -> None:
-        BaseSDK.__init__(self, sdk_config)
+    def __init__(
+        self, sdk_config: SDKConfiguration, parent_ref: Optional[object] = None
+    ) -> None:
+        BaseSDK.__init__(self, sdk_config, parent_ref=parent_ref)
         self.sdk_configuration = sdk_config
         self._init_sdks()
 
     def _init_sdks(self):
-        self.fields = TemplatesFields(self.sdk_configuration)
-        self.recipients = TemplatesRecipients(self.sdk_configuration)
-        self.direct_link = DirectLinkSDK(self.sdk_configuration)
+        self.fields = TemplatesFields(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
+        self.recipients = TemplatesRecipients(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
+        self.direct_link = DirectLinkSDK(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
 
     def find(
         self,
@@ -34,6 +43,7 @@ class Templates(BaseSDK):
         page: Optional[float] = None,
         per_page: Optional[float] = None,
         type_: Optional[models.QueryParamType] = None,
+        folder_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -47,6 +57,7 @@ class Templates(BaseSDK):
         :param page: The pagination page number, starts at 1.
         :param per_page: The number of items per page.
         :param type: Filter templates by type.
+        :param folder_id: The ID of the folder to filter templates by.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -67,6 +78,7 @@ class Templates(BaseSDK):
             page=page,
             per_page=per_page,
             type=type_,
+            folder_id=folder_id,
         )
 
         req = self._build_request(
@@ -110,43 +122,34 @@ class Templates(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.TemplateFindTemplatesResponse
+            return unmarshal_json_response(
+                models.TemplateFindTemplatesResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateFindTemplatesBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.TemplateFindTemplatesBadRequestErrorData, http_res
             )
-            raise models.TemplateFindTemplatesBadRequestError(data=response_data)
+            raise models.TemplateFindTemplatesBadRequestError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateFindTemplatesNotFoundErrorData
+            response_data = unmarshal_json_response(
+                models.TemplateFindTemplatesNotFoundErrorData, http_res
             )
-            raise models.TemplateFindTemplatesNotFoundError(data=response_data)
+            raise models.TemplateFindTemplatesNotFoundError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateFindTemplatesInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.TemplateFindTemplatesInternalServerErrorData, http_res
             )
-            raise models.TemplateFindTemplatesInternalServerError(data=response_data)
+            raise models.TemplateFindTemplatesInternalServerError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def find_async(
         self,
@@ -155,6 +158,7 @@ class Templates(BaseSDK):
         page: Optional[float] = None,
         per_page: Optional[float] = None,
         type_: Optional[models.QueryParamType] = None,
+        folder_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -168,6 +172,7 @@ class Templates(BaseSDK):
         :param page: The pagination page number, starts at 1.
         :param per_page: The number of items per page.
         :param type: Filter templates by type.
+        :param folder_id: The ID of the folder to filter templates by.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -188,6 +193,7 @@ class Templates(BaseSDK):
             page=page,
             per_page=per_page,
             type=type_,
+            folder_id=folder_id,
         )
 
         req = self._build_request_async(
@@ -231,43 +237,34 @@ class Templates(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.TemplateFindTemplatesResponse
+            return unmarshal_json_response(
+                models.TemplateFindTemplatesResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateFindTemplatesBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.TemplateFindTemplatesBadRequestErrorData, http_res
             )
-            raise models.TemplateFindTemplatesBadRequestError(data=response_data)
+            raise models.TemplateFindTemplatesBadRequestError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateFindTemplatesNotFoundErrorData
+            response_data = unmarshal_json_response(
+                models.TemplateFindTemplatesNotFoundErrorData, http_res
             )
-            raise models.TemplateFindTemplatesNotFoundError(data=response_data)
+            raise models.TemplateFindTemplatesNotFoundError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateFindTemplatesInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.TemplateFindTemplatesInternalServerErrorData, http_res
             )
-            raise models.TemplateFindTemplatesInternalServerError(data=response_data)
+            raise models.TemplateFindTemplatesInternalServerError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def get(
         self,
@@ -341,43 +338,34 @@ class Templates(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.TemplateGetTemplateByIDResponse
+            return unmarshal_json_response(
+                models.TemplateGetTemplateByIDResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateGetTemplateByIDBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.TemplateGetTemplateByIDBadRequestErrorData, http_res
             )
-            raise models.TemplateGetTemplateByIDBadRequestError(data=response_data)
+            raise models.TemplateGetTemplateByIDBadRequestError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateGetTemplateByIDNotFoundErrorData
+            response_data = unmarshal_json_response(
+                models.TemplateGetTemplateByIDNotFoundErrorData, http_res
             )
-            raise models.TemplateGetTemplateByIDNotFoundError(data=response_data)
+            raise models.TemplateGetTemplateByIDNotFoundError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateGetTemplateByIDInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.TemplateGetTemplateByIDInternalServerErrorData, http_res
             )
-            raise models.TemplateGetTemplateByIDInternalServerError(data=response_data)
+            raise models.TemplateGetTemplateByIDInternalServerError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def get_async(
         self,
@@ -451,43 +439,34 @@ class Templates(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.TemplateGetTemplateByIDResponse
+            return unmarshal_json_response(
+                models.TemplateGetTemplateByIDResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateGetTemplateByIDBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.TemplateGetTemplateByIDBadRequestErrorData, http_res
             )
-            raise models.TemplateGetTemplateByIDBadRequestError(data=response_data)
+            raise models.TemplateGetTemplateByIDBadRequestError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateGetTemplateByIDNotFoundErrorData
+            response_data = unmarshal_json_response(
+                models.TemplateGetTemplateByIDNotFoundErrorData, http_res
             )
-            raise models.TemplateGetTemplateByIDNotFoundError(data=response_data)
+            raise models.TemplateGetTemplateByIDNotFoundError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateGetTemplateByIDInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.TemplateGetTemplateByIDInternalServerErrorData, http_res
             )
-            raise models.TemplateGetTemplateByIDInternalServerError(data=response_data)
+            raise models.TemplateGetTemplateByIDInternalServerError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def update(
         self,
@@ -584,38 +563,29 @@ class Templates(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.TemplateUpdateTemplateResponse
+            return unmarshal_json_response(
+                models.TemplateUpdateTemplateResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateUpdateTemplateBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.TemplateUpdateTemplateBadRequestErrorData, http_res
             )
-            raise models.TemplateUpdateTemplateBadRequestError(data=response_data)
+            raise models.TemplateUpdateTemplateBadRequestError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateUpdateTemplateInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.TemplateUpdateTemplateInternalServerErrorData, http_res
             )
-            raise models.TemplateUpdateTemplateInternalServerError(data=response_data)
+            raise models.TemplateUpdateTemplateInternalServerError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def update_async(
         self,
@@ -712,38 +682,29 @@ class Templates(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.TemplateUpdateTemplateResponse
+            return unmarshal_json_response(
+                models.TemplateUpdateTemplateResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateUpdateTemplateBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.TemplateUpdateTemplateBadRequestErrorData, http_res
             )
-            raise models.TemplateUpdateTemplateBadRequestError(data=response_data)
+            raise models.TemplateUpdateTemplateBadRequestError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateUpdateTemplateInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.TemplateUpdateTemplateInternalServerErrorData, http_res
             )
-            raise models.TemplateUpdateTemplateInternalServerError(data=response_data)
+            raise models.TemplateUpdateTemplateInternalServerError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def duplicate(
         self,
@@ -820,40 +781,31 @@ class Templates(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.TemplateDuplicateTemplateResponse
+            return unmarshal_json_response(
+                models.TemplateDuplicateTemplateResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateDuplicateTemplateBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.TemplateDuplicateTemplateBadRequestErrorData, http_res
             )
-            raise models.TemplateDuplicateTemplateBadRequestError(data=response_data)
+            raise models.TemplateDuplicateTemplateBadRequestError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateDuplicateTemplateInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.TemplateDuplicateTemplateInternalServerErrorData, http_res
             )
             raise models.TemplateDuplicateTemplateInternalServerError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def duplicate_async(
         self,
@@ -930,40 +882,31 @@ class Templates(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.TemplateDuplicateTemplateResponse
+            return unmarshal_json_response(
+                models.TemplateDuplicateTemplateResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateDuplicateTemplateBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.TemplateDuplicateTemplateBadRequestErrorData, http_res
             )
-            raise models.TemplateDuplicateTemplateBadRequestError(data=response_data)
+            raise models.TemplateDuplicateTemplateBadRequestError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateDuplicateTemplateInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.TemplateDuplicateTemplateInternalServerErrorData, http_res
             )
             raise models.TemplateDuplicateTemplateInternalServerError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def delete(
         self,
@@ -1040,38 +983,29 @@ class Templates(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.TemplateDeleteTemplateResponse
+            return unmarshal_json_response(
+                models.TemplateDeleteTemplateResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateDeleteTemplateBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.TemplateDeleteTemplateBadRequestErrorData, http_res
             )
-            raise models.TemplateDeleteTemplateBadRequestError(data=response_data)
+            raise models.TemplateDeleteTemplateBadRequestError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateDeleteTemplateInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.TemplateDeleteTemplateInternalServerErrorData, http_res
             )
-            raise models.TemplateDeleteTemplateInternalServerError(data=response_data)
+            raise models.TemplateDeleteTemplateInternalServerError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def delete_async(
         self,
@@ -1148,48 +1082,37 @@ class Templates(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.TemplateDeleteTemplateResponse
+            return unmarshal_json_response(
+                models.TemplateDeleteTemplateResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateDeleteTemplateBadRequestErrorData
+            response_data = unmarshal_json_response(
+                models.TemplateDeleteTemplateBadRequestErrorData, http_res
             )
-            raise models.TemplateDeleteTemplateBadRequestError(data=response_data)
+            raise models.TemplateDeleteTemplateBadRequestError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateDeleteTemplateInternalServerErrorData
+            response_data = unmarshal_json_response(
+                models.TemplateDeleteTemplateInternalServerErrorData, http_res
             )
-            raise models.TemplateDeleteTemplateInternalServerError(data=response_data)
+            raise models.TemplateDeleteTemplateInternalServerError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     def use(
         self,
         *,
         template_id: float,
         recipients: Union[
-            List[models.TemplateCreateDocumentFromTemplateRecipientRequestBody],
-            List[
-                models.TemplateCreateDocumentFromTemplateRecipientRequestBodyTypedDict
-            ],
+            List[models.TemplateCreateDocumentFromTemplateRecipientRequest],
+            List[models.TemplateCreateDocumentFromTemplateRecipientRequestTypedDict],
         ],
         distribute_document: Optional[bool] = None,
         custom_document_data_id: Optional[str] = None,
@@ -1229,7 +1152,7 @@ class Templates(BaseSDK):
             template_id=template_id,
             recipients=utils.get_pydantic_model(
                 recipients,
-                List[models.TemplateCreateDocumentFromTemplateRecipientRequestBody],
+                List[models.TemplateCreateDocumentFromTemplateRecipientRequest],
             ),
             distribute_document=distribute_document,
             custom_document_data_id=custom_document_data_id,
@@ -1286,54 +1209,40 @@ class Templates(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.TemplateCreateDocumentFromTemplateResponse
+            return unmarshal_json_response(
+                models.TemplateCreateDocumentFromTemplateResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
-                models.TemplateCreateDocumentFromTemplateBadRequestErrorData,
+            response_data = unmarshal_json_response(
+                models.TemplateCreateDocumentFromTemplateBadRequestErrorData, http_res
             )
             raise models.TemplateCreateDocumentFromTemplateBadRequestError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
+            response_data = unmarshal_json_response(
                 models.TemplateCreateDocumentFromTemplateInternalServerErrorData,
+                http_res,
             )
             raise models.TemplateCreateDocumentFromTemplateInternalServerError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)
 
     async def use_async(
         self,
         *,
         template_id: float,
         recipients: Union[
-            List[models.TemplateCreateDocumentFromTemplateRecipientRequestBody],
-            List[
-                models.TemplateCreateDocumentFromTemplateRecipientRequestBodyTypedDict
-            ],
+            List[models.TemplateCreateDocumentFromTemplateRecipientRequest],
+            List[models.TemplateCreateDocumentFromTemplateRecipientRequestTypedDict],
         ],
         distribute_document: Optional[bool] = None,
         custom_document_data_id: Optional[str] = None,
@@ -1373,7 +1282,7 @@ class Templates(BaseSDK):
             template_id=template_id,
             recipients=utils.get_pydantic_model(
                 recipients,
-                List[models.TemplateCreateDocumentFromTemplateRecipientRequestBody],
+                List[models.TemplateCreateDocumentFromTemplateRecipientRequest],
             ),
             distribute_document=distribute_document,
             custom_document_data_id=custom_document_data_id,
@@ -1430,271 +1339,29 @@ class Templates(BaseSDK):
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.TemplateCreateDocumentFromTemplateResponse
+            return unmarshal_json_response(
+                models.TemplateCreateDocumentFromTemplateResponse, http_res
             )
         if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
-                models.TemplateCreateDocumentFromTemplateBadRequestErrorData,
+            response_data = unmarshal_json_response(
+                models.TemplateCreateDocumentFromTemplateBadRequestErrorData, http_res
             )
             raise models.TemplateCreateDocumentFromTemplateBadRequestError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text,
+            response_data = unmarshal_json_response(
                 models.TemplateCreateDocumentFromTemplateInternalServerErrorData,
+                http_res,
             )
             raise models.TemplateCreateDocumentFromTemplateInternalServerError(
-                data=response_data
+                response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
+            raise models.APIError("API error occurred", http_res, http_res_text)
 
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    def move_to_team(
-        self,
-        *,
-        template_id: float,
-        team_id: float,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TemplateMoveTemplateToTeamResponse:
-        r"""Move template
-
-        Move a template to a team
-
-        :param template_id: The ID of the template to move to.
-        :param team_id: The ID of the team to move the template to.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.TemplateMoveTemplateToTeamRequest(
-            template_id=template_id,
-            team_id=team_id,
-        )
-
-        req = self._build_request(
-            method="POST",
-            path="/template/move",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TemplateMoveTemplateToTeamRequest
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="template-moveTemplateToTeam",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.TemplateMoveTemplateToTeamResponse
-            )
-        if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateMoveTemplateToTeamBadRequestErrorData
-            )
-            raise models.TemplateMoveTemplateToTeamBadRequestError(data=response_data)
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateMoveTemplateToTeamInternalServerErrorData
-            )
-            raise models.TemplateMoveTemplateToTeamInternalServerError(
-                data=response_data
-            )
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    async def move_to_team_async(
-        self,
-        *,
-        template_id: float,
-        team_id: float,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TemplateMoveTemplateToTeamResponse:
-        r"""Move template
-
-        Move a template to a team
-
-        :param template_id: The ID of the template to move to.
-        :param team_id: The ID of the team to move the template to.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.TemplateMoveTemplateToTeamRequest(
-            template_id=template_id,
-            team_id=team_id,
-        )
-
-        req = self._build_request_async(
-            method="POST",
-            path="/template/move",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.TemplateMoveTemplateToTeamRequest
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="template-moveTemplateToTeam",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, models.TemplateMoveTemplateToTeamResponse
-            )
-        if utils.match_response(http_res, "400", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateMoveTemplateToTeamBadRequestErrorData
-            )
-            raise models.TemplateMoveTemplateToTeamBadRequestError(data=response_data)
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = utils.unmarshal_json(
-                http_res.text, models.TemplateMoveTemplateToTeamInternalServerErrorData
-            )
-            raise models.TemplateMoveTemplateToTeamInternalServerError(
-                data=response_data
-            )
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
+        raise models.APIError("Unexpected response received", http_res)

@@ -3,10 +3,10 @@
 import importlib.metadata
 
 __title__: str = "documenso_sdk"
-__version__: str = "0.2.0"
+__version__: str = "0.3.0"
 __openapi_doc_version__: str = "0.0.0"
-__gen_version__: str = "2.623.0"
-__user_agent__: str = "speakeasy-sdk/python 0.2.0 2.623.0 0.0.0 documenso_sdk"
+__gen_version__: str = "2.687.13"
+__user_agent__: str = "speakeasy-sdk/python 0.3.0 2.687.13 0.0.0 documenso_sdk"
 
 try:
     if __package__ is not None:
