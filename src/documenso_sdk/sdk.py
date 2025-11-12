@@ -15,20 +15,35 @@ from typing import Any, Callable, Dict, Optional, TYPE_CHECKING, Union, cast
 import weakref
 
 if TYPE_CHECKING:
+    from documenso_sdk.document_sdk import DocumentSDK
     from documenso_sdk.documents import Documents
     from documenso_sdk.embedding import Embedding
+    from documenso_sdk.envelopes import Envelopes
+    from documenso_sdk.folders import Folders
+    from documenso_sdk.template_sdk import TemplateSDK
     from documenso_sdk.templates import Templates
 
 
 class Documenso(BaseSDK):
-    r"""Documenso v2 beta API: Subject to breaking changes until v2 is fully released."""
+    r"""Documenso v2 API: Welcome to the Documenso v2 API.
 
+    This API provides access to our system, which you can use to integrate applications, automate workflows, or build custom tools.
+    """
+
+    envelopes: "Envelopes"
     documents: "Documents"
+    document: "DocumentSDK"
     templates: "Templates"
+    folders: "Folders"
+    template: "TemplateSDK"
     embedding: "Embedding"
     _sub_sdk_map = {
+        "envelopes": ("documenso_sdk.envelopes", "Envelopes"),
         "documents": ("documenso_sdk.documents", "Documents"),
+        "document": ("documenso_sdk.document_sdk", "DocumentSDK"),
         "templates": ("documenso_sdk.templates", "Templates"),
+        "folders": ("documenso_sdk.folders", "Folders"),
+        "template": ("documenso_sdk.template_sdk", "TemplateSDK"),
         "embedding": ("documenso_sdk.embedding", "Embedding"),
     }
 
@@ -57,7 +72,7 @@ class Documenso(BaseSDK):
         """
         client_supplied = True
         if client is None:
-            client = httpx.Client()
+            client = httpx.Client(follow_redirects=True)
             client_supplied = False
 
         assert issubclass(
@@ -66,7 +81,7 @@ class Documenso(BaseSDK):
 
         async_client_supplied = True
         if async_client is None:
-            async_client = httpx.AsyncClient()
+            async_client = httpx.AsyncClient(follow_redirects=True)
             async_client_supplied = False
 
         if debug_logger is None:

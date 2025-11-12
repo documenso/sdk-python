@@ -3,6 +3,12 @@
 
 ## Supported Types
 
+### `models.TemplateCreateDocumentFromTemplateFieldMetaSignature`
+
+```python
+value: models.TemplateCreateDocumentFromTemplateFieldMetaSignature = /* values here */
+```
+
 ### `models.TemplateCreateDocumentFromTemplateFieldMetaInitials`
 
 ```python

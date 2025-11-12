@@ -16,7 +16,7 @@ from typing import Callable, Dict, Optional, Tuple, Union
 
 
 SERVERS = [
-    "https://app.documenso.com/api/v2-beta",
+    "https://app.documenso.com/api/v2",
 ]
 """Contains the list of servers available to the SDK"""
 

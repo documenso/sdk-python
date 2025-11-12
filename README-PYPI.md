@@ -245,17 +245,29 @@ if __name__ == "__main__":
 <details open>
 <summary>Available methods</summary>
 
+### [document](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documentsdk/README.md)
+
+* [document_download](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documentsdk/README.md#document_download) - Download document (beta)
 
 ### [documents](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documents/README.md)
 
-* [update](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documents/README.md#update) - Update document
-* [find](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documents/README.md#find) - Find documents
 * [get](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documents/README.md#get) - Get document
-* [create_v0](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documents/README.md#create_v0) - Create document
+* [find](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documents/README.md#find) - Find documents
+* [create](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documents/README.md#create) - Create document
+* [update](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documents/README.md#update) - Update document
 * [delete](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documents/README.md#delete) - Delete document
+* [duplicate](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documents/README.md#duplicate) - Duplicate document
 * [distribute](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documents/README.md#distribute) - Distribute document
 * [redistribute](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documents/README.md#redistribute) - Redistribute document
-* [duplicate](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documents/README.md#duplicate) - Duplicate document
+* [download](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documents/README.md#download) - Download document
+* [create_v0](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documents/README.md#create_v0) - Create document
+
+#### [documents.attachments](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documentsattachments/README.md)
+
+* [create](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documentsattachments/README.md#create) - Create attachment
+* [update](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documentsattachments/README.md#update) - Update attachment
+* [delete](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documentsattachments/README.md#delete) - Delete attachment
+* [find](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documentsattachments/README.md#find) - Find attachments
 
 #### [documents.fields](https://github.com/documenso/sdk-python/blob/master/docs/sdks/documentsfields/README.md)
 
@@ -280,10 +292,61 @@ if __name__ == "__main__":
 * [embedding_presign_create_embedding_presign_token](https://github.com/documenso/sdk-python/blob/master/docs/sdks/embedding/README.md#embedding_presign_create_embedding_presign_token) - Create embedding presign token
 * [embedding_presign_verify_embedding_presign_token](https://github.com/documenso/sdk-python/blob/master/docs/sdks/embedding/README.md#embedding_presign_verify_embedding_presign_token) - Verify embedding presign token
 
+### [envelopes](https://github.com/documenso/sdk-python/blob/master/docs/sdks/envelopes/README.md)
+
+* [get](https://github.com/documenso/sdk-python/blob/master/docs/sdks/envelopes/README.md#get) - Get envelope
+* [create](https://github.com/documenso/sdk-python/blob/master/docs/sdks/envelopes/README.md#create) - Create envelope
+* [use](https://github.com/documenso/sdk-python/blob/master/docs/sdks/envelopes/README.md#use) - Use envelope
+* [update](https://github.com/documenso/sdk-python/blob/master/docs/sdks/envelopes/README.md#update) - Update envelope
+* [delete](https://github.com/documenso/sdk-python/blob/master/docs/sdks/envelopes/README.md#delete) - Delete envelope
+* [duplicate](https://github.com/documenso/sdk-python/blob/master/docs/sdks/envelopes/README.md#duplicate) - Duplicate envelope
+* [distribute](https://github.com/documenso/sdk-python/blob/master/docs/sdks/envelopes/README.md#distribute) - Distribute envelope
+* [redistribute](https://github.com/documenso/sdk-python/blob/master/docs/sdks/envelopes/README.md#redistribute) - Redistribute envelope
+
+#### [envelopes.attachments](https://github.com/documenso/sdk-python/blob/master/docs/sdks/envelopesattachments/README.md)
+
+* [find](https://github.com/documenso/sdk-python/blob/master/docs/sdks/envelopesattachments/README.md#find) - Find attachments
+* [create](https://github.com/documenso/sdk-python/blob/master/docs/sdks/envelopesattachments/README.md#create) - Create attachment
+* [update](https://github.com/documenso/sdk-python/blob/master/docs/sdks/envelopesattachments/README.md#update) - Update attachment
+* [delete](https://github.com/documenso/sdk-python/blob/master/docs/sdks/envelopesattachments/README.md#delete) - Delete attachment
+
+#### [envelopes.fields](https://github.com/documenso/sdk-python/blob/master/docs/sdks/envelopesfields/README.md)
+
+* [get](https://github.com/documenso/sdk-python/blob/master/docs/sdks/envelopesfields/README.md#get) - Get envelope field
+* [create_many](https://github.com/documenso/sdk-python/blob/master/docs/sdks/envelopesfields/README.md#create_many) - Create envelope fields
+* [update_many](https://github.com/documenso/sdk-python/blob/master/docs/sdks/envelopesfields/README.md#update_many) - Update envelope fields
+* [delete](https://github.com/documenso/sdk-python/blob/master/docs/sdks/envelopesfields/README.md#delete) - Delete envelope field
+
+#### [envelopes.items](https://github.com/documenso/sdk-python/blob/master/docs/sdks/items/README.md)
+
+* [create_many](https://github.com/documenso/sdk-python/blob/master/docs/sdks/items/README.md#create_many) - Create envelope items
+* [update_many](https://github.com/documenso/sdk-python/blob/master/docs/sdks/items/README.md#update_many) - Update envelope items
+* [delete](https://github.com/documenso/sdk-python/blob/master/docs/sdks/items/README.md#delete) - Delete envelope item
+* [download](https://github.com/documenso/sdk-python/blob/master/docs/sdks/items/README.md#download) - Download an envelope item
+
+#### [envelopes.recipients](https://github.com/documenso/sdk-python/blob/master/docs/sdks/envelopesrecipients/README.md)
+
+* [get](https://github.com/documenso/sdk-python/blob/master/docs/sdks/envelopesrecipients/README.md#get) - Get envelope recipient
+* [create_many](https://github.com/documenso/sdk-python/blob/master/docs/sdks/envelopesrecipients/README.md#create_many) - Create envelope recipients
+* [update_many](https://github.com/documenso/sdk-python/blob/master/docs/sdks/envelopesrecipients/README.md#update_many) - Update envelope recipients
+* [delete](https://github.com/documenso/sdk-python/blob/master/docs/sdks/envelopesrecipients/README.md#delete) - Delete envelope recipient
+
+### [folders](https://github.com/documenso/sdk-python/blob/master/docs/sdks/folders/README.md)
+
+* [find](https://github.com/documenso/sdk-python/blob/master/docs/sdks/folders/README.md#find) - Find folders
+* [create](https://github.com/documenso/sdk-python/blob/master/docs/sdks/folders/README.md#create) - Create new folder
+* [update](https://github.com/documenso/sdk-python/blob/master/docs/sdks/folders/README.md#update) - Update folder
+* [delete](https://github.com/documenso/sdk-python/blob/master/docs/sdks/folders/README.md#delete) - Delete folder
+
+### [template](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templatesdk/README.md)
+
+* [template_create_template_temporary](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templatesdk/README.md#template_create_template_temporary) - Create template
+
 ### [templates](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templates/README.md)
 
 * [find](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templates/README.md#find) - Find templates
 * [get](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templates/README.md#get) - Get template
+* [create](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templates/README.md#create) - Create template
 * [update](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templates/README.md#update) - Update template
 * [duplicate](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templates/README.md#duplicate) - Duplicate template
 * [delete](https://github.com/documenso/sdk-python/blob/master/docs/sdks/templates/README.md#delete) - Delete template
@@ -316,6 +379,37 @@ if __name__ == "__main__":
 </details>
 <!-- End Available Resources and Operations [operations] -->
 
+<!-- Start File uploads [file-upload] -->
+## File uploads
+
+Certain SDK methods accept file objects as part of a request body or multi-part request. It is possible and typically recommended to upload files as a stream rather than reading the entire contents into memory. This avoids excessive memory consumption and potentially crashing with out-of-memory errors when working with very large files. The following example demonstrates how to attach a file stream to a request.
+
+> [!TIP]
+>
+> For endpoints that handle file uploads bytes arrays can also be used. However, using streams is recommended for large files.
+>
+
+```python
+import documenso_sdk
+from documenso_sdk import Documenso
+import os
+
+
+with Documenso(
+    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+) as documenso:
+
+    res = documenso.envelopes.create(payload={
+        "title": "<value>",
+        "type": documenso_sdk.EnvelopeCreateType.TEMPLATE,
+    })
+
+    # Handle response
+    print(res)
+
+```
+<!-- End File uploads [file-upload] -->
+
 <!-- Start Retries [retries] -->
 ## Retries
 
@@ -332,7 +426,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.update(document_id=9701.92,
+    res = documenso.envelopes.get(envelope_id="<id>",
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
     # Handle response
@@ -352,7 +446,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.update(document_id=9701.92)
+    res = documenso.envelopes.get(envelope_id="<id>")
 
     # Handle response
     print(res)
@@ -387,7 +481,7 @@ with Documenso(
     res = None
     try:
 
-        res = documenso.documents.update(document_id=9701.92)
+        res = documenso.envelopes.get(envelope_id="<id>")
 
         # Handle response
         print(res)
@@ -402,17 +496,17 @@ with Documenso(
         print(e.raw_response)
 
         # Depending on the method different errors may be thrown
-        if isinstance(e, models.DocumentUpdateDocumentBadRequestError):
+        if isinstance(e, models.EnvelopeGetBadRequestError):
             print(e.data.message)  # str
             print(e.data.code)  # str
-            print(e.data.issues)  # Optional[List[documenso_sdk.DocumentUpdateDocumentBadRequestIssue]]
+            print(e.data.issues)  # Optional[List[documenso_sdk.EnvelopeGetBadRequestIssue]]
 ```
 
 ### Error Classes
 **Primary error:**
 * [`DocumensoError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documensoerror.py): The base class for HTTP error responses.
 
-<details><summary>Less common errors (99)</summary>
+<details><summary>Less common errors (342)</summary>
 
 <br />
 
@@ -423,100 +517,343 @@ with Documenso(
 
 
 **Inherit from [`DocumensoError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documensoerror.py)**:
-* [`DocumentUpdateDocumentBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentupdatedocumentbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`DocumentFindDocumentsBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentfinddocumentsbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`DocumentGetDocumentWithDetailsByIDBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentgetdocumentwithdetailsbyidbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`DocumentCreateDocumentTemporaryBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentcreatedocumenttemporarybadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`DocumentDeleteDocumentBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentdeletedocumentbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`DocumentSendDocumentBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentsenddocumentbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`DocumentResendDocumentBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentresenddocumentbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`DocumentDuplicateDocumentBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentduplicatedocumentbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`TemplateFindTemplatesBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatefindtemplatesbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`TemplateGetTemplateByIDBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templategettemplatebyidbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`TemplateUpdateTemplateBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templateupdatetemplatebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`TemplateDuplicateTemplateBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templateduplicatetemplatebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`TemplateDeleteTemplateBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatedeletetemplatebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`TemplateCreateDocumentFromTemplateBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatecreatedocumentfromtemplatebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`EmbeddingPresignCreateEmbeddingPresignTokenBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/embeddingpresigncreateembeddingpresigntokenbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`EmbeddingPresignVerifyEmbeddingPresignTokenBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/embeddingpresignverifyembeddingpresigntokenbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`FieldGetDocumentFieldBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldgetdocumentfieldbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`FieldCreateDocumentFieldBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldcreatedocumentfieldbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`FieldCreateDocumentFieldsBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldcreatedocumentfieldsbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`FieldUpdateDocumentFieldBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldupdatedocumentfieldbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`FieldUpdateDocumentFieldsBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldupdatedocumentfieldsbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`FieldDeleteDocumentFieldBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fielddeletedocumentfieldbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`RecipientGetDocumentRecipientBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientgetdocumentrecipientbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`RecipientCreateDocumentRecipientBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientcreatedocumentrecipientbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`RecipientCreateDocumentRecipientsBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientcreatedocumentrecipientsbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`RecipientUpdateDocumentRecipientBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientupdatedocumentrecipientbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`RecipientUpdateDocumentRecipientsBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientupdatedocumentrecipientsbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`RecipientDeleteDocumentRecipientBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientdeletedocumentrecipientbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`FieldCreateTemplateFieldBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldcreatetemplatefieldbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`FieldGetTemplateFieldBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldgettemplatefieldbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`FieldCreateTemplateFieldsBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldcreatetemplatefieldsbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`FieldUpdateTemplateFieldBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldupdatetemplatefieldbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`FieldUpdateTemplateFieldsBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldupdatetemplatefieldsbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`FieldDeleteTemplateFieldBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fielddeletetemplatefieldbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`RecipientGetTemplateRecipientBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientgettemplaterecipientbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`RecipientCreateTemplateRecipientBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientcreatetemplaterecipientbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`RecipientCreateTemplateRecipientsBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientcreatetemplaterecipientsbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`RecipientUpdateTemplateRecipientBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientupdatetemplaterecipientbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`RecipientUpdateTemplateRecipientsBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientupdatetemplaterecipientsbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`RecipientDeleteTemplateRecipientBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientdeletetemplaterecipientbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`TemplateCreateTemplateDirectLinkBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatecreatetemplatedirectlinkbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`TemplateDeleteTemplateDirectLinkBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatedeletetemplatedirectlinkbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`TemplateToggleTemplateDirectLinkBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatetoggletemplatedirectlinkbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 43 methods.*
-* [`DocumentFindDocumentsNotFoundError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentfinddocumentsnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 43 methods.*
-* [`DocumentGetDocumentWithDetailsByIDNotFoundError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentgetdocumentwithdetailsbyidnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 43 methods.*
-* [`TemplateFindTemplatesNotFoundError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatefindtemplatesnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 43 methods.*
-* [`TemplateGetTemplateByIDNotFoundError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templategettemplatebyidnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 43 methods.*
-* [`FieldGetDocumentFieldNotFoundError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldgetdocumentfieldnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 43 methods.*
-* [`RecipientGetDocumentRecipientNotFoundError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientgetdocumentrecipientnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 43 methods.*
-* [`FieldGetTemplateFieldNotFoundError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldgettemplatefieldnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 43 methods.*
-* [`RecipientGetTemplateRecipientNotFoundError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientgettemplaterecipientnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 43 methods.*
-* [`DocumentUpdateDocumentInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentupdatedocumentinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`DocumentFindDocumentsInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentfinddocumentsinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`DocumentGetDocumentWithDetailsByIDInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentgetdocumentwithdetailsbyidinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`DocumentCreateDocumentTemporaryInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentcreatedocumenttemporaryinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`DocumentDeleteDocumentInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentdeletedocumentinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`DocumentSendDocumentInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentsenddocumentinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`DocumentResendDocumentInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentresenddocumentinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`DocumentDuplicateDocumentInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentduplicatedocumentinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`TemplateFindTemplatesInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatefindtemplatesinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`TemplateGetTemplateByIDInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templategettemplatebyidinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`TemplateUpdateTemplateInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templateupdatetemplateinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`TemplateDuplicateTemplateInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templateduplicatetemplateinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`TemplateDeleteTemplateInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatedeletetemplateinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`TemplateCreateDocumentFromTemplateInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatecreatedocumentfromtemplateinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`EmbeddingPresignCreateEmbeddingPresignTokenInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/embeddingpresigncreateembeddingpresigntokeninternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`EmbeddingPresignVerifyEmbeddingPresignTokenInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/embeddingpresignverifyembeddingpresigntokeninternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`FieldGetDocumentFieldInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldgetdocumentfieldinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`FieldCreateDocumentFieldInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldcreatedocumentfieldinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`FieldCreateDocumentFieldsInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldcreatedocumentfieldsinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`FieldUpdateDocumentFieldInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldupdatedocumentfieldinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`FieldUpdateDocumentFieldsInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldupdatedocumentfieldsinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`FieldDeleteDocumentFieldInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fielddeletedocumentfieldinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`RecipientGetDocumentRecipientInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientgetdocumentrecipientinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`RecipientCreateDocumentRecipientInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientcreatedocumentrecipientinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`RecipientCreateDocumentRecipientsInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientcreatedocumentrecipientsinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`RecipientUpdateDocumentRecipientInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientupdatedocumentrecipientinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`RecipientUpdateDocumentRecipientsInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientupdatedocumentrecipientsinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`RecipientDeleteDocumentRecipientInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientdeletedocumentrecipientinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`FieldCreateTemplateFieldInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldcreatetemplatefieldinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`FieldGetTemplateFieldInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldgettemplatefieldinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`FieldCreateTemplateFieldsInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldcreatetemplatefieldsinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`FieldUpdateTemplateFieldInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldupdatetemplatefieldinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`FieldUpdateTemplateFieldsInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldupdatetemplatefieldsinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`FieldDeleteTemplateFieldInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fielddeletetemplatefieldinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`RecipientGetTemplateRecipientInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientgettemplaterecipientinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`RecipientCreateTemplateRecipientInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientcreatetemplaterecipientinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`RecipientCreateTemplateRecipientsInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientcreatetemplaterecipientsinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`RecipientUpdateTemplateRecipientInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientupdatetemplaterecipientinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`RecipientUpdateTemplateRecipientsInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientupdatetemplaterecipientsinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`RecipientDeleteTemplateRecipientInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientdeletetemplaterecipientinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`TemplateCreateTemplateDirectLinkInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatecreatetemplatedirectlinkinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`TemplateDeleteTemplateDirectLinkInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatedeletetemplatedirectlinkinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
-* [`TemplateToggleTemplateDirectLinkInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatetoggletemplatedirectlinkinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 43 methods.*
+* [`EnvelopeGetBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopegetbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EnvelopeCreateBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopecreatebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EnvelopeUseBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeusebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EnvelopeUpdateBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeupdatebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EnvelopeDeleteBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopedeletebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EnvelopeDuplicateBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeduplicatebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EnvelopeDistributeBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopedistributebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EnvelopeRedistributeBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/enveloperedistributebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`DocumentGetBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentgetbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`DocumentFindBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentfindbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`DocumentCreateBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentcreatebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`DocumentUpdateBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentupdatebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`DocumentDeleteBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentdeletebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`DocumentDuplicateBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentduplicatebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`DocumentDistributeBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentdistributebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`DocumentRedistributeBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentredistributebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`DocumentDownloadBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentdownloadbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`DocumentCreateDocumentTemporaryBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentcreatedocumenttemporarybadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`DocumentDownloadBetaBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentdownloadbetabadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`TemplateFindTemplatesBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatefindtemplatesbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`TemplateGetTemplateByIDBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templategettemplatebyidbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`TemplateCreateTemplateBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatecreatetemplatebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`TemplateUpdateTemplateBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templateupdatetemplatebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`TemplateDuplicateTemplateBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templateduplicatetemplatebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`TemplateDeleteTemplateBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatedeletetemplatebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`TemplateCreateDocumentFromTemplateBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatecreatedocumentfromtemplatebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`FolderFindFoldersBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/folderfindfoldersbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`FolderCreateFolderBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/foldercreatefolderbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`FolderUpdateFolderBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/folderupdatefolderbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`FolderDeleteFolderBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/folderdeletefolderbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`TemplateCreateTemplateTemporaryBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatecreatetemplatetemporarybadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EmbeddingPresignCreateEmbeddingPresignTokenBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/embeddingpresigncreateembeddingpresigntokenbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EmbeddingPresignVerifyEmbeddingPresignTokenBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/embeddingpresignverifyembeddingpresigntokenbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EnvelopeAttachmentFindBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeattachmentfindbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EnvelopeAttachmentCreateBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeattachmentcreatebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EnvelopeAttachmentUpdateBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeattachmentupdatebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EnvelopeAttachmentDeleteBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeattachmentdeletebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EnvelopeItemCreateManyBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeitemcreatemanybadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EnvelopeItemUpdateManyBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeitemupdatemanybadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EnvelopeItemDeleteBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeitemdeletebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EnvelopeItemDownloadBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeitemdownloadbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EnvelopeRecipientGetBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/enveloperecipientgetbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EnvelopeRecipientCreateManyBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/enveloperecipientcreatemanybadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EnvelopeRecipientUpdateManyBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/enveloperecipientupdatemanybadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EnvelopeRecipientDeleteBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/enveloperecipientdeletebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EnvelopeFieldGetBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopefieldgetbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EnvelopeFieldCreateManyBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopefieldcreatemanybadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EnvelopeFieldUpdateManyBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopefieldupdatemanybadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EnvelopeFieldDeleteBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopefielddeletebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`DocumentAttachmentCreateBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentattachmentcreatebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`DocumentAttachmentUpdateBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentattachmentupdatebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`DocumentAttachmentDeleteBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentattachmentdeletebadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`DocumentAttachmentFindBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentattachmentfindbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`FieldGetDocumentFieldBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldgetdocumentfieldbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`FieldCreateDocumentFieldBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldcreatedocumentfieldbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`FieldCreateDocumentFieldsBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldcreatedocumentfieldsbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`FieldUpdateDocumentFieldBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldupdatedocumentfieldbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`FieldUpdateDocumentFieldsBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldupdatedocumentfieldsbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`FieldDeleteDocumentFieldBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fielddeletedocumentfieldbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`RecipientGetDocumentRecipientBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientgetdocumentrecipientbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`RecipientCreateDocumentRecipientBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientcreatedocumentrecipientbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`RecipientCreateDocumentRecipientsBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientcreatedocumentrecipientsbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`RecipientUpdateDocumentRecipientBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientupdatedocumentrecipientbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`RecipientUpdateDocumentRecipientsBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientupdatedocumentrecipientsbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`RecipientDeleteDocumentRecipientBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientdeletedocumentrecipientbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`FieldCreateTemplateFieldBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldcreatetemplatefieldbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`FieldGetTemplateFieldBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldgettemplatefieldbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`FieldCreateTemplateFieldsBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldcreatetemplatefieldsbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`FieldUpdateTemplateFieldBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldupdatetemplatefieldbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`FieldUpdateTemplateFieldsBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldupdatetemplatefieldsbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`FieldDeleteTemplateFieldBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fielddeletetemplatefieldbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`RecipientGetTemplateRecipientBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientgettemplaterecipientbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`RecipientCreateTemplateRecipientBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientcreatetemplaterecipientbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`RecipientCreateTemplateRecipientsBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientcreatetemplaterecipientsbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`RecipientUpdateTemplateRecipientBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientupdatetemplaterecipientbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`RecipientUpdateTemplateRecipientsBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientupdatetemplaterecipientsbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`RecipientDeleteTemplateRecipientBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientdeletetemplaterecipientbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`TemplateCreateTemplateDirectLinkBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatecreatetemplatedirectlinkbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`TemplateDeleteTemplateDirectLinkBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatedeletetemplatedirectlinkbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`TemplateToggleTemplateDirectLinkBadRequestError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatetoggletemplatedirectlinkbadrequesterror.py): Invalid input data. Status code `400`. Applicable to 1 of 80 methods.*
+* [`EnvelopeGetUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopegetunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EnvelopeCreateUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopecreateunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EnvelopeUseUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeuseunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EnvelopeUpdateUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeupdateunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EnvelopeDeleteUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopedeleteunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EnvelopeDuplicateUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeduplicateunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EnvelopeDistributeUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopedistributeunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EnvelopeRedistributeUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/enveloperedistributeunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`DocumentGetUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentgetunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`DocumentFindUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentfindunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`DocumentCreateUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentcreateunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`DocumentUpdateUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentupdateunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`DocumentDeleteUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentdeleteunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`DocumentDuplicateUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentduplicateunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`DocumentDistributeUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentdistributeunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`DocumentRedistributeUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentredistributeunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`DocumentDownloadUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentdownloadunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`DocumentCreateDocumentTemporaryUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentcreatedocumenttemporaryunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`DocumentDownloadBetaUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentdownloadbetaunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`TemplateFindTemplatesUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatefindtemplatesunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`TemplateGetTemplateByIDUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templategettemplatebyidunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`TemplateCreateTemplateUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatecreatetemplateunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`TemplateUpdateTemplateUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templateupdatetemplateunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`TemplateDuplicateTemplateUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templateduplicatetemplateunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`TemplateDeleteTemplateUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatedeletetemplateunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`TemplateCreateDocumentFromTemplateUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatecreatedocumentfromtemplateunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`FolderFindFoldersUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/folderfindfoldersunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`FolderCreateFolderUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/foldercreatefolderunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`FolderUpdateFolderUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/folderupdatefolderunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`FolderDeleteFolderUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/folderdeletefolderunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`TemplateCreateTemplateTemporaryUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatecreatetemplatetemporaryunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EmbeddingPresignCreateEmbeddingPresignTokenUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/embeddingpresigncreateembeddingpresigntokenunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EmbeddingPresignVerifyEmbeddingPresignTokenUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/embeddingpresignverifyembeddingpresigntokenunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EnvelopeAttachmentFindUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeattachmentfindunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EnvelopeAttachmentCreateUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeattachmentcreateunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EnvelopeAttachmentUpdateUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeattachmentupdateunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EnvelopeAttachmentDeleteUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeattachmentdeleteunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EnvelopeItemCreateManyUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeitemcreatemanyunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EnvelopeItemUpdateManyUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeitemupdatemanyunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EnvelopeItemDeleteUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeitemdeleteunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EnvelopeItemDownloadUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeitemdownloadunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EnvelopeRecipientGetUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/enveloperecipientgetunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EnvelopeRecipientCreateManyUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/enveloperecipientcreatemanyunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EnvelopeRecipientUpdateManyUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/enveloperecipientupdatemanyunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EnvelopeRecipientDeleteUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/enveloperecipientdeleteunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EnvelopeFieldGetUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopefieldgetunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EnvelopeFieldCreateManyUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopefieldcreatemanyunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EnvelopeFieldUpdateManyUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopefieldupdatemanyunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EnvelopeFieldDeleteUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopefielddeleteunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`DocumentAttachmentCreateUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentattachmentcreateunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`DocumentAttachmentUpdateUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentattachmentupdateunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`DocumentAttachmentDeleteUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentattachmentdeleteunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`DocumentAttachmentFindUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentattachmentfindunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`FieldGetDocumentFieldUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldgetdocumentfieldunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`FieldCreateDocumentFieldUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldcreatedocumentfieldunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`FieldCreateDocumentFieldsUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldcreatedocumentfieldsunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`FieldUpdateDocumentFieldUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldupdatedocumentfieldunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`FieldUpdateDocumentFieldsUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldupdatedocumentfieldsunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`FieldDeleteDocumentFieldUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fielddeletedocumentfieldunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`RecipientGetDocumentRecipientUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientgetdocumentrecipientunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`RecipientCreateDocumentRecipientUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientcreatedocumentrecipientunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`RecipientCreateDocumentRecipientsUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientcreatedocumentrecipientsunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`RecipientUpdateDocumentRecipientUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientupdatedocumentrecipientunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`RecipientUpdateDocumentRecipientsUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientupdatedocumentrecipientsunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`RecipientDeleteDocumentRecipientUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientdeletedocumentrecipientunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`FieldCreateTemplateFieldUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldcreatetemplatefieldunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`FieldGetTemplateFieldUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldgettemplatefieldunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`FieldCreateTemplateFieldsUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldcreatetemplatefieldsunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`FieldUpdateTemplateFieldUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldupdatetemplatefieldunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`FieldUpdateTemplateFieldsUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldupdatetemplatefieldsunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`FieldDeleteTemplateFieldUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fielddeletetemplatefieldunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`RecipientGetTemplateRecipientUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientgettemplaterecipientunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`RecipientCreateTemplateRecipientUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientcreatetemplaterecipientunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`RecipientCreateTemplateRecipientsUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientcreatetemplaterecipientsunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`RecipientUpdateTemplateRecipientUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientupdatetemplaterecipientunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`RecipientUpdateTemplateRecipientsUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientupdatetemplaterecipientsunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`RecipientDeleteTemplateRecipientUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientdeletetemplaterecipientunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`TemplateCreateTemplateDirectLinkUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatecreatetemplatedirectlinkunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`TemplateDeleteTemplateDirectLinkUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatedeletetemplatedirectlinkunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`TemplateToggleTemplateDirectLinkUnauthorizedError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatetoggletemplatedirectlinkunauthorizederror.py): Authorization not provided. Status code `401`. Applicable to 1 of 80 methods.*
+* [`EnvelopeGetForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopegetforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EnvelopeCreateForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopecreateforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EnvelopeUseForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeuseforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EnvelopeUpdateForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeupdateforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EnvelopeDeleteForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopedeleteforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EnvelopeDuplicateForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeduplicateforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EnvelopeDistributeForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopedistributeforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EnvelopeRedistributeForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/enveloperedistributeforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`DocumentGetForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentgetforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`DocumentFindForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentfindforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`DocumentCreateForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentcreateforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`DocumentUpdateForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentupdateforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`DocumentDeleteForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentdeleteforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`DocumentDuplicateForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentduplicateforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`DocumentDistributeForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentdistributeforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`DocumentRedistributeForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentredistributeforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`DocumentDownloadForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentdownloadforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`DocumentCreateDocumentTemporaryForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentcreatedocumenttemporaryforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`DocumentDownloadBetaForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentdownloadbetaforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`TemplateFindTemplatesForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatefindtemplatesforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`TemplateGetTemplateByIDForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templategettemplatebyidforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`TemplateCreateTemplateForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatecreatetemplateforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`TemplateUpdateTemplateForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templateupdatetemplateforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`TemplateDuplicateTemplateForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templateduplicatetemplateforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`TemplateDeleteTemplateForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatedeletetemplateforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`TemplateCreateDocumentFromTemplateForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatecreatedocumentfromtemplateforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`FolderFindFoldersForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/folderfindfoldersforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`FolderCreateFolderForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/foldercreatefolderforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`FolderUpdateFolderForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/folderupdatefolderforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`FolderDeleteFolderForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/folderdeletefolderforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`TemplateCreateTemplateTemporaryForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatecreatetemplatetemporaryforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EmbeddingPresignCreateEmbeddingPresignTokenForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/embeddingpresigncreateembeddingpresigntokenforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EmbeddingPresignVerifyEmbeddingPresignTokenForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/embeddingpresignverifyembeddingpresigntokenforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EnvelopeAttachmentFindForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeattachmentfindforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EnvelopeAttachmentCreateForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeattachmentcreateforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EnvelopeAttachmentUpdateForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeattachmentupdateforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EnvelopeAttachmentDeleteForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeattachmentdeleteforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EnvelopeItemCreateManyForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeitemcreatemanyforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EnvelopeItemUpdateManyForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeitemupdatemanyforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EnvelopeItemDeleteForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeitemdeleteforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EnvelopeItemDownloadForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeitemdownloadforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EnvelopeRecipientGetForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/enveloperecipientgetforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EnvelopeRecipientCreateManyForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/enveloperecipientcreatemanyforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EnvelopeRecipientUpdateManyForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/enveloperecipientupdatemanyforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EnvelopeRecipientDeleteForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/enveloperecipientdeleteforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EnvelopeFieldGetForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopefieldgetforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EnvelopeFieldCreateManyForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopefieldcreatemanyforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EnvelopeFieldUpdateManyForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopefieldupdatemanyforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EnvelopeFieldDeleteForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopefielddeleteforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`DocumentAttachmentCreateForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentattachmentcreateforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`DocumentAttachmentUpdateForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentattachmentupdateforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`DocumentAttachmentDeleteForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentattachmentdeleteforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`DocumentAttachmentFindForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentattachmentfindforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`FieldGetDocumentFieldForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldgetdocumentfieldforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`FieldCreateDocumentFieldForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldcreatedocumentfieldforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`FieldCreateDocumentFieldsForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldcreatedocumentfieldsforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`FieldUpdateDocumentFieldForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldupdatedocumentfieldforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`FieldUpdateDocumentFieldsForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldupdatedocumentfieldsforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`FieldDeleteDocumentFieldForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fielddeletedocumentfieldforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`RecipientGetDocumentRecipientForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientgetdocumentrecipientforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`RecipientCreateDocumentRecipientForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientcreatedocumentrecipientforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`RecipientCreateDocumentRecipientsForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientcreatedocumentrecipientsforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`RecipientUpdateDocumentRecipientForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientupdatedocumentrecipientforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`RecipientUpdateDocumentRecipientsForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientupdatedocumentrecipientsforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`RecipientDeleteDocumentRecipientForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientdeletedocumentrecipientforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`FieldCreateTemplateFieldForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldcreatetemplatefieldforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`FieldGetTemplateFieldForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldgettemplatefieldforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`FieldCreateTemplateFieldsForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldcreatetemplatefieldsforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`FieldUpdateTemplateFieldForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldupdatetemplatefieldforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`FieldUpdateTemplateFieldsForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldupdatetemplatefieldsforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`FieldDeleteTemplateFieldForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fielddeletetemplatefieldforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`RecipientGetTemplateRecipientForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientgettemplaterecipientforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`RecipientCreateTemplateRecipientForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientcreatetemplaterecipientforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`RecipientCreateTemplateRecipientsForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientcreatetemplaterecipientsforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`RecipientUpdateTemplateRecipientForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientupdatetemplaterecipientforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`RecipientUpdateTemplateRecipientsForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientupdatetemplaterecipientsforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`RecipientDeleteTemplateRecipientForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientdeletetemplaterecipientforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`TemplateCreateTemplateDirectLinkForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatecreatetemplatedirectlinkforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`TemplateDeleteTemplateDirectLinkForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatedeletetemplatedirectlinkforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`TemplateToggleTemplateDirectLinkForbiddenError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatetoggletemplatedirectlinkforbiddenerror.py): Insufficient access. Status code `403`. Applicable to 1 of 80 methods.*
+* [`EnvelopeGetNotFoundError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopegetnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 80 methods.*
+* [`DocumentGetNotFoundError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentgetnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 80 methods.*
+* [`DocumentFindNotFoundError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentfindnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 80 methods.*
+* [`DocumentDownloadNotFoundError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentdownloadnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 80 methods.*
+* [`DocumentDownloadBetaNotFoundError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentdownloadbetanotfounderror.py): Not found. Status code `404`. Applicable to 1 of 80 methods.*
+* [`TemplateFindTemplatesNotFoundError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatefindtemplatesnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 80 methods.*
+* [`TemplateGetTemplateByIDNotFoundError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templategettemplatebyidnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 80 methods.*
+* [`FolderFindFoldersNotFoundError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/folderfindfoldersnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 80 methods.*
+* [`EnvelopeAttachmentFindNotFoundError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeattachmentfindnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 80 methods.*
+* [`EnvelopeItemDownloadNotFoundError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeitemdownloadnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 80 methods.*
+* [`EnvelopeRecipientGetNotFoundError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/enveloperecipientgetnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 80 methods.*
+* [`EnvelopeFieldGetNotFoundError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopefieldgetnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 80 methods.*
+* [`DocumentAttachmentFindNotFoundError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentattachmentfindnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 80 methods.*
+* [`FieldGetDocumentFieldNotFoundError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldgetdocumentfieldnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 80 methods.*
+* [`RecipientGetDocumentRecipientNotFoundError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientgetdocumentrecipientnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 80 methods.*
+* [`FieldGetTemplateFieldNotFoundError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldgettemplatefieldnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 80 methods.*
+* [`RecipientGetTemplateRecipientNotFoundError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientgettemplaterecipientnotfounderror.py): Not found. Status code `404`. Applicable to 1 of 80 methods.*
+* [`EnvelopeGetInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopegetinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`EnvelopeCreateInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopecreateinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`EnvelopeUseInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeuseinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`EnvelopeUpdateInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeupdateinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`EnvelopeDeleteInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopedeleteinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`EnvelopeDuplicateInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeduplicateinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`EnvelopeDistributeInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopedistributeinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`EnvelopeRedistributeInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/enveloperedistributeinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`DocumentGetInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentgetinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`DocumentFindInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentfindinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`DocumentCreateInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentcreateinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`DocumentUpdateInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentupdateinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`DocumentDeleteInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentdeleteinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`DocumentDuplicateInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentduplicateinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`DocumentDistributeInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentdistributeinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`DocumentRedistributeInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentredistributeinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`DocumentDownloadInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentdownloadinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`DocumentCreateDocumentTemporaryInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentcreatedocumenttemporaryinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`DocumentDownloadBetaInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentdownloadbetainternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`TemplateFindTemplatesInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatefindtemplatesinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`TemplateGetTemplateByIDInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templategettemplatebyidinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`TemplateCreateTemplateInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatecreatetemplateinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`TemplateUpdateTemplateInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templateupdatetemplateinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`TemplateDuplicateTemplateInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templateduplicatetemplateinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`TemplateDeleteTemplateInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatedeletetemplateinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`TemplateCreateDocumentFromTemplateInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatecreatedocumentfromtemplateinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`FolderFindFoldersInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/folderfindfoldersinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`FolderCreateFolderInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/foldercreatefolderinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`FolderUpdateFolderInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/folderupdatefolderinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`FolderDeleteFolderInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/folderdeletefolderinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`TemplateCreateTemplateTemporaryInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatecreatetemplatetemporaryinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`EmbeddingPresignCreateEmbeddingPresignTokenInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/embeddingpresigncreateembeddingpresigntokeninternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`EmbeddingPresignVerifyEmbeddingPresignTokenInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/embeddingpresignverifyembeddingpresigntokeninternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`EnvelopeAttachmentFindInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeattachmentfindinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`EnvelopeAttachmentCreateInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeattachmentcreateinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`EnvelopeAttachmentUpdateInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeattachmentupdateinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`EnvelopeAttachmentDeleteInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeattachmentdeleteinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`EnvelopeItemCreateManyInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeitemcreatemanyinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`EnvelopeItemUpdateManyInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeitemupdatemanyinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`EnvelopeItemDeleteInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeitemdeleteinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`EnvelopeItemDownloadInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopeitemdownloadinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`EnvelopeRecipientGetInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/enveloperecipientgetinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`EnvelopeRecipientCreateManyInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/enveloperecipientcreatemanyinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`EnvelopeRecipientUpdateManyInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/enveloperecipientupdatemanyinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`EnvelopeRecipientDeleteInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/enveloperecipientdeleteinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`EnvelopeFieldGetInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopefieldgetinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`EnvelopeFieldCreateManyInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopefieldcreatemanyinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`EnvelopeFieldUpdateManyInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopefieldupdatemanyinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`EnvelopeFieldDeleteInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/envelopefielddeleteinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`DocumentAttachmentCreateInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentattachmentcreateinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`DocumentAttachmentUpdateInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentattachmentupdateinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`DocumentAttachmentDeleteInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentattachmentdeleteinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`DocumentAttachmentFindInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/documentattachmentfindinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`FieldGetDocumentFieldInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldgetdocumentfieldinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`FieldCreateDocumentFieldInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldcreatedocumentfieldinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`FieldCreateDocumentFieldsInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldcreatedocumentfieldsinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`FieldUpdateDocumentFieldInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldupdatedocumentfieldinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`FieldUpdateDocumentFieldsInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldupdatedocumentfieldsinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`FieldDeleteDocumentFieldInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fielddeletedocumentfieldinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`RecipientGetDocumentRecipientInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientgetdocumentrecipientinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`RecipientCreateDocumentRecipientInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientcreatedocumentrecipientinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`RecipientCreateDocumentRecipientsInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientcreatedocumentrecipientsinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`RecipientUpdateDocumentRecipientInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientupdatedocumentrecipientinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`RecipientUpdateDocumentRecipientsInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientupdatedocumentrecipientsinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`RecipientDeleteDocumentRecipientInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientdeletedocumentrecipientinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`FieldCreateTemplateFieldInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldcreatetemplatefieldinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`FieldGetTemplateFieldInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldgettemplatefieldinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`FieldCreateTemplateFieldsInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldcreatetemplatefieldsinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`FieldUpdateTemplateFieldInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldupdatetemplatefieldinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`FieldUpdateTemplateFieldsInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fieldupdatetemplatefieldsinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`FieldDeleteTemplateFieldInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/fielddeletetemplatefieldinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`RecipientGetTemplateRecipientInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientgettemplaterecipientinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`RecipientCreateTemplateRecipientInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientcreatetemplaterecipientinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`RecipientCreateTemplateRecipientsInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientcreatetemplaterecipientsinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`RecipientUpdateTemplateRecipientInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientupdatetemplaterecipientinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`RecipientUpdateTemplateRecipientsInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientupdatetemplaterecipientsinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`RecipientDeleteTemplateRecipientInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/recipientdeletetemplaterecipientinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`TemplateCreateTemplateDirectLinkInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatecreatetemplatedirectlinkinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`TemplateDeleteTemplateDirectLinkInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatedeletetemplatedirectlinkinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
+* [`TemplateToggleTemplateDirectLinkInternalServerError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/templatetoggletemplatedirectlinkinternalservererror.py): Internal server error. Status code `500`. Applicable to 1 of 80 methods.*
 * [`ResponseValidationError`](https://github.com/documenso/sdk-python/blob/master/./src/documenso_sdk/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
@@ -536,11 +873,11 @@ import os
 
 
 with Documenso(
-    server_url="https://app.documenso.com/api/v2-beta",
+    server_url="https://app.documenso.com/api/v2",
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.update(document_id=9701.92)
+    res = documenso.envelopes.get(envelope_id="<id>")
 
     # Handle response
     print(res)

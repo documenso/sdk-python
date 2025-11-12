@@ -1,0 +1,9 @@
+# EnvelopeUpdateAuthOptions
+
+
+## Fields
+
+| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `global_access_auth`                                                                                       | List[[models.EnvelopeUpdateGlobalAccessAuthResponse](../models/envelopeupdateglobalaccessauthresponse.md)] | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `global_action_auth`                                                                                       | List[[models.EnvelopeUpdateGlobalActionAuthResponse](../models/envelopeupdateglobalactionauthresponse.md)] | :heavy_check_mark:                                                                                         | N/A                                                                                                        |

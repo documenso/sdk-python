@@ -3,6 +3,12 @@
 
 ## Supported Types
 
+### `models.FieldGetDocumentFieldFieldMetaSignature`
+
+```python
+value: models.FieldGetDocumentFieldFieldMetaSignature = /* values here */
+```
+
 ### `models.FieldGetDocumentFieldFieldMetaInitials`
 
 ```python

@@ -2,10 +2,12 @@
 
 import httpx
 from typing import Optional
+from dataclasses import dataclass
 
 from documenso_sdk.models import DocumensoError
 
 
+@dataclass(unsafe_hash=True)
 class ResponseValidationError(DocumensoError):
     """Error raised when there is a type mismatch between the response data and the expected Pydantic model."""
 

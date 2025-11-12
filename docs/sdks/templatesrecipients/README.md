@@ -51,6 +51,8 @@ with Documenso(
 | Error Type                                              | Status Code                                             | Content Type                                            |
 | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
 | models.RecipientGetTemplateRecipientBadRequestError     | 400                                                     | application/json                                        |
+| models.RecipientGetTemplateRecipientUnauthorizedError   | 401                                                     | application/json                                        |
+| models.RecipientGetTemplateRecipientForbiddenError      | 403                                                     | application/json                                        |
 | models.RecipientGetTemplateRecipientNotFoundError       | 404                                                     | application/json                                        |
 | models.RecipientGetTemplateRecipientInternalServerError | 500                                                     | application/json                                        |
 | models.APIError                                         | 4XX, 5XX                                                | \*/\*                                                   |
@@ -100,6 +102,8 @@ with Documenso(
 | Error Type                                                 | Status Code                                                | Content Type                                               |
 | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
 | models.RecipientCreateTemplateRecipientBadRequestError     | 400                                                        | application/json                                           |
+| models.RecipientCreateTemplateRecipientUnauthorizedError   | 401                                                        | application/json                                           |
+| models.RecipientCreateTemplateRecipientForbiddenError      | 403                                                        | application/json                                           |
 | models.RecipientCreateTemplateRecipientInternalServerError | 500                                                        | application/json                                           |
 | models.APIError                                            | 4XX, 5XX                                                   | \*/\*                                                      |
 
@@ -143,6 +147,8 @@ with Documenso(
 | Error Type                                                  | Status Code                                                 | Content Type                                                |
 | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
 | models.RecipientCreateTemplateRecipientsBadRequestError     | 400                                                         | application/json                                            |
+| models.RecipientCreateTemplateRecipientsUnauthorizedError   | 401                                                         | application/json                                            |
+| models.RecipientCreateTemplateRecipientsForbiddenError      | 403                                                         | application/json                                            |
 | models.RecipientCreateTemplateRecipientsInternalServerError | 500                                                         | application/json                                            |
 | models.APIError                                             | 4XX, 5XX                                                    | \*/\*                                                       |
 
@@ -188,6 +194,8 @@ with Documenso(
 | Error Type                                                 | Status Code                                                | Content Type                                               |
 | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
 | models.RecipientUpdateTemplateRecipientBadRequestError     | 400                                                        | application/json                                           |
+| models.RecipientUpdateTemplateRecipientUnauthorizedError   | 401                                                        | application/json                                           |
+| models.RecipientUpdateTemplateRecipientForbiddenError      | 403                                                        | application/json                                           |
 | models.RecipientUpdateTemplateRecipientInternalServerError | 500                                                        | application/json                                           |
 | models.APIError                                            | 4XX, 5XX                                                   | \*/\*                                                      |
 
@@ -235,6 +243,8 @@ with Documenso(
 | Error Type                                                  | Status Code                                                 | Content Type                                                |
 | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
 | models.RecipientUpdateTemplateRecipientsBadRequestError     | 400                                                         | application/json                                            |
+| models.RecipientUpdateTemplateRecipientsUnauthorizedError   | 401                                                         | application/json                                            |
+| models.RecipientUpdateTemplateRecipientsForbiddenError      | 403                                                         | application/json                                            |
 | models.RecipientUpdateTemplateRecipientsInternalServerError | 500                                                         | application/json                                            |
 | models.APIError                                             | 4XX, 5XX                                                    | \*/\*                                                       |
 
@@ -277,5 +287,7 @@ with Documenso(
 | Error Type                                                 | Status Code                                                | Content Type                                               |
 | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
 | models.RecipientDeleteTemplateRecipientBadRequestError     | 400                                                        | application/json                                           |
+| models.RecipientDeleteTemplateRecipientUnauthorizedError   | 401                                                        | application/json                                           |
+| models.RecipientDeleteTemplateRecipientForbiddenError      | 403                                                        | application/json                                           |
 | models.RecipientDeleteTemplateRecipientInternalServerError | 500                                                        | application/json                                           |
 | models.APIError                                            | 4XX, 5XX                                                   | \*/\*                                                      |

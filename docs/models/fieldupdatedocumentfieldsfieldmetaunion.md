@@ -3,6 +3,12 @@
 
 ## Supported Types
 
+### `models.FieldUpdateDocumentFieldsFieldMetaSignatureResponse`
+
+```python
+value: models.FieldUpdateDocumentFieldsFieldMetaSignatureResponse = /* values here */
+```
+
 ### `models.FieldUpdateDocumentFieldsFieldMetaInitialsResponse`
 
 ```python

@@ -1,0 +1,14 @@
+# EnvelopeGetFieldMetaEmail
+
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `label`                                                                      | *Optional[str]*                                                              | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `placeholder`                                                                | *Optional[str]*                                                              | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `required`                                                                   | *Optional[bool]*                                                             | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `read_only`                                                                  | *Optional[bool]*                                                             | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `font_size`                                                                  | *Optional[float]*                                                            | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `type`                                                                       | [models.EnvelopeGetTypeEmail](../models/envelopegettypeemail.md)             | :heavy_check_mark:                                                           | N/A                                                                          |
+| `text_align`                                                                 | [Optional[models.EnvelopeGetTextAlign3]](../models/envelopegettextalign3.md) | :heavy_minus_sign:                                                           | N/A                                                                          |

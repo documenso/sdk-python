@@ -1,0 +1,10 @@
+# FolderCreateFolderRequest
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `name`                                                                                       | *str*                                                                                        | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `parent_id`                                                                                  | *Optional[str]*                                                                              | :heavy_minus_sign:                                                                           | N/A                                                                                          |
+| `type`                                                                                       | [Optional[models.FolderCreateFolderTypeRequest]](../models/foldercreatefoldertyperequest.md) | :heavy_minus_sign:                                                                           | N/A                                                                                          |

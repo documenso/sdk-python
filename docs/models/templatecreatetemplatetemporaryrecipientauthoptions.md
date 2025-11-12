@@ -1,0 +1,9 @@
+# TemplateCreateTemplateTemporaryRecipientAuthOptions
+
+
+## Fields
+
+| Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `access_auth`                                                                                                    | List[[models.TemplateCreateTemplateTemporaryAccessAuth](../models/templatecreatetemplatetemporaryaccessauth.md)] | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
+| `action_auth`                                                                                                    | List[[models.TemplateCreateTemplateTemporaryActionAuth](../models/templatecreatetemplatetemporaryactionauth.md)] | :heavy_check_mark:                                                                                               | N/A                                                                                                              |

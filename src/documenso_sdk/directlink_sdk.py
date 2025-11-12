@@ -25,7 +25,7 @@ class DirectLinkSDK(BaseSDK):
         Create a direct link for a template
 
         :param template_id:
-        :param direct_recipient_id: The of the recipient in the current template to transform into the primary recipient when the template is used.
+        :param direct_recipient_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -82,13 +82,13 @@ class DirectLinkSDK(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-createTemplateDirectLink",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -102,6 +102,20 @@ class DirectLinkSDK(BaseSDK):
                 models.TemplateCreateTemplateDirectLinkBadRequestErrorData, http_res
             )
             raise models.TemplateCreateTemplateDirectLinkBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.TemplateCreateTemplateDirectLinkUnauthorizedErrorData, http_res
+            )
+            raise models.TemplateCreateTemplateDirectLinkUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.TemplateCreateTemplateDirectLinkForbiddenErrorData, http_res
+            )
+            raise models.TemplateCreateTemplateDirectLinkForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -135,7 +149,7 @@ class DirectLinkSDK(BaseSDK):
         Create a direct link for a template
 
         :param template_id:
-        :param direct_recipient_id: The of the recipient in the current template to transform into the primary recipient when the template is used.
+        :param direct_recipient_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -192,13 +206,13 @@ class DirectLinkSDK(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-createTemplateDirectLink",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -212,6 +226,20 @@ class DirectLinkSDK(BaseSDK):
                 models.TemplateCreateTemplateDirectLinkBadRequestErrorData, http_res
             )
             raise models.TemplateCreateTemplateDirectLinkBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.TemplateCreateTemplateDirectLinkUnauthorizedErrorData, http_res
+            )
+            raise models.TemplateCreateTemplateDirectLinkUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.TemplateCreateTemplateDirectLinkForbiddenErrorData, http_res
+            )
+            raise models.TemplateCreateTemplateDirectLinkForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -299,13 +327,13 @@ class DirectLinkSDK(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-deleteTemplateDirectLink",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -319,6 +347,20 @@ class DirectLinkSDK(BaseSDK):
                 models.TemplateDeleteTemplateDirectLinkBadRequestErrorData, http_res
             )
             raise models.TemplateDeleteTemplateDirectLinkBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.TemplateDeleteTemplateDirectLinkUnauthorizedErrorData, http_res
+            )
+            raise models.TemplateDeleteTemplateDirectLinkUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.TemplateDeleteTemplateDirectLinkForbiddenErrorData, http_res
+            )
+            raise models.TemplateDeleteTemplateDirectLinkForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -406,13 +448,13 @@ class DirectLinkSDK(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-deleteTemplateDirectLink",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -426,6 +468,20 @@ class DirectLinkSDK(BaseSDK):
                 models.TemplateDeleteTemplateDirectLinkBadRequestErrorData, http_res
             )
             raise models.TemplateDeleteTemplateDirectLinkBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.TemplateDeleteTemplateDirectLinkUnauthorizedErrorData, http_res
+            )
+            raise models.TemplateDeleteTemplateDirectLinkUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.TemplateDeleteTemplateDirectLinkForbiddenErrorData, http_res
+            )
+            raise models.TemplateDeleteTemplateDirectLinkForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -516,13 +572,13 @@ class DirectLinkSDK(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-toggleTemplateDirectLink",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -536,6 +592,20 @@ class DirectLinkSDK(BaseSDK):
                 models.TemplateToggleTemplateDirectLinkBadRequestErrorData, http_res
             )
             raise models.TemplateToggleTemplateDirectLinkBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.TemplateToggleTemplateDirectLinkUnauthorizedErrorData, http_res
+            )
+            raise models.TemplateToggleTemplateDirectLinkUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.TemplateToggleTemplateDirectLinkForbiddenErrorData, http_res
+            )
+            raise models.TemplateToggleTemplateDirectLinkForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -626,13 +696,13 @@ class DirectLinkSDK(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="template-toggleTemplateDirectLink",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -646,6 +716,20 @@ class DirectLinkSDK(BaseSDK):
                 models.TemplateToggleTemplateDirectLinkBadRequestErrorData, http_res
             )
             raise models.TemplateToggleTemplateDirectLinkBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.TemplateToggleTemplateDirectLinkUnauthorizedErrorData, http_res
+            )
+            raise models.TemplateToggleTemplateDirectLinkUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.TemplateToggleTemplateDirectLinkForbiddenErrorData, http_res
+            )
+            raise models.TemplateToggleTemplateDirectLinkForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):

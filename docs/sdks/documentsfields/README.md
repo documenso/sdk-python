@@ -51,6 +51,8 @@ with Documenso(
 | Error Type                                      | Status Code                                     | Content Type                                    |
 | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
 | models.FieldGetDocumentFieldBadRequestError     | 400                                             | application/json                                |
+| models.FieldGetDocumentFieldUnauthorizedError   | 401                                             | application/json                                |
+| models.FieldGetDocumentFieldForbiddenError      | 403                                             | application/json                                |
 | models.FieldGetDocumentFieldNotFoundError       | 404                                             | application/json                                |
 | models.FieldGetDocumentFieldInternalServerError | 500                                             | application/json                                |
 | models.APIError                                 | 4XX, 5XX                                        | \*/\*                                           |
@@ -104,6 +106,8 @@ with Documenso(
 | Error Type                                         | Status Code                                        | Content Type                                       |
 | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
 | models.FieldCreateDocumentFieldBadRequestError     | 400                                                | application/json                                   |
+| models.FieldCreateDocumentFieldUnauthorizedError   | 401                                                | application/json                                   |
+| models.FieldCreateDocumentFieldForbiddenError      | 403                                                | application/json                                   |
 | models.FieldCreateDocumentFieldInternalServerError | 500                                                | application/json                                   |
 | models.APIError                                    | 4XX, 5XX                                           | \*/\*                                              |
 
@@ -158,6 +162,8 @@ with Documenso(
 | Error Type                                          | Status Code                                         | Content Type                                        |
 | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
 | models.FieldCreateDocumentFieldsBadRequestError     | 400                                                 | application/json                                    |
+| models.FieldCreateDocumentFieldsUnauthorizedError   | 401                                                 | application/json                                    |
+| models.FieldCreateDocumentFieldsForbiddenError      | 403                                                 | application/json                                    |
 | models.FieldCreateDocumentFieldsInternalServerError | 500                                                 | application/json                                    |
 | models.APIError                                     | 4XX, 5XX                                            | \*/\*                                               |
 
@@ -205,6 +211,8 @@ with Documenso(
 | Error Type                                         | Status Code                                        | Content Type                                       |
 | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
 | models.FieldUpdateDocumentFieldBadRequestError     | 400                                                | application/json                                   |
+| models.FieldUpdateDocumentFieldUnauthorizedError   | 401                                                | application/json                                   |
+| models.FieldUpdateDocumentFieldForbiddenError      | 403                                                | application/json                                   |
 | models.FieldUpdateDocumentFieldInternalServerError | 500                                                | application/json                                   |
 | models.APIError                                    | 4XX, 5XX                                           | \*/\*                                              |
 
@@ -248,6 +256,8 @@ with Documenso(
 | Error Type                                          | Status Code                                         | Content Type                                        |
 | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
 | models.FieldUpdateDocumentFieldsBadRequestError     | 400                                                 | application/json                                    |
+| models.FieldUpdateDocumentFieldsUnauthorizedError   | 401                                                 | application/json                                    |
+| models.FieldUpdateDocumentFieldsForbiddenError      | 403                                                 | application/json                                    |
 | models.FieldUpdateDocumentFieldsInternalServerError | 500                                                 | application/json                                    |
 | models.APIError                                     | 4XX, 5XX                                            | \*/\*                                               |
 
@@ -290,5 +300,7 @@ with Documenso(
 | Error Type                                         | Status Code                                        | Content Type                                       |
 | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
 | models.FieldDeleteDocumentFieldBadRequestError     | 400                                                | application/json                                   |
+| models.FieldDeleteDocumentFieldUnauthorizedError   | 401                                                | application/json                                   |
+| models.FieldDeleteDocumentFieldForbiddenError      | 403                                                | application/json                                   |
 | models.FieldDeleteDocumentFieldInternalServerError | 500                                                | application/json                                   |
 | models.APIError                                    | 4XX, 5XX                                           | \*/\*                                              |

@@ -83,13 +83,13 @@ class TemplatesFields(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-createTemplateField",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -105,6 +105,18 @@ class TemplatesFields(BaseSDK):
             raise models.FieldCreateTemplateFieldBadRequestError(
                 response_data, http_res
             )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldCreateTemplateFieldUnauthorizedErrorData, http_res
+            )
+            raise models.FieldCreateTemplateFieldUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldCreateTemplateFieldForbiddenErrorData, http_res
+            )
+            raise models.FieldCreateTemplateFieldForbiddenError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 models.FieldCreateTemplateFieldInternalServerErrorData, http_res
@@ -194,13 +206,13 @@ class TemplatesFields(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-createTemplateField",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -216,6 +228,18 @@ class TemplatesFields(BaseSDK):
             raise models.FieldCreateTemplateFieldBadRequestError(
                 response_data, http_res
             )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldCreateTemplateFieldUnauthorizedErrorData, http_res
+            )
+            raise models.FieldCreateTemplateFieldUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldCreateTemplateFieldForbiddenErrorData, http_res
+            )
+            raise models.FieldCreateTemplateFieldForbiddenError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 models.FieldCreateTemplateFieldInternalServerErrorData, http_res
@@ -294,13 +318,13 @@ class TemplatesFields(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-getTemplateField",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -314,6 +338,16 @@ class TemplatesFields(BaseSDK):
                 models.FieldGetTemplateFieldBadRequestErrorData, http_res
             )
             raise models.FieldGetTemplateFieldBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldGetTemplateFieldUnauthorizedErrorData, http_res
+            )
+            raise models.FieldGetTemplateFieldUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldGetTemplateFieldForbiddenErrorData, http_res
+            )
+            raise models.FieldGetTemplateFieldForbiddenError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 models.FieldGetTemplateFieldNotFoundErrorData, http_res
@@ -397,13 +431,13 @@ class TemplatesFields(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-getTemplateField",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -417,6 +451,16 @@ class TemplatesFields(BaseSDK):
                 models.FieldGetTemplateFieldBadRequestErrorData, http_res
             )
             raise models.FieldGetTemplateFieldBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldGetTemplateFieldUnauthorizedErrorData, http_res
+            )
+            raise models.FieldGetTemplateFieldUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldGetTemplateFieldForbiddenErrorData, http_res
+            )
+            raise models.FieldGetTemplateFieldForbiddenError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 models.FieldGetTemplateFieldNotFoundErrorData, http_res
@@ -511,13 +555,13 @@ class TemplatesFields(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-createTemplateFields",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -531,6 +575,20 @@ class TemplatesFields(BaseSDK):
                 models.FieldCreateTemplateFieldsBadRequestErrorData, http_res
             )
             raise models.FieldCreateTemplateFieldsBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldCreateTemplateFieldsUnauthorizedErrorData, http_res
+            )
+            raise models.FieldCreateTemplateFieldsUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldCreateTemplateFieldsForbiddenErrorData, http_res
+            )
+            raise models.FieldCreateTemplateFieldsForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -622,13 +680,13 @@ class TemplatesFields(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-createTemplateFields",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -642,6 +700,20 @@ class TemplatesFields(BaseSDK):
                 models.FieldCreateTemplateFieldsBadRequestErrorData, http_res
             )
             raise models.FieldCreateTemplateFieldsBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldCreateTemplateFieldsUnauthorizedErrorData, http_res
+            )
+            raise models.FieldCreateTemplateFieldsUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldCreateTemplateFieldsForbiddenErrorData, http_res
+            )
+            raise models.FieldCreateTemplateFieldsForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -733,13 +805,13 @@ class TemplatesFields(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-updateTemplateField",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -755,6 +827,18 @@ class TemplatesFields(BaseSDK):
             raise models.FieldUpdateTemplateFieldBadRequestError(
                 response_data, http_res
             )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldUpdateTemplateFieldUnauthorizedErrorData, http_res
+            )
+            raise models.FieldUpdateTemplateFieldUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldUpdateTemplateFieldForbiddenErrorData, http_res
+            )
+            raise models.FieldUpdateTemplateFieldForbiddenError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 models.FieldUpdateTemplateFieldInternalServerErrorData, http_res
@@ -844,13 +928,13 @@ class TemplatesFields(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-updateTemplateField",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -866,6 +950,18 @@ class TemplatesFields(BaseSDK):
             raise models.FieldUpdateTemplateFieldBadRequestError(
                 response_data, http_res
             )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldUpdateTemplateFieldUnauthorizedErrorData, http_res
+            )
+            raise models.FieldUpdateTemplateFieldUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldUpdateTemplateFieldForbiddenErrorData, http_res
+            )
+            raise models.FieldUpdateTemplateFieldForbiddenError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 models.FieldUpdateTemplateFieldInternalServerErrorData, http_res
@@ -955,13 +1051,13 @@ class TemplatesFields(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-updateTemplateFields",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -975,6 +1071,20 @@ class TemplatesFields(BaseSDK):
                 models.FieldUpdateTemplateFieldsBadRequestErrorData, http_res
             )
             raise models.FieldUpdateTemplateFieldsBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldUpdateTemplateFieldsUnauthorizedErrorData, http_res
+            )
+            raise models.FieldUpdateTemplateFieldsUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldUpdateTemplateFieldsForbiddenErrorData, http_res
+            )
+            raise models.FieldUpdateTemplateFieldsForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -1066,13 +1176,13 @@ class TemplatesFields(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-updateTemplateFields",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1086,6 +1196,20 @@ class TemplatesFields(BaseSDK):
                 models.FieldUpdateTemplateFieldsBadRequestErrorData, http_res
             )
             raise models.FieldUpdateTemplateFieldsBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldUpdateTemplateFieldsUnauthorizedErrorData, http_res
+            )
+            raise models.FieldUpdateTemplateFieldsUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldUpdateTemplateFieldsForbiddenErrorData, http_res
+            )
+            raise models.FieldUpdateTemplateFieldsForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -1167,13 +1291,13 @@ class TemplatesFields(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-deleteTemplateField",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1189,6 +1313,18 @@ class TemplatesFields(BaseSDK):
             raise models.FieldDeleteTemplateFieldBadRequestError(
                 response_data, http_res
             )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldDeleteTemplateFieldUnauthorizedErrorData, http_res
+            )
+            raise models.FieldDeleteTemplateFieldUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldDeleteTemplateFieldForbiddenErrorData, http_res
+            )
+            raise models.FieldDeleteTemplateFieldForbiddenError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 models.FieldDeleteTemplateFieldInternalServerErrorData, http_res
@@ -1268,13 +1404,13 @@ class TemplatesFields(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-deleteTemplateField",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1290,6 +1426,18 @@ class TemplatesFields(BaseSDK):
             raise models.FieldDeleteTemplateFieldBadRequestError(
                 response_data, http_res
             )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldDeleteTemplateFieldUnauthorizedErrorData, http_res
+            )
+            raise models.FieldDeleteTemplateFieldUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldDeleteTemplateFieldForbiddenErrorData, http_res
+            )
+            raise models.FieldDeleteTemplateFieldForbiddenError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 models.FieldDeleteTemplateFieldInternalServerErrorData, http_res

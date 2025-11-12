@@ -4,6 +4,7 @@ from .basesdk import BaseSDK
 from .sdkconfiguration import SDKConfiguration
 from documenso_sdk import models, utils
 from documenso_sdk._hooks import HookContext
+from documenso_sdk.documents_attachments import DocumentsAttachments
 from documenso_sdk.documents_fields import DocumentsFields
 from documenso_sdk.documents_recipients import DocumentsRecipients
 from documenso_sdk.types import OptionalNullable, UNSET
@@ -13,6 +14,7 @@ from typing import Any, Dict, List, Mapping, Optional, Union
 
 
 class Documents(BaseSDK):
+    attachments: DocumentsAttachments
     fields: DocumentsFields
     recipients: DocumentsRecipients
 
@@ -24,6 +26,9 @@ class Documents(BaseSDK):
         self._init_sdks()
 
     def _init_sdks(self):
+        self.attachments = DocumentsAttachments(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
         self.fields = DocumentsFields(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
@@ -31,32 +36,20 @@ class Documents(BaseSDK):
             self.sdk_configuration, parent_ref=self.parent_ref
         )
 
-    def update(
+    def get(
         self,
         *,
         document_id: float,
-        data: Optional[
-            Union[
-                models.DocumentUpdateDocumentData,
-                models.DocumentUpdateDocumentDataTypedDict,
-            ]
-        ] = None,
-        meta: Optional[
-            Union[
-                models.DocumentUpdateDocumentMeta,
-                models.DocumentUpdateDocumentMetaTypedDict,
-            ]
-        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentUpdateDocumentResponse:
-        r"""Update document
+    ) -> models.DocumentGetResponse:
+        r"""Get document
+
+        Returns a document given an ID
 
         :param document_id:
-        :param data:
-        :param meta:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -72,32 +65,23 @@ class Documents(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DocumentUpdateDocumentRequest(
+        request = models.DocumentGetRequest(
             document_id=document_id,
-            data=utils.get_pydantic_model(
-                data, Optional[models.DocumentUpdateDocumentData]
-            ),
-            meta=utils.get_pydantic_model(
-                meta, Optional[models.DocumentUpdateDocumentMeta]
-            ),
         )
 
         req = self._build_request(
-            method="POST",
-            path="/document/update",
+            method="GET",
+            path="/document/{documentId}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=True,
-            request_has_path_params=False,
+            request_body_required=False,
+            request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DocumentUpdateDocumentRequest
-            ),
             timeout_ms=timeout_ms,
         )
 
@@ -113,34 +97,45 @@ class Documents(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="document-updateDocument",
-                oauth2_scopes=[],
+                operation_id="document-get",
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.DocumentUpdateDocumentResponse, http_res
-            )
+            return unmarshal_json_response(models.DocumentGetResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
-                models.DocumentUpdateDocumentBadRequestErrorData, http_res
+                models.DocumentGetBadRequestErrorData, http_res
             )
-            raise models.DocumentUpdateDocumentBadRequestError(response_data, http_res)
+            raise models.DocumentGetBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentGetUnauthorizedErrorData, http_res
+            )
+            raise models.DocumentGetUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentGetForbiddenErrorData, http_res
+            )
+            raise models.DocumentGetForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentGetNotFoundErrorData, http_res
+            )
+            raise models.DocumentGetNotFoundError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
-                models.DocumentUpdateDocumentInternalServerErrorData, http_res
+                models.DocumentGetInternalServerErrorData, http_res
             )
-            raise models.DocumentUpdateDocumentInternalServerError(
-                response_data, http_res
-            )
+            raise models.DocumentGetInternalServerError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -150,32 +145,20 @@ class Documents(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
-    async def update_async(
+    async def get_async(
         self,
         *,
         document_id: float,
-        data: Optional[
-            Union[
-                models.DocumentUpdateDocumentData,
-                models.DocumentUpdateDocumentDataTypedDict,
-            ]
-        ] = None,
-        meta: Optional[
-            Union[
-                models.DocumentUpdateDocumentMeta,
-                models.DocumentUpdateDocumentMetaTypedDict,
-            ]
-        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentUpdateDocumentResponse:
-        r"""Update document
+    ) -> models.DocumentGetResponse:
+        r"""Get document
+
+        Returns a document given an ID
 
         :param document_id:
-        :param data:
-        :param meta:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -191,32 +174,23 @@ class Documents(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DocumentUpdateDocumentRequest(
+        request = models.DocumentGetRequest(
             document_id=document_id,
-            data=utils.get_pydantic_model(
-                data, Optional[models.DocumentUpdateDocumentData]
-            ),
-            meta=utils.get_pydantic_model(
-                meta, Optional[models.DocumentUpdateDocumentMeta]
-            ),
         )
 
         req = self._build_request_async(
-            method="POST",
-            path="/document/update",
+            method="GET",
+            path="/document/{documentId}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=True,
-            request_has_path_params=False,
+            request_body_required=False,
+            request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DocumentUpdateDocumentRequest
-            ),
             timeout_ms=timeout_ms,
         )
 
@@ -232,34 +206,45 @@ class Documents(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="document-updateDocument",
-                oauth2_scopes=[],
+                operation_id="document-get",
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.DocumentUpdateDocumentResponse, http_res
-            )
+            return unmarshal_json_response(models.DocumentGetResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
-                models.DocumentUpdateDocumentBadRequestErrorData, http_res
+                models.DocumentGetBadRequestErrorData, http_res
             )
-            raise models.DocumentUpdateDocumentBadRequestError(response_data, http_res)
+            raise models.DocumentGetBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentGetUnauthorizedErrorData, http_res
+            )
+            raise models.DocumentGetUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentGetForbiddenErrorData, http_res
+            )
+            raise models.DocumentGetForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentGetNotFoundErrorData, http_res
+            )
+            raise models.DocumentGetNotFoundError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
-                models.DocumentUpdateDocumentInternalServerErrorData, http_res
+                models.DocumentGetInternalServerErrorData, http_res
             )
-            raise models.DocumentUpdateDocumentInternalServerError(
-                response_data, http_res
-            )
+            raise models.DocumentGetInternalServerError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -287,7 +272,7 @@ class Documents(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentFindDocumentsResponse:
+    ) -> models.DocumentFindResponse:
         r"""Find documents
 
         Find documents based on a search criteria
@@ -316,7 +301,7 @@ class Documents(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DocumentFindDocumentsRequest(
+        request = models.DocumentFindRequest(
             query=query,
             page=page,
             per_page=per_page,
@@ -356,39 +341,45 @@ class Documents(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="document-findDocuments",
-                oauth2_scopes=[],
+                operation_id="document-find",
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.DocumentFindDocumentsResponse, http_res
-            )
+            return unmarshal_json_response(models.DocumentFindResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
-                models.DocumentFindDocumentsBadRequestErrorData, http_res
+                models.DocumentFindBadRequestErrorData, http_res
             )
-            raise models.DocumentFindDocumentsBadRequestError(response_data, http_res)
+            raise models.DocumentFindBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentFindUnauthorizedErrorData, http_res
+            )
+            raise models.DocumentFindUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentFindForbiddenErrorData, http_res
+            )
+            raise models.DocumentFindForbiddenError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
-                models.DocumentFindDocumentsNotFoundErrorData, http_res
+                models.DocumentFindNotFoundErrorData, http_res
             )
-            raise models.DocumentFindDocumentsNotFoundError(response_data, http_res)
+            raise models.DocumentFindNotFoundError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
-                models.DocumentFindDocumentsInternalServerErrorData, http_res
+                models.DocumentFindInternalServerErrorData, http_res
             )
-            raise models.DocumentFindDocumentsInternalServerError(
-                response_data, http_res
-            )
+            raise models.DocumentFindInternalServerError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -416,7 +407,7 @@ class Documents(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentFindDocumentsResponse:
+    ) -> models.DocumentFindResponse:
         r"""Find documents
 
         Find documents based on a search criteria
@@ -445,7 +436,7 @@ class Documents(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DocumentFindDocumentsRequest(
+        request = models.DocumentFindRequest(
             query=query,
             page=page,
             per_page=per_page,
@@ -485,39 +476,45 @@ class Documents(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="document-findDocuments",
-                oauth2_scopes=[],
+                operation_id="document-find",
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.DocumentFindDocumentsResponse, http_res
-            )
+            return unmarshal_json_response(models.DocumentFindResponse, http_res)
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
-                models.DocumentFindDocumentsBadRequestErrorData, http_res
+                models.DocumentFindBadRequestErrorData, http_res
             )
-            raise models.DocumentFindDocumentsBadRequestError(response_data, http_res)
+            raise models.DocumentFindBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentFindUnauthorizedErrorData, http_res
+            )
+            raise models.DocumentFindUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentFindForbiddenErrorData, http_res
+            )
+            raise models.DocumentFindForbiddenError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
-                models.DocumentFindDocumentsNotFoundErrorData, http_res
+                models.DocumentFindNotFoundErrorData, http_res
             )
-            raise models.DocumentFindDocumentsNotFoundError(response_data, http_res)
+            raise models.DocumentFindNotFoundError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
-                models.DocumentFindDocumentsInternalServerErrorData, http_res
+                models.DocumentFindInternalServerErrorData, http_res
             )
-            raise models.DocumentFindDocumentsInternalServerError(
-                response_data, http_res
-            )
+            raise models.DocumentFindInternalServerError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -527,22 +524,24 @@ class Documents(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
-    def get(
+    def create(
         self,
         *,
-        document_id: float,
-        folder_id: Optional[str] = None,
+        payload: Union[
+            models.DocumentCreatePayload, models.DocumentCreatePayloadTypedDict
+        ],
+        file: Union[models.DocumentCreateFile, models.DocumentCreateFileTypedDict],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentGetDocumentWithDetailsByIDResponse:
-        r"""Get document
+    ) -> models.DocumentCreateResponse:
+        r"""Create document
 
-        Returns a document given an ID
+        Create a document using form data.
 
-        :param document_id:
-        :param folder_id: Filter documents by folder ID
+        :param payload:
+        :param file:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -558,14 +557,1342 @@ class Documents(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DocumentGetDocumentWithDetailsByIDRequest(
+        request = models.DocumentCreateRequest(
+            payload=utils.get_pydantic_model(payload, models.DocumentCreatePayload),
+            file=utils.get_pydantic_model(file, models.DocumentCreateFile),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/document/create",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "multipart", models.DocumentCreateRequest
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="document-create",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.DocumentCreateResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentCreateBadRequestErrorData, http_res
+            )
+            raise models.DocumentCreateBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentCreateUnauthorizedErrorData, http_res
+            )
+            raise models.DocumentCreateUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentCreateForbiddenErrorData, http_res
+            )
+            raise models.DocumentCreateForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentCreateInternalServerErrorData, http_res
+            )
+            raise models.DocumentCreateInternalServerError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def create_async(
+        self,
+        *,
+        payload: Union[
+            models.DocumentCreatePayload, models.DocumentCreatePayloadTypedDict
+        ],
+        file: Union[models.DocumentCreateFile, models.DocumentCreateFileTypedDict],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.DocumentCreateResponse:
+        r"""Create document
+
+        Create a document using form data.
+
+        :param payload:
+        :param file:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.DocumentCreateRequest(
+            payload=utils.get_pydantic_model(payload, models.DocumentCreatePayload),
+            file=utils.get_pydantic_model(file, models.DocumentCreateFile),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/document/create",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "multipart", models.DocumentCreateRequest
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="document-create",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.DocumentCreateResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentCreateBadRequestErrorData, http_res
+            )
+            raise models.DocumentCreateBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentCreateUnauthorizedErrorData, http_res
+            )
+            raise models.DocumentCreateUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentCreateForbiddenErrorData, http_res
+            )
+            raise models.DocumentCreateForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentCreateInternalServerErrorData, http_res
+            )
+            raise models.DocumentCreateInternalServerError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def update(
+        self,
+        *,
+        document_id: float,
+        data: Optional[
+            Union[models.DocumentUpdateData, models.DocumentUpdateDataTypedDict]
+        ] = None,
+        meta: Optional[
+            Union[models.DocumentUpdateMeta, models.DocumentUpdateMetaTypedDict]
+        ] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.DocumentUpdateResponse:
+        r"""Update document
+
+        :param document_id:
+        :param data:
+        :param meta:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.DocumentUpdateRequest(
             document_id=document_id,
-            folder_id=folder_id,
+            data=utils.get_pydantic_model(data, Optional[models.DocumentUpdateData]),
+            meta=utils.get_pydantic_model(meta, Optional[models.DocumentUpdateMeta]),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/document/update",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.DocumentUpdateRequest
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="document-update",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.DocumentUpdateResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentUpdateBadRequestErrorData, http_res
+            )
+            raise models.DocumentUpdateBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentUpdateUnauthorizedErrorData, http_res
+            )
+            raise models.DocumentUpdateUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentUpdateForbiddenErrorData, http_res
+            )
+            raise models.DocumentUpdateForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentUpdateInternalServerErrorData, http_res
+            )
+            raise models.DocumentUpdateInternalServerError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def update_async(
+        self,
+        *,
+        document_id: float,
+        data: Optional[
+            Union[models.DocumentUpdateData, models.DocumentUpdateDataTypedDict]
+        ] = None,
+        meta: Optional[
+            Union[models.DocumentUpdateMeta, models.DocumentUpdateMetaTypedDict]
+        ] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.DocumentUpdateResponse:
+        r"""Update document
+
+        :param document_id:
+        :param data:
+        :param meta:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.DocumentUpdateRequest(
+            document_id=document_id,
+            data=utils.get_pydantic_model(data, Optional[models.DocumentUpdateData]),
+            meta=utils.get_pydantic_model(meta, Optional[models.DocumentUpdateMeta]),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/document/update",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.DocumentUpdateRequest
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="document-update",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.DocumentUpdateResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentUpdateBadRequestErrorData, http_res
+            )
+            raise models.DocumentUpdateBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentUpdateUnauthorizedErrorData, http_res
+            )
+            raise models.DocumentUpdateUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentUpdateForbiddenErrorData, http_res
+            )
+            raise models.DocumentUpdateForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentUpdateInternalServerErrorData, http_res
+            )
+            raise models.DocumentUpdateInternalServerError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def delete(
+        self,
+        *,
+        document_id: float,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.DocumentDeleteResponse:
+        r"""Delete document
+
+        :param document_id:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.DocumentDeleteRequest(
+            document_id=document_id,
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/document/delete",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.DocumentDeleteRequest
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="document-delete",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.DocumentDeleteResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDeleteBadRequestErrorData, http_res
+            )
+            raise models.DocumentDeleteBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDeleteUnauthorizedErrorData, http_res
+            )
+            raise models.DocumentDeleteUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDeleteForbiddenErrorData, http_res
+            )
+            raise models.DocumentDeleteForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDeleteInternalServerErrorData, http_res
+            )
+            raise models.DocumentDeleteInternalServerError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def delete_async(
+        self,
+        *,
+        document_id: float,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.DocumentDeleteResponse:
+        r"""Delete document
+
+        :param document_id:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.DocumentDeleteRequest(
+            document_id=document_id,
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/document/delete",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.DocumentDeleteRequest
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="document-delete",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.DocumentDeleteResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDeleteBadRequestErrorData, http_res
+            )
+            raise models.DocumentDeleteBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDeleteUnauthorizedErrorData, http_res
+            )
+            raise models.DocumentDeleteUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDeleteForbiddenErrorData, http_res
+            )
+            raise models.DocumentDeleteForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDeleteInternalServerErrorData, http_res
+            )
+            raise models.DocumentDeleteInternalServerError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def duplicate(
+        self,
+        *,
+        document_id: float,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.DocumentDuplicateResponse:
+        r"""Duplicate document
+
+        :param document_id:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.DocumentDuplicateRequest(
+            document_id=document_id,
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/document/duplicate",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.DocumentDuplicateRequest
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="document-duplicate",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.DocumentDuplicateResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDuplicateBadRequestErrorData, http_res
+            )
+            raise models.DocumentDuplicateBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDuplicateUnauthorizedErrorData, http_res
+            )
+            raise models.DocumentDuplicateUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDuplicateForbiddenErrorData, http_res
+            )
+            raise models.DocumentDuplicateForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDuplicateInternalServerErrorData, http_res
+            )
+            raise models.DocumentDuplicateInternalServerError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def duplicate_async(
+        self,
+        *,
+        document_id: float,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.DocumentDuplicateResponse:
+        r"""Duplicate document
+
+        :param document_id:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.DocumentDuplicateRequest(
+            document_id=document_id,
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/document/duplicate",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.DocumentDuplicateRequest
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="document-duplicate",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.DocumentDuplicateResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDuplicateBadRequestErrorData, http_res
+            )
+            raise models.DocumentDuplicateBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDuplicateUnauthorizedErrorData, http_res
+            )
+            raise models.DocumentDuplicateUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDuplicateForbiddenErrorData, http_res
+            )
+            raise models.DocumentDuplicateForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDuplicateInternalServerErrorData, http_res
+            )
+            raise models.DocumentDuplicateInternalServerError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def distribute(
+        self,
+        *,
+        document_id: float,
+        meta: Optional[
+            Union[models.DocumentDistributeMeta, models.DocumentDistributeMetaTypedDict]
+        ] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.DocumentDistributeResponse:
+        r"""Distribute document
+
+        Send the document out to recipients based on your distribution method
+
+        :param document_id:
+        :param meta:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.DocumentDistributeRequest(
+            document_id=document_id,
+            meta=utils.get_pydantic_model(
+                meta, Optional[models.DocumentDistributeMeta]
+            ),
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/document/distribute",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.DocumentDistributeRequest
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="document-distribute",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.DocumentDistributeResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDistributeBadRequestErrorData, http_res
+            )
+            raise models.DocumentDistributeBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDistributeUnauthorizedErrorData, http_res
+            )
+            raise models.DocumentDistributeUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDistributeForbiddenErrorData, http_res
+            )
+            raise models.DocumentDistributeForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDistributeInternalServerErrorData, http_res
+            )
+            raise models.DocumentDistributeInternalServerError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def distribute_async(
+        self,
+        *,
+        document_id: float,
+        meta: Optional[
+            Union[models.DocumentDistributeMeta, models.DocumentDistributeMetaTypedDict]
+        ] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.DocumentDistributeResponse:
+        r"""Distribute document
+
+        Send the document out to recipients based on your distribution method
+
+        :param document_id:
+        :param meta:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.DocumentDistributeRequest(
+            document_id=document_id,
+            meta=utils.get_pydantic_model(
+                meta, Optional[models.DocumentDistributeMeta]
+            ),
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/document/distribute",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.DocumentDistributeRequest
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="document-distribute",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.DocumentDistributeResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDistributeBadRequestErrorData, http_res
+            )
+            raise models.DocumentDistributeBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDistributeUnauthorizedErrorData, http_res
+            )
+            raise models.DocumentDistributeUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDistributeForbiddenErrorData, http_res
+            )
+            raise models.DocumentDistributeForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDistributeInternalServerErrorData, http_res
+            )
+            raise models.DocumentDistributeInternalServerError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def redistribute(
+        self,
+        *,
+        document_id: float,
+        recipients: List[float],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.DocumentRedistributeResponse:
+        r"""Redistribute document
+
+        Redistribute the document to the provided recipients who have not actioned the document. Will use the distribution method set in the document
+
+        :param document_id:
+        :param recipients:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.DocumentRedistributeRequest(
+            document_id=document_id,
+            recipients=recipients,
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/document/redistribute",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.DocumentRedistributeRequest
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="document-redistribute",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.DocumentRedistributeResponse, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentRedistributeBadRequestErrorData, http_res
+            )
+            raise models.DocumentRedistributeBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentRedistributeUnauthorizedErrorData, http_res
+            )
+            raise models.DocumentRedistributeUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentRedistributeForbiddenErrorData, http_res
+            )
+            raise models.DocumentRedistributeForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentRedistributeInternalServerErrorData, http_res
+            )
+            raise models.DocumentRedistributeInternalServerError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def redistribute_async(
+        self,
+        *,
+        document_id: float,
+        recipients: List[float],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.DocumentRedistributeResponse:
+        r"""Redistribute document
+
+        Redistribute the document to the provided recipients who have not actioned the document. Will use the distribution method set in the document
+
+        :param document_id:
+        :param recipients:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.DocumentRedistributeRequest(
+            document_id=document_id,
+            recipients=recipients,
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/document/redistribute",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.DocumentRedistributeRequest
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="document-redistribute",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(
+                models.DocumentRedistributeResponse, http_res
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentRedistributeBadRequestErrorData, http_res
+            )
+            raise models.DocumentRedistributeBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentRedistributeUnauthorizedErrorData, http_res
+            )
+            raise models.DocumentRedistributeUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentRedistributeForbiddenErrorData, http_res
+            )
+            raise models.DocumentRedistributeForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentRedistributeInternalServerErrorData, http_res
+            )
+            raise models.DocumentRedistributeInternalServerError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def download(
+        self,
+        *,
+        document_id: float,
+        version: Optional[
+            models.DocumentDownloadVersion
+        ] = models.DocumentDownloadVersion.SIGNED,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.DocumentDownloadResponse:
+        r"""Download document
+
+        :param document_id: The ID of the document to download.
+        :param version: The version of the document to download. \"signed\" returns the completed document with signatures, \"original\" returns the original uploaded document.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.DocumentDownloadRequest(
+            document_id=document_id,
+            version=version,
         )
 
         req = self._build_request(
             method="GET",
-            path="/document/{documentId}",
+            path="/document/{documentId}/download",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -591,44 +1918,48 @@ class Documents(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="document-getDocumentWithDetailsById",
-                oauth2_scopes=[],
+                operation_id="document-download",
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.DocumentGetDocumentWithDetailsByIDResponse, http_res
+            return models.DocumentDownloadResponse(
+                result=unmarshal_json_response(Any, http_res),
+                headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
-                models.DocumentGetDocumentWithDetailsByIDBadRequestErrorData, http_res
+                models.DocumentDownloadBadRequestErrorData, http_res
             )
-            raise models.DocumentGetDocumentWithDetailsByIDBadRequestError(
-                response_data, http_res
+            raise models.DocumentDownloadBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDownloadUnauthorizedErrorData, http_res
             )
+            raise models.DocumentDownloadUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDownloadForbiddenErrorData, http_res
+            )
+            raise models.DocumentDownloadForbiddenError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
-                models.DocumentGetDocumentWithDetailsByIDNotFoundErrorData, http_res
+                models.DocumentDownloadNotFoundErrorData, http_res
             )
-            raise models.DocumentGetDocumentWithDetailsByIDNotFoundError(
-                response_data, http_res
-            )
+            raise models.DocumentDownloadNotFoundError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
-                models.DocumentGetDocumentWithDetailsByIDInternalServerErrorData,
-                http_res,
+                models.DocumentDownloadInternalServerErrorData, http_res
             )
-            raise models.DocumentGetDocumentWithDetailsByIDInternalServerError(
-                response_data, http_res
-            )
+            raise models.DocumentDownloadInternalServerError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -638,22 +1969,22 @@ class Documents(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
-    async def get_async(
+    async def download_async(
         self,
         *,
         document_id: float,
-        folder_id: Optional[str] = None,
+        version: Optional[
+            models.DocumentDownloadVersion
+        ] = models.DocumentDownloadVersion.SIGNED,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentGetDocumentWithDetailsByIDResponse:
-        r"""Get document
+    ) -> models.DocumentDownloadResponse:
+        r"""Download document
 
-        Returns a document given an ID
-
-        :param document_id:
-        :param folder_id: Filter documents by folder ID
+        :param document_id: The ID of the document to download.
+        :param version: The version of the document to download. \"signed\" returns the completed document with signatures, \"original\" returns the original uploaded document.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -669,14 +2000,14 @@ class Documents(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DocumentGetDocumentWithDetailsByIDRequest(
+        request = models.DocumentDownloadRequest(
             document_id=document_id,
-            folder_id=folder_id,
+            version=version,
         )
 
         req = self._build_request_async(
             method="GET",
-            path="/document/{documentId}",
+            path="/document/{documentId}/download",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -702,44 +2033,48 @@ class Documents(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="document-getDocumentWithDetailsById",
-                oauth2_scopes=[],
+                operation_id="document-download",
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.DocumentGetDocumentWithDetailsByIDResponse, http_res
+            return models.DocumentDownloadResponse(
+                result=unmarshal_json_response(Any, http_res),
+                headers=utils.get_response_headers(http_res.headers),
             )
         if utils.match_response(http_res, "400", "application/json"):
             response_data = unmarshal_json_response(
-                models.DocumentGetDocumentWithDetailsByIDBadRequestErrorData, http_res
+                models.DocumentDownloadBadRequestErrorData, http_res
             )
-            raise models.DocumentGetDocumentWithDetailsByIDBadRequestError(
-                response_data, http_res
+            raise models.DocumentDownloadBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDownloadUnauthorizedErrorData, http_res
             )
+            raise models.DocumentDownloadUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentDownloadForbiddenErrorData, http_res
+            )
+            raise models.DocumentDownloadForbiddenError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
-                models.DocumentGetDocumentWithDetailsByIDNotFoundErrorData, http_res
+                models.DocumentDownloadNotFoundErrorData, http_res
             )
-            raise models.DocumentGetDocumentWithDetailsByIDNotFoundError(
-                response_data, http_res
-            )
+            raise models.DocumentDownloadNotFoundError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
-                models.DocumentGetDocumentWithDetailsByIDInternalServerErrorData,
-                http_res,
+                models.DocumentDownloadInternalServerErrorData, http_res
             )
-            raise models.DocumentGetDocumentWithDetailsByIDInternalServerError(
-                response_data, http_res
-            )
+            raise models.DocumentDownloadInternalServerError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -765,14 +2100,24 @@ class Documents(BaseSDK):
         ] = None,
         form_values: Optional[
             Union[
-                Dict[str, models.FormValuesRequest],
-                Dict[str, models.FormValuesRequestTypedDict],
+                Dict[str, models.DocumentCreateDocumentTemporaryFormValuesRequest],
+                Dict[
+                    str,
+                    models.DocumentCreateDocumentTemporaryFormValuesRequestTypedDict,
+                ],
             ]
         ] = None,
+        folder_id: Optional[str] = None,
         recipients: Optional[
             Union[
                 List[models.DocumentCreateDocumentTemporaryRecipientRequest],
                 List[models.DocumentCreateDocumentTemporaryRecipientRequestTypedDict],
+            ]
+        ] = None,
+        attachments: Optional[
+            Union[
+                List[models.DocumentCreateDocumentTemporaryAttachment],
+                List[models.DocumentCreateDocumentTemporaryAttachmentTypedDict],
             ]
         ] = None,
         meta: Optional[
@@ -790,13 +2135,15 @@ class Documents(BaseSDK):
 
         You will need to upload the PDF to the provided URL returned. Note: Once V2 API is released, this will be removed since we will allow direct uploads, instead of using an upload URL.
 
-        :param title: The title of the document.
-        :param external_id: The external ID of the document.
-        :param visibility: The visibility of the document.
+        :param title:
+        :param external_id:
+        :param visibility:
         :param global_access_auth:
         :param global_action_auth:
         :param form_values:
+        :param folder_id:
         :param recipients:
+        :param attachments:
         :param meta:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -820,9 +2167,14 @@ class Documents(BaseSDK):
             global_access_auth=global_access_auth,
             global_action_auth=global_action_auth,
             form_values=form_values,
+            folder_id=folder_id,
             recipients=utils.get_pydantic_model(
                 recipients,
                 Optional[List[models.DocumentCreateDocumentTemporaryRecipientRequest]],
+            ),
+            attachments=utils.get_pydantic_model(
+                attachments,
+                Optional[List[models.DocumentCreateDocumentTemporaryAttachment]],
             ),
             meta=utils.get_pydantic_model(
                 meta, Optional[models.DocumentCreateDocumentTemporaryMeta]
@@ -865,13 +2217,13 @@ class Documents(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="document-createDocumentTemporary",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -885,6 +2237,20 @@ class Documents(BaseSDK):
                 models.DocumentCreateDocumentTemporaryBadRequestErrorData, http_res
             )
             raise models.DocumentCreateDocumentTemporaryBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentCreateDocumentTemporaryUnauthorizedErrorData, http_res
+            )
+            raise models.DocumentCreateDocumentTemporaryUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentCreateDocumentTemporaryForbiddenErrorData, http_res
+            )
+            raise models.DocumentCreateDocumentTemporaryForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -919,14 +2285,24 @@ class Documents(BaseSDK):
         ] = None,
         form_values: Optional[
             Union[
-                Dict[str, models.FormValuesRequest],
-                Dict[str, models.FormValuesRequestTypedDict],
+                Dict[str, models.DocumentCreateDocumentTemporaryFormValuesRequest],
+                Dict[
+                    str,
+                    models.DocumentCreateDocumentTemporaryFormValuesRequestTypedDict,
+                ],
             ]
         ] = None,
+        folder_id: Optional[str] = None,
         recipients: Optional[
             Union[
                 List[models.DocumentCreateDocumentTemporaryRecipientRequest],
                 List[models.DocumentCreateDocumentTemporaryRecipientRequestTypedDict],
+            ]
+        ] = None,
+        attachments: Optional[
+            Union[
+                List[models.DocumentCreateDocumentTemporaryAttachment],
+                List[models.DocumentCreateDocumentTemporaryAttachmentTypedDict],
             ]
         ] = None,
         meta: Optional[
@@ -944,13 +2320,15 @@ class Documents(BaseSDK):
 
         You will need to upload the PDF to the provided URL returned. Note: Once V2 API is released, this will be removed since we will allow direct uploads, instead of using an upload URL.
 
-        :param title: The title of the document.
-        :param external_id: The external ID of the document.
-        :param visibility: The visibility of the document.
+        :param title:
+        :param external_id:
+        :param visibility:
         :param global_access_auth:
         :param global_action_auth:
         :param form_values:
+        :param folder_id:
         :param recipients:
+        :param attachments:
         :param meta:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -974,9 +2352,14 @@ class Documents(BaseSDK):
             global_access_auth=global_access_auth,
             global_action_auth=global_action_auth,
             form_values=form_values,
+            folder_id=folder_id,
             recipients=utils.get_pydantic_model(
                 recipients,
                 Optional[List[models.DocumentCreateDocumentTemporaryRecipientRequest]],
+            ),
+            attachments=utils.get_pydantic_model(
+                attachments,
+                Optional[List[models.DocumentCreateDocumentTemporaryAttachment]],
             ),
             meta=utils.get_pydantic_model(
                 meta, Optional[models.DocumentCreateDocumentTemporaryMeta]
@@ -1019,13 +2402,13 @@ class Documents(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="document-createDocumentTemporary",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1041,841 +2424,25 @@ class Documents(BaseSDK):
             raise models.DocumentCreateDocumentTemporaryBadRequestError(
                 response_data, http_res
             )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentCreateDocumentTemporaryUnauthorizedErrorData, http_res
+            )
+            raise models.DocumentCreateDocumentTemporaryUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.DocumentCreateDocumentTemporaryForbiddenErrorData, http_res
+            )
+            raise models.DocumentCreateDocumentTemporaryForbiddenError(
+                response_data, http_res
+            )
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 models.DocumentCreateDocumentTemporaryInternalServerErrorData, http_res
             )
             raise models.DocumentCreateDocumentTemporaryInternalServerError(
-                response_data, http_res
-            )
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-
-        raise models.APIError("Unexpected response received", http_res)
-
-    def delete(
-        self,
-        *,
-        document_id: float,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentDeleteDocumentResponse:
-        r"""Delete document
-
-        :param document_id:
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.DocumentDeleteDocumentRequest(
-            document_id=document_id,
-        )
-
-        req = self._build_request(
-            method="POST",
-            path="/document/delete",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DocumentDeleteDocumentRequest
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="document-deleteDocument",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.DocumentDeleteDocumentResponse, http_res
-            )
-        if utils.match_response(http_res, "400", "application/json"):
-            response_data = unmarshal_json_response(
-                models.DocumentDeleteDocumentBadRequestErrorData, http_res
-            )
-            raise models.DocumentDeleteDocumentBadRequestError(response_data, http_res)
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(
-                models.DocumentDeleteDocumentInternalServerErrorData, http_res
-            )
-            raise models.DocumentDeleteDocumentInternalServerError(
-                response_data, http_res
-            )
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-
-        raise models.APIError("Unexpected response received", http_res)
-
-    async def delete_async(
-        self,
-        *,
-        document_id: float,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentDeleteDocumentResponse:
-        r"""Delete document
-
-        :param document_id:
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.DocumentDeleteDocumentRequest(
-            document_id=document_id,
-        )
-
-        req = self._build_request_async(
-            method="POST",
-            path="/document/delete",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DocumentDeleteDocumentRequest
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="document-deleteDocument",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.DocumentDeleteDocumentResponse, http_res
-            )
-        if utils.match_response(http_res, "400", "application/json"):
-            response_data = unmarshal_json_response(
-                models.DocumentDeleteDocumentBadRequestErrorData, http_res
-            )
-            raise models.DocumentDeleteDocumentBadRequestError(response_data, http_res)
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(
-                models.DocumentDeleteDocumentInternalServerErrorData, http_res
-            )
-            raise models.DocumentDeleteDocumentInternalServerError(
-                response_data, http_res
-            )
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-
-        raise models.APIError("Unexpected response received", http_res)
-
-    def distribute(
-        self,
-        *,
-        document_id: float,
-        meta: Optional[
-            Union[
-                models.DocumentSendDocumentMeta,
-                models.DocumentSendDocumentMetaTypedDict,
-            ]
-        ] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentSendDocumentResponse:
-        r"""Distribute document
-
-        Send the document out to recipients based on your distribution method
-
-        :param document_id: The ID of the document to send.
-        :param meta:
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.DocumentSendDocumentRequest(
-            document_id=document_id,
-            meta=utils.get_pydantic_model(
-                meta, Optional[models.DocumentSendDocumentMeta]
-            ),
-        )
-
-        req = self._build_request(
-            method="POST",
-            path="/document/distribute",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DocumentSendDocumentRequest
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="document-sendDocument",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.DocumentSendDocumentResponse, http_res
-            )
-        if utils.match_response(http_res, "400", "application/json"):
-            response_data = unmarshal_json_response(
-                models.DocumentSendDocumentBadRequestErrorData, http_res
-            )
-            raise models.DocumentSendDocumentBadRequestError(response_data, http_res)
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(
-                models.DocumentSendDocumentInternalServerErrorData, http_res
-            )
-            raise models.DocumentSendDocumentInternalServerError(
-                response_data, http_res
-            )
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-
-        raise models.APIError("Unexpected response received", http_res)
-
-    async def distribute_async(
-        self,
-        *,
-        document_id: float,
-        meta: Optional[
-            Union[
-                models.DocumentSendDocumentMeta,
-                models.DocumentSendDocumentMetaTypedDict,
-            ]
-        ] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentSendDocumentResponse:
-        r"""Distribute document
-
-        Send the document out to recipients based on your distribution method
-
-        :param document_id: The ID of the document to send.
-        :param meta:
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.DocumentSendDocumentRequest(
-            document_id=document_id,
-            meta=utils.get_pydantic_model(
-                meta, Optional[models.DocumentSendDocumentMeta]
-            ),
-        )
-
-        req = self._build_request_async(
-            method="POST",
-            path="/document/distribute",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DocumentSendDocumentRequest
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="document-sendDocument",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.DocumentSendDocumentResponse, http_res
-            )
-        if utils.match_response(http_res, "400", "application/json"):
-            response_data = unmarshal_json_response(
-                models.DocumentSendDocumentBadRequestErrorData, http_res
-            )
-            raise models.DocumentSendDocumentBadRequestError(response_data, http_res)
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(
-                models.DocumentSendDocumentInternalServerErrorData, http_res
-            )
-            raise models.DocumentSendDocumentInternalServerError(
-                response_data, http_res
-            )
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-
-        raise models.APIError("Unexpected response received", http_res)
-
-    def redistribute(
-        self,
-        *,
-        document_id: float,
-        recipients: List[float],
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentResendDocumentResponse:
-        r"""Redistribute document
-
-        Redistribute the document to the provided recipients who have not actioned the document. Will use the distribution method set in the document
-
-        :param document_id:
-        :param recipients: The IDs of the recipients to redistribute the document to.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.DocumentResendDocumentRequest(
-            document_id=document_id,
-            recipients=recipients,
-        )
-
-        req = self._build_request(
-            method="POST",
-            path="/document/redistribute",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DocumentResendDocumentRequest
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="document-resendDocument",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.DocumentResendDocumentResponse, http_res
-            )
-        if utils.match_response(http_res, "400", "application/json"):
-            response_data = unmarshal_json_response(
-                models.DocumentResendDocumentBadRequestErrorData, http_res
-            )
-            raise models.DocumentResendDocumentBadRequestError(response_data, http_res)
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(
-                models.DocumentResendDocumentInternalServerErrorData, http_res
-            )
-            raise models.DocumentResendDocumentInternalServerError(
-                response_data, http_res
-            )
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-
-        raise models.APIError("Unexpected response received", http_res)
-
-    async def redistribute_async(
-        self,
-        *,
-        document_id: float,
-        recipients: List[float],
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentResendDocumentResponse:
-        r"""Redistribute document
-
-        Redistribute the document to the provided recipients who have not actioned the document. Will use the distribution method set in the document
-
-        :param document_id:
-        :param recipients: The IDs of the recipients to redistribute the document to.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.DocumentResendDocumentRequest(
-            document_id=document_id,
-            recipients=recipients,
-        )
-
-        req = self._build_request_async(
-            method="POST",
-            path="/document/redistribute",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DocumentResendDocumentRequest
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="document-resendDocument",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.DocumentResendDocumentResponse, http_res
-            )
-        if utils.match_response(http_res, "400", "application/json"):
-            response_data = unmarshal_json_response(
-                models.DocumentResendDocumentBadRequestErrorData, http_res
-            )
-            raise models.DocumentResendDocumentBadRequestError(response_data, http_res)
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(
-                models.DocumentResendDocumentInternalServerErrorData, http_res
-            )
-            raise models.DocumentResendDocumentInternalServerError(
-                response_data, http_res
-            )
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-
-        raise models.APIError("Unexpected response received", http_res)
-
-    def duplicate(
-        self,
-        *,
-        document_id: float,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentDuplicateDocumentResponse:
-        r"""Duplicate document
-
-        :param document_id:
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.DocumentDuplicateDocumentRequest(
-            document_id=document_id,
-        )
-
-        req = self._build_request(
-            method="POST",
-            path="/document/duplicate",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DocumentDuplicateDocumentRequest
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="document-duplicateDocument",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.DocumentDuplicateDocumentResponse, http_res
-            )
-        if utils.match_response(http_res, "400", "application/json"):
-            response_data = unmarshal_json_response(
-                models.DocumentDuplicateDocumentBadRequestErrorData, http_res
-            )
-            raise models.DocumentDuplicateDocumentBadRequestError(
-                response_data, http_res
-            )
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(
-                models.DocumentDuplicateDocumentInternalServerErrorData, http_res
-            )
-            raise models.DocumentDuplicateDocumentInternalServerError(
-                response_data, http_res
-            )
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-
-        raise models.APIError("Unexpected response received", http_res)
-
-    async def duplicate_async(
-        self,
-        *,
-        document_id: float,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.DocumentDuplicateDocumentResponse:
-        r"""Duplicate document
-
-        :param document_id:
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.DocumentDuplicateDocumentRequest(
-            document_id=document_id,
-        )
-
-        req = self._build_request_async(
-            method="POST",
-            path="/document/duplicate",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.DocumentDuplicateDocumentRequest
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="document-duplicateDocument",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(
-                models.DocumentDuplicateDocumentResponse, http_res
-            )
-        if utils.match_response(http_res, "400", "application/json"):
-            response_data = unmarshal_json_response(
-                models.DocumentDuplicateDocumentBadRequestErrorData, http_res
-            )
-            raise models.DocumentDuplicateDocumentBadRequestError(
-                response_data, http_res
-            )
-        if utils.match_response(http_res, "500", "application/json"):
-            response_data = unmarshal_json_response(
-                models.DocumentDuplicateDocumentInternalServerErrorData, http_res
-            )
-            raise models.DocumentDuplicateDocumentInternalServerError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):

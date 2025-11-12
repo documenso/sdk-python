@@ -72,13 +72,13 @@ class DocumentsRecipients(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-getDocumentRecipient",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -92,6 +92,20 @@ class DocumentsRecipients(BaseSDK):
                 models.RecipientGetDocumentRecipientBadRequestErrorData, http_res
             )
             raise models.RecipientGetDocumentRecipientBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientGetDocumentRecipientUnauthorizedErrorData, http_res
+            )
+            raise models.RecipientGetDocumentRecipientUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientGetDocumentRecipientForbiddenErrorData, http_res
+            )
+            raise models.RecipientGetDocumentRecipientForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "404", "application/json"):
@@ -179,13 +193,13 @@ class DocumentsRecipients(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-getDocumentRecipient",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -199,6 +213,20 @@ class DocumentsRecipients(BaseSDK):
                 models.RecipientGetDocumentRecipientBadRequestErrorData, http_res
             )
             raise models.RecipientGetDocumentRecipientBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientGetDocumentRecipientUnauthorizedErrorData, http_res
+            )
+            raise models.RecipientGetDocumentRecipientUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientGetDocumentRecipientForbiddenErrorData, http_res
+            )
+            raise models.RecipientGetDocumentRecipientForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "404", "application/json"):
@@ -301,13 +329,13 @@ class DocumentsRecipients(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-createDocumentRecipient",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -321,6 +349,20 @@ class DocumentsRecipients(BaseSDK):
                 models.RecipientCreateDocumentRecipientBadRequestErrorData, http_res
             )
             raise models.RecipientCreateDocumentRecipientBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientCreateDocumentRecipientUnauthorizedErrorData, http_res
+            )
+            raise models.RecipientCreateDocumentRecipientUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientCreateDocumentRecipientForbiddenErrorData, http_res
+            )
+            raise models.RecipientCreateDocumentRecipientForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -416,13 +458,13 @@ class DocumentsRecipients(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-createDocumentRecipient",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -436,6 +478,20 @@ class DocumentsRecipients(BaseSDK):
                 models.RecipientCreateDocumentRecipientBadRequestErrorData, http_res
             )
             raise models.RecipientCreateDocumentRecipientBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientCreateDocumentRecipientUnauthorizedErrorData, http_res
+            )
+            raise models.RecipientCreateDocumentRecipientUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientCreateDocumentRecipientForbiddenErrorData, http_res
+            )
+            raise models.RecipientCreateDocumentRecipientForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -532,13 +588,13 @@ class DocumentsRecipients(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-createDocumentRecipients",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -552,6 +608,20 @@ class DocumentsRecipients(BaseSDK):
                 models.RecipientCreateDocumentRecipientsBadRequestErrorData, http_res
             )
             raise models.RecipientCreateDocumentRecipientsBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientCreateDocumentRecipientsUnauthorizedErrorData, http_res
+            )
+            raise models.RecipientCreateDocumentRecipientsUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientCreateDocumentRecipientsForbiddenErrorData, http_res
+            )
+            raise models.RecipientCreateDocumentRecipientsForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -649,13 +719,13 @@ class DocumentsRecipients(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-createDocumentRecipients",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -669,6 +739,20 @@ class DocumentsRecipients(BaseSDK):
                 models.RecipientCreateDocumentRecipientsBadRequestErrorData, http_res
             )
             raise models.RecipientCreateDocumentRecipientsBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientCreateDocumentRecipientsUnauthorizedErrorData, http_res
+            )
+            raise models.RecipientCreateDocumentRecipientsUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientCreateDocumentRecipientsForbiddenErrorData, http_res
+            )
+            raise models.RecipientCreateDocumentRecipientsForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -765,13 +849,13 @@ class DocumentsRecipients(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-updateDocumentRecipient",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -785,6 +869,20 @@ class DocumentsRecipients(BaseSDK):
                 models.RecipientUpdateDocumentRecipientBadRequestErrorData, http_res
             )
             raise models.RecipientUpdateDocumentRecipientBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientUpdateDocumentRecipientUnauthorizedErrorData, http_res
+            )
+            raise models.RecipientUpdateDocumentRecipientUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientUpdateDocumentRecipientForbiddenErrorData, http_res
+            )
+            raise models.RecipientUpdateDocumentRecipientForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -880,13 +978,13 @@ class DocumentsRecipients(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-updateDocumentRecipient",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -900,6 +998,20 @@ class DocumentsRecipients(BaseSDK):
                 models.RecipientUpdateDocumentRecipientBadRequestErrorData, http_res
             )
             raise models.RecipientUpdateDocumentRecipientBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientUpdateDocumentRecipientUnauthorizedErrorData, http_res
+            )
+            raise models.RecipientUpdateDocumentRecipientUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientUpdateDocumentRecipientForbiddenErrorData, http_res
+            )
+            raise models.RecipientUpdateDocumentRecipientForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -996,13 +1108,13 @@ class DocumentsRecipients(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-updateDocumentRecipients",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1016,6 +1128,20 @@ class DocumentsRecipients(BaseSDK):
                 models.RecipientUpdateDocumentRecipientsBadRequestErrorData, http_res
             )
             raise models.RecipientUpdateDocumentRecipientsBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientUpdateDocumentRecipientsUnauthorizedErrorData, http_res
+            )
+            raise models.RecipientUpdateDocumentRecipientsUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientUpdateDocumentRecipientsForbiddenErrorData, http_res
+            )
+            raise models.RecipientUpdateDocumentRecipientsForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -1113,13 +1239,13 @@ class DocumentsRecipients(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-updateDocumentRecipients",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1133,6 +1259,20 @@ class DocumentsRecipients(BaseSDK):
                 models.RecipientUpdateDocumentRecipientsBadRequestErrorData, http_res
             )
             raise models.RecipientUpdateDocumentRecipientsBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientUpdateDocumentRecipientsUnauthorizedErrorData, http_res
+            )
+            raise models.RecipientUpdateDocumentRecipientsUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientUpdateDocumentRecipientsForbiddenErrorData, http_res
+            )
+            raise models.RecipientUpdateDocumentRecipientsForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -1219,13 +1359,13 @@ class DocumentsRecipients(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-deleteDocumentRecipient",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1239,6 +1379,20 @@ class DocumentsRecipients(BaseSDK):
                 models.RecipientDeleteDocumentRecipientBadRequestErrorData, http_res
             )
             raise models.RecipientDeleteDocumentRecipientBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientDeleteDocumentRecipientUnauthorizedErrorData, http_res
+            )
+            raise models.RecipientDeleteDocumentRecipientUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientDeleteDocumentRecipientForbiddenErrorData, http_res
+            )
+            raise models.RecipientDeleteDocumentRecipientForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -1324,13 +1478,13 @@ class DocumentsRecipients(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-deleteDocumentRecipient",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1344,6 +1498,20 @@ class DocumentsRecipients(BaseSDK):
                 models.RecipientDeleteDocumentRecipientBadRequestErrorData, http_res
             )
             raise models.RecipientDeleteDocumentRecipientBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientDeleteDocumentRecipientUnauthorizedErrorData, http_res
+            )
+            raise models.RecipientDeleteDocumentRecipientUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientDeleteDocumentRecipientForbiddenErrorData, http_res
+            )
+            raise models.RecipientDeleteDocumentRecipientForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):

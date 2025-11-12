@@ -1,0 +1,9 @@
+# EnvelopeFieldUpdateManyRequest
+
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `envelope_id`                                                                                  | *str*                                                                                          | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `data`                                                                                         | List[[models.EnvelopeFieldUpdateManyDataUnion](../models/envelopefieldupdatemanydataunion.md)] | :heavy_check_mark:                                                                             | N/A                                                                                            |
