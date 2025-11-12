@@ -72,13 +72,13 @@ class TemplatesRecipients(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-getTemplateRecipient",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -92,6 +92,20 @@ class TemplatesRecipients(BaseSDK):
                 models.RecipientGetTemplateRecipientBadRequestErrorData, http_res
             )
             raise models.RecipientGetTemplateRecipientBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientGetTemplateRecipientUnauthorizedErrorData, http_res
+            )
+            raise models.RecipientGetTemplateRecipientUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientGetTemplateRecipientForbiddenErrorData, http_res
+            )
+            raise models.RecipientGetTemplateRecipientForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "404", "application/json"):
@@ -179,13 +193,13 @@ class TemplatesRecipients(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-getTemplateRecipient",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -199,6 +213,20 @@ class TemplatesRecipients(BaseSDK):
                 models.RecipientGetTemplateRecipientBadRequestErrorData, http_res
             )
             raise models.RecipientGetTemplateRecipientBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientGetTemplateRecipientUnauthorizedErrorData, http_res
+            )
+            raise models.RecipientGetTemplateRecipientUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientGetTemplateRecipientForbiddenErrorData, http_res
+            )
+            raise models.RecipientGetTemplateRecipientForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "404", "application/json"):
@@ -301,13 +329,13 @@ class TemplatesRecipients(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-createTemplateRecipient",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -321,6 +349,20 @@ class TemplatesRecipients(BaseSDK):
                 models.RecipientCreateTemplateRecipientBadRequestErrorData, http_res
             )
             raise models.RecipientCreateTemplateRecipientBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientCreateTemplateRecipientUnauthorizedErrorData, http_res
+            )
+            raise models.RecipientCreateTemplateRecipientUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientCreateTemplateRecipientForbiddenErrorData, http_res
+            )
+            raise models.RecipientCreateTemplateRecipientForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -416,13 +458,13 @@ class TemplatesRecipients(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-createTemplateRecipient",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -436,6 +478,20 @@ class TemplatesRecipients(BaseSDK):
                 models.RecipientCreateTemplateRecipientBadRequestErrorData, http_res
             )
             raise models.RecipientCreateTemplateRecipientBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientCreateTemplateRecipientUnauthorizedErrorData, http_res
+            )
+            raise models.RecipientCreateTemplateRecipientUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientCreateTemplateRecipientForbiddenErrorData, http_res
+            )
+            raise models.RecipientCreateTemplateRecipientForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -532,13 +588,13 @@ class TemplatesRecipients(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-createTemplateRecipients",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -552,6 +608,20 @@ class TemplatesRecipients(BaseSDK):
                 models.RecipientCreateTemplateRecipientsBadRequestErrorData, http_res
             )
             raise models.RecipientCreateTemplateRecipientsBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientCreateTemplateRecipientsUnauthorizedErrorData, http_res
+            )
+            raise models.RecipientCreateTemplateRecipientsUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientCreateTemplateRecipientsForbiddenErrorData, http_res
+            )
+            raise models.RecipientCreateTemplateRecipientsForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -649,13 +719,13 @@ class TemplatesRecipients(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-createTemplateRecipients",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -669,6 +739,20 @@ class TemplatesRecipients(BaseSDK):
                 models.RecipientCreateTemplateRecipientsBadRequestErrorData, http_res
             )
             raise models.RecipientCreateTemplateRecipientsBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientCreateTemplateRecipientsUnauthorizedErrorData, http_res
+            )
+            raise models.RecipientCreateTemplateRecipientsUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientCreateTemplateRecipientsForbiddenErrorData, http_res
+            )
+            raise models.RecipientCreateTemplateRecipientsForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -765,13 +849,13 @@ class TemplatesRecipients(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-updateTemplateRecipient",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -785,6 +869,20 @@ class TemplatesRecipients(BaseSDK):
                 models.RecipientUpdateTemplateRecipientBadRequestErrorData, http_res
             )
             raise models.RecipientUpdateTemplateRecipientBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientUpdateTemplateRecipientUnauthorizedErrorData, http_res
+            )
+            raise models.RecipientUpdateTemplateRecipientUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientUpdateTemplateRecipientForbiddenErrorData, http_res
+            )
+            raise models.RecipientUpdateTemplateRecipientForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -880,13 +978,13 @@ class TemplatesRecipients(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-updateTemplateRecipient",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -900,6 +998,20 @@ class TemplatesRecipients(BaseSDK):
                 models.RecipientUpdateTemplateRecipientBadRequestErrorData, http_res
             )
             raise models.RecipientUpdateTemplateRecipientBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientUpdateTemplateRecipientUnauthorizedErrorData, http_res
+            )
+            raise models.RecipientUpdateTemplateRecipientUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientUpdateTemplateRecipientForbiddenErrorData, http_res
+            )
+            raise models.RecipientUpdateTemplateRecipientForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -996,13 +1108,13 @@ class TemplatesRecipients(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-updateTemplateRecipients",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1016,6 +1128,20 @@ class TemplatesRecipients(BaseSDK):
                 models.RecipientUpdateTemplateRecipientsBadRequestErrorData, http_res
             )
             raise models.RecipientUpdateTemplateRecipientsBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientUpdateTemplateRecipientsUnauthorizedErrorData, http_res
+            )
+            raise models.RecipientUpdateTemplateRecipientsUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientUpdateTemplateRecipientsForbiddenErrorData, http_res
+            )
+            raise models.RecipientUpdateTemplateRecipientsForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -1113,13 +1239,13 @@ class TemplatesRecipients(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-updateTemplateRecipients",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1133,6 +1259,20 @@ class TemplatesRecipients(BaseSDK):
                 models.RecipientUpdateTemplateRecipientsBadRequestErrorData, http_res
             )
             raise models.RecipientUpdateTemplateRecipientsBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientUpdateTemplateRecipientsUnauthorizedErrorData, http_res
+            )
+            raise models.RecipientUpdateTemplateRecipientsUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientUpdateTemplateRecipientsForbiddenErrorData, http_res
+            )
+            raise models.RecipientUpdateTemplateRecipientsForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -1219,13 +1359,13 @@ class TemplatesRecipients(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-deleteTemplateRecipient",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1239,6 +1379,20 @@ class TemplatesRecipients(BaseSDK):
                 models.RecipientDeleteTemplateRecipientBadRequestErrorData, http_res
             )
             raise models.RecipientDeleteTemplateRecipientBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientDeleteTemplateRecipientUnauthorizedErrorData, http_res
+            )
+            raise models.RecipientDeleteTemplateRecipientUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientDeleteTemplateRecipientForbiddenErrorData, http_res
+            )
+            raise models.RecipientDeleteTemplateRecipientForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -1324,13 +1478,13 @@ class TemplatesRecipients(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="recipient-deleteTemplateRecipient",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1344,6 +1498,20 @@ class TemplatesRecipients(BaseSDK):
                 models.RecipientDeleteTemplateRecipientBadRequestErrorData, http_res
             )
             raise models.RecipientDeleteTemplateRecipientBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientDeleteTemplateRecipientUnauthorizedErrorData, http_res
+            )
+            raise models.RecipientDeleteTemplateRecipientUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.RecipientDeleteTemplateRecipientForbiddenErrorData, http_res
+            )
+            raise models.RecipientDeleteTemplateRecipientForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):

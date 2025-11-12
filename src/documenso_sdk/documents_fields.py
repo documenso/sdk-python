@@ -72,13 +72,13 @@ class DocumentsFields(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-getDocumentField",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -92,6 +92,16 @@ class DocumentsFields(BaseSDK):
                 models.FieldGetDocumentFieldBadRequestErrorData, http_res
             )
             raise models.FieldGetDocumentFieldBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldGetDocumentFieldUnauthorizedErrorData, http_res
+            )
+            raise models.FieldGetDocumentFieldUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldGetDocumentFieldForbiddenErrorData, http_res
+            )
+            raise models.FieldGetDocumentFieldForbiddenError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 models.FieldGetDocumentFieldNotFoundErrorData, http_res
@@ -175,13 +185,13 @@ class DocumentsFields(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-getDocumentField",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -195,6 +205,16 @@ class DocumentsFields(BaseSDK):
                 models.FieldGetDocumentFieldBadRequestErrorData, http_res
             )
             raise models.FieldGetDocumentFieldBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldGetDocumentFieldUnauthorizedErrorData, http_res
+            )
+            raise models.FieldGetDocumentFieldUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldGetDocumentFieldForbiddenErrorData, http_res
+            )
+            raise models.FieldGetDocumentFieldForbiddenError(response_data, http_res)
         if utils.match_response(http_res, "404", "application/json"):
             response_data = unmarshal_json_response(
                 models.FieldGetDocumentFieldNotFoundErrorData, http_res
@@ -289,13 +309,13 @@ class DocumentsFields(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-createDocumentField",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -311,6 +331,18 @@ class DocumentsFields(BaseSDK):
             raise models.FieldCreateDocumentFieldBadRequestError(
                 response_data, http_res
             )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldCreateDocumentFieldUnauthorizedErrorData, http_res
+            )
+            raise models.FieldCreateDocumentFieldUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldCreateDocumentFieldForbiddenErrorData, http_res
+            )
+            raise models.FieldCreateDocumentFieldForbiddenError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 models.FieldCreateDocumentFieldInternalServerErrorData, http_res
@@ -400,13 +432,13 @@ class DocumentsFields(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-createDocumentField",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -422,6 +454,18 @@ class DocumentsFields(BaseSDK):
             raise models.FieldCreateDocumentFieldBadRequestError(
                 response_data, http_res
             )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldCreateDocumentFieldUnauthorizedErrorData, http_res
+            )
+            raise models.FieldCreateDocumentFieldUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldCreateDocumentFieldForbiddenErrorData, http_res
+            )
+            raise models.FieldCreateDocumentFieldForbiddenError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 models.FieldCreateDocumentFieldInternalServerErrorData, http_res
@@ -511,13 +555,13 @@ class DocumentsFields(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-createDocumentFields",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -531,6 +575,20 @@ class DocumentsFields(BaseSDK):
                 models.FieldCreateDocumentFieldsBadRequestErrorData, http_res
             )
             raise models.FieldCreateDocumentFieldsBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldCreateDocumentFieldsUnauthorizedErrorData, http_res
+            )
+            raise models.FieldCreateDocumentFieldsUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldCreateDocumentFieldsForbiddenErrorData, http_res
+            )
+            raise models.FieldCreateDocumentFieldsForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -622,13 +680,13 @@ class DocumentsFields(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-createDocumentFields",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -642,6 +700,20 @@ class DocumentsFields(BaseSDK):
                 models.FieldCreateDocumentFieldsBadRequestErrorData, http_res
             )
             raise models.FieldCreateDocumentFieldsBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldCreateDocumentFieldsUnauthorizedErrorData, http_res
+            )
+            raise models.FieldCreateDocumentFieldsUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldCreateDocumentFieldsForbiddenErrorData, http_res
+            )
+            raise models.FieldCreateDocumentFieldsForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -733,13 +805,13 @@ class DocumentsFields(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-updateDocumentField",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -755,6 +827,18 @@ class DocumentsFields(BaseSDK):
             raise models.FieldUpdateDocumentFieldBadRequestError(
                 response_data, http_res
             )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldUpdateDocumentFieldUnauthorizedErrorData, http_res
+            )
+            raise models.FieldUpdateDocumentFieldUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldUpdateDocumentFieldForbiddenErrorData, http_res
+            )
+            raise models.FieldUpdateDocumentFieldForbiddenError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 models.FieldUpdateDocumentFieldInternalServerErrorData, http_res
@@ -844,13 +928,13 @@ class DocumentsFields(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-updateDocumentField",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -866,6 +950,18 @@ class DocumentsFields(BaseSDK):
             raise models.FieldUpdateDocumentFieldBadRequestError(
                 response_data, http_res
             )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldUpdateDocumentFieldUnauthorizedErrorData, http_res
+            )
+            raise models.FieldUpdateDocumentFieldUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldUpdateDocumentFieldForbiddenErrorData, http_res
+            )
+            raise models.FieldUpdateDocumentFieldForbiddenError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 models.FieldUpdateDocumentFieldInternalServerErrorData, http_res
@@ -955,13 +1051,13 @@ class DocumentsFields(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-updateDocumentFields",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -975,6 +1071,20 @@ class DocumentsFields(BaseSDK):
                 models.FieldUpdateDocumentFieldsBadRequestErrorData, http_res
             )
             raise models.FieldUpdateDocumentFieldsBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldUpdateDocumentFieldsUnauthorizedErrorData, http_res
+            )
+            raise models.FieldUpdateDocumentFieldsUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldUpdateDocumentFieldsForbiddenErrorData, http_res
+            )
+            raise models.FieldUpdateDocumentFieldsForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -1066,13 +1176,13 @@ class DocumentsFields(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-updateDocumentFields",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1086,6 +1196,20 @@ class DocumentsFields(BaseSDK):
                 models.FieldUpdateDocumentFieldsBadRequestErrorData, http_res
             )
             raise models.FieldUpdateDocumentFieldsBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldUpdateDocumentFieldsUnauthorizedErrorData, http_res
+            )
+            raise models.FieldUpdateDocumentFieldsUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldUpdateDocumentFieldsForbiddenErrorData, http_res
+            )
+            raise models.FieldUpdateDocumentFieldsForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -1167,13 +1291,13 @@ class DocumentsFields(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-deleteDocumentField",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1189,6 +1313,18 @@ class DocumentsFields(BaseSDK):
             raise models.FieldDeleteDocumentFieldBadRequestError(
                 response_data, http_res
             )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldDeleteDocumentFieldUnauthorizedErrorData, http_res
+            )
+            raise models.FieldDeleteDocumentFieldUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldDeleteDocumentFieldForbiddenErrorData, http_res
+            )
+            raise models.FieldDeleteDocumentFieldForbiddenError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 models.FieldDeleteDocumentFieldInternalServerErrorData, http_res
@@ -1268,13 +1404,13 @@ class DocumentsFields(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="field-deleteDocumentField",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -1290,6 +1426,18 @@ class DocumentsFields(BaseSDK):
             raise models.FieldDeleteDocumentFieldBadRequestError(
                 response_data, http_res
             )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldDeleteDocumentFieldUnauthorizedErrorData, http_res
+            )
+            raise models.FieldDeleteDocumentFieldUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.FieldDeleteDocumentFieldForbiddenErrorData, http_res
+            )
+            raise models.FieldDeleteDocumentFieldForbiddenError(response_data, http_res)
         if utils.match_response(http_res, "500", "application/json"):
             response_data = unmarshal_json_response(
                 models.FieldDeleteDocumentFieldInternalServerErrorData, http_res

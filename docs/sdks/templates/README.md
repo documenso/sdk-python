@@ -7,6 +7,7 @@
 
 * [find](#find) - Find templates
 * [get](#get) - Get template
+* [create](#create) - Create template
 * [update](#update) - Update template
 * [duplicate](#duplicate) - Duplicate template
 * [delete](#delete) - Delete template
@@ -37,14 +38,14 @@ with Documenso(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `query`                                                             | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | The search query.                                                   |
-| `page`                                                              | *Optional[float]*                                                   | :heavy_minus_sign:                                                  | The pagination page number, starts at 1.                            |
-| `per_page`                                                          | *Optional[float]*                                                   | :heavy_minus_sign:                                                  | The number of items per page.                                       |
-| `type`                                                              | [Optional[models.QueryParamType]](../../models/queryparamtype.md)   | :heavy_minus_sign:                                                  | Filter templates by type.                                           |
-| `folder_id`                                                         | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | The ID of the folder to filter templates by.                        |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `query`                                                                                                     | *Optional[str]*                                                                                             | :heavy_minus_sign:                                                                                          | The search query.                                                                                           |
+| `page`                                                                                                      | *Optional[float]*                                                                                           | :heavy_minus_sign:                                                                                          | The pagination page number, starts at 1.                                                                    |
+| `per_page`                                                                                                  | *Optional[float]*                                                                                           | :heavy_minus_sign:                                                                                          | The number of items per page.                                                                               |
+| `type`                                                                                                      | [Optional[models.TemplateFindTemplatesQueryParamType]](../../models/templatefindtemplatesqueryparamtype.md) | :heavy_minus_sign:                                                                                          | Filter templates by type.                                                                                   |
+| `folder_id`                                                                                                 | *Optional[str]*                                                                                             | :heavy_minus_sign:                                                                                          | The ID of the folder to filter templates by.                                                                |
+| `retries`                                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                            | :heavy_minus_sign:                                                                                          | Configuration to override the default retry behavior of the client.                                         |
 
 ### Response
 
@@ -55,6 +56,8 @@ with Documenso(
 | Error Type                                      | Status Code                                     | Content Type                                    |
 | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
 | models.TemplateFindTemplatesBadRequestError     | 400                                             | application/json                                |
+| models.TemplateFindTemplatesUnauthorizedError   | 401                                             | application/json                                |
+| models.TemplateFindTemplatesForbiddenError      | 403                                             | application/json                                |
 | models.TemplateFindTemplatesNotFoundError       | 404                                             | application/json                                |
 | models.TemplateFindTemplatesInternalServerError | 500                                             | application/json                                |
 | models.APIError                                 | 4XX, 5XX                                        | \*/\*                                           |
@@ -98,9 +101,61 @@ with Documenso(
 | Error Type                                        | Status Code                                       | Content Type                                      |
 | ------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------- |
 | models.TemplateGetTemplateByIDBadRequestError     | 400                                               | application/json                                  |
+| models.TemplateGetTemplateByIDUnauthorizedError   | 401                                               | application/json                                  |
+| models.TemplateGetTemplateByIDForbiddenError      | 403                                               | application/json                                  |
 | models.TemplateGetTemplateByIDNotFoundError       | 404                                               | application/json                                  |
 | models.TemplateGetTemplateByIDInternalServerError | 500                                               | application/json                                  |
 | models.APIError                                   | 4XX, 5XX                                          | \*/\*                                             |
+
+## create
+
+Create a new template
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="template-createTemplate" method="post" path="/template/create" -->
+```python
+from documenso_sdk import Documenso
+import os
+
+
+with Documenso(
+    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+) as documenso:
+
+    res = documenso.templates.create(payload={
+        "title": "<value>",
+    }, file={
+        "file_name": "example.file",
+        "content": open("example.file", "rb"),
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `payload`                                                                             | [models.TemplateCreateTemplatePayload](../../models/templatecreatetemplatepayload.md) | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `file`                                                                                | [models.TemplateCreateTemplateFile](../../models/templatecreatetemplatefile.md)       | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `retries`                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                      | :heavy_minus_sign:                                                                    | Configuration to override the default retry behavior of the client.                   |
+
+### Response
+
+**[models.TemplateCreateTemplateResponse](../../models/templatecreatetemplateresponse.md)**
+
+### Errors
+
+| Error Type                                       | Status Code                                      | Content Type                                     |
+| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
+| models.TemplateCreateTemplateBadRequestError     | 400                                              | application/json                                 |
+| models.TemplateCreateTemplateUnauthorizedError   | 401                                              | application/json                                 |
+| models.TemplateCreateTemplateForbiddenError      | 403                                              | application/json                                 |
+| models.TemplateCreateTemplateInternalServerError | 500                                              | application/json                                 |
+| models.APIError                                  | 4XX, 5XX                                         | \*/\*                                            |
 
 ## update
 
@@ -143,6 +198,8 @@ with Documenso(
 | Error Type                                       | Status Code                                      | Content Type                                     |
 | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
 | models.TemplateUpdateTemplateBadRequestError     | 400                                              | application/json                                 |
+| models.TemplateUpdateTemplateUnauthorizedError   | 401                                              | application/json                                 |
+| models.TemplateUpdateTemplateForbiddenError      | 403                                              | application/json                                 |
 | models.TemplateUpdateTemplateInternalServerError | 500                                              | application/json                                 |
 | models.APIError                                  | 4XX, 5XX                                         | \*/\*                                            |
 
@@ -185,6 +242,8 @@ with Documenso(
 | Error Type                                          | Status Code                                         | Content Type                                        |
 | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
 | models.TemplateDuplicateTemplateBadRequestError     | 400                                                 | application/json                                    |
+| models.TemplateDuplicateTemplateUnauthorizedError   | 401                                                 | application/json                                    |
+| models.TemplateDuplicateTemplateForbiddenError      | 403                                                 | application/json                                    |
 | models.TemplateDuplicateTemplateInternalServerError | 500                                                 | application/json                                    |
 | models.APIError                                     | 4XX, 5XX                                            | \*/\*                                               |
 
@@ -227,6 +286,8 @@ with Documenso(
 | Error Type                                       | Status Code                                      | Content Type                                     |
 | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
 | models.TemplateDeleteTemplateBadRequestError     | 400                                              | application/json                                 |
+| models.TemplateDeleteTemplateUnauthorizedError   | 401                                              | application/json                                 |
+| models.TemplateDeleteTemplateForbiddenError      | 403                                              | application/json                                 |
 | models.TemplateDeleteTemplateInternalServerError | 500                                              | application/json                                 |
 | models.APIError                                  | 4XX, 5XX                                         | \*/\*                                            |
 
@@ -255,14 +316,16 @@ with Documenso(
 
 ### Parameters
 
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `template_id`                                                                                                                                                                  | *float*                                                                                                                                                                        | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |
-| `recipients`                                                                                                                                                                   | List[[models.TemplateCreateDocumentFromTemplateRecipientRequest](../../models/templatecreatedocumentfromtemplaterecipientrequest.md)]                                          | :heavy_check_mark:                                                                                                                                                             | The information of the recipients to create the document with.                                                                                                                 |
-| `distribute_document`                                                                                                                                                          | *Optional[bool]*                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                             | Whether to create the document as pending and distribute it to recipients.                                                                                                     |
-| `custom_document_data_id`                                                                                                                                                      | *Optional[str]*                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                             | The data ID of an alternative PDF to use when creating the document. If not provided, the PDF attached to the template will be used.                                           |
-| `prefill_fields`                                                                                                                                                               | List[[models.PrefillField](../../models/prefillfield.md)]                                                                                                                      | :heavy_minus_sign:                                                                                                                                                             | The fields to prefill on the document before sending it out. Useful when you want to create a document from an existing template and pre-fill the fields with specific values. |
-| `retries`                                                                                                                                                                      | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                               | :heavy_minus_sign:                                                                                                                                                             | Configuration to override the default retry behavior of the client.                                                                                                            |
+| Parameter                                                                                                                                   | Type                                                                                                                                        | Required                                                                                                                                    | Description                                                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `template_id`                                                                                                                               | *float*                                                                                                                                     | :heavy_check_mark:                                                                                                                          | N/A                                                                                                                                         |
+| `recipients`                                                                                                                                | List[[models.TemplateCreateDocumentFromTemplateRecipientRequest](../../models/templatecreatedocumentfromtemplaterecipientrequest.md)]       | :heavy_check_mark:                                                                                                                          | N/A                                                                                                                                         |
+| `distribute_document`                                                                                                                       | *Optional[bool]*                                                                                                                            | :heavy_minus_sign:                                                                                                                          | N/A                                                                                                                                         |
+| `custom_document_data_id`                                                                                                                   | *Optional[str]*                                                                                                                             | :heavy_minus_sign:                                                                                                                          | N/A                                                                                                                                         |
+| `custom_document_data`                                                                                                                      | List[[models.TemplateCreateDocumentFromTemplateCustomDocumentDatum](../../models/templatecreatedocumentfromtemplatecustomdocumentdatum.md)] | :heavy_minus_sign:                                                                                                                          | N/A                                                                                                                                         |
+| `folder_id`                                                                                                                                 | *Optional[str]*                                                                                                                             | :heavy_minus_sign:                                                                                                                          | N/A                                                                                                                                         |
+| `prefill_fields`                                                                                                                            | List[[models.TemplateCreateDocumentFromTemplatePrefillFieldUnion](../../models/templatecreatedocumentfromtemplateprefillfieldunion.md)]     | :heavy_minus_sign:                                                                                                                          | N/A                                                                                                                                         |
+| `retries`                                                                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                            | :heavy_minus_sign:                                                                                                                          | Configuration to override the default retry behavior of the client.                                                                         |
 
 ### Response
 
@@ -273,5 +336,7 @@ with Documenso(
 | Error Type                                                   | Status Code                                                  | Content Type                                                 |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | models.TemplateCreateDocumentFromTemplateBadRequestError     | 400                                                          | application/json                                             |
+| models.TemplateCreateDocumentFromTemplateUnauthorizedError   | 401                                                          | application/json                                             |
+| models.TemplateCreateDocumentFromTemplateForbiddenError      | 403                                                          | application/json                                             |
 | models.TemplateCreateDocumentFromTemplateInternalServerError | 500                                                          | application/json                                             |
 | models.APIError                                              | 4XX, 5XX                                                     | \*/\*                                                        |

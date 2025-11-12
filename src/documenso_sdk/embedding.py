@@ -23,7 +23,7 @@ class Embedding(BaseSDK):
 
         Creates a presign token for embedding operations with configurable expiration time
 
-        :param expires_in: Expiration time in minutes (default: 60, max: 10,080)
+        :param expires_in:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -79,13 +79,13 @@ class Embedding(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="embeddingPresign-createEmbeddingPresignToken",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -100,6 +100,22 @@ class Embedding(BaseSDK):
                 http_res,
             )
             raise models.EmbeddingPresignCreateEmbeddingPresignTokenBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EmbeddingPresignCreateEmbeddingPresignTokenUnauthorizedErrorData,
+                http_res,
+            )
+            raise models.EmbeddingPresignCreateEmbeddingPresignTokenUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EmbeddingPresignCreateEmbeddingPresignTokenForbiddenErrorData,
+                http_res,
+            )
+            raise models.EmbeddingPresignCreateEmbeddingPresignTokenForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -132,7 +148,7 @@ class Embedding(BaseSDK):
 
         Creates a presign token for embedding operations with configurable expiration time
 
-        :param expires_in: Expiration time in minutes (default: 60, max: 10,080)
+        :param expires_in:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -188,13 +204,13 @@ class Embedding(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="embeddingPresign-createEmbeddingPresignToken",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -209,6 +225,22 @@ class Embedding(BaseSDK):
                 http_res,
             )
             raise models.EmbeddingPresignCreateEmbeddingPresignTokenBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EmbeddingPresignCreateEmbeddingPresignTokenUnauthorizedErrorData,
+                http_res,
+            )
+            raise models.EmbeddingPresignCreateEmbeddingPresignTokenUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EmbeddingPresignCreateEmbeddingPresignTokenForbiddenErrorData,
+                http_res,
+            )
+            raise models.EmbeddingPresignCreateEmbeddingPresignTokenForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -241,7 +273,7 @@ class Embedding(BaseSDK):
 
         Verifies a presign token for embedding operations and returns the associated API token
 
-        :param token: The presign token to verify
+        :param token:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -297,13 +329,13 @@ class Embedding(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="embeddingPresign-verifyEmbeddingPresignToken",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -318,6 +350,22 @@ class Embedding(BaseSDK):
                 http_res,
             )
             raise models.EmbeddingPresignVerifyEmbeddingPresignTokenBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EmbeddingPresignVerifyEmbeddingPresignTokenUnauthorizedErrorData,
+                http_res,
+            )
+            raise models.EmbeddingPresignVerifyEmbeddingPresignTokenUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EmbeddingPresignVerifyEmbeddingPresignTokenForbiddenErrorData,
+                http_res,
+            )
+            raise models.EmbeddingPresignVerifyEmbeddingPresignTokenForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):
@@ -350,7 +398,7 @@ class Embedding(BaseSDK):
 
         Verifies a presign token for embedding operations and returns the associated API token
 
-        :param token: The presign token to verify
+        :param token:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -406,13 +454,13 @@ class Embedding(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="embeddingPresign-verifyEmbeddingPresignToken",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "4XX", "500", "5XX"],
+            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
             retry_config=retry_config,
         )
 
@@ -427,6 +475,22 @@ class Embedding(BaseSDK):
                 http_res,
             )
             raise models.EmbeddingPresignVerifyEmbeddingPresignTokenBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EmbeddingPresignVerifyEmbeddingPresignTokenUnauthorizedErrorData,
+                http_res,
+            )
+            raise models.EmbeddingPresignVerifyEmbeddingPresignTokenUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EmbeddingPresignVerifyEmbeddingPresignTokenForbiddenErrorData,
+                http_res,
+            )
+            raise models.EmbeddingPresignVerifyEmbeddingPresignTokenForbiddenError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "500", "application/json"):

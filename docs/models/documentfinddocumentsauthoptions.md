@@ -1,9 +1,0 @@
-# DocumentFindDocumentsAuthOptions
-
-
-## Fields
-
-| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
-| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `global_access_auth`                                                                                     | List[[models.DocumentFindDocumentsGlobalAccessAuth](../models/documentfinddocumentsglobalaccessauth.md)] | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
-| `global_action_auth`                                                                                     | List[[models.DocumentFindDocumentsGlobalActionAuth](../models/documentfinddocumentsglobalactionauth.md)] | :heavy_check_mark:                                                                                       | N/A                                                                                                      |

@@ -61,6 +61,8 @@ with Documenso(
 | Error Type                                         | Status Code                                        | Content Type                                       |
 | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
 | models.FieldCreateTemplateFieldBadRequestError     | 400                                                | application/json                                   |
+| models.FieldCreateTemplateFieldUnauthorizedError   | 401                                                | application/json                                   |
+| models.FieldCreateTemplateFieldForbiddenError      | 403                                                | application/json                                   |
 | models.FieldCreateTemplateFieldInternalServerError | 500                                                | application/json                                   |
 | models.APIError                                    | 4XX, 5XX                                           | \*/\*                                              |
 
@@ -103,6 +105,8 @@ with Documenso(
 | Error Type                                      | Status Code                                     | Content Type                                    |
 | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
 | models.FieldGetTemplateFieldBadRequestError     | 400                                             | application/json                                |
+| models.FieldGetTemplateFieldUnauthorizedError   | 401                                             | application/json                                |
+| models.FieldGetTemplateFieldForbiddenError      | 403                                             | application/json                                |
 | models.FieldGetTemplateFieldNotFoundError       | 404                                             | application/json                                |
 | models.FieldGetTemplateFieldInternalServerError | 500                                             | application/json                                |
 | models.APIError                                 | 4XX, 5XX                                        | \*/\*                                           |
@@ -126,7 +130,7 @@ with Documenso(
 
     res = documenso.templates.fields.create_many(template_id=586.2, fields=[
         {
-            "type": documenso_sdk.FieldCreateTemplateFieldsTypeSignature.SIGNATURE,
+            "type": documenso_sdk.FieldCreateTemplateFieldsTypeSignatureRequest1.SIGNATURE,
             "recipient_id": 6990.12,
             "page_number": 3472.45,
             "page_x": 4747.87,
@@ -158,6 +162,8 @@ with Documenso(
 | Error Type                                          | Status Code                                         | Content Type                                        |
 | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
 | models.FieldCreateTemplateFieldsBadRequestError     | 400                                                 | application/json                                    |
+| models.FieldCreateTemplateFieldsUnauthorizedError   | 401                                                 | application/json                                    |
+| models.FieldCreateTemplateFieldsForbiddenError      | 403                                                 | application/json                                    |
 | models.FieldCreateTemplateFieldsInternalServerError | 500                                                 | application/json                                    |
 | models.APIError                                     | 4XX, 5XX                                            | \*/\*                                               |
 
@@ -205,6 +211,8 @@ with Documenso(
 | Error Type                                         | Status Code                                        | Content Type                                       |
 | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
 | models.FieldUpdateTemplateFieldBadRequestError     | 400                                                | application/json                                   |
+| models.FieldUpdateTemplateFieldUnauthorizedError   | 401                                                | application/json                                   |
+| models.FieldUpdateTemplateFieldForbiddenError      | 403                                                | application/json                                   |
 | models.FieldUpdateTemplateFieldInternalServerError | 500                                                | application/json                                   |
 | models.APIError                                    | 4XX, 5XX                                           | \*/\*                                              |
 
@@ -254,6 +262,8 @@ with Documenso(
 | Error Type                                          | Status Code                                         | Content Type                                        |
 | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
 | models.FieldUpdateTemplateFieldsBadRequestError     | 400                                                 | application/json                                    |
+| models.FieldUpdateTemplateFieldsUnauthorizedError   | 401                                                 | application/json                                    |
+| models.FieldUpdateTemplateFieldsForbiddenError      | 403                                                 | application/json                                    |
 | models.FieldUpdateTemplateFieldsInternalServerError | 500                                                 | application/json                                    |
 | models.APIError                                     | 4XX, 5XX                                            | \*/\*                                               |
 
@@ -296,5 +306,7 @@ with Documenso(
 | Error Type                                         | Status Code                                        | Content Type                                       |
 | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
 | models.FieldDeleteTemplateFieldBadRequestError     | 400                                                | application/json                                   |
+| models.FieldDeleteTemplateFieldUnauthorizedError   | 401                                                | application/json                                   |
+| models.FieldDeleteTemplateFieldForbiddenError      | 403                                                | application/json                                   |
 | models.FieldDeleteTemplateFieldInternalServerError | 500                                                | application/json                                   |
 | models.APIError                                    | 4XX, 5XX                                           | \*/\*                                              |

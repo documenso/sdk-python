@@ -1,9 +1,0 @@
-# DocumentSendDocumentAuthOptions
-
-
-## Fields
-
-| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
-| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `global_access_auth`                                                                                   | List[[models.DocumentSendDocumentGlobalAccessAuth](../models/documentsenddocumentglobalaccessauth.md)] | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
-| `global_action_auth`                                                                                   | List[[models.DocumentSendDocumentGlobalActionAuth](../models/documentsenddocumentglobalactionauth.md)] | :heavy_check_mark:                                                                                     | N/A                                                                                                    |

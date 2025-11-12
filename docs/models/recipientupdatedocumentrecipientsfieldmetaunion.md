@@ -3,6 +3,12 @@
 
 ## Supported Types
 
+### `models.RecipientUpdateDocumentRecipientsFieldMetaSignature`
+
+```python
+value: models.RecipientUpdateDocumentRecipientsFieldMetaSignature = /* values here */
+```
+
 ### `models.RecipientUpdateDocumentRecipientsFieldMetaInitials`
 
 ```python

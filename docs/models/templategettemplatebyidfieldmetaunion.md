@@ -3,6 +3,12 @@
 
 ## Supported Types
 
+### `models.TemplateGetTemplateByIDFieldMetaSignature`
+
+```python
+value: models.TemplateGetTemplateByIDFieldMetaSignature = /* values here */
+```
+
 ### `models.TemplateGetTemplateByIDFieldMetaInitials`
 
 ```python

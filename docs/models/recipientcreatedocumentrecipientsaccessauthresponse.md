@@ -1,10 +1,9 @@
 # RecipientCreateDocumentRecipientsAccessAuthResponse
 
-The type of authentication required for the recipient to access the document.
-
 
 ## Values
 
-| Name      | Value     |
-| --------- | --------- |
-| `ACCOUNT` | ACCOUNT   |
+| Name              | Value             |
+| ----------------- | ----------------- |
+| `ACCOUNT`         | ACCOUNT           |
+| `TWO_FACTOR_AUTH` | TWO_FACTOR_AUTH   |

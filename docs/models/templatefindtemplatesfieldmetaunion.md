@@ -3,6 +3,12 @@
 
 ## Supported Types
 
+### `models.TemplateFindTemplatesFieldMetaSignature`
+
+```python
+value: models.TemplateFindTemplatesFieldMetaSignature = /* values here */
+```
+
 ### `models.TemplateFindTemplatesFieldMetaInitials`
 
 ```python

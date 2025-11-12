@@ -1,0 +1,9 @@
+# EnvelopeFieldCreateManyRequest
+
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `envelope_id`                                                                                  | *str*                                                                                          | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `data`                                                                                         | List[[models.EnvelopeFieldCreateManyDataUnion](../models/envelopefieldcreatemanydataunion.md)] | :heavy_check_mark:                                                                             | N/A                                                                                            |

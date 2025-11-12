@@ -35,7 +35,7 @@ with Documenso(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `expires_in`                                                        | *Optional[float]*                                                   | :heavy_minus_sign:                                                  | Expiration time in minutes (default: 60, max: 10,080)               |
+| `expires_in`                                                        | *Optional[float]*                                                   | :heavy_minus_sign:                                                  | N/A                                                                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
@@ -47,6 +47,8 @@ with Documenso(
 | Error Type                                                            | Status Code                                                           | Content Type                                                          |
 | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
 | models.EmbeddingPresignCreateEmbeddingPresignTokenBadRequestError     | 400                                                                   | application/json                                                      |
+| models.EmbeddingPresignCreateEmbeddingPresignTokenUnauthorizedError   | 401                                                                   | application/json                                                      |
+| models.EmbeddingPresignCreateEmbeddingPresignTokenForbiddenError      | 403                                                                   | application/json                                                      |
 | models.EmbeddingPresignCreateEmbeddingPresignTokenInternalServerError | 500                                                                   | application/json                                                      |
 | models.APIError                                                       | 4XX, 5XX                                                              | \*/\*                                                                 |
 
@@ -77,7 +79,7 @@ with Documenso(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `token`                                                             | *str*                                                               | :heavy_check_mark:                                                  | The presign token to verify                                         |
+| `token`                                                             | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
@@ -89,5 +91,7 @@ with Documenso(
 | Error Type                                                            | Status Code                                                           | Content Type                                                          |
 | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
 | models.EmbeddingPresignVerifyEmbeddingPresignTokenBadRequestError     | 400                                                                   | application/json                                                      |
+| models.EmbeddingPresignVerifyEmbeddingPresignTokenUnauthorizedError   | 401                                                                   | application/json                                                      |
+| models.EmbeddingPresignVerifyEmbeddingPresignTokenForbiddenError      | 403                                                                   | application/json                                                      |
 | models.EmbeddingPresignVerifyEmbeddingPresignTokenInternalServerError | 500                                                                   | application/json                                                      |
 | models.APIError                                                       | 4XX, 5XX                                                              | \*/\*                                                                 |
