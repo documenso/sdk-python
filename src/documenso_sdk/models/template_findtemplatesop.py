@@ -10,11 +10,11 @@ from documenso_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from documenso_sdk.utils import FieldMetadata, QueryParamMetadata
+from documenso_sdk.utils import FieldMetadata, QueryParamMetadata, get_discriminator
 from enum import Enum
 import httpx
 import pydantic
-from pydantic import model_serializer
+from pydantic import Discriminator, Tag, model_serializer
 from typing import Any, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -902,21 +902,21 @@ TemplateFindTemplatesFieldMetaUnionTypedDict = TypeAliasType(
 )
 
 
-TemplateFindTemplatesFieldMetaUnion = TypeAliasType(
-    "TemplateFindTemplatesFieldMetaUnion",
+TemplateFindTemplatesFieldMetaUnion = Annotated[
     Union[
-        TemplateFindTemplatesFieldMetaSignature,
-        TemplateFindTemplatesFieldMetaInitials,
-        TemplateFindTemplatesFieldMetaName,
-        TemplateFindTemplatesFieldMetaEmail,
-        TemplateFindTemplatesFieldMetaDate,
-        TemplateFindTemplatesFieldMetaRadio,
-        TemplateFindTemplatesFieldMetaDropdown,
-        TemplateFindTemplatesFieldMetaCheckbox,
-        TemplateFindTemplatesFieldMetaText,
-        TemplateFindTemplatesFieldMetaNumber,
+        Annotated[TemplateFindTemplatesFieldMetaSignature, Tag("signature")],
+        Annotated[TemplateFindTemplatesFieldMetaInitials, Tag("initials")],
+        Annotated[TemplateFindTemplatesFieldMetaName, Tag("name")],
+        Annotated[TemplateFindTemplatesFieldMetaEmail, Tag("email")],
+        Annotated[TemplateFindTemplatesFieldMetaDate, Tag("date")],
+        Annotated[TemplateFindTemplatesFieldMetaText, Tag("text")],
+        Annotated[TemplateFindTemplatesFieldMetaNumber, Tag("number")],
+        Annotated[TemplateFindTemplatesFieldMetaRadio, Tag("radio")],
+        Annotated[TemplateFindTemplatesFieldMetaCheckbox, Tag("checkbox")],
+        Annotated[TemplateFindTemplatesFieldMetaDropdown, Tag("dropdown")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class TemplateFindTemplatesFieldTypedDict(TypedDict):

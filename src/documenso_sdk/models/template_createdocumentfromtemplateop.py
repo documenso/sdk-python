@@ -10,10 +10,11 @@ from documenso_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
+from documenso_sdk.utils import get_discriminator
 from enum import Enum
 import httpx
 import pydantic
-from pydantic import model_serializer
+from pydantic import Discriminator, Tag, model_serializer
 from typing import Any, Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -185,17 +186,189 @@ TemplateCreateDocumentFromTemplatePrefillFieldUnionTypedDict = TypeAliasType(
 )
 
 
-TemplateCreateDocumentFromTemplatePrefillFieldUnion = TypeAliasType(
-    "TemplateCreateDocumentFromTemplatePrefillFieldUnion",
+TemplateCreateDocumentFromTemplatePrefillFieldUnion = Annotated[
     Union[
-        TemplateCreateDocumentFromTemplatePrefillFieldDate,
-        TemplateCreateDocumentFromTemplatePrefillFieldRadio,
-        TemplateCreateDocumentFromTemplatePrefillFieldCheckbox,
-        TemplateCreateDocumentFromTemplatePrefillFieldDropdown,
-        TemplateCreateDocumentFromTemplatePrefillFieldText,
-        TemplateCreateDocumentFromTemplatePrefillFieldNumber,
+        Annotated[TemplateCreateDocumentFromTemplatePrefillFieldText, Tag("text")],
+        Annotated[TemplateCreateDocumentFromTemplatePrefillFieldNumber, Tag("number")],
+        Annotated[TemplateCreateDocumentFromTemplatePrefillFieldRadio, Tag("radio")],
+        Annotated[
+            TemplateCreateDocumentFromTemplatePrefillFieldCheckbox, Tag("checkbox")
+        ],
+        Annotated[
+            TemplateCreateDocumentFromTemplatePrefillFieldDropdown, Tag("dropdown")
+        ],
+        Annotated[TemplateCreateDocumentFromTemplatePrefillFieldDate, Tag("date")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
+
+
+class TemplateCreateDocumentFromTemplateDateFormat(str, Enum):
+    YYYY_M_MDD_HH_MM_A = "yyyy-MM-dd hh:mm a"
+    YYYY_M_MDD = "yyyy-MM-dd"
+    DD_MM_SLASH_YYYY = "dd/MM/yyyy"
+    MM_DD_SLASH_YYYY = "MM/dd/yyyy"
+    YY_M_MDD = "yy-MM-dd"
+    MMMM_DD_COMMA_YYYY = "MMMM dd, yyyy"
+    EEEE_MMMM_DD_COMMA_YYYY = "EEEE, MMMM dd, yyyy"
+    DD_MM_SLASH_YYYY_HH_MM_A = "dd/MM/yyyy hh:mm a"
+    DD_MM_SLASH_YYYY_H_HMM = "dd/MM/yyyy HH:mm"
+    MM_DD_SLASH_YYYY_HH_MM_A = "MM/dd/yyyy hh:mm a"
+    MM_DD_SLASH_YYYY_H_HMM = "MM/dd/yyyy HH:mm"
+    DD_DOT_MM_DOT_YYYY = "dd.MM.yyyy"
+    DD_DOT_MM_DOT_YYYY_H_HMM = "dd.MM.yyyy HH:mm"
+    YYYY_M_MDD_H_HMM = "yyyy-MM-dd HH:mm"
+    YY_M_MDD_HH_MM_A = "yy-MM-dd hh:mm a"
+    YY_M_MDD_H_HMM = "yy-MM-dd HH:mm"
+    YYYY_M_MDD_H_HMMSS = "yyyy-MM-dd HH:mm:ss"
+    MMMM_DD_COMMA_YYYY_HH_MM_A = "MMMM dd, yyyy hh:mm a"
+    MMMM_DD_COMMA_YYYY_H_HMM = "MMMM dd, yyyy HH:mm"
+    EEEE_MMMM_DD_COMMA_YYYY_HH_MM_A = "EEEE, MMMM dd, yyyy hh:mm a"
+    EEEE_MMMM_DD_COMMA_YYYY_H_HMM = "EEEE, MMMM dd, yyyy HH:mm"
+    ISO8601_FULL = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
+
+
+class TemplateCreateDocumentFromTemplateOverrideDistributionMethod(str, Enum):
+    EMAIL = "EMAIL"
+    NONE = "NONE"
+
+
+class TemplateCreateDocumentFromTemplateOverrideEmailSettingsTypedDict(TypedDict):
+    recipient_signing_request: NotRequired[bool]
+    recipient_removed: NotRequired[bool]
+    recipient_signed: NotRequired[bool]
+    document_pending: NotRequired[bool]
+    document_completed: NotRequired[bool]
+    document_deleted: NotRequired[bool]
+    owner_document_completed: NotRequired[bool]
+
+
+class TemplateCreateDocumentFromTemplateOverrideEmailSettings(BaseModel):
+    recipient_signing_request: Annotated[
+        Optional[bool], pydantic.Field(alias="recipientSigningRequest")
+    ] = True
+
+    recipient_removed: Annotated[
+        Optional[bool], pydantic.Field(alias="recipientRemoved")
+    ] = True
+
+    recipient_signed: Annotated[
+        Optional[bool], pydantic.Field(alias="recipientSigned")
+    ] = True
+
+    document_pending: Annotated[
+        Optional[bool], pydantic.Field(alias="documentPending")
+    ] = True
+
+    document_completed: Annotated[
+        Optional[bool], pydantic.Field(alias="documentCompleted")
+    ] = True
+
+    document_deleted: Annotated[
+        Optional[bool], pydantic.Field(alias="documentDeleted")
+    ] = True
+
+    owner_document_completed: Annotated[
+        Optional[bool], pydantic.Field(alias="ownerDocumentCompleted")
+    ] = True
+
+
+class TemplateCreateDocumentFromTemplateLanguage(str, Enum):
+    DE = "de"
+    EN = "en"
+    FR = "fr"
+    ES = "es"
+    IT = "it"
+    PL = "pl"
+    PT_BR = "pt-BR"
+    JA = "ja"
+    KO = "ko"
+    ZH = "zh"
+
+
+class TemplateCreateDocumentFromTemplateOverrideTypedDict(TypedDict):
+    title: NotRequired[str]
+    subject: NotRequired[str]
+    message: NotRequired[str]
+    timezone: NotRequired[str]
+    date_format: NotRequired[TemplateCreateDocumentFromTemplateDateFormat]
+    redirect_url: NotRequired[str]
+    distribution_method: NotRequired[
+        TemplateCreateDocumentFromTemplateOverrideDistributionMethod
+    ]
+    email_settings: NotRequired[
+        TemplateCreateDocumentFromTemplateOverrideEmailSettingsTypedDict
+    ]
+    language: NotRequired[TemplateCreateDocumentFromTemplateLanguage]
+    typed_signature_enabled: NotRequired[bool]
+    upload_signature_enabled: NotRequired[bool]
+    draw_signature_enabled: NotRequired[bool]
+    allow_dictate_next_signer: NotRequired[bool]
+
+
+class TemplateCreateDocumentFromTemplateOverride(BaseModel):
+    title: Optional[str] = None
+
+    subject: Optional[str] = None
+
+    message: Optional[str] = None
+
+    timezone: Optional[str] = None
+
+    date_format: Annotated[
+        Optional[TemplateCreateDocumentFromTemplateDateFormat],
+        pydantic.Field(alias="dateFormat"),
+    ] = None
+
+    redirect_url: Annotated[Optional[str], pydantic.Field(alias="redirectUrl")] = None
+
+    distribution_method: Annotated[
+        Optional[TemplateCreateDocumentFromTemplateOverrideDistributionMethod],
+        pydantic.Field(alias="distributionMethod"),
+    ] = None
+
+    email_settings: Annotated[
+        Optional[TemplateCreateDocumentFromTemplateOverrideEmailSettings],
+        pydantic.Field(alias="emailSettings"),
+    ] = None
+
+    language: Optional[TemplateCreateDocumentFromTemplateLanguage] = None
+
+    typed_signature_enabled: Annotated[
+        Optional[bool], pydantic.Field(alias="typedSignatureEnabled")
+    ] = None
+
+    upload_signature_enabled: Annotated[
+        Optional[bool], pydantic.Field(alias="uploadSignatureEnabled")
+    ] = None
+
+    draw_signature_enabled: Annotated[
+        Optional[bool], pydantic.Field(alias="drawSignatureEnabled")
+    ] = None
+
+    allow_dictate_next_signer: Annotated[
+        Optional[bool], pydantic.Field(alias="allowDictateNextSigner")
+    ] = None
+
+
+class TemplateCreateDocumentFromTemplateTypeLink(str, Enum):
+    LINK = "link"
+
+
+class TemplateCreateDocumentFromTemplateAttachmentTypedDict(TypedDict):
+    label: str
+    data: str
+    type: NotRequired[TemplateCreateDocumentFromTemplateTypeLink]
+
+
+class TemplateCreateDocumentFromTemplateAttachment(BaseModel):
+    label: str
+
+    data: str
+
+    type: Optional[TemplateCreateDocumentFromTemplateTypeLink] = (
+        TemplateCreateDocumentFromTemplateTypeLink.LINK
+    )
 
 
 class TemplateCreateDocumentFromTemplateRequestTypedDict(TypedDict):
@@ -209,6 +382,10 @@ class TemplateCreateDocumentFromTemplateRequestTypedDict(TypedDict):
     folder_id: NotRequired[str]
     prefill_fields: NotRequired[
         List[TemplateCreateDocumentFromTemplatePrefillFieldUnionTypedDict]
+    ]
+    override: NotRequired[TemplateCreateDocumentFromTemplateOverrideTypedDict]
+    attachments: NotRequired[
+        List[TemplateCreateDocumentFromTemplateAttachmentTypedDict]
     ]
 
 
@@ -236,6 +413,10 @@ class TemplateCreateDocumentFromTemplateRequest(BaseModel):
         Optional[List[TemplateCreateDocumentFromTemplatePrefillFieldUnion]],
         pydantic.Field(alias="prefillFields"),
     ] = None
+
+    override: Optional[TemplateCreateDocumentFromTemplateOverride] = None
+
+    attachments: Optional[List[TemplateCreateDocumentFromTemplateAttachment]] = None
 
 
 class TemplateCreateDocumentFromTemplateInternalServerErrorIssueTypedDict(TypedDict):
@@ -465,12 +646,12 @@ class TemplateCreateDocumentFromTemplateSigningOrder(str, Enum):
     SEQUENTIAL = "SEQUENTIAL"
 
 
-class TemplateCreateDocumentFromTemplateDistributionMethod(str, Enum):
+class TemplateCreateDocumentFromTemplateDocumentMetaDistributionMethod(str, Enum):
     EMAIL = "EMAIL"
     NONE = "NONE"
 
 
-class TemplateCreateDocumentFromTemplateEmailSettingsTypedDict(TypedDict):
+class TemplateCreateDocumentFromTemplateDocumentMetaEmailSettingsTypedDict(TypedDict):
     recipient_signing_request: NotRequired[bool]
     recipient_removed: NotRequired[bool]
     recipient_signed: NotRequired[bool]
@@ -480,7 +661,7 @@ class TemplateCreateDocumentFromTemplateEmailSettingsTypedDict(TypedDict):
     owner_document_completed: NotRequired[bool]
 
 
-class TemplateCreateDocumentFromTemplateEmailSettings(BaseModel):
+class TemplateCreateDocumentFromTemplateDocumentMetaEmailSettings(BaseModel):
     recipient_signing_request: Annotated[
         Optional[bool], pydantic.Field(alias="recipientSigningRequest")
     ] = True
@@ -512,7 +693,9 @@ class TemplateCreateDocumentFromTemplateEmailSettings(BaseModel):
 
 class TemplateCreateDocumentFromTemplateDocumentMetaTypedDict(TypedDict):
     signing_order: TemplateCreateDocumentFromTemplateSigningOrder
-    distribution_method: TemplateCreateDocumentFromTemplateDistributionMethod
+    distribution_method: (
+        TemplateCreateDocumentFromTemplateDocumentMetaDistributionMethod
+    )
     id: str
     subject: Nullable[str]
     message: Nullable[str]
@@ -524,7 +707,9 @@ class TemplateCreateDocumentFromTemplateDocumentMetaTypedDict(TypedDict):
     draw_signature_enabled: bool
     allow_dictate_next_signer: bool
     language: str
-    email_settings: Nullable[TemplateCreateDocumentFromTemplateEmailSettingsTypedDict]
+    email_settings: Nullable[
+        TemplateCreateDocumentFromTemplateDocumentMetaEmailSettingsTypedDict
+    ]
     email_id: Nullable[str]
     email_reply_to: Nullable[str]
     password: NotRequired[Nullable[str]]
@@ -538,7 +723,7 @@ class TemplateCreateDocumentFromTemplateDocumentMeta(BaseModel):
     ]
 
     distribution_method: Annotated[
-        TemplateCreateDocumentFromTemplateDistributionMethod,
+        TemplateCreateDocumentFromTemplateDocumentMetaDistributionMethod,
         pydantic.Field(alias="distributionMethod"),
     ]
 
@@ -573,7 +758,7 @@ class TemplateCreateDocumentFromTemplateDocumentMeta(BaseModel):
     language: str
 
     email_settings: Annotated[
-        Nullable[TemplateCreateDocumentFromTemplateEmailSettings],
+        Nullable[TemplateCreateDocumentFromTemplateDocumentMetaEmailSettings],
         pydantic.Field(alias="emailSettings"),
     ]
 
@@ -1498,21 +1683,23 @@ TemplateCreateDocumentFromTemplateFieldMetaUnionTypedDict = TypeAliasType(
 )
 
 
-TemplateCreateDocumentFromTemplateFieldMetaUnion = TypeAliasType(
-    "TemplateCreateDocumentFromTemplateFieldMetaUnion",
+TemplateCreateDocumentFromTemplateFieldMetaUnion = Annotated[
     Union[
-        TemplateCreateDocumentFromTemplateFieldMetaSignature,
-        TemplateCreateDocumentFromTemplateFieldMetaInitials,
-        TemplateCreateDocumentFromTemplateFieldMetaName,
-        TemplateCreateDocumentFromTemplateFieldMetaEmail,
-        TemplateCreateDocumentFromTemplateFieldMetaDate,
-        TemplateCreateDocumentFromTemplateFieldMetaRadio,
-        TemplateCreateDocumentFromTemplateFieldMetaDropdown,
-        TemplateCreateDocumentFromTemplateFieldMetaCheckbox,
-        TemplateCreateDocumentFromTemplateFieldMetaText,
-        TemplateCreateDocumentFromTemplateFieldMetaNumber,
+        Annotated[
+            TemplateCreateDocumentFromTemplateFieldMetaSignature, Tag("signature")
+        ],
+        Annotated[TemplateCreateDocumentFromTemplateFieldMetaInitials, Tag("initials")],
+        Annotated[TemplateCreateDocumentFromTemplateFieldMetaName, Tag("name")],
+        Annotated[TemplateCreateDocumentFromTemplateFieldMetaEmail, Tag("email")],
+        Annotated[TemplateCreateDocumentFromTemplateFieldMetaDate, Tag("date")],
+        Annotated[TemplateCreateDocumentFromTemplateFieldMetaText, Tag("text")],
+        Annotated[TemplateCreateDocumentFromTemplateFieldMetaNumber, Tag("number")],
+        Annotated[TemplateCreateDocumentFromTemplateFieldMetaRadio, Tag("radio")],
+        Annotated[TemplateCreateDocumentFromTemplateFieldMetaCheckbox, Tag("checkbox")],
+        Annotated[TemplateCreateDocumentFromTemplateFieldMetaDropdown, Tag("dropdown")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class TemplateCreateDocumentFromTemplateFieldTypedDict(TypedDict):

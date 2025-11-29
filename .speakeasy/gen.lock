@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 9b8ab966-40b1-444c-b41e-217acf02dd9e
 management:
-  docChecksum: d4156690edb6babf72c9cf9548e8b789
+  docChecksum: be41e7da13fea6b9b4b30dc37e3cb6b2
   docVersion: 1.0.0
-  speakeasyVersion: 1.654.0
-  generationVersion: 2.750.0
-  releaseVersion: 0.4.0
-  configChecksum: 73792869a029519486fb0d6eb485aad6
+  speakeasyVersion: 1.665.0
+  generationVersion: 2.767.2
+  releaseVersion: 0.5.0
+  configChecksum: c79a7e7348a1f881369b1483ba5fba1c
   repoURL: https://github.com/documenso/sdk-python.git
   installationURL: https://github.com/documenso/sdk-python.git
   published: true
@@ -14,7 +14,7 @@ features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.23.5
+    core: 5.23.13
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
     enumUnions: 0.1.0
@@ -32,8 +32,8 @@ features:
     nameOverrides: 3.0.1
     nullables: 1.0.1
     responseFormat: 1.0.1
-    retries: 3.0.2
-    sdkHooks: 1.1.0
+    retries: 3.0.3
+    sdkHooks: 1.2.0
     unions: 3.1.0
     uploadStreams: 1.0.0
 generatedFiles:
@@ -698,8 +698,10 @@ generatedFiles:
   - docs/models/envelopedistributeinternalservererrorissue.md
   - docs/models/envelopedistributelanguage.md
   - docs/models/envelopedistributemeta.md
+  - docs/models/envelopedistributerecipient.md
   - docs/models/envelopedistributerequest.md
   - docs/models/envelopedistributeresponse.md
+  - docs/models/envelopedistributerole.md
   - docs/models/envelopedistributeunauthorizederror.md
   - docs/models/envelopedistributeunauthorizedissue.md
   - docs/models/envelopeduplicatebadrequesterror.md
@@ -1209,8 +1211,10 @@ generatedFiles:
   - docs/models/enveloperedistributeforbiddenissue.md
   - docs/models/enveloperedistributeinternalservererror.md
   - docs/models/enveloperedistributeinternalservererrorissue.md
+  - docs/models/enveloperedistributerecipient.md
   - docs/models/enveloperedistributerequest.md
   - docs/models/enveloperedistributeresponse.md
+  - docs/models/enveloperedistributerole.md
   - docs/models/enveloperedistributeunauthorizederror.md
   - docs/models/enveloperedistributeunauthorizedissue.md
   - docs/models/envelopeupdateauthoptions.md
@@ -1256,7 +1260,9 @@ generatedFiles:
   - docs/models/envelopeuseinternalservererror.md
   - docs/models/envelopeuseinternalservererrorissue.md
   - docs/models/envelopeuselanguage.md
+  - docs/models/envelopeuseoverride.md
   - docs/models/envelopeusepayload.md
+  - docs/models/envelopeusepayloadrecipient.md
   - docs/models/envelopeuseprefillfieldcheckbox.md
   - docs/models/envelopeuseprefillfielddate.md
   - docs/models/envelopeuseprefillfielddropdown.md
@@ -1264,9 +1270,10 @@ generatedFiles:
   - docs/models/envelopeuseprefillfieldradio.md
   - docs/models/envelopeuseprefillfieldtext.md
   - docs/models/envelopeuseprefillfieldunion.md
-  - docs/models/envelopeuserecipient.md
+  - docs/models/envelopeuserecipientresponse.md
   - docs/models/envelopeuserequest.md
   - docs/models/envelopeuseresponse.md
+  - docs/models/envelopeuserole.md
   - docs/models/envelopeusetypecheckbox.md
   - docs/models/envelopeusetypedate.md
   - docs/models/envelopeusetypedropdown.md
@@ -2267,7 +2274,6 @@ generatedFiles:
   - docs/models/folderupdatefoldervisibilityresponse.md
   - docs/models/orderbycolumn.md
   - docs/models/orderbydirection.md
-  - docs/models/override.md
   - docs/models/queryparamsource.md
   - docs/models/queryparamstatus.md
   - docs/models/recipientcreatedocumentrecipientaccessauthrequest.md
@@ -2719,17 +2725,19 @@ generatedFiles:
   - docs/models/security.md
   - docs/models/templatecreatedocumentfromtemplateaccessauth.md
   - docs/models/templatecreatedocumentfromtemplateactionauth.md
+  - docs/models/templatecreatedocumentfromtemplateattachment.md
   - docs/models/templatecreatedocumentfromtemplateauthoptions.md
   - docs/models/templatecreatedocumentfromtemplatebadrequesterror.md
   - docs/models/templatecreatedocumentfromtemplatebadrequestissue.md
   - docs/models/templatecreatedocumentfromtemplatecustomdocumentdatum.md
+  - docs/models/templatecreatedocumentfromtemplatedateformat.md
   - docs/models/templatecreatedocumentfromtemplatedirection1.md
   - docs/models/templatecreatedocumentfromtemplatedirection2.md
-  - docs/models/templatecreatedocumentfromtemplatedistributionmethod.md
   - docs/models/templatecreatedocumentfromtemplatedocumentdata.md
   - docs/models/templatecreatedocumentfromtemplatedocumentdatatype.md
   - docs/models/templatecreatedocumentfromtemplatedocumentmeta.md
-  - docs/models/templatecreatedocumentfromtemplateemailsettings.md
+  - docs/models/templatecreatedocumentfromtemplatedocumentmetadistributionmethod.md
+  - docs/models/templatecreatedocumentfromtemplatedocumentmetaemailsettings.md
   - docs/models/templatecreatedocumentfromtemplateenvelopeitem.md
   - docs/models/templatecreatedocumentfromtemplatefield.md
   - docs/models/templatecreatedocumentfromtemplatefieldmetacheckbox.md
@@ -2760,6 +2768,10 @@ generatedFiles:
   - docs/models/templatecreatedocumentfromtemplateglobalactionauth.md
   - docs/models/templatecreatedocumentfromtemplateinternalservererror.md
   - docs/models/templatecreatedocumentfromtemplateinternalservererrorissue.md
+  - docs/models/templatecreatedocumentfromtemplatelanguage.md
+  - docs/models/templatecreatedocumentfromtemplateoverride.md
+  - docs/models/templatecreatedocumentfromtemplateoverridedistributionmethod.md
+  - docs/models/templatecreatedocumentfromtemplateoverrideemailsettings.md
   - docs/models/templatecreatedocumentfromtemplateprefillfieldcheckbox.md
   - docs/models/templatecreatedocumentfromtemplateprefillfielddate.md
   - docs/models/templatecreatedocumentfromtemplateprefillfielddropdown.md
@@ -2793,6 +2805,7 @@ generatedFiles:
   - docs/models/templatecreatedocumentfromtemplatetextalign6.md
   - docs/models/templatecreatedocumentfromtemplatetypeemail.md
   - docs/models/templatecreatedocumentfromtemplatetypeinitials.md
+  - docs/models/templatecreatedocumentfromtemplatetypelink.md
   - docs/models/templatecreatedocumentfromtemplatetypename.md
   - docs/models/templatecreatedocumentfromtemplatetypesignature.md
   - docs/models/templatecreatedocumentfromtemplateunauthorizederror.md
@@ -3986,10 +3999,10 @@ examples:
   envelope-use:
     speakeasy-default-envelope-use:
       requestBody:
-        multipart/form-data: {"payload": {"envelopeId": "<id>", "recipients": []}}
+        multipart/form-data: {"payload": {"envelopeId": "<id>"}}
       responses:
         "200":
-          application/json: {"id": "<id>"}
+          application/json: {"id": "<id>", "recipients": []}
         "400":
           application/json: {"message": "<value>", "code": "<value>"}
         "401":
@@ -4049,7 +4062,7 @@ examples:
         application/json: {"envelopeId": "<id>"}
       responses:
         "200":
-          application/json: {"success": false}
+          application/json: {"success": false, "id": "<id>", "recipients": [{"id": 9754.11, "name": "<value>", "email": "Jennie_Kuphal@hotmail.com", "token": "<value>", "role": "CC", "signingOrder": 3303.07, "signingUrl": "https://superb-other.name/"}]}
         "400":
           application/json: {"message": "<value>", "code": "<value>"}
         "401":
@@ -4064,7 +4077,7 @@ examples:
         application/json: {"envelopeId": "<id>", "recipients": []}
       responses:
         "200":
-          application/json: {"success": false}
+          application/json: {"success": false, "id": "<id>", "recipients": []}
         "400":
           application/json: {"message": "<value>", "code": "<value>"}
         "401":
@@ -4648,4 +4661,4 @@ examples:
           application/json: {"message": "<value>", "code": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes Detected:\n* `documenso.documents.get()`: \n  *  `request.folder_id` **Removed** **Breaking** :warning:\n  *  `response` **Changed** **Breaking** :warning:\n  *  `error` **Changed**\n* `documenso.templates.use()`: \n  *  `request` **Changed**\n  *  `response` **Changed** **Breaking** :warning:\n  *  `error` **Changed**\n* `documenso.templates.get()`: \n  *  `response` **Changed** **Breaking** :warning:\n  *  `error` **Changed**\n* `documenso.templates.find()`: \n  *  `response.data.[]` **Changed** **Breaking** :warning:\n  *  `error` **Changed**\n* `documenso.documents.create_v0()`: \n  *  `request` **Changed**\n  *  `response.document` **Changed** **Breaking** :warning:\n  *  `error` **Changed**\n* `documenso.envelopes.fields.get()`: **Added**\n* `documenso.documents.redistribute()`:  `error` **Changed**\n* `documenso.envelopes.redistribute()`: **Added**\n* `documenso.envelopes.attachments.find()`: **Added**\n* `documenso.envelopes.attachments.create()`: **Added**\n* `documenso.envelopes.attachments.update()`: **Added**\n* `documenso.envelopes.attachments.delete()`: **Added**\n* `documenso.envelopes.items.create_many()`: **Added**\n* `documenso.envelopes.items.update_many()`: **Added**\n* `documenso.envelopes.items.delete()`: **Added**\n* `documenso.envelopes.items.download()`: **Added**\n* `documenso.envelopes.recipients.get()`: **Added**\n* `documenso.envelopes.recipients.create_many()`: **Added**\n* `documenso.envelopes.recipients.update_many()`: **Added**\n* `documenso.envelopes.recipients.delete()`: **Added**\n* `documenso.envelopes.get()`: **Added**\n* `documenso.envelopes.fields.create_many()`: **Added**\n* `documenso.envelopes.fields.update_many()`: **Added**\n* `documenso.envelopes.fields.delete()`: **Added**\n* `documenso.documents.create()`: **Added**\n* `documenso.documents.download()`: **Added**\n* `documenso.documents.attachments.create()`: **Added**\n* `documenso.documents.attachments.update()`: **Added**\n* `documenso.documents.attachments.delete()`: **Added**\n* `documenso.documents.attachments.find()`: **Added**\n* `documenso.document.document_download()`: **Added**\n* `documenso.templates.create()`: **Added**\n* `documenso.documents.distribute()`: \n  *  `request.meta` **Changed**\n  *  `response` **Changed**\n  *  `error` **Changed**\n* `documenso.folders.create()`: **Added**\n* `documenso.folders.update()`: **Added**\n* `documenso.folders.delete()`: **Added**\n* `documenso.template.template-create_template_temporary()`: **Added**\n* `documenso.documents.update()`: \n  *  `request` **Changed**\n  *  `response` **Changed**\n  *  `error` **Changed**\n* `documenso.documents.find()`: \n  *  `response.data.[]` **Changed**\n  *  `error` **Changed**\n* `documenso.envelopes.duplicate()`: **Added**\n* `documenso.envelopes.delete()`: **Added**\n* `documenso.envelopes.distribute()`: **Added**\n* `documenso.documents.delete()`:  `error` **Changed**\n* `documenso.folders.find()`: **Added**\n* `documenso.documents.duplicate()`: \n  *  `response.id` **Added**\n  *  `error` **Changed**\n* `documenso.documents.fields.get()`: \n  *  `response` **Changed**\n  *  `error` **Changed**\n* `documenso.documents.fields.create()`: \n  *  `request.field.[class].field_meta` **Changed**\n  *  `response` **Changed**\n  *  `error` **Changed**\n* `documenso.documents.fields.create_many()`: \n  *  `request.fields.[].[class].field_meta` **Changed**\n  *  `response.fields.[]` **Changed**\n  *  `error` **Changed**\n* `documenso.documents.fields.update()`: \n  *  `request.field.[class].field_meta` **Changed**\n  *  `response` **Changed**\n  *  `error` **Changed**\n* `documenso.documents.fields.update_many()`: \n  *  `request.fields.[].[class].field_meta` **Changed**\n  *  `response.fields.[]` **Changed**\n  *  `error` **Changed**\n* `documenso.documents.fields.delete()`:  `error` **Changed**\n* `documenso.documents.recipients.get()`: \n  *  `response` **Changed**\n  *  `error` **Changed**\n* `documenso.documents.recipients.create()`: \n  *  `response` **Changed**\n  *  `error` **Changed**\n* `documenso.documents.recipients.create_many()`: \n  *  `response.recipients.[]` **Changed**\n  *  `error` **Changed**\n* `documenso.documents.recipients.update()`: \n  *  `response` **Changed**\n  *  `error` **Changed**\n* `documenso.documents.recipients.update_many()`: \n  *  `response.recipients.[]` **Changed**\n  *  `error` **Changed**\n* `documenso.documents.recipients.delete()`:  `error` **Changed**\n* `documenso.envelopes.update()`: **Added**\n* `documenso.envelopes.use()`: **Added**\n* `documenso.templates.update()`: \n  *  `request` **Changed**\n  *  `response` **Changed**\n  *  `error` **Changed**\n* `documenso.templates.duplicate()`: \n  *  `response` **Changed**\n  *  `error` **Changed**\n* `documenso.templates.delete()`:  `error` **Changed**\n* `documenso.envelopes.create()`: **Added**\n* `documenso.templates.fields.create()`: \n  *  `request.field.[class].field_meta` **Changed**\n  *  `response` **Changed**\n  *  `error` **Changed**\n* `documenso.templates.fields.get()`: \n  *  `response` **Changed**\n  *  `error` **Changed**\n* `documenso.templates.fields.create_many()`: \n  *  `request.fields.[].[class].field_meta` **Changed**\n  *  `response.fields.[]` **Changed**\n  *  `error` **Changed**\n* `documenso.templates.fields.update()`: \n  *  `request.field.[class].field_meta` **Changed**\n  *  `response` **Changed**\n  *  `error` **Changed**\n* `documenso.templates.fields.update_many()`: \n  *  `request.fields.[].[class].field_meta` **Changed**\n  *  `response.fields.[]` **Changed**\n  *  `error` **Changed**\n* `documenso.templates.fields.delete()`:  `error` **Changed**\n* `documenso.templates.recipients.get()`: \n  *  `response` **Changed**\n  *  `error` **Changed**\n* `documenso.templates.recipients.create()`: \n  *  `response` **Changed**\n  *  `error` **Changed**\n* `documenso.templates.recipients.create_many()`: \n  *  `response.recipients.[]` **Changed**\n  *  `error` **Changed**\n* `documenso.templates.recipients.update()`: \n  *  `response` **Changed**\n  *  `error` **Changed**\n* `documenso.templates.recipients.update_many()`: \n  *  `response.recipients.[]` **Changed**\n  *  `error` **Changed**\n* `documenso.templates.recipients.delete()`:  `error` **Changed**\n* `documenso.templates.direct_link.create()`: \n  *  `response.envelope_id` **Added**\n  *  `error` **Changed**\n* `documenso.templates.direct_link.delete()`:  `error` **Changed**\n* `documenso.templates.direct_link.toggle()`: \n  *  `response.envelope_id` **Added**\n  *  `error` **Changed**\n* `documenso.embedding.embedding_presign-create_embedding_presign_token()`:  `error` **Changed**\n* `documenso.embedding.embedding_presign-verify_embedding_presign_token()`:  `error` **Changed**\n"
+releaseNotes: "## Python SDK Changes:\n* `documenso.envelopes.create()`:  `request.payload` **Changed**\n* `documenso.envelopes.use()`: \n  *  `request.payload` **Changed**\n  *  `response.recipients` **Added**\n* `documenso.envelopes.distribute()`:  `response` **Changed**\n* `documenso.envelopes.redistribute()`:  `response` **Changed**\n* `documenso.documents.create()`:  `request.payload` **Changed**\n* `documenso.templates.create()`:  `request.payload` **Changed**\n* `documenso.templates.use()`:  `request` **Changed**\n"

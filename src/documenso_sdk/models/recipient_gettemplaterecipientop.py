@@ -10,11 +10,11 @@ from documenso_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from documenso_sdk.utils import FieldMetadata, PathParamMetadata
+from documenso_sdk.utils import FieldMetadata, PathParamMetadata, get_discriminator
 from enum import Enum
 import httpx
 import pydantic
-from pydantic import model_serializer
+from pydantic import Discriminator, Tag, model_serializer
 from typing import Any, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -869,21 +869,21 @@ RecipientGetTemplateRecipientFieldMetaUnionTypedDict = TypeAliasType(
 )
 
 
-RecipientGetTemplateRecipientFieldMetaUnion = TypeAliasType(
-    "RecipientGetTemplateRecipientFieldMetaUnion",
+RecipientGetTemplateRecipientFieldMetaUnion = Annotated[
     Union[
-        RecipientGetTemplateRecipientFieldMetaSignature,
-        RecipientGetTemplateRecipientFieldMetaInitials,
-        RecipientGetTemplateRecipientFieldMetaName,
-        RecipientGetTemplateRecipientFieldMetaEmail,
-        RecipientGetTemplateRecipientFieldMetaDate,
-        RecipientGetTemplateRecipientFieldMetaRadio,
-        RecipientGetTemplateRecipientFieldMetaDropdown,
-        RecipientGetTemplateRecipientFieldMetaCheckbox,
-        RecipientGetTemplateRecipientFieldMetaText,
-        RecipientGetTemplateRecipientFieldMetaNumber,
+        Annotated[RecipientGetTemplateRecipientFieldMetaSignature, Tag("signature")],
+        Annotated[RecipientGetTemplateRecipientFieldMetaInitials, Tag("initials")],
+        Annotated[RecipientGetTemplateRecipientFieldMetaName, Tag("name")],
+        Annotated[RecipientGetTemplateRecipientFieldMetaEmail, Tag("email")],
+        Annotated[RecipientGetTemplateRecipientFieldMetaDate, Tag("date")],
+        Annotated[RecipientGetTemplateRecipientFieldMetaText, Tag("text")],
+        Annotated[RecipientGetTemplateRecipientFieldMetaNumber, Tag("number")],
+        Annotated[RecipientGetTemplateRecipientFieldMetaRadio, Tag("radio")],
+        Annotated[RecipientGetTemplateRecipientFieldMetaCheckbox, Tag("checkbox")],
+        Annotated[RecipientGetTemplateRecipientFieldMetaDropdown, Tag("dropdown")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class RecipientGetTemplateRecipientFieldTypedDict(TypedDict):

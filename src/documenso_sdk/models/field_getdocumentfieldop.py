@@ -10,11 +10,11 @@ from documenso_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from documenso_sdk.utils import FieldMetadata, PathParamMetadata
+from documenso_sdk.utils import FieldMetadata, PathParamMetadata, get_discriminator
 from enum import Enum
 import httpx
 import pydantic
-from pydantic import model_serializer
+from pydantic import Discriminator, Tag, model_serializer
 from typing import Any, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -809,21 +809,21 @@ FieldGetDocumentFieldFieldMetaUnionTypedDict = TypeAliasType(
 )
 
 
-FieldGetDocumentFieldFieldMetaUnion = TypeAliasType(
-    "FieldGetDocumentFieldFieldMetaUnion",
+FieldGetDocumentFieldFieldMetaUnion = Annotated[
     Union[
-        FieldGetDocumentFieldFieldMetaSignature,
-        FieldGetDocumentFieldFieldMetaInitials,
-        FieldGetDocumentFieldFieldMetaName,
-        FieldGetDocumentFieldFieldMetaEmail,
-        FieldGetDocumentFieldFieldMetaDate,
-        FieldGetDocumentFieldFieldMetaRadio,
-        FieldGetDocumentFieldFieldMetaDropdown,
-        FieldGetDocumentFieldFieldMetaCheckbox,
-        FieldGetDocumentFieldFieldMetaText,
-        FieldGetDocumentFieldFieldMetaNumber,
+        Annotated[FieldGetDocumentFieldFieldMetaSignature, Tag("signature")],
+        Annotated[FieldGetDocumentFieldFieldMetaInitials, Tag("initials")],
+        Annotated[FieldGetDocumentFieldFieldMetaName, Tag("name")],
+        Annotated[FieldGetDocumentFieldFieldMetaEmail, Tag("email")],
+        Annotated[FieldGetDocumentFieldFieldMetaDate, Tag("date")],
+        Annotated[FieldGetDocumentFieldFieldMetaText, Tag("text")],
+        Annotated[FieldGetDocumentFieldFieldMetaNumber, Tag("number")],
+        Annotated[FieldGetDocumentFieldFieldMetaRadio, Tag("radio")],
+        Annotated[FieldGetDocumentFieldFieldMetaCheckbox, Tag("checkbox")],
+        Annotated[FieldGetDocumentFieldFieldMetaDropdown, Tag("dropdown")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class FieldGetDocumentFieldResponseTypedDict(TypedDict):

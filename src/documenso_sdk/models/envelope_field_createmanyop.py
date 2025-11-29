@@ -10,10 +10,11 @@ from documenso_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
+from documenso_sdk.utils import get_discriminator
 from enum import Enum
 import httpx
 import pydantic
-from pydantic import model_serializer
+from pydantic import Discriminator, Tag, model_serializer
 from typing import Any, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -1064,22 +1065,22 @@ EnvelopeFieldCreateManyDataUnionTypedDict = TypeAliasType(
 )
 
 
-EnvelopeFieldCreateManyDataUnion = TypeAliasType(
-    "EnvelopeFieldCreateManyDataUnion",
+EnvelopeFieldCreateManyDataUnion = Annotated[
     Union[
-        EnvelopeFieldCreateManyDataFreeSignature,
-        EnvelopeFieldCreateManyDataSignature,
-        EnvelopeFieldCreateManyDataInitials,
-        EnvelopeFieldCreateManyDataName,
-        EnvelopeFieldCreateManyDataEmail,
-        EnvelopeFieldCreateManyDataDate,
-        EnvelopeFieldCreateManyDataText,
-        EnvelopeFieldCreateManyDataNumber,
-        EnvelopeFieldCreateManyDataRadio,
-        EnvelopeFieldCreateManyDataCheckbox,
-        EnvelopeFieldCreateManyDataDropdown,
+        Annotated[EnvelopeFieldCreateManyDataSignature, Tag("SIGNATURE")],
+        Annotated[EnvelopeFieldCreateManyDataFreeSignature, Tag("FREE_SIGNATURE")],
+        Annotated[EnvelopeFieldCreateManyDataInitials, Tag("INITIALS")],
+        Annotated[EnvelopeFieldCreateManyDataName, Tag("NAME")],
+        Annotated[EnvelopeFieldCreateManyDataEmail, Tag("EMAIL")],
+        Annotated[EnvelopeFieldCreateManyDataDate, Tag("DATE")],
+        Annotated[EnvelopeFieldCreateManyDataText, Tag("TEXT")],
+        Annotated[EnvelopeFieldCreateManyDataNumber, Tag("NUMBER")],
+        Annotated[EnvelopeFieldCreateManyDataRadio, Tag("RADIO")],
+        Annotated[EnvelopeFieldCreateManyDataCheckbox, Tag("CHECKBOX")],
+        Annotated[EnvelopeFieldCreateManyDataDropdown, Tag("DROPDOWN")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class EnvelopeFieldCreateManyRequestTypedDict(TypedDict):
@@ -1843,21 +1844,21 @@ EnvelopeFieldCreateManyFieldMetaUnionTypedDict = TypeAliasType(
 )
 
 
-EnvelopeFieldCreateManyFieldMetaUnion = TypeAliasType(
-    "EnvelopeFieldCreateManyFieldMetaUnion",
+EnvelopeFieldCreateManyFieldMetaUnion = Annotated[
     Union[
-        EnvelopeFieldCreateManyFieldMetaSignatureResponse,
-        EnvelopeFieldCreateManyFieldMetaInitialsResponse,
-        EnvelopeFieldCreateManyFieldMetaNameResponse,
-        EnvelopeFieldCreateManyFieldMetaEmailResponse,
-        EnvelopeFieldCreateManyFieldMetaDateResponse,
-        EnvelopeFieldCreateManyFieldMetaRadioResponse,
-        EnvelopeFieldCreateManyFieldMetaDropdownResponse,
-        EnvelopeFieldCreateManyFieldMetaCheckboxResponse,
-        EnvelopeFieldCreateManyFieldMetaTextResponse,
-        EnvelopeFieldCreateManyFieldMetaNumberResponse,
+        Annotated[EnvelopeFieldCreateManyFieldMetaSignatureResponse, Tag("signature")],
+        Annotated[EnvelopeFieldCreateManyFieldMetaInitialsResponse, Tag("initials")],
+        Annotated[EnvelopeFieldCreateManyFieldMetaNameResponse, Tag("name")],
+        Annotated[EnvelopeFieldCreateManyFieldMetaEmailResponse, Tag("email")],
+        Annotated[EnvelopeFieldCreateManyFieldMetaDateResponse, Tag("date")],
+        Annotated[EnvelopeFieldCreateManyFieldMetaTextResponse, Tag("text")],
+        Annotated[EnvelopeFieldCreateManyFieldMetaNumberResponse, Tag("number")],
+        Annotated[EnvelopeFieldCreateManyFieldMetaRadioResponse, Tag("radio")],
+        Annotated[EnvelopeFieldCreateManyFieldMetaCheckboxResponse, Tag("checkbox")],
+        Annotated[EnvelopeFieldCreateManyFieldMetaDropdownResponse, Tag("dropdown")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class EnvelopeFieldCreateManyDataResponseTypedDict(TypedDict):

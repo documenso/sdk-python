@@ -10,10 +10,11 @@ from documenso_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
+from documenso_sdk.utils import get_discriminator
 from enum import Enum
 import httpx
 import pydantic
-from pydantic import model_serializer
+from pydantic import Discriminator, Tag, model_serializer
 from typing import Any, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -894,21 +895,21 @@ RecipientUpdateDocumentRecipientFieldMetaUnionTypedDict = TypeAliasType(
 )
 
 
-RecipientUpdateDocumentRecipientFieldMetaUnion = TypeAliasType(
-    "RecipientUpdateDocumentRecipientFieldMetaUnion",
+RecipientUpdateDocumentRecipientFieldMetaUnion = Annotated[
     Union[
-        RecipientUpdateDocumentRecipientFieldMetaSignature,
-        RecipientUpdateDocumentRecipientFieldMetaInitials,
-        RecipientUpdateDocumentRecipientFieldMetaName,
-        RecipientUpdateDocumentRecipientFieldMetaEmail,
-        RecipientUpdateDocumentRecipientFieldMetaDate,
-        RecipientUpdateDocumentRecipientFieldMetaRadio,
-        RecipientUpdateDocumentRecipientFieldMetaDropdown,
-        RecipientUpdateDocumentRecipientFieldMetaCheckbox,
-        RecipientUpdateDocumentRecipientFieldMetaText,
-        RecipientUpdateDocumentRecipientFieldMetaNumber,
+        Annotated[RecipientUpdateDocumentRecipientFieldMetaSignature, Tag("signature")],
+        Annotated[RecipientUpdateDocumentRecipientFieldMetaInitials, Tag("initials")],
+        Annotated[RecipientUpdateDocumentRecipientFieldMetaName, Tag("name")],
+        Annotated[RecipientUpdateDocumentRecipientFieldMetaEmail, Tag("email")],
+        Annotated[RecipientUpdateDocumentRecipientFieldMetaDate, Tag("date")],
+        Annotated[RecipientUpdateDocumentRecipientFieldMetaText, Tag("text")],
+        Annotated[RecipientUpdateDocumentRecipientFieldMetaNumber, Tag("number")],
+        Annotated[RecipientUpdateDocumentRecipientFieldMetaRadio, Tag("radio")],
+        Annotated[RecipientUpdateDocumentRecipientFieldMetaCheckbox, Tag("checkbox")],
+        Annotated[RecipientUpdateDocumentRecipientFieldMetaDropdown, Tag("dropdown")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class RecipientUpdateDocumentRecipientFieldTypedDict(TypedDict):

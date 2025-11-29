@@ -10,12 +10,12 @@ from documenso_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from documenso_sdk.utils import FieldMetadata, MultipartFormMetadata
+from documenso_sdk.utils import FieldMetadata, MultipartFormMetadata, get_discriminator
 from enum import Enum
 import httpx
 import io
 import pydantic
-from pydantic import model_serializer
+from pydantic import Discriminator, Tag, model_serializer
 from typing import Dict, IO, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -1159,22 +1159,22 @@ EnvelopeCreateFieldUnionTypedDict = TypeAliasType(
 )
 
 
-EnvelopeCreateFieldUnion = TypeAliasType(
-    "EnvelopeCreateFieldUnion",
+EnvelopeCreateFieldUnion = Annotated[
     Union[
-        EnvelopeCreateFieldFreeSignature,
-        EnvelopeCreateFieldSignature,
-        EnvelopeCreateFieldInitials,
-        EnvelopeCreateFieldName,
-        EnvelopeCreateFieldEmail,
-        EnvelopeCreateFieldDate,
-        EnvelopeCreateFieldText,
-        EnvelopeCreateFieldNumber,
-        EnvelopeCreateFieldRadio,
-        EnvelopeCreateFieldCheckbox,
-        EnvelopeCreateFieldDropdown,
+        Annotated[EnvelopeCreateFieldSignature, Tag("SIGNATURE")],
+        Annotated[EnvelopeCreateFieldFreeSignature, Tag("FREE_SIGNATURE")],
+        Annotated[EnvelopeCreateFieldInitials, Tag("INITIALS")],
+        Annotated[EnvelopeCreateFieldName, Tag("NAME")],
+        Annotated[EnvelopeCreateFieldEmail, Tag("EMAIL")],
+        Annotated[EnvelopeCreateFieldDate, Tag("DATE")],
+        Annotated[EnvelopeCreateFieldText, Tag("TEXT")],
+        Annotated[EnvelopeCreateFieldNumber, Tag("NUMBER")],
+        Annotated[EnvelopeCreateFieldRadio, Tag("RADIO")],
+        Annotated[EnvelopeCreateFieldCheckbox, Tag("CHECKBOX")],
+        Annotated[EnvelopeCreateFieldDropdown, Tag("DROPDOWN")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class EnvelopeCreateRecipientTypedDict(TypedDict):
@@ -1251,6 +1251,10 @@ class EnvelopeCreateLanguage(str, Enum):
     ES = "es"
     IT = "it"
     PL = "pl"
+    PT_BR = "pt-BR"
+    JA = "ja"
+    KO = "ko"
+    ZH = "zh"
 
 
 class EnvelopeCreateEmailSettingsTypedDict(TypedDict):

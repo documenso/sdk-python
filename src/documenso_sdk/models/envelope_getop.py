@@ -10,11 +10,11 @@ from documenso_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from documenso_sdk.utils import FieldMetadata, PathParamMetadata
+from documenso_sdk.utils import FieldMetadata, PathParamMetadata, get_discriminator
 from enum import Enum
 import httpx
 import pydantic
-from pydantic import model_serializer
+from pydantic import Discriminator, Tag, model_serializer
 from typing import Any, Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -1170,21 +1170,21 @@ EnvelopeGetFieldMetaUnionTypedDict = TypeAliasType(
 )
 
 
-EnvelopeGetFieldMetaUnion = TypeAliasType(
-    "EnvelopeGetFieldMetaUnion",
+EnvelopeGetFieldMetaUnion = Annotated[
     Union[
-        EnvelopeGetFieldMetaSignature,
-        EnvelopeGetFieldMetaInitials,
-        EnvelopeGetFieldMetaName,
-        EnvelopeGetFieldMetaEmail,
-        EnvelopeGetFieldMetaDate,
-        EnvelopeGetFieldMetaRadio,
-        EnvelopeGetFieldMetaDropdown,
-        EnvelopeGetFieldMetaCheckbox,
-        EnvelopeGetFieldMetaText,
-        EnvelopeGetFieldMetaNumber,
+        Annotated[EnvelopeGetFieldMetaSignature, Tag("signature")],
+        Annotated[EnvelopeGetFieldMetaInitials, Tag("initials")],
+        Annotated[EnvelopeGetFieldMetaName, Tag("name")],
+        Annotated[EnvelopeGetFieldMetaEmail, Tag("email")],
+        Annotated[EnvelopeGetFieldMetaDate, Tag("date")],
+        Annotated[EnvelopeGetFieldMetaText, Tag("text")],
+        Annotated[EnvelopeGetFieldMetaNumber, Tag("number")],
+        Annotated[EnvelopeGetFieldMetaRadio, Tag("radio")],
+        Annotated[EnvelopeGetFieldMetaCheckbox, Tag("checkbox")],
+        Annotated[EnvelopeGetFieldMetaDropdown, Tag("dropdown")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class EnvelopeGetFieldTypedDict(TypedDict):

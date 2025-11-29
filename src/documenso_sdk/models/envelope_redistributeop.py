@@ -3,9 +3,11 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 from documenso_sdk.models import DocumensoError
-from documenso_sdk.types import BaseModel
+from documenso_sdk.types import BaseModel, Nullable, UNSET_SENTINEL
+from enum import Enum
 import httpx
 import pydantic
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, TypedDict
 
@@ -157,13 +159,83 @@ class EnvelopeRedistributeBadRequestError(DocumensoError):
         object.__setattr__(self, "data", data)
 
 
+class EnvelopeRedistributeRole(str, Enum):
+    CC = "CC"
+    SIGNER = "SIGNER"
+    VIEWER = "VIEWER"
+    APPROVER = "APPROVER"
+    ASSISTANT = "ASSISTANT"
+
+
+class EnvelopeRedistributeRecipientTypedDict(TypedDict):
+    id: float
+    name: str
+    email: str
+    token: str
+    role: EnvelopeRedistributeRole
+    signing_order: Nullable[float]
+    signing_url: str
+
+
+class EnvelopeRedistributeRecipient(BaseModel):
+    id: float
+
+    name: str
+
+    email: str
+
+    token: str
+
+    role: EnvelopeRedistributeRole
+
+    signing_order: Annotated[Nullable[float], pydantic.Field(alias="signingOrder")]
+
+    signing_url: Annotated[str, pydantic.Field(alias="signingUrl")]
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = []
+        nullable_fields = ["signingOrder"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
+
+
 class EnvelopeRedistributeResponseTypedDict(TypedDict):
     r"""Successful response"""
 
     success: bool
+    id: str
+    recipients: List[EnvelopeRedistributeRecipientTypedDict]
 
 
 class EnvelopeRedistributeResponse(BaseModel):
     r"""Successful response"""
 
     success: bool
+
+    id: str
+
+    recipients: List[EnvelopeRedistributeRecipient]

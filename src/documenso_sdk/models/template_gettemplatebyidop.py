@@ -10,11 +10,11 @@ from documenso_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from documenso_sdk.utils import FieldMetadata, PathParamMetadata
+from documenso_sdk.utils import FieldMetadata, PathParamMetadata, get_discriminator
 from enum import Enum
 import httpx
 import pydantic
-from pydantic import model_serializer
+from pydantic import Discriminator, Tag, model_serializer
 from typing import Any, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -1271,21 +1271,21 @@ TemplateGetTemplateByIDFieldMetaUnionTypedDict = TypeAliasType(
 )
 
 
-TemplateGetTemplateByIDFieldMetaUnion = TypeAliasType(
-    "TemplateGetTemplateByIDFieldMetaUnion",
+TemplateGetTemplateByIDFieldMetaUnion = Annotated[
     Union[
-        TemplateGetTemplateByIDFieldMetaSignature,
-        TemplateGetTemplateByIDFieldMetaInitials,
-        TemplateGetTemplateByIDFieldMetaName,
-        TemplateGetTemplateByIDFieldMetaEmail,
-        TemplateGetTemplateByIDFieldMetaDate,
-        TemplateGetTemplateByIDFieldMetaRadio,
-        TemplateGetTemplateByIDFieldMetaDropdown,
-        TemplateGetTemplateByIDFieldMetaCheckbox,
-        TemplateGetTemplateByIDFieldMetaText,
-        TemplateGetTemplateByIDFieldMetaNumber,
+        Annotated[TemplateGetTemplateByIDFieldMetaSignature, Tag("signature")],
+        Annotated[TemplateGetTemplateByIDFieldMetaInitials, Tag("initials")],
+        Annotated[TemplateGetTemplateByIDFieldMetaName, Tag("name")],
+        Annotated[TemplateGetTemplateByIDFieldMetaEmail, Tag("email")],
+        Annotated[TemplateGetTemplateByIDFieldMetaDate, Tag("date")],
+        Annotated[TemplateGetTemplateByIDFieldMetaText, Tag("text")],
+        Annotated[TemplateGetTemplateByIDFieldMetaNumber, Tag("number")],
+        Annotated[TemplateGetTemplateByIDFieldMetaRadio, Tag("radio")],
+        Annotated[TemplateGetTemplateByIDFieldMetaCheckbox, Tag("checkbox")],
+        Annotated[TemplateGetTemplateByIDFieldMetaDropdown, Tag("dropdown")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class TemplateGetTemplateByIDFieldTypedDict(TypedDict):

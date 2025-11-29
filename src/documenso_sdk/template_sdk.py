@@ -114,6 +114,7 @@ class TemplateSDK(BaseSDK):
                 "json",
                 models.TemplateCreateTemplateTemporaryRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -286,6 +287,7 @@ class TemplateSDK(BaseSDK):
                 "json",
                 models.TemplateCreateTemplateTemporaryRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

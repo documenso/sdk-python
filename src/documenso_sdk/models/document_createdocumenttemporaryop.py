@@ -10,10 +10,11 @@ from documenso_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
+from documenso_sdk.utils import get_discriminator
 from enum import Enum
 import httpx
 import pydantic
-from pydantic import model_serializer
+from pydantic import Discriminator, Tag, model_serializer
 from typing import Any, Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -1049,22 +1050,24 @@ DocumentCreateDocumentTemporaryFieldUnionTypedDict = TypeAliasType(
 )
 
 
-DocumentCreateDocumentTemporaryFieldUnion = TypeAliasType(
-    "DocumentCreateDocumentTemporaryFieldUnion",
+DocumentCreateDocumentTemporaryFieldUnion = Annotated[
     Union[
-        DocumentCreateDocumentTemporaryFieldFreeSignature,
-        DocumentCreateDocumentTemporaryFieldSignature,
-        DocumentCreateDocumentTemporaryFieldInitials,
-        DocumentCreateDocumentTemporaryFieldName,
-        DocumentCreateDocumentTemporaryFieldEmail,
-        DocumentCreateDocumentTemporaryFieldDate,
-        DocumentCreateDocumentTemporaryFieldText,
-        DocumentCreateDocumentTemporaryFieldNumber,
-        DocumentCreateDocumentTemporaryFieldRadio,
-        DocumentCreateDocumentTemporaryFieldCheckbox,
-        DocumentCreateDocumentTemporaryFieldDropdown,
+        Annotated[DocumentCreateDocumentTemporaryFieldSignature, Tag("SIGNATURE")],
+        Annotated[
+            DocumentCreateDocumentTemporaryFieldFreeSignature, Tag("FREE_SIGNATURE")
+        ],
+        Annotated[DocumentCreateDocumentTemporaryFieldInitials, Tag("INITIALS")],
+        Annotated[DocumentCreateDocumentTemporaryFieldName, Tag("NAME")],
+        Annotated[DocumentCreateDocumentTemporaryFieldEmail, Tag("EMAIL")],
+        Annotated[DocumentCreateDocumentTemporaryFieldDate, Tag("DATE")],
+        Annotated[DocumentCreateDocumentTemporaryFieldText, Tag("TEXT")],
+        Annotated[DocumentCreateDocumentTemporaryFieldNumber, Tag("NUMBER")],
+        Annotated[DocumentCreateDocumentTemporaryFieldRadio, Tag("RADIO")],
+        Annotated[DocumentCreateDocumentTemporaryFieldCheckbox, Tag("CHECKBOX")],
+        Annotated[DocumentCreateDocumentTemporaryFieldDropdown, Tag("DROPDOWN")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class DocumentCreateDocumentTemporaryRecipientRequestTypedDict(TypedDict):
@@ -1163,6 +1166,10 @@ class DocumentCreateDocumentTemporaryLanguage(str, Enum):
     ES = "es"
     IT = "it"
     PL = "pl"
+    PT_BR = "pt-BR"
+    JA = "ja"
+    KO = "ko"
+    ZH = "zh"
 
 
 class DocumentCreateDocumentTemporaryMetaEmailSettingsTypedDict(TypedDict):
@@ -2606,21 +2613,21 @@ DocumentFieldMetaUnionTypedDict = TypeAliasType(
 )
 
 
-DocumentFieldMetaUnion = TypeAliasType(
-    "DocumentFieldMetaUnion",
+DocumentFieldMetaUnion = Annotated[
     Union[
-        FieldMetaDocumentSignature,
-        FieldMetaDocumentInitials,
-        FieldMetaDocumentName,
-        FieldMetaDocumentEmail,
-        FieldMetaDocumentDate,
-        FieldMetaDocumentRadio,
-        FieldMetaDocumentDropdown,
-        FieldMetaDocumentCheckbox,
-        FieldMetaDocumentText,
-        FieldMetaDocumentNumber,
+        Annotated[FieldMetaDocumentSignature, Tag("signature")],
+        Annotated[FieldMetaDocumentInitials, Tag("initials")],
+        Annotated[FieldMetaDocumentName, Tag("name")],
+        Annotated[FieldMetaDocumentEmail, Tag("email")],
+        Annotated[FieldMetaDocumentDate, Tag("date")],
+        Annotated[FieldMetaDocumentText, Tag("text")],
+        Annotated[FieldMetaDocumentNumber, Tag("number")],
+        Annotated[FieldMetaDocumentRadio, Tag("radio")],
+        Annotated[FieldMetaDocumentCheckbox, Tag("checkbox")],
+        Annotated[FieldMetaDocumentDropdown, Tag("dropdown")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class DocumentFieldTypedDict(TypedDict):

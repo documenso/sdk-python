@@ -10,11 +10,11 @@ from documenso_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from documenso_sdk.utils import FieldMetadata, PathParamMetadata
+from documenso_sdk.utils import FieldMetadata, PathParamMetadata, get_discriminator
 from enum import Enum
 import httpx
 import pydantic
-from pydantic import model_serializer
+from pydantic import Discriminator, Tag, model_serializer
 from typing import Any, Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -1292,21 +1292,21 @@ DocumentGetFieldMetaUnionTypedDict = TypeAliasType(
 )
 
 
-DocumentGetFieldMetaUnion = TypeAliasType(
-    "DocumentGetFieldMetaUnion",
+DocumentGetFieldMetaUnion = Annotated[
     Union[
-        DocumentGetFieldMetaSignature,
-        DocumentGetFieldMetaInitials,
-        DocumentGetFieldMetaName,
-        DocumentGetFieldMetaEmail,
-        DocumentGetFieldMetaDate,
-        DocumentGetFieldMetaRadio,
-        DocumentGetFieldMetaDropdown,
-        DocumentGetFieldMetaCheckbox,
-        DocumentGetFieldMetaText,
-        DocumentGetFieldMetaNumber,
+        Annotated[DocumentGetFieldMetaSignature, Tag("signature")],
+        Annotated[DocumentGetFieldMetaInitials, Tag("initials")],
+        Annotated[DocumentGetFieldMetaName, Tag("name")],
+        Annotated[DocumentGetFieldMetaEmail, Tag("email")],
+        Annotated[DocumentGetFieldMetaDate, Tag("date")],
+        Annotated[DocumentGetFieldMetaText, Tag("text")],
+        Annotated[DocumentGetFieldMetaNumber, Tag("number")],
+        Annotated[DocumentGetFieldMetaRadio, Tag("radio")],
+        Annotated[DocumentGetFieldMetaCheckbox, Tag("checkbox")],
+        Annotated[DocumentGetFieldMetaDropdown, Tag("dropdown")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class DocumentGetFieldTypedDict(TypedDict):

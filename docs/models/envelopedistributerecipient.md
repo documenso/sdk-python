@@ -1,0 +1,14 @@
+# EnvelopeDistributeRecipient
+
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `id`                                                                 | *float*                                                              | :heavy_check_mark:                                                   | N/A                                                                  |
+| `name`                                                               | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
+| `email`                                                              | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
+| `token`                                                              | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |
+| `role`                                                               | [models.EnvelopeDistributeRole](../models/envelopedistributerole.md) | :heavy_check_mark:                                                   | N/A                                                                  |
+| `signing_order`                                                      | *Nullable[float]*                                                    | :heavy_check_mark:                                                   | N/A                                                                  |
+| `signing_url`                                                        | *str*                                                                | :heavy_check_mark:                                                   | N/A                                                                  |

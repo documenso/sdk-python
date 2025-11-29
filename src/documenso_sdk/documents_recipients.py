@@ -56,6 +56,7 @@ class DocumentsRecipients(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -177,6 +178,7 @@ class DocumentsRecipients(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -313,6 +315,7 @@ class DocumentsRecipients(BaseSDK):
                 "json",
                 models.RecipientCreateDocumentRecipientRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -442,6 +445,7 @@ class DocumentsRecipients(BaseSDK):
                 "json",
                 models.RecipientCreateDocumentRecipientRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -572,6 +576,7 @@ class DocumentsRecipients(BaseSDK):
                 "json",
                 models.RecipientCreateDocumentRecipientsRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -703,6 +708,7 @@ class DocumentsRecipients(BaseSDK):
                 "json",
                 models.RecipientCreateDocumentRecipientsRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -833,6 +839,7 @@ class DocumentsRecipients(BaseSDK):
                 "json",
                 models.RecipientUpdateDocumentRecipientRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -962,6 +969,7 @@ class DocumentsRecipients(BaseSDK):
                 "json",
                 models.RecipientUpdateDocumentRecipientRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1092,6 +1100,7 @@ class DocumentsRecipients(BaseSDK):
                 "json",
                 models.RecipientUpdateDocumentRecipientsRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1223,6 +1232,7 @@ class DocumentsRecipients(BaseSDK):
                 "json",
                 models.RecipientUpdateDocumentRecipientsRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1343,6 +1353,7 @@ class DocumentsRecipients(BaseSDK):
                 "json",
                 models.RecipientDeleteDocumentRecipientRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1462,6 +1473,7 @@ class DocumentsRecipients(BaseSDK):
                 "json",
                 models.RecipientDeleteDocumentRecipientRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

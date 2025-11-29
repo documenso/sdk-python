@@ -55,6 +55,10 @@ class EnvelopeDistributeLanguage(str, Enum):
     ES = "es"
     IT = "it"
     PL = "pl"
+    PT_BR = "pt-BR"
+    JA = "ja"
+    KO = "ko"
+    ZH = "zh"
 
 
 class EnvelopeDistributeEmailSettingsTypedDict(TypedDict):
@@ -330,13 +334,83 @@ class EnvelopeDistributeBadRequestError(DocumensoError):
         object.__setattr__(self, "data", data)
 
 
+class EnvelopeDistributeRole(str, Enum):
+    CC = "CC"
+    SIGNER = "SIGNER"
+    VIEWER = "VIEWER"
+    APPROVER = "APPROVER"
+    ASSISTANT = "ASSISTANT"
+
+
+class EnvelopeDistributeRecipientTypedDict(TypedDict):
+    id: float
+    name: str
+    email: str
+    token: str
+    role: EnvelopeDistributeRole
+    signing_order: Nullable[float]
+    signing_url: str
+
+
+class EnvelopeDistributeRecipient(BaseModel):
+    id: float
+
+    name: str
+
+    email: str
+
+    token: str
+
+    role: EnvelopeDistributeRole
+
+    signing_order: Annotated[Nullable[float], pydantic.Field(alias="signingOrder")]
+
+    signing_url: Annotated[str, pydantic.Field(alias="signingUrl")]
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = []
+        nullable_fields = ["signingOrder"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
+
+
 class EnvelopeDistributeResponseTypedDict(TypedDict):
     r"""Successful response"""
 
     success: bool
+    id: str
+    recipients: List[EnvelopeDistributeRecipientTypedDict]
 
 
 class EnvelopeDistributeResponse(BaseModel):
     r"""Successful response"""
 
     success: bool
+
+    id: str
+
+    recipients: List[EnvelopeDistributeRecipient]

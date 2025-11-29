@@ -10,11 +10,11 @@ from documenso_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from documenso_sdk.utils import FieldMetadata, PathParamMetadata
+from documenso_sdk.utils import FieldMetadata, PathParamMetadata, get_discriminator
 from enum import Enum
 import httpx
 import pydantic
-from pydantic import model_serializer
+from pydantic import Discriminator, Tag, model_serializer
 from typing import Any, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -809,21 +809,21 @@ FieldGetTemplateFieldFieldMetaUnionTypedDict = TypeAliasType(
 )
 
 
-FieldGetTemplateFieldFieldMetaUnion = TypeAliasType(
-    "FieldGetTemplateFieldFieldMetaUnion",
+FieldGetTemplateFieldFieldMetaUnion = Annotated[
     Union[
-        FieldGetTemplateFieldFieldMetaSignature,
-        FieldGetTemplateFieldFieldMetaInitials,
-        FieldGetTemplateFieldFieldMetaName,
-        FieldGetTemplateFieldFieldMetaEmail,
-        FieldGetTemplateFieldFieldMetaDate,
-        FieldGetTemplateFieldFieldMetaRadio,
-        FieldGetTemplateFieldFieldMetaDropdown,
-        FieldGetTemplateFieldFieldMetaCheckbox,
-        FieldGetTemplateFieldFieldMetaText,
-        FieldGetTemplateFieldFieldMetaNumber,
+        Annotated[FieldGetTemplateFieldFieldMetaSignature, Tag("signature")],
+        Annotated[FieldGetTemplateFieldFieldMetaInitials, Tag("initials")],
+        Annotated[FieldGetTemplateFieldFieldMetaName, Tag("name")],
+        Annotated[FieldGetTemplateFieldFieldMetaEmail, Tag("email")],
+        Annotated[FieldGetTemplateFieldFieldMetaDate, Tag("date")],
+        Annotated[FieldGetTemplateFieldFieldMetaText, Tag("text")],
+        Annotated[FieldGetTemplateFieldFieldMetaNumber, Tag("number")],
+        Annotated[FieldGetTemplateFieldFieldMetaRadio, Tag("radio")],
+        Annotated[FieldGetTemplateFieldFieldMetaCheckbox, Tag("checkbox")],
+        Annotated[FieldGetTemplateFieldFieldMetaDropdown, Tag("dropdown")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class FieldGetTemplateFieldResponseTypedDict(TypedDict):
