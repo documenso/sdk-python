@@ -3,24 +3,25 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 from documenso_sdk.models import DocumensoError
-from documenso_sdk.types import BaseModel
-from documenso_sdk.utils import FieldMetadata, MultipartFormMetadata
+from documenso_sdk.types import BaseModel, Nullable, UNSET_SENTINEL
+from documenso_sdk.utils import FieldMetadata, MultipartFormMetadata, get_discriminator
 from enum import Enum
 import httpx
 import io
 import pydantic
+from pydantic import Discriminator, Tag, model_serializer
 from typing import IO, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-class EnvelopeUseRecipientTypedDict(TypedDict):
+class EnvelopeUsePayloadRecipientTypedDict(TypedDict):
     id: float
     email: str
     name: NotRequired[str]
     signing_order: NotRequired[float]
 
 
-class EnvelopeUseRecipient(BaseModel):
+class EnvelopeUsePayloadRecipient(BaseModel):
     id: float
 
     email: str
@@ -193,17 +194,17 @@ EnvelopeUsePrefillFieldUnionTypedDict = TypeAliasType(
 )
 
 
-EnvelopeUsePrefillFieldUnion = TypeAliasType(
-    "EnvelopeUsePrefillFieldUnion",
+EnvelopeUsePrefillFieldUnion = Annotated[
     Union[
-        EnvelopeUsePrefillFieldDate,
-        EnvelopeUsePrefillFieldRadio,
-        EnvelopeUsePrefillFieldCheckbox,
-        EnvelopeUsePrefillFieldDropdown,
-        EnvelopeUsePrefillFieldText,
-        EnvelopeUsePrefillFieldNumber,
+        Annotated[EnvelopeUsePrefillFieldText, Tag("text")],
+        Annotated[EnvelopeUsePrefillFieldNumber, Tag("number")],
+        Annotated[EnvelopeUsePrefillFieldRadio, Tag("radio")],
+        Annotated[EnvelopeUsePrefillFieldCheckbox, Tag("checkbox")],
+        Annotated[EnvelopeUsePrefillFieldDropdown, Tag("dropdown")],
+        Annotated[EnvelopeUsePrefillFieldDate, Tag("date")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class EnvelopeUseDateFormat(str, Enum):
@@ -283,9 +284,13 @@ class EnvelopeUseLanguage(str, Enum):
     ES = "es"
     IT = "it"
     PL = "pl"
+    PT_BR = "pt-BR"
+    JA = "ja"
+    KO = "ko"
+    ZH = "zh"
 
 
-class OverrideTypedDict(TypedDict):
+class EnvelopeUseOverrideTypedDict(TypedDict):
     title: NotRequired[str]
     subject: NotRequired[str]
     message: NotRequired[str]
@@ -301,7 +306,7 @@ class OverrideTypedDict(TypedDict):
     allow_dictate_next_signer: NotRequired[bool]
 
 
-class Override(BaseModel):
+class EnvelopeUseOverride(BaseModel):
     title: Optional[str] = None
 
     subject: Optional[str] = None
@@ -364,22 +369,22 @@ class EnvelopeUseAttachment(BaseModel):
 
 class EnvelopeUsePayloadTypedDict(TypedDict):
     envelope_id: str
-    recipients: List[EnvelopeUseRecipientTypedDict]
     external_id: NotRequired[str]
+    recipients: NotRequired[List[EnvelopeUsePayloadRecipientTypedDict]]
     distribute_document: NotRequired[bool]
     custom_document_data: NotRequired[List[EnvelopeUseCustomDocumentDatumTypedDict]]
     folder_id: NotRequired[str]
     prefill_fields: NotRequired[List[EnvelopeUsePrefillFieldUnionTypedDict]]
-    override: NotRequired[OverrideTypedDict]
+    override: NotRequired[EnvelopeUseOverrideTypedDict]
     attachments: NotRequired[List[EnvelopeUseAttachmentTypedDict]]
 
 
 class EnvelopeUsePayload(BaseModel):
     envelope_id: Annotated[str, pydantic.Field(alias="envelopeId")]
 
-    recipients: List[EnvelopeUseRecipient]
-
     external_id: Annotated[Optional[str], pydantic.Field(alias="externalId")] = None
+
+    recipients: Optional[List[EnvelopeUsePayloadRecipient]] = None
 
     distribute_document: Annotated[
         Optional[bool], pydantic.Field(alias="distributeDocument")
@@ -397,7 +402,7 @@ class EnvelopeUsePayload(BaseModel):
         pydantic.Field(alias="prefillFields"),
     ] = None
 
-    override: Optional[Override] = None
+    override: Optional[EnvelopeUseOverride] = None
 
     attachments: Optional[List[EnvelopeUseAttachment]] = None
 
@@ -578,13 +583,80 @@ class EnvelopeUseBadRequestError(DocumensoError):
         object.__setattr__(self, "data", data)
 
 
+class EnvelopeUseRole(str, Enum):
+    CC = "CC"
+    SIGNER = "SIGNER"
+    VIEWER = "VIEWER"
+    APPROVER = "APPROVER"
+    ASSISTANT = "ASSISTANT"
+
+
+class EnvelopeUseRecipientResponseTypedDict(TypedDict):
+    id: float
+    name: str
+    email: str
+    token: str
+    role: EnvelopeUseRole
+    signing_order: Nullable[float]
+    signing_url: str
+
+
+class EnvelopeUseRecipientResponse(BaseModel):
+    id: float
+
+    name: str
+
+    email: str
+
+    token: str
+
+    role: EnvelopeUseRole
+
+    signing_order: Annotated[Nullable[float], pydantic.Field(alias="signingOrder")]
+
+    signing_url: Annotated[str, pydantic.Field(alias="signingUrl")]
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = []
+        nullable_fields = ["signingOrder"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
+
+
 class EnvelopeUseResponseTypedDict(TypedDict):
     r"""Successful response"""
 
     id: str
+    recipients: List[EnvelopeUseRecipientResponseTypedDict]
 
 
 class EnvelopeUseResponse(BaseModel):
     r"""Successful response"""
 
     id: str
+
+    recipients: List[EnvelopeUseRecipientResponse]

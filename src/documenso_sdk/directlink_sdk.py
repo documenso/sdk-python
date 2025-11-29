@@ -66,6 +66,7 @@ class DirectLinkSDK(BaseSDK):
                 "json",
                 models.TemplateCreateTemplateDirectLinkRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -190,6 +191,7 @@ class DirectLinkSDK(BaseSDK):
                 "json",
                 models.TemplateCreateTemplateDirectLinkRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -311,6 +313,7 @@ class DirectLinkSDK(BaseSDK):
                 "json",
                 models.TemplateDeleteTemplateDirectLinkRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -432,6 +435,7 @@ class DirectLinkSDK(BaseSDK):
                 "json",
                 models.TemplateDeleteTemplateDirectLinkRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -556,6 +560,7 @@ class DirectLinkSDK(BaseSDK):
                 "json",
                 models.TemplateToggleTemplateDirectLinkRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -680,6 +685,7 @@ class DirectLinkSDK(BaseSDK):
                 "json",
                 models.TemplateToggleTemplateDirectLinkRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

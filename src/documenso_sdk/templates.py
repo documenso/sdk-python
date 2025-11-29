@@ -94,6 +94,7 @@ class Templates(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -219,6 +220,7 @@ class Templates(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -330,6 +332,7 @@ class Templates(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -443,6 +446,7 @@ class Templates(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -572,6 +576,7 @@ class Templates(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "multipart", models.TemplateCreateTemplateRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -696,6 +701,7 @@ class Templates(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "multipart", models.TemplateCreateTemplateRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -827,6 +833,7 @@ class Templates(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.TemplateUpdateTemplateRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -958,6 +965,7 @@ class Templates(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.TemplateUpdateTemplateRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1069,6 +1077,7 @@ class Templates(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.TemplateDuplicateTemplateRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1184,6 +1193,7 @@ class Templates(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.TemplateDuplicateTemplateRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1299,6 +1309,7 @@ class Templates(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.TemplateDeleteTemplateRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1410,6 +1421,7 @@ class Templates(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.TemplateDeleteTemplateRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1501,6 +1513,18 @@ class Templates(BaseSDK):
                 ],
             ]
         ] = None,
+        override: Optional[
+            Union[
+                models.TemplateCreateDocumentFromTemplateOverride,
+                models.TemplateCreateDocumentFromTemplateOverrideTypedDict,
+            ]
+        ] = None,
+        attachments: Optional[
+            Union[
+                List[models.TemplateCreateDocumentFromTemplateAttachment],
+                List[models.TemplateCreateDocumentFromTemplateAttachmentTypedDict],
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1517,6 +1541,8 @@ class Templates(BaseSDK):
         :param custom_document_data:
         :param folder_id:
         :param prefill_fields:
+        :param override:
+        :param attachments:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1553,6 +1579,13 @@ class Templates(BaseSDK):
                     List[models.TemplateCreateDocumentFromTemplatePrefillFieldUnion]
                 ],
             ),
+            override=utils.get_pydantic_model(
+                override, Optional[models.TemplateCreateDocumentFromTemplateOverride]
+            ),
+            attachments=utils.get_pydantic_model(
+                attachments,
+                Optional[List[models.TemplateCreateDocumentFromTemplateAttachment]],
+            ),
         )
 
         req = self._build_request(
@@ -1575,6 +1608,7 @@ class Templates(BaseSDK):
                 "json",
                 models.TemplateCreateDocumentFromTemplateRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1671,6 +1705,18 @@ class Templates(BaseSDK):
                 ],
             ]
         ] = None,
+        override: Optional[
+            Union[
+                models.TemplateCreateDocumentFromTemplateOverride,
+                models.TemplateCreateDocumentFromTemplateOverrideTypedDict,
+            ]
+        ] = None,
+        attachments: Optional[
+            Union[
+                List[models.TemplateCreateDocumentFromTemplateAttachment],
+                List[models.TemplateCreateDocumentFromTemplateAttachmentTypedDict],
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1687,6 +1733,8 @@ class Templates(BaseSDK):
         :param custom_document_data:
         :param folder_id:
         :param prefill_fields:
+        :param override:
+        :param attachments:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1723,6 +1771,13 @@ class Templates(BaseSDK):
                     List[models.TemplateCreateDocumentFromTemplatePrefillFieldUnion]
                 ],
             ),
+            override=utils.get_pydantic_model(
+                override, Optional[models.TemplateCreateDocumentFromTemplateOverride]
+            ),
+            attachments=utils.get_pydantic_model(
+                attachments,
+                Optional[List[models.TemplateCreateDocumentFromTemplateAttachment]],
+            ),
         )
 
         req = self._build_request_async(
@@ -1745,6 +1800,7 @@ class Templates(BaseSDK):
                 "json",
                 models.TemplateCreateDocumentFromTemplateRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

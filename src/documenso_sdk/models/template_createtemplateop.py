@@ -120,6 +120,10 @@ class TemplateCreateTemplateLanguage(str, Enum):
     ES = "es"
     IT = "it"
     PL = "pl"
+    PT_BR = "pt-BR"
+    JA = "ja"
+    KO = "ko"
+    ZH = "zh"
 
 
 class TemplateCreateTemplateSigningOrder(str, Enum):

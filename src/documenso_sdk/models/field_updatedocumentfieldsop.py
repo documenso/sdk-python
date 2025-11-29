@@ -10,10 +10,11 @@ from documenso_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
+from documenso_sdk.utils import get_discriminator
 from enum import Enum
 import httpx
 import pydantic
-from pydantic import model_serializer
+from pydantic import Discriminator, Tag, model_serializer
 from typing import Any, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -1009,22 +1010,22 @@ FieldUpdateDocumentFieldsFieldUnionTypedDict = TypeAliasType(
 )
 
 
-FieldUpdateDocumentFieldsFieldUnion = TypeAliasType(
-    "FieldUpdateDocumentFieldsFieldUnion",
+FieldUpdateDocumentFieldsFieldUnion = Annotated[
     Union[
-        FieldUpdateDocumentFieldsFieldFreeSignature,
-        FieldUpdateDocumentFieldsFieldSignature,
-        FieldUpdateDocumentFieldsFieldInitials,
-        FieldUpdateDocumentFieldsFieldName,
-        FieldUpdateDocumentFieldsFieldEmail,
-        FieldUpdateDocumentFieldsFieldDate,
-        FieldUpdateDocumentFieldsFieldText,
-        FieldUpdateDocumentFieldsFieldNumber,
-        FieldUpdateDocumentFieldsFieldRadio,
-        FieldUpdateDocumentFieldsFieldCheckbox,
-        FieldUpdateDocumentFieldsFieldDropdown,
+        Annotated[FieldUpdateDocumentFieldsFieldSignature, Tag("SIGNATURE")],
+        Annotated[FieldUpdateDocumentFieldsFieldFreeSignature, Tag("FREE_SIGNATURE")],
+        Annotated[FieldUpdateDocumentFieldsFieldInitials, Tag("INITIALS")],
+        Annotated[FieldUpdateDocumentFieldsFieldName, Tag("NAME")],
+        Annotated[FieldUpdateDocumentFieldsFieldEmail, Tag("EMAIL")],
+        Annotated[FieldUpdateDocumentFieldsFieldDate, Tag("DATE")],
+        Annotated[FieldUpdateDocumentFieldsFieldText, Tag("TEXT")],
+        Annotated[FieldUpdateDocumentFieldsFieldNumber, Tag("NUMBER")],
+        Annotated[FieldUpdateDocumentFieldsFieldRadio, Tag("RADIO")],
+        Annotated[FieldUpdateDocumentFieldsFieldCheckbox, Tag("CHECKBOX")],
+        Annotated[FieldUpdateDocumentFieldsFieldDropdown, Tag("DROPDOWN")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class FieldUpdateDocumentFieldsRequestTypedDict(TypedDict):
@@ -1792,21 +1793,23 @@ FieldUpdateDocumentFieldsFieldMetaUnionTypedDict = TypeAliasType(
 )
 
 
-FieldUpdateDocumentFieldsFieldMetaUnion = TypeAliasType(
-    "FieldUpdateDocumentFieldsFieldMetaUnion",
+FieldUpdateDocumentFieldsFieldMetaUnion = Annotated[
     Union[
-        FieldUpdateDocumentFieldsFieldMetaSignatureResponse,
-        FieldUpdateDocumentFieldsFieldMetaInitialsResponse,
-        FieldUpdateDocumentFieldsFieldMetaNameResponse,
-        FieldUpdateDocumentFieldsFieldMetaEmailResponse,
-        FieldUpdateDocumentFieldsFieldMetaDateResponse,
-        FieldUpdateDocumentFieldsFieldMetaRadioResponse,
-        FieldUpdateDocumentFieldsFieldMetaDropdownResponse,
-        FieldUpdateDocumentFieldsFieldMetaCheckboxResponse,
-        FieldUpdateDocumentFieldsFieldMetaTextResponse,
-        FieldUpdateDocumentFieldsFieldMetaNumberResponse,
+        Annotated[
+            FieldUpdateDocumentFieldsFieldMetaSignatureResponse, Tag("signature")
+        ],
+        Annotated[FieldUpdateDocumentFieldsFieldMetaInitialsResponse, Tag("initials")],
+        Annotated[FieldUpdateDocumentFieldsFieldMetaNameResponse, Tag("name")],
+        Annotated[FieldUpdateDocumentFieldsFieldMetaEmailResponse, Tag("email")],
+        Annotated[FieldUpdateDocumentFieldsFieldMetaDateResponse, Tag("date")],
+        Annotated[FieldUpdateDocumentFieldsFieldMetaTextResponse, Tag("text")],
+        Annotated[FieldUpdateDocumentFieldsFieldMetaNumberResponse, Tag("number")],
+        Annotated[FieldUpdateDocumentFieldsFieldMetaRadioResponse, Tag("radio")],
+        Annotated[FieldUpdateDocumentFieldsFieldMetaCheckboxResponse, Tag("checkbox")],
+        Annotated[FieldUpdateDocumentFieldsFieldMetaDropdownResponse, Tag("dropdown")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class FieldUpdateDocumentFieldsFieldResponseTypedDict(TypedDict):

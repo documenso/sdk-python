@@ -126,7 +126,6 @@ with Documenso(
 
     res = documenso.envelopes.use(payload={
         "envelope_id": "<id>",
-        "recipients": [],
     })
 
     # Handle response

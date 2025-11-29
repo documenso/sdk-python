@@ -10,11 +10,11 @@ from documenso_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from documenso_sdk.utils import FieldMetadata, PathParamMetadata
+from documenso_sdk.utils import FieldMetadata, PathParamMetadata, get_discriminator
 from enum import Enum
 import httpx
 import pydantic
-from pydantic import model_serializer
+from pydantic import Discriminator, Tag, model_serializer
 from typing import Any, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -861,21 +861,21 @@ EnvelopeRecipientGetFieldMetaUnionTypedDict = TypeAliasType(
 )
 
 
-EnvelopeRecipientGetFieldMetaUnion = TypeAliasType(
-    "EnvelopeRecipientGetFieldMetaUnion",
+EnvelopeRecipientGetFieldMetaUnion = Annotated[
     Union[
-        EnvelopeRecipientGetFieldMetaSignature,
-        EnvelopeRecipientGetFieldMetaInitials,
-        EnvelopeRecipientGetFieldMetaName,
-        EnvelopeRecipientGetFieldMetaEmail,
-        EnvelopeRecipientGetFieldMetaDate,
-        EnvelopeRecipientGetFieldMetaRadio,
-        EnvelopeRecipientGetFieldMetaDropdown,
-        EnvelopeRecipientGetFieldMetaCheckbox,
-        EnvelopeRecipientGetFieldMetaText,
-        EnvelopeRecipientGetFieldMetaNumber,
+        Annotated[EnvelopeRecipientGetFieldMetaSignature, Tag("signature")],
+        Annotated[EnvelopeRecipientGetFieldMetaInitials, Tag("initials")],
+        Annotated[EnvelopeRecipientGetFieldMetaName, Tag("name")],
+        Annotated[EnvelopeRecipientGetFieldMetaEmail, Tag("email")],
+        Annotated[EnvelopeRecipientGetFieldMetaDate, Tag("date")],
+        Annotated[EnvelopeRecipientGetFieldMetaText, Tag("text")],
+        Annotated[EnvelopeRecipientGetFieldMetaNumber, Tag("number")],
+        Annotated[EnvelopeRecipientGetFieldMetaRadio, Tag("radio")],
+        Annotated[EnvelopeRecipientGetFieldMetaCheckbox, Tag("checkbox")],
+        Annotated[EnvelopeRecipientGetFieldMetaDropdown, Tag("dropdown")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class EnvelopeRecipientGetFieldTypedDict(TypedDict):

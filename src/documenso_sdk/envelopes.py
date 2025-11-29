@@ -85,6 +85,7 @@ class Envelopes(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -194,6 +195,7 @@ class Envelopes(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -318,6 +320,7 @@ class Envelopes(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "multipart", models.EnvelopeCreateRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -437,6 +440,7 @@ class Envelopes(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "multipart", models.EnvelopeCreateRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -551,6 +555,7 @@ class Envelopes(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "multipart", models.EnvelopeUseRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -665,6 +670,7 @@ class Envelopes(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "multipart", models.EnvelopeUseRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -780,6 +786,7 @@ class Envelopes(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.EnvelopeUpdateRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -895,6 +902,7 @@ class Envelopes(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.EnvelopeUpdateRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1000,6 +1008,7 @@ class Envelopes(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.EnvelopeDeleteRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1105,6 +1114,7 @@ class Envelopes(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.EnvelopeDeleteRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1212,6 +1222,7 @@ class Envelopes(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.EnvelopeDuplicateRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1319,6 +1330,7 @@ class Envelopes(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.EnvelopeDuplicateRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1433,6 +1445,7 @@ class Envelopes(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.EnvelopeDistributeRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1547,6 +1560,7 @@ class Envelopes(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.EnvelopeDistributeRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1657,6 +1671,7 @@ class Envelopes(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.EnvelopeRedistributeRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1771,6 +1786,7 @@ class Envelopes(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.EnvelopeRedistributeRequest
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

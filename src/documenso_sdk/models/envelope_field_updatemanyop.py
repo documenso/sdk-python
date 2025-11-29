@@ -10,10 +10,11 @@ from documenso_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
+from documenso_sdk.utils import get_discriminator
 from enum import Enum
 import httpx
 import pydantic
-from pydantic import model_serializer
+from pydantic import Discriminator, Tag, model_serializer
 from typing import Any, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -1064,22 +1065,22 @@ EnvelopeFieldUpdateManyDataUnionTypedDict = TypeAliasType(
 )
 
 
-EnvelopeFieldUpdateManyDataUnion = TypeAliasType(
-    "EnvelopeFieldUpdateManyDataUnion",
+EnvelopeFieldUpdateManyDataUnion = Annotated[
     Union[
-        EnvelopeFieldUpdateManyDataFreeSignature,
-        EnvelopeFieldUpdateManyDataSignature,
-        EnvelopeFieldUpdateManyDataInitials,
-        EnvelopeFieldUpdateManyDataName,
-        EnvelopeFieldUpdateManyDataEmail,
-        EnvelopeFieldUpdateManyDataDate,
-        EnvelopeFieldUpdateManyDataText,
-        EnvelopeFieldUpdateManyDataNumber,
-        EnvelopeFieldUpdateManyDataRadio,
-        EnvelopeFieldUpdateManyDataCheckbox,
-        EnvelopeFieldUpdateManyDataDropdown,
+        Annotated[EnvelopeFieldUpdateManyDataSignature, Tag("SIGNATURE")],
+        Annotated[EnvelopeFieldUpdateManyDataFreeSignature, Tag("FREE_SIGNATURE")],
+        Annotated[EnvelopeFieldUpdateManyDataInitials, Tag("INITIALS")],
+        Annotated[EnvelopeFieldUpdateManyDataName, Tag("NAME")],
+        Annotated[EnvelopeFieldUpdateManyDataEmail, Tag("EMAIL")],
+        Annotated[EnvelopeFieldUpdateManyDataDate, Tag("DATE")],
+        Annotated[EnvelopeFieldUpdateManyDataText, Tag("TEXT")],
+        Annotated[EnvelopeFieldUpdateManyDataNumber, Tag("NUMBER")],
+        Annotated[EnvelopeFieldUpdateManyDataRadio, Tag("RADIO")],
+        Annotated[EnvelopeFieldUpdateManyDataCheckbox, Tag("CHECKBOX")],
+        Annotated[EnvelopeFieldUpdateManyDataDropdown, Tag("DROPDOWN")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class EnvelopeFieldUpdateManyRequestTypedDict(TypedDict):
@@ -1843,21 +1844,21 @@ EnvelopeFieldUpdateManyFieldMetaUnionTypedDict = TypeAliasType(
 )
 
 
-EnvelopeFieldUpdateManyFieldMetaUnion = TypeAliasType(
-    "EnvelopeFieldUpdateManyFieldMetaUnion",
+EnvelopeFieldUpdateManyFieldMetaUnion = Annotated[
     Union[
-        EnvelopeFieldUpdateManyFieldMetaSignatureResponse,
-        EnvelopeFieldUpdateManyFieldMetaInitialsResponse,
-        EnvelopeFieldUpdateManyFieldMetaNameResponse,
-        EnvelopeFieldUpdateManyFieldMetaEmailResponse,
-        EnvelopeFieldUpdateManyFieldMetaDateResponse,
-        EnvelopeFieldUpdateManyFieldMetaRadioResponse,
-        EnvelopeFieldUpdateManyFieldMetaDropdownResponse,
-        EnvelopeFieldUpdateManyFieldMetaCheckboxResponse,
-        EnvelopeFieldUpdateManyFieldMetaTextResponse,
-        EnvelopeFieldUpdateManyFieldMetaNumberResponse,
+        Annotated[EnvelopeFieldUpdateManyFieldMetaSignatureResponse, Tag("signature")],
+        Annotated[EnvelopeFieldUpdateManyFieldMetaInitialsResponse, Tag("initials")],
+        Annotated[EnvelopeFieldUpdateManyFieldMetaNameResponse, Tag("name")],
+        Annotated[EnvelopeFieldUpdateManyFieldMetaEmailResponse, Tag("email")],
+        Annotated[EnvelopeFieldUpdateManyFieldMetaDateResponse, Tag("date")],
+        Annotated[EnvelopeFieldUpdateManyFieldMetaTextResponse, Tag("text")],
+        Annotated[EnvelopeFieldUpdateManyFieldMetaNumberResponse, Tag("number")],
+        Annotated[EnvelopeFieldUpdateManyFieldMetaRadioResponse, Tag("radio")],
+        Annotated[EnvelopeFieldUpdateManyFieldMetaCheckboxResponse, Tag("checkbox")],
+        Annotated[EnvelopeFieldUpdateManyFieldMetaDropdownResponse, Tag("dropdown")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class EnvelopeFieldUpdateManyDataResponseTypedDict(TypedDict):

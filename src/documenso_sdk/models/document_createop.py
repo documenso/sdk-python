@@ -10,12 +10,12 @@ from documenso_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from documenso_sdk.utils import FieldMetadata, MultipartFormMetadata
+from documenso_sdk.utils import FieldMetadata, MultipartFormMetadata, get_discriminator
 from enum import Enum
 import httpx
 import io
 import pydantic
-from pydantic import model_serializer
+from pydantic import Discriminator, Tag, model_serializer
 from typing import Dict, IO, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -1011,22 +1011,22 @@ DocumentCreateFieldUnionTypedDict = TypeAliasType(
 )
 
 
-DocumentCreateFieldUnion = TypeAliasType(
-    "DocumentCreateFieldUnion",
+DocumentCreateFieldUnion = Annotated[
     Union[
-        DocumentCreateFieldFreeSignature,
-        DocumentCreateFieldSignature,
-        DocumentCreateFieldInitials,
-        DocumentCreateFieldName,
-        DocumentCreateFieldEmail,
-        DocumentCreateFieldDate,
-        DocumentCreateFieldText,
-        DocumentCreateFieldNumber,
-        DocumentCreateFieldRadio,
-        DocumentCreateFieldCheckbox,
-        DocumentCreateFieldDropdown,
+        Annotated[DocumentCreateFieldSignature, Tag("SIGNATURE")],
+        Annotated[DocumentCreateFieldFreeSignature, Tag("FREE_SIGNATURE")],
+        Annotated[DocumentCreateFieldInitials, Tag("INITIALS")],
+        Annotated[DocumentCreateFieldName, Tag("NAME")],
+        Annotated[DocumentCreateFieldEmail, Tag("EMAIL")],
+        Annotated[DocumentCreateFieldDate, Tag("DATE")],
+        Annotated[DocumentCreateFieldText, Tag("TEXT")],
+        Annotated[DocumentCreateFieldNumber, Tag("NUMBER")],
+        Annotated[DocumentCreateFieldRadio, Tag("RADIO")],
+        Annotated[DocumentCreateFieldCheckbox, Tag("CHECKBOX")],
+        Annotated[DocumentCreateFieldDropdown, Tag("DROPDOWN")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class DocumentCreateRecipientTypedDict(TypedDict):
@@ -1121,6 +1121,10 @@ class DocumentCreateLanguage(str, Enum):
     ES = "es"
     IT = "it"
     PL = "pl"
+    PT_BR = "pt-BR"
+    JA = "ja"
+    KO = "ko"
+    ZH = "zh"
 
 
 class DocumentCreateEmailSettingsTypedDict(TypedDict):

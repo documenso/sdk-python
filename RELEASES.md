@@ -37,3 +37,13 @@ Based on:
 - [python v0.4.0] .
 ### Releases
 - [PyPI v0.4.0] https://pypi.org/project/documenso_sdk/0.4.0 - .
+
+## 2025-11-29 00:12:54
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.665.0 (2.767.2) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v0.5.0] .
+### Releases
+- [PyPI v0.5.0] https://pypi.org/project/documenso_sdk/0.5.0 - .

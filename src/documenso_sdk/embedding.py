@@ -63,6 +63,7 @@ class Embedding(BaseSDK):
                 "json",
                 models.EmbeddingPresignCreateEmbeddingPresignTokenRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -188,6 +189,7 @@ class Embedding(BaseSDK):
                 "json",
                 models.EmbeddingPresignCreateEmbeddingPresignTokenRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -313,6 +315,7 @@ class Embedding(BaseSDK):
                 "json",
                 models.EmbeddingPresignVerifyEmbeddingPresignTokenRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -438,6 +441,7 @@ class Embedding(BaseSDK):
                 "json",
                 models.EmbeddingPresignVerifyEmbeddingPresignTokenRequest,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

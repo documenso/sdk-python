@@ -10,10 +10,11 @@ from documenso_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
+from documenso_sdk.utils import get_discriminator
 from enum import Enum
 import httpx
 import pydantic
-from pydantic import model_serializer
+from pydantic import Discriminator, Tag, model_serializer
 from typing import Any, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -118,6 +119,10 @@ class TemplateCreateTemplateTemporaryLanguage(str, Enum):
     ES = "es"
     IT = "it"
     PL = "pl"
+    PT_BR = "pt-BR"
+    JA = "ja"
+    KO = "ko"
+    ZH = "zh"
 
 
 class TemplateCreateTemplateTemporarySigningOrderRequest(str, Enum):
@@ -1580,21 +1585,21 @@ TemplateCreateTemplateTemporaryFieldMetaUnionTypedDict = TypeAliasType(
 )
 
 
-TemplateCreateTemplateTemporaryFieldMetaUnion = TypeAliasType(
-    "TemplateCreateTemplateTemporaryFieldMetaUnion",
+TemplateCreateTemplateTemporaryFieldMetaUnion = Annotated[
     Union[
-        TemplateCreateTemplateTemporaryFieldMetaSignature,
-        TemplateCreateTemplateTemporaryFieldMetaInitials,
-        TemplateCreateTemplateTemporaryFieldMetaName,
-        TemplateCreateTemplateTemporaryFieldMetaEmail,
-        TemplateCreateTemplateTemporaryFieldMetaDate,
-        TemplateCreateTemplateTemporaryFieldMetaRadio,
-        TemplateCreateTemplateTemporaryFieldMetaDropdown,
-        TemplateCreateTemplateTemporaryFieldMetaCheckbox,
-        TemplateCreateTemplateTemporaryFieldMetaText,
-        TemplateCreateTemplateTemporaryFieldMetaNumber,
+        Annotated[TemplateCreateTemplateTemporaryFieldMetaSignature, Tag("signature")],
+        Annotated[TemplateCreateTemplateTemporaryFieldMetaInitials, Tag("initials")],
+        Annotated[TemplateCreateTemplateTemporaryFieldMetaName, Tag("name")],
+        Annotated[TemplateCreateTemplateTemporaryFieldMetaEmail, Tag("email")],
+        Annotated[TemplateCreateTemplateTemporaryFieldMetaDate, Tag("date")],
+        Annotated[TemplateCreateTemplateTemporaryFieldMetaText, Tag("text")],
+        Annotated[TemplateCreateTemplateTemporaryFieldMetaNumber, Tag("number")],
+        Annotated[TemplateCreateTemplateTemporaryFieldMetaRadio, Tag("radio")],
+        Annotated[TemplateCreateTemplateTemporaryFieldMetaCheckbox, Tag("checkbox")],
+        Annotated[TemplateCreateTemplateTemporaryFieldMetaDropdown, Tag("dropdown")],
     ],
-)
+    Discriminator(lambda m: get_discriminator(m, "type", "type")),
+]
 
 
 class TemplateCreateTemplateTemporaryFieldTypedDict(TypedDict):
