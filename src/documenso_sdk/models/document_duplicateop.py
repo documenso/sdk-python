@@ -28,9 +28,7 @@ class DocumentDuplicateInternalServerErrorIssue(BaseModel):
 
 class DocumentDuplicateInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDuplicateInternalServerErrorIssue]] = None
 
 
@@ -62,9 +60,7 @@ class DocumentDuplicateForbiddenIssue(BaseModel):
 
 class DocumentDuplicateForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDuplicateForbiddenIssue]] = None
 
 
@@ -96,9 +92,7 @@ class DocumentDuplicateUnauthorizedIssue(BaseModel):
 
 class DocumentDuplicateUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDuplicateUnauthorizedIssue]] = None
 
 
@@ -130,9 +124,7 @@ class DocumentDuplicateBadRequestIssue(BaseModel):
 
 class DocumentDuplicateBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDuplicateBadRequestIssue]] = None
 
 

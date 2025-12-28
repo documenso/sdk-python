@@ -45,9 +45,7 @@ class EnvelopeItemUpdateManyInternalServerErrorIssue(BaseModel):
 
 class EnvelopeItemUpdateManyInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeItemUpdateManyInternalServerErrorIssue]] = None
 
 
@@ -79,9 +77,7 @@ class EnvelopeItemUpdateManyForbiddenIssue(BaseModel):
 
 class EnvelopeItemUpdateManyForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeItemUpdateManyForbiddenIssue]] = None
 
 
@@ -113,9 +109,7 @@ class EnvelopeItemUpdateManyUnauthorizedIssue(BaseModel):
 
 class EnvelopeItemUpdateManyUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeItemUpdateManyUnauthorizedIssue]] = None
 
 
@@ -147,9 +141,7 @@ class EnvelopeItemUpdateManyBadRequestIssue(BaseModel):
 
 class EnvelopeItemUpdateManyBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeItemUpdateManyBadRequestIssue]] = None
 
 

@@ -53,6 +53,20 @@ EnvelopeCreateFormValues = TypeAliasType(
 )
 
 
+class EnvelopeCreateEmailEnum(str, Enum):
+    UNKNOWN = ""
+
+
+EnvelopeCreateEmailUnionTypedDict = TypeAliasType(
+    "EnvelopeCreateEmailUnionTypedDict", Union[EnvelopeCreateEmailEnum, str]
+)
+
+
+EnvelopeCreateEmailUnion = TypeAliasType(
+    "EnvelopeCreateEmailUnion", Union[EnvelopeCreateEmailEnum, str]
+)
+
+
 class EnvelopeCreateRole(str, Enum):
     CC = "CC"
     SIGNER = "SIGNER"
@@ -1178,7 +1192,7 @@ EnvelopeCreateFieldUnion = Annotated[
 
 
 class EnvelopeCreateRecipientTypedDict(TypedDict):
-    email: str
+    email: EnvelopeCreateEmailUnionTypedDict
     name: str
     role: EnvelopeCreateRole
     signing_order: NotRequired[float]
@@ -1188,7 +1202,7 @@ class EnvelopeCreateRecipientTypedDict(TypedDict):
 
 
 class EnvelopeCreateRecipient(BaseModel):
-    email: str
+    email: EnvelopeCreateEmailUnion
 
     name: str
 
@@ -1250,6 +1264,7 @@ class EnvelopeCreateLanguage(str, Enum):
     FR = "fr"
     ES = "es"
     IT = "it"
+    NL = "nl"
     PL = "pl"
     PT_BR = "pt-BR"
     JA = "ja"
@@ -1434,6 +1449,7 @@ class EnvelopeCreateAttachment(BaseModel):
 class EnvelopeCreatePayloadTypedDict(TypedDict):
     title: str
     type: EnvelopeCreateType
+    delegated_document_owner: NotRequired[str]
     external_id: NotRequired[str]
     visibility: NotRequired[EnvelopeCreateVisibility]
     global_access_auth: NotRequired[List[EnvelopeCreateGlobalAccessAuth]]
@@ -1449,6 +1465,10 @@ class EnvelopeCreatePayload(BaseModel):
     title: str
 
     type: EnvelopeCreateType
+
+    delegated_document_owner: Annotated[
+        Optional[str], pydantic.Field(alias="delegatedDocumentOwner")
+    ] = None
 
     external_id: Annotated[Optional[str], pydantic.Field(alias="externalId")] = None
 
@@ -1528,9 +1548,7 @@ class EnvelopeCreateInternalServerErrorIssue(BaseModel):
 
 class EnvelopeCreateInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeCreateInternalServerErrorIssue]] = None
 
 
@@ -1562,9 +1580,7 @@ class EnvelopeCreateForbiddenIssue(BaseModel):
 
 class EnvelopeCreateForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeCreateForbiddenIssue]] = None
 
 
@@ -1596,9 +1612,7 @@ class EnvelopeCreateUnauthorizedIssue(BaseModel):
 
 class EnvelopeCreateUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeCreateUnauthorizedIssue]] = None
 
 
@@ -1630,9 +1644,7 @@ class EnvelopeCreateBadRequestIssue(BaseModel):
 
 class EnvelopeCreateBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeCreateBadRequestIssue]] = None
 
 
