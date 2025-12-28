@@ -1,5 +1,4 @@
 # Documents
-(*documents*)
 
 ## Overview
 
@@ -78,7 +77,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.documents.find(order_by_direction=documenso_sdk.OrderByDirection.DESC)
+    res = documenso.documents.find(order_by_direction=documenso_sdk.DocumentFindOrderByDirection.DESC)
 
     # Handle response
     print(res)
@@ -87,18 +86,18 @@ with Documenso(
 
 ### Parameters
 
-| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| `query`                                                               | *Optional[str]*                                                       | :heavy_minus_sign:                                                    | The search query.                                                     |
-| `page`                                                                | *Optional[float]*                                                     | :heavy_minus_sign:                                                    | The pagination page number, starts at 1.                              |
-| `per_page`                                                            | *Optional[float]*                                                     | :heavy_minus_sign:                                                    | The number of items per page.                                         |
-| `template_id`                                                         | *Optional[float]*                                                     | :heavy_minus_sign:                                                    | Filter documents by the template ID used to create it.                |
-| `source`                                                              | [Optional[models.QueryParamSource]](../../models/queryparamsource.md) | :heavy_minus_sign:                                                    | Filter documents by how it was created.                               |
-| `status`                                                              | [Optional[models.QueryParamStatus]](../../models/queryparamstatus.md) | :heavy_minus_sign:                                                    | Filter documents by the current status                                |
-| `folder_id`                                                           | *Optional[str]*                                                       | :heavy_minus_sign:                                                    | Filter documents by folder ID                                         |
-| `order_by_column`                                                     | [Optional[models.OrderByColumn]](../../models/orderbycolumn.md)       | :heavy_minus_sign:                                                    | N/A                                                                   |
-| `order_by_direction`                                                  | [Optional[models.OrderByDirection]](../../models/orderbydirection.md) | :heavy_minus_sign:                                                    | N/A                                                                   |
-| `retries`                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)      | :heavy_minus_sign:                                                    | Configuration to override the default retry behavior of the client.   |
+| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `query`                                                                                       | *Optional[str]*                                                                               | :heavy_minus_sign:                                                                            | The search query.                                                                             |
+| `page`                                                                                        | *Optional[float]*                                                                             | :heavy_minus_sign:                                                                            | The pagination page number, starts at 1.                                                      |
+| `per_page`                                                                                    | *Optional[float]*                                                                             | :heavy_minus_sign:                                                                            | The number of items per page.                                                                 |
+| `template_id`                                                                                 | *Optional[float]*                                                                             | :heavy_minus_sign:                                                                            | Filter documents by the template ID used to create it.                                        |
+| `source`                                                                                      | [Optional[models.DocumentFindQueryParamSource]](../../models/documentfindqueryparamsource.md) | :heavy_minus_sign:                                                                            | Filter documents by how it was created.                                                       |
+| `status`                                                                                      | [Optional[models.DocumentFindQueryParamStatus]](../../models/documentfindqueryparamstatus.md) | :heavy_minus_sign:                                                                            | Filter documents by the current status                                                        |
+| `folder_id`                                                                                   | *Optional[str]*                                                                               | :heavy_minus_sign:                                                                            | Filter documents by folder ID                                                                 |
+| `order_by_column`                                                                             | [Optional[models.DocumentFindOrderByColumn]](../../models/documentfindorderbycolumn.md)       | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `order_by_direction`                                                                          | [Optional[models.DocumentFindOrderByDirection]](../../models/documentfindorderbydirection.md) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `retries`                                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                              | :heavy_minus_sign:                                                                            | Configuration to override the default retry behavior of the client.                           |
 
 ### Response
 

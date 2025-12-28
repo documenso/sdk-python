@@ -18,6 +18,7 @@ if TYPE_CHECKING:
     from documenso_sdk.document_sdk import DocumentSDK
     from documenso_sdk.documents import Documents
     from documenso_sdk.embedding import Embedding
+    from documenso_sdk.envelope import Envelope
     from documenso_sdk.envelopes import Envelopes
     from documenso_sdk.folders import Folders
     from documenso_sdk.template_sdk import TemplateSDK
@@ -31,6 +32,7 @@ class Documenso(BaseSDK):
     """
 
     envelopes: "Envelopes"
+    envelope: "Envelope"
     documents: "Documents"
     document: "DocumentSDK"
     templates: "Templates"
@@ -39,6 +41,7 @@ class Documenso(BaseSDK):
     embedding: "Embedding"
     _sub_sdk_map = {
         "envelopes": ("documenso_sdk.envelopes", "Envelopes"),
+        "envelope": ("documenso_sdk.envelope", "Envelope"),
         "documents": ("documenso_sdk.documents", "Documents"),
         "document": ("documenso_sdk.document_sdk", "DocumentSDK"),
         "templates": ("documenso_sdk.templates", "Templates"),

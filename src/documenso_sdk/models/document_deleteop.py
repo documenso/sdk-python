@@ -28,9 +28,7 @@ class DocumentDeleteInternalServerErrorIssue(BaseModel):
 
 class DocumentDeleteInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDeleteInternalServerErrorIssue]] = None
 
 
@@ -62,9 +60,7 @@ class DocumentDeleteForbiddenIssue(BaseModel):
 
 class DocumentDeleteForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDeleteForbiddenIssue]] = None
 
 
@@ -96,9 +92,7 @@ class DocumentDeleteUnauthorizedIssue(BaseModel):
 
 class DocumentDeleteUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDeleteUnauthorizedIssue]] = None
 
 
@@ -130,9 +124,7 @@ class DocumentDeleteBadRequestIssue(BaseModel):
 
 class DocumentDeleteBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDeleteBadRequestIssue]] = None
 
 

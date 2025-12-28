@@ -41,9 +41,7 @@ class FieldGetDocumentFieldInternalServerErrorIssue(BaseModel):
 
 class FieldGetDocumentFieldInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldGetDocumentFieldInternalServerErrorIssue]] = None
 
 
@@ -75,9 +73,7 @@ class FieldGetDocumentFieldNotFoundIssue(BaseModel):
 
 class FieldGetDocumentFieldNotFoundErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldGetDocumentFieldNotFoundIssue]] = None
 
 
@@ -109,9 +105,7 @@ class FieldGetDocumentFieldForbiddenIssue(BaseModel):
 
 class FieldGetDocumentFieldForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldGetDocumentFieldForbiddenIssue]] = None
 
 
@@ -143,9 +137,7 @@ class FieldGetDocumentFieldUnauthorizedIssue(BaseModel):
 
 class FieldGetDocumentFieldUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldGetDocumentFieldUnauthorizedIssue]] = None
 
 
@@ -177,9 +169,7 @@ class FieldGetDocumentFieldBadRequestIssue(BaseModel):
 
 class FieldGetDocumentFieldBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldGetDocumentFieldBadRequestIssue]] = None
 
 

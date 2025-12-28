@@ -83,9 +83,7 @@ class TemplateFindTemplatesInternalServerErrorIssue(BaseModel):
 
 class TemplateFindTemplatesInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateFindTemplatesInternalServerErrorIssue]] = None
 
 
@@ -117,9 +115,7 @@ class TemplateFindTemplatesNotFoundIssue(BaseModel):
 
 class TemplateFindTemplatesNotFoundErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateFindTemplatesNotFoundIssue]] = None
 
 
@@ -151,9 +147,7 @@ class TemplateFindTemplatesForbiddenIssue(BaseModel):
 
 class TemplateFindTemplatesForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateFindTemplatesForbiddenIssue]] = None
 
 
@@ -185,9 +179,7 @@ class TemplateFindTemplatesUnauthorizedIssue(BaseModel):
 
 class TemplateFindTemplatesUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateFindTemplatesUnauthorizedIssue]] = None
 
 
@@ -219,9 +211,7 @@ class TemplateFindTemplatesBadRequestIssue(BaseModel):
 
 class TemplateFindTemplatesBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateFindTemplatesBadRequestIssue]] = None
 
 

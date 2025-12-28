@@ -31,9 +31,7 @@ class EnvelopeItemDeleteInternalServerErrorIssue(BaseModel):
 
 class EnvelopeItemDeleteInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeItemDeleteInternalServerErrorIssue]] = None
 
 
@@ -65,9 +63,7 @@ class EnvelopeItemDeleteForbiddenIssue(BaseModel):
 
 class EnvelopeItemDeleteForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeItemDeleteForbiddenIssue]] = None
 
 
@@ -99,9 +95,7 @@ class EnvelopeItemDeleteUnauthorizedIssue(BaseModel):
 
 class EnvelopeItemDeleteUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeItemDeleteUnauthorizedIssue]] = None
 
 
@@ -133,9 +127,7 @@ class EnvelopeItemDeleteBadRequestIssue(BaseModel):
 
 class EnvelopeItemDeleteBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeItemDeleteBadRequestIssue]] = None
 
 

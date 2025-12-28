@@ -41,9 +41,7 @@ class EnvelopeFieldGetInternalServerErrorIssue(BaseModel):
 
 class EnvelopeFieldGetInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeFieldGetInternalServerErrorIssue]] = None
 
 
@@ -75,9 +73,7 @@ class EnvelopeFieldGetNotFoundIssue(BaseModel):
 
 class EnvelopeFieldGetNotFoundErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeFieldGetNotFoundIssue]] = None
 
 
@@ -109,9 +105,7 @@ class EnvelopeFieldGetForbiddenIssue(BaseModel):
 
 class EnvelopeFieldGetForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeFieldGetForbiddenIssue]] = None
 
 
@@ -143,9 +137,7 @@ class EnvelopeFieldGetUnauthorizedIssue(BaseModel):
 
 class EnvelopeFieldGetUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeFieldGetUnauthorizedIssue]] = None
 
 
@@ -177,9 +169,7 @@ class EnvelopeFieldGetBadRequestIssue(BaseModel):
 
 class EnvelopeFieldGetBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeFieldGetBadRequestIssue]] = None
 
 
