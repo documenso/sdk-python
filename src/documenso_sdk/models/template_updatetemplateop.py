@@ -18,18 +18,18 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class TemplateUpdateTemplateDataVisibility(str, Enum):
+class TemplateUpdateTemplateVisibilityRequest(str, Enum):
     EVERYONE = "EVERYONE"
     MANAGER_AND_ABOVE = "MANAGER_AND_ABOVE"
     ADMIN = "ADMIN"
 
 
-class TemplateUpdateTemplateDataGlobalAccessAuth(str, Enum):
+class TemplateUpdateTemplateGlobalAccessAuthRequest(str, Enum):
     ACCOUNT = "ACCOUNT"
     TWO_FACTOR_AUTH = "TWO_FACTOR_AUTH"
 
 
-class TemplateUpdateTemplateDataGlobalActionAuth(str, Enum):
+class TemplateUpdateTemplateGlobalActionAuthRequest(str, Enum):
     ACCOUNT = "ACCOUNT"
     PASSKEY = "PASSKEY"
     TWO_FACTOR_AUTH = "TWO_FACTOR_AUTH"
@@ -44,9 +44,9 @@ class TemplateUpdateTemplateDataType(str, Enum):
 class TemplateUpdateTemplateDataTypedDict(TypedDict):
     title: NotRequired[str]
     external_id: NotRequired[Nullable[str]]
-    visibility: NotRequired[TemplateUpdateTemplateDataVisibility]
-    global_access_auth: NotRequired[List[TemplateUpdateTemplateDataGlobalAccessAuth]]
-    global_action_auth: NotRequired[List[TemplateUpdateTemplateDataGlobalActionAuth]]
+    visibility: NotRequired[TemplateUpdateTemplateVisibilityRequest]
+    global_access_auth: NotRequired[List[TemplateUpdateTemplateGlobalAccessAuthRequest]]
+    global_action_auth: NotRequired[List[TemplateUpdateTemplateGlobalActionAuthRequest]]
     public_title: NotRequired[str]
     public_description: NotRequired[str]
     type: NotRequired[TemplateUpdateTemplateDataType]
@@ -61,15 +61,15 @@ class TemplateUpdateTemplateData(BaseModel):
         OptionalNullable[str], pydantic.Field(alias="externalId")
     ] = UNSET
 
-    visibility: Optional[TemplateUpdateTemplateDataVisibility] = None
+    visibility: Optional[TemplateUpdateTemplateVisibilityRequest] = None
 
     global_access_auth: Annotated[
-        Optional[List[TemplateUpdateTemplateDataGlobalAccessAuth]],
+        Optional[List[TemplateUpdateTemplateGlobalAccessAuthRequest]],
         pydantic.Field(alias="globalAccessAuth"),
     ] = None
 
     global_action_auth: Annotated[
-        Optional[List[TemplateUpdateTemplateDataGlobalActionAuth]],
+        Optional[List[TemplateUpdateTemplateGlobalActionAuthRequest]],
         pydantic.Field(alias="globalActionAuth"),
     ] = None
 
@@ -207,6 +207,7 @@ class TemplateUpdateTemplateLanguage(str, Enum):
     FR = "fr"
     ES = "es"
     IT = "it"
+    NL = "nl"
     PL = "pl"
     PT_BR = "pt-BR"
     JA = "ja"
@@ -360,9 +361,7 @@ class TemplateUpdateTemplateInternalServerErrorIssue(BaseModel):
 
 class TemplateUpdateTemplateInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateUpdateTemplateInternalServerErrorIssue]] = None
 
 
@@ -394,9 +393,7 @@ class TemplateUpdateTemplateForbiddenIssue(BaseModel):
 
 class TemplateUpdateTemplateForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateUpdateTemplateForbiddenIssue]] = None
 
 
@@ -428,9 +425,7 @@ class TemplateUpdateTemplateUnauthorizedIssue(BaseModel):
 
 class TemplateUpdateTemplateUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateUpdateTemplateUnauthorizedIssue]] = None
 
 
@@ -462,9 +457,7 @@ class TemplateUpdateTemplateBadRequestIssue(BaseModel):
 
 class TemplateUpdateTemplateBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateUpdateTemplateBadRequestIssue]] = None
 
 

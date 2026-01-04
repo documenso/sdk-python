@@ -18,18 +18,18 @@ from typing import Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-class EnvelopeUpdateDataVisibility(str, Enum):
+class EnvelopeUpdateVisibilityRequest(str, Enum):
     EVERYONE = "EVERYONE"
     MANAGER_AND_ABOVE = "MANAGER_AND_ABOVE"
     ADMIN = "ADMIN"
 
 
-class EnvelopeUpdateDataGlobalAccessAuth(str, Enum):
+class EnvelopeUpdateGlobalAccessAuthRequest(str, Enum):
     ACCOUNT = "ACCOUNT"
     TWO_FACTOR_AUTH = "TWO_FACTOR_AUTH"
 
 
-class EnvelopeUpdateDataGlobalActionAuth(str, Enum):
+class EnvelopeUpdateGlobalActionAuthRequest(str, Enum):
     ACCOUNT = "ACCOUNT"
     PASSKEY = "PASSKEY"
     TWO_FACTOR_AUTH = "TWO_FACTOR_AUTH"
@@ -39,9 +39,9 @@ class EnvelopeUpdateDataGlobalActionAuth(str, Enum):
 class EnvelopeUpdateDataTypedDict(TypedDict):
     title: NotRequired[str]
     external_id: NotRequired[Nullable[str]]
-    visibility: NotRequired[EnvelopeUpdateDataVisibility]
-    global_access_auth: NotRequired[List[EnvelopeUpdateDataGlobalAccessAuth]]
-    global_action_auth: NotRequired[List[EnvelopeUpdateDataGlobalActionAuth]]
+    visibility: NotRequired[EnvelopeUpdateVisibilityRequest]
+    global_access_auth: NotRequired[List[EnvelopeUpdateGlobalAccessAuthRequest]]
+    global_action_auth: NotRequired[List[EnvelopeUpdateGlobalActionAuthRequest]]
     folder_id: NotRequired[Nullable[str]]
 
 
@@ -52,15 +52,15 @@ class EnvelopeUpdateData(BaseModel):
         OptionalNullable[str], pydantic.Field(alias="externalId")
     ] = UNSET
 
-    visibility: Optional[EnvelopeUpdateDataVisibility] = None
+    visibility: Optional[EnvelopeUpdateVisibilityRequest] = None
 
     global_access_auth: Annotated[
-        Optional[List[EnvelopeUpdateDataGlobalAccessAuth]],
+        Optional[List[EnvelopeUpdateGlobalAccessAuthRequest]],
         pydantic.Field(alias="globalAccessAuth"),
     ] = None
 
     global_action_auth: Annotated[
-        Optional[List[EnvelopeUpdateDataGlobalActionAuth]],
+        Optional[List[EnvelopeUpdateGlobalActionAuthRequest]],
         pydantic.Field(alias="globalActionAuth"),
     ] = None
 
@@ -147,6 +147,7 @@ class EnvelopeUpdateLanguage(str, Enum):
     FR = "fr"
     ES = "es"
     IT = "it"
+    NL = "nl"
     PL = "pl"
     PT_BR = "pt-BR"
     JA = "ja"
@@ -334,9 +335,7 @@ class EnvelopeUpdateInternalServerErrorIssue(BaseModel):
 
 class EnvelopeUpdateInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeUpdateInternalServerErrorIssue]] = None
 
 
@@ -368,9 +367,7 @@ class EnvelopeUpdateForbiddenIssue(BaseModel):
 
 class EnvelopeUpdateForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeUpdateForbiddenIssue]] = None
 
 
@@ -402,9 +399,7 @@ class EnvelopeUpdateUnauthorizedIssue(BaseModel):
 
 class EnvelopeUpdateUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeUpdateUnauthorizedIssue]] = None
 
 
@@ -436,9 +431,7 @@ class EnvelopeUpdateBadRequestIssue(BaseModel):
 
 class EnvelopeUpdateBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeUpdateBadRequestIssue]] = None
 
 

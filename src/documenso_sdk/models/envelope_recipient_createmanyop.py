@@ -8,8 +8,24 @@ from enum import Enum
 import httpx
 import pydantic
 from pydantic import model_serializer
-from typing import List, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing import List, Optional, Union
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+
+
+class EnvelopeRecipientCreateManyEmailEnum(str, Enum):
+    UNKNOWN = ""
+
+
+EnvelopeRecipientCreateManyEmailUnionTypedDict = TypeAliasType(
+    "EnvelopeRecipientCreateManyEmailUnionTypedDict",
+    Union[EnvelopeRecipientCreateManyEmailEnum, str],
+)
+
+
+EnvelopeRecipientCreateManyEmailUnion = TypeAliasType(
+    "EnvelopeRecipientCreateManyEmailUnion",
+    Union[EnvelopeRecipientCreateManyEmailEnum, str],
+)
 
 
 class EnvelopeRecipientCreateManyRoleRequest(str, Enum):
@@ -34,7 +50,7 @@ class EnvelopeRecipientCreateManyActionAuthRequest(str, Enum):
 
 
 class EnvelopeRecipientCreateManyDataRequestTypedDict(TypedDict):
-    email: str
+    email: EnvelopeRecipientCreateManyEmailUnionTypedDict
     name: str
     role: EnvelopeRecipientCreateManyRoleRequest
     signing_order: NotRequired[float]
@@ -43,7 +59,7 @@ class EnvelopeRecipientCreateManyDataRequestTypedDict(TypedDict):
 
 
 class EnvelopeRecipientCreateManyDataRequest(BaseModel):
-    email: str
+    email: EnvelopeRecipientCreateManyEmailUnion
 
     name: str
 
@@ -85,9 +101,7 @@ class EnvelopeRecipientCreateManyInternalServerErrorIssue(BaseModel):
 
 class EnvelopeRecipientCreateManyInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeRecipientCreateManyInternalServerErrorIssue]] = None
 
 
@@ -119,9 +133,7 @@ class EnvelopeRecipientCreateManyForbiddenIssue(BaseModel):
 
 class EnvelopeRecipientCreateManyForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeRecipientCreateManyForbiddenIssue]] = None
 
 
@@ -153,9 +165,7 @@ class EnvelopeRecipientCreateManyUnauthorizedIssue(BaseModel):
 
 class EnvelopeRecipientCreateManyUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeRecipientCreateManyUnauthorizedIssue]] = None
 
 
@@ -187,9 +197,7 @@ class EnvelopeRecipientCreateManyBadRequestIssue(BaseModel):
 
 class EnvelopeRecipientCreateManyBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeRecipientCreateManyBadRequestIssue]] = None
 
 
@@ -235,12 +243,12 @@ class EnvelopeRecipientCreateManySendStatus(str, Enum):
     SENT = "SENT"
 
 
-class EnvelopeRecipientCreateManyAccessAuthResponse(str, Enum):
+class EnvelopeRecipientCreateManyAuthOptionsAccessAuth(str, Enum):
     ACCOUNT = "ACCOUNT"
     TWO_FACTOR_AUTH = "TWO_FACTOR_AUTH"
 
 
-class EnvelopeRecipientCreateManyActionAuthResponse(str, Enum):
+class EnvelopeRecipientCreateManyAuthOptionsActionAuth(str, Enum):
     ACCOUNT = "ACCOUNT"
     PASSKEY = "PASSKEY"
     TWO_FACTOR_AUTH = "TWO_FACTOR_AUTH"
@@ -249,18 +257,18 @@ class EnvelopeRecipientCreateManyActionAuthResponse(str, Enum):
 
 
 class EnvelopeRecipientCreateManyAuthOptionsTypedDict(TypedDict):
-    access_auth: List[EnvelopeRecipientCreateManyAccessAuthResponse]
-    action_auth: List[EnvelopeRecipientCreateManyActionAuthResponse]
+    access_auth: List[EnvelopeRecipientCreateManyAuthOptionsAccessAuth]
+    action_auth: List[EnvelopeRecipientCreateManyAuthOptionsActionAuth]
 
 
 class EnvelopeRecipientCreateManyAuthOptions(BaseModel):
     access_auth: Annotated[
-        List[EnvelopeRecipientCreateManyAccessAuthResponse],
+        List[EnvelopeRecipientCreateManyAuthOptionsAccessAuth],
         pydantic.Field(alias="accessAuth"),
     ]
 
     action_auth: Annotated[
-        List[EnvelopeRecipientCreateManyActionAuthResponse],
+        List[EnvelopeRecipientCreateManyAuthOptionsActionAuth],
         pydantic.Field(alias="actionAuth"),
     ]
 

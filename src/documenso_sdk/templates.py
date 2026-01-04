@@ -1494,6 +1494,7 @@ class Templates(BaseSDK):
             List[models.TemplateCreateDocumentFromTemplateRecipientRequest],
             List[models.TemplateCreateDocumentFromTemplateRecipientRequestTypedDict],
         ],
+        external_id: Optional[str] = None,
         distribute_document: Optional[bool] = None,
         custom_document_data_id: Optional[str] = None,
         custom_document_data: Optional[
@@ -1536,6 +1537,7 @@ class Templates(BaseSDK):
 
         :param template_id:
         :param recipients:
+        :param external_id:
         :param distribute_document:
         :param custom_document_data_id:
         :param custom_document_data:
@@ -1560,6 +1562,7 @@ class Templates(BaseSDK):
 
         request = models.TemplateCreateDocumentFromTemplateRequest(
             template_id=template_id,
+            external_id=external_id,
             recipients=utils.get_pydantic_model(
                 recipients,
                 List[models.TemplateCreateDocumentFromTemplateRecipientRequest],
@@ -1686,6 +1689,7 @@ class Templates(BaseSDK):
             List[models.TemplateCreateDocumentFromTemplateRecipientRequest],
             List[models.TemplateCreateDocumentFromTemplateRecipientRequestTypedDict],
         ],
+        external_id: Optional[str] = None,
         distribute_document: Optional[bool] = None,
         custom_document_data_id: Optional[str] = None,
         custom_document_data: Optional[
@@ -1728,6 +1732,7 @@ class Templates(BaseSDK):
 
         :param template_id:
         :param recipients:
+        :param external_id:
         :param distribute_document:
         :param custom_document_data_id:
         :param custom_document_data:
@@ -1752,6 +1757,7 @@ class Templates(BaseSDK):
 
         request = models.TemplateCreateDocumentFromTemplateRequest(
             template_id=template_id,
+            external_id=external_id,
             recipients=utils.get_pydantic_model(
                 recipients,
                 List[models.TemplateCreateDocumentFromTemplateRecipientRequest],

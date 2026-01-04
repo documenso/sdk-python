@@ -51,9 +51,7 @@ class DocumentDownloadBetaInternalServerErrorIssue(BaseModel):
 
 class DocumentDownloadBetaInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDownloadBetaInternalServerErrorIssue]] = None
 
 
@@ -85,9 +83,7 @@ class DocumentDownloadBetaNotFoundIssue(BaseModel):
 
 class DocumentDownloadBetaNotFoundErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDownloadBetaNotFoundIssue]] = None
 
 
@@ -119,9 +115,7 @@ class DocumentDownloadBetaForbiddenIssue(BaseModel):
 
 class DocumentDownloadBetaForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDownloadBetaForbiddenIssue]] = None
 
 
@@ -153,9 +147,7 @@ class DocumentDownloadBetaUnauthorizedIssue(BaseModel):
 
 class DocumentDownloadBetaUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDownloadBetaUnauthorizedIssue]] = None
 
 
@@ -187,9 +179,7 @@ class DocumentDownloadBetaBadRequestIssue(BaseModel):
 
 class DocumentDownloadBetaBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDownloadBetaBadRequestIssue]] = None
 
 

@@ -41,9 +41,7 @@ class DocumentGetInternalServerErrorIssue(BaseModel):
 
 class DocumentGetInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentGetInternalServerErrorIssue]] = None
 
 
@@ -75,9 +73,7 @@ class DocumentGetNotFoundIssue(BaseModel):
 
 class DocumentGetNotFoundErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentGetNotFoundIssue]] = None
 
 
@@ -109,9 +105,7 @@ class DocumentGetForbiddenIssue(BaseModel):
 
 class DocumentGetForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentGetForbiddenIssue]] = None
 
 
@@ -143,9 +137,7 @@ class DocumentGetUnauthorizedIssue(BaseModel):
 
 class DocumentGetUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentGetUnauthorizedIssue]] = None
 
 
@@ -177,9 +169,7 @@ class DocumentGetBadRequestIssue(BaseModel):
 
 class DocumentGetBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentGetBadRequestIssue]] = None
 
 

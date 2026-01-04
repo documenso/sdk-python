@@ -42,9 +42,7 @@ class DocumentAttachmentCreateInternalServerErrorIssue(BaseModel):
 
 class DocumentAttachmentCreateInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentAttachmentCreateInternalServerErrorIssue]] = None
 
 
@@ -76,9 +74,7 @@ class DocumentAttachmentCreateForbiddenIssue(BaseModel):
 
 class DocumentAttachmentCreateForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentAttachmentCreateForbiddenIssue]] = None
 
 
@@ -110,9 +106,7 @@ class DocumentAttachmentCreateUnauthorizedIssue(BaseModel):
 
 class DocumentAttachmentCreateUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentAttachmentCreateUnauthorizedIssue]] = None
 
 
@@ -144,9 +138,7 @@ class DocumentAttachmentCreateBadRequestIssue(BaseModel):
 
 class DocumentAttachmentCreateBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentAttachmentCreateBadRequestIssue]] = None
 
 
