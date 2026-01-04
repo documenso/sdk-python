@@ -1,0 +1,9 @@
+# TemplateGetManyDirectLink
+
+
+## Fields
+
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `token`            | *str*              | :heavy_check_mark: | N/A                |
+| `enabled`          | *bool*             | :heavy_check_mark: | N/A                |

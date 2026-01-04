@@ -34,9 +34,7 @@ class DocumentAttachmentFindInternalServerErrorIssue(BaseModel):
 
 class DocumentAttachmentFindInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentAttachmentFindInternalServerErrorIssue]] = None
 
 
@@ -68,9 +66,7 @@ class DocumentAttachmentFindNotFoundIssue(BaseModel):
 
 class DocumentAttachmentFindNotFoundErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentAttachmentFindNotFoundIssue]] = None
 
 
@@ -102,9 +98,7 @@ class DocumentAttachmentFindForbiddenIssue(BaseModel):
 
 class DocumentAttachmentFindForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentAttachmentFindForbiddenIssue]] = None
 
 
@@ -136,9 +130,7 @@ class DocumentAttachmentFindUnauthorizedIssue(BaseModel):
 
 class DocumentAttachmentFindUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentAttachmentFindUnauthorizedIssue]] = None
 
 
@@ -170,9 +162,7 @@ class DocumentAttachmentFindBadRequestIssue(BaseModel):
 
 class DocumentAttachmentFindBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentAttachmentFindBadRequestIssue]] = None
 
 

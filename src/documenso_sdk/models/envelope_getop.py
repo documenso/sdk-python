@@ -41,9 +41,7 @@ class EnvelopeGetInternalServerErrorIssue(BaseModel):
 
 class EnvelopeGetInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeGetInternalServerErrorIssue]] = None
 
 
@@ -75,9 +73,7 @@ class EnvelopeGetNotFoundIssue(BaseModel):
 
 class EnvelopeGetNotFoundErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeGetNotFoundIssue]] = None
 
 
@@ -109,9 +105,7 @@ class EnvelopeGetForbiddenIssue(BaseModel):
 
 class EnvelopeGetForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeGetForbiddenIssue]] = None
 
 
@@ -143,9 +137,7 @@ class EnvelopeGetUnauthorizedIssue(BaseModel):
 
 class EnvelopeGetUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeGetUnauthorizedIssue]] = None
 
 
@@ -177,9 +169,7 @@ class EnvelopeGetBadRequestIssue(BaseModel):
 
 class EnvelopeGetBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeGetBadRequestIssue]] = None
 
 

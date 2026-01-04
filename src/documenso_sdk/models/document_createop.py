@@ -1120,6 +1120,7 @@ class DocumentCreateLanguage(str, Enum):
     FR = "fr"
     ES = "es"
     IT = "it"
+    NL = "nl"
     PL = "pl"
     PT_BR = "pt-BR"
     JA = "ja"
@@ -1376,9 +1377,7 @@ class DocumentCreateInternalServerErrorIssue(BaseModel):
 
 class DocumentCreateInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentCreateInternalServerErrorIssue]] = None
 
 
@@ -1410,9 +1409,7 @@ class DocumentCreateForbiddenIssue(BaseModel):
 
 class DocumentCreateForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentCreateForbiddenIssue]] = None
 
 
@@ -1444,9 +1441,7 @@ class DocumentCreateUnauthorizedIssue(BaseModel):
 
 class DocumentCreateUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentCreateUnauthorizedIssue]] = None
 
 
@@ -1478,9 +1473,7 @@ class DocumentCreateBadRequestIssue(BaseModel):
 
 class DocumentCreateBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentCreateBadRequestIssue]] = None
 
 

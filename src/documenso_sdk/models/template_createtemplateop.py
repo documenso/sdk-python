@@ -119,6 +119,7 @@ class TemplateCreateTemplateLanguage(str, Enum):
     FR = "fr"
     ES = "es"
     IT = "it"
+    NL = "nl"
     PL = "pl"
     PT_BR = "pt-BR"
     JA = "ja"
@@ -406,9 +407,7 @@ class TemplateCreateTemplateInternalServerErrorIssue(BaseModel):
 
 class TemplateCreateTemplateInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateCreateTemplateInternalServerErrorIssue]] = None
 
 
@@ -440,9 +439,7 @@ class TemplateCreateTemplateForbiddenIssue(BaseModel):
 
 class TemplateCreateTemplateForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateCreateTemplateForbiddenIssue]] = None
 
 
@@ -474,9 +471,7 @@ class TemplateCreateTemplateUnauthorizedIssue(BaseModel):
 
 class TemplateCreateTemplateUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateCreateTemplateUnauthorizedIssue]] = None
 
 
@@ -508,9 +503,7 @@ class TemplateCreateTemplateBadRequestIssue(BaseModel):
 
 class TemplateCreateTemplateBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateCreateTemplateBadRequestIssue]] = None
 
 

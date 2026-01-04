@@ -10,6 +10,7 @@
 | `FR`    | fr      |
 | `ES`    | es      |
 | `IT`    | it      |
+| `NL`    | nl      |
 | `PL`    | pl      |
 | `PT_BR` | pt-BR   |
 | `JA`    | ja      |

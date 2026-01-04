@@ -41,9 +41,7 @@ class RecipientGetDocumentRecipientInternalServerErrorIssue(BaseModel):
 
 class RecipientGetDocumentRecipientInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[RecipientGetDocumentRecipientInternalServerErrorIssue]] = None
 
 
@@ -75,9 +73,7 @@ class RecipientGetDocumentRecipientNotFoundIssue(BaseModel):
 
 class RecipientGetDocumentRecipientNotFoundErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[RecipientGetDocumentRecipientNotFoundIssue]] = None
 
 
@@ -109,9 +105,7 @@ class RecipientGetDocumentRecipientForbiddenIssue(BaseModel):
 
 class RecipientGetDocumentRecipientForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[RecipientGetDocumentRecipientForbiddenIssue]] = None
 
 
@@ -143,9 +137,7 @@ class RecipientGetDocumentRecipientUnauthorizedIssue(BaseModel):
 
 class RecipientGetDocumentRecipientUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[RecipientGetDocumentRecipientUnauthorizedIssue]] = None
 
 
@@ -177,9 +169,7 @@ class RecipientGetDocumentRecipientBadRequestIssue(BaseModel):
 
 class RecipientGetDocumentRecipientBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[RecipientGetDocumentRecipientBadRequestIssue]] = None
 
 
