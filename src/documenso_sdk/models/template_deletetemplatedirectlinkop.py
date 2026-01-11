@@ -28,9 +28,7 @@ class TemplateDeleteTemplateDirectLinkInternalServerErrorIssue(BaseModel):
 
 class TemplateDeleteTemplateDirectLinkInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateDeleteTemplateDirectLinkInternalServerErrorIssue]] = (
         None
     )
@@ -64,9 +62,7 @@ class TemplateDeleteTemplateDirectLinkForbiddenIssue(BaseModel):
 
 class TemplateDeleteTemplateDirectLinkForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateDeleteTemplateDirectLinkForbiddenIssue]] = None
 
 
@@ -98,9 +94,7 @@ class TemplateDeleteTemplateDirectLinkUnauthorizedIssue(BaseModel):
 
 class TemplateDeleteTemplateDirectLinkUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateDeleteTemplateDirectLinkUnauthorizedIssue]] = None
 
 
@@ -132,9 +126,7 @@ class TemplateDeleteTemplateDirectLinkBadRequestIssue(BaseModel):
 
 class TemplateDeleteTemplateDirectLinkBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateDeleteTemplateDirectLinkBadRequestIssue]] = None
 
 

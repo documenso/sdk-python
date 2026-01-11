@@ -33,9 +33,7 @@ class EnvelopeRedistributeInternalServerErrorIssue(BaseModel):
 
 class EnvelopeRedistributeInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeRedistributeInternalServerErrorIssue]] = None
 
 
@@ -67,9 +65,7 @@ class EnvelopeRedistributeForbiddenIssue(BaseModel):
 
 class EnvelopeRedistributeForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeRedistributeForbiddenIssue]] = None
 
 
@@ -101,9 +97,7 @@ class EnvelopeRedistributeUnauthorizedIssue(BaseModel):
 
 class EnvelopeRedistributeUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeRedistributeUnauthorizedIssue]] = None
 
 
@@ -135,9 +129,7 @@ class EnvelopeRedistributeBadRequestIssue(BaseModel):
 
 class EnvelopeRedistributeBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeRedistributeBadRequestIssue]] = None
 
 

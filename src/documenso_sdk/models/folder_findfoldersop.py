@@ -71,9 +71,7 @@ class FolderFindFoldersInternalServerErrorIssue(BaseModel):
 
 class FolderFindFoldersInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FolderFindFoldersInternalServerErrorIssue]] = None
 
 
@@ -105,9 +103,7 @@ class FolderFindFoldersNotFoundIssue(BaseModel):
 
 class FolderFindFoldersNotFoundErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FolderFindFoldersNotFoundIssue]] = None
 
 
@@ -139,9 +135,7 @@ class FolderFindFoldersForbiddenIssue(BaseModel):
 
 class FolderFindFoldersForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FolderFindFoldersForbiddenIssue]] = None
 
 
@@ -173,9 +167,7 @@ class FolderFindFoldersUnauthorizedIssue(BaseModel):
 
 class FolderFindFoldersUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FolderFindFoldersUnauthorizedIssue]] = None
 
 
@@ -207,9 +199,7 @@ class FolderFindFoldersBadRequestIssue(BaseModel):
 
 class FolderFindFoldersBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FolderFindFoldersBadRequestIssue]] = None
 
 

@@ -40,9 +40,7 @@ class EnvelopeAttachmentFindInternalServerErrorIssue(BaseModel):
 
 class EnvelopeAttachmentFindInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeAttachmentFindInternalServerErrorIssue]] = None
 
 
@@ -74,9 +72,7 @@ class EnvelopeAttachmentFindNotFoundIssue(BaseModel):
 
 class EnvelopeAttachmentFindNotFoundErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeAttachmentFindNotFoundIssue]] = None
 
 
@@ -108,9 +104,7 @@ class EnvelopeAttachmentFindForbiddenIssue(BaseModel):
 
 class EnvelopeAttachmentFindForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeAttachmentFindForbiddenIssue]] = None
 
 
@@ -142,9 +136,7 @@ class EnvelopeAttachmentFindUnauthorizedIssue(BaseModel):
 
 class EnvelopeAttachmentFindUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeAttachmentFindUnauthorizedIssue]] = None
 
 
@@ -176,9 +168,7 @@ class EnvelopeAttachmentFindBadRequestIssue(BaseModel):
 
 class EnvelopeAttachmentFindBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeAttachmentFindBadRequestIssue]] = None
 
 

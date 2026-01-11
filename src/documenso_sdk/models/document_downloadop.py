@@ -51,9 +51,7 @@ class DocumentDownloadInternalServerErrorIssue(BaseModel):
 
 class DocumentDownloadInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDownloadInternalServerErrorIssue]] = None
 
 
@@ -85,9 +83,7 @@ class DocumentDownloadNotFoundIssue(BaseModel):
 
 class DocumentDownloadNotFoundErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDownloadNotFoundIssue]] = None
 
 
@@ -119,9 +115,7 @@ class DocumentDownloadForbiddenIssue(BaseModel):
 
 class DocumentDownloadForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDownloadForbiddenIssue]] = None
 
 
@@ -153,9 +147,7 @@ class DocumentDownloadUnauthorizedIssue(BaseModel):
 
 class DocumentDownloadUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDownloadUnauthorizedIssue]] = None
 
 
@@ -187,9 +179,7 @@ class DocumentDownloadBadRequestIssue(BaseModel):
 
 class DocumentDownloadBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDownloadBadRequestIssue]] = None
 
 

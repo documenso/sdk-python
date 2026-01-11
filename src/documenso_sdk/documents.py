@@ -263,13 +263,13 @@ class Documents(BaseSDK):
         page: Optional[float] = None,
         per_page: Optional[float] = None,
         template_id: Optional[float] = None,
-        source: Optional[models.QueryParamSource] = None,
-        status: Optional[models.QueryParamStatus] = None,
+        source: Optional[models.DocumentFindQueryParamSource] = None,
+        status: Optional[models.DocumentFindQueryParamStatus] = None,
         folder_id: Optional[str] = None,
-        order_by_column: Optional[models.OrderByColumn] = None,
+        order_by_column: Optional[models.DocumentFindOrderByColumn] = None,
         order_by_direction: Optional[
-            models.OrderByDirection
-        ] = models.OrderByDirection.DESC,
+            models.DocumentFindOrderByDirection
+        ] = models.DocumentFindOrderByDirection.DESC,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -399,13 +399,13 @@ class Documents(BaseSDK):
         page: Optional[float] = None,
         per_page: Optional[float] = None,
         template_id: Optional[float] = None,
-        source: Optional[models.QueryParamSource] = None,
-        status: Optional[models.QueryParamStatus] = None,
+        source: Optional[models.DocumentFindQueryParamSource] = None,
+        status: Optional[models.DocumentFindQueryParamStatus] = None,
         folder_id: Optional[str] = None,
-        order_by_column: Optional[models.OrderByColumn] = None,
+        order_by_column: Optional[models.DocumentFindOrderByColumn] = None,
         order_by_direction: Optional[
-            models.OrderByDirection
-        ] = models.OrderByDirection.DESC,
+            models.DocumentFindOrderByDirection
+        ] = models.DocumentFindOrderByDirection.DESC,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,

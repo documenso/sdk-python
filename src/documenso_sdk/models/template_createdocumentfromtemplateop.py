@@ -19,16 +19,32 @@ from typing import Any, Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
+class TemplateCreateDocumentFromTemplateEmailEnum(str, Enum):
+    UNKNOWN = ""
+
+
+TemplateCreateDocumentFromTemplateEmailUnionTypedDict = TypeAliasType(
+    "TemplateCreateDocumentFromTemplateEmailUnionTypedDict",
+    Union[TemplateCreateDocumentFromTemplateEmailEnum, str],
+)
+
+
+TemplateCreateDocumentFromTemplateEmailUnion = TypeAliasType(
+    "TemplateCreateDocumentFromTemplateEmailUnion",
+    Union[TemplateCreateDocumentFromTemplateEmailEnum, str],
+)
+
+
 class TemplateCreateDocumentFromTemplateRecipientRequestTypedDict(TypedDict):
     id: float
-    email: str
+    email: TemplateCreateDocumentFromTemplateEmailUnionTypedDict
     name: NotRequired[str]
 
 
 class TemplateCreateDocumentFromTemplateRecipientRequest(BaseModel):
     id: float
 
-    email: str
+    email: TemplateCreateDocumentFromTemplateEmailUnion
 
     name: Optional[str] = None
 
@@ -279,6 +295,7 @@ class TemplateCreateDocumentFromTemplateLanguage(str, Enum):
     FR = "fr"
     ES = "es"
     IT = "it"
+    NL = "nl"
     PL = "pl"
     PT_BR = "pt-BR"
     JA = "ja"
@@ -374,6 +391,7 @@ class TemplateCreateDocumentFromTemplateAttachment(BaseModel):
 class TemplateCreateDocumentFromTemplateRequestTypedDict(TypedDict):
     template_id: float
     recipients: List[TemplateCreateDocumentFromTemplateRecipientRequestTypedDict]
+    external_id: NotRequired[str]
     distribute_document: NotRequired[bool]
     custom_document_data_id: NotRequired[str]
     custom_document_data: NotRequired[
@@ -393,6 +411,8 @@ class TemplateCreateDocumentFromTemplateRequest(BaseModel):
     template_id: Annotated[float, pydantic.Field(alias="templateId")]
 
     recipients: List[TemplateCreateDocumentFromTemplateRecipientRequest]
+
+    external_id: Annotated[Optional[str], pydantic.Field(alias="externalId")] = None
 
     distribute_document: Annotated[
         Optional[bool], pydantic.Field(alias="distributeDocument")
@@ -429,9 +449,7 @@ class TemplateCreateDocumentFromTemplateInternalServerErrorIssue(BaseModel):
 
 class TemplateCreateDocumentFromTemplateInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[
         List[TemplateCreateDocumentFromTemplateInternalServerErrorIssue]
     ] = None
@@ -465,9 +483,7 @@ class TemplateCreateDocumentFromTemplateForbiddenIssue(BaseModel):
 
 class TemplateCreateDocumentFromTemplateForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateCreateDocumentFromTemplateForbiddenIssue]] = None
 
 
@@ -499,9 +515,7 @@ class TemplateCreateDocumentFromTemplateUnauthorizedIssue(BaseModel):
 
 class TemplateCreateDocumentFromTemplateUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateCreateDocumentFromTemplateUnauthorizedIssue]] = None
 
 
@@ -533,9 +547,7 @@ class TemplateCreateDocumentFromTemplateBadRequestIssue(BaseModel):
 
 class TemplateCreateDocumentFromTemplateBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateCreateDocumentFromTemplateBadRequestIssue]] = None
 
 

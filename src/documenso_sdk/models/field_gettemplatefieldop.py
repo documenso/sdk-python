@@ -41,9 +41,7 @@ class FieldGetTemplateFieldInternalServerErrorIssue(BaseModel):
 
 class FieldGetTemplateFieldInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldGetTemplateFieldInternalServerErrorIssue]] = None
 
 
@@ -75,9 +73,7 @@ class FieldGetTemplateFieldNotFoundIssue(BaseModel):
 
 class FieldGetTemplateFieldNotFoundErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldGetTemplateFieldNotFoundIssue]] = None
 
 
@@ -109,9 +105,7 @@ class FieldGetTemplateFieldForbiddenIssue(BaseModel):
 
 class FieldGetTemplateFieldForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldGetTemplateFieldForbiddenIssue]] = None
 
 
@@ -143,9 +137,7 @@ class FieldGetTemplateFieldUnauthorizedIssue(BaseModel):
 
 class FieldGetTemplateFieldUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldGetTemplateFieldUnauthorizedIssue]] = None
 
 
@@ -177,9 +169,7 @@ class FieldGetTemplateFieldBadRequestIssue(BaseModel):
 
 class FieldGetTemplateFieldBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldGetTemplateFieldBadRequestIssue]] = None
 
 

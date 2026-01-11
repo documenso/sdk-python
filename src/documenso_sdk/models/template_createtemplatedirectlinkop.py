@@ -33,9 +33,7 @@ class TemplateCreateTemplateDirectLinkInternalServerErrorIssue(BaseModel):
 
 class TemplateCreateTemplateDirectLinkInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateCreateTemplateDirectLinkInternalServerErrorIssue]] = (
         None
     )
@@ -69,9 +67,7 @@ class TemplateCreateTemplateDirectLinkForbiddenIssue(BaseModel):
 
 class TemplateCreateTemplateDirectLinkForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateCreateTemplateDirectLinkForbiddenIssue]] = None
 
 
@@ -103,9 +99,7 @@ class TemplateCreateTemplateDirectLinkUnauthorizedIssue(BaseModel):
 
 class TemplateCreateTemplateDirectLinkUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateCreateTemplateDirectLinkUnauthorizedIssue]] = None
 
 
@@ -137,9 +131,7 @@ class TemplateCreateTemplateDirectLinkBadRequestIssue(BaseModel):
 
 class TemplateCreateTemplateDirectLinkBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateCreateTemplateDirectLinkBadRequestIssue]] = None
 
 

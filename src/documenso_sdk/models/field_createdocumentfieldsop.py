@@ -1049,9 +1049,7 @@ class FieldCreateDocumentFieldsInternalServerErrorIssue(BaseModel):
 
 class FieldCreateDocumentFieldsInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldCreateDocumentFieldsInternalServerErrorIssue]] = None
 
 
@@ -1083,9 +1081,7 @@ class FieldCreateDocumentFieldsForbiddenIssue(BaseModel):
 
 class FieldCreateDocumentFieldsForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldCreateDocumentFieldsForbiddenIssue]] = None
 
 
@@ -1117,9 +1113,7 @@ class FieldCreateDocumentFieldsUnauthorizedIssue(BaseModel):
 
 class FieldCreateDocumentFieldsUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldCreateDocumentFieldsUnauthorizedIssue]] = None
 
 
@@ -1151,9 +1145,7 @@ class FieldCreateDocumentFieldsBadRequestIssue(BaseModel):
 
 class FieldCreateDocumentFieldsBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldCreateDocumentFieldsBadRequestIssue]] = None
 
 

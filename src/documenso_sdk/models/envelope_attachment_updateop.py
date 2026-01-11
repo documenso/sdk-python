@@ -41,9 +41,7 @@ class EnvelopeAttachmentUpdateInternalServerErrorIssue(BaseModel):
 
 class EnvelopeAttachmentUpdateInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeAttachmentUpdateInternalServerErrorIssue]] = None
 
 
@@ -75,9 +73,7 @@ class EnvelopeAttachmentUpdateForbiddenIssue(BaseModel):
 
 class EnvelopeAttachmentUpdateForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeAttachmentUpdateForbiddenIssue]] = None
 
 
@@ -109,9 +105,7 @@ class EnvelopeAttachmentUpdateUnauthorizedIssue(BaseModel):
 
 class EnvelopeAttachmentUpdateUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeAttachmentUpdateUnauthorizedIssue]] = None
 
 
@@ -143,9 +137,7 @@ class EnvelopeAttachmentUpdateBadRequestIssue(BaseModel):
 
 class EnvelopeAttachmentUpdateBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeAttachmentUpdateBadRequestIssue]] = None
 
 

@@ -41,9 +41,7 @@ class TemplateGetTemplateByIDInternalServerErrorIssue(BaseModel):
 
 class TemplateGetTemplateByIDInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateGetTemplateByIDInternalServerErrorIssue]] = None
 
 
@@ -75,9 +73,7 @@ class TemplateGetTemplateByIDNotFoundIssue(BaseModel):
 
 class TemplateGetTemplateByIDNotFoundErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateGetTemplateByIDNotFoundIssue]] = None
 
 
@@ -109,9 +105,7 @@ class TemplateGetTemplateByIDForbiddenIssue(BaseModel):
 
 class TemplateGetTemplateByIDForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateGetTemplateByIDForbiddenIssue]] = None
 
 
@@ -143,9 +137,7 @@ class TemplateGetTemplateByIDUnauthorizedIssue(BaseModel):
 
 class TemplateGetTemplateByIDUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateGetTemplateByIDUnauthorizedIssue]] = None
 
 
@@ -177,9 +169,7 @@ class TemplateGetTemplateByIDBadRequestIssue(BaseModel):
 
 class TemplateGetTemplateByIDBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateGetTemplateByIDBadRequestIssue]] = None
 
 

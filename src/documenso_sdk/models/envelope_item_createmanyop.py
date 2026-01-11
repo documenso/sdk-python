@@ -71,9 +71,7 @@ class EnvelopeItemCreateManyInternalServerErrorIssue(BaseModel):
 
 class EnvelopeItemCreateManyInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeItemCreateManyInternalServerErrorIssue]] = None
 
 
@@ -105,9 +103,7 @@ class EnvelopeItemCreateManyForbiddenIssue(BaseModel):
 
 class EnvelopeItemCreateManyForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeItemCreateManyForbiddenIssue]] = None
 
 
@@ -139,9 +135,7 @@ class EnvelopeItemCreateManyUnauthorizedIssue(BaseModel):
 
 class EnvelopeItemCreateManyUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeItemCreateManyUnauthorizedIssue]] = None
 
 
@@ -173,9 +167,7 @@ class EnvelopeItemCreateManyBadRequestIssue(BaseModel):
 
 class EnvelopeItemCreateManyBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeItemCreateManyBadRequestIssue]] = None
 
 

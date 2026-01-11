@@ -14,9 +14,23 @@ from typing import IO, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
+class EnvelopeUseEmailEnum(str, Enum):
+    UNKNOWN = ""
+
+
+EnvelopeUseEmailUnionTypedDict = TypeAliasType(
+    "EnvelopeUseEmailUnionTypedDict", Union[EnvelopeUseEmailEnum, str]
+)
+
+
+EnvelopeUseEmailUnion = TypeAliasType(
+    "EnvelopeUseEmailUnion", Union[EnvelopeUseEmailEnum, str]
+)
+
+
 class EnvelopeUsePayloadRecipientTypedDict(TypedDict):
     id: float
-    email: str
+    email: EnvelopeUseEmailUnionTypedDict
     name: NotRequired[str]
     signing_order: NotRequired[float]
 
@@ -24,7 +38,7 @@ class EnvelopeUsePayloadRecipientTypedDict(TypedDict):
 class EnvelopeUsePayloadRecipient(BaseModel):
     id: float
 
-    email: str
+    email: EnvelopeUseEmailUnion
 
     name: Optional[str] = None
 
@@ -283,6 +297,7 @@ class EnvelopeUseLanguage(str, Enum):
     FR = "fr"
     ES = "es"
     IT = "it"
+    NL = "nl"
     PL = "pl"
     PT_BR = "pt-BR"
     JA = "ja"
@@ -457,9 +472,7 @@ class EnvelopeUseInternalServerErrorIssue(BaseModel):
 
 class EnvelopeUseInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeUseInternalServerErrorIssue]] = None
 
 
@@ -491,9 +504,7 @@ class EnvelopeUseForbiddenIssue(BaseModel):
 
 class EnvelopeUseForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeUseForbiddenIssue]] = None
 
 
@@ -525,9 +536,7 @@ class EnvelopeUseUnauthorizedIssue(BaseModel):
 
 class EnvelopeUseUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeUseUnauthorizedIssue]] = None
 
 
@@ -559,9 +568,7 @@ class EnvelopeUseBadRequestIssue(BaseModel):
 
 class EnvelopeUseBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeUseBadRequestIssue]] = None
 
 

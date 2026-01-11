@@ -41,9 +41,7 @@ class RecipientGetTemplateRecipientInternalServerErrorIssue(BaseModel):
 
 class RecipientGetTemplateRecipientInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[RecipientGetTemplateRecipientInternalServerErrorIssue]] = None
 
 
@@ -75,9 +73,7 @@ class RecipientGetTemplateRecipientNotFoundIssue(BaseModel):
 
 class RecipientGetTemplateRecipientNotFoundErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[RecipientGetTemplateRecipientNotFoundIssue]] = None
 
 
@@ -109,9 +105,7 @@ class RecipientGetTemplateRecipientForbiddenIssue(BaseModel):
 
 class RecipientGetTemplateRecipientForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[RecipientGetTemplateRecipientForbiddenIssue]] = None
 
 
@@ -143,9 +137,7 @@ class RecipientGetTemplateRecipientUnauthorizedIssue(BaseModel):
 
 class RecipientGetTemplateRecipientUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[RecipientGetTemplateRecipientUnauthorizedIssue]] = None
 
 
@@ -177,9 +169,7 @@ class RecipientGetTemplateRecipientBadRequestIssue(BaseModel):
 
 class RecipientGetTemplateRecipientBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[RecipientGetTemplateRecipientBadRequestIssue]] = None
 
 

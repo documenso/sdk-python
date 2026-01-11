@@ -28,9 +28,7 @@ class TemplateDeleteTemplateInternalServerErrorIssue(BaseModel):
 
 class TemplateDeleteTemplateInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateDeleteTemplateInternalServerErrorIssue]] = None
 
 
@@ -62,9 +60,7 @@ class TemplateDeleteTemplateForbiddenIssue(BaseModel):
 
 class TemplateDeleteTemplateForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateDeleteTemplateForbiddenIssue]] = None
 
 
@@ -96,9 +92,7 @@ class TemplateDeleteTemplateUnauthorizedIssue(BaseModel):
 
 class TemplateDeleteTemplateUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateDeleteTemplateUnauthorizedIssue]] = None
 
 
@@ -130,9 +124,7 @@ class TemplateDeleteTemplateBadRequestIssue(BaseModel):
 
 class TemplateDeleteTemplateBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateDeleteTemplateBadRequestIssue]] = None
 
 

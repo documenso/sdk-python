@@ -30,9 +30,7 @@ class TemplateDuplicateTemplateInternalServerErrorIssue(BaseModel):
 
 class TemplateDuplicateTemplateInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateDuplicateTemplateInternalServerErrorIssue]] = None
 
 
@@ -64,9 +62,7 @@ class TemplateDuplicateTemplateForbiddenIssue(BaseModel):
 
 class TemplateDuplicateTemplateForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateDuplicateTemplateForbiddenIssue]] = None
 
 
@@ -98,9 +94,7 @@ class TemplateDuplicateTemplateUnauthorizedIssue(BaseModel):
 
 class TemplateDuplicateTemplateUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateDuplicateTemplateUnauthorizedIssue]] = None
 
 
@@ -132,9 +126,7 @@ class TemplateDuplicateTemplateBadRequestIssue(BaseModel):
 
 class TemplateDuplicateTemplateBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateDuplicateTemplateBadRequestIssue]] = None
 
 

@@ -18,7 +18,7 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class FolderUpdateFolderDataVisibility(str, Enum):
+class FolderUpdateFolderVisibilityRequest(str, Enum):
     EVERYONE = "EVERYONE"
     MANAGER_AND_ABOVE = "MANAGER_AND_ABOVE"
     ADMIN = "ADMIN"
@@ -27,7 +27,7 @@ class FolderUpdateFolderDataVisibility(str, Enum):
 class FolderUpdateFolderDataTypedDict(TypedDict):
     name: NotRequired[str]
     parent_id: NotRequired[Nullable[str]]
-    visibility: NotRequired[FolderUpdateFolderDataVisibility]
+    visibility: NotRequired[FolderUpdateFolderVisibilityRequest]
     pinned: NotRequired[bool]
 
 
@@ -38,7 +38,7 @@ class FolderUpdateFolderData(BaseModel):
         UNSET
     )
 
-    visibility: Optional[FolderUpdateFolderDataVisibility] = None
+    visibility: Optional[FolderUpdateFolderVisibilityRequest] = None
 
     pinned: Optional[bool] = None
 
@@ -94,9 +94,7 @@ class FolderUpdateFolderInternalServerErrorIssue(BaseModel):
 
 class FolderUpdateFolderInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FolderUpdateFolderInternalServerErrorIssue]] = None
 
 
@@ -128,9 +126,7 @@ class FolderUpdateFolderForbiddenIssue(BaseModel):
 
 class FolderUpdateFolderForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FolderUpdateFolderForbiddenIssue]] = None
 
 
@@ -162,9 +158,7 @@ class FolderUpdateFolderUnauthorizedIssue(BaseModel):
 
 class FolderUpdateFolderUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FolderUpdateFolderUnauthorizedIssue]] = None
 
 
@@ -196,9 +190,7 @@ class FolderUpdateFolderBadRequestIssue(BaseModel):
 
 class FolderUpdateFolderBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FolderUpdateFolderBadRequestIssue]] = None
 
 

@@ -1049,9 +1049,7 @@ class FieldCreateTemplateFieldsInternalServerErrorIssue(BaseModel):
 
 class FieldCreateTemplateFieldsInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldCreateTemplateFieldsInternalServerErrorIssue]] = None
 
 
@@ -1083,9 +1081,7 @@ class FieldCreateTemplateFieldsForbiddenIssue(BaseModel):
 
 class FieldCreateTemplateFieldsForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldCreateTemplateFieldsForbiddenIssue]] = None
 
 
@@ -1117,9 +1113,7 @@ class FieldCreateTemplateFieldsUnauthorizedIssue(BaseModel):
 
 class FieldCreateTemplateFieldsUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldCreateTemplateFieldsUnauthorizedIssue]] = None
 
 
@@ -1151,9 +1145,7 @@ class FieldCreateTemplateFieldsBadRequestIssue(BaseModel):
 
 class FieldCreateTemplateFieldsBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldCreateTemplateFieldsBadRequestIssue]] = None
 
 

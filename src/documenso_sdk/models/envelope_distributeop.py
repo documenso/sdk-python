@@ -54,6 +54,7 @@ class EnvelopeDistributeLanguage(str, Enum):
     FR = "fr"
     ES = "es"
     IT = "it"
+    NL = "nl"
     PL = "pl"
     PT_BR = "pt-BR"
     JA = "ja"
@@ -208,9 +209,7 @@ class EnvelopeDistributeInternalServerErrorIssue(BaseModel):
 
 class EnvelopeDistributeInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeDistributeInternalServerErrorIssue]] = None
 
 
@@ -242,9 +241,7 @@ class EnvelopeDistributeForbiddenIssue(BaseModel):
 
 class EnvelopeDistributeForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeDistributeForbiddenIssue]] = None
 
 
@@ -276,9 +273,7 @@ class EnvelopeDistributeUnauthorizedIssue(BaseModel):
 
 class EnvelopeDistributeUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeDistributeUnauthorizedIssue]] = None
 
 
@@ -310,9 +305,7 @@ class EnvelopeDistributeBadRequestIssue(BaseModel):
 
 class EnvelopeDistributeBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeDistributeBadRequestIssue]] = None
 
 
