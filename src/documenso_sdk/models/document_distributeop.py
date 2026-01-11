@@ -54,6 +54,7 @@ class DocumentDistributeLanguage(str, Enum):
     FR = "fr"
     ES = "es"
     IT = "it"
+    NL = "nl"
     PL = "pl"
     PT_BR = "pt-BR"
     JA = "ja"
@@ -207,9 +208,7 @@ class DocumentDistributeInternalServerErrorIssue(BaseModel):
 
 class DocumentDistributeInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDistributeInternalServerErrorIssue]] = None
 
 
@@ -241,9 +240,7 @@ class DocumentDistributeForbiddenIssue(BaseModel):
 
 class DocumentDistributeForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDistributeForbiddenIssue]] = None
 
 
@@ -275,9 +272,7 @@ class DocumentDistributeUnauthorizedIssue(BaseModel):
 
 class DocumentDistributeUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDistributeUnauthorizedIssue]] = None
 
 
@@ -309,9 +304,7 @@ class DocumentDistributeBadRequestIssue(BaseModel):
 
 class DocumentDistributeBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDistributeBadRequestIssue]] = None
 
 

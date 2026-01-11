@@ -18,18 +18,18 @@ from typing import Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-class DocumentUpdateDataVisibility(str, Enum):
+class DocumentUpdateVisibilityRequest(str, Enum):
     EVERYONE = "EVERYONE"
     MANAGER_AND_ABOVE = "MANAGER_AND_ABOVE"
     ADMIN = "ADMIN"
 
 
-class DocumentUpdateDataGlobalAccessAuth(str, Enum):
+class DocumentUpdateGlobalAccessAuthRequest(str, Enum):
     ACCOUNT = "ACCOUNT"
     TWO_FACTOR_AUTH = "TWO_FACTOR_AUTH"
 
 
-class DocumentUpdateDataGlobalActionAuth(str, Enum):
+class DocumentUpdateGlobalActionAuthRequest(str, Enum):
     ACCOUNT = "ACCOUNT"
     PASSKEY = "PASSKEY"
     TWO_FACTOR_AUTH = "TWO_FACTOR_AUTH"
@@ -39,9 +39,9 @@ class DocumentUpdateDataGlobalActionAuth(str, Enum):
 class DocumentUpdateDataTypedDict(TypedDict):
     title: NotRequired[str]
     external_id: NotRequired[Nullable[str]]
-    visibility: NotRequired[DocumentUpdateDataVisibility]
-    global_access_auth: NotRequired[List[DocumentUpdateDataGlobalAccessAuth]]
-    global_action_auth: NotRequired[List[DocumentUpdateDataGlobalActionAuth]]
+    visibility: NotRequired[DocumentUpdateVisibilityRequest]
+    global_access_auth: NotRequired[List[DocumentUpdateGlobalAccessAuthRequest]]
+    global_action_auth: NotRequired[List[DocumentUpdateGlobalActionAuthRequest]]
     use_legacy_field_insertion: NotRequired[bool]
     folder_id: NotRequired[Nullable[str]]
 
@@ -53,15 +53,15 @@ class DocumentUpdateData(BaseModel):
         OptionalNullable[str], pydantic.Field(alias="externalId")
     ] = UNSET
 
-    visibility: Optional[DocumentUpdateDataVisibility] = None
+    visibility: Optional[DocumentUpdateVisibilityRequest] = None
 
     global_access_auth: Annotated[
-        Optional[List[DocumentUpdateDataGlobalAccessAuth]],
+        Optional[List[DocumentUpdateGlobalAccessAuthRequest]],
         pydantic.Field(alias="globalAccessAuth"),
     ] = None
 
     global_action_auth: Annotated[
-        Optional[List[DocumentUpdateDataGlobalActionAuth]],
+        Optional[List[DocumentUpdateGlobalActionAuthRequest]],
         pydantic.Field(alias="globalActionAuth"),
     ] = None
 
@@ -153,6 +153,7 @@ class DocumentUpdateLanguage(str, Enum):
     FR = "fr"
     ES = "es"
     IT = "it"
+    NL = "nl"
     PL = "pl"
     PT_BR = "pt-BR"
     JA = "ja"
@@ -340,9 +341,7 @@ class DocumentUpdateInternalServerErrorIssue(BaseModel):
 
 class DocumentUpdateInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentUpdateInternalServerErrorIssue]] = None
 
 
@@ -374,9 +373,7 @@ class DocumentUpdateForbiddenIssue(BaseModel):
 
 class DocumentUpdateForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentUpdateForbiddenIssue]] = None
 
 
@@ -408,9 +405,7 @@ class DocumentUpdateUnauthorizedIssue(BaseModel):
 
 class DocumentUpdateUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentUpdateUnauthorizedIssue]] = None
 
 
@@ -442,9 +437,7 @@ class DocumentUpdateBadRequestIssue(BaseModel):
 
 class DocumentUpdateBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentUpdateBadRequestIssue]] = None
 
 

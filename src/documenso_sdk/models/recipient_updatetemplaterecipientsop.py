@@ -95,9 +95,7 @@ class RecipientUpdateTemplateRecipientsInternalServerErrorIssue(BaseModel):
 
 class RecipientUpdateTemplateRecipientsInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[
         List[RecipientUpdateTemplateRecipientsInternalServerErrorIssue]
     ] = None
@@ -131,9 +129,7 @@ class RecipientUpdateTemplateRecipientsForbiddenIssue(BaseModel):
 
 class RecipientUpdateTemplateRecipientsForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[RecipientUpdateTemplateRecipientsForbiddenIssue]] = None
 
 
@@ -165,9 +161,7 @@ class RecipientUpdateTemplateRecipientsUnauthorizedIssue(BaseModel):
 
 class RecipientUpdateTemplateRecipientsUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[RecipientUpdateTemplateRecipientsUnauthorizedIssue]] = None
 
 
@@ -199,9 +193,7 @@ class RecipientUpdateTemplateRecipientsBadRequestIssue(BaseModel):
 
 class RecipientUpdateTemplateRecipientsBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[RecipientUpdateTemplateRecipientsBadRequestIssue]] = None
 
 
@@ -247,12 +239,12 @@ class RecipientUpdateTemplateRecipientsSendStatus(str, Enum):
     SENT = "SENT"
 
 
-class RecipientUpdateTemplateRecipientsAccessAuthResponse(str, Enum):
+class RecipientUpdateTemplateRecipientsAuthOptionsAccessAuth(str, Enum):
     ACCOUNT = "ACCOUNT"
     TWO_FACTOR_AUTH = "TWO_FACTOR_AUTH"
 
 
-class RecipientUpdateTemplateRecipientsActionAuthResponse(str, Enum):
+class RecipientUpdateTemplateRecipientsAuthOptionsActionAuth(str, Enum):
     ACCOUNT = "ACCOUNT"
     PASSKEY = "PASSKEY"
     TWO_FACTOR_AUTH = "TWO_FACTOR_AUTH"
@@ -261,18 +253,18 @@ class RecipientUpdateTemplateRecipientsActionAuthResponse(str, Enum):
 
 
 class RecipientUpdateTemplateRecipientsAuthOptionsTypedDict(TypedDict):
-    access_auth: List[RecipientUpdateTemplateRecipientsAccessAuthResponse]
-    action_auth: List[RecipientUpdateTemplateRecipientsActionAuthResponse]
+    access_auth: List[RecipientUpdateTemplateRecipientsAuthOptionsAccessAuth]
+    action_auth: List[RecipientUpdateTemplateRecipientsAuthOptionsActionAuth]
 
 
 class RecipientUpdateTemplateRecipientsAuthOptions(BaseModel):
     access_auth: Annotated[
-        List[RecipientUpdateTemplateRecipientsAccessAuthResponse],
+        List[RecipientUpdateTemplateRecipientsAuthOptionsAccessAuth],
         pydantic.Field(alias="accessAuth"),
     ]
 
     action_auth: Annotated[
-        List[RecipientUpdateTemplateRecipientsActionAuthResponse],
+        List[RecipientUpdateTemplateRecipientsAuthOptionsActionAuth],
         pydantic.Field(alias="actionAuth"),
     ]
 

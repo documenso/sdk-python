@@ -51,9 +51,7 @@ class EnvelopeItemDownloadInternalServerErrorIssue(BaseModel):
 
 class EnvelopeItemDownloadInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeItemDownloadInternalServerErrorIssue]] = None
 
 
@@ -85,9 +83,7 @@ class EnvelopeItemDownloadNotFoundIssue(BaseModel):
 
 class EnvelopeItemDownloadNotFoundErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeItemDownloadNotFoundIssue]] = None
 
 
@@ -119,9 +115,7 @@ class EnvelopeItemDownloadForbiddenIssue(BaseModel):
 
 class EnvelopeItemDownloadForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeItemDownloadForbiddenIssue]] = None
 
 
@@ -153,9 +147,7 @@ class EnvelopeItemDownloadUnauthorizedIssue(BaseModel):
 
 class EnvelopeItemDownloadUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeItemDownloadUnauthorizedIssue]] = None
 
 
@@ -187,9 +179,7 @@ class EnvelopeItemDownloadBadRequestIssue(BaseModel):
 
 class EnvelopeItemDownloadBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeItemDownloadBadRequestIssue]] = None
 
 

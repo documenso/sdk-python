@@ -12,10 +12,13 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class EmbeddingPresignCreateEmbeddingPresignTokenRequestTypedDict(TypedDict):
     expires_in: NotRequired[float]
+    scope: NotRequired[str]
 
 
 class EmbeddingPresignCreateEmbeddingPresignTokenRequest(BaseModel):
     expires_in: Annotated[Optional[float], pydantic.Field(alias="expiresIn")] = 60
+
+    scope: Optional[str] = None
 
 
 class EmbeddingPresignCreateEmbeddingPresignTokenInternalServerErrorIssueTypedDict(
@@ -30,9 +33,7 @@ class EmbeddingPresignCreateEmbeddingPresignTokenInternalServerErrorIssue(BaseMo
 
 class EmbeddingPresignCreateEmbeddingPresignTokenInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[
         List[EmbeddingPresignCreateEmbeddingPresignTokenInternalServerErrorIssue]
     ] = None
@@ -68,9 +69,7 @@ class EmbeddingPresignCreateEmbeddingPresignTokenForbiddenIssue(BaseModel):
 
 class EmbeddingPresignCreateEmbeddingPresignTokenForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[
         List[EmbeddingPresignCreateEmbeddingPresignTokenForbiddenIssue]
     ] = None
@@ -106,9 +105,7 @@ class EmbeddingPresignCreateEmbeddingPresignTokenUnauthorizedIssue(BaseModel):
 
 class EmbeddingPresignCreateEmbeddingPresignTokenUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[
         List[EmbeddingPresignCreateEmbeddingPresignTokenUnauthorizedIssue]
     ] = None
@@ -144,9 +141,7 @@ class EmbeddingPresignCreateEmbeddingPresignTokenBadRequestIssue(BaseModel):
 
 class EmbeddingPresignCreateEmbeddingPresignTokenBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[
         List[EmbeddingPresignCreateEmbeddingPresignTokenBadRequestIssue]
     ] = None

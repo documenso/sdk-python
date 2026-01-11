@@ -42,9 +42,7 @@ class EnvelopeAttachmentCreateInternalServerErrorIssue(BaseModel):
 
 class EnvelopeAttachmentCreateInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeAttachmentCreateInternalServerErrorIssue]] = None
 
 
@@ -76,9 +74,7 @@ class EnvelopeAttachmentCreateForbiddenIssue(BaseModel):
 
 class EnvelopeAttachmentCreateForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeAttachmentCreateForbiddenIssue]] = None
 
 
@@ -110,9 +106,7 @@ class EnvelopeAttachmentCreateUnauthorizedIssue(BaseModel):
 
 class EnvelopeAttachmentCreateUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeAttachmentCreateUnauthorizedIssue]] = None
 
 
@@ -144,9 +138,7 @@ class EnvelopeAttachmentCreateBadRequestIssue(BaseModel):
 
 class EnvelopeAttachmentCreateBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeAttachmentCreateBadRequestIssue]] = None
 
 

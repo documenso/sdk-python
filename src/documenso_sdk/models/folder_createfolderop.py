@@ -41,9 +41,7 @@ class FolderCreateFolderInternalServerErrorIssue(BaseModel):
 
 class FolderCreateFolderInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FolderCreateFolderInternalServerErrorIssue]] = None
 
 
@@ -75,9 +73,7 @@ class FolderCreateFolderForbiddenIssue(BaseModel):
 
 class FolderCreateFolderForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FolderCreateFolderForbiddenIssue]] = None
 
 
@@ -109,9 +105,7 @@ class FolderCreateFolderUnauthorizedIssue(BaseModel):
 
 class FolderCreateFolderUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FolderCreateFolderUnauthorizedIssue]] = None
 
 
@@ -143,9 +137,7 @@ class FolderCreateFolderBadRequestIssue(BaseModel):
 
 class FolderCreateFolderBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FolderCreateFolderBadRequestIssue]] = None
 
 

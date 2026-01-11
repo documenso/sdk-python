@@ -6,15 +6,18 @@ from documenso_sdk.models import DocumensoError
 from documenso_sdk.types import BaseModel
 import httpx
 from typing import List, Optional
-from typing_extensions import TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 
 class EmbeddingPresignVerifyEmbeddingPresignTokenRequestTypedDict(TypedDict):
     token: str
+    scope: NotRequired[str]
 
 
 class EmbeddingPresignVerifyEmbeddingPresignTokenRequest(BaseModel):
     token: str
+
+    scope: Optional[str] = None
 
 
 class EmbeddingPresignVerifyEmbeddingPresignTokenInternalServerErrorIssueTypedDict(
@@ -29,9 +32,7 @@ class EmbeddingPresignVerifyEmbeddingPresignTokenInternalServerErrorIssue(BaseMo
 
 class EmbeddingPresignVerifyEmbeddingPresignTokenInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[
         List[EmbeddingPresignVerifyEmbeddingPresignTokenInternalServerErrorIssue]
     ] = None
@@ -67,9 +68,7 @@ class EmbeddingPresignVerifyEmbeddingPresignTokenForbiddenIssue(BaseModel):
 
 class EmbeddingPresignVerifyEmbeddingPresignTokenForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[
         List[EmbeddingPresignVerifyEmbeddingPresignTokenForbiddenIssue]
     ] = None
@@ -105,9 +104,7 @@ class EmbeddingPresignVerifyEmbeddingPresignTokenUnauthorizedIssue(BaseModel):
 
 class EmbeddingPresignVerifyEmbeddingPresignTokenUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[
         List[EmbeddingPresignVerifyEmbeddingPresignTokenUnauthorizedIssue]
     ] = None
@@ -143,9 +140,7 @@ class EmbeddingPresignVerifyEmbeddingPresignTokenBadRequestIssue(BaseModel):
 
 class EmbeddingPresignVerifyEmbeddingPresignTokenBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[
         List[EmbeddingPresignVerifyEmbeddingPresignTokenBadRequestIssue]
     ] = None

@@ -1,5 +1,4 @@
-# DirectLinkSDK
-(*templates.direct_link*)
+# Templates.DirectLink
 
 ## Overview
 

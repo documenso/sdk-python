@@ -1165,6 +1165,7 @@ class DocumentCreateDocumentTemporaryLanguage(str, Enum):
     FR = "fr"
     ES = "es"
     IT = "it"
+    NL = "nl"
     PL = "pl"
     PT_BR = "pt-BR"
     JA = "ja"
@@ -1396,9 +1397,7 @@ class DocumentCreateDocumentTemporaryInternalServerErrorIssue(BaseModel):
 
 class DocumentCreateDocumentTemporaryInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentCreateDocumentTemporaryInternalServerErrorIssue]] = (
         None
     )
@@ -1432,9 +1431,7 @@ class DocumentCreateDocumentTemporaryForbiddenIssue(BaseModel):
 
 class DocumentCreateDocumentTemporaryForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentCreateDocumentTemporaryForbiddenIssue]] = None
 
 
@@ -1466,9 +1463,7 @@ class DocumentCreateDocumentTemporaryUnauthorizedIssue(BaseModel):
 
 class DocumentCreateDocumentTemporaryUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentCreateDocumentTemporaryUnauthorizedIssue]] = None
 
 
@@ -1500,9 +1495,7 @@ class DocumentCreateDocumentTemporaryBadRequestIssue(BaseModel):
 
 class DocumentCreateDocumentTemporaryBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentCreateDocumentTemporaryBadRequestIssue]] = None
 
 

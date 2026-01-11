@@ -1049,9 +1049,7 @@ class FieldUpdateDocumentFieldsInternalServerErrorIssue(BaseModel):
 
 class FieldUpdateDocumentFieldsInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldUpdateDocumentFieldsInternalServerErrorIssue]] = None
 
 
@@ -1083,9 +1081,7 @@ class FieldUpdateDocumentFieldsForbiddenIssue(BaseModel):
 
 class FieldUpdateDocumentFieldsForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldUpdateDocumentFieldsForbiddenIssue]] = None
 
 
@@ -1117,9 +1113,7 @@ class FieldUpdateDocumentFieldsUnauthorizedIssue(BaseModel):
 
 class FieldUpdateDocumentFieldsUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldUpdateDocumentFieldsUnauthorizedIssue]] = None
 
 
@@ -1151,9 +1145,7 @@ class FieldUpdateDocumentFieldsBadRequestIssue(BaseModel):
 
 class FieldUpdateDocumentFieldsBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldUpdateDocumentFieldsBadRequestIssue]] = None
 
 
