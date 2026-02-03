@@ -31,9 +31,7 @@ class DocumentRedistributeInternalServerErrorIssue(BaseModel):
 
 class DocumentRedistributeInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentRedistributeInternalServerErrorIssue]] = None
 
 
@@ -65,9 +63,7 @@ class DocumentRedistributeForbiddenIssue(BaseModel):
 
 class DocumentRedistributeForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentRedistributeForbiddenIssue]] = None
 
 
@@ -99,9 +95,7 @@ class DocumentRedistributeUnauthorizedIssue(BaseModel):
 
 class DocumentRedistributeUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentRedistributeUnauthorizedIssue]] = None
 
 
@@ -133,9 +127,7 @@ class DocumentRedistributeBadRequestIssue(BaseModel):
 
 class DocumentRedistributeBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentRedistributeBadRequestIssue]] = None
 
 

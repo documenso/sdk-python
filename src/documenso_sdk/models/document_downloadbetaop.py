@@ -3,11 +3,12 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 from documenso_sdk.models import DocumensoError
-from documenso_sdk.types import BaseModel
+from documenso_sdk.types import BaseModel, UNSET_SENTINEL
 from documenso_sdk.utils import FieldMetadata, PathParamMetadata, QueryParamMetadata
 from enum import Enum
 import httpx
 import pydantic
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -40,6 +41,22 @@ class DocumentDownloadBetaRequest(BaseModel):
     ] = DocumentDownloadBetaVersion.SIGNED
     r"""The version of the document to download. \"signed\" returns the completed document with signatures, \"original\" returns the original uploaded document."""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["version"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class DocumentDownloadBetaInternalServerErrorIssueTypedDict(TypedDict):
     message: str
@@ -51,9 +68,7 @@ class DocumentDownloadBetaInternalServerErrorIssue(BaseModel):
 
 class DocumentDownloadBetaInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDownloadBetaInternalServerErrorIssue]] = None
 
 
@@ -85,9 +100,7 @@ class DocumentDownloadBetaNotFoundIssue(BaseModel):
 
 class DocumentDownloadBetaNotFoundErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDownloadBetaNotFoundIssue]] = None
 
 
@@ -119,9 +132,7 @@ class DocumentDownloadBetaForbiddenIssue(BaseModel):
 
 class DocumentDownloadBetaForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDownloadBetaForbiddenIssue]] = None
 
 
@@ -153,9 +164,7 @@ class DocumentDownloadBetaUnauthorizedIssue(BaseModel):
 
 class DocumentDownloadBetaUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDownloadBetaUnauthorizedIssue]] = None
 
 
@@ -187,9 +196,7 @@ class DocumentDownloadBetaBadRequestIssue(BaseModel):
 
 class DocumentDownloadBetaBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDownloadBetaBadRequestIssue]] = None
 
 

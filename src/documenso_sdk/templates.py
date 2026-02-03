@@ -10,7 +10,7 @@ from documenso_sdk.templates_recipients import TemplatesRecipients
 from documenso_sdk.types import OptionalNullable, UNSET
 from documenso_sdk.utils import get_security_from_env
 from documenso_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Dict, List, Mapping, Optional, Union
 
 
 class Templates(BaseSDK):
@@ -1494,6 +1494,7 @@ class Templates(BaseSDK):
             List[models.TemplateCreateDocumentFromTemplateRecipientRequest],
             List[models.TemplateCreateDocumentFromTemplateRecipientRequestTypedDict],
         ],
+        external_id: Optional[str] = None,
         distribute_document: Optional[bool] = None,
         custom_document_data_id: Optional[str] = None,
         custom_document_data: Optional[
@@ -1525,6 +1526,15 @@ class Templates(BaseSDK):
                 List[models.TemplateCreateDocumentFromTemplateAttachmentTypedDict],
             ]
         ] = None,
+        form_values: Optional[
+            Union[
+                Dict[str, models.TemplateCreateDocumentFromTemplateFormValuesRequest],
+                Dict[
+                    str,
+                    models.TemplateCreateDocumentFromTemplateFormValuesRequestTypedDict,
+                ],
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1536,6 +1546,7 @@ class Templates(BaseSDK):
 
         :param template_id:
         :param recipients:
+        :param external_id:
         :param distribute_document:
         :param custom_document_data_id:
         :param custom_document_data:
@@ -1543,6 +1554,7 @@ class Templates(BaseSDK):
         :param prefill_fields:
         :param override:
         :param attachments:
+        :param form_values:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1560,6 +1572,7 @@ class Templates(BaseSDK):
 
         request = models.TemplateCreateDocumentFromTemplateRequest(
             template_id=template_id,
+            external_id=external_id,
             recipients=utils.get_pydantic_model(
                 recipients,
                 List[models.TemplateCreateDocumentFromTemplateRecipientRequest],
@@ -1586,6 +1599,7 @@ class Templates(BaseSDK):
                 attachments,
                 Optional[List[models.TemplateCreateDocumentFromTemplateAttachment]],
             ),
+            form_values=form_values,
         )
 
         req = self._build_request(
@@ -1686,6 +1700,7 @@ class Templates(BaseSDK):
             List[models.TemplateCreateDocumentFromTemplateRecipientRequest],
             List[models.TemplateCreateDocumentFromTemplateRecipientRequestTypedDict],
         ],
+        external_id: Optional[str] = None,
         distribute_document: Optional[bool] = None,
         custom_document_data_id: Optional[str] = None,
         custom_document_data: Optional[
@@ -1717,6 +1732,15 @@ class Templates(BaseSDK):
                 List[models.TemplateCreateDocumentFromTemplateAttachmentTypedDict],
             ]
         ] = None,
+        form_values: Optional[
+            Union[
+                Dict[str, models.TemplateCreateDocumentFromTemplateFormValuesRequest],
+                Dict[
+                    str,
+                    models.TemplateCreateDocumentFromTemplateFormValuesRequestTypedDict,
+                ],
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1728,6 +1752,7 @@ class Templates(BaseSDK):
 
         :param template_id:
         :param recipients:
+        :param external_id:
         :param distribute_document:
         :param custom_document_data_id:
         :param custom_document_data:
@@ -1735,6 +1760,7 @@ class Templates(BaseSDK):
         :param prefill_fields:
         :param override:
         :param attachments:
+        :param form_values:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1752,6 +1778,7 @@ class Templates(BaseSDK):
 
         request = models.TemplateCreateDocumentFromTemplateRequest(
             template_id=template_id,
+            external_id=external_id,
             recipients=utils.get_pydantic_model(
                 recipients,
                 List[models.TemplateCreateDocumentFromTemplateRecipientRequest],
@@ -1778,6 +1805,7 @@ class Templates(BaseSDK):
                 attachments,
                 Optional[List[models.TemplateCreateDocumentFromTemplateAttachment]],
             ),
+            form_values=form_values,
         )
 
         req = self._build_request_async(

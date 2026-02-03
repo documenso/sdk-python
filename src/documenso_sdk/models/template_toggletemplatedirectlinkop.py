@@ -31,9 +31,7 @@ class TemplateToggleTemplateDirectLinkInternalServerErrorIssue(BaseModel):
 
 class TemplateToggleTemplateDirectLinkInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateToggleTemplateDirectLinkInternalServerErrorIssue]] = (
         None
     )
@@ -67,9 +65,7 @@ class TemplateToggleTemplateDirectLinkForbiddenIssue(BaseModel):
 
 class TemplateToggleTemplateDirectLinkForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateToggleTemplateDirectLinkForbiddenIssue]] = None
 
 
@@ -101,9 +97,7 @@ class TemplateToggleTemplateDirectLinkUnauthorizedIssue(BaseModel):
 
 class TemplateToggleTemplateDirectLinkUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateToggleTemplateDirectLinkUnauthorizedIssue]] = None
 
 
@@ -135,9 +129,7 @@ class TemplateToggleTemplateDirectLinkBadRequestIssue(BaseModel):
 
 class TemplateToggleTemplateDirectLinkBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateToggleTemplateDirectLinkBadRequestIssue]] = None
 
 

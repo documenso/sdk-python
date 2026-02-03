@@ -69,6 +69,22 @@ class RecipientCreateTemplateRecipientRecipient(BaseModel):
         pydantic.Field(alias="actionAuth"),
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["signingOrder", "accessAuth", "actionAuth"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class RecipientCreateTemplateRecipientRequestTypedDict(TypedDict):
     template_id: float
@@ -91,9 +107,7 @@ class RecipientCreateTemplateRecipientInternalServerErrorIssue(BaseModel):
 
 class RecipientCreateTemplateRecipientInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[RecipientCreateTemplateRecipientInternalServerErrorIssue]] = (
         None
     )
@@ -127,9 +141,7 @@ class RecipientCreateTemplateRecipientForbiddenIssue(BaseModel):
 
 class RecipientCreateTemplateRecipientForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[RecipientCreateTemplateRecipientForbiddenIssue]] = None
 
 
@@ -161,9 +173,7 @@ class RecipientCreateTemplateRecipientUnauthorizedIssue(BaseModel):
 
 class RecipientCreateTemplateRecipientUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[RecipientCreateTemplateRecipientUnauthorizedIssue]] = None
 
 
@@ -195,9 +205,7 @@ class RecipientCreateTemplateRecipientBadRequestIssue(BaseModel):
 
 class RecipientCreateTemplateRecipientBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[RecipientCreateTemplateRecipientBadRequestIssue]] = None
 
 
@@ -243,12 +251,12 @@ class RecipientCreateTemplateRecipientSendStatus(str, Enum):
     SENT = "SENT"
 
 
-class RecipientCreateTemplateRecipientAccessAuthResponse(str, Enum):
+class RecipientCreateTemplateRecipientAuthOptionsAccessAuth(str, Enum):
     ACCOUNT = "ACCOUNT"
     TWO_FACTOR_AUTH = "TWO_FACTOR_AUTH"
 
 
-class RecipientCreateTemplateRecipientActionAuthResponse(str, Enum):
+class RecipientCreateTemplateRecipientAuthOptionsActionAuth(str, Enum):
     ACCOUNT = "ACCOUNT"
     PASSKEY = "PASSKEY"
     TWO_FACTOR_AUTH = "TWO_FACTOR_AUTH"
@@ -257,18 +265,18 @@ class RecipientCreateTemplateRecipientActionAuthResponse(str, Enum):
 
 
 class RecipientCreateTemplateRecipientAuthOptionsTypedDict(TypedDict):
-    access_auth: List[RecipientCreateTemplateRecipientAccessAuthResponse]
-    action_auth: List[RecipientCreateTemplateRecipientActionAuthResponse]
+    access_auth: List[RecipientCreateTemplateRecipientAuthOptionsAccessAuth]
+    action_auth: List[RecipientCreateTemplateRecipientAuthOptionsActionAuth]
 
 
 class RecipientCreateTemplateRecipientAuthOptions(BaseModel):
     access_auth: Annotated[
-        List[RecipientCreateTemplateRecipientAccessAuthResponse],
+        List[RecipientCreateTemplateRecipientAuthOptionsAccessAuth],
         pydantic.Field(alias="accessAuth"),
     ]
 
     action_auth: Annotated[
-        List[RecipientCreateTemplateRecipientActionAuthResponse],
+        List[RecipientCreateTemplateRecipientAuthOptionsActionAuth],
         pydantic.Field(alias="actionAuth"),
     ]
 
@@ -350,39 +358,36 @@ class RecipientCreateTemplateRecipientResponse(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["documentId", "templateId"]
-        nullable_fields = [
-            "documentDeletedAt",
-            "expired",
-            "signedAt",
-            "authOptions",
-            "signingOrder",
-            "rejectionReason",
-            "documentId",
-            "templateId",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(["documentId", "templateId"])
+        nullable_fields = set(
+            [
+                "documentDeletedAt",
+                "expired",
+                "signedAt",
+                "authOptions",
+                "signingOrder",
+                "rejectionReason",
+                "documentId",
+                "templateId",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

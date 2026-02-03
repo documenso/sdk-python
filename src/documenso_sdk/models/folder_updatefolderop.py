@@ -18,7 +18,7 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class FolderUpdateFolderDataVisibility(str, Enum):
+class FolderUpdateFolderVisibilityRequest(str, Enum):
     EVERYONE = "EVERYONE"
     MANAGER_AND_ABOVE = "MANAGER_AND_ABOVE"
     ADMIN = "ADMIN"
@@ -27,7 +27,7 @@ class FolderUpdateFolderDataVisibility(str, Enum):
 class FolderUpdateFolderDataTypedDict(TypedDict):
     name: NotRequired[str]
     parent_id: NotRequired[Nullable[str]]
-    visibility: NotRequired[FolderUpdateFolderDataVisibility]
+    visibility: NotRequired[FolderUpdateFolderVisibilityRequest]
     pinned: NotRequired[bool]
 
 
@@ -38,37 +38,32 @@ class FolderUpdateFolderData(BaseModel):
         UNSET
     )
 
-    visibility: Optional[FolderUpdateFolderDataVisibility] = None
+    visibility: Optional[FolderUpdateFolderVisibilityRequest] = None
 
     pinned: Optional[bool] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["name", "parentId", "visibility", "pinned"]
-        nullable_fields = ["parentId"]
-        null_default_fields = []
-
+        optional_fields = set(["name", "parentId", "visibility", "pinned"])
+        nullable_fields = set(["parentId"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -94,9 +89,7 @@ class FolderUpdateFolderInternalServerErrorIssue(BaseModel):
 
 class FolderUpdateFolderInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FolderUpdateFolderInternalServerErrorIssue]] = None
 
 
@@ -128,9 +121,7 @@ class FolderUpdateFolderForbiddenIssue(BaseModel):
 
 class FolderUpdateFolderForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FolderUpdateFolderForbiddenIssue]] = None
 
 
@@ -162,9 +153,7 @@ class FolderUpdateFolderUnauthorizedIssue(BaseModel):
 
 class FolderUpdateFolderUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FolderUpdateFolderUnauthorizedIssue]] = None
 
 
@@ -196,9 +185,7 @@ class FolderUpdateFolderBadRequestIssue(BaseModel):
 
 class FolderUpdateFolderBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FolderUpdateFolderBadRequestIssue]] = None
 
 
@@ -271,30 +258,14 @@ class FolderUpdateFolderResponse(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = []
-        nullable_fields = ["parentId"]
-        null_default_fields = []
-
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
+            if val != UNSET_SENTINEL:
                 m[k] = val
 
         return m

@@ -28,9 +28,7 @@ class FieldDeleteDocumentFieldInternalServerErrorIssue(BaseModel):
 
 class FieldDeleteDocumentFieldInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldDeleteDocumentFieldInternalServerErrorIssue]] = None
 
 
@@ -62,9 +60,7 @@ class FieldDeleteDocumentFieldForbiddenIssue(BaseModel):
 
 class FieldDeleteDocumentFieldForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldDeleteDocumentFieldForbiddenIssue]] = None
 
 
@@ -96,9 +92,7 @@ class FieldDeleteDocumentFieldUnauthorizedIssue(BaseModel):
 
 class FieldDeleteDocumentFieldUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldDeleteDocumentFieldUnauthorizedIssue]] = None
 
 
@@ -130,9 +124,7 @@ class FieldDeleteDocumentFieldBadRequestIssue(BaseModel):
 
 class FieldDeleteDocumentFieldBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldDeleteDocumentFieldBadRequestIssue]] = None
 
 

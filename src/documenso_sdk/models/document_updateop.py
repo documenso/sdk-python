@@ -18,18 +18,18 @@ from typing import Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-class DocumentUpdateDataVisibility(str, Enum):
+class DocumentUpdateVisibilityRequest(str, Enum):
     EVERYONE = "EVERYONE"
     MANAGER_AND_ABOVE = "MANAGER_AND_ABOVE"
     ADMIN = "ADMIN"
 
 
-class DocumentUpdateDataGlobalAccessAuth(str, Enum):
+class DocumentUpdateGlobalAccessAuthRequest(str, Enum):
     ACCOUNT = "ACCOUNT"
     TWO_FACTOR_AUTH = "TWO_FACTOR_AUTH"
 
 
-class DocumentUpdateDataGlobalActionAuth(str, Enum):
+class DocumentUpdateGlobalActionAuthRequest(str, Enum):
     ACCOUNT = "ACCOUNT"
     PASSKEY = "PASSKEY"
     TWO_FACTOR_AUTH = "TWO_FACTOR_AUTH"
@@ -39,9 +39,9 @@ class DocumentUpdateDataGlobalActionAuth(str, Enum):
 class DocumentUpdateDataTypedDict(TypedDict):
     title: NotRequired[str]
     external_id: NotRequired[Nullable[str]]
-    visibility: NotRequired[DocumentUpdateDataVisibility]
-    global_access_auth: NotRequired[List[DocumentUpdateDataGlobalAccessAuth]]
-    global_action_auth: NotRequired[List[DocumentUpdateDataGlobalActionAuth]]
+    visibility: NotRequired[DocumentUpdateVisibilityRequest]
+    global_access_auth: NotRequired[List[DocumentUpdateGlobalAccessAuthRequest]]
+    global_action_auth: NotRequired[List[DocumentUpdateGlobalActionAuthRequest]]
     use_legacy_field_insertion: NotRequired[bool]
     folder_id: NotRequired[Nullable[str]]
 
@@ -53,15 +53,15 @@ class DocumentUpdateData(BaseModel):
         OptionalNullable[str], pydantic.Field(alias="externalId")
     ] = UNSET
 
-    visibility: Optional[DocumentUpdateDataVisibility] = None
+    visibility: Optional[DocumentUpdateVisibilityRequest] = None
 
     global_access_auth: Annotated[
-        Optional[List[DocumentUpdateDataGlobalAccessAuth]],
+        Optional[List[DocumentUpdateGlobalAccessAuthRequest]],
         pydantic.Field(alias="globalAccessAuth"),
     ] = None
 
     global_action_auth: Annotated[
-        Optional[List[DocumentUpdateDataGlobalActionAuth]],
+        Optional[List[DocumentUpdateGlobalActionAuthRequest]],
         pydantic.Field(alias="globalActionAuth"),
     ] = None
 
@@ -75,39 +75,36 @@ class DocumentUpdateData(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "title",
-            "externalId",
-            "visibility",
-            "globalAccessAuth",
-            "globalActionAuth",
-            "useLegacyFieldInsertion",
-            "folderId",
-        ]
-        nullable_fields = ["externalId", "folderId"]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "title",
+                "externalId",
+                "visibility",
+                "globalAccessAuth",
+                "globalActionAuth",
+                "useLegacyFieldInsertion",
+                "folderId",
+            ]
+        )
+        nullable_fields = set(["externalId", "folderId"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -153,6 +150,7 @@ class DocumentUpdateLanguage(str, Enum):
     FR = "fr"
     ES = "es"
     IT = "it"
+    NL = "nl"
     PL = "pl"
     PT_BR = "pt-BR"
     JA = "ja"
@@ -198,6 +196,32 @@ class DocumentUpdateEmailSettings(BaseModel):
     owner_document_completed: Annotated[
         Optional[bool], pydantic.Field(alias="ownerDocumentCompleted")
     ] = True
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "recipientSigningRequest",
+                "recipientRemoved",
+                "recipientSigned",
+                "documentPending",
+                "documentCompleted",
+                "documentDeleted",
+                "ownerDocumentCompleted",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class DocumentUpdateMetaTypedDict(TypedDict):
@@ -271,47 +295,44 @@ class DocumentUpdateMeta(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "subject",
-            "message",
-            "timezone",
-            "dateFormat",
-            "distributionMethod",
-            "signingOrder",
-            "allowDictateNextSigner",
-            "redirectUrl",
-            "language",
-            "typedSignatureEnabled",
-            "uploadSignatureEnabled",
-            "drawSignatureEnabled",
-            "emailId",
-            "emailReplyTo",
-            "emailSettings",
-        ]
-        nullable_fields = ["emailId", "emailReplyTo", "emailSettings"]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "subject",
+                "message",
+                "timezone",
+                "dateFormat",
+                "distributionMethod",
+                "signingOrder",
+                "allowDictateNextSigner",
+                "redirectUrl",
+                "language",
+                "typedSignatureEnabled",
+                "uploadSignatureEnabled",
+                "drawSignatureEnabled",
+                "emailId",
+                "emailReplyTo",
+                "emailSettings",
+            ]
+        )
+        nullable_fields = set(["emailId", "emailReplyTo", "emailSettings"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -329,6 +350,22 @@ class DocumentUpdateRequest(BaseModel):
 
     meta: Optional[DocumentUpdateMeta] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data", "meta"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class DocumentUpdateInternalServerErrorIssueTypedDict(TypedDict):
     message: str
@@ -340,9 +377,7 @@ class DocumentUpdateInternalServerErrorIssue(BaseModel):
 
 class DocumentUpdateInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentUpdateInternalServerErrorIssue]] = None
 
 
@@ -374,9 +409,7 @@ class DocumentUpdateForbiddenIssue(BaseModel):
 
 class DocumentUpdateForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentUpdateForbiddenIssue]] = None
 
 
@@ -408,9 +441,7 @@ class DocumentUpdateUnauthorizedIssue(BaseModel):
 
 class DocumentUpdateUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentUpdateUnauthorizedIssue]] = None
 
 
@@ -442,9 +473,7 @@ class DocumentUpdateBadRequestIssue(BaseModel):
 
 class DocumentUpdateBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentUpdateBadRequestIssue]] = None
 
 
@@ -605,38 +634,35 @@ class DocumentUpdateResponse(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["documentDataId", "templateId"]
-        nullable_fields = [
-            "externalId",
-            "authOptions",
-            "formValues",
-            "completedAt",
-            "deletedAt",
-            "folderId",
-            "templateId",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(["documentDataId", "templateId"])
+        nullable_fields = set(
+            [
+                "externalId",
+                "authOptions",
+                "formValues",
+                "completedAt",
+                "deletedAt",
+                "folderId",
+                "templateId",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
