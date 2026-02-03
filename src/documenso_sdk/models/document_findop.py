@@ -19,7 +19,7 @@ from typing import Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-class QueryParamSource(str, Enum):
+class DocumentFindQueryParamSource(str, Enum):
     r"""Filter documents by how it was created."""
 
     DOCUMENT = "DOCUMENT"
@@ -27,7 +27,7 @@ class QueryParamSource(str, Enum):
     TEMPLATE_DIRECT_LINK = "TEMPLATE_DIRECT_LINK"
 
 
-class QueryParamStatus(str, Enum):
+class DocumentFindQueryParamStatus(str, Enum):
     r"""Filter documents by the current status"""
 
     DRAFT = "DRAFT"
@@ -36,11 +36,11 @@ class QueryParamStatus(str, Enum):
     REJECTED = "REJECTED"
 
 
-class OrderByColumn(str, Enum):
+class DocumentFindOrderByColumn(str, Enum):
     CREATED_AT = "createdAt"
 
 
-class OrderByDirection(str, Enum):
+class DocumentFindOrderByDirection(str, Enum):
     ASC = "asc"
     DESC = "desc"
 
@@ -54,14 +54,14 @@ class DocumentFindRequestTypedDict(TypedDict):
     r"""The number of items per page."""
     template_id: NotRequired[float]
     r"""Filter documents by the template ID used to create it."""
-    source: NotRequired[QueryParamSource]
+    source: NotRequired[DocumentFindQueryParamSource]
     r"""Filter documents by how it was created."""
-    status: NotRequired[QueryParamStatus]
+    status: NotRequired[DocumentFindQueryParamStatus]
     r"""Filter documents by the current status"""
     folder_id: NotRequired[str]
     r"""Filter documents by folder ID"""
-    order_by_column: NotRequired[OrderByColumn]
-    order_by_direction: NotRequired[OrderByDirection]
+    order_by_column: NotRequired[DocumentFindOrderByColumn]
+    order_by_direction: NotRequired[DocumentFindOrderByDirection]
 
 
 class DocumentFindRequest(BaseModel):
@@ -92,13 +92,13 @@ class DocumentFindRequest(BaseModel):
     r"""Filter documents by the template ID used to create it."""
 
     source: Annotated[
-        Optional[QueryParamSource],
+        Optional[DocumentFindQueryParamSource],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Filter documents by how it was created."""
 
     status: Annotated[
-        Optional[QueryParamStatus],
+        Optional[DocumentFindQueryParamStatus],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Filter documents by the current status"""
@@ -111,16 +111,44 @@ class DocumentFindRequest(BaseModel):
     r"""Filter documents by folder ID"""
 
     order_by_column: Annotated[
-        Optional[OrderByColumn],
+        Optional[DocumentFindOrderByColumn],
         pydantic.Field(alias="orderByColumn"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
 
     order_by_direction: Annotated[
-        Optional[OrderByDirection],
+        Optional[DocumentFindOrderByDirection],
         pydantic.Field(alias="orderByDirection"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = OrderByDirection.DESC
+    ] = DocumentFindOrderByDirection.DESC
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "query",
+                "page",
+                "perPage",
+                "templateId",
+                "source",
+                "status",
+                "folderId",
+                "orderByColumn",
+                "orderByDirection",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class DocumentFindInternalServerErrorIssueTypedDict(TypedDict):
@@ -133,9 +161,7 @@ class DocumentFindInternalServerErrorIssue(BaseModel):
 
 class DocumentFindInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentFindInternalServerErrorIssue]] = None
 
 
@@ -167,9 +193,7 @@ class DocumentFindNotFoundIssue(BaseModel):
 
 class DocumentFindNotFoundErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentFindNotFoundIssue]] = None
 
 
@@ -201,9 +225,7 @@ class DocumentFindForbiddenIssue(BaseModel):
 
 class DocumentFindForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentFindForbiddenIssue]] = None
 
 
@@ -235,9 +257,7 @@ class DocumentFindUnauthorizedIssue(BaseModel):
 
 class DocumentFindUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentFindUnauthorizedIssue]] = None
 
 
@@ -269,9 +289,7 @@ class DocumentFindBadRequestIssue(BaseModel):
 
 class DocumentFindBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentFindBadRequestIssue]] = None
 
 
@@ -299,14 +317,14 @@ class DocumentFindVisibility(str, Enum):
     ADMIN = "ADMIN"
 
 
-class DataStatus(str, Enum):
+class DocumentFindDataStatus(str, Enum):
     DRAFT = "DRAFT"
     PENDING = "PENDING"
     COMPLETED = "COMPLETED"
     REJECTED = "REJECTED"
 
 
-class DataSource(str, Enum):
+class DocumentFindDataSource(str, Enum):
     DOCUMENT = "DOCUMENT"
     TEMPLATE = "TEMPLATE"
     TEMPLATE_DIRECT_LINK = "TEMPLATE_DIRECT_LINK"
@@ -364,30 +382,14 @@ class DocumentFindUser(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = []
-        nullable_fields = ["name"]
-        null_default_fields = []
-
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
+            if val != UNSET_SENTINEL:
                 m[k] = val
 
         return m
@@ -512,40 +514,37 @@ class DocumentFindRecipient(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["documentId", "templateId"]
-        nullable_fields = [
-            "documentDeletedAt",
-            "expired",
-            "signedAt",
-            "authOptions",
-            "signingOrder",
-            "rejectionReason",
-            "documentId",
-            "templateId",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(["documentId", "templateId"])
+        nullable_fields = set(
+            [
+                "documentDeletedAt",
+                "expired",
+                "signedAt",
+                "authOptions",
+                "signingOrder",
+                "rejectionReason",
+                "documentId",
+                "templateId",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -563,8 +562,8 @@ class DocumentFindTeam(BaseModel):
 
 class DocumentFindDataTypedDict(TypedDict):
     visibility: DocumentFindVisibility
-    status: DataStatus
-    source: DataSource
+    status: DocumentFindDataStatus
+    source: DocumentFindDataSource
     id: float
     external_id: Nullable[str]
     user_id: float
@@ -590,9 +589,9 @@ class DocumentFindDataTypedDict(TypedDict):
 class DocumentFindData(BaseModel):
     visibility: DocumentFindVisibility
 
-    status: DataStatus
+    status: DocumentFindDataStatus
 
-    source: DataSource
+    source: DocumentFindDataSource
 
     id: float
 
@@ -646,40 +645,37 @@ class DocumentFindData(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["documentDataId", "templateId"]
-        nullable_fields = [
-            "externalId",
-            "authOptions",
-            "formValues",
-            "completedAt",
-            "deletedAt",
-            "folderId",
-            "templateId",
-            "team",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(["documentDataId", "templateId"])
+        nullable_fields = set(
+            [
+                "externalId",
+                "authOptions",
+                "formValues",
+                "completedAt",
+                "deletedAt",
+                "folderId",
+                "templateId",
+                "team",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 

@@ -1,11 +1,55 @@
-# DocumentSDK
-(*document*)
+# Document
 
 ## Overview
 
 ### Available Operations
 
+* [document_get_many](#document_get_many) - Get multiple documents
 * [document_download](#document_download) - Download document (beta)
+
+## document_get_many
+
+Retrieve multiple documents by their IDs
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="document-getMany" method="post" path="/document/get-many" -->
+```python
+from documenso_sdk import Documenso
+import os
+
+
+with Documenso(
+    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+) as documenso:
+
+    res = documenso.document.document_get_many(document_ids=[])
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `document_ids`                                                      | List[*float*]                                                       | :heavy_check_mark:                                                  | N/A                                                                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.DocumentGetManyResponse](../../models/documentgetmanyresponse.md)**
+
+### Errors
+
+| Error Type                                | Status Code                               | Content Type                              |
+| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
+| models.DocumentGetManyBadRequestError     | 400                                       | application/json                          |
+| models.DocumentGetManyUnauthorizedError   | 401                                       | application/json                          |
+| models.DocumentGetManyForbiddenError      | 403                                       | application/json                          |
+| models.DocumentGetManyInternalServerError | 500                                       | application/json                          |
+| models.APIError                           | 4XX, 5XX                                  | \*/\*                                     |
 
 ## document_download
 

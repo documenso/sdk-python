@@ -28,9 +28,7 @@ class RecipientDeleteTemplateRecipientInternalServerErrorIssue(BaseModel):
 
 class RecipientDeleteTemplateRecipientInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[RecipientDeleteTemplateRecipientInternalServerErrorIssue]] = (
         None
     )
@@ -64,9 +62,7 @@ class RecipientDeleteTemplateRecipientForbiddenIssue(BaseModel):
 
 class RecipientDeleteTemplateRecipientForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[RecipientDeleteTemplateRecipientForbiddenIssue]] = None
 
 
@@ -98,9 +94,7 @@ class RecipientDeleteTemplateRecipientUnauthorizedIssue(BaseModel):
 
 class RecipientDeleteTemplateRecipientUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[RecipientDeleteTemplateRecipientUnauthorizedIssue]] = None
 
 
@@ -132,9 +126,7 @@ class RecipientDeleteTemplateRecipientBadRequestIssue(BaseModel):
 
 class RecipientDeleteTemplateRecipientBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[RecipientDeleteTemplateRecipientBadRequestIssue]] = None
 
 

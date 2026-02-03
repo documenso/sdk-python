@@ -3,9 +3,10 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 from documenso_sdk.models import DocumensoError
-from documenso_sdk.types import BaseModel
+from documenso_sdk.types import BaseModel, UNSET_SENTINEL
 import httpx
 import pydantic
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -22,6 +23,22 @@ class TemplateCreateTemplateDirectLinkRequest(BaseModel):
         Optional[float], pydantic.Field(alias="directRecipientId")
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["directRecipientId"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class TemplateCreateTemplateDirectLinkInternalServerErrorIssueTypedDict(TypedDict):
     message: str
@@ -33,9 +50,7 @@ class TemplateCreateTemplateDirectLinkInternalServerErrorIssue(BaseModel):
 
 class TemplateCreateTemplateDirectLinkInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateCreateTemplateDirectLinkInternalServerErrorIssue]] = (
         None
     )
@@ -69,9 +84,7 @@ class TemplateCreateTemplateDirectLinkForbiddenIssue(BaseModel):
 
 class TemplateCreateTemplateDirectLinkForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateCreateTemplateDirectLinkForbiddenIssue]] = None
 
 
@@ -103,9 +116,7 @@ class TemplateCreateTemplateDirectLinkUnauthorizedIssue(BaseModel):
 
 class TemplateCreateTemplateDirectLinkUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateCreateTemplateDirectLinkUnauthorizedIssue]] = None
 
 
@@ -137,9 +148,7 @@ class TemplateCreateTemplateDirectLinkBadRequestIssue(BaseModel):
 
 class TemplateCreateTemplateDirectLinkBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateCreateTemplateDirectLinkBadRequestIssue]] = None
 
 

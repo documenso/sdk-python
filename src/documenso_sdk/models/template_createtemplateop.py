@@ -112,6 +112,32 @@ class TemplateCreateTemplateEmailSettings(BaseModel):
         Optional[bool], pydantic.Field(alias="ownerDocumentCompleted")
     ] = True
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "recipientSigningRequest",
+                "recipientRemoved",
+                "recipientSigned",
+                "documentPending",
+                "documentCompleted",
+                "documentDeleted",
+                "ownerDocumentCompleted",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class TemplateCreateTemplateLanguage(str, Enum):
     DE = "de"
@@ -119,6 +145,7 @@ class TemplateCreateTemplateLanguage(str, Enum):
     FR = "fr"
     ES = "es"
     IT = "it"
+    NL = "nl"
     PL = "pl"
     PT_BR = "pt-BR"
     JA = "ja"
@@ -203,47 +230,44 @@ class TemplateCreateTemplateMeta(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "subject",
-            "message",
-            "timezone",
-            "dateFormat",
-            "distributionMethod",
-            "emailId",
-            "emailReplyTo",
-            "emailSettings",
-            "redirectUrl",
-            "language",
-            "typedSignatureEnabled",
-            "uploadSignatureEnabled",
-            "drawSignatureEnabled",
-            "signingOrder",
-            "allowDictateNextSigner",
-        ]
-        nullable_fields = ["emailId", "emailReplyTo"]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "subject",
+                "message",
+                "timezone",
+                "dateFormat",
+                "distributionMethod",
+                "emailId",
+                "emailReplyTo",
+                "emailSettings",
+                "redirectUrl",
+                "language",
+                "typedSignatureEnabled",
+                "uploadSignatureEnabled",
+                "drawSignatureEnabled",
+                "signingOrder",
+                "allowDictateNextSigner",
+            ]
+        )
+        nullable_fields = set(["emailId", "emailReplyTo"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -264,6 +288,22 @@ class TemplateCreateTemplateAttachment(BaseModel):
     data: str
 
     type: Optional[TemplateCreateTemplateTypeLink] = TemplateCreateTemplateTypeLink.LINK
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["type"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class TemplateCreateTemplatePayloadTypedDict(TypedDict):
@@ -315,42 +355,39 @@ class TemplateCreateTemplatePayload(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "folderId",
-            "externalId",
-            "visibility",
-            "globalAccessAuth",
-            "globalActionAuth",
-            "publicTitle",
-            "publicDescription",
-            "type",
-            "meta",
-            "attachments",
-        ]
-        nullable_fields = ["externalId"]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "folderId",
+                "externalId",
+                "visibility",
+                "globalAccessAuth",
+                "globalActionAuth",
+                "publicTitle",
+                "publicDescription",
+                "type",
+                "meta",
+                "attachments",
+            ]
+        )
+        nullable_fields = set(["externalId"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -377,6 +414,22 @@ class TemplateCreateTemplateFile(BaseModel):
         pydantic.Field(alias="Content-Type"),
         FieldMetadata(multipart=True),
     ] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["contentType"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class TemplateCreateTemplateRequestTypedDict(TypedDict):
@@ -406,9 +459,7 @@ class TemplateCreateTemplateInternalServerErrorIssue(BaseModel):
 
 class TemplateCreateTemplateInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateCreateTemplateInternalServerErrorIssue]] = None
 
 
@@ -440,9 +491,7 @@ class TemplateCreateTemplateForbiddenIssue(BaseModel):
 
 class TemplateCreateTemplateForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateCreateTemplateForbiddenIssue]] = None
 
 
@@ -474,9 +523,7 @@ class TemplateCreateTemplateUnauthorizedIssue(BaseModel):
 
 class TemplateCreateTemplateUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateCreateTemplateUnauthorizedIssue]] = None
 
 
@@ -508,9 +555,7 @@ class TemplateCreateTemplateBadRequestIssue(BaseModel):
 
 class TemplateCreateTemplateBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateCreateTemplateBadRequestIssue]] = None
 
 

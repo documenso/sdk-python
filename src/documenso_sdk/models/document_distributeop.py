@@ -54,6 +54,7 @@ class DocumentDistributeLanguage(str, Enum):
     FR = "fr"
     ES = "es"
     IT = "it"
+    NL = "nl"
     PL = "pl"
     PT_BR = "pt-BR"
     JA = "ja"
@@ -99,6 +100,32 @@ class DocumentDistributeEmailSettings(BaseModel):
     owner_document_completed: Annotated[
         Optional[bool], pydantic.Field(alias="ownerDocumentCompleted")
     ] = True
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "recipientSigningRequest",
+                "recipientRemoved",
+                "recipientSigned",
+                "documentPending",
+                "documentCompleted",
+                "documentDeleted",
+                "ownerDocumentCompleted",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class DocumentDistributeMetaTypedDict(TypedDict):
@@ -146,42 +173,39 @@ class DocumentDistributeMeta(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "subject",
-            "message",
-            "timezone",
-            "dateFormat",
-            "distributionMethod",
-            "redirectUrl",
-            "language",
-            "emailId",
-            "emailReplyTo",
-            "emailSettings",
-        ]
-        nullable_fields = ["emailId", "emailReplyTo"]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "subject",
+                "message",
+                "timezone",
+                "dateFormat",
+                "distributionMethod",
+                "redirectUrl",
+                "language",
+                "emailId",
+                "emailReplyTo",
+                "emailSettings",
+            ]
+        )
+        nullable_fields = set(["emailId", "emailReplyTo"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -196,6 +220,22 @@ class DocumentDistributeRequest(BaseModel):
 
     meta: Optional[DocumentDistributeMeta] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["meta"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class DocumentDistributeInternalServerErrorIssueTypedDict(TypedDict):
     message: str
@@ -207,9 +247,7 @@ class DocumentDistributeInternalServerErrorIssue(BaseModel):
 
 class DocumentDistributeInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDistributeInternalServerErrorIssue]] = None
 
 
@@ -241,9 +279,7 @@ class DocumentDistributeForbiddenIssue(BaseModel):
 
 class DocumentDistributeForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDistributeForbiddenIssue]] = None
 
 
@@ -275,9 +311,7 @@ class DocumentDistributeUnauthorizedIssue(BaseModel):
 
 class DocumentDistributeUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDistributeUnauthorizedIssue]] = None
 
 
@@ -309,9 +343,7 @@ class DocumentDistributeBadRequestIssue(BaseModel):
 
 class DocumentDistributeBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentDistributeBadRequestIssue]] = None
 
 
@@ -472,38 +504,35 @@ class DocumentDistributeResponse(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["documentDataId", "templateId"]
-        nullable_fields = [
-            "externalId",
-            "authOptions",
-            "formValues",
-            "completedAt",
-            "deletedAt",
-            "folderId",
-            "templateId",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(["documentDataId", "templateId"])
+        nullable_fields = set(
+            [
+                "externalId",
+                "authOptions",
+                "formValues",
+                "completedAt",
+                "deletedAt",
+                "folderId",
+                "templateId",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

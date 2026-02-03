@@ -41,9 +41,7 @@ class TemplateGetTemplateByIDInternalServerErrorIssue(BaseModel):
 
 class TemplateGetTemplateByIDInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateGetTemplateByIDInternalServerErrorIssue]] = None
 
 
@@ -75,9 +73,7 @@ class TemplateGetTemplateByIDNotFoundIssue(BaseModel):
 
 class TemplateGetTemplateByIDNotFoundErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateGetTemplateByIDNotFoundIssue]] = None
 
 
@@ -109,9 +105,7 @@ class TemplateGetTemplateByIDForbiddenIssue(BaseModel):
 
 class TemplateGetTemplateByIDForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateGetTemplateByIDForbiddenIssue]] = None
 
 
@@ -143,9 +137,7 @@ class TemplateGetTemplateByIDUnauthorizedIssue(BaseModel):
 
 class TemplateGetTemplateByIDUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateGetTemplateByIDUnauthorizedIssue]] = None
 
 
@@ -177,9 +169,7 @@ class TemplateGetTemplateByIDBadRequestIssue(BaseModel):
 
 class TemplateGetTemplateByIDBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[TemplateGetTemplateByIDBadRequestIssue]] = None
 
 
@@ -316,6 +306,32 @@ class TemplateGetTemplateByIDEmailSettings(BaseModel):
         Optional[bool], pydantic.Field(alias="ownerDocumentCompleted")
     ] = True
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "recipientSigningRequest",
+                "recipientRemoved",
+                "recipientSigned",
+                "documentPending",
+                "documentCompleted",
+                "documentDeleted",
+                "ownerDocumentCompleted",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class TemplateGetTemplateByIDTemplateMetaTypedDict(TypedDict):
     id: str
@@ -390,40 +406,14 @@ class TemplateGetTemplateByIDTemplateMeta(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = []
-        nullable_fields = [
-            "subject",
-            "message",
-            "timezone",
-            "dateFormat",
-            "redirectUrl",
-            "emailSettings",
-            "emailId",
-            "emailReplyTo",
-            "templateId",
-        ]
-        null_default_fields = []
-
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
+            if val != UNSET_SENTINEL:
                 m[k] = val
 
         return m
@@ -472,30 +462,14 @@ class TemplateGetTemplateByIDUser(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = []
-        nullable_fields = ["name"]
-        null_default_fields = []
-
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
+            if val != UNSET_SENTINEL:
                 m[k] = val
 
         return m
@@ -625,40 +599,37 @@ class TemplateGetTemplateByIDRecipient(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["documentId", "templateId"]
-        nullable_fields = [
-            "documentDeletedAt",
-            "expired",
-            "signedAt",
-            "authOptions",
-            "signingOrder",
-            "rejectionReason",
-            "documentId",
-            "templateId",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(["documentId", "templateId"])
+        nullable_fields = set(
+            [
+                "documentDeletedAt",
+                "expired",
+                "signedAt",
+                "authOptions",
+                "signingOrder",
+                "rejectionReason",
+                "documentId",
+                "templateId",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -716,6 +687,32 @@ class TemplateGetTemplateByIDFieldMetaDropdown(BaseModel):
     values: Optional[List[TemplateGetTemplateByIDValue3]] = None
 
     default_value: Annotated[Optional[str], pydantic.Field(alias="defaultValue")] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "values",
+                "defaultValue",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class TemplateGetTemplateByIDTypeCheckbox(str, Enum):
@@ -781,6 +778,34 @@ class TemplateGetTemplateByIDFieldMetaCheckbox(BaseModel):
         TemplateGetTemplateByIDDirection2.VERTICAL
     )
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "values",
+                "validationRule",
+                "validationLength",
+                "direction",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class TemplateGetTemplateByIDTypeRadio(str, Enum):
     RADIO = "radio"
@@ -834,6 +859,32 @@ class TemplateGetTemplateByIDFieldMetaRadio(BaseModel):
     direction: Optional[TemplateGetTemplateByIDDirection1] = (
         TemplateGetTemplateByIDDirection1.VERTICAL
     )
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "values",
+                "direction",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class TemplateGetTemplateByIDTypeNumber(str, Enum):
@@ -915,52 +966,51 @@ class TemplateGetTemplateByIDFieldMetaNumber(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "label",
-            "placeholder",
-            "required",
-            "readOnly",
-            "fontSize",
-            "numberFormat",
-            "value",
-            "minValue",
-            "maxValue",
-            "textAlign",
-            "lineHeight",
-            "letterSpacing",
-            "verticalAlign",
-        ]
-        nullable_fields = [
-            "numberFormat",
-            "minValue",
-            "maxValue",
-            "lineHeight",
-            "letterSpacing",
-            "verticalAlign",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "numberFormat",
+                "value",
+                "minValue",
+                "maxValue",
+                "textAlign",
+                "lineHeight",
+                "letterSpacing",
+                "verticalAlign",
+            ]
+        )
+        nullable_fields = set(
+            [
+                "numberFormat",
+                "minValue",
+                "maxValue",
+                "lineHeight",
+                "letterSpacing",
+                "verticalAlign",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -1034,43 +1084,40 @@ class TemplateGetTemplateByIDFieldMetaText(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "label",
-            "placeholder",
-            "required",
-            "readOnly",
-            "fontSize",
-            "text",
-            "characterLimit",
-            "textAlign",
-            "lineHeight",
-            "letterSpacing",
-            "verticalAlign",
-        ]
-        nullable_fields = ["lineHeight", "letterSpacing", "verticalAlign"]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "text",
+                "characterLimit",
+                "textAlign",
+                "lineHeight",
+                "letterSpacing",
+                "verticalAlign",
+            ]
+        )
+        nullable_fields = set(["lineHeight", "letterSpacing", "verticalAlign"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -1112,6 +1159,24 @@ class TemplateGetTemplateByIDFieldMetaDate(BaseModel):
         Optional[TemplateGetTemplateByIDTextAlign4], pydantic.Field(alias="textAlign")
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class TemplateGetTemplateByIDTypeEmail(str, Enum):
     EMAIL = "email"
@@ -1149,6 +1214,24 @@ class TemplateGetTemplateByIDFieldMetaEmail(BaseModel):
     text_align: Annotated[
         Optional[TemplateGetTemplateByIDTextAlign3], pydantic.Field(alias="textAlign")
     ] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class TemplateGetTemplateByIDTypeName(str, Enum):
@@ -1188,6 +1271,24 @@ class TemplateGetTemplateByIDFieldMetaName(BaseModel):
         Optional[TemplateGetTemplateByIDTextAlign2], pydantic.Field(alias="textAlign")
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class TemplateGetTemplateByIDTypeInitials(str, Enum):
     INITIALS = "initials"
@@ -1226,6 +1327,24 @@ class TemplateGetTemplateByIDFieldMetaInitials(BaseModel):
         Optional[TemplateGetTemplateByIDTextAlign1], pydantic.Field(alias="textAlign")
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class TemplateGetTemplateByIDTypeSignature(str, Enum):
     SIGNATURE = "signature"
@@ -1252,6 +1371,24 @@ class TemplateGetTemplateByIDFieldMetaSignature(BaseModel):
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["label", "placeholder", "required", "readOnly", "fontSize"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 TemplateGetTemplateByIDFieldMetaUnionTypedDict = TypeAliasType(
@@ -1349,31 +1486,26 @@ class TemplateGetTemplateByIDField(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["documentId", "templateId"]
-        nullable_fields = ["fieldMeta", "documentId", "templateId"]
-        null_default_fields = []
-
+        optional_fields = set(["documentId", "templateId"])
+        nullable_fields = set(["fieldMeta", "documentId", "templateId"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -1425,30 +1557,14 @@ class TemplateGetTemplateByIDFolder(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = []
-        nullable_fields = ["parentId"]
-        null_default_fields = []
-
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
+            if val != UNSET_SENTINEL:
                 m[k] = val
 
         return m
@@ -1558,36 +1674,27 @@ class TemplateGetTemplateByIDResponse(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["templateDocumentDataId"]
-        nullable_fields = [
-            "externalId",
-            "authOptions",
-            "folderId",
-            "directLink",
-            "folder",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(["templateDocumentDataId"])
+        nullable_fields = set(
+            ["externalId", "authOptions", "folderId", "directLink", "folder"]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

@@ -41,9 +41,7 @@ class DocumentAttachmentUpdateInternalServerErrorIssue(BaseModel):
 
 class DocumentAttachmentUpdateInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentAttachmentUpdateInternalServerErrorIssue]] = None
 
 
@@ -75,9 +73,7 @@ class DocumentAttachmentUpdateForbiddenIssue(BaseModel):
 
 class DocumentAttachmentUpdateForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentAttachmentUpdateForbiddenIssue]] = None
 
 
@@ -109,9 +105,7 @@ class DocumentAttachmentUpdateUnauthorizedIssue(BaseModel):
 
 class DocumentAttachmentUpdateUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentAttachmentUpdateUnauthorizedIssue]] = None
 
 
@@ -143,9 +137,7 @@ class DocumentAttachmentUpdateBadRequestIssue(BaseModel):
 
 class DocumentAttachmentUpdateBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[DocumentAttachmentUpdateBadRequestIssue]] = None
 
 

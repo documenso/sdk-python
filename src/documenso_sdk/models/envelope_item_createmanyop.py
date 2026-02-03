@@ -3,11 +3,12 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 from documenso_sdk.models import DocumensoError
-from documenso_sdk.types import BaseModel
+from documenso_sdk.types import BaseModel, UNSET_SENTINEL
 from documenso_sdk.utils import FieldMetadata, MultipartFormMetadata
 import httpx
 import io
 import pydantic
+from pydantic import model_serializer
 from typing import IO, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -43,6 +44,22 @@ class EnvelopeItemCreateManyFile(BaseModel):
         FieldMetadata(multipart=True),
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["contentType"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class EnvelopeItemCreateManyRequestTypedDict(TypedDict):
     payload: EnvelopeItemCreateManyPayloadTypedDict
@@ -60,6 +77,22 @@ class EnvelopeItemCreateManyRequest(BaseModel):
         FieldMetadata(multipart=MultipartFormMetadata(file=True)),
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["files"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class EnvelopeItemCreateManyInternalServerErrorIssueTypedDict(TypedDict):
     message: str
@@ -71,9 +104,7 @@ class EnvelopeItemCreateManyInternalServerErrorIssue(BaseModel):
 
 class EnvelopeItemCreateManyInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeItemCreateManyInternalServerErrorIssue]] = None
 
 
@@ -105,9 +136,7 @@ class EnvelopeItemCreateManyForbiddenIssue(BaseModel):
 
 class EnvelopeItemCreateManyForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeItemCreateManyForbiddenIssue]] = None
 
 
@@ -139,9 +168,7 @@ class EnvelopeItemCreateManyUnauthorizedIssue(BaseModel):
 
 class EnvelopeItemCreateManyUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeItemCreateManyUnauthorizedIssue]] = None
 
 
@@ -173,9 +200,7 @@ class EnvelopeItemCreateManyBadRequestIssue(BaseModel):
 
 class EnvelopeItemCreateManyBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeItemCreateManyBadRequestIssue]] = None
 
 

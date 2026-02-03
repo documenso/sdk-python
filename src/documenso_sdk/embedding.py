@@ -14,6 +14,7 @@ class Embedding(BaseSDK):
         self,
         *,
         expires_in: Optional[float] = 60,
+        scope: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -24,6 +25,7 @@ class Embedding(BaseSDK):
         Creates a presign token for embedding operations with configurable expiration time
 
         :param expires_in:
+        :param scope:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -41,6 +43,7 @@ class Embedding(BaseSDK):
 
         request = models.EmbeddingPresignCreateEmbeddingPresignTokenRequest(
             expires_in=expires_in,
+            scope=scope,
         )
 
         req = self._build_request(
@@ -140,6 +143,7 @@ class Embedding(BaseSDK):
         self,
         *,
         expires_in: Optional[float] = 60,
+        scope: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -150,6 +154,7 @@ class Embedding(BaseSDK):
         Creates a presign token for embedding operations with configurable expiration time
 
         :param expires_in:
+        :param scope:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -167,6 +172,7 @@ class Embedding(BaseSDK):
 
         request = models.EmbeddingPresignCreateEmbeddingPresignTokenRequest(
             expires_in=expires_in,
+            scope=scope,
         )
 
         req = self._build_request_async(
@@ -266,6 +272,7 @@ class Embedding(BaseSDK):
         self,
         *,
         token: str,
+        scope: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -276,6 +283,7 @@ class Embedding(BaseSDK):
         Verifies a presign token for embedding operations and returns the associated API token
 
         :param token:
+        :param scope:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -293,6 +301,7 @@ class Embedding(BaseSDK):
 
         request = models.EmbeddingPresignVerifyEmbeddingPresignTokenRequest(
             token=token,
+            scope=scope,
         )
 
         req = self._build_request(
@@ -392,6 +401,7 @@ class Embedding(BaseSDK):
         self,
         *,
         token: str,
+        scope: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -402,6 +412,7 @@ class Embedding(BaseSDK):
         Verifies a presign token for embedding operations and returns the associated API token
 
         :param token:
+        :param scope:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -419,6 +430,7 @@ class Embedding(BaseSDK):
 
         request = models.EmbeddingPresignVerifyEmbeddingPresignTokenRequest(
             token=token,
+            scope=scope,
         )
 
         req = self._build_request_async(

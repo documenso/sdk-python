@@ -28,9 +28,7 @@ class RecipientDeleteDocumentRecipientInternalServerErrorIssue(BaseModel):
 
 class RecipientDeleteDocumentRecipientInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[RecipientDeleteDocumentRecipientInternalServerErrorIssue]] = (
         None
     )
@@ -64,9 +62,7 @@ class RecipientDeleteDocumentRecipientForbiddenIssue(BaseModel):
 
 class RecipientDeleteDocumentRecipientForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[RecipientDeleteDocumentRecipientForbiddenIssue]] = None
 
 
@@ -98,9 +94,7 @@ class RecipientDeleteDocumentRecipientUnauthorizedIssue(BaseModel):
 
 class RecipientDeleteDocumentRecipientUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[RecipientDeleteDocumentRecipientUnauthorizedIssue]] = None
 
 
@@ -132,9 +126,7 @@ class RecipientDeleteDocumentRecipientBadRequestIssue(BaseModel):
 
 class RecipientDeleteDocumentRecipientBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[RecipientDeleteDocumentRecipientBadRequestIssue]] = None
 
 

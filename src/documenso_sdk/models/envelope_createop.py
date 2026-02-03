@@ -53,6 +53,20 @@ EnvelopeCreateFormValues = TypeAliasType(
 )
 
 
+class EnvelopeCreateEmailEnum(str, Enum):
+    UNKNOWN = ""
+
+
+EnvelopeCreateEmailUnionTypedDict = TypeAliasType(
+    "EnvelopeCreateEmailUnionTypedDict", Union[EnvelopeCreateEmailEnum, str]
+)
+
+
+EnvelopeCreateEmailUnion = TypeAliasType(
+    "EnvelopeCreateEmailUnion", Union[EnvelopeCreateEmailEnum, str]
+)
+
+
 class EnvelopeCreateRole(str, Enum):
     CC = "CC"
     SIGNER = "SIGNER"
@@ -118,6 +132,32 @@ class EnvelopeCreateFieldMetaDropdown(BaseModel):
 
     default_value: Annotated[Optional[str], pydantic.Field(alias="defaultValue")] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "values",
+                "defaultValue",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 EnvelopeCreateIdentifier11TypedDict = TypeAliasType(
     "EnvelopeCreateIdentifier11TypedDict", Union[str, float]
@@ -158,6 +198,22 @@ class EnvelopeCreateFieldDropdown(BaseModel):
     ] = None
 
     identifier: Optional[EnvelopeCreateIdentifier11] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["fieldMeta", "identifier"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class EnvelopeCreateTypeCheckbox1(str, Enum):
@@ -227,6 +283,34 @@ class EnvelopeCreateFieldMetaCheckbox(BaseModel):
         EnvelopeCreateDirectionCheckbox.VERTICAL
     )
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "values",
+                "validationRule",
+                "validationLength",
+                "direction",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 EnvelopeCreateIdentifier10TypedDict = TypeAliasType(
     "EnvelopeCreateIdentifier10TypedDict", Union[str, float]
@@ -267,6 +351,22 @@ class EnvelopeCreateFieldCheckbox(BaseModel):
     ] = None
 
     identifier: Optional[EnvelopeCreateIdentifier10] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["fieldMeta", "identifier"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class EnvelopeCreateTypeRadio1(str, Enum):
@@ -326,6 +426,32 @@ class EnvelopeCreateFieldMetaRadio(BaseModel):
         EnvelopeCreateDirectionRadio.VERTICAL
     )
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "values",
+                "direction",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 EnvelopeCreateIdentifier9TypedDict = TypeAliasType(
     "EnvelopeCreateIdentifier9TypedDict", Union[str, float]
@@ -366,6 +492,22 @@ class EnvelopeCreateFieldRadio(BaseModel):
     ] = None
 
     identifier: Optional[EnvelopeCreateIdentifier9] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["fieldMeta", "identifier"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class EnvelopeCreateTypeNumber1(str, Enum):
@@ -451,52 +593,51 @@ class EnvelopeCreateFieldMetaNumber(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "label",
-            "placeholder",
-            "required",
-            "readOnly",
-            "fontSize",
-            "numberFormat",
-            "value",
-            "minValue",
-            "maxValue",
-            "textAlign",
-            "lineHeight",
-            "letterSpacing",
-            "verticalAlign",
-        ]
-        nullable_fields = [
-            "numberFormat",
-            "minValue",
-            "maxValue",
-            "lineHeight",
-            "letterSpacing",
-            "verticalAlign",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "numberFormat",
+                "value",
+                "minValue",
+                "maxValue",
+                "textAlign",
+                "lineHeight",
+                "letterSpacing",
+                "verticalAlign",
+            ]
+        )
+        nullable_fields = set(
+            [
+                "numberFormat",
+                "minValue",
+                "maxValue",
+                "lineHeight",
+                "letterSpacing",
+                "verticalAlign",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -540,6 +681,22 @@ class EnvelopeCreateFieldNumber(BaseModel):
     ] = None
 
     identifier: Optional[EnvelopeCreateIdentifier8] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["fieldMeta", "identifier"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class EnvelopeCreateTypeText1(str, Enum):
@@ -615,43 +772,40 @@ class EnvelopeCreateFieldMetaText(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "label",
-            "placeholder",
-            "required",
-            "readOnly",
-            "fontSize",
-            "text",
-            "characterLimit",
-            "textAlign",
-            "lineHeight",
-            "letterSpacing",
-            "verticalAlign",
-        ]
-        nullable_fields = ["lineHeight", "letterSpacing", "verticalAlign"]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "text",
+                "characterLimit",
+                "textAlign",
+                "lineHeight",
+                "letterSpacing",
+                "verticalAlign",
+            ]
+        )
+        nullable_fields = set(["lineHeight", "letterSpacing", "verticalAlign"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -696,6 +850,22 @@ class EnvelopeCreateFieldText(BaseModel):
 
     identifier: Optional[EnvelopeCreateIdentifier7] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["fieldMeta", "identifier"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class EnvelopeCreateTypeDate1(str, Enum):
     DATE = "DATE"
@@ -738,6 +908,24 @@ class EnvelopeCreateFieldMetaDate(BaseModel):
         Optional[EnvelopeCreateTextAlignDate], pydantic.Field(alias="textAlign")
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 EnvelopeCreateIdentifier6TypedDict = TypeAliasType(
     "EnvelopeCreateIdentifier6TypedDict", Union[str, float]
@@ -778,6 +966,22 @@ class EnvelopeCreateFieldDate(BaseModel):
     ] = None
 
     identifier: Optional[EnvelopeCreateIdentifier6] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["fieldMeta", "identifier"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class EnvelopeCreateTypeEmail1(str, Enum):
@@ -821,6 +1025,24 @@ class EnvelopeCreateFieldMetaEmail(BaseModel):
         Optional[EnvelopeCreateTextAlignEmail], pydantic.Field(alias="textAlign")
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 EnvelopeCreateIdentifier5TypedDict = TypeAliasType(
     "EnvelopeCreateIdentifier5TypedDict", Union[str, float]
@@ -861,6 +1083,22 @@ class EnvelopeCreateFieldEmail(BaseModel):
     ] = None
 
     identifier: Optional[EnvelopeCreateIdentifier5] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["fieldMeta", "identifier"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class EnvelopeCreateTypeName1(str, Enum):
@@ -904,6 +1142,24 @@ class EnvelopeCreateFieldMetaName(BaseModel):
         Optional[EnvelopeCreateTextAlignName], pydantic.Field(alias="textAlign")
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 EnvelopeCreateIdentifier4TypedDict = TypeAliasType(
     "EnvelopeCreateIdentifier4TypedDict", Union[str, float]
@@ -944,6 +1200,22 @@ class EnvelopeCreateFieldName(BaseModel):
     ] = None
 
     identifier: Optional[EnvelopeCreateIdentifier4] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["fieldMeta", "identifier"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class EnvelopeCreateTypeInitials1(str, Enum):
@@ -987,6 +1259,24 @@ class EnvelopeCreateFieldMetaInitials(BaseModel):
         Optional[EnvelopeCreateTextAlignInitials], pydantic.Field(alias="textAlign")
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 EnvelopeCreateIdentifier3TypedDict = TypeAliasType(
     "EnvelopeCreateIdentifier3TypedDict", Union[str, float]
@@ -1028,6 +1318,22 @@ class EnvelopeCreateFieldInitials(BaseModel):
 
     identifier: Optional[EnvelopeCreateIdentifier3] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["fieldMeta", "identifier"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class EnvelopeCreateTypeFreeSignature(str, Enum):
     FREE_SIGNATURE = "FREE_SIGNATURE"
@@ -1068,6 +1374,22 @@ class EnvelopeCreateFieldFreeSignature(BaseModel):
 
     identifier: Optional[EnvelopeCreateIdentifier2] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["identifier"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class EnvelopeCreateTypeSignature1(str, Enum):
     SIGNATURE = "SIGNATURE"
@@ -1098,6 +1420,24 @@ class EnvelopeCreateFieldMetaSignature(BaseModel):
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["label", "placeholder", "required", "readOnly", "fontSize"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 EnvelopeCreateIdentifier1TypedDict = TypeAliasType(
@@ -1140,6 +1480,22 @@ class EnvelopeCreateFieldSignature(BaseModel):
 
     identifier: Optional[EnvelopeCreateIdentifier1] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["fieldMeta", "identifier"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 EnvelopeCreateFieldUnionTypedDict = TypeAliasType(
     "EnvelopeCreateFieldUnionTypedDict",
@@ -1178,7 +1534,7 @@ EnvelopeCreateFieldUnion = Annotated[
 
 
 class EnvelopeCreateRecipientTypedDict(TypedDict):
-    email: str
+    email: EnvelopeCreateEmailUnionTypedDict
     name: str
     role: EnvelopeCreateRole
     signing_order: NotRequired[float]
@@ -1188,7 +1544,7 @@ class EnvelopeCreateRecipientTypedDict(TypedDict):
 
 
 class EnvelopeCreateRecipient(BaseModel):
-    email: str
+    email: EnvelopeCreateEmailUnion
 
     name: str
 
@@ -1207,6 +1563,22 @@ class EnvelopeCreateRecipient(BaseModel):
     ] = None
 
     fields: Optional[List[EnvelopeCreateFieldUnion]] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["signingOrder", "accessAuth", "actionAuth", "fields"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class EnvelopeCreateDateFormat(str, Enum):
@@ -1250,6 +1622,7 @@ class EnvelopeCreateLanguage(str, Enum):
     FR = "fr"
     ES = "es"
     IT = "it"
+    NL = "nl"
     PL = "pl"
     PT_BR = "pt-BR"
     JA = "ja"
@@ -1295,6 +1668,32 @@ class EnvelopeCreateEmailSettings(BaseModel):
     owner_document_completed: Annotated[
         Optional[bool], pydantic.Field(alias="ownerDocumentCompleted")
     ] = True
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "recipientSigningRequest",
+                "recipientRemoved",
+                "recipientSigned",
+                "documentPending",
+                "documentCompleted",
+                "documentDeleted",
+                "ownerDocumentCompleted",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class EnvelopeCreateMetaTypedDict(TypedDict):
@@ -1368,47 +1767,44 @@ class EnvelopeCreateMeta(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "subject",
-            "message",
-            "timezone",
-            "dateFormat",
-            "distributionMethod",
-            "signingOrder",
-            "allowDictateNextSigner",
-            "redirectUrl",
-            "language",
-            "typedSignatureEnabled",
-            "uploadSignatureEnabled",
-            "drawSignatureEnabled",
-            "emailId",
-            "emailReplyTo",
-            "emailSettings",
-        ]
-        nullable_fields = ["emailId", "emailReplyTo", "emailSettings"]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "subject",
+                "message",
+                "timezone",
+                "dateFormat",
+                "distributionMethod",
+                "signingOrder",
+                "allowDictateNextSigner",
+                "redirectUrl",
+                "language",
+                "typedSignatureEnabled",
+                "uploadSignatureEnabled",
+                "drawSignatureEnabled",
+                "emailId",
+                "emailReplyTo",
+                "emailSettings",
+            ]
+        )
+        nullable_fields = set(["emailId", "emailReplyTo", "emailSettings"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -1430,10 +1826,27 @@ class EnvelopeCreateAttachment(BaseModel):
 
     type: Optional[EnvelopeCreateTypeLink] = EnvelopeCreateTypeLink.LINK
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["type"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class EnvelopeCreatePayloadTypedDict(TypedDict):
     title: str
     type: EnvelopeCreateType
+    delegated_document_owner: NotRequired[str]
     external_id: NotRequired[str]
     visibility: NotRequired[EnvelopeCreateVisibility]
     global_access_auth: NotRequired[List[EnvelopeCreateGlobalAccessAuth]]
@@ -1449,6 +1862,10 @@ class EnvelopeCreatePayload(BaseModel):
     title: str
 
     type: EnvelopeCreateType
+
+    delegated_document_owner: Annotated[
+        Optional[str], pydantic.Field(alias="delegatedDocumentOwner")
+    ] = None
 
     external_id: Annotated[Optional[str], pydantic.Field(alias="externalId")] = None
 
@@ -1477,6 +1894,35 @@ class EnvelopeCreatePayload(BaseModel):
 
     attachments: Optional[List[EnvelopeCreateAttachment]] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "delegatedDocumentOwner",
+                "externalId",
+                "visibility",
+                "globalAccessAuth",
+                "globalActionAuth",
+                "formValues",
+                "folderId",
+                "recipients",
+                "meta",
+                "attachments",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class EnvelopeCreateFileTypedDict(TypedDict):
     file_name: str
@@ -1501,6 +1947,22 @@ class EnvelopeCreateFile(BaseModel):
         FieldMetadata(multipart=True),
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["contentType"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class EnvelopeCreateRequestTypedDict(TypedDict):
     payload: EnvelopeCreatePayloadTypedDict
@@ -1517,6 +1979,22 @@ class EnvelopeCreateRequest(BaseModel):
         FieldMetadata(multipart=MultipartFormMetadata(file=True)),
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["files"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class EnvelopeCreateInternalServerErrorIssueTypedDict(TypedDict):
     message: str
@@ -1528,9 +2006,7 @@ class EnvelopeCreateInternalServerErrorIssue(BaseModel):
 
 class EnvelopeCreateInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeCreateInternalServerErrorIssue]] = None
 
 
@@ -1562,9 +2038,7 @@ class EnvelopeCreateForbiddenIssue(BaseModel):
 
 class EnvelopeCreateForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeCreateForbiddenIssue]] = None
 
 
@@ -1596,9 +2070,7 @@ class EnvelopeCreateUnauthorizedIssue(BaseModel):
 
 class EnvelopeCreateUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeCreateUnauthorizedIssue]] = None
 
 
@@ -1630,9 +2102,7 @@ class EnvelopeCreateBadRequestIssue(BaseModel):
 
 class EnvelopeCreateBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeCreateBadRequestIssue]] = None
 
 

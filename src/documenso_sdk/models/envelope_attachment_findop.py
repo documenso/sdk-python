@@ -3,11 +3,12 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 from documenso_sdk.models import DocumensoError
-from documenso_sdk.types import BaseModel
+from documenso_sdk.types import BaseModel, UNSET_SENTINEL
 from documenso_sdk.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import httpx
 import pydantic
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -29,6 +30,22 @@ class EnvelopeAttachmentFindRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["token"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class EnvelopeAttachmentFindInternalServerErrorIssueTypedDict(TypedDict):
     message: str
@@ -40,9 +57,7 @@ class EnvelopeAttachmentFindInternalServerErrorIssue(BaseModel):
 
 class EnvelopeAttachmentFindInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeAttachmentFindInternalServerErrorIssue]] = None
 
 
@@ -74,9 +89,7 @@ class EnvelopeAttachmentFindNotFoundIssue(BaseModel):
 
 class EnvelopeAttachmentFindNotFoundErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeAttachmentFindNotFoundIssue]] = None
 
 
@@ -108,9 +121,7 @@ class EnvelopeAttachmentFindForbiddenIssue(BaseModel):
 
 class EnvelopeAttachmentFindForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeAttachmentFindForbiddenIssue]] = None
 
 
@@ -142,9 +153,7 @@ class EnvelopeAttachmentFindUnauthorizedIssue(BaseModel):
 
 class EnvelopeAttachmentFindUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeAttachmentFindUnauthorizedIssue]] = None
 
 
@@ -176,9 +185,7 @@ class EnvelopeAttachmentFindBadRequestIssue(BaseModel):
 
 class EnvelopeAttachmentFindBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeAttachmentFindBadRequestIssue]] = None
 
 

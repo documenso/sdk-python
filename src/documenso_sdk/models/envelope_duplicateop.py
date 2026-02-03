@@ -28,9 +28,7 @@ class EnvelopeDuplicateInternalServerErrorIssue(BaseModel):
 
 class EnvelopeDuplicateInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeDuplicateInternalServerErrorIssue]] = None
 
 
@@ -62,9 +60,7 @@ class EnvelopeDuplicateForbiddenIssue(BaseModel):
 
 class EnvelopeDuplicateForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeDuplicateForbiddenIssue]] = None
 
 
@@ -96,9 +92,7 @@ class EnvelopeDuplicateUnauthorizedIssue(BaseModel):
 
 class EnvelopeDuplicateUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeDuplicateUnauthorizedIssue]] = None
 
 
@@ -130,9 +124,7 @@ class EnvelopeDuplicateBadRequestIssue(BaseModel):
 
 class EnvelopeDuplicateBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeDuplicateBadRequestIssue]] = None
 
 

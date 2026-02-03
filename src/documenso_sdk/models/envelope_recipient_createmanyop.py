@@ -8,8 +8,24 @@ from enum import Enum
 import httpx
 import pydantic
 from pydantic import model_serializer
-from typing import List, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing import List, Optional, Union
+from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
+
+
+class EnvelopeRecipientCreateManyEmailEnum(str, Enum):
+    UNKNOWN = ""
+
+
+EnvelopeRecipientCreateManyEmailUnionTypedDict = TypeAliasType(
+    "EnvelopeRecipientCreateManyEmailUnionTypedDict",
+    Union[EnvelopeRecipientCreateManyEmailEnum, str],
+)
+
+
+EnvelopeRecipientCreateManyEmailUnion = TypeAliasType(
+    "EnvelopeRecipientCreateManyEmailUnion",
+    Union[EnvelopeRecipientCreateManyEmailEnum, str],
+)
 
 
 class EnvelopeRecipientCreateManyRoleRequest(str, Enum):
@@ -34,7 +50,7 @@ class EnvelopeRecipientCreateManyActionAuthRequest(str, Enum):
 
 
 class EnvelopeRecipientCreateManyDataRequestTypedDict(TypedDict):
-    email: str
+    email: EnvelopeRecipientCreateManyEmailUnionTypedDict
     name: str
     role: EnvelopeRecipientCreateManyRoleRequest
     signing_order: NotRequired[float]
@@ -43,7 +59,7 @@ class EnvelopeRecipientCreateManyDataRequestTypedDict(TypedDict):
 
 
 class EnvelopeRecipientCreateManyDataRequest(BaseModel):
-    email: str
+    email: EnvelopeRecipientCreateManyEmailUnion
 
     name: str
 
@@ -62,6 +78,22 @@ class EnvelopeRecipientCreateManyDataRequest(BaseModel):
         Optional[List[EnvelopeRecipientCreateManyActionAuthRequest]],
         pydantic.Field(alias="actionAuth"),
     ] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["signingOrder", "accessAuth", "actionAuth"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class EnvelopeRecipientCreateManyRequestTypedDict(TypedDict):
@@ -85,9 +117,7 @@ class EnvelopeRecipientCreateManyInternalServerErrorIssue(BaseModel):
 
 class EnvelopeRecipientCreateManyInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeRecipientCreateManyInternalServerErrorIssue]] = None
 
 
@@ -119,9 +149,7 @@ class EnvelopeRecipientCreateManyForbiddenIssue(BaseModel):
 
 class EnvelopeRecipientCreateManyForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeRecipientCreateManyForbiddenIssue]] = None
 
 
@@ -153,9 +181,7 @@ class EnvelopeRecipientCreateManyUnauthorizedIssue(BaseModel):
 
 class EnvelopeRecipientCreateManyUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeRecipientCreateManyUnauthorizedIssue]] = None
 
 
@@ -187,9 +213,7 @@ class EnvelopeRecipientCreateManyBadRequestIssue(BaseModel):
 
 class EnvelopeRecipientCreateManyBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeRecipientCreateManyBadRequestIssue]] = None
 
 
@@ -235,12 +259,12 @@ class EnvelopeRecipientCreateManySendStatus(str, Enum):
     SENT = "SENT"
 
 
-class EnvelopeRecipientCreateManyAccessAuthResponse(str, Enum):
+class EnvelopeRecipientCreateManyAuthOptionsAccessAuth(str, Enum):
     ACCOUNT = "ACCOUNT"
     TWO_FACTOR_AUTH = "TWO_FACTOR_AUTH"
 
 
-class EnvelopeRecipientCreateManyActionAuthResponse(str, Enum):
+class EnvelopeRecipientCreateManyAuthOptionsActionAuth(str, Enum):
     ACCOUNT = "ACCOUNT"
     PASSKEY = "PASSKEY"
     TWO_FACTOR_AUTH = "TWO_FACTOR_AUTH"
@@ -249,18 +273,18 @@ class EnvelopeRecipientCreateManyActionAuthResponse(str, Enum):
 
 
 class EnvelopeRecipientCreateManyAuthOptionsTypedDict(TypedDict):
-    access_auth: List[EnvelopeRecipientCreateManyAccessAuthResponse]
-    action_auth: List[EnvelopeRecipientCreateManyActionAuthResponse]
+    access_auth: List[EnvelopeRecipientCreateManyAuthOptionsAccessAuth]
+    action_auth: List[EnvelopeRecipientCreateManyAuthOptionsActionAuth]
 
 
 class EnvelopeRecipientCreateManyAuthOptions(BaseModel):
     access_auth: Annotated[
-        List[EnvelopeRecipientCreateManyAccessAuthResponse],
+        List[EnvelopeRecipientCreateManyAuthOptionsAccessAuth],
         pydantic.Field(alias="accessAuth"),
     ]
 
     action_auth: Annotated[
-        List[EnvelopeRecipientCreateManyActionAuthResponse],
+        List[EnvelopeRecipientCreateManyAuthOptionsActionAuth],
         pydantic.Field(alias="actionAuth"),
     ]
 
@@ -327,37 +351,14 @@ class EnvelopeRecipientCreateManyDataResponse(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = []
-        nullable_fields = [
-            "documentDeletedAt",
-            "expired",
-            "signedAt",
-            "authOptions",
-            "signingOrder",
-            "rejectionReason",
-        ]
-        null_default_fields = []
-
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
+            if val != UNSET_SENTINEL:
                 m[k] = val
 
         return m

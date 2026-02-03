@@ -28,9 +28,7 @@ class FolderDeleteFolderInternalServerErrorIssue(BaseModel):
 
 class FolderDeleteFolderInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FolderDeleteFolderInternalServerErrorIssue]] = None
 
 
@@ -62,9 +60,7 @@ class FolderDeleteFolderForbiddenIssue(BaseModel):
 
 class FolderDeleteFolderForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FolderDeleteFolderForbiddenIssue]] = None
 
 
@@ -96,9 +92,7 @@ class FolderDeleteFolderUnauthorizedIssue(BaseModel):
 
 class FolderDeleteFolderUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FolderDeleteFolderUnauthorizedIssue]] = None
 
 
@@ -130,9 +124,7 @@ class FolderDeleteFolderBadRequestIssue(BaseModel):
 
 class FolderDeleteFolderBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FolderDeleteFolderBadRequestIssue]] = None
 
 

@@ -18,18 +18,18 @@ from typing import Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
-class EnvelopeUpdateDataVisibility(str, Enum):
+class EnvelopeUpdateVisibilityRequest(str, Enum):
     EVERYONE = "EVERYONE"
     MANAGER_AND_ABOVE = "MANAGER_AND_ABOVE"
     ADMIN = "ADMIN"
 
 
-class EnvelopeUpdateDataGlobalAccessAuth(str, Enum):
+class EnvelopeUpdateGlobalAccessAuthRequest(str, Enum):
     ACCOUNT = "ACCOUNT"
     TWO_FACTOR_AUTH = "TWO_FACTOR_AUTH"
 
 
-class EnvelopeUpdateDataGlobalActionAuth(str, Enum):
+class EnvelopeUpdateGlobalActionAuthRequest(str, Enum):
     ACCOUNT = "ACCOUNT"
     PASSKEY = "PASSKEY"
     TWO_FACTOR_AUTH = "TWO_FACTOR_AUTH"
@@ -39,9 +39,9 @@ class EnvelopeUpdateDataGlobalActionAuth(str, Enum):
 class EnvelopeUpdateDataTypedDict(TypedDict):
     title: NotRequired[str]
     external_id: NotRequired[Nullable[str]]
-    visibility: NotRequired[EnvelopeUpdateDataVisibility]
-    global_access_auth: NotRequired[List[EnvelopeUpdateDataGlobalAccessAuth]]
-    global_action_auth: NotRequired[List[EnvelopeUpdateDataGlobalActionAuth]]
+    visibility: NotRequired[EnvelopeUpdateVisibilityRequest]
+    global_access_auth: NotRequired[List[EnvelopeUpdateGlobalAccessAuthRequest]]
+    global_action_auth: NotRequired[List[EnvelopeUpdateGlobalActionAuthRequest]]
     folder_id: NotRequired[Nullable[str]]
 
 
@@ -52,15 +52,15 @@ class EnvelopeUpdateData(BaseModel):
         OptionalNullable[str], pydantic.Field(alias="externalId")
     ] = UNSET
 
-    visibility: Optional[EnvelopeUpdateDataVisibility] = None
+    visibility: Optional[EnvelopeUpdateVisibilityRequest] = None
 
     global_access_auth: Annotated[
-        Optional[List[EnvelopeUpdateDataGlobalAccessAuth]],
+        Optional[List[EnvelopeUpdateGlobalAccessAuthRequest]],
         pydantic.Field(alias="globalAccessAuth"),
     ] = None
 
     global_action_auth: Annotated[
-        Optional[List[EnvelopeUpdateDataGlobalActionAuth]],
+        Optional[List[EnvelopeUpdateGlobalActionAuthRequest]],
         pydantic.Field(alias="globalActionAuth"),
     ] = None
 
@@ -70,38 +70,35 @@ class EnvelopeUpdateData(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "title",
-            "externalId",
-            "visibility",
-            "globalAccessAuth",
-            "globalActionAuth",
-            "folderId",
-        ]
-        nullable_fields = ["externalId", "folderId"]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "title",
+                "externalId",
+                "visibility",
+                "globalAccessAuth",
+                "globalActionAuth",
+                "folderId",
+            ]
+        )
+        nullable_fields = set(["externalId", "folderId"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -147,6 +144,7 @@ class EnvelopeUpdateLanguage(str, Enum):
     FR = "fr"
     ES = "es"
     IT = "it"
+    NL = "nl"
     PL = "pl"
     PT_BR = "pt-BR"
     JA = "ja"
@@ -192,6 +190,32 @@ class EnvelopeUpdateEmailSettings(BaseModel):
     owner_document_completed: Annotated[
         Optional[bool], pydantic.Field(alias="ownerDocumentCompleted")
     ] = True
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "recipientSigningRequest",
+                "recipientRemoved",
+                "recipientSigned",
+                "documentPending",
+                "documentCompleted",
+                "documentDeleted",
+                "ownerDocumentCompleted",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class EnvelopeUpdateMetaTypedDict(TypedDict):
@@ -265,47 +289,44 @@ class EnvelopeUpdateMeta(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "subject",
-            "message",
-            "timezone",
-            "dateFormat",
-            "distributionMethod",
-            "signingOrder",
-            "allowDictateNextSigner",
-            "redirectUrl",
-            "language",
-            "typedSignatureEnabled",
-            "uploadSignatureEnabled",
-            "drawSignatureEnabled",
-            "emailId",
-            "emailReplyTo",
-            "emailSettings",
-        ]
-        nullable_fields = ["emailId", "emailReplyTo", "emailSettings"]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "subject",
+                "message",
+                "timezone",
+                "dateFormat",
+                "distributionMethod",
+                "signingOrder",
+                "allowDictateNextSigner",
+                "redirectUrl",
+                "language",
+                "typedSignatureEnabled",
+                "uploadSignatureEnabled",
+                "drawSignatureEnabled",
+                "emailId",
+                "emailReplyTo",
+                "emailSettings",
+            ]
+        )
+        nullable_fields = set(["emailId", "emailReplyTo", "emailSettings"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -323,6 +344,22 @@ class EnvelopeUpdateRequest(BaseModel):
 
     meta: Optional[EnvelopeUpdateMeta] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data", "meta"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class EnvelopeUpdateInternalServerErrorIssueTypedDict(TypedDict):
     message: str
@@ -334,9 +371,7 @@ class EnvelopeUpdateInternalServerErrorIssue(BaseModel):
 
 class EnvelopeUpdateInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeUpdateInternalServerErrorIssue]] = None
 
 
@@ -368,9 +403,7 @@ class EnvelopeUpdateForbiddenIssue(BaseModel):
 
 class EnvelopeUpdateForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeUpdateForbiddenIssue]] = None
 
 
@@ -402,9 +435,7 @@ class EnvelopeUpdateUnauthorizedIssue(BaseModel):
 
 class EnvelopeUpdateUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeUpdateUnauthorizedIssue]] = None
 
 
@@ -436,9 +467,7 @@ class EnvelopeUpdateBadRequestIssue(BaseModel):
 
 class EnvelopeUpdateBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[EnvelopeUpdateBadRequestIssue]] = None
 
 
@@ -608,37 +637,14 @@ class EnvelopeUpdateResponse(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = []
-        nullable_fields = [
-            "externalId",
-            "completedAt",
-            "deletedAt",
-            "authOptions",
-            "formValues",
-            "folderId",
-        ]
-        null_default_fields = []
-
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
+            if val != UNSET_SENTINEL:
                 m[k] = val
 
         return m

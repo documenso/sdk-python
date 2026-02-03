@@ -63,6 +63,32 @@ class FieldUpdateDocumentFieldFieldMetaDropdownRequest(BaseModel):
 
     default_value: Annotated[Optional[str], pydantic.Field(alias="defaultValue")] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "values",
+                "defaultValue",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class FieldUpdateDocumentFieldFieldDropdownTypedDict(TypedDict):
     type: FieldUpdateDocumentFieldTypeDropdownRequest1
@@ -94,6 +120,24 @@ class FieldUpdateDocumentFieldFieldDropdown(BaseModel):
     width: Optional[float] = None
 
     height: Optional[float] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["fieldMeta", "pageNumber", "pageX", "pageY", "width", "height"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class FieldUpdateDocumentFieldTypeCheckboxRequest1(str, Enum):
@@ -163,6 +207,34 @@ class FieldUpdateDocumentFieldFieldMetaCheckboxRequest(BaseModel):
         FieldUpdateDocumentFieldDirectionCheckbox.VERTICAL
     )
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "values",
+                "validationRule",
+                "validationLength",
+                "direction",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class FieldUpdateDocumentFieldFieldCheckboxTypedDict(TypedDict):
     type: FieldUpdateDocumentFieldTypeCheckboxRequest1
@@ -194,6 +266,24 @@ class FieldUpdateDocumentFieldFieldCheckbox(BaseModel):
     width: Optional[float] = None
 
     height: Optional[float] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["fieldMeta", "pageNumber", "pageX", "pageY", "width", "height"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class FieldUpdateDocumentFieldTypeRadioRequest1(str, Enum):
@@ -253,6 +343,32 @@ class FieldUpdateDocumentFieldFieldMetaRadioRequest(BaseModel):
         FieldUpdateDocumentFieldDirectionRadio.VERTICAL
     )
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "values",
+                "direction",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class FieldUpdateDocumentFieldFieldRadioTypedDict(TypedDict):
     type: FieldUpdateDocumentFieldTypeRadioRequest1
@@ -284,6 +400,24 @@ class FieldUpdateDocumentFieldFieldRadio(BaseModel):
     width: Optional[float] = None
 
     height: Optional[float] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["fieldMeta", "pageNumber", "pageX", "pageY", "width", "height"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class FieldUpdateDocumentFieldTypeNumberRequest1(str, Enum):
@@ -370,52 +504,51 @@ class FieldUpdateDocumentFieldFieldMetaNumberRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "label",
-            "placeholder",
-            "required",
-            "readOnly",
-            "fontSize",
-            "numberFormat",
-            "value",
-            "minValue",
-            "maxValue",
-            "textAlign",
-            "lineHeight",
-            "letterSpacing",
-            "verticalAlign",
-        ]
-        nullable_fields = [
-            "numberFormat",
-            "minValue",
-            "maxValue",
-            "lineHeight",
-            "letterSpacing",
-            "verticalAlign",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "numberFormat",
+                "value",
+                "minValue",
+                "maxValue",
+                "textAlign",
+                "lineHeight",
+                "letterSpacing",
+                "verticalAlign",
+            ]
+        )
+        nullable_fields = set(
+            [
+                "numberFormat",
+                "minValue",
+                "maxValue",
+                "lineHeight",
+                "letterSpacing",
+                "verticalAlign",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -450,6 +583,24 @@ class FieldUpdateDocumentFieldFieldNumber(BaseModel):
     width: Optional[float] = None
 
     height: Optional[float] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["fieldMeta", "pageNumber", "pageX", "pageY", "width", "height"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class FieldUpdateDocumentFieldTypeTextRequest1(str, Enum):
@@ -526,43 +677,40 @@ class FieldUpdateDocumentFieldFieldMetaTextRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "label",
-            "placeholder",
-            "required",
-            "readOnly",
-            "fontSize",
-            "text",
-            "characterLimit",
-            "textAlign",
-            "lineHeight",
-            "letterSpacing",
-            "verticalAlign",
-        ]
-        nullable_fields = ["lineHeight", "letterSpacing", "verticalAlign"]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "text",
+                "characterLimit",
+                "textAlign",
+                "lineHeight",
+                "letterSpacing",
+                "verticalAlign",
+            ]
+        )
+        nullable_fields = set(["lineHeight", "letterSpacing", "verticalAlign"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -597,6 +745,24 @@ class FieldUpdateDocumentFieldFieldText(BaseModel):
     width: Optional[float] = None
 
     height: Optional[float] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["fieldMeta", "pageNumber", "pageX", "pageY", "width", "height"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class FieldUpdateDocumentFieldTypeDateRequest1(str, Enum):
@@ -641,6 +807,24 @@ class FieldUpdateDocumentFieldFieldMetaDateRequest(BaseModel):
         pydantic.Field(alias="textAlign"),
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class FieldUpdateDocumentFieldFieldDateTypedDict(TypedDict):
     type: FieldUpdateDocumentFieldTypeDateRequest1
@@ -672,6 +856,24 @@ class FieldUpdateDocumentFieldFieldDate(BaseModel):
     width: Optional[float] = None
 
     height: Optional[float] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["fieldMeta", "pageNumber", "pageX", "pageY", "width", "height"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class FieldUpdateDocumentFieldTypeEmailRequest1(str, Enum):
@@ -716,6 +918,24 @@ class FieldUpdateDocumentFieldFieldMetaEmailRequest(BaseModel):
         pydantic.Field(alias="textAlign"),
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class FieldUpdateDocumentFieldFieldEmailTypedDict(TypedDict):
     type: FieldUpdateDocumentFieldTypeEmailRequest1
@@ -747,6 +967,24 @@ class FieldUpdateDocumentFieldFieldEmail(BaseModel):
     width: Optional[float] = None
 
     height: Optional[float] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["fieldMeta", "pageNumber", "pageX", "pageY", "width", "height"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class FieldUpdateDocumentFieldTypeNameRequest1(str, Enum):
@@ -791,6 +1029,24 @@ class FieldUpdateDocumentFieldFieldMetaNameRequest(BaseModel):
         pydantic.Field(alias="textAlign"),
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class FieldUpdateDocumentFieldFieldNameTypedDict(TypedDict):
     type: FieldUpdateDocumentFieldTypeNameRequest1
@@ -822,6 +1078,24 @@ class FieldUpdateDocumentFieldFieldName(BaseModel):
     width: Optional[float] = None
 
     height: Optional[float] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["fieldMeta", "pageNumber", "pageX", "pageY", "width", "height"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class FieldUpdateDocumentFieldTypeInitialsRequest1(str, Enum):
@@ -866,6 +1140,24 @@ class FieldUpdateDocumentFieldFieldMetaInitialsRequest(BaseModel):
         pydantic.Field(alias="textAlign"),
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class FieldUpdateDocumentFieldFieldInitialsTypedDict(TypedDict):
     type: FieldUpdateDocumentFieldTypeInitialsRequest1
@@ -898,6 +1190,24 @@ class FieldUpdateDocumentFieldFieldInitials(BaseModel):
 
     height: Optional[float] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["fieldMeta", "pageNumber", "pageX", "pageY", "width", "height"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class FieldUpdateDocumentFieldTypeFreeSignature(str, Enum):
     FREE_SIGNATURE = "FREE_SIGNATURE"
@@ -927,6 +1237,22 @@ class FieldUpdateDocumentFieldFieldFreeSignature(BaseModel):
     width: Optional[float] = None
 
     height: Optional[float] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["pageNumber", "pageX", "pageY", "width", "height"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class FieldUpdateDocumentFieldTypeSignatureRequest1(str, Enum):
@@ -959,6 +1285,24 @@ class FieldUpdateDocumentFieldFieldMetaSignatureRequest(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["label", "placeholder", "required", "readOnly", "fontSize"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class FieldUpdateDocumentFieldFieldSignatureTypedDict(TypedDict):
     type: FieldUpdateDocumentFieldTypeSignatureRequest1
@@ -990,6 +1334,24 @@ class FieldUpdateDocumentFieldFieldSignature(BaseModel):
     width: Optional[float] = None
 
     height: Optional[float] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["fieldMeta", "pageNumber", "pageX", "pageY", "width", "height"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 FieldUpdateDocumentFieldFieldUnionTypedDict = TypeAliasType(
@@ -1049,9 +1411,7 @@ class FieldUpdateDocumentFieldInternalServerErrorIssue(BaseModel):
 
 class FieldUpdateDocumentFieldInternalServerErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldUpdateDocumentFieldInternalServerErrorIssue]] = None
 
 
@@ -1083,9 +1443,7 @@ class FieldUpdateDocumentFieldForbiddenIssue(BaseModel):
 
 class FieldUpdateDocumentFieldForbiddenErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldUpdateDocumentFieldForbiddenIssue]] = None
 
 
@@ -1117,9 +1475,7 @@ class FieldUpdateDocumentFieldUnauthorizedIssue(BaseModel):
 
 class FieldUpdateDocumentFieldUnauthorizedErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldUpdateDocumentFieldUnauthorizedIssue]] = None
 
 
@@ -1151,9 +1507,7 @@ class FieldUpdateDocumentFieldBadRequestIssue(BaseModel):
 
 class FieldUpdateDocumentFieldBadRequestErrorData(BaseModel):
     message: str
-
     code: str
-
     issues: Optional[List[FieldUpdateDocumentFieldBadRequestIssue]] = None
 
 
@@ -1229,6 +1583,32 @@ class FieldUpdateDocumentFieldFieldMetaDropdownResponse(BaseModel):
 
     default_value: Annotated[Optional[str], pydantic.Field(alias="defaultValue")] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "values",
+                "defaultValue",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class FieldUpdateDocumentFieldFieldMetaTypeCheckbox(str, Enum):
     CHECKBOX = "checkbox"
@@ -1293,6 +1673,34 @@ class FieldUpdateDocumentFieldFieldMetaCheckboxResponse(BaseModel):
         FieldUpdateDocumentFieldDirectionResponse2.VERTICAL
     )
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "values",
+                "validationRule",
+                "validationLength",
+                "direction",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class FieldUpdateDocumentFieldFieldMetaTypeRadio(str, Enum):
     RADIO = "radio"
@@ -1346,6 +1754,32 @@ class FieldUpdateDocumentFieldFieldMetaRadioResponse(BaseModel):
     direction: Optional[FieldUpdateDocumentFieldDirectionResponse1] = (
         FieldUpdateDocumentFieldDirectionResponse1.VERTICAL
     )
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "values",
+                "direction",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class FieldUpdateDocumentFieldFieldMetaTypeNumber(str, Enum):
@@ -1430,52 +1864,51 @@ class FieldUpdateDocumentFieldFieldMetaNumberResponse(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "label",
-            "placeholder",
-            "required",
-            "readOnly",
-            "fontSize",
-            "numberFormat",
-            "value",
-            "minValue",
-            "maxValue",
-            "textAlign",
-            "lineHeight",
-            "letterSpacing",
-            "verticalAlign",
-        ]
-        nullable_fields = [
-            "numberFormat",
-            "minValue",
-            "maxValue",
-            "lineHeight",
-            "letterSpacing",
-            "verticalAlign",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "numberFormat",
+                "value",
+                "minValue",
+                "maxValue",
+                "textAlign",
+                "lineHeight",
+                "letterSpacing",
+                "verticalAlign",
+            ]
+        )
+        nullable_fields = set(
+            [
+                "numberFormat",
+                "minValue",
+                "maxValue",
+                "lineHeight",
+                "letterSpacing",
+                "verticalAlign",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -1552,43 +1985,40 @@ class FieldUpdateDocumentFieldFieldMetaTextResponse(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "label",
-            "placeholder",
-            "required",
-            "readOnly",
-            "fontSize",
-            "text",
-            "characterLimit",
-            "textAlign",
-            "lineHeight",
-            "letterSpacing",
-            "verticalAlign",
-        ]
-        nullable_fields = ["lineHeight", "letterSpacing", "verticalAlign"]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "text",
+                "characterLimit",
+                "textAlign",
+                "lineHeight",
+                "letterSpacing",
+                "verticalAlign",
+            ]
+        )
+        nullable_fields = set(["lineHeight", "letterSpacing", "verticalAlign"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -1631,6 +2061,24 @@ class FieldUpdateDocumentFieldFieldMetaDateResponse(BaseModel):
         pydantic.Field(alias="textAlign"),
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class FieldUpdateDocumentFieldFieldMetaTypeEmail(str, Enum):
     EMAIL = "email"
@@ -1669,6 +2117,24 @@ class FieldUpdateDocumentFieldFieldMetaEmailResponse(BaseModel):
         Optional[FieldUpdateDocumentFieldTextAlignResponse3],
         pydantic.Field(alias="textAlign"),
     ] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class FieldUpdateDocumentFieldFieldMetaTypeName(str, Enum):
@@ -1709,6 +2175,24 @@ class FieldUpdateDocumentFieldFieldMetaNameResponse(BaseModel):
         pydantic.Field(alias="textAlign"),
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class FieldUpdateDocumentFieldFieldMetaTypeInitials(str, Enum):
     INITIALS = "initials"
@@ -1748,6 +2232,24 @@ class FieldUpdateDocumentFieldFieldMetaInitialsResponse(BaseModel):
         pydantic.Field(alias="textAlign"),
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class FieldUpdateDocumentFieldFieldMetaTypeSignature(str, Enum):
     SIGNATURE = "signature"
@@ -1774,6 +2276,24 @@ class FieldUpdateDocumentFieldFieldMetaSignatureResponse(BaseModel):
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["label", "placeholder", "required", "readOnly", "fontSize"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 FieldUpdateDocumentFieldFieldMetaUnionTypedDict = TypeAliasType(
@@ -1875,30 +2395,25 @@ class FieldUpdateDocumentFieldResponse(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["documentId", "templateId"]
-        nullable_fields = ["fieldMeta", "documentId", "templateId"]
-        null_default_fields = []
-
+        optional_fields = set(["documentId", "templateId"])
+        nullable_fields = set(["fieldMeta", "documentId", "templateId"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
