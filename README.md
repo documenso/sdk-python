@@ -91,7 +91,7 @@ It's also possible to write a standalone Python script without needing to set up
 ```python
 #!/usr/bin/env -S uv run --script
 # /// script
-# requires-python = ">=3.9"
+# requires-python = ">=3.10"
 # dependencies = [
 #     "documenso_sdk",
 # ]
@@ -261,7 +261,7 @@ if __name__ == "__main__":
 * [distribute](docs/sdks/documents/README.md#distribute) - Distribute document
 * [redistribute](docs/sdks/documents/README.md#redistribute) - Redistribute document
 * [download](docs/sdks/documents/README.md#download) - Download document
-* [create_v0](docs/sdks/documents/README.md#create_v0) - Create document
+* [~~create_v0~~](docs/sdks/documents/README.md#create_v0) - Create document :warning: **Deprecated**
 
 #### [Documents.Attachments](docs/sdks/documentsattachments/README.md)
 

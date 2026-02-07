@@ -90,7 +90,7 @@ class EnvelopeFieldUpdateManyFieldMetaDropdownRequest(BaseModel):
         return m
 
 
-class EnvelopeFieldUpdateManyDataDropdownTypedDict(TypedDict):
+class DataDropdownTypedDict(TypedDict):
     type: EnvelopeFieldUpdateManyTypeDropdownRequest1
     id: float
     field_meta: NotRequired[EnvelopeFieldUpdateManyFieldMetaDropdownRequestTypedDict]
@@ -102,7 +102,7 @@ class EnvelopeFieldUpdateManyDataDropdownTypedDict(TypedDict):
     height: NotRequired[float]
 
 
-class EnvelopeFieldUpdateManyDataDropdown(BaseModel):
+class DataDropdown(BaseModel):
     type: EnvelopeFieldUpdateManyTypeDropdownRequest1
 
     id: float
@@ -249,7 +249,7 @@ class EnvelopeFieldUpdateManyFieldMetaCheckboxRequest(BaseModel):
         return m
 
 
-class EnvelopeFieldUpdateManyDataCheckboxTypedDict(TypedDict):
+class DataCheckboxTypedDict(TypedDict):
     type: EnvelopeFieldUpdateManyTypeCheckboxRequest1
     id: float
     field_meta: NotRequired[EnvelopeFieldUpdateManyFieldMetaCheckboxRequestTypedDict]
@@ -261,7 +261,7 @@ class EnvelopeFieldUpdateManyDataCheckboxTypedDict(TypedDict):
     height: NotRequired[float]
 
 
-class EnvelopeFieldUpdateManyDataCheckbox(BaseModel):
+class DataCheckbox(BaseModel):
     type: EnvelopeFieldUpdateManyTypeCheckboxRequest1
 
     id: float
@@ -396,7 +396,7 @@ class EnvelopeFieldUpdateManyFieldMetaRadioRequest(BaseModel):
         return m
 
 
-class EnvelopeFieldUpdateManyDataRadioTypedDict(TypedDict):
+class DataRadioTypedDict(TypedDict):
     type: EnvelopeFieldUpdateManyTypeRadioRequest1
     id: float
     field_meta: NotRequired[EnvelopeFieldUpdateManyFieldMetaRadioRequestTypedDict]
@@ -408,7 +408,7 @@ class EnvelopeFieldUpdateManyDataRadioTypedDict(TypedDict):
     height: NotRequired[float]
 
 
-class EnvelopeFieldUpdateManyDataRadio(BaseModel):
+class DataRadio(BaseModel):
     type: EnvelopeFieldUpdateManyTypeRadioRequest1
 
     id: float
@@ -592,7 +592,7 @@ class EnvelopeFieldUpdateManyFieldMetaNumberRequest(BaseModel):
         return m
 
 
-class EnvelopeFieldUpdateManyDataNumberTypedDict(TypedDict):
+class DataNumberTypedDict(TypedDict):
     type: EnvelopeFieldUpdateManyTypeNumberRequest1
     id: float
     field_meta: NotRequired[EnvelopeFieldUpdateManyFieldMetaNumberRequestTypedDict]
@@ -604,7 +604,7 @@ class EnvelopeFieldUpdateManyDataNumberTypedDict(TypedDict):
     height: NotRequired[float]
 
 
-class EnvelopeFieldUpdateManyDataNumber(BaseModel):
+class DataNumber(BaseModel):
     type: EnvelopeFieldUpdateManyTypeNumberRequest1
 
     id: float
@@ -767,7 +767,7 @@ class EnvelopeFieldUpdateManyFieldMetaTextRequest(BaseModel):
         return m
 
 
-class EnvelopeFieldUpdateManyDataTextTypedDict(TypedDict):
+class DataTextTypedDict(TypedDict):
     type: EnvelopeFieldUpdateManyTypeTextRequest1
     id: float
     field_meta: NotRequired[EnvelopeFieldUpdateManyFieldMetaTextRequestTypedDict]
@@ -779,7 +779,7 @@ class EnvelopeFieldUpdateManyDataTextTypedDict(TypedDict):
     height: NotRequired[float]
 
 
-class EnvelopeFieldUpdateManyDataText(BaseModel):
+class DataText(BaseModel):
     type: EnvelopeFieldUpdateManyTypeTextRequest1
 
     id: float
@@ -891,7 +891,7 @@ class EnvelopeFieldUpdateManyFieldMetaDateRequest(BaseModel):
         return m
 
 
-class EnvelopeFieldUpdateManyDataDateTypedDict(TypedDict):
+class DataDateTypedDict(TypedDict):
     type: EnvelopeFieldUpdateManyTypeDateRequest1
     id: float
     field_meta: NotRequired[EnvelopeFieldUpdateManyFieldMetaDateRequestTypedDict]
@@ -903,7 +903,7 @@ class EnvelopeFieldUpdateManyDataDateTypedDict(TypedDict):
     height: NotRequired[float]
 
 
-class EnvelopeFieldUpdateManyDataDate(BaseModel):
+class DataDate(BaseModel):
     type: EnvelopeFieldUpdateManyTypeDateRequest1
 
     id: float
@@ -1015,7 +1015,7 @@ class EnvelopeFieldUpdateManyFieldMetaEmailRequest(BaseModel):
         return m
 
 
-class EnvelopeFieldUpdateManyDataEmailTypedDict(TypedDict):
+class DataEmailTypedDict(TypedDict):
     type: EnvelopeFieldUpdateManyTypeEmailRequest1
     id: float
     field_meta: NotRequired[EnvelopeFieldUpdateManyFieldMetaEmailRequestTypedDict]
@@ -1027,7 +1027,7 @@ class EnvelopeFieldUpdateManyDataEmailTypedDict(TypedDict):
     height: NotRequired[float]
 
 
-class EnvelopeFieldUpdateManyDataEmail(BaseModel):
+class DataEmail(BaseModel):
     type: EnvelopeFieldUpdateManyTypeEmailRequest1
 
     id: float
@@ -1139,7 +1139,7 @@ class EnvelopeFieldUpdateManyFieldMetaNameRequest(BaseModel):
         return m
 
 
-class EnvelopeFieldUpdateManyDataNameTypedDict(TypedDict):
+class DataNameTypedDict(TypedDict):
     type: EnvelopeFieldUpdateManyTypeNameRequest1
     id: float
     field_meta: NotRequired[EnvelopeFieldUpdateManyFieldMetaNameRequestTypedDict]
@@ -1151,7 +1151,7 @@ class EnvelopeFieldUpdateManyDataNameTypedDict(TypedDict):
     height: NotRequired[float]
 
 
-class EnvelopeFieldUpdateManyDataName(BaseModel):
+class DataName(BaseModel):
     type: EnvelopeFieldUpdateManyTypeNameRequest1
 
     id: float
@@ -1263,7 +1263,7 @@ class EnvelopeFieldUpdateManyFieldMetaInitialsRequest(BaseModel):
         return m
 
 
-class EnvelopeFieldUpdateManyDataInitialsTypedDict(TypedDict):
+class DataInitialsTypedDict(TypedDict):
     type: EnvelopeFieldUpdateManyTypeInitialsRequest1
     id: float
     field_meta: NotRequired[EnvelopeFieldUpdateManyFieldMetaInitialsRequestTypedDict]
@@ -1275,7 +1275,7 @@ class EnvelopeFieldUpdateManyDataInitialsTypedDict(TypedDict):
     height: NotRequired[float]
 
 
-class EnvelopeFieldUpdateManyDataInitials(BaseModel):
+class DataInitials(BaseModel):
     type: EnvelopeFieldUpdateManyTypeInitialsRequest1
 
     id: float
@@ -1330,7 +1330,7 @@ class EnvelopeFieldUpdateManyTypeFreeSignature(str, Enum):
     FREE_SIGNATURE = "FREE_SIGNATURE"
 
 
-class EnvelopeFieldUpdateManyDataFreeSignatureTypedDict(TypedDict):
+class DataFreeSignatureTypedDict(TypedDict):
     type: EnvelopeFieldUpdateManyTypeFreeSignature
     id: float
     envelope_item_id: NotRequired[str]
@@ -1341,7 +1341,7 @@ class EnvelopeFieldUpdateManyDataFreeSignatureTypedDict(TypedDict):
     height: NotRequired[float]
 
 
-class EnvelopeFieldUpdateManyDataFreeSignature(BaseModel):
+class DataFreeSignature(BaseModel):
     type: EnvelopeFieldUpdateManyTypeFreeSignature
 
     id: float
@@ -1428,7 +1428,7 @@ class EnvelopeFieldUpdateManyFieldMetaSignatureRequest(BaseModel):
         return m
 
 
-class EnvelopeFieldUpdateManyDataSignatureTypedDict(TypedDict):
+class DataSignatureTypedDict(TypedDict):
     type: EnvelopeFieldUpdateManyTypeSignatureRequest1
     id: float
     field_meta: NotRequired[EnvelopeFieldUpdateManyFieldMetaSignatureRequestTypedDict]
@@ -1440,7 +1440,7 @@ class EnvelopeFieldUpdateManyDataSignatureTypedDict(TypedDict):
     height: NotRequired[float]
 
 
-class EnvelopeFieldUpdateManyDataSignature(BaseModel):
+class DataSignature(BaseModel):
     type: EnvelopeFieldUpdateManyTypeSignatureRequest1
 
     id: float
@@ -1494,34 +1494,34 @@ class EnvelopeFieldUpdateManyDataSignature(BaseModel):
 EnvelopeFieldUpdateManyDataUnionTypedDict = TypeAliasType(
     "EnvelopeFieldUpdateManyDataUnionTypedDict",
     Union[
-        EnvelopeFieldUpdateManyDataFreeSignatureTypedDict,
-        EnvelopeFieldUpdateManyDataSignatureTypedDict,
-        EnvelopeFieldUpdateManyDataInitialsTypedDict,
-        EnvelopeFieldUpdateManyDataNameTypedDict,
-        EnvelopeFieldUpdateManyDataEmailTypedDict,
-        EnvelopeFieldUpdateManyDataDateTypedDict,
-        EnvelopeFieldUpdateManyDataTextTypedDict,
-        EnvelopeFieldUpdateManyDataNumberTypedDict,
-        EnvelopeFieldUpdateManyDataRadioTypedDict,
-        EnvelopeFieldUpdateManyDataCheckboxTypedDict,
-        EnvelopeFieldUpdateManyDataDropdownTypedDict,
+        DataFreeSignatureTypedDict,
+        DataSignatureTypedDict,
+        DataInitialsTypedDict,
+        DataNameTypedDict,
+        DataEmailTypedDict,
+        DataDateTypedDict,
+        DataTextTypedDict,
+        DataNumberTypedDict,
+        DataRadioTypedDict,
+        DataCheckboxTypedDict,
+        DataDropdownTypedDict,
     ],
 )
 
 
 EnvelopeFieldUpdateManyDataUnion = Annotated[
     Union[
-        Annotated[EnvelopeFieldUpdateManyDataSignature, Tag("SIGNATURE")],
-        Annotated[EnvelopeFieldUpdateManyDataFreeSignature, Tag("FREE_SIGNATURE")],
-        Annotated[EnvelopeFieldUpdateManyDataInitials, Tag("INITIALS")],
-        Annotated[EnvelopeFieldUpdateManyDataName, Tag("NAME")],
-        Annotated[EnvelopeFieldUpdateManyDataEmail, Tag("EMAIL")],
-        Annotated[EnvelopeFieldUpdateManyDataDate, Tag("DATE")],
-        Annotated[EnvelopeFieldUpdateManyDataText, Tag("TEXT")],
-        Annotated[EnvelopeFieldUpdateManyDataNumber, Tag("NUMBER")],
-        Annotated[EnvelopeFieldUpdateManyDataRadio, Tag("RADIO")],
-        Annotated[EnvelopeFieldUpdateManyDataCheckbox, Tag("CHECKBOX")],
-        Annotated[EnvelopeFieldUpdateManyDataDropdown, Tag("DROPDOWN")],
+        Annotated[DataSignature, Tag("SIGNATURE")],
+        Annotated[DataFreeSignature, Tag("FREE_SIGNATURE")],
+        Annotated[DataInitials, Tag("INITIALS")],
+        Annotated[DataName, Tag("NAME")],
+        Annotated[DataEmail, Tag("EMAIL")],
+        Annotated[DataDate, Tag("DATE")],
+        Annotated[DataText, Tag("TEXT")],
+        Annotated[DataNumber, Tag("NUMBER")],
+        Annotated[DataRadio, Tag("RADIO")],
+        Annotated[DataCheckbox, Tag("CHECKBOX")],
+        Annotated[DataDropdown, Tag("DROPDOWN")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]

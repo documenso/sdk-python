@@ -13,7 +13,7 @@
 * [distribute](#distribute) - Distribute document
 * [redistribute](#redistribute) - Redistribute document
 * [download](#download) - Download document
-* [create_v0](#create_v0) - Create document
+* [~~create_v0~~](#create_v0) - Create document :warning: **Deprecated**
 
 ## get
 
@@ -439,9 +439,11 @@ with Documenso(
 | models.DocumentDownloadInternalServerError | 500                                        | application/json                           |
 | models.APIError                            | 4XX, 5XX                                   | \*/\*                                      |
 
-## create_v0
+## ~~create_v0~~
 
 You will need to upload the PDF to the provided URL returned. Note: Once V2 API is released, this will be removed since we will allow direct uploads, instead of using an upload URL.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 

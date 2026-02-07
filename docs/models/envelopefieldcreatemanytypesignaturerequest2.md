@@ -1,8 +1,0 @@
-# EnvelopeFieldCreateManyTypeSignatureRequest2
-
-
-## Values
-
-| Name        | Value       |
-| ----------- | ----------- |
-| `SIGNATURE` | signature   |
