@@ -3,69 +3,15 @@
 
 ## Supported Types
 
-### `models.EnvelopeFieldCreateManyDataSignature`
+### `models.EnvelopeFieldCreateManyDataRequest1`
 
 ```python
-value: models.EnvelopeFieldCreateManyDataSignature = /* values here */
+value: models.EnvelopeFieldCreateManyDataRequest1 = /* values here */
 ```
 
-### `models.EnvelopeFieldCreateManyDataFreeSignature`
+### `models.EnvelopeFieldCreateManyDataRequest2`
 
 ```python
-value: models.EnvelopeFieldCreateManyDataFreeSignature = /* values here */
-```
-
-### `models.EnvelopeFieldCreateManyDataInitials`
-
-```python
-value: models.EnvelopeFieldCreateManyDataInitials = /* values here */
-```
-
-### `models.EnvelopeFieldCreateManyDataName`
-
-```python
-value: models.EnvelopeFieldCreateManyDataName = /* values here */
-```
-
-### `models.EnvelopeFieldCreateManyDataEmail`
-
-```python
-value: models.EnvelopeFieldCreateManyDataEmail = /* values here */
-```
-
-### `models.EnvelopeFieldCreateManyDataDate`
-
-```python
-value: models.EnvelopeFieldCreateManyDataDate = /* values here */
-```
-
-### `models.EnvelopeFieldCreateManyDataText`
-
-```python
-value: models.EnvelopeFieldCreateManyDataText = /* values here */
-```
-
-### `models.EnvelopeFieldCreateManyDataNumber`
-
-```python
-value: models.EnvelopeFieldCreateManyDataNumber = /* values here */
-```
-
-### `models.EnvelopeFieldCreateManyDataRadio`
-
-```python
-value: models.EnvelopeFieldCreateManyDataRadio = /* values here */
-```
-
-### `models.EnvelopeFieldCreateManyDataCheckbox`
-
-```python
-value: models.EnvelopeFieldCreateManyDataCheckbox = /* values here */
-```
-
-### `models.EnvelopeFieldCreateManyDataDropdown`
-
-```python
-value: models.EnvelopeFieldCreateManyDataDropdown = /* values here */
+value: models.EnvelopeFieldCreateManyDataRequest2 = /* values here */
 ```
 

@@ -3,63 +3,63 @@
 
 ## Supported Types
 
-### `models.EnvelopeFieldCreateManyFieldMetaSignatureResponse`
+### `models.EnvelopeFieldCreateManyFieldMetaSignature`
 
 ```python
-value: models.EnvelopeFieldCreateManyFieldMetaSignatureResponse = /* values here */
+value: models.EnvelopeFieldCreateManyFieldMetaSignature = /* values here */
 ```
 
-### `models.EnvelopeFieldCreateManyFieldMetaInitialsResponse`
+### `models.EnvelopeFieldCreateManyFieldMetaInitials`
 
 ```python
-value: models.EnvelopeFieldCreateManyFieldMetaInitialsResponse = /* values here */
+value: models.EnvelopeFieldCreateManyFieldMetaInitials = /* values here */
 ```
 
-### `models.EnvelopeFieldCreateManyFieldMetaNameResponse`
+### `models.EnvelopeFieldCreateManyFieldMetaName`
 
 ```python
-value: models.EnvelopeFieldCreateManyFieldMetaNameResponse = /* values here */
+value: models.EnvelopeFieldCreateManyFieldMetaName = /* values here */
 ```
 
-### `models.EnvelopeFieldCreateManyFieldMetaEmailResponse`
+### `models.EnvelopeFieldCreateManyFieldMetaEmail`
 
 ```python
-value: models.EnvelopeFieldCreateManyFieldMetaEmailResponse = /* values here */
+value: models.EnvelopeFieldCreateManyFieldMetaEmail = /* values here */
 ```
 
-### `models.EnvelopeFieldCreateManyFieldMetaDateResponse`
+### `models.EnvelopeFieldCreateManyFieldMetaDate`
 
 ```python
-value: models.EnvelopeFieldCreateManyFieldMetaDateResponse = /* values here */
+value: models.EnvelopeFieldCreateManyFieldMetaDate = /* values here */
 ```
 
-### `models.EnvelopeFieldCreateManyFieldMetaTextResponse`
+### `models.EnvelopeFieldCreateManyFieldMetaText`
 
 ```python
-value: models.EnvelopeFieldCreateManyFieldMetaTextResponse = /* values here */
+value: models.EnvelopeFieldCreateManyFieldMetaText = /* values here */
 ```
 
-### `models.EnvelopeFieldCreateManyFieldMetaNumberResponse`
+### `models.EnvelopeFieldCreateManyFieldMetaNumber`
 
 ```python
-value: models.EnvelopeFieldCreateManyFieldMetaNumberResponse = /* values here */
+value: models.EnvelopeFieldCreateManyFieldMetaNumber = /* values here */
 ```
 
-### `models.EnvelopeFieldCreateManyFieldMetaRadioResponse`
+### `models.EnvelopeFieldCreateManyFieldMetaRadio`
 
 ```python
-value: models.EnvelopeFieldCreateManyFieldMetaRadioResponse = /* values here */
+value: models.EnvelopeFieldCreateManyFieldMetaRadio = /* values here */
 ```
 
-### `models.EnvelopeFieldCreateManyFieldMetaCheckboxResponse`
+### `models.EnvelopeFieldCreateManyFieldMetaCheckbox`
 
 ```python
-value: models.EnvelopeFieldCreateManyFieldMetaCheckboxResponse = /* values here */
+value: models.EnvelopeFieldCreateManyFieldMetaCheckbox = /* values here */
 ```
 
-### `models.EnvelopeFieldCreateManyFieldMetaDropdownResponse`
+### `models.EnvelopeFieldCreateManyFieldMetaDropdown`
 
 ```python
-value: models.EnvelopeFieldCreateManyFieldMetaDropdownResponse = /* values here */
+value: models.EnvelopeFieldCreateManyFieldMetaDropdown = /* values here */
 ```
 
