@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `models.Change`
+### `models.Change2`
 
 ```python
-value: models.Change = /* values here */
+value: models.Change2 = /* values here */
 ```
 
 ### `models.ChangePassword`

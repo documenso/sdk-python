@@ -1,5 +1,13 @@
 # EnvelopeGetManyStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeGetManyStatus
+
+value = EnvelopeGetManyStatus.DRAFT
+```
+
 
 ## Values
 
@@ -9,3 +17,4 @@
 | `PENDING`   | PENDING     |
 | `COMPLETED` | COMPLETED   |
 | `REJECTED`  | REJECTED    |
+| `CANCELLED` | CANCELLED   |

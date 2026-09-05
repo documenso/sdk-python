@@ -35,6 +35,14 @@ class EnvelopeFindQueryParamStatus(str, Enum):
     PENDING = "PENDING"
     COMPLETED = "COMPLETED"
     REJECTED = "REJECTED"
+    CANCELLED = "CANCELLED"
+
+
+class EnvelopeFindHasExpiredRecipients(str, Enum):
+    r"""Filter for envelopes that have at least one recipient whose signing link has expired."""
+
+    TRUE = "true"
+    FALSE = "false"
 
 
 class EnvelopeFindOrderByColumn(str, Enum):
@@ -63,6 +71,8 @@ class EnvelopeFindRequestTypedDict(TypedDict):
     r"""Filter envelopes by how it was created."""
     status: NotRequired[EnvelopeFindQueryParamStatus]
     r"""Filter envelopes by the current status."""
+    has_expired_recipients: NotRequired[EnvelopeFindHasExpiredRecipients]
+    r"""Filter for envelopes that have at least one recipient whose signing link has expired."""
     folder_id: NotRequired[str]
     r"""Filter envelopes by folder ID."""
     order_by_column: NotRequired[EnvelopeFindOrderByColumn]
@@ -115,6 +125,13 @@ class EnvelopeFindRequest(BaseModel):
     ] = None
     r"""Filter envelopes by the current status."""
 
+    has_expired_recipients: Annotated[
+        Optional[EnvelopeFindHasExpiredRecipients],
+        pydantic.Field(alias="hasExpiredRecipients"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter for envelopes that have at least one recipient whose signing link has expired."""
+
     folder_id: Annotated[
         Optional[str],
         pydantic.Field(alias="folderId"),
@@ -146,6 +163,7 @@ class EnvelopeFindRequest(BaseModel):
                 "templateId",
                 "source",
                 "status",
+                "hasExpiredRecipients",
                 "folderId",
                 "orderByColumn",
                 "orderByDirection",
@@ -156,7 +174,7 @@ class EnvelopeFindRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -335,6 +353,7 @@ class EnvelopeFindDataStatus(str, Enum):
     PENDING = "PENDING"
     COMPLETED = "COMPLETED"
     REJECTED = "REJECTED"
+    CANCELLED = "CANCELLED"
 
 
 class EnvelopeFindDataSource(str, Enum):
@@ -352,6 +371,7 @@ class EnvelopeFindVisibility(str, Enum):
 class EnvelopeFindTemplateType(str, Enum):
     PUBLIC = "PUBLIC"
     PRIVATE = "PRIVATE"
+    ORGANISATION = "ORGANISATION"
 
 
 class EnvelopeFindGlobalAccessAuth(str, Enum):
@@ -469,6 +489,8 @@ class EnvelopeFindRecipientTypedDict(TypedDict):
     token: str
     document_deleted_at: Nullable[str]
     expired: Nullable[str]
+    expires_at: Nullable[str]
+    expiration_notified_at: Nullable[str]
     signed_at: Nullable[str]
     auth_options: Nullable[EnvelopeFindRecipientAuthOptionsTypedDict]
     signing_order: Nullable[float]
@@ -502,6 +524,12 @@ class EnvelopeFindRecipient(BaseModel):
 
     expired: Nullable[str]
 
+    expires_at: Annotated[Nullable[str], pydantic.Field(alias="expiresAt")]
+
+    expiration_notified_at: Annotated[
+        Nullable[str], pydantic.Field(alias="expirationNotifiedAt")
+    ]
+
     signed_at: Annotated[Nullable[str], pydantic.Field(alias="signedAt")]
 
     auth_options: Annotated[
@@ -519,7 +547,7 @@ class EnvelopeFindRecipient(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 m[k] = val
@@ -630,7 +658,7 @@ class EnvelopeFindData(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 m[k] = val
@@ -660,3 +688,25 @@ class EnvelopeFindResponse(BaseModel):
     per_page: Annotated[float, pydantic.Field(alias="perPage")]
 
     total_pages: Annotated[float, pydantic.Field(alias="totalPages")]
+
+
+try:
+    EnvelopeFindAuthOptions.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFindRecipientAuthOptions.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFindRecipient.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFindData.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFindResponse.model_rebuild()
+except NameError:
+    pass

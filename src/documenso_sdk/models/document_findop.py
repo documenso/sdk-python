@@ -34,6 +34,14 @@ class DocumentFindQueryParamStatus(str, Enum):
     PENDING = "PENDING"
     COMPLETED = "COMPLETED"
     REJECTED = "REJECTED"
+    CANCELLED = "CANCELLED"
+
+
+class DocumentFindHasExpiredRecipients(str, Enum):
+    r"""Filter for documents that have at least one recipient whose signing link has expired."""
+
+    TRUE = "true"
+    FALSE = "false"
 
 
 class DocumentFindOrderByColumn(str, Enum):
@@ -58,6 +66,8 @@ class DocumentFindRequestTypedDict(TypedDict):
     r"""Filter documents by how it was created."""
     status: NotRequired[DocumentFindQueryParamStatus]
     r"""Filter documents by the current status"""
+    has_expired_recipients: NotRequired[DocumentFindHasExpiredRecipients]
+    r"""Filter for documents that have at least one recipient whose signing link has expired."""
     folder_id: NotRequired[str]
     r"""Filter documents by folder ID"""
     order_by_column: NotRequired[DocumentFindOrderByColumn]
@@ -103,6 +113,13 @@ class DocumentFindRequest(BaseModel):
     ] = None
     r"""Filter documents by the current status"""
 
+    has_expired_recipients: Annotated[
+        Optional[DocumentFindHasExpiredRecipients],
+        pydantic.Field(alias="hasExpiredRecipients"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter for documents that have at least one recipient whose signing link has expired."""
+
     folder_id: Annotated[
         Optional[str],
         pydantic.Field(alias="folderId"),
@@ -132,6 +149,7 @@ class DocumentFindRequest(BaseModel):
                 "templateId",
                 "source",
                 "status",
+                "hasExpiredRecipients",
                 "folderId",
                 "orderByColumn",
                 "orderByDirection",
@@ -142,7 +160,7 @@ class DocumentFindRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -322,6 +340,7 @@ class DocumentFindDataStatus(str, Enum):
     PENDING = "PENDING"
     COMPLETED = "COMPLETED"
     REJECTED = "REJECTED"
+    CANCELLED = "CANCELLED"
 
 
 class DocumentFindDataSource(str, Enum):
@@ -387,7 +406,7 @@ class DocumentFindUser(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 m[k] = val
@@ -459,6 +478,8 @@ class DocumentFindRecipientTypedDict(TypedDict):
     token: str
     document_deleted_at: Nullable[str]
     expired: Nullable[str]
+    expires_at: Nullable[str]
+    expiration_notified_at: Nullable[str]
     signed_at: Nullable[str]
     auth_options: Nullable[DocumentFindRecipientAuthOptionsTypedDict]
     signing_order: Nullable[float]
@@ -494,6 +515,12 @@ class DocumentFindRecipient(BaseModel):
 
     expired: Nullable[str]
 
+    expires_at: Annotated[Nullable[str], pydantic.Field(alias="expiresAt")]
+
+    expiration_notified_at: Annotated[
+        Nullable[str], pydantic.Field(alias="expirationNotifiedAt")
+    ]
+
     signed_at: Annotated[Nullable[str], pydantic.Field(alias="signedAt")]
 
     auth_options: Annotated[
@@ -519,6 +546,8 @@ class DocumentFindRecipient(BaseModel):
             [
                 "documentDeletedAt",
                 "expired",
+                "expiresAt",
+                "expirationNotifiedAt",
                 "signedAt",
                 "authOptions",
                 "signingOrder",
@@ -532,7 +561,7 @@ class DocumentFindRecipient(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -663,7 +692,7 @@ class DocumentFindData(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -702,3 +731,25 @@ class DocumentFindResponse(BaseModel):
     per_page: Annotated[float, pydantic.Field(alias="perPage")]
 
     total_pages: Annotated[float, pydantic.Field(alias="totalPages")]
+
+
+try:
+    DocumentFindAuthOptions.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentFindRecipientAuthOptions.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentFindRecipient.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentFindData.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentFindResponse.model_rebuild()
+except NameError:
+    pass

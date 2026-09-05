@@ -1,5 +1,13 @@
 # EnvelopeRecipientUpdateManyReadStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeRecipientUpdateManyReadStatus
+
+value = EnvelopeRecipientUpdateManyReadStatus.NOT_OPENED
+```
+
 
 ## Values
 

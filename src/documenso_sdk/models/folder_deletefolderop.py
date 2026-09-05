@@ -156,3 +156,9 @@ class FolderDeleteFolderResponse(BaseModel):
     r"""Successful response"""
 
     success: bool
+
+
+try:
+    FolderDeleteFolderRequest.model_rebuild()
+except NameError:
+    pass

@@ -1,5 +1,13 @@
 # EnvelopeAuditLogFindActionAuth1
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeAuditLogFindActionAuth1
+
+value = EnvelopeAuditLogFindActionAuth1.ACCOUNT
+```
+
 
 ## Values
 

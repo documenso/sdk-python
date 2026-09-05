@@ -1,5 +1,13 @@
 # TemplateCreateDocumentFromTemplateVerticalAlign2
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateCreateDocumentFromTemplateVerticalAlign2
+
+value = TemplateCreateDocumentFromTemplateVerticalAlign2.TOP
+```
+
 
 ## Values
 

@@ -23,6 +23,13 @@ class EnvelopeFieldUpdateManyTypeDropdownRequest1(str, Enum):
     DROPDOWN = "DROPDOWN"
 
 
+class EnvelopeFieldUpdateManyOverflowDropdown(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
+
+
 class EnvelopeFieldUpdateManyTypeDropdownRequest2(str, Enum):
     DROPDOWN = "dropdown"
 
@@ -42,6 +49,7 @@ class EnvelopeFieldUpdateManyFieldMetaDropdownRequestTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[EnvelopeFieldUpdateManyOverflowDropdown]
     values: NotRequired[List[EnvelopeFieldUpdateManyValueDropdownTypedDict]]
     default_value: NotRequired[str]
 
@@ -59,6 +67,8 @@ class EnvelopeFieldUpdateManyFieldMetaDropdownRequest(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[EnvelopeFieldUpdateManyOverflowDropdown] = None
+
     values: Optional[List[EnvelopeFieldUpdateManyValueDropdown]] = None
 
     default_value: Annotated[Optional[str], pydantic.Field(alias="defaultValue")] = None
@@ -72,6 +82,7 @@ class EnvelopeFieldUpdateManyFieldMetaDropdownRequest(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "values",
                 "defaultValue",
             ]
@@ -81,7 +92,7 @@ class EnvelopeFieldUpdateManyFieldMetaDropdownRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -90,7 +101,7 @@ class EnvelopeFieldUpdateManyFieldMetaDropdownRequest(BaseModel):
         return m
 
 
-class DataDropdownTypedDict(TypedDict):
+class EnvelopeFieldUpdateManyDataDropdownTypedDict(TypedDict):
     type: EnvelopeFieldUpdateManyTypeDropdownRequest1
     id: float
     field_meta: NotRequired[EnvelopeFieldUpdateManyFieldMetaDropdownRequestTypedDict]
@@ -102,7 +113,7 @@ class DataDropdownTypedDict(TypedDict):
     height: NotRequired[float]
 
 
-class DataDropdown(BaseModel):
+class EnvelopeFieldUpdateManyDataDropdown(BaseModel):
     type: EnvelopeFieldUpdateManyTypeDropdownRequest1
 
     id: float
@@ -144,7 +155,7 @@ class DataDropdown(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -155,6 +166,13 @@ class DataDropdown(BaseModel):
 
 class EnvelopeFieldUpdateManyTypeCheckboxRequest1(str, Enum):
     CHECKBOX = "CHECKBOX"
+
+
+class EnvelopeFieldUpdateManyOverflowCheckbox(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class EnvelopeFieldUpdateManyTypeCheckboxRequest2(str, Enum):
@@ -187,6 +205,7 @@ class EnvelopeFieldUpdateManyFieldMetaCheckboxRequestTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[EnvelopeFieldUpdateManyOverflowCheckbox]
     values: NotRequired[List[EnvelopeFieldUpdateManyValueCheckboxTypedDict]]
     validation_rule: NotRequired[str]
     validation_length: NotRequired[float]
@@ -205,6 +224,8 @@ class EnvelopeFieldUpdateManyFieldMetaCheckboxRequest(BaseModel):
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+
+    overflow: Optional[EnvelopeFieldUpdateManyOverflowCheckbox] = None
 
     values: Optional[List[EnvelopeFieldUpdateManyValueCheckbox]] = None
 
@@ -229,6 +250,7 @@ class EnvelopeFieldUpdateManyFieldMetaCheckboxRequest(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "values",
                 "validationRule",
                 "validationLength",
@@ -240,7 +262,7 @@ class EnvelopeFieldUpdateManyFieldMetaCheckboxRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -249,7 +271,7 @@ class EnvelopeFieldUpdateManyFieldMetaCheckboxRequest(BaseModel):
         return m
 
 
-class DataCheckboxTypedDict(TypedDict):
+class EnvelopeFieldUpdateManyDataCheckboxTypedDict(TypedDict):
     type: EnvelopeFieldUpdateManyTypeCheckboxRequest1
     id: float
     field_meta: NotRequired[EnvelopeFieldUpdateManyFieldMetaCheckboxRequestTypedDict]
@@ -261,7 +283,7 @@ class DataCheckboxTypedDict(TypedDict):
     height: NotRequired[float]
 
 
-class DataCheckbox(BaseModel):
+class EnvelopeFieldUpdateManyDataCheckbox(BaseModel):
     type: EnvelopeFieldUpdateManyTypeCheckboxRequest1
 
     id: float
@@ -303,7 +325,7 @@ class DataCheckbox(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -314,6 +336,13 @@ class DataCheckbox(BaseModel):
 
 class EnvelopeFieldUpdateManyTypeRadioRequest1(str, Enum):
     RADIO = "RADIO"
+
+
+class EnvelopeFieldUpdateManyOverflowRadio(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class EnvelopeFieldUpdateManyTypeRadioRequest2(str, Enum):
@@ -346,6 +375,7 @@ class EnvelopeFieldUpdateManyFieldMetaRadioRequestTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[EnvelopeFieldUpdateManyOverflowRadio]
     values: NotRequired[List[EnvelopeFieldUpdateManyValueRadioTypedDict]]
     direction: NotRequired[EnvelopeFieldUpdateManyDirectionRadio]
 
@@ -363,6 +393,8 @@ class EnvelopeFieldUpdateManyFieldMetaRadioRequest(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[EnvelopeFieldUpdateManyOverflowRadio] = None
+
     values: Optional[List[EnvelopeFieldUpdateManyValueRadio]] = None
 
     direction: Optional[EnvelopeFieldUpdateManyDirectionRadio] = (
@@ -378,6 +410,7 @@ class EnvelopeFieldUpdateManyFieldMetaRadioRequest(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "values",
                 "direction",
             ]
@@ -387,7 +420,7 @@ class EnvelopeFieldUpdateManyFieldMetaRadioRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -396,7 +429,7 @@ class EnvelopeFieldUpdateManyFieldMetaRadioRequest(BaseModel):
         return m
 
 
-class DataRadioTypedDict(TypedDict):
+class EnvelopeFieldUpdateManyDataRadioTypedDict(TypedDict):
     type: EnvelopeFieldUpdateManyTypeRadioRequest1
     id: float
     field_meta: NotRequired[EnvelopeFieldUpdateManyFieldMetaRadioRequestTypedDict]
@@ -408,7 +441,7 @@ class DataRadioTypedDict(TypedDict):
     height: NotRequired[float]
 
 
-class DataRadio(BaseModel):
+class EnvelopeFieldUpdateManyDataRadio(BaseModel):
     type: EnvelopeFieldUpdateManyTypeRadioRequest1
 
     id: float
@@ -450,7 +483,7 @@ class DataRadio(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -461,6 +494,13 @@ class DataRadio(BaseModel):
 
 class EnvelopeFieldUpdateManyTypeNumberRequest1(str, Enum):
     NUMBER = "NUMBER"
+
+
+class EnvelopeFieldUpdateManyOverflowNumber(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class EnvelopeFieldUpdateManyTypeNumberRequest2(str, Enum):
@@ -486,6 +526,7 @@ class EnvelopeFieldUpdateManyFieldMetaNumberRequestTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[EnvelopeFieldUpdateManyOverflowNumber]
     number_format: NotRequired[Nullable[str]]
     value: NotRequired[str]
     min_value: NotRequired[Nullable[float]]
@@ -508,6 +549,8 @@ class EnvelopeFieldUpdateManyFieldMetaNumberRequest(BaseModel):
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+
+    overflow: Optional[EnvelopeFieldUpdateManyOverflowNumber] = None
 
     number_format: Annotated[
         OptionalNullable[str], pydantic.Field(alias="numberFormat")
@@ -550,6 +593,7 @@ class EnvelopeFieldUpdateManyFieldMetaNumberRequest(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "numberFormat",
                 "value",
                 "minValue",
@@ -575,7 +619,7 @@ class EnvelopeFieldUpdateManyFieldMetaNumberRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -592,7 +636,7 @@ class EnvelopeFieldUpdateManyFieldMetaNumberRequest(BaseModel):
         return m
 
 
-class DataNumberTypedDict(TypedDict):
+class EnvelopeFieldUpdateManyDataNumberTypedDict(TypedDict):
     type: EnvelopeFieldUpdateManyTypeNumberRequest1
     id: float
     field_meta: NotRequired[EnvelopeFieldUpdateManyFieldMetaNumberRequestTypedDict]
@@ -604,7 +648,7 @@ class DataNumberTypedDict(TypedDict):
     height: NotRequired[float]
 
 
-class DataNumber(BaseModel):
+class EnvelopeFieldUpdateManyDataNumber(BaseModel):
     type: EnvelopeFieldUpdateManyTypeNumberRequest1
 
     id: float
@@ -646,7 +690,7 @@ class DataNumber(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -657,6 +701,13 @@ class DataNumber(BaseModel):
 
 class EnvelopeFieldUpdateManyTypeTextRequest1(str, Enum):
     TEXT = "TEXT"
+
+
+class EnvelopeFieldUpdateManyOverflowText(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class EnvelopeFieldUpdateManyTypeTextRequest2(str, Enum):
@@ -682,6 +733,7 @@ class EnvelopeFieldUpdateManyFieldMetaTextRequestTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[EnvelopeFieldUpdateManyOverflowText]
     text: NotRequired[str]
     character_limit: NotRequired[float]
     text_align: NotRequired[EnvelopeFieldUpdateManyTextAlignText]
@@ -702,6 +754,8 @@ class EnvelopeFieldUpdateManyFieldMetaTextRequest(BaseModel):
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+
+    overflow: Optional[EnvelopeFieldUpdateManyOverflowText] = None
 
     text: Optional[str] = None
 
@@ -736,6 +790,7 @@ class EnvelopeFieldUpdateManyFieldMetaTextRequest(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "text",
                 "characterLimit",
                 "textAlign",
@@ -750,7 +805,7 @@ class EnvelopeFieldUpdateManyFieldMetaTextRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -767,7 +822,7 @@ class EnvelopeFieldUpdateManyFieldMetaTextRequest(BaseModel):
         return m
 
 
-class DataTextTypedDict(TypedDict):
+class EnvelopeFieldUpdateManyDataTextTypedDict(TypedDict):
     type: EnvelopeFieldUpdateManyTypeTextRequest1
     id: float
     field_meta: NotRequired[EnvelopeFieldUpdateManyFieldMetaTextRequestTypedDict]
@@ -779,7 +834,7 @@ class DataTextTypedDict(TypedDict):
     height: NotRequired[float]
 
 
-class DataText(BaseModel):
+class EnvelopeFieldUpdateManyDataText(BaseModel):
     type: EnvelopeFieldUpdateManyTypeTextRequest1
 
     id: float
@@ -821,7 +876,7 @@ class DataText(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -832,6 +887,13 @@ class DataText(BaseModel):
 
 class EnvelopeFieldUpdateManyTypeDateRequest1(str, Enum):
     DATE = "DATE"
+
+
+class EnvelopeFieldUpdateManyOverflowDate(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class EnvelopeFieldUpdateManyTypeDateRequest2(str, Enum):
@@ -851,6 +913,7 @@ class EnvelopeFieldUpdateManyFieldMetaDateRequestTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[EnvelopeFieldUpdateManyOverflowDate]
     text_align: NotRequired[EnvelopeFieldUpdateManyTextAlignDate]
 
 
@@ -867,6 +930,10 @@ class EnvelopeFieldUpdateManyFieldMetaDateRequest(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[EnvelopeFieldUpdateManyOverflowDate] = (
+        EnvelopeFieldUpdateManyOverflowDate.AUTO
+    )
+
     text_align: Annotated[
         Optional[EnvelopeFieldUpdateManyTextAlignDate],
         pydantic.Field(alias="textAlign"),
@@ -875,14 +942,22 @@ class EnvelopeFieldUpdateManyFieldMetaDateRequest(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -891,7 +966,7 @@ class EnvelopeFieldUpdateManyFieldMetaDateRequest(BaseModel):
         return m
 
 
-class DataDateTypedDict(TypedDict):
+class EnvelopeFieldUpdateManyDataDateTypedDict(TypedDict):
     type: EnvelopeFieldUpdateManyTypeDateRequest1
     id: float
     field_meta: NotRequired[EnvelopeFieldUpdateManyFieldMetaDateRequestTypedDict]
@@ -903,7 +978,7 @@ class DataDateTypedDict(TypedDict):
     height: NotRequired[float]
 
 
-class DataDate(BaseModel):
+class EnvelopeFieldUpdateManyDataDate(BaseModel):
     type: EnvelopeFieldUpdateManyTypeDateRequest1
 
     id: float
@@ -945,7 +1020,7 @@ class DataDate(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -956,6 +1031,13 @@ class DataDate(BaseModel):
 
 class EnvelopeFieldUpdateManyTypeEmailRequest1(str, Enum):
     EMAIL = "EMAIL"
+
+
+class EnvelopeFieldUpdateManyOverflowEmail(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class EnvelopeFieldUpdateManyTypeEmailRequest2(str, Enum):
@@ -975,6 +1057,7 @@ class EnvelopeFieldUpdateManyFieldMetaEmailRequestTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[EnvelopeFieldUpdateManyOverflowEmail]
     text_align: NotRequired[EnvelopeFieldUpdateManyTextAlignEmail]
 
 
@@ -991,6 +1074,10 @@ class EnvelopeFieldUpdateManyFieldMetaEmailRequest(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[EnvelopeFieldUpdateManyOverflowEmail] = (
+        EnvelopeFieldUpdateManyOverflowEmail.AUTO
+    )
+
     text_align: Annotated[
         Optional[EnvelopeFieldUpdateManyTextAlignEmail],
         pydantic.Field(alias="textAlign"),
@@ -999,14 +1086,22 @@ class EnvelopeFieldUpdateManyFieldMetaEmailRequest(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -1015,7 +1110,7 @@ class EnvelopeFieldUpdateManyFieldMetaEmailRequest(BaseModel):
         return m
 
 
-class DataEmailTypedDict(TypedDict):
+class EnvelopeFieldUpdateManyDataEmailTypedDict(TypedDict):
     type: EnvelopeFieldUpdateManyTypeEmailRequest1
     id: float
     field_meta: NotRequired[EnvelopeFieldUpdateManyFieldMetaEmailRequestTypedDict]
@@ -1027,7 +1122,7 @@ class DataEmailTypedDict(TypedDict):
     height: NotRequired[float]
 
 
-class DataEmail(BaseModel):
+class EnvelopeFieldUpdateManyDataEmail(BaseModel):
     type: EnvelopeFieldUpdateManyTypeEmailRequest1
 
     id: float
@@ -1069,7 +1164,7 @@ class DataEmail(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -1080,6 +1175,13 @@ class DataEmail(BaseModel):
 
 class EnvelopeFieldUpdateManyTypeNameRequest1(str, Enum):
     NAME = "NAME"
+
+
+class EnvelopeFieldUpdateManyOverflowName(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class EnvelopeFieldUpdateManyTypeNameRequest2(str, Enum):
@@ -1099,6 +1201,7 @@ class EnvelopeFieldUpdateManyFieldMetaNameRequestTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[EnvelopeFieldUpdateManyOverflowName]
     text_align: NotRequired[EnvelopeFieldUpdateManyTextAlignName]
 
 
@@ -1115,6 +1218,8 @@ class EnvelopeFieldUpdateManyFieldMetaNameRequest(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[EnvelopeFieldUpdateManyOverflowName] = None
+
     text_align: Annotated[
         Optional[EnvelopeFieldUpdateManyTextAlignName],
         pydantic.Field(alias="textAlign"),
@@ -1123,14 +1228,22 @@ class EnvelopeFieldUpdateManyFieldMetaNameRequest(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -1139,7 +1252,7 @@ class EnvelopeFieldUpdateManyFieldMetaNameRequest(BaseModel):
         return m
 
 
-class DataNameTypedDict(TypedDict):
+class EnvelopeFieldUpdateManyDataNameTypedDict(TypedDict):
     type: EnvelopeFieldUpdateManyTypeNameRequest1
     id: float
     field_meta: NotRequired[EnvelopeFieldUpdateManyFieldMetaNameRequestTypedDict]
@@ -1151,7 +1264,7 @@ class DataNameTypedDict(TypedDict):
     height: NotRequired[float]
 
 
-class DataName(BaseModel):
+class EnvelopeFieldUpdateManyDataName(BaseModel):
     type: EnvelopeFieldUpdateManyTypeNameRequest1
 
     id: float
@@ -1193,7 +1306,7 @@ class DataName(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -1204,6 +1317,13 @@ class DataName(BaseModel):
 
 class EnvelopeFieldUpdateManyTypeInitialsRequest1(str, Enum):
     INITIALS = "INITIALS"
+
+
+class EnvelopeFieldUpdateManyOverflowInitials(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class EnvelopeFieldUpdateManyTypeInitialsRequest2(str, Enum):
@@ -1223,6 +1343,7 @@ class EnvelopeFieldUpdateManyFieldMetaInitialsRequestTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[EnvelopeFieldUpdateManyOverflowInitials]
     text_align: NotRequired[EnvelopeFieldUpdateManyTextAlignInitials]
 
 
@@ -1239,6 +1360,8 @@ class EnvelopeFieldUpdateManyFieldMetaInitialsRequest(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[EnvelopeFieldUpdateManyOverflowInitials] = None
+
     text_align: Annotated[
         Optional[EnvelopeFieldUpdateManyTextAlignInitials],
         pydantic.Field(alias="textAlign"),
@@ -1247,14 +1370,22 @@ class EnvelopeFieldUpdateManyFieldMetaInitialsRequest(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -1263,7 +1394,7 @@ class EnvelopeFieldUpdateManyFieldMetaInitialsRequest(BaseModel):
         return m
 
 
-class DataInitialsTypedDict(TypedDict):
+class EnvelopeFieldUpdateManyDataInitialsTypedDict(TypedDict):
     type: EnvelopeFieldUpdateManyTypeInitialsRequest1
     id: float
     field_meta: NotRequired[EnvelopeFieldUpdateManyFieldMetaInitialsRequestTypedDict]
@@ -1275,7 +1406,7 @@ class DataInitialsTypedDict(TypedDict):
     height: NotRequired[float]
 
 
-class DataInitials(BaseModel):
+class EnvelopeFieldUpdateManyDataInitials(BaseModel):
     type: EnvelopeFieldUpdateManyTypeInitialsRequest1
 
     id: float
@@ -1317,7 +1448,7 @@ class DataInitials(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -1330,7 +1461,7 @@ class EnvelopeFieldUpdateManyTypeFreeSignature(str, Enum):
     FREE_SIGNATURE = "FREE_SIGNATURE"
 
 
-class DataFreeSignatureTypedDict(TypedDict):
+class EnvelopeFieldUpdateManyDataFreeSignatureTypedDict(TypedDict):
     type: EnvelopeFieldUpdateManyTypeFreeSignature
     id: float
     envelope_item_id: NotRequired[str]
@@ -1341,7 +1472,7 @@ class DataFreeSignatureTypedDict(TypedDict):
     height: NotRequired[float]
 
 
-class DataFreeSignature(BaseModel):
+class EnvelopeFieldUpdateManyDataFreeSignature(BaseModel):
     type: EnvelopeFieldUpdateManyTypeFreeSignature
 
     id: float
@@ -1370,7 +1501,7 @@ class DataFreeSignature(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -1381,6 +1512,13 @@ class DataFreeSignature(BaseModel):
 
 class EnvelopeFieldUpdateManyTypeSignatureRequest1(str, Enum):
     SIGNATURE = "SIGNATURE"
+
+
+class EnvelopeFieldUpdateManyOverflowSignature(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class EnvelopeFieldUpdateManyTypeSignatureRequest2(str, Enum):
@@ -1394,6 +1532,7 @@ class EnvelopeFieldUpdateManyFieldMetaSignatureRequestTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[EnvelopeFieldUpdateManyOverflowSignature]
 
 
 class EnvelopeFieldUpdateManyFieldMetaSignatureRequest(BaseModel):
@@ -1409,17 +1548,21 @@ class EnvelopeFieldUpdateManyFieldMetaSignatureRequest(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[EnvelopeFieldUpdateManyOverflowSignature] = (
+        EnvelopeFieldUpdateManyOverflowSignature.AUTO
+    )
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize"]
+            ["label", "placeholder", "required", "readOnly", "fontSize", "overflow"]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -1428,7 +1571,7 @@ class EnvelopeFieldUpdateManyFieldMetaSignatureRequest(BaseModel):
         return m
 
 
-class DataSignatureTypedDict(TypedDict):
+class EnvelopeFieldUpdateManyDataSignatureTypedDict(TypedDict):
     type: EnvelopeFieldUpdateManyTypeSignatureRequest1
     id: float
     field_meta: NotRequired[EnvelopeFieldUpdateManyFieldMetaSignatureRequestTypedDict]
@@ -1440,7 +1583,7 @@ class DataSignatureTypedDict(TypedDict):
     height: NotRequired[float]
 
 
-class DataSignature(BaseModel):
+class EnvelopeFieldUpdateManyDataSignature(BaseModel):
     type: EnvelopeFieldUpdateManyTypeSignatureRequest1
 
     id: float
@@ -1482,7 +1625,7 @@ class DataSignature(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -1494,34 +1637,34 @@ class DataSignature(BaseModel):
 EnvelopeFieldUpdateManyDataUnionTypedDict = TypeAliasType(
     "EnvelopeFieldUpdateManyDataUnionTypedDict",
     Union[
-        DataFreeSignatureTypedDict,
-        DataSignatureTypedDict,
-        DataInitialsTypedDict,
-        DataNameTypedDict,
-        DataEmailTypedDict,
-        DataDateTypedDict,
-        DataTextTypedDict,
-        DataNumberTypedDict,
-        DataRadioTypedDict,
-        DataCheckboxTypedDict,
-        DataDropdownTypedDict,
+        EnvelopeFieldUpdateManyDataFreeSignatureTypedDict,
+        EnvelopeFieldUpdateManyDataSignatureTypedDict,
+        EnvelopeFieldUpdateManyDataInitialsTypedDict,
+        EnvelopeFieldUpdateManyDataNameTypedDict,
+        EnvelopeFieldUpdateManyDataEmailTypedDict,
+        EnvelopeFieldUpdateManyDataDateTypedDict,
+        EnvelopeFieldUpdateManyDataTextTypedDict,
+        EnvelopeFieldUpdateManyDataNumberTypedDict,
+        EnvelopeFieldUpdateManyDataRadioTypedDict,
+        EnvelopeFieldUpdateManyDataCheckboxTypedDict,
+        EnvelopeFieldUpdateManyDataDropdownTypedDict,
     ],
 )
 
 
 EnvelopeFieldUpdateManyDataUnion = Annotated[
     Union[
-        Annotated[DataSignature, Tag("SIGNATURE")],
-        Annotated[DataFreeSignature, Tag("FREE_SIGNATURE")],
-        Annotated[DataInitials, Tag("INITIALS")],
-        Annotated[DataName, Tag("NAME")],
-        Annotated[DataEmail, Tag("EMAIL")],
-        Annotated[DataDate, Tag("DATE")],
-        Annotated[DataText, Tag("TEXT")],
-        Annotated[DataNumber, Tag("NUMBER")],
-        Annotated[DataRadio, Tag("RADIO")],
-        Annotated[DataCheckbox, Tag("CHECKBOX")],
-        Annotated[DataDropdown, Tag("DROPDOWN")],
+        Annotated[EnvelopeFieldUpdateManyDataSignature, Tag("SIGNATURE")],
+        Annotated[EnvelopeFieldUpdateManyDataFreeSignature, Tag("FREE_SIGNATURE")],
+        Annotated[EnvelopeFieldUpdateManyDataInitials, Tag("INITIALS")],
+        Annotated[EnvelopeFieldUpdateManyDataName, Tag("NAME")],
+        Annotated[EnvelopeFieldUpdateManyDataEmail, Tag("EMAIL")],
+        Annotated[EnvelopeFieldUpdateManyDataDate, Tag("DATE")],
+        Annotated[EnvelopeFieldUpdateManyDataText, Tag("TEXT")],
+        Annotated[EnvelopeFieldUpdateManyDataNumber, Tag("NUMBER")],
+        Annotated[EnvelopeFieldUpdateManyDataRadio, Tag("RADIO")],
+        Annotated[EnvelopeFieldUpdateManyDataCheckbox, Tag("CHECKBOX")],
+        Annotated[EnvelopeFieldUpdateManyDataDropdown, Tag("DROPDOWN")],
     ],
     Discriminator(lambda m: get_discriminator(m, "type", "type")),
 ]
@@ -1680,6 +1823,13 @@ class EnvelopeFieldUpdateManyTypeResponse(str, Enum):
     DROPDOWN = "DROPDOWN"
 
 
+class EnvelopeFieldUpdateManyOverflowResponse10(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
+
+
 class EnvelopeFieldUpdateManyFieldMetaTypeDropdown(str, Enum):
     DROPDOWN = "dropdown"
 
@@ -1699,6 +1849,7 @@ class EnvelopeFieldUpdateManyFieldMetaDropdownResponseTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[EnvelopeFieldUpdateManyOverflowResponse10]
     values: NotRequired[List[EnvelopeFieldUpdateManyValueResponse3TypedDict]]
     default_value: NotRequired[str]
 
@@ -1716,6 +1867,8 @@ class EnvelopeFieldUpdateManyFieldMetaDropdownResponse(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[EnvelopeFieldUpdateManyOverflowResponse10] = None
+
     values: Optional[List[EnvelopeFieldUpdateManyValueResponse3]] = None
 
     default_value: Annotated[Optional[str], pydantic.Field(alias="defaultValue")] = None
@@ -1729,6 +1882,7 @@ class EnvelopeFieldUpdateManyFieldMetaDropdownResponse(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "values",
                 "defaultValue",
             ]
@@ -1738,13 +1892,20 @@ class EnvelopeFieldUpdateManyFieldMetaDropdownResponse(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class EnvelopeFieldUpdateManyOverflowResponse9(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class EnvelopeFieldUpdateManyFieldMetaTypeCheckbox(str, Enum):
@@ -1777,6 +1938,7 @@ class EnvelopeFieldUpdateManyFieldMetaCheckboxResponseTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[EnvelopeFieldUpdateManyOverflowResponse9]
     values: NotRequired[List[EnvelopeFieldUpdateManyValueResponse2TypedDict]]
     validation_rule: NotRequired[str]
     validation_length: NotRequired[float]
@@ -1795,6 +1957,8 @@ class EnvelopeFieldUpdateManyFieldMetaCheckboxResponse(BaseModel):
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+
+    overflow: Optional[EnvelopeFieldUpdateManyOverflowResponse9] = None
 
     values: Optional[List[EnvelopeFieldUpdateManyValueResponse2]] = None
 
@@ -1819,6 +1983,7 @@ class EnvelopeFieldUpdateManyFieldMetaCheckboxResponse(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "values",
                 "validationRule",
                 "validationLength",
@@ -1830,13 +1995,20 @@ class EnvelopeFieldUpdateManyFieldMetaCheckboxResponse(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class EnvelopeFieldUpdateManyOverflowResponse8(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class EnvelopeFieldUpdateManyFieldMetaTypeRadio(str, Enum):
@@ -1869,6 +2041,7 @@ class EnvelopeFieldUpdateManyFieldMetaRadioResponseTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[EnvelopeFieldUpdateManyOverflowResponse8]
     values: NotRequired[List[EnvelopeFieldUpdateManyValueResponse1TypedDict]]
     direction: NotRequired[EnvelopeFieldUpdateManyDirectionResponse1]
 
@@ -1886,6 +2059,8 @@ class EnvelopeFieldUpdateManyFieldMetaRadioResponse(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[EnvelopeFieldUpdateManyOverflowResponse8] = None
+
     values: Optional[List[EnvelopeFieldUpdateManyValueResponse1]] = None
 
     direction: Optional[EnvelopeFieldUpdateManyDirectionResponse1] = (
@@ -1901,6 +2076,7 @@ class EnvelopeFieldUpdateManyFieldMetaRadioResponse(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "values",
                 "direction",
             ]
@@ -1910,13 +2086,20 @@ class EnvelopeFieldUpdateManyFieldMetaRadioResponse(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class EnvelopeFieldUpdateManyOverflowResponse7(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class EnvelopeFieldUpdateManyFieldMetaTypeNumber(str, Enum):
@@ -1942,6 +2125,7 @@ class EnvelopeFieldUpdateManyFieldMetaNumberResponseTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[EnvelopeFieldUpdateManyOverflowResponse7]
     number_format: NotRequired[Nullable[str]]
     value: NotRequired[str]
     min_value: NotRequired[Nullable[float]]
@@ -1964,6 +2148,8 @@ class EnvelopeFieldUpdateManyFieldMetaNumberResponse(BaseModel):
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+
+    overflow: Optional[EnvelopeFieldUpdateManyOverflowResponse7] = None
 
     number_format: Annotated[
         OptionalNullable[str], pydantic.Field(alias="numberFormat")
@@ -2006,6 +2192,7 @@ class EnvelopeFieldUpdateManyFieldMetaNumberResponse(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "numberFormat",
                 "value",
                 "minValue",
@@ -2031,7 +2218,7 @@ class EnvelopeFieldUpdateManyFieldMetaNumberResponse(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -2046,6 +2233,13 @@ class EnvelopeFieldUpdateManyFieldMetaNumberResponse(BaseModel):
                     m[k] = val
 
         return m
+
+
+class EnvelopeFieldUpdateManyOverflowResponse6(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class EnvelopeFieldUpdateManyFieldMetaTypeText(str, Enum):
@@ -2071,6 +2265,7 @@ class EnvelopeFieldUpdateManyFieldMetaTextResponseTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[EnvelopeFieldUpdateManyOverflowResponse6]
     text: NotRequired[str]
     character_limit: NotRequired[float]
     text_align: NotRequired[EnvelopeFieldUpdateManyTextAlignResponse5]
@@ -2091,6 +2286,8 @@ class EnvelopeFieldUpdateManyFieldMetaTextResponse(BaseModel):
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+
+    overflow: Optional[EnvelopeFieldUpdateManyOverflowResponse6] = None
 
     text: Optional[str] = None
 
@@ -2125,6 +2322,7 @@ class EnvelopeFieldUpdateManyFieldMetaTextResponse(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "text",
                 "characterLimit",
                 "textAlign",
@@ -2139,7 +2337,7 @@ class EnvelopeFieldUpdateManyFieldMetaTextResponse(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -2154,6 +2352,13 @@ class EnvelopeFieldUpdateManyFieldMetaTextResponse(BaseModel):
                     m[k] = val
 
         return m
+
+
+class EnvelopeFieldUpdateManyOverflowResponse5(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class EnvelopeFieldUpdateManyFieldMetaTypeDate(str, Enum):
@@ -2173,6 +2378,7 @@ class EnvelopeFieldUpdateManyFieldMetaDateResponseTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[EnvelopeFieldUpdateManyOverflowResponse5]
     text_align: NotRequired[EnvelopeFieldUpdateManyTextAlignResponse4]
 
 
@@ -2189,6 +2395,10 @@ class EnvelopeFieldUpdateManyFieldMetaDateResponse(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[EnvelopeFieldUpdateManyOverflowResponse5] = (
+        EnvelopeFieldUpdateManyOverflowResponse5.AUTO
+    )
+
     text_align: Annotated[
         Optional[EnvelopeFieldUpdateManyTextAlignResponse4],
         pydantic.Field(alias="textAlign"),
@@ -2197,20 +2407,35 @@ class EnvelopeFieldUpdateManyFieldMetaDateResponse(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class EnvelopeFieldUpdateManyOverflowResponse4(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class EnvelopeFieldUpdateManyFieldMetaTypeEmail(str, Enum):
@@ -2230,6 +2455,7 @@ class EnvelopeFieldUpdateManyFieldMetaEmailResponseTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[EnvelopeFieldUpdateManyOverflowResponse4]
     text_align: NotRequired[EnvelopeFieldUpdateManyTextAlignResponse3]
 
 
@@ -2246,6 +2472,10 @@ class EnvelopeFieldUpdateManyFieldMetaEmailResponse(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[EnvelopeFieldUpdateManyOverflowResponse4] = (
+        EnvelopeFieldUpdateManyOverflowResponse4.AUTO
+    )
+
     text_align: Annotated[
         Optional[EnvelopeFieldUpdateManyTextAlignResponse3],
         pydantic.Field(alias="textAlign"),
@@ -2254,20 +2484,35 @@ class EnvelopeFieldUpdateManyFieldMetaEmailResponse(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class EnvelopeFieldUpdateManyOverflowResponse3(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class EnvelopeFieldUpdateManyFieldMetaTypeName(str, Enum):
@@ -2287,6 +2532,7 @@ class EnvelopeFieldUpdateManyFieldMetaNameResponseTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[EnvelopeFieldUpdateManyOverflowResponse3]
     text_align: NotRequired[EnvelopeFieldUpdateManyTextAlignResponse2]
 
 
@@ -2303,6 +2549,8 @@ class EnvelopeFieldUpdateManyFieldMetaNameResponse(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[EnvelopeFieldUpdateManyOverflowResponse3] = None
+
     text_align: Annotated[
         Optional[EnvelopeFieldUpdateManyTextAlignResponse2],
         pydantic.Field(alias="textAlign"),
@@ -2311,20 +2559,35 @@ class EnvelopeFieldUpdateManyFieldMetaNameResponse(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class EnvelopeFieldUpdateManyOverflowResponse2(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class EnvelopeFieldUpdateManyFieldMetaTypeInitials(str, Enum):
@@ -2344,6 +2607,7 @@ class EnvelopeFieldUpdateManyFieldMetaInitialsResponseTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[EnvelopeFieldUpdateManyOverflowResponse2]
     text_align: NotRequired[EnvelopeFieldUpdateManyTextAlignResponse1]
 
 
@@ -2360,6 +2624,8 @@ class EnvelopeFieldUpdateManyFieldMetaInitialsResponse(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[EnvelopeFieldUpdateManyOverflowResponse2] = None
+
     text_align: Annotated[
         Optional[EnvelopeFieldUpdateManyTextAlignResponse1],
         pydantic.Field(alias="textAlign"),
@@ -2368,20 +2634,35 @@ class EnvelopeFieldUpdateManyFieldMetaInitialsResponse(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class EnvelopeFieldUpdateManyOverflowResponse1(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class EnvelopeFieldUpdateManyFieldMetaTypeSignature(str, Enum):
@@ -2395,6 +2676,7 @@ class EnvelopeFieldUpdateManyFieldMetaSignatureResponseTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[EnvelopeFieldUpdateManyOverflowResponse1]
 
 
 class EnvelopeFieldUpdateManyFieldMetaSignatureResponse(BaseModel):
@@ -2410,17 +2692,21 @@ class EnvelopeFieldUpdateManyFieldMetaSignatureResponse(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[EnvelopeFieldUpdateManyOverflowResponse1] = (
+        EnvelopeFieldUpdateManyOverflowResponse1.AUTO
+    )
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize"]
+            ["label", "placeholder", "required", "readOnly", "fontSize", "overflow"]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -2531,7 +2817,7 @@ class EnvelopeFieldUpdateManyDataResponse(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -2558,3 +2844,137 @@ class EnvelopeFieldUpdateManyResponse(BaseModel):
     r"""Successful response"""
 
     data: List[EnvelopeFieldUpdateManyDataResponse]
+
+
+try:
+    EnvelopeFieldUpdateManyFieldMetaDropdownRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyDataDropdown.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyFieldMetaCheckboxRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyDataCheckbox.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyFieldMetaRadioRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyDataRadio.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyFieldMetaNumberRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyDataNumber.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyFieldMetaTextRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyDataText.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyFieldMetaDateRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyDataDate.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyFieldMetaEmailRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyDataEmail.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyFieldMetaNameRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyDataName.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyFieldMetaInitialsRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyDataInitials.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyDataFreeSignature.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyFieldMetaSignatureRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyDataSignature.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyFieldMetaDropdownResponse.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyFieldMetaCheckboxResponse.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyFieldMetaRadioResponse.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyFieldMetaNumberResponse.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyFieldMetaTextResponse.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyFieldMetaDateResponse.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyFieldMetaEmailResponse.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyFieldMetaNameResponse.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyFieldMetaInitialsResponse.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyFieldMetaSignatureResponse.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFieldUpdateManyDataResponse.model_rebuild()
+except NameError:
+    pass

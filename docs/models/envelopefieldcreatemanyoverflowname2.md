@@ -1,0 +1,19 @@
+# EnvelopeFieldCreateManyOverflowName2
+
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeFieldCreateManyOverflowName2
+
+value = EnvelopeFieldCreateManyOverflowName2.AUTO
+```
+
+
+## Values
+
+| Name         | Value        |
+| ------------ | ------------ |
+| `AUTO`       | auto         |
+| `HORIZONTAL` | horizontal   |
+| `VERTICAL`   | vertical     |
+| `CROP`       | crop         |

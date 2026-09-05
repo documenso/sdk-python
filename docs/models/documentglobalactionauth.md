@@ -1,5 +1,13 @@
 # DocumentGlobalActionAuth
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentGlobalActionAuth
+
+value = DocumentGlobalActionAuth.ACCOUNT
+```
+
 
 ## Values
 

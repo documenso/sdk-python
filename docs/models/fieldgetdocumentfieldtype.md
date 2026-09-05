@@ -1,5 +1,13 @@
 # FieldGetDocumentFieldType
 
+## Example Usage
+
+```python
+from documenso_sdk.models import FieldGetDocumentFieldType
+
+value = FieldGetDocumentFieldType.SIGNATURE
+```
+
 
 ## Values
 

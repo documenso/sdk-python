@@ -10,12 +10,13 @@ from documenso_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from documenso_sdk.utils import get_discriminator
+from documenso_sdk.utils import get_discriminator, validate_const
 from enum import Enum
 import httpx
 import pydantic
 from pydantic import Discriminator, Tag, model_serializer
-from typing import Any, Dict, List, Optional, Union
+from pydantic.functional_validators import AfterValidator
+from typing import Any, Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
@@ -56,7 +57,7 @@ class TemplateCreateDocumentFromTemplateRecipientRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -101,7 +102,7 @@ class TemplateCreateDocumentFromTemplatePrefillFieldDate(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -138,7 +139,7 @@ class TemplateCreateDocumentFromTemplatePrefillFieldDropdown(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -175,7 +176,7 @@ class TemplateCreateDocumentFromTemplatePrefillFieldCheckbox(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -212,7 +213,7 @@ class TemplateCreateDocumentFromTemplatePrefillFieldRadio(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -252,7 +253,7 @@ class TemplateCreateDocumentFromTemplatePrefillFieldNumber(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -292,7 +293,7 @@ class TemplateCreateDocumentFromTemplatePrefillFieldText(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -335,12 +336,15 @@ class TemplateCreateDocumentFromTemplateDateFormat(str, Enum):
     YYYY_M_MDD_HH_MM_A = "yyyy-MM-dd hh:mm a"
     YYYY_M_MDD = "yyyy-MM-dd"
     DD_MM_SLASH_YYYY = "dd/MM/yyyy"
+    DD_MM_DASH_YYYY = "dd-MM-yyyy"
     MM_DD_SLASH_YYYY = "MM/dd/yyyy"
     YY_M_MDD = "yy-MM-dd"
     MMMM_DD_COMMA_YYYY = "MMMM dd, yyyy"
     EEEE_MMMM_DD_COMMA_YYYY = "EEEE, MMMM dd, yyyy"
     DD_MM_SLASH_YYYY_HH_MM_A = "dd/MM/yyyy hh:mm a"
     DD_MM_SLASH_YYYY_H_HMM = "dd/MM/yyyy HH:mm"
+    DD_MM_DASH_YYYY_HH_MM_A = "dd-MM-yyyy hh:mm a"
+    DD_MM_DASH_YYYY_H_HMM = "dd-MM-yyyy HH:mm"
     MM_DD_SLASH_YYYY_HH_MM_A = "MM/dd/yyyy hh:mm a"
     MM_DD_SLASH_YYYY_H_HMM = "MM/dd/yyyy HH:mm"
     DD_DOT_MM_DOT_YYYY = "dd.MM.yyyy"
@@ -369,6 +373,8 @@ class TemplateCreateDocumentFromTemplateOverrideEmailSettingsTypedDict(TypedDict
     document_completed: NotRequired[bool]
     document_deleted: NotRequired[bool]
     owner_document_completed: NotRequired[bool]
+    owner_recipient_expired: NotRequired[bool]
+    owner_document_created: NotRequired[bool]
 
 
 class TemplateCreateDocumentFromTemplateOverrideEmailSettings(BaseModel):
@@ -400,6 +406,14 @@ class TemplateCreateDocumentFromTemplateOverrideEmailSettings(BaseModel):
         Optional[bool], pydantic.Field(alias="ownerDocumentCompleted")
     ] = True
 
+    owner_recipient_expired: Annotated[
+        Optional[bool], pydantic.Field(alias="ownerRecipientExpired")
+    ] = True
+
+    owner_document_created: Annotated[
+        Optional[bool], pydantic.Field(alias="ownerDocumentCreated")
+    ] = True
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -411,6 +425,8 @@ class TemplateCreateDocumentFromTemplateOverrideEmailSettings(BaseModel):
                 "documentCompleted",
                 "documentDeleted",
                 "ownerDocumentCompleted",
+                "ownerRecipientExpired",
+                "ownerDocumentCreated",
             ]
         )
         serialized = handler(self)
@@ -418,7 +434,7 @@ class TemplateCreateDocumentFromTemplateOverrideEmailSettings(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -441,6 +457,57 @@ class TemplateCreateDocumentFromTemplateLanguage(str, Enum):
     ZH = "zh"
 
 
+class TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodOverride2TypedDict(
+    TypedDict
+):
+    disabled: Literal[True]
+
+
+class TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodOverride2(BaseModel):
+    DISABLED: Annotated[
+        Annotated[Literal[True], AfterValidator(validate_const(True))],
+        pydantic.Field(alias="disabled"),
+    ] = True
+
+
+class TemplateCreateDocumentFromTemplateOverrideUnit(str, Enum):
+    DAY = "day"
+    WEEK = "week"
+    MONTH = "month"
+    YEAR = "year"
+
+
+class TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodOverride1TypedDict(
+    TypedDict
+):
+    unit: TemplateCreateDocumentFromTemplateOverrideUnit
+    amount: int
+
+
+class TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodOverride1(BaseModel):
+    unit: TemplateCreateDocumentFromTemplateOverrideUnit
+
+    amount: int
+
+
+TemplateCreateDocumentFromTemplateOverrideEnvelopeExpirationPeriodUnionTypedDict = TypeAliasType(
+    "TemplateCreateDocumentFromTemplateOverrideEnvelopeExpirationPeriodUnionTypedDict",
+    Union[
+        TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodOverride2TypedDict,
+        TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodOverride1TypedDict,
+    ],
+)
+
+
+TemplateCreateDocumentFromTemplateOverrideEnvelopeExpirationPeriodUnion = TypeAliasType(
+    "TemplateCreateDocumentFromTemplateOverrideEnvelopeExpirationPeriodUnion",
+    Union[
+        TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodOverride2,
+        TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodOverride1,
+    ],
+)
+
+
 class TemplateCreateDocumentFromTemplateOverrideTypedDict(TypedDict):
     title: NotRequired[str]
     subject: NotRequired[str]
@@ -459,6 +526,11 @@ class TemplateCreateDocumentFromTemplateOverrideTypedDict(TypedDict):
     upload_signature_enabled: NotRequired[bool]
     draw_signature_enabled: NotRequired[bool]
     allow_dictate_next_signer: NotRequired[bool]
+    envelope_expiration_period: NotRequired[
+        Nullable[
+            TemplateCreateDocumentFromTemplateOverrideEnvelopeExpirationPeriodUnionTypedDict
+        ]
+    ]
 
 
 class TemplateCreateDocumentFromTemplateOverride(BaseModel):
@@ -505,6 +577,13 @@ class TemplateCreateDocumentFromTemplateOverride(BaseModel):
         Optional[bool], pydantic.Field(alias="allowDictateNextSigner")
     ] = None
 
+    envelope_expiration_period: Annotated[
+        OptionalNullable[
+            TemplateCreateDocumentFromTemplateOverrideEnvelopeExpirationPeriodUnion
+        ],
+        pydantic.Field(alias="envelopeExpirationPeriod"),
+    ] = UNSET
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -522,17 +601,27 @@ class TemplateCreateDocumentFromTemplateOverride(BaseModel):
                 "uploadSignatureEnabled",
                 "drawSignatureEnabled",
                 "allowDictateNextSigner",
+                "envelopeExpirationPeriod",
             ]
         )
+        nullable_fields = set(["envelopeExpirationPeriod"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m
@@ -565,7 +654,7 @@ class TemplateCreateDocumentFromTemplateAttachment(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -663,7 +752,7 @@ class TemplateCreateDocumentFromTemplateRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -813,6 +902,7 @@ class TemplateCreateDocumentFromTemplateStatus(str, Enum):
     PENDING = "PENDING"
     COMPLETED = "COMPLETED"
     REJECTED = "REJECTED"
+    CANCELLED = "CANCELLED"
 
 
 class TemplateCreateDocumentFromTemplateSource(str, Enum):
@@ -905,6 +995,8 @@ class TemplateCreateDocumentFromTemplateDocumentMetaEmailSettingsTypedDict(Typed
     document_completed: NotRequired[bool]
     document_deleted: NotRequired[bool]
     owner_document_completed: NotRequired[bool]
+    owner_recipient_expired: NotRequired[bool]
+    owner_document_created: NotRequired[bool]
 
 
 class TemplateCreateDocumentFromTemplateDocumentMetaEmailSettings(BaseModel):
@@ -936,6 +1028,14 @@ class TemplateCreateDocumentFromTemplateDocumentMetaEmailSettings(BaseModel):
         Optional[bool], pydantic.Field(alias="ownerDocumentCompleted")
     ] = True
 
+    owner_recipient_expired: Annotated[
+        Optional[bool], pydantic.Field(alias="ownerRecipientExpired")
+    ] = True
+
+    owner_document_created: Annotated[
+        Optional[bool], pydantic.Field(alias="ownerDocumentCreated")
+    ] = True
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -947,6 +1047,8 @@ class TemplateCreateDocumentFromTemplateDocumentMetaEmailSettings(BaseModel):
                 "documentCompleted",
                 "documentDeleted",
                 "ownerDocumentCompleted",
+                "ownerRecipientExpired",
+                "ownerDocumentCreated",
             ]
         )
         serialized = handler(self)
@@ -954,13 +1056,173 @@ class TemplateCreateDocumentFromTemplateDocumentMetaEmailSettings(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodResponse2TypedDict(
+    TypedDict
+):
+    disabled: Literal[True]
+
+
+class TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodResponse2(BaseModel):
+    DISABLED: Annotated[
+        Annotated[Literal[True], AfterValidator(validate_const(True))],
+        pydantic.Field(alias="disabled"),
+    ] = True
+
+
+class TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodUnitResponse(str, Enum):
+    DAY = "day"
+    WEEK = "week"
+    MONTH = "month"
+    YEAR = "year"
+
+
+class TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodResponse1TypedDict(
+    TypedDict
+):
+    unit: TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodUnitResponse
+    amount: int
+
+
+class TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodResponse1(BaseModel):
+    unit: TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodUnitResponse
+
+    amount: int
+
+
+class TemplateCreateDocumentFromTemplateSendAfter2TypedDict(TypedDict):
+    disabled: Literal[True]
+
+
+class TemplateCreateDocumentFromTemplateSendAfter2(BaseModel):
+    DISABLED: Annotated[
+        Annotated[Literal[True], AfterValidator(validate_const(True))],
+        pydantic.Field(alias="disabled"),
+    ] = True
+
+
+TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodResponseUnionTypedDict = TypeAliasType(
+    "TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodResponseUnionTypedDict",
+    Union[
+        TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodResponse2TypedDict,
+        TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodResponse1TypedDict,
+    ],
+)
+
+
+TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodResponseUnion = TypeAliasType(
+    "TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodResponseUnion",
+    Union[
+        TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodResponse2,
+        TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodResponse1,
+    ],
+)
+
+
+class TemplateCreateDocumentFromTemplateSendAfterUnit(str, Enum):
+    DAY = "day"
+    WEEK = "week"
+    MONTH = "month"
+
+
+class TemplateCreateDocumentFromTemplateSendAfter1TypedDict(TypedDict):
+    unit: TemplateCreateDocumentFromTemplateSendAfterUnit
+    amount: int
+
+
+class TemplateCreateDocumentFromTemplateSendAfter1(BaseModel):
+    unit: TemplateCreateDocumentFromTemplateSendAfterUnit
+
+    amount: int
+
+
+class TemplateCreateDocumentFromTemplateRepeatEvery2TypedDict(TypedDict):
+    disabled: Literal[True]
+
+
+class TemplateCreateDocumentFromTemplateRepeatEvery2(BaseModel):
+    DISABLED: Annotated[
+        Annotated[Literal[True], AfterValidator(validate_const(True))],
+        pydantic.Field(alias="disabled"),
+    ] = True
+
+
+TemplateCreateDocumentFromTemplateSendAfterUnionTypedDict = TypeAliasType(
+    "TemplateCreateDocumentFromTemplateSendAfterUnionTypedDict",
+    Union[
+        TemplateCreateDocumentFromTemplateSendAfter2TypedDict,
+        TemplateCreateDocumentFromTemplateSendAfter1TypedDict,
+    ],
+)
+
+
+TemplateCreateDocumentFromTemplateSendAfterUnion = TypeAliasType(
+    "TemplateCreateDocumentFromTemplateSendAfterUnion",
+    Union[
+        TemplateCreateDocumentFromTemplateSendAfter2,
+        TemplateCreateDocumentFromTemplateSendAfter1,
+    ],
+)
+
+
+class TemplateCreateDocumentFromTemplateRepeatEveryUnit(str, Enum):
+    DAY = "day"
+    WEEK = "week"
+    MONTH = "month"
+
+
+class TemplateCreateDocumentFromTemplateRepeatEvery1TypedDict(TypedDict):
+    unit: TemplateCreateDocumentFromTemplateRepeatEveryUnit
+    amount: int
+
+
+class TemplateCreateDocumentFromTemplateRepeatEvery1(BaseModel):
+    unit: TemplateCreateDocumentFromTemplateRepeatEveryUnit
+
+    amount: int
+
+
+TemplateCreateDocumentFromTemplateRepeatEveryUnionTypedDict = TypeAliasType(
+    "TemplateCreateDocumentFromTemplateRepeatEveryUnionTypedDict",
+    Union[
+        TemplateCreateDocumentFromTemplateRepeatEvery2TypedDict,
+        TemplateCreateDocumentFromTemplateRepeatEvery1TypedDict,
+    ],
+)
+
+
+TemplateCreateDocumentFromTemplateRepeatEveryUnion = TypeAliasType(
+    "TemplateCreateDocumentFromTemplateRepeatEveryUnion",
+    Union[
+        TemplateCreateDocumentFromTemplateRepeatEvery2,
+        TemplateCreateDocumentFromTemplateRepeatEvery1,
+    ],
+)
+
+
+class TemplateCreateDocumentFromTemplateReminderSettingsTypedDict(TypedDict):
+    send_after: TemplateCreateDocumentFromTemplateSendAfterUnionTypedDict
+    repeat_every: TemplateCreateDocumentFromTemplateRepeatEveryUnionTypedDict
+
+
+class TemplateCreateDocumentFromTemplateReminderSettings(BaseModel):
+    send_after: Annotated[
+        TemplateCreateDocumentFromTemplateSendAfterUnion,
+        pydantic.Field(alias="sendAfter"),
+    ]
+
+    repeat_every: Annotated[
+        TemplateCreateDocumentFromTemplateRepeatEveryUnion,
+        pydantic.Field(alias="repeatEvery"),
+    ]
 
 
 class TemplateCreateDocumentFromTemplateDocumentMetaTypedDict(TypedDict):
@@ -984,6 +1246,12 @@ class TemplateCreateDocumentFromTemplateDocumentMetaTypedDict(TypedDict):
     ]
     email_id: Nullable[str]
     email_reply_to: Nullable[str]
+    envelope_expiration_period: Nullable[
+        TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodResponseUnionTypedDict
+    ]
+    reminder_settings: Nullable[
+        TemplateCreateDocumentFromTemplateReminderSettingsTypedDict
+    ]
     password: NotRequired[Nullable[str]]
     document_id: NotRequired[float]
 
@@ -1038,6 +1306,18 @@ class TemplateCreateDocumentFromTemplateDocumentMeta(BaseModel):
 
     email_reply_to: Annotated[Nullable[str], pydantic.Field(alias="emailReplyTo")]
 
+    envelope_expiration_period: Annotated[
+        Nullable[
+            TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodResponseUnion
+        ],
+        pydantic.Field(alias="envelopeExpirationPeriod"),
+    ]
+
+    reminder_settings: Annotated[
+        Nullable[TemplateCreateDocumentFromTemplateReminderSettings],
+        pydantic.Field(alias="reminderSettings"),
+    ]
+
     password: OptionalNullable[str] = None
 
     document_id: Annotated[Optional[float], pydantic.Field(alias="documentId")] = -1
@@ -1055,6 +1335,8 @@ class TemplateCreateDocumentFromTemplateDocumentMeta(BaseModel):
                 "emailSettings",
                 "emailId",
                 "emailReplyTo",
+                "envelopeExpirationPeriod",
+                "reminderSettings",
                 "password",
             ]
         )
@@ -1064,7 +1346,7 @@ class TemplateCreateDocumentFromTemplateDocumentMeta(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (
@@ -1147,7 +1429,7 @@ class TemplateCreateDocumentFromTemplateFolder(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 m[k] = val
@@ -1221,6 +1503,8 @@ class TemplateCreateDocumentFromTemplateRecipientResponseTypedDict(TypedDict):
     token: str
     document_deleted_at: Nullable[str]
     expired: Nullable[str]
+    expires_at: Nullable[str]
+    expiration_notified_at: Nullable[str]
     signed_at: Nullable[str]
     auth_options: Nullable[
         TemplateCreateDocumentFromTemplateRecipientAuthOptionsTypedDict
@@ -1263,6 +1547,12 @@ class TemplateCreateDocumentFromTemplateRecipientResponse(BaseModel):
 
     expired: Nullable[str]
 
+    expires_at: Annotated[Nullable[str], pydantic.Field(alias="expiresAt")]
+
+    expiration_notified_at: Annotated[
+        Nullable[str], pydantic.Field(alias="expirationNotifiedAt")
+    ]
+
     signed_at: Annotated[Nullable[str], pydantic.Field(alias="signedAt")]
 
     auth_options: Annotated[
@@ -1289,6 +1579,8 @@ class TemplateCreateDocumentFromTemplateRecipientResponse(BaseModel):
             [
                 "documentDeletedAt",
                 "expired",
+                "expiresAt",
+                "expirationNotifiedAt",
                 "signedAt",
                 "authOptions",
                 "signingOrder",
@@ -1302,7 +1594,7 @@ class TemplateCreateDocumentFromTemplateRecipientResponse(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -1333,6 +1625,13 @@ class TemplateCreateDocumentFromTemplateFieldType(str, Enum):
     DROPDOWN = "DROPDOWN"
 
 
+class TemplateCreateDocumentFromTemplateOverflow10(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
+
+
 class TemplateCreateDocumentFromTemplateFieldMetaTypeDropdown(str, Enum):
     DROPDOWN = "dropdown"
 
@@ -1352,6 +1651,7 @@ class TemplateCreateDocumentFromTemplateFieldMetaDropdownTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateCreateDocumentFromTemplateOverflow10]
     values: NotRequired[List[TemplateCreateDocumentFromTemplateValue3TypedDict]]
     default_value: NotRequired[str]
 
@@ -1369,6 +1669,8 @@ class TemplateCreateDocumentFromTemplateFieldMetaDropdown(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateCreateDocumentFromTemplateOverflow10] = None
+
     values: Optional[List[TemplateCreateDocumentFromTemplateValue3]] = None
 
     default_value: Annotated[Optional[str], pydantic.Field(alias="defaultValue")] = None
@@ -1382,6 +1684,7 @@ class TemplateCreateDocumentFromTemplateFieldMetaDropdown(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "values",
                 "defaultValue",
             ]
@@ -1391,13 +1694,20 @@ class TemplateCreateDocumentFromTemplateFieldMetaDropdown(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateCreateDocumentFromTemplateOverflow9(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateCreateDocumentFromTemplateFieldMetaTypeCheckbox(str, Enum):
@@ -1430,6 +1740,7 @@ class TemplateCreateDocumentFromTemplateFieldMetaCheckboxTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateCreateDocumentFromTemplateOverflow9]
     values: NotRequired[List[TemplateCreateDocumentFromTemplateValue2TypedDict]]
     validation_rule: NotRequired[str]
     validation_length: NotRequired[float]
@@ -1448,6 +1759,8 @@ class TemplateCreateDocumentFromTemplateFieldMetaCheckbox(BaseModel):
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+
+    overflow: Optional[TemplateCreateDocumentFromTemplateOverflow9] = None
 
     values: Optional[List[TemplateCreateDocumentFromTemplateValue2]] = None
 
@@ -1472,6 +1785,7 @@ class TemplateCreateDocumentFromTemplateFieldMetaCheckbox(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "values",
                 "validationRule",
                 "validationLength",
@@ -1483,13 +1797,20 @@ class TemplateCreateDocumentFromTemplateFieldMetaCheckbox(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateCreateDocumentFromTemplateOverflow8(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateCreateDocumentFromTemplateFieldMetaTypeRadio(str, Enum):
@@ -1522,6 +1843,7 @@ class TemplateCreateDocumentFromTemplateFieldMetaRadioTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateCreateDocumentFromTemplateOverflow8]
     values: NotRequired[List[TemplateCreateDocumentFromTemplateValue1TypedDict]]
     direction: NotRequired[TemplateCreateDocumentFromTemplateDirection1]
 
@@ -1539,6 +1861,8 @@ class TemplateCreateDocumentFromTemplateFieldMetaRadio(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateCreateDocumentFromTemplateOverflow8] = None
+
     values: Optional[List[TemplateCreateDocumentFromTemplateValue1]] = None
 
     direction: Optional[TemplateCreateDocumentFromTemplateDirection1] = (
@@ -1554,6 +1878,7 @@ class TemplateCreateDocumentFromTemplateFieldMetaRadio(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "values",
                 "direction",
             ]
@@ -1563,13 +1888,20 @@ class TemplateCreateDocumentFromTemplateFieldMetaRadio(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateCreateDocumentFromTemplateOverflow7(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateCreateDocumentFromTemplateFieldMetaTypeNumber(str, Enum):
@@ -1595,6 +1927,7 @@ class TemplateCreateDocumentFromTemplateFieldMetaNumberTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateCreateDocumentFromTemplateOverflow7]
     number_format: NotRequired[Nullable[str]]
     value: NotRequired[str]
     min_value: NotRequired[Nullable[float]]
@@ -1619,6 +1952,8 @@ class TemplateCreateDocumentFromTemplateFieldMetaNumber(BaseModel):
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+
+    overflow: Optional[TemplateCreateDocumentFromTemplateOverflow7] = None
 
     number_format: Annotated[
         OptionalNullable[str], pydantic.Field(alias="numberFormat")
@@ -1661,6 +1996,7 @@ class TemplateCreateDocumentFromTemplateFieldMetaNumber(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "numberFormat",
                 "value",
                 "minValue",
@@ -1686,7 +2022,7 @@ class TemplateCreateDocumentFromTemplateFieldMetaNumber(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -1701,6 +2037,13 @@ class TemplateCreateDocumentFromTemplateFieldMetaNumber(BaseModel):
                     m[k] = val
 
         return m
+
+
+class TemplateCreateDocumentFromTemplateOverflow6(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateCreateDocumentFromTemplateFieldMetaTypeText(str, Enum):
@@ -1726,6 +2069,7 @@ class TemplateCreateDocumentFromTemplateFieldMetaTextTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateCreateDocumentFromTemplateOverflow6]
     text: NotRequired[str]
     character_limit: NotRequired[float]
     text_align: NotRequired[TemplateCreateDocumentFromTemplateTextAlign5]
@@ -1748,6 +2092,8 @@ class TemplateCreateDocumentFromTemplateFieldMetaText(BaseModel):
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+
+    overflow: Optional[TemplateCreateDocumentFromTemplateOverflow6] = None
 
     text: Optional[str] = None
 
@@ -1782,6 +2128,7 @@ class TemplateCreateDocumentFromTemplateFieldMetaText(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "text",
                 "characterLimit",
                 "textAlign",
@@ -1796,7 +2143,7 @@ class TemplateCreateDocumentFromTemplateFieldMetaText(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -1811,6 +2158,13 @@ class TemplateCreateDocumentFromTemplateFieldMetaText(BaseModel):
                     m[k] = val
 
         return m
+
+
+class TemplateCreateDocumentFromTemplateOverflow5(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateCreateDocumentFromTemplateFieldMetaTypeDate(str, Enum):
@@ -1830,6 +2184,7 @@ class TemplateCreateDocumentFromTemplateFieldMetaDateTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateCreateDocumentFromTemplateOverflow5]
     text_align: NotRequired[TemplateCreateDocumentFromTemplateTextAlign4]
 
 
@@ -1846,6 +2201,10 @@ class TemplateCreateDocumentFromTemplateFieldMetaDate(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateCreateDocumentFromTemplateOverflow5] = (
+        TemplateCreateDocumentFromTemplateOverflow5.AUTO
+    )
+
     text_align: Annotated[
         Optional[TemplateCreateDocumentFromTemplateTextAlign4],
         pydantic.Field(alias="textAlign"),
@@ -1854,20 +2213,35 @@ class TemplateCreateDocumentFromTemplateFieldMetaDate(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateCreateDocumentFromTemplateOverflow4(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateCreateDocumentFromTemplateTypeEmail(str, Enum):
@@ -1887,6 +2261,7 @@ class TemplateCreateDocumentFromTemplateFieldMetaEmailTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateCreateDocumentFromTemplateOverflow4]
     text_align: NotRequired[TemplateCreateDocumentFromTemplateTextAlign3]
 
 
@@ -1903,6 +2278,10 @@ class TemplateCreateDocumentFromTemplateFieldMetaEmail(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateCreateDocumentFromTemplateOverflow4] = (
+        TemplateCreateDocumentFromTemplateOverflow4.AUTO
+    )
+
     text_align: Annotated[
         Optional[TemplateCreateDocumentFromTemplateTextAlign3],
         pydantic.Field(alias="textAlign"),
@@ -1911,20 +2290,35 @@ class TemplateCreateDocumentFromTemplateFieldMetaEmail(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateCreateDocumentFromTemplateOverflow3(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateCreateDocumentFromTemplateTypeName(str, Enum):
@@ -1944,6 +2338,7 @@ class TemplateCreateDocumentFromTemplateFieldMetaNameTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateCreateDocumentFromTemplateOverflow3]
     text_align: NotRequired[TemplateCreateDocumentFromTemplateTextAlign2]
 
 
@@ -1960,6 +2355,8 @@ class TemplateCreateDocumentFromTemplateFieldMetaName(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateCreateDocumentFromTemplateOverflow3] = None
+
     text_align: Annotated[
         Optional[TemplateCreateDocumentFromTemplateTextAlign2],
         pydantic.Field(alias="textAlign"),
@@ -1968,20 +2365,35 @@ class TemplateCreateDocumentFromTemplateFieldMetaName(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateCreateDocumentFromTemplateOverflow2(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateCreateDocumentFromTemplateTypeInitials(str, Enum):
@@ -2001,6 +2413,7 @@ class TemplateCreateDocumentFromTemplateFieldMetaInitialsTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateCreateDocumentFromTemplateOverflow2]
     text_align: NotRequired[TemplateCreateDocumentFromTemplateTextAlign1]
 
 
@@ -2017,6 +2430,8 @@ class TemplateCreateDocumentFromTemplateFieldMetaInitials(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateCreateDocumentFromTemplateOverflow2] = None
+
     text_align: Annotated[
         Optional[TemplateCreateDocumentFromTemplateTextAlign1],
         pydantic.Field(alias="textAlign"),
@@ -2025,20 +2440,35 @@ class TemplateCreateDocumentFromTemplateFieldMetaInitials(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateCreateDocumentFromTemplateOverflow1(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateCreateDocumentFromTemplateTypeSignature(str, Enum):
@@ -2052,6 +2482,7 @@ class TemplateCreateDocumentFromTemplateFieldMetaSignatureTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateCreateDocumentFromTemplateOverflow1]
 
 
 class TemplateCreateDocumentFromTemplateFieldMetaSignature(BaseModel):
@@ -2067,17 +2498,21 @@ class TemplateCreateDocumentFromTemplateFieldMetaSignature(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateCreateDocumentFromTemplateOverflow1] = (
+        TemplateCreateDocumentFromTemplateOverflow1.AUTO
+    )
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize"]
+            ["label", "placeholder", "required", "readOnly", "fontSize", "overflow"]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -2190,7 +2625,7 @@ class TemplateCreateDocumentFromTemplateField(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -2331,7 +2766,7 @@ class TemplateCreateDocumentFromTemplateResponse(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -2346,3 +2781,121 @@ class TemplateCreateDocumentFromTemplateResponse(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    TemplateCreateDocumentFromTemplateCustomDocumentDatum.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateOverrideEmailSettings.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodOverride2.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateOverride.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateAuthOptions.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateDocumentData.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateDocumentMetaEmailSettings.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateEnvelopeExpirationPeriodResponse2.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateSendAfter2.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateRepeatEvery2.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateReminderSettings.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateDocumentMeta.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateEnvelopeItem.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateFolder.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateRecipientAuthOptions.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateRecipientResponse.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateFieldMetaDropdown.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateFieldMetaCheckbox.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateFieldMetaRadio.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateFieldMetaNumber.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateFieldMetaText.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateFieldMetaDate.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateFieldMetaEmail.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateFieldMetaName.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateFieldMetaInitials.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateFieldMetaSignature.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateField.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateDocumentFromTemplateResponse.model_rebuild()
+except NameError:
+    pass

@@ -170,3 +170,9 @@ class EnvelopeAttachmentCreateResponse(BaseModel):
     r"""Successful response"""
 
     id: str
+
+
+try:
+    EnvelopeAttachmentCreateRequest.model_rebuild()
+except NameError:
+    pass

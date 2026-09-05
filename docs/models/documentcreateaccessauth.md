@@ -1,5 +1,13 @@
 # DocumentCreateAccessAuth
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentCreateAccessAuth
+
+value = DocumentCreateAccessAuth.ACCOUNT
+```
+
 
 ## Values
 

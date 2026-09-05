@@ -2,6 +2,14 @@
 
 Filter documents by how it was created.
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentFindQueryParamSource
+
+value = DocumentFindQueryParamSource.DOCUMENT
+```
+
 
 ## Values
 

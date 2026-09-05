@@ -1,5 +1,13 @@
 # EnvelopeGetSource
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeGetSource
+
+value = EnvelopeGetSource.DOCUMENT
+```
+
 
 ## Values
 

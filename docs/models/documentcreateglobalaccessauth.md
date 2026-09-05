@@ -1,5 +1,13 @@
 # DocumentCreateGlobalAccessAuth
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentCreateGlobalAccessAuth
+
+value = DocumentCreateGlobalAccessAuth.ACCOUNT
+```
+
 
 ## Values
 

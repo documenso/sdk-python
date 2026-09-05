@@ -1,5 +1,13 @@
 # EmailType
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EmailType
+
+value = EmailType.SIGNING_REQUEST
+```
+
 
 ## Values
 
@@ -11,3 +19,4 @@
 | `ASSISTING_REQUEST`  | ASSISTING_REQUEST    |
 | `CC`                 | CC                   |
 | `DOCUMENT_COMPLETED` | DOCUMENT_COMPLETED   |
+| `REMINDER`           | REMINDER             |

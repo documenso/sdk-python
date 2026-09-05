@@ -1,5 +1,13 @@
 # TemplateGetManyActionAuth
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateGetManyActionAuth
+
+value = TemplateGetManyActionAuth.ACCOUNT
+```
+
 
 ## Values
 

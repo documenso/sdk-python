@@ -1,5 +1,13 @@
 # TemplateFindTemplatesTypeEmail
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateFindTemplatesTypeEmail
+
+value = TemplateFindTemplatesTypeEmail.EMAIL
+```
+
 
 ## Values
 

@@ -1,5 +1,13 @@
 # FieldUpdateDocumentFieldsTextAlignInitials
 
+## Example Usage
+
+```python
+from documenso_sdk.models import FieldUpdateDocumentFieldsTextAlignInitials
+
+value = FieldUpdateDocumentFieldsTextAlignInitials.LEFT
+```
+
 
 ## Values
 
