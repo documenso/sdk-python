@@ -1,5 +1,13 @@
 # FieldCreateTemplateFieldTypeResponse
 
+## Example Usage
+
+```python
+from documenso_sdk.models import FieldCreateTemplateFieldTypeResponse
+
+value = FieldCreateTemplateFieldTypeResponse.SIGNATURE
+```
+
 
 ## Values
 

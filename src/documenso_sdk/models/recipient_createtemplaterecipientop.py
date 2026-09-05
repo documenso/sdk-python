@@ -77,7 +77,7 @@ class RecipientCreateTemplateRecipientRecipient(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -295,6 +295,8 @@ class RecipientCreateTemplateRecipientResponseTypedDict(TypedDict):
     token: str
     document_deleted_at: Nullable[str]
     expired: Nullable[str]
+    expires_at: Nullable[str]
+    expiration_notified_at: Nullable[str]
     signed_at: Nullable[str]
     auth_options: Nullable[RecipientCreateTemplateRecipientAuthOptionsTypedDict]
     signing_order: Nullable[float]
@@ -337,6 +339,12 @@ class RecipientCreateTemplateRecipientResponse(BaseModel):
 
     expired: Nullable[str]
 
+    expires_at: Annotated[Nullable[str], pydantic.Field(alias="expiresAt")]
+
+    expiration_notified_at: Annotated[
+        Nullable[str], pydantic.Field(alias="expirationNotifiedAt")
+    ]
+
     signed_at: Annotated[Nullable[str], pydantic.Field(alias="signedAt")]
 
     auth_options: Annotated[
@@ -363,6 +371,8 @@ class RecipientCreateTemplateRecipientResponse(BaseModel):
             [
                 "documentDeletedAt",
                 "expired",
+                "expiresAt",
+                "expirationNotifiedAt",
                 "signedAt",
                 "authOptions",
                 "signingOrder",
@@ -376,7 +386,7 @@ class RecipientCreateTemplateRecipientResponse(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -391,3 +401,21 @@ class RecipientCreateTemplateRecipientResponse(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    RecipientCreateTemplateRecipientRecipient.model_rebuild()
+except NameError:
+    pass
+try:
+    RecipientCreateTemplateRecipientRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    RecipientCreateTemplateRecipientAuthOptions.model_rebuild()
+except NameError:
+    pass
+try:
+    RecipientCreateTemplateRecipientResponse.model_rebuild()
+except NameError:
+    pass

@@ -1,5 +1,13 @@
 # EnvelopeUpdateVisibilityRequest
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeUpdateVisibilityRequest
+
+value = EnvelopeUpdateVisibilityRequest.EVERYONE
+```
+
 
 ## Values
 

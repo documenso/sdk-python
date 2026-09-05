@@ -1,0 +1,19 @@
+# TemplateGetTemplateByIDOverflow3
+
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateGetTemplateByIDOverflow3
+
+value = TemplateGetTemplateByIDOverflow3.AUTO
+```
+
+
+## Values
+
+| Name         | Value        |
+| ------------ | ------------ |
+| `AUTO`       | auto         |
+| `HORIZONTAL` | horizontal   |
+| `VERTICAL`   | vertical     |
+| `CROP`       | crop         |

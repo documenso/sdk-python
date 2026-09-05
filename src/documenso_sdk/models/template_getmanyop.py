@@ -158,6 +158,7 @@ class TemplateGetManyBadRequestError(DocumensoError):
 class TemplateGetManyType(str, Enum):
     PUBLIC = "PUBLIC"
     PRIVATE = "PRIVATE"
+    ORGANISATION = "ORGANISATION"
 
 
 class TemplateGetManyVisibility(str, Enum):
@@ -196,12 +197,15 @@ class TemplateGetManyAuthOptions(BaseModel):
 class TemplateGetManyTeamTypedDict(TypedDict):
     id: float
     url: str
+    name: str
 
 
 class TemplateGetManyTeam(BaseModel):
     id: float
 
     url: str
+
+    name: str
 
 
 class TemplateGetManyFieldType(str, Enum):
@@ -216,6 +220,13 @@ class TemplateGetManyFieldType(str, Enum):
     RADIO = "RADIO"
     CHECKBOX = "CHECKBOX"
     DROPDOWN = "DROPDOWN"
+
+
+class TemplateGetManyOverflow10(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateGetManyTypeDropdown(str, Enum):
@@ -237,6 +248,7 @@ class TemplateGetManyFieldMetaDropdownTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateGetManyOverflow10]
     values: NotRequired[List[TemplateGetManyValue3TypedDict]]
     default_value: NotRequired[str]
 
@@ -254,6 +266,8 @@ class TemplateGetManyFieldMetaDropdown(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateGetManyOverflow10] = None
+
     values: Optional[List[TemplateGetManyValue3]] = None
 
     default_value: Annotated[Optional[str], pydantic.Field(alias="defaultValue")] = None
@@ -267,6 +281,7 @@ class TemplateGetManyFieldMetaDropdown(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "values",
                 "defaultValue",
             ]
@@ -276,13 +291,20 @@ class TemplateGetManyFieldMetaDropdown(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateGetManyOverflow9(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateGetManyTypeCheckbox(str, Enum):
@@ -315,6 +337,7 @@ class TemplateGetManyFieldMetaCheckboxTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateGetManyOverflow9]
     values: NotRequired[List[TemplateGetManyValue2TypedDict]]
     validation_rule: NotRequired[str]
     validation_length: NotRequired[float]
@@ -333,6 +356,8 @@ class TemplateGetManyFieldMetaCheckbox(BaseModel):
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+
+    overflow: Optional[TemplateGetManyOverflow9] = None
 
     values: Optional[List[TemplateGetManyValue2]] = None
 
@@ -355,6 +380,7 @@ class TemplateGetManyFieldMetaCheckbox(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "values",
                 "validationRule",
                 "validationLength",
@@ -366,13 +392,20 @@ class TemplateGetManyFieldMetaCheckbox(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateGetManyOverflow8(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateGetManyTypeRadio(str, Enum):
@@ -405,6 +438,7 @@ class TemplateGetManyFieldMetaRadioTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateGetManyOverflow8]
     values: NotRequired[List[TemplateGetManyValue1TypedDict]]
     direction: NotRequired[TemplateGetManyDirection1]
 
@@ -422,6 +456,8 @@ class TemplateGetManyFieldMetaRadio(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateGetManyOverflow8] = None
+
     values: Optional[List[TemplateGetManyValue1]] = None
 
     direction: Optional[TemplateGetManyDirection1] = TemplateGetManyDirection1.VERTICAL
@@ -435,6 +471,7 @@ class TemplateGetManyFieldMetaRadio(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "values",
                 "direction",
             ]
@@ -444,13 +481,20 @@ class TemplateGetManyFieldMetaRadio(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateGetManyOverflow7(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateGetManyTypeNumber(str, Enum):
@@ -476,6 +520,7 @@ class TemplateGetManyFieldMetaNumberTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateGetManyOverflow7]
     number_format: NotRequired[Nullable[str]]
     value: NotRequired[str]
     min_value: NotRequired[Nullable[float]]
@@ -498,6 +543,8 @@ class TemplateGetManyFieldMetaNumber(BaseModel):
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+
+    overflow: Optional[TemplateGetManyOverflow7] = None
 
     number_format: Annotated[
         OptionalNullable[str], pydantic.Field(alias="numberFormat")
@@ -539,6 +586,7 @@ class TemplateGetManyFieldMetaNumber(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "numberFormat",
                 "value",
                 "minValue",
@@ -564,7 +612,7 @@ class TemplateGetManyFieldMetaNumber(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -579,6 +627,13 @@ class TemplateGetManyFieldMetaNumber(BaseModel):
                     m[k] = val
 
         return m
+
+
+class TemplateGetManyOverflow6(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateGetManyTypeText(str, Enum):
@@ -604,6 +659,7 @@ class TemplateGetManyFieldMetaTextTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateGetManyOverflow6]
     text: NotRequired[str]
     character_limit: NotRequired[float]
     text_align: NotRequired[TemplateGetManyTextAlign5]
@@ -624,6 +680,8 @@ class TemplateGetManyFieldMetaText(BaseModel):
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+
+    overflow: Optional[TemplateGetManyOverflow6] = None
 
     text: Optional[str] = None
 
@@ -657,6 +715,7 @@ class TemplateGetManyFieldMetaText(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "text",
                 "characterLimit",
                 "textAlign",
@@ -671,7 +730,7 @@ class TemplateGetManyFieldMetaText(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -686,6 +745,13 @@ class TemplateGetManyFieldMetaText(BaseModel):
                     m[k] = val
 
         return m
+
+
+class TemplateGetManyOverflow5(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateGetManyTypeDate(str, Enum):
@@ -705,6 +771,7 @@ class TemplateGetManyFieldMetaDateTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateGetManyOverflow5]
     text_align: NotRequired[TemplateGetManyTextAlign4]
 
 
@@ -721,6 +788,8 @@ class TemplateGetManyFieldMetaDate(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateGetManyOverflow5] = TemplateGetManyOverflow5.AUTO
+
     text_align: Annotated[
         Optional[TemplateGetManyTextAlign4], pydantic.Field(alias="textAlign")
     ] = None
@@ -728,20 +797,35 @@ class TemplateGetManyFieldMetaDate(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateGetManyOverflow4(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateGetManyTypeEmail(str, Enum):
@@ -761,6 +845,7 @@ class TemplateGetManyFieldMetaEmailTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateGetManyOverflow4]
     text_align: NotRequired[TemplateGetManyTextAlign3]
 
 
@@ -777,6 +862,8 @@ class TemplateGetManyFieldMetaEmail(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateGetManyOverflow4] = TemplateGetManyOverflow4.AUTO
+
     text_align: Annotated[
         Optional[TemplateGetManyTextAlign3], pydantic.Field(alias="textAlign")
     ] = None
@@ -784,20 +871,35 @@ class TemplateGetManyFieldMetaEmail(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateGetManyOverflow3(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateGetManyTypeName(str, Enum):
@@ -817,6 +919,7 @@ class TemplateGetManyFieldMetaNameTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateGetManyOverflow3]
     text_align: NotRequired[TemplateGetManyTextAlign2]
 
 
@@ -833,6 +936,8 @@ class TemplateGetManyFieldMetaName(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateGetManyOverflow3] = None
+
     text_align: Annotated[
         Optional[TemplateGetManyTextAlign2], pydantic.Field(alias="textAlign")
     ] = None
@@ -840,20 +945,35 @@ class TemplateGetManyFieldMetaName(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateGetManyOverflow2(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateGetManyTypeInitials(str, Enum):
@@ -873,6 +993,7 @@ class TemplateGetManyFieldMetaInitialsTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateGetManyOverflow2]
     text_align: NotRequired[TemplateGetManyTextAlign1]
 
 
@@ -889,6 +1010,8 @@ class TemplateGetManyFieldMetaInitials(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateGetManyOverflow2] = None
+
     text_align: Annotated[
         Optional[TemplateGetManyTextAlign1], pydantic.Field(alias="textAlign")
     ] = None
@@ -896,20 +1019,35 @@ class TemplateGetManyFieldMetaInitials(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateGetManyOverflow1(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateGetManyTypeSignature(str, Enum):
@@ -923,6 +1061,7 @@ class TemplateGetManyFieldMetaSignatureTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateGetManyOverflow1]
 
 
 class TemplateGetManyFieldMetaSignature(BaseModel):
@@ -938,17 +1077,19 @@ class TemplateGetManyFieldMetaSignature(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateGetManyOverflow1] = TemplateGetManyOverflow1.AUTO
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize"]
+            ["label", "placeholder", "required", "readOnly", "fontSize", "overflow"]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -1058,7 +1199,7 @@ class TemplateGetManyField(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -1139,6 +1280,8 @@ class TemplateGetManyRecipientTypedDict(TypedDict):
     token: str
     document_deleted_at: Nullable[str]
     expired: Nullable[str]
+    expires_at: Nullable[str]
+    expiration_notified_at: Nullable[str]
     signed_at: Nullable[str]
     auth_options: Nullable[TemplateGetManyRecipientAuthOptionsTypedDict]
     signing_order: Nullable[float]
@@ -1178,6 +1321,12 @@ class TemplateGetManyRecipient(BaseModel):
 
     expired: Nullable[str]
 
+    expires_at: Annotated[Nullable[str], pydantic.Field(alias="expiresAt")]
+
+    expiration_notified_at: Annotated[
+        Nullable[str], pydantic.Field(alias="expirationNotifiedAt")
+    ]
+
     signed_at: Annotated[Nullable[str], pydantic.Field(alias="signedAt")]
 
     auth_options: Annotated[
@@ -1204,6 +1353,8 @@ class TemplateGetManyRecipient(BaseModel):
             [
                 "documentDeletedAt",
                 "expired",
+                "expiresAt",
+                "expirationNotifiedAt",
                 "signedAt",
                 "authOptions",
                 "signingOrder",
@@ -1217,7 +1368,7 @@ class TemplateGetManyRecipient(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -1365,7 +1516,7 @@ class TemplateGetManyData(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -1392,3 +1543,73 @@ class TemplateGetManyResponse(BaseModel):
     r"""Successful response"""
 
     data: List[TemplateGetManyData]
+
+
+try:
+    TemplateGetManyRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateGetManyAuthOptions.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateGetManyFieldMetaDropdown.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateGetManyFieldMetaCheckbox.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateGetManyFieldMetaRadio.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateGetManyFieldMetaNumber.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateGetManyFieldMetaText.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateGetManyFieldMetaDate.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateGetManyFieldMetaEmail.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateGetManyFieldMetaName.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateGetManyFieldMetaInitials.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateGetManyFieldMetaSignature.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateGetManyField.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateGetManyRecipientAuthOptions.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateGetManyRecipient.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateGetManyTemplateMeta.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateGetManyData.model_rebuild()
+except NameError:
+    pass

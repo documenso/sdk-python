@@ -20,6 +20,9 @@ class Envelope(BaseSDK):
         template_id: Optional[float] = None,
         source: Optional[models.EnvelopeFindQueryParamSource] = None,
         status: Optional[models.EnvelopeFindQueryParamStatus] = None,
+        has_expired_recipients: Optional[
+            models.EnvelopeFindHasExpiredRecipients
+        ] = None,
         folder_id: Optional[str] = None,
         order_by_column: Optional[models.EnvelopeFindOrderByColumn] = None,
         order_by_direction: Optional[
@@ -41,6 +44,7 @@ class Envelope(BaseSDK):
         :param template_id: Filter envelopes by the template ID used to create it.
         :param source: Filter envelopes by how it was created.
         :param status: Filter envelopes by the current status.
+        :param has_expired_recipients: Filter for envelopes that have at least one recipient whose signing link has expired.
         :param folder_id: Filter envelopes by folder ID.
         :param order_by_column:
         :param order_by_direction: Sort direction.
@@ -67,6 +71,7 @@ class Envelope(BaseSDK):
             template_id=template_id,
             source=source,
             status=status,
+            has_expired_recipients=has_expired_recipients,
             folder_id=folder_id,
             order_by_column=order_by_column,
             order_by_direction=order_by_direction,
@@ -106,9 +111,11 @@ class Envelope(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -159,6 +166,9 @@ class Envelope(BaseSDK):
         template_id: Optional[float] = None,
         source: Optional[models.EnvelopeFindQueryParamSource] = None,
         status: Optional[models.EnvelopeFindQueryParamStatus] = None,
+        has_expired_recipients: Optional[
+            models.EnvelopeFindHasExpiredRecipients
+        ] = None,
         folder_id: Optional[str] = None,
         order_by_column: Optional[models.EnvelopeFindOrderByColumn] = None,
         order_by_direction: Optional[
@@ -180,6 +190,7 @@ class Envelope(BaseSDK):
         :param template_id: Filter envelopes by the template ID used to create it.
         :param source: Filter envelopes by how it was created.
         :param status: Filter envelopes by the current status.
+        :param has_expired_recipients: Filter for envelopes that have at least one recipient whose signing link has expired.
         :param folder_id: Filter envelopes by folder ID.
         :param order_by_column:
         :param order_by_direction: Sort direction.
@@ -206,6 +217,7 @@ class Envelope(BaseSDK):
             template_id=template_id,
             source=source,
             status=status,
+            has_expired_recipients=has_expired_recipients,
             folder_id=folder_id,
             order_by_column=order_by_column,
             order_by_direction=order_by_direction,
@@ -245,9 +257,11 @@ class Envelope(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -369,9 +383,11 @@ class Envelope(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -497,9 +513,11 @@ class Envelope(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -533,6 +551,506 @@ class Envelope(BaseSDK):
                 models.EnvelopeAuditLogFindInternalServerErrorData, http_res
             )
             raise models.EnvelopeAuditLogFindInternalServerError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def envelope_audit_log_download_pdf(
+        self,
+        *,
+        envelope_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.EnvelopeAuditLogDownloadPdfResponse:
+        r"""Download envelope audit log PDF
+
+        Download the audit log for a document as a PDF.
+
+        :param envelope_id: The ID of the envelope to download the audit log for.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.EnvelopeAuditLogDownloadPdfRequest(
+            envelope_id=envelope_id,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/envelope/{envelopeId}/audit-log/download",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="envelope-auditLog-downloadPdf",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["Envelope"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.EnvelopeAuditLogDownloadPdfResponse(
+                result=unmarshal_json_response(Any, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeAuditLogDownloadPdfBadRequestErrorData, http_res
+            )
+            raise models.EnvelopeAuditLogDownloadPdfBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeAuditLogDownloadPdfUnauthorizedErrorData, http_res
+            )
+            raise models.EnvelopeAuditLogDownloadPdfUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeAuditLogDownloadPdfForbiddenErrorData, http_res
+            )
+            raise models.EnvelopeAuditLogDownloadPdfForbiddenError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeAuditLogDownloadPdfNotFoundErrorData, http_res
+            )
+            raise models.EnvelopeAuditLogDownloadPdfNotFoundError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeAuditLogDownloadPdfInternalServerErrorData, http_res
+            )
+            raise models.EnvelopeAuditLogDownloadPdfInternalServerError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def envelope_audit_log_download_pdf_async(
+        self,
+        *,
+        envelope_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.EnvelopeAuditLogDownloadPdfResponse:
+        r"""Download envelope audit log PDF
+
+        Download the audit log for a document as a PDF.
+
+        :param envelope_id: The ID of the envelope to download the audit log for.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.EnvelopeAuditLogDownloadPdfRequest(
+            envelope_id=envelope_id,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/envelope/{envelopeId}/audit-log/download",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="envelope-auditLog-downloadPdf",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["Envelope"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.EnvelopeAuditLogDownloadPdfResponse(
+                result=unmarshal_json_response(Any, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeAuditLogDownloadPdfBadRequestErrorData, http_res
+            )
+            raise models.EnvelopeAuditLogDownloadPdfBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeAuditLogDownloadPdfUnauthorizedErrorData, http_res
+            )
+            raise models.EnvelopeAuditLogDownloadPdfUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeAuditLogDownloadPdfForbiddenErrorData, http_res
+            )
+            raise models.EnvelopeAuditLogDownloadPdfForbiddenError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeAuditLogDownloadPdfNotFoundErrorData, http_res
+            )
+            raise models.EnvelopeAuditLogDownloadPdfNotFoundError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeAuditLogDownloadPdfInternalServerErrorData, http_res
+            )
+            raise models.EnvelopeAuditLogDownloadPdfInternalServerError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def envelope_certificate_download_pdf(
+        self,
+        *,
+        envelope_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.EnvelopeCertificateDownloadPdfResponse:
+        r"""Download envelope certificate PDF
+
+        Download the signing certificate for a completed document as a PDF.
+
+        :param envelope_id: The ID of the envelope to download the certificate for.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.EnvelopeCertificateDownloadPdfRequest(
+            envelope_id=envelope_id,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/envelope/{envelopeId}/certificate/download",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="envelope-certificate-downloadPdf",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["Envelope"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.EnvelopeCertificateDownloadPdfResponse(
+                result=unmarshal_json_response(Any, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeCertificateDownloadPdfBadRequestErrorData, http_res
+            )
+            raise models.EnvelopeCertificateDownloadPdfBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeCertificateDownloadPdfUnauthorizedErrorData, http_res
+            )
+            raise models.EnvelopeCertificateDownloadPdfUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeCertificateDownloadPdfForbiddenErrorData, http_res
+            )
+            raise models.EnvelopeCertificateDownloadPdfForbiddenError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeCertificateDownloadPdfNotFoundErrorData, http_res
+            )
+            raise models.EnvelopeCertificateDownloadPdfNotFoundError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeCertificateDownloadPdfInternalServerErrorData, http_res
+            )
+            raise models.EnvelopeCertificateDownloadPdfInternalServerError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def envelope_certificate_download_pdf_async(
+        self,
+        *,
+        envelope_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.EnvelopeCertificateDownloadPdfResponse:
+        r"""Download envelope certificate PDF
+
+        Download the signing certificate for a completed document as a PDF.
+
+        :param envelope_id: The ID of the envelope to download the certificate for.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.EnvelopeCertificateDownloadPdfRequest(
+            envelope_id=envelope_id,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/envelope/{envelopeId}/certificate/download",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="envelope-certificate-downloadPdf",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["Envelope"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return models.EnvelopeCertificateDownloadPdfResponse(
+                result=unmarshal_json_response(Any, http_res),
+                headers=utils.get_response_headers(http_res.headers),
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeCertificateDownloadPdfBadRequestErrorData, http_res
+            )
+            raise models.EnvelopeCertificateDownloadPdfBadRequestError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeCertificateDownloadPdfUnauthorizedErrorData, http_res
+            )
+            raise models.EnvelopeCertificateDownloadPdfUnauthorizedError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeCertificateDownloadPdfForbiddenErrorData, http_res
+            )
+            raise models.EnvelopeCertificateDownloadPdfForbiddenError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "404", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeCertificateDownloadPdfNotFoundErrorData, http_res
+            )
+            raise models.EnvelopeCertificateDownloadPdfNotFoundError(
+                response_data, http_res
+            )
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeCertificateDownloadPdfInternalServerErrorData, http_res
+            )
+            raise models.EnvelopeCertificateDownloadPdfInternalServerError(
                 response_data, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
@@ -614,9 +1132,11 @@ class Envelope(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -722,9 +1242,11 @@ class Envelope(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -751,6 +1273,228 @@ class Envelope(BaseSDK):
                 models.EnvelopeGetManyInternalServerErrorData, http_res
             )
             raise models.EnvelopeGetManyInternalServerError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def envelope_cancel(
+        self,
+        *,
+        envelope_id: str,
+        reason: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.EnvelopeCancelResponse:
+        r"""Cancel envelope
+
+        :param envelope_id:
+        :param reason:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.EnvelopeCancelRequest(
+            envelope_id=envelope_id,
+            reason=reason,
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/envelope/cancel",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.EnvelopeCancelRequest
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="envelope-cancel",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["Envelope"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.EnvelopeCancelResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeCancelBadRequestErrorData, http_res
+            )
+            raise models.EnvelopeCancelBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeCancelUnauthorizedErrorData, http_res
+            )
+            raise models.EnvelopeCancelUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeCancelForbiddenErrorData, http_res
+            )
+            raise models.EnvelopeCancelForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeCancelInternalServerErrorData, http_res
+            )
+            raise models.EnvelopeCancelInternalServerError(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def envelope_cancel_async(
+        self,
+        *,
+        envelope_id: str,
+        reason: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.EnvelopeCancelResponse:
+        r"""Cancel envelope
+
+        :param envelope_id:
+        :param reason:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.EnvelopeCancelRequest(
+            envelope_id=envelope_id,
+            reason=reason,
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/envelope/cancel",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request, False, False, "json", models.EnvelopeCancelRequest
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="envelope-cancel",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["Envelope"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return unmarshal_json_response(models.EnvelopeCancelResponse, http_res)
+        if utils.match_response(http_res, "400", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeCancelBadRequestErrorData, http_res
+            )
+            raise models.EnvelopeCancelBadRequestError(response_data, http_res)
+        if utils.match_response(http_res, "401", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeCancelUnauthorizedErrorData, http_res
+            )
+            raise models.EnvelopeCancelUnauthorizedError(response_data, http_res)
+        if utils.match_response(http_res, "403", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeCancelForbiddenErrorData, http_res
+            )
+            raise models.EnvelopeCancelForbiddenError(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/json"):
+            response_data = unmarshal_json_response(
+                models.EnvelopeCancelInternalServerErrorData, http_res
+            )
+            raise models.EnvelopeCancelInternalServerError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)

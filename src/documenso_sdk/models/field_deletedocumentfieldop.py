@@ -156,3 +156,9 @@ class FieldDeleteDocumentFieldResponse(BaseModel):
     r"""Successful response"""
 
     success: bool
+
+
+try:
+    FieldDeleteDocumentFieldRequest.model_rebuild()
+except NameError:
+    pass

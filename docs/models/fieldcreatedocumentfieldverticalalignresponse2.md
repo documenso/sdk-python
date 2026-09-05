@@ -1,5 +1,13 @@
 # FieldCreateDocumentFieldVerticalAlignResponse2
 
+## Example Usage
+
+```python
+from documenso_sdk.models import FieldCreateDocumentFieldVerticalAlignResponse2
+
+value = FieldCreateDocumentFieldVerticalAlignResponse2.TOP
+```
+
 
 ## Values
 

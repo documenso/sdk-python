@@ -10,11 +10,13 @@ from documenso_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
+from documenso_sdk.utils import validate_const
 from enum import Enum
 import httpx
 import pydantic
 from pydantic import model_serializer
-from typing import Dict, List, Optional, Union
+from pydantic.functional_validators import AfterValidator
+from typing import Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
@@ -36,6 +38,12 @@ class EnvelopeUpdateGlobalActionAuthRequest(str, Enum):
     PASSWORD = "PASSWORD"
 
 
+class TemplateTypeRequest(str, Enum):
+    PUBLIC = "PUBLIC"
+    PRIVATE = "PRIVATE"
+    ORGANISATION = "ORGANISATION"
+
+
 class EnvelopeUpdateDataTypedDict(TypedDict):
     title: NotRequired[str]
     external_id: NotRequired[Nullable[str]]
@@ -43,6 +51,7 @@ class EnvelopeUpdateDataTypedDict(TypedDict):
     global_access_auth: NotRequired[List[EnvelopeUpdateGlobalAccessAuthRequest]]
     global_action_auth: NotRequired[List[EnvelopeUpdateGlobalActionAuthRequest]]
     folder_id: NotRequired[Nullable[str]]
+    template_type: NotRequired[TemplateTypeRequest]
 
 
 class EnvelopeUpdateData(BaseModel):
@@ -68,6 +77,10 @@ class EnvelopeUpdateData(BaseModel):
         UNSET
     )
 
+    template_type: Annotated[
+        Optional[TemplateTypeRequest], pydantic.Field(alias="templateType")
+    ] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -78,6 +91,7 @@ class EnvelopeUpdateData(BaseModel):
                 "globalAccessAuth",
                 "globalActionAuth",
                 "folderId",
+                "templateType",
             ]
         )
         nullable_fields = set(["externalId", "folderId"])
@@ -86,7 +100,7 @@ class EnvelopeUpdateData(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -107,12 +121,15 @@ class EnvelopeUpdateDateFormat(str, Enum):
     YYYY_M_MDD_HH_MM_A = "yyyy-MM-dd hh:mm a"
     YYYY_M_MDD = "yyyy-MM-dd"
     DD_MM_SLASH_YYYY = "dd/MM/yyyy"
+    DD_MM_DASH_YYYY = "dd-MM-yyyy"
     MM_DD_SLASH_YYYY = "MM/dd/yyyy"
     YY_M_MDD = "yy-MM-dd"
     MMMM_DD_COMMA_YYYY = "MMMM dd, yyyy"
     EEEE_MMMM_DD_COMMA_YYYY = "EEEE, MMMM dd, yyyy"
     DD_MM_SLASH_YYYY_HH_MM_A = "dd/MM/yyyy hh:mm a"
     DD_MM_SLASH_YYYY_H_HMM = "dd/MM/yyyy HH:mm"
+    DD_MM_DASH_YYYY_HH_MM_A = "dd-MM-yyyy hh:mm a"
+    DD_MM_DASH_YYYY_H_HMM = "dd-MM-yyyy HH:mm"
     MM_DD_SLASH_YYYY_HH_MM_A = "MM/dd/yyyy hh:mm a"
     MM_DD_SLASH_YYYY_H_HMM = "MM/dd/yyyy HH:mm"
     DD_DOT_MM_DOT_YYYY = "dd.MM.yyyy"
@@ -160,6 +177,8 @@ class EnvelopeUpdateEmailSettingsTypedDict(TypedDict):
     document_completed: NotRequired[bool]
     document_deleted: NotRequired[bool]
     owner_document_completed: NotRequired[bool]
+    owner_recipient_expired: NotRequired[bool]
+    owner_document_created: NotRequired[bool]
 
 
 class EnvelopeUpdateEmailSettings(BaseModel):
@@ -191,6 +210,14 @@ class EnvelopeUpdateEmailSettings(BaseModel):
         Optional[bool], pydantic.Field(alias="ownerDocumentCompleted")
     ] = True
 
+    owner_recipient_expired: Annotated[
+        Optional[bool], pydantic.Field(alias="ownerRecipientExpired")
+    ] = True
+
+    owner_document_created: Annotated[
+        Optional[bool], pydantic.Field(alias="ownerDocumentCreated")
+    ] = True
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -202,6 +229,8 @@ class EnvelopeUpdateEmailSettings(BaseModel):
                 "documentCompleted",
                 "documentDeleted",
                 "ownerDocumentCompleted",
+                "ownerRecipientExpired",
+                "ownerDocumentCreated",
             ]
         )
         serialized = handler(self)
@@ -209,13 +238,154 @@ class EnvelopeUpdateEmailSettings(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class EnvelopeUpdateEnvelopeExpirationPeriod2TypedDict(TypedDict):
+    disabled: Literal[True]
+
+
+class EnvelopeUpdateEnvelopeExpirationPeriod2(BaseModel):
+    DISABLED: Annotated[
+        Annotated[Literal[True], AfterValidator(validate_const(True))],
+        pydantic.Field(alias="disabled"),
+    ] = True
+
+
+class EnvelopeUpdateEnvelopeExpirationPeriodUnit(str, Enum):
+    DAY = "day"
+    WEEK = "week"
+    MONTH = "month"
+    YEAR = "year"
+
+
+class EnvelopeUpdateEnvelopeExpirationPeriod1TypedDict(TypedDict):
+    unit: EnvelopeUpdateEnvelopeExpirationPeriodUnit
+    amount: int
+
+
+class EnvelopeUpdateEnvelopeExpirationPeriod1(BaseModel):
+    unit: EnvelopeUpdateEnvelopeExpirationPeriodUnit
+
+    amount: int
+
+
+class EnvelopeUpdateSendAfter2TypedDict(TypedDict):
+    disabled: Literal[True]
+
+
+class EnvelopeUpdateSendAfter2(BaseModel):
+    DISABLED: Annotated[
+        Annotated[Literal[True], AfterValidator(validate_const(True))],
+        pydantic.Field(alias="disabled"),
+    ] = True
+
+
+EnvelopeUpdateEnvelopeExpirationPeriodUnionTypedDict = TypeAliasType(
+    "EnvelopeUpdateEnvelopeExpirationPeriodUnionTypedDict",
+    Union[
+        EnvelopeUpdateEnvelopeExpirationPeriod2TypedDict,
+        EnvelopeUpdateEnvelopeExpirationPeriod1TypedDict,
+    ],
+)
+
+
+EnvelopeUpdateEnvelopeExpirationPeriodUnion = TypeAliasType(
+    "EnvelopeUpdateEnvelopeExpirationPeriodUnion",
+    Union[
+        EnvelopeUpdateEnvelopeExpirationPeriod2, EnvelopeUpdateEnvelopeExpirationPeriod1
+    ],
+)
+
+
+class EnvelopeUpdateSendAfterUnit(str, Enum):
+    DAY = "day"
+    WEEK = "week"
+    MONTH = "month"
+
+
+class EnvelopeUpdateSendAfter1TypedDict(TypedDict):
+    unit: EnvelopeUpdateSendAfterUnit
+    amount: int
+
+
+class EnvelopeUpdateSendAfter1(BaseModel):
+    unit: EnvelopeUpdateSendAfterUnit
+
+    amount: int
+
+
+class EnvelopeUpdateRepeatEvery2TypedDict(TypedDict):
+    disabled: Literal[True]
+
+
+class EnvelopeUpdateRepeatEvery2(BaseModel):
+    DISABLED: Annotated[
+        Annotated[Literal[True], AfterValidator(validate_const(True))],
+        pydantic.Field(alias="disabled"),
+    ] = True
+
+
+EnvelopeUpdateSendAfterUnionTypedDict = TypeAliasType(
+    "EnvelopeUpdateSendAfterUnionTypedDict",
+    Union[EnvelopeUpdateSendAfter2TypedDict, EnvelopeUpdateSendAfter1TypedDict],
+)
+
+
+EnvelopeUpdateSendAfterUnion = TypeAliasType(
+    "EnvelopeUpdateSendAfterUnion",
+    Union[EnvelopeUpdateSendAfter2, EnvelopeUpdateSendAfter1],
+)
+
+
+class EnvelopeUpdateRepeatEveryUnit(str, Enum):
+    DAY = "day"
+    WEEK = "week"
+    MONTH = "month"
+
+
+class EnvelopeUpdateRepeatEvery1TypedDict(TypedDict):
+    unit: EnvelopeUpdateRepeatEveryUnit
+    amount: int
+
+
+class EnvelopeUpdateRepeatEvery1(BaseModel):
+    unit: EnvelopeUpdateRepeatEveryUnit
+
+    amount: int
+
+
+EnvelopeUpdateRepeatEveryUnionTypedDict = TypeAliasType(
+    "EnvelopeUpdateRepeatEveryUnionTypedDict",
+    Union[EnvelopeUpdateRepeatEvery2TypedDict, EnvelopeUpdateRepeatEvery1TypedDict],
+)
+
+
+EnvelopeUpdateRepeatEveryUnion = TypeAliasType(
+    "EnvelopeUpdateRepeatEveryUnion",
+    Union[EnvelopeUpdateRepeatEvery2, EnvelopeUpdateRepeatEvery1],
+)
+
+
+class EnvelopeUpdateReminderSettingsTypedDict(TypedDict):
+    send_after: EnvelopeUpdateSendAfterUnionTypedDict
+    repeat_every: EnvelopeUpdateRepeatEveryUnionTypedDict
+
+
+class EnvelopeUpdateReminderSettings(BaseModel):
+    send_after: Annotated[
+        EnvelopeUpdateSendAfterUnion, pydantic.Field(alias="sendAfter")
+    ]
+
+    repeat_every: Annotated[
+        EnvelopeUpdateRepeatEveryUnion, pydantic.Field(alias="repeatEvery")
+    ]
 
 
 class EnvelopeUpdateMetaTypedDict(TypedDict):
@@ -234,6 +404,10 @@ class EnvelopeUpdateMetaTypedDict(TypedDict):
     email_id: NotRequired[Nullable[str]]
     email_reply_to: NotRequired[Nullable[str]]
     email_settings: NotRequired[Nullable[EnvelopeUpdateEmailSettingsTypedDict]]
+    envelope_expiration_period: NotRequired[
+        Nullable[EnvelopeUpdateEnvelopeExpirationPeriodUnionTypedDict]
+    ]
+    reminder_settings: NotRequired[Nullable[EnvelopeUpdateReminderSettingsTypedDict]]
 
 
 class EnvelopeUpdateMeta(BaseModel):
@@ -287,6 +461,16 @@ class EnvelopeUpdateMeta(BaseModel):
         pydantic.Field(alias="emailSettings"),
     ] = UNSET
 
+    envelope_expiration_period: Annotated[
+        OptionalNullable[EnvelopeUpdateEnvelopeExpirationPeriodUnion],
+        pydantic.Field(alias="envelopeExpirationPeriod"),
+    ] = UNSET
+
+    reminder_settings: Annotated[
+        OptionalNullable[EnvelopeUpdateReminderSettings],
+        pydantic.Field(alias="reminderSettings"),
+    ] = UNSET
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -306,15 +490,25 @@ class EnvelopeUpdateMeta(BaseModel):
                 "emailId",
                 "emailReplyTo",
                 "emailSettings",
+                "envelopeExpirationPeriod",
+                "reminderSettings",
             ]
         )
-        nullable_fields = set(["emailId", "emailReplyTo", "emailSettings"])
+        nullable_fields = set(
+            [
+                "emailId",
+                "emailReplyTo",
+                "emailSettings",
+                "envelopeExpirationPeriod",
+                "reminderSettings",
+            ]
+        )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -352,7 +546,7 @@ class EnvelopeUpdateRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -499,6 +693,7 @@ class EnvelopeUpdateStatus(str, Enum):
     PENDING = "PENDING"
     COMPLETED = "COMPLETED"
     REJECTED = "REJECTED"
+    CANCELLED = "CANCELLED"
 
 
 class EnvelopeUpdateSource(str, Enum):
@@ -513,9 +708,10 @@ class EnvelopeUpdateVisibilityResponse(str, Enum):
     ADMIN = "ADMIN"
 
 
-class EnvelopeUpdateTemplateType(str, Enum):
+class EnvelopeUpdateTemplateTypeResponse(str, Enum):
     PUBLIC = "PUBLIC"
     PRIVATE = "PRIVATE"
+    ORGANISATION = "ORGANISATION"
 
 
 class EnvelopeUpdateGlobalAccessAuthResponse(str, Enum):
@@ -565,7 +761,7 @@ class EnvelopeUpdateResponseTypedDict(TypedDict):
     status: EnvelopeUpdateStatus
     source: EnvelopeUpdateSource
     visibility: EnvelopeUpdateVisibilityResponse
-    template_type: EnvelopeUpdateTemplateType
+    template_type: EnvelopeUpdateTemplateTypeResponse
     id: str
     secondary_id: str
     external_id: Nullable[str]
@@ -597,7 +793,7 @@ class EnvelopeUpdateResponse(BaseModel):
     visibility: EnvelopeUpdateVisibilityResponse
 
     template_type: Annotated[
-        EnvelopeUpdateTemplateType, pydantic.Field(alias="templateType")
+        EnvelopeUpdateTemplateTypeResponse, pydantic.Field(alias="templateType")
     ]
 
     id: str
@@ -642,9 +838,51 @@ class EnvelopeUpdateResponse(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 m[k] = val
 
         return m
+
+
+try:
+    EnvelopeUpdateData.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeUpdateEmailSettings.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeUpdateEnvelopeExpirationPeriod2.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeUpdateSendAfter2.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeUpdateRepeatEvery2.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeUpdateReminderSettings.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeUpdateMeta.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeUpdateRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeUpdateAuthOptions.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeUpdateResponse.model_rebuild()
+except NameError:
+    pass

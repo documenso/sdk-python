@@ -1,5 +1,13 @@
 # TemplateGetTemplateByIDVisibility
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateGetTemplateByIDVisibility
+
+value = TemplateGetTemplateByIDVisibility.EVERYONE
+```
+
 
 ## Values
 

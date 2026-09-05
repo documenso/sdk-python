@@ -1,5 +1,13 @@
 # TypeDocumentCreated
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TypeDocumentCreated
+
+value = TypeDocumentCreated.DOCUMENT_CREATED
+```
+
 
 ## Values
 

@@ -1,5 +1,13 @@
 # EnvelopeCreateTextAlignInitials
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeCreateTextAlignInitials
+
+value = EnvelopeCreateTextAlignInitials.LEFT
+```
+
 
 ## Values
 

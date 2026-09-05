@@ -1,5 +1,13 @@
 # RecipientGetDocumentRecipientRole
 
+## Example Usage
+
+```python
+from documenso_sdk.models import RecipientGetDocumentRecipientRole
+
+value = RecipientGetDocumentRecipientRole.CC
+```
+
 
 ## Values
 

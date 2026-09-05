@@ -1,0 +1,9 @@
+# EnvelopeRecipientRejectOnBehalfOfRequest
+
+
+## Fields
+
+| Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `recipient_id`                                                                                                   | *float*                                                                                                          | :heavy_check_mark:                                                                                               | The ID of the recipient to reject the document on behalf of.                                                     |
+| `request_body`                                                                                                   | [models.EnvelopeRecipientRejectOnBehalfOfRequestBody](../models/enveloperecipientrejectonbehalfofrequestbody.md) | :heavy_check_mark:                                                                                               | N/A                                                                                                              |

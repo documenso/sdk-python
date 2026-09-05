@@ -1,5 +1,13 @@
 # DocumentFindRole
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentFindRole
+
+value = DocumentFindRole.CC
+```
+
 
 ## Values
 

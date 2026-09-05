@@ -6,10 +6,14 @@ from documenso_sdk._hooks import HookContext
 from documenso_sdk.types import OptionalNullable, UNSET
 from documenso_sdk.utils import get_security_from_env
 from documenso_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Iterable, List, Mapping, Optional, Union
+from typing_extensions import deprecated
 
 
 class TemplatesFields(BaseSDK):
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def create(
         self,
         *,
@@ -25,7 +29,7 @@ class TemplatesFields(BaseSDK):
     ) -> models.FieldCreateTemplateFieldResponse:
         r"""Create template field
 
-        Create a single field for a template.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Create a single field for a template.
 
         :param template_id:
         :param field:
@@ -88,9 +92,11 @@ class TemplatesFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -134,6 +140,9 @@ class TemplatesFields(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def create_async(
         self,
         *,
@@ -149,7 +158,7 @@ class TemplatesFields(BaseSDK):
     ) -> models.FieldCreateTemplateFieldResponse:
         r"""Create template field
 
-        Create a single field for a template.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Create a single field for a template.
 
         :param template_id:
         :param field:
@@ -212,9 +221,11 @@ class TemplatesFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -258,6 +269,9 @@ class TemplatesFields(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def get(
         self,
         *,
@@ -269,7 +283,7 @@ class TemplatesFields(BaseSDK):
     ) -> models.FieldGetTemplateFieldResponse:
         r"""Get template field
 
-        Returns a single field. If you want to retrieve all the fields for a template, use the \"Get Template\" endpoint.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Returns a single field. If you want to retrieve all the fields for a template, use the \"Get Template\" endpoint.
 
         :param field_id:
         :param retries: Override the default retry configuration for this method
@@ -325,9 +339,11 @@ class TemplatesFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -372,6 +388,9 @@ class TemplatesFields(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def get_async(
         self,
         *,
@@ -383,7 +402,7 @@ class TemplatesFields(BaseSDK):
     ) -> models.FieldGetTemplateFieldResponse:
         r"""Get template field
 
-        Returns a single field. If you want to retrieve all the fields for a template, use the \"Get Template\" endpoint.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Returns a single field. If you want to retrieve all the fields for a template, use the \"Get Template\" endpoint.
 
         :param field_id:
         :param retries: Override the default retry configuration for this method
@@ -439,9 +458,11 @@ class TemplatesFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -486,13 +507,16 @@ class TemplatesFields(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def create_many(
         self,
         *,
         template_id: float,
         fields: Union[
-            List[models.FieldCreateTemplateFieldsFieldUnion],
-            List[models.FieldCreateTemplateFieldsFieldUnionTypedDict],
+            Iterable[models.FieldCreateTemplateFieldsFieldUnion],
+            Iterable[models.FieldCreateTemplateFieldsFieldUnionTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -501,7 +525,7 @@ class TemplatesFields(BaseSDK):
     ) -> models.FieldCreateTemplateFieldsResponse:
         r"""Create template fields
 
-        Create multiple fields for a template.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Create multiple fields for a template.
 
         :param template_id:
         :param fields:
@@ -564,9 +588,11 @@ class TemplatesFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -612,13 +638,16 @@ class TemplatesFields(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def create_many_async(
         self,
         *,
         template_id: float,
         fields: Union[
-            List[models.FieldCreateTemplateFieldsFieldUnion],
-            List[models.FieldCreateTemplateFieldsFieldUnionTypedDict],
+            Iterable[models.FieldCreateTemplateFieldsFieldUnion],
+            Iterable[models.FieldCreateTemplateFieldsFieldUnionTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -627,7 +656,7 @@ class TemplatesFields(BaseSDK):
     ) -> models.FieldCreateTemplateFieldsResponse:
         r"""Create template fields
 
-        Create multiple fields for a template.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Create multiple fields for a template.
 
         :param template_id:
         :param fields:
@@ -690,9 +719,11 @@ class TemplatesFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -738,6 +769,9 @@ class TemplatesFields(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def update(
         self,
         *,
@@ -753,7 +787,7 @@ class TemplatesFields(BaseSDK):
     ) -> models.FieldUpdateTemplateFieldResponse:
         r"""Update template field
 
-        Update a single field for a template.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Update a single field for a template.
 
         :param template_id:
         :param field:
@@ -816,9 +850,11 @@ class TemplatesFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -862,6 +898,9 @@ class TemplatesFields(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def update_async(
         self,
         *,
@@ -877,7 +916,7 @@ class TemplatesFields(BaseSDK):
     ) -> models.FieldUpdateTemplateFieldResponse:
         r"""Update template field
 
-        Update a single field for a template.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Update a single field for a template.
 
         :param template_id:
         :param field:
@@ -940,9 +979,11 @@ class TemplatesFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -986,13 +1027,16 @@ class TemplatesFields(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def update_many(
         self,
         *,
         template_id: float,
         fields: Union[
-            List[models.FieldUpdateTemplateFieldsFieldUnion],
-            List[models.FieldUpdateTemplateFieldsFieldUnionTypedDict],
+            Iterable[models.FieldUpdateTemplateFieldsFieldUnion],
+            Iterable[models.FieldUpdateTemplateFieldsFieldUnionTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1001,7 +1045,7 @@ class TemplatesFields(BaseSDK):
     ) -> models.FieldUpdateTemplateFieldsResponse:
         r"""Update template fields
 
-        Update multiple fields for a template.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Update multiple fields for a template.
 
         :param template_id:
         :param fields:
@@ -1064,9 +1108,11 @@ class TemplatesFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1112,13 +1158,16 @@ class TemplatesFields(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def update_many_async(
         self,
         *,
         template_id: float,
         fields: Union[
-            List[models.FieldUpdateTemplateFieldsFieldUnion],
-            List[models.FieldUpdateTemplateFieldsFieldUnionTypedDict],
+            Iterable[models.FieldUpdateTemplateFieldsFieldUnion],
+            Iterable[models.FieldUpdateTemplateFieldsFieldUnionTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1127,7 +1176,7 @@ class TemplatesFields(BaseSDK):
     ) -> models.FieldUpdateTemplateFieldsResponse:
         r"""Update template fields
 
-        Update multiple fields for a template.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Update multiple fields for a template.
 
         :param template_id:
         :param fields:
@@ -1190,9 +1239,11 @@ class TemplatesFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1238,6 +1289,9 @@ class TemplatesFields(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def delete(
         self,
         *,
@@ -1248,6 +1302,8 @@ class TemplatesFields(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.FieldDeleteTemplateFieldResponse:
         r"""Delete template field
+
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
 
         :param field_id:
         :param retries: Override the default retry configuration for this method
@@ -1306,9 +1362,11 @@ class TemplatesFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1352,6 +1410,9 @@ class TemplatesFields(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def delete_async(
         self,
         *,
@@ -1362,6 +1423,8 @@ class TemplatesFields(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.FieldDeleteTemplateFieldResponse:
         r"""Delete template field
+
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
 
         :param field_id:
         :param retries: Override the default retry configuration for this method
@@ -1420,9 +1483,11 @@ class TemplatesFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

@@ -1,5 +1,13 @@
 # DocumentGetManyGlobalAccessAuth
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentGetManyGlobalAccessAuth
+
+value = DocumentGetManyGlobalAccessAuth.ACCOUNT
+```
+
 
 ## Values
 

@@ -1,5 +1,13 @@
 # TemplateCreateDocumentFromTemplateStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateCreateDocumentFromTemplateStatus
+
+value = TemplateCreateDocumentFromTemplateStatus.DRAFT
+```
+
 
 ## Values
 
@@ -9,3 +17,4 @@
 | `PENDING`   | PENDING     |
 | `COMPLETED` | COMPLETED   |
 | `REJECTED`  | REJECTED    |
+| `CANCELLED` | CANCELLED   |

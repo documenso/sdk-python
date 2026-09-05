@@ -3,7 +3,8 @@
 
 ## Fields
 
-| Field                                      | Type                                       | Required                                   | Description                                |
-| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| `field`                                    | [models.FieldEnum](../models/fieldenum.md) | :heavy_check_mark:                         | N/A                                        |
-| `field_id`                                 | *str*                                      | :heavy_check_mark:                         | N/A                                        |
+| Field                   | Type                    | Required                | Description             |
+| ----------------------- | ----------------------- | ----------------------- | ----------------------- |
+| `delegated_owner_name`  | *Nullable[str]*         | :heavy_check_mark:      | N/A                     |
+| `delegated_owner_email` | *str*                   | :heavy_check_mark:      | N/A                     |
+| `team_name`             | *str*                   | :heavy_check_mark:      | N/A                     |

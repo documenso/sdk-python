@@ -1,5 +1,13 @@
 # EnvelopeUpdateGlobalAccessAuthResponse
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeUpdateGlobalAccessAuthResponse
+
+value = EnvelopeUpdateGlobalAccessAuthResponse.ACCOUNT
+```
+
 
 ## Values
 

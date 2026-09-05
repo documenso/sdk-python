@@ -3,69 +3,69 @@
 
 ## Supported Types
 
-### `models.DataSignature`
+### `models.EnvelopeFieldUpdateManyDataSignature`
 
 ```python
-value: models.DataSignature = /* values here */
+value: models.EnvelopeFieldUpdateManyDataSignature = /* values here */
 ```
 
-### `models.DataFreeSignature`
+### `models.EnvelopeFieldUpdateManyDataFreeSignature`
 
 ```python
-value: models.DataFreeSignature = /* values here */
+value: models.EnvelopeFieldUpdateManyDataFreeSignature = /* values here */
 ```
 
-### `models.DataInitials`
+### `models.EnvelopeFieldUpdateManyDataInitials`
 
 ```python
-value: models.DataInitials = /* values here */
+value: models.EnvelopeFieldUpdateManyDataInitials = /* values here */
 ```
 
-### `models.DataName`
+### `models.EnvelopeFieldUpdateManyDataName`
 
 ```python
-value: models.DataName = /* values here */
+value: models.EnvelopeFieldUpdateManyDataName = /* values here */
 ```
 
-### `models.DataEmail`
+### `models.EnvelopeFieldUpdateManyDataEmail`
 
 ```python
-value: models.DataEmail = /* values here */
+value: models.EnvelopeFieldUpdateManyDataEmail = /* values here */
 ```
 
-### `models.DataDate`
+### `models.EnvelopeFieldUpdateManyDataDate`
 
 ```python
-value: models.DataDate = /* values here */
+value: models.EnvelopeFieldUpdateManyDataDate = /* values here */
 ```
 
-### `models.DataText`
+### `models.EnvelopeFieldUpdateManyDataText`
 
 ```python
-value: models.DataText = /* values here */
+value: models.EnvelopeFieldUpdateManyDataText = /* values here */
 ```
 
-### `models.DataNumber`
+### `models.EnvelopeFieldUpdateManyDataNumber`
 
 ```python
-value: models.DataNumber = /* values here */
+value: models.EnvelopeFieldUpdateManyDataNumber = /* values here */
 ```
 
-### `models.DataRadio`
+### `models.EnvelopeFieldUpdateManyDataRadio`
 
 ```python
-value: models.DataRadio = /* values here */
+value: models.EnvelopeFieldUpdateManyDataRadio = /* values here */
 ```
 
-### `models.DataCheckbox`
+### `models.EnvelopeFieldUpdateManyDataCheckbox`
 
 ```python
-value: models.DataCheckbox = /* values here */
+value: models.EnvelopeFieldUpdateManyDataCheckbox = /* values here */
 ```
 
-### `models.DataDropdown`
+### `models.EnvelopeFieldUpdateManyDataDropdown`
 
 ```python
-value: models.DataDropdown = /* values here */
+value: models.EnvelopeFieldUpdateManyDataDropdown = /* values here */
 ```
 
