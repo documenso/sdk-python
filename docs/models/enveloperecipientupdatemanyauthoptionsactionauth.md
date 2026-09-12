@@ -1,5 +1,13 @@
 # EnvelopeRecipientUpdateManyAuthOptionsActionAuth
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeRecipientUpdateManyAuthOptionsActionAuth
+
+value = EnvelopeRecipientUpdateManyAuthOptionsActionAuth.ACCOUNT
+```
+
 
 ## Values
 

@@ -1,5 +1,13 @@
 # TemplateGetTemplateByIDActionAuth
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateGetTemplateByIDActionAuth
+
+value = TemplateGetTemplateByIDActionAuth.ACCOUNT
+```
+
 
 ## Values
 

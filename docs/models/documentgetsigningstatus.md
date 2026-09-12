@@ -1,5 +1,13 @@
 # DocumentGetSigningStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentGetSigningStatus
+
+value = DocumentGetSigningStatus.NOT_SIGNED
+```
+
 
 ## Values
 

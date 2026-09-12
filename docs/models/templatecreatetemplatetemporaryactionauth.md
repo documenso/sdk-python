@@ -1,5 +1,13 @@
 # TemplateCreateTemplateTemporaryActionAuth
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateCreateTemplateTemporaryActionAuth
+
+value = TemplateCreateTemplateTemporaryActionAuth.ACCOUNT
+```
+
 
 ## Values
 

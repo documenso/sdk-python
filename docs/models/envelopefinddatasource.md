@@ -1,5 +1,13 @@
 # EnvelopeFindDataSource
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeFindDataSource
+
+value = EnvelopeFindDataSource.DOCUMENT
+```
+
 
 ## Values
 

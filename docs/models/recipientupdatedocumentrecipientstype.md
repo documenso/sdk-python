@@ -1,5 +1,13 @@
 # RecipientUpdateDocumentRecipientsType
 
+## Example Usage
+
+```python
+from documenso_sdk.models import RecipientUpdateDocumentRecipientsType
+
+value = RecipientUpdateDocumentRecipientsType.SIGNATURE
+```
+
 
 ## Values
 

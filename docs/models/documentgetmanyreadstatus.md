@@ -1,5 +1,13 @@
 # DocumentGetManyReadStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentGetManyReadStatus
+
+value = DocumentGetManyReadStatus.NOT_OPENED
+```
+
 
 ## Values
 

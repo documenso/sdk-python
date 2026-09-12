@@ -1,5 +1,13 @@
 # EnvelopeRecipientGetSendStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeRecipientGetSendStatus
+
+value = EnvelopeRecipientGetSendStatus.NOT_SENT
+```
+
 
 ## Values
 

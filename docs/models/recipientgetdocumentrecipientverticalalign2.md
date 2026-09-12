@@ -1,5 +1,13 @@
 # RecipientGetDocumentRecipientVerticalAlign2
 
+## Example Usage
+
+```python
+from documenso_sdk.models import RecipientGetDocumentRecipientVerticalAlign2
+
+value = RecipientGetDocumentRecipientVerticalAlign2.TOP
+```
+
 
 ## Values
 

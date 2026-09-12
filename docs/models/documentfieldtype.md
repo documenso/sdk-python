@@ -1,5 +1,13 @@
 # DocumentFieldType
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentFieldType
+
+value = DocumentFieldType.SIGNATURE
+```
+
 
 ## Values
 

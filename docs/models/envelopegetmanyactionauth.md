@@ -1,5 +1,13 @@
 # EnvelopeGetManyActionAuth
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeGetManyActionAuth
+
+value = EnvelopeGetManyActionAuth.ACCOUNT
+```
+
 
 ## Values
 

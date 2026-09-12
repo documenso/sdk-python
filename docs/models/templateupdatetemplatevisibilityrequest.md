@@ -1,5 +1,13 @@
 # TemplateUpdateTemplateVisibilityRequest
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateUpdateTemplateVisibilityRequest
+
+value = TemplateUpdateTemplateVisibilityRequest.EVERYONE
+```
+
 
 ## Values
 

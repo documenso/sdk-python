@@ -29,7 +29,7 @@ class EmbeddingPresignCreateEmbeddingPresignTokenRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -200,3 +200,13 @@ class EmbeddingPresignCreateEmbeddingPresignTokenResponse(BaseModel):
     expires_at: Annotated[str, pydantic.Field(alias="expiresAt")]
 
     expires_in: Annotated[float, pydantic.Field(alias="expiresIn")]
+
+
+try:
+    EmbeddingPresignCreateEmbeddingPresignTokenRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    EmbeddingPresignCreateEmbeddingPresignTokenResponse.model_rebuild()
+except NameError:
+    pass

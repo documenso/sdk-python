@@ -68,7 +68,7 @@ class FolderFindFoldersRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -289,7 +289,7 @@ class FolderFindFoldersData(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 m[k] = val
@@ -319,3 +319,13 @@ class FolderFindFoldersResponse(BaseModel):
     per_page: Annotated[float, pydantic.Field(alias="perPage")]
 
     total_pages: Annotated[float, pydantic.Field(alias="totalPages")]
+
+
+try:
+    FolderFindFoldersData.model_rebuild()
+except NameError:
+    pass
+try:
+    FolderFindFoldersResponse.model_rebuild()
+except NameError:
+    pass

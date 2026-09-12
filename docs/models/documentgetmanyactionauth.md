@@ -1,5 +1,13 @@
 # DocumentGetManyActionAuth
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentGetManyActionAuth
+
+value = DocumentGetManyActionAuth.ACCOUNT
+```
+
 
 ## Values
 

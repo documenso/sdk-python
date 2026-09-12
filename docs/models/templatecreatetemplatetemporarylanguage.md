@@ -1,5 +1,13 @@
 # TemplateCreateTemplateTemporaryLanguage
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateCreateTemplateTemporaryLanguage
+
+value = TemplateCreateTemplateTemporaryLanguage.DE
+```
+
 
 ## Values
 

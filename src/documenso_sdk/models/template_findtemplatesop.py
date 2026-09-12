@@ -24,6 +24,7 @@ class TemplateFindTemplatesQueryParamType(str, Enum):
 
     PUBLIC = "PUBLIC"
     PRIVATE = "PRIVATE"
+    ORGANISATION = "ORGANISATION"
 
 
 class TemplateFindTemplatesRequestTypedDict(TypedDict):
@@ -80,7 +81,7 @@ class TemplateFindTemplatesRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -252,6 +253,7 @@ class TemplateFindTemplatesBadRequestError(DocumensoError):
 class TemplateFindTemplatesDataType(str, Enum):
     PUBLIC = "PUBLIC"
     PRIVATE = "PRIVATE"
+    ORGANISATION = "ORGANISATION"
 
 
 class TemplateFindTemplatesVisibility(str, Enum):
@@ -292,12 +294,15 @@ class TemplateFindTemplatesAuthOptions(BaseModel):
 class TemplateFindTemplatesTeamTypedDict(TypedDict):
     id: float
     url: str
+    name: str
 
 
 class TemplateFindTemplatesTeam(BaseModel):
     id: float
 
     url: str
+
+    name: str
 
 
 class TemplateFindTemplatesFieldType(str, Enum):
@@ -312,6 +317,13 @@ class TemplateFindTemplatesFieldType(str, Enum):
     RADIO = "RADIO"
     CHECKBOX = "CHECKBOX"
     DROPDOWN = "DROPDOWN"
+
+
+class TemplateFindTemplatesOverflow10(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateFindTemplatesTypeDropdown(str, Enum):
@@ -333,6 +345,7 @@ class TemplateFindTemplatesFieldMetaDropdownTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateFindTemplatesOverflow10]
     values: NotRequired[List[TemplateFindTemplatesValue3TypedDict]]
     default_value: NotRequired[str]
 
@@ -350,6 +363,8 @@ class TemplateFindTemplatesFieldMetaDropdown(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateFindTemplatesOverflow10] = None
+
     values: Optional[List[TemplateFindTemplatesValue3]] = None
 
     default_value: Annotated[Optional[str], pydantic.Field(alias="defaultValue")] = None
@@ -363,6 +378,7 @@ class TemplateFindTemplatesFieldMetaDropdown(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "values",
                 "defaultValue",
             ]
@@ -372,13 +388,20 @@ class TemplateFindTemplatesFieldMetaDropdown(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateFindTemplatesOverflow9(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateFindTemplatesTypeCheckbox(str, Enum):
@@ -411,6 +434,7 @@ class TemplateFindTemplatesFieldMetaCheckboxTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateFindTemplatesOverflow9]
     values: NotRequired[List[TemplateFindTemplatesValue2TypedDict]]
     validation_rule: NotRequired[str]
     validation_length: NotRequired[float]
@@ -429,6 +453,8 @@ class TemplateFindTemplatesFieldMetaCheckbox(BaseModel):
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+
+    overflow: Optional[TemplateFindTemplatesOverflow9] = None
 
     values: Optional[List[TemplateFindTemplatesValue2]] = None
 
@@ -453,6 +479,7 @@ class TemplateFindTemplatesFieldMetaCheckbox(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "values",
                 "validationRule",
                 "validationLength",
@@ -464,13 +491,20 @@ class TemplateFindTemplatesFieldMetaCheckbox(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateFindTemplatesOverflow8(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateFindTemplatesTypeRadio(str, Enum):
@@ -503,6 +537,7 @@ class TemplateFindTemplatesFieldMetaRadioTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateFindTemplatesOverflow8]
     values: NotRequired[List[TemplateFindTemplatesValue1TypedDict]]
     direction: NotRequired[TemplateFindTemplatesDirection1]
 
@@ -520,6 +555,8 @@ class TemplateFindTemplatesFieldMetaRadio(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateFindTemplatesOverflow8] = None
+
     values: Optional[List[TemplateFindTemplatesValue1]] = None
 
     direction: Optional[TemplateFindTemplatesDirection1] = (
@@ -535,6 +572,7 @@ class TemplateFindTemplatesFieldMetaRadio(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "values",
                 "direction",
             ]
@@ -544,13 +582,20 @@ class TemplateFindTemplatesFieldMetaRadio(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateFindTemplatesOverflow7(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateFindTemplatesTypeNumber(str, Enum):
@@ -576,6 +621,7 @@ class TemplateFindTemplatesFieldMetaNumberTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateFindTemplatesOverflow7]
     number_format: NotRequired[Nullable[str]]
     value: NotRequired[str]
     min_value: NotRequired[Nullable[float]]
@@ -598,6 +644,8 @@ class TemplateFindTemplatesFieldMetaNumber(BaseModel):
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+
+    overflow: Optional[TemplateFindTemplatesOverflow7] = None
 
     number_format: Annotated[
         OptionalNullable[str], pydantic.Field(alias="numberFormat")
@@ -639,6 +687,7 @@ class TemplateFindTemplatesFieldMetaNumber(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "numberFormat",
                 "value",
                 "minValue",
@@ -664,7 +713,7 @@ class TemplateFindTemplatesFieldMetaNumber(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -679,6 +728,13 @@ class TemplateFindTemplatesFieldMetaNumber(BaseModel):
                     m[k] = val
 
         return m
+
+
+class TemplateFindTemplatesOverflow6(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateFindTemplatesTypeText(str, Enum):
@@ -704,6 +760,7 @@ class TemplateFindTemplatesFieldMetaTextTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateFindTemplatesOverflow6]
     text: NotRequired[str]
     character_limit: NotRequired[float]
     text_align: NotRequired[TemplateFindTemplatesTextAlign5]
@@ -724,6 +781,8 @@ class TemplateFindTemplatesFieldMetaText(BaseModel):
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+
+    overflow: Optional[TemplateFindTemplatesOverflow6] = None
 
     text: Optional[str] = None
 
@@ -757,6 +816,7 @@ class TemplateFindTemplatesFieldMetaText(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "text",
                 "characterLimit",
                 "textAlign",
@@ -771,7 +831,7 @@ class TemplateFindTemplatesFieldMetaText(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -786,6 +846,13 @@ class TemplateFindTemplatesFieldMetaText(BaseModel):
                     m[k] = val
 
         return m
+
+
+class TemplateFindTemplatesOverflow5(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateFindTemplatesTypeDate(str, Enum):
@@ -805,6 +872,7 @@ class TemplateFindTemplatesFieldMetaDateTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateFindTemplatesOverflow5]
     text_align: NotRequired[TemplateFindTemplatesTextAlign4]
 
 
@@ -821,6 +889,10 @@ class TemplateFindTemplatesFieldMetaDate(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateFindTemplatesOverflow5] = (
+        TemplateFindTemplatesOverflow5.AUTO
+    )
+
     text_align: Annotated[
         Optional[TemplateFindTemplatesTextAlign4], pydantic.Field(alias="textAlign")
     ] = None
@@ -828,20 +900,35 @@ class TemplateFindTemplatesFieldMetaDate(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateFindTemplatesOverflow4(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateFindTemplatesTypeEmail(str, Enum):
@@ -861,6 +948,7 @@ class TemplateFindTemplatesFieldMetaEmailTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateFindTemplatesOverflow4]
     text_align: NotRequired[TemplateFindTemplatesTextAlign3]
 
 
@@ -877,6 +965,10 @@ class TemplateFindTemplatesFieldMetaEmail(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateFindTemplatesOverflow4] = (
+        TemplateFindTemplatesOverflow4.AUTO
+    )
+
     text_align: Annotated[
         Optional[TemplateFindTemplatesTextAlign3], pydantic.Field(alias="textAlign")
     ] = None
@@ -884,20 +976,35 @@ class TemplateFindTemplatesFieldMetaEmail(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateFindTemplatesOverflow3(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateFindTemplatesTypeName(str, Enum):
@@ -917,6 +1024,7 @@ class TemplateFindTemplatesFieldMetaNameTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateFindTemplatesOverflow3]
     text_align: NotRequired[TemplateFindTemplatesTextAlign2]
 
 
@@ -933,6 +1041,8 @@ class TemplateFindTemplatesFieldMetaName(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateFindTemplatesOverflow3] = None
+
     text_align: Annotated[
         Optional[TemplateFindTemplatesTextAlign2], pydantic.Field(alias="textAlign")
     ] = None
@@ -940,20 +1050,35 @@ class TemplateFindTemplatesFieldMetaName(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateFindTemplatesOverflow2(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateFindTemplatesTypeInitials(str, Enum):
@@ -973,6 +1098,7 @@ class TemplateFindTemplatesFieldMetaInitialsTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateFindTemplatesOverflow2]
     text_align: NotRequired[TemplateFindTemplatesTextAlign1]
 
 
@@ -989,6 +1115,8 @@ class TemplateFindTemplatesFieldMetaInitials(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateFindTemplatesOverflow2] = None
+
     text_align: Annotated[
         Optional[TemplateFindTemplatesTextAlign1], pydantic.Field(alias="textAlign")
     ] = None
@@ -996,20 +1124,35 @@ class TemplateFindTemplatesFieldMetaInitials(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateFindTemplatesOverflow1(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateFindTemplatesTypeSignature(str, Enum):
@@ -1023,6 +1166,7 @@ class TemplateFindTemplatesFieldMetaSignatureTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateFindTemplatesOverflow1]
 
 
 class TemplateFindTemplatesFieldMetaSignature(BaseModel):
@@ -1038,17 +1182,21 @@ class TemplateFindTemplatesFieldMetaSignature(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateFindTemplatesOverflow1] = (
+        TemplateFindTemplatesOverflow1.AUTO
+    )
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize"]
+            ["label", "placeholder", "required", "readOnly", "fontSize", "overflow"]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -1158,7 +1306,7 @@ class TemplateFindTemplatesField(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -1239,6 +1387,8 @@ class TemplateFindTemplatesRecipientTypedDict(TypedDict):
     token: str
     document_deleted_at: Nullable[str]
     expired: Nullable[str]
+    expires_at: Nullable[str]
+    expiration_notified_at: Nullable[str]
     signed_at: Nullable[str]
     auth_options: Nullable[TemplateFindTemplatesRecipientAuthOptionsTypedDict]
     signing_order: Nullable[float]
@@ -1278,6 +1428,12 @@ class TemplateFindTemplatesRecipient(BaseModel):
 
     expired: Nullable[str]
 
+    expires_at: Annotated[Nullable[str], pydantic.Field(alias="expiresAt")]
+
+    expiration_notified_at: Annotated[
+        Nullable[str], pydantic.Field(alias="expirationNotifiedAt")
+    ]
+
     signed_at: Annotated[Nullable[str], pydantic.Field(alias="signedAt")]
 
     auth_options: Annotated[
@@ -1304,6 +1460,8 @@ class TemplateFindTemplatesRecipient(BaseModel):
             [
                 "documentDeletedAt",
                 "expired",
+                "expiresAt",
+                "expirationNotifiedAt",
                 "signedAt",
                 "authOptions",
                 "signingOrder",
@@ -1317,7 +1475,7 @@ class TemplateFindTemplatesRecipient(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -1467,7 +1625,7 @@ class TemplateFindTemplatesData(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -1506,3 +1664,73 @@ class TemplateFindTemplatesResponse(BaseModel):
     per_page: Annotated[float, pydantic.Field(alias="perPage")]
 
     total_pages: Annotated[float, pydantic.Field(alias="totalPages")]
+
+
+try:
+    TemplateFindTemplatesAuthOptions.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateFindTemplatesFieldMetaDropdown.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateFindTemplatesFieldMetaCheckbox.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateFindTemplatesFieldMetaRadio.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateFindTemplatesFieldMetaNumber.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateFindTemplatesFieldMetaText.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateFindTemplatesFieldMetaDate.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateFindTemplatesFieldMetaEmail.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateFindTemplatesFieldMetaName.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateFindTemplatesFieldMetaInitials.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateFindTemplatesFieldMetaSignature.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateFindTemplatesField.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateFindTemplatesRecipientAuthOptions.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateFindTemplatesRecipient.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateFindTemplatesTemplateMeta.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateFindTemplatesData.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateFindTemplatesResponse.model_rebuild()
+except NameError:
+    pass
