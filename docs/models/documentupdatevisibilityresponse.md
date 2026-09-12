@@ -1,5 +1,13 @@
 # DocumentUpdateVisibilityResponse
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentUpdateVisibilityResponse
+
+value = DocumentUpdateVisibilityResponse.EVERYONE
+```
+
 
 ## Values
 

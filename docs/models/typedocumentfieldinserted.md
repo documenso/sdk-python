@@ -1,5 +1,13 @@
 # TypeDocumentFieldInserted
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TypeDocumentFieldInserted
+
+value = TypeDocumentFieldInserted.DOCUMENT_FIELD_INSERTED
+```
+
 
 ## Values
 

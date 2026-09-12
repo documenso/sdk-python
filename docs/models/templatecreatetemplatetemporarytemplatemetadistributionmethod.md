@@ -1,5 +1,13 @@
 # TemplateCreateTemplateTemporaryTemplateMetaDistributionMethod
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateCreateTemplateTemporaryTemplateMetaDistributionMethod
+
+value = TemplateCreateTemplateTemporaryTemplateMetaDistributionMethod.EMAIL
+```
+
 
 ## Values
 

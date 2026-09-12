@@ -1,5 +1,13 @@
 # EnvelopeFieldUpdateManyTextAlignEmail
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeFieldUpdateManyTextAlignEmail
+
+value = EnvelopeFieldUpdateManyTextAlignEmail.LEFT
+```
+
 
 ## Values
 

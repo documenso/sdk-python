@@ -1,5 +1,13 @@
 # TypeDocument
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TypeDocument
+
+value = TypeDocument.DOCUMENT
+```
+
 
 ## Values
 

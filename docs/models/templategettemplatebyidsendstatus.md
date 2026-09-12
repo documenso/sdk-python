@@ -1,5 +1,13 @@
 # TemplateGetTemplateByIDSendStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateGetTemplateByIDSendStatus
+
+value = TemplateGetTemplateByIDSendStatus.NOT_SENT
+```
+
 
 ## Values
 

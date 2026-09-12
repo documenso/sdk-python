@@ -40,18 +40,22 @@ class TemplateCreateTemplateTemporaryGlobalActionAuthRequest(str, Enum):
 class TemplateCreateTemplateTemporaryTypeRequest(str, Enum):
     PUBLIC = "PUBLIC"
     PRIVATE = "PRIVATE"
+    ORGANISATION = "ORGANISATION"
 
 
 class TemplateCreateTemplateTemporaryDateFormat(str, Enum):
     YYYY_M_MDD_HH_MM_A = "yyyy-MM-dd hh:mm a"
     YYYY_M_MDD = "yyyy-MM-dd"
     DD_MM_SLASH_YYYY = "dd/MM/yyyy"
+    DD_MM_DASH_YYYY = "dd-MM-yyyy"
     MM_DD_SLASH_YYYY = "MM/dd/yyyy"
     YY_M_MDD = "yy-MM-dd"
     MMMM_DD_COMMA_YYYY = "MMMM dd, yyyy"
     EEEE_MMMM_DD_COMMA_YYYY = "EEEE, MMMM dd, yyyy"
     DD_MM_SLASH_YYYY_HH_MM_A = "dd/MM/yyyy hh:mm a"
     DD_MM_SLASH_YYYY_H_HMM = "dd/MM/yyyy HH:mm"
+    DD_MM_DASH_YYYY_HH_MM_A = "dd-MM-yyyy hh:mm a"
+    DD_MM_DASH_YYYY_H_HMM = "dd-MM-yyyy HH:mm"
     MM_DD_SLASH_YYYY_HH_MM_A = "MM/dd/yyyy hh:mm a"
     MM_DD_SLASH_YYYY_H_HMM = "MM/dd/yyyy HH:mm"
     DD_DOT_MM_DOT_YYYY = "dd.MM.yyyy"
@@ -80,6 +84,8 @@ class TemplateCreateTemplateTemporaryMetaEmailSettingsTypedDict(TypedDict):
     document_completed: NotRequired[bool]
     document_deleted: NotRequired[bool]
     owner_document_completed: NotRequired[bool]
+    owner_recipient_expired: NotRequired[bool]
+    owner_document_created: NotRequired[bool]
 
 
 class TemplateCreateTemplateTemporaryMetaEmailSettings(BaseModel):
@@ -111,6 +117,14 @@ class TemplateCreateTemplateTemporaryMetaEmailSettings(BaseModel):
         Optional[bool], pydantic.Field(alias="ownerDocumentCompleted")
     ] = True
 
+    owner_recipient_expired: Annotated[
+        Optional[bool], pydantic.Field(alias="ownerRecipientExpired")
+    ] = True
+
+    owner_document_created: Annotated[
+        Optional[bool], pydantic.Field(alias="ownerDocumentCreated")
+    ] = True
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -122,6 +136,8 @@ class TemplateCreateTemplateTemporaryMetaEmailSettings(BaseModel):
                 "documentCompleted",
                 "documentDeleted",
                 "ownerDocumentCompleted",
+                "ownerRecipientExpired",
+                "ownerDocumentCreated",
             ]
         )
         serialized = handler(self)
@@ -129,7 +145,7 @@ class TemplateCreateTemplateTemporaryMetaEmailSettings(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -259,7 +275,7 @@ class TemplateCreateTemplateTemporaryMeta(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -303,7 +319,7 @@ class TemplateCreateTemplateTemporaryAttachment(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -385,7 +401,7 @@ class TemplateCreateTemplateTemporaryRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -535,6 +551,7 @@ class TemplateCreateTemplateTemporaryBadRequestError(DocumensoError):
 class TemplateCreateTemplateTemporaryTypeResponse(str, Enum):
     PUBLIC = "PUBLIC"
     PRIVATE = "PRIVATE"
+    ORGANISATION = "ORGANISATION"
 
 
 class TemplateCreateTemplateTemporaryVisibilityResponse(str, Enum):
@@ -616,6 +633,8 @@ class TemplateCreateTemplateTemporaryTemplateMetaEmailSettingsTypedDict(TypedDic
     document_completed: NotRequired[bool]
     document_deleted: NotRequired[bool]
     owner_document_completed: NotRequired[bool]
+    owner_recipient_expired: NotRequired[bool]
+    owner_document_created: NotRequired[bool]
 
 
 class TemplateCreateTemplateTemporaryTemplateMetaEmailSettings(BaseModel):
@@ -647,6 +666,14 @@ class TemplateCreateTemplateTemporaryTemplateMetaEmailSettings(BaseModel):
         Optional[bool], pydantic.Field(alias="ownerDocumentCompleted")
     ] = True
 
+    owner_recipient_expired: Annotated[
+        Optional[bool], pydantic.Field(alias="ownerRecipientExpired")
+    ] = True
+
+    owner_document_created: Annotated[
+        Optional[bool], pydantic.Field(alias="ownerDocumentCreated")
+    ] = True
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -658,6 +685,8 @@ class TemplateCreateTemplateTemporaryTemplateMetaEmailSettings(BaseModel):
                 "documentCompleted",
                 "documentDeleted",
                 "ownerDocumentCompleted",
+                "ownerRecipientExpired",
+                "ownerDocumentCreated",
             ]
         )
         serialized = handler(self)
@@ -665,7 +694,7 @@ class TemplateCreateTemplateTemporaryTemplateMetaEmailSettings(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -755,7 +784,7 @@ class TemplateCreateTemplateTemporaryTemplateMeta(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 m[k] = val
@@ -811,7 +840,7 @@ class TemplateCreateTemplateTemporaryUser(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 m[k] = val
@@ -885,6 +914,8 @@ class TemplateCreateTemplateTemporaryRecipientTypedDict(TypedDict):
     token: str
     document_deleted_at: Nullable[str]
     expired: Nullable[str]
+    expires_at: Nullable[str]
+    expiration_notified_at: Nullable[str]
     signed_at: Nullable[str]
     auth_options: Nullable[TemplateCreateTemplateTemporaryRecipientAuthOptionsTypedDict]
     signing_order: Nullable[float]
@@ -925,6 +956,12 @@ class TemplateCreateTemplateTemporaryRecipient(BaseModel):
 
     expired: Nullable[str]
 
+    expires_at: Annotated[Nullable[str], pydantic.Field(alias="expiresAt")]
+
+    expiration_notified_at: Annotated[
+        Nullable[str], pydantic.Field(alias="expirationNotifiedAt")
+    ]
+
     signed_at: Annotated[Nullable[str], pydantic.Field(alias="signedAt")]
 
     auth_options: Annotated[
@@ -951,6 +988,8 @@ class TemplateCreateTemplateTemporaryRecipient(BaseModel):
             [
                 "documentDeletedAt",
                 "expired",
+                "expiresAt",
+                "expirationNotifiedAt",
                 "signedAt",
                 "authOptions",
                 "signingOrder",
@@ -964,7 +1003,7 @@ class TemplateCreateTemplateTemporaryRecipient(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -995,6 +1034,13 @@ class TemplateCreateTemplateTemporaryFieldType(str, Enum):
     DROPDOWN = "DROPDOWN"
 
 
+class TemplateCreateTemplateTemporaryOverflow10(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
+
+
 class TemplateCreateTemplateTemporaryTypeDropdown(str, Enum):
     DROPDOWN = "dropdown"
 
@@ -1014,6 +1060,7 @@ class TemplateCreateTemplateTemporaryFieldMetaDropdownTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateCreateTemplateTemporaryOverflow10]
     values: NotRequired[List[TemplateCreateTemplateTemporaryValue3TypedDict]]
     default_value: NotRequired[str]
 
@@ -1031,6 +1078,8 @@ class TemplateCreateTemplateTemporaryFieldMetaDropdown(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateCreateTemplateTemporaryOverflow10] = None
+
     values: Optional[List[TemplateCreateTemplateTemporaryValue3]] = None
 
     default_value: Annotated[Optional[str], pydantic.Field(alias="defaultValue")] = None
@@ -1044,6 +1093,7 @@ class TemplateCreateTemplateTemporaryFieldMetaDropdown(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "values",
                 "defaultValue",
             ]
@@ -1053,13 +1103,20 @@ class TemplateCreateTemplateTemporaryFieldMetaDropdown(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateCreateTemplateTemporaryOverflow9(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateCreateTemplateTemporaryTypeCheckbox(str, Enum):
@@ -1092,6 +1149,7 @@ class TemplateCreateTemplateTemporaryFieldMetaCheckboxTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateCreateTemplateTemporaryOverflow9]
     values: NotRequired[List[TemplateCreateTemplateTemporaryValue2TypedDict]]
     validation_rule: NotRequired[str]
     validation_length: NotRequired[float]
@@ -1110,6 +1168,8 @@ class TemplateCreateTemplateTemporaryFieldMetaCheckbox(BaseModel):
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+
+    overflow: Optional[TemplateCreateTemplateTemporaryOverflow9] = None
 
     values: Optional[List[TemplateCreateTemplateTemporaryValue2]] = None
 
@@ -1134,6 +1194,7 @@ class TemplateCreateTemplateTemporaryFieldMetaCheckbox(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "values",
                 "validationRule",
                 "validationLength",
@@ -1145,13 +1206,20 @@ class TemplateCreateTemplateTemporaryFieldMetaCheckbox(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateCreateTemplateTemporaryOverflow8(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateCreateTemplateTemporaryTypeRadio(str, Enum):
@@ -1184,6 +1252,7 @@ class TemplateCreateTemplateTemporaryFieldMetaRadioTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateCreateTemplateTemporaryOverflow8]
     values: NotRequired[List[TemplateCreateTemplateTemporaryValue1TypedDict]]
     direction: NotRequired[TemplateCreateTemplateTemporaryDirection1]
 
@@ -1201,6 +1270,8 @@ class TemplateCreateTemplateTemporaryFieldMetaRadio(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateCreateTemplateTemporaryOverflow8] = None
+
     values: Optional[List[TemplateCreateTemplateTemporaryValue1]] = None
 
     direction: Optional[TemplateCreateTemplateTemporaryDirection1] = (
@@ -1216,6 +1287,7 @@ class TemplateCreateTemplateTemporaryFieldMetaRadio(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "values",
                 "direction",
             ]
@@ -1225,13 +1297,20 @@ class TemplateCreateTemplateTemporaryFieldMetaRadio(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateCreateTemplateTemporaryOverflow7(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateCreateTemplateTemporaryTypeNumber(str, Enum):
@@ -1257,6 +1336,7 @@ class TemplateCreateTemplateTemporaryFieldMetaNumberTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateCreateTemplateTemporaryOverflow7]
     number_format: NotRequired[Nullable[str]]
     value: NotRequired[str]
     min_value: NotRequired[Nullable[float]]
@@ -1279,6 +1359,8 @@ class TemplateCreateTemplateTemporaryFieldMetaNumber(BaseModel):
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+
+    overflow: Optional[TemplateCreateTemplateTemporaryOverflow7] = None
 
     number_format: Annotated[
         OptionalNullable[str], pydantic.Field(alias="numberFormat")
@@ -1321,6 +1403,7 @@ class TemplateCreateTemplateTemporaryFieldMetaNumber(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "numberFormat",
                 "value",
                 "minValue",
@@ -1346,7 +1429,7 @@ class TemplateCreateTemplateTemporaryFieldMetaNumber(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -1361,6 +1444,13 @@ class TemplateCreateTemplateTemporaryFieldMetaNumber(BaseModel):
                     m[k] = val
 
         return m
+
+
+class TemplateCreateTemplateTemporaryOverflow6(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateCreateTemplateTemporaryTypeText(str, Enum):
@@ -1386,6 +1476,7 @@ class TemplateCreateTemplateTemporaryFieldMetaTextTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateCreateTemplateTemporaryOverflow6]
     text: NotRequired[str]
     character_limit: NotRequired[float]
     text_align: NotRequired[TemplateCreateTemplateTemporaryTextAlign5]
@@ -1406,6 +1497,8 @@ class TemplateCreateTemplateTemporaryFieldMetaText(BaseModel):
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+
+    overflow: Optional[TemplateCreateTemplateTemporaryOverflow6] = None
 
     text: Optional[str] = None
 
@@ -1440,6 +1533,7 @@ class TemplateCreateTemplateTemporaryFieldMetaText(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "text",
                 "characterLimit",
                 "textAlign",
@@ -1454,7 +1548,7 @@ class TemplateCreateTemplateTemporaryFieldMetaText(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -1469,6 +1563,13 @@ class TemplateCreateTemplateTemporaryFieldMetaText(BaseModel):
                     m[k] = val
 
         return m
+
+
+class TemplateCreateTemplateTemporaryOverflow5(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateCreateTemplateTemporaryTypeDate(str, Enum):
@@ -1488,6 +1589,7 @@ class TemplateCreateTemplateTemporaryFieldMetaDateTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateCreateTemplateTemporaryOverflow5]
     text_align: NotRequired[TemplateCreateTemplateTemporaryTextAlign4]
 
 
@@ -1504,6 +1606,10 @@ class TemplateCreateTemplateTemporaryFieldMetaDate(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateCreateTemplateTemporaryOverflow5] = (
+        TemplateCreateTemplateTemporaryOverflow5.AUTO
+    )
+
     text_align: Annotated[
         Optional[TemplateCreateTemplateTemporaryTextAlign4],
         pydantic.Field(alias="textAlign"),
@@ -1512,20 +1618,35 @@ class TemplateCreateTemplateTemporaryFieldMetaDate(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateCreateTemplateTemporaryOverflow4(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateCreateTemplateTemporaryTypeEmail(str, Enum):
@@ -1545,6 +1666,7 @@ class TemplateCreateTemplateTemporaryFieldMetaEmailTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateCreateTemplateTemporaryOverflow4]
     text_align: NotRequired[TemplateCreateTemplateTemporaryTextAlign3]
 
 
@@ -1561,6 +1683,10 @@ class TemplateCreateTemplateTemporaryFieldMetaEmail(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateCreateTemplateTemporaryOverflow4] = (
+        TemplateCreateTemplateTemporaryOverflow4.AUTO
+    )
+
     text_align: Annotated[
         Optional[TemplateCreateTemplateTemporaryTextAlign3],
         pydantic.Field(alias="textAlign"),
@@ -1569,20 +1695,35 @@ class TemplateCreateTemplateTemporaryFieldMetaEmail(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateCreateTemplateTemporaryOverflow3(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateCreateTemplateTemporaryTypeName(str, Enum):
@@ -1602,6 +1743,7 @@ class TemplateCreateTemplateTemporaryFieldMetaNameTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateCreateTemplateTemporaryOverflow3]
     text_align: NotRequired[TemplateCreateTemplateTemporaryTextAlign2]
 
 
@@ -1618,6 +1760,8 @@ class TemplateCreateTemplateTemporaryFieldMetaName(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateCreateTemplateTemporaryOverflow3] = None
+
     text_align: Annotated[
         Optional[TemplateCreateTemplateTemporaryTextAlign2],
         pydantic.Field(alias="textAlign"),
@@ -1626,20 +1770,35 @@ class TemplateCreateTemplateTemporaryFieldMetaName(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateCreateTemplateTemporaryOverflow2(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateCreateTemplateTemporaryTypeInitials(str, Enum):
@@ -1659,6 +1818,7 @@ class TemplateCreateTemplateTemporaryFieldMetaInitialsTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateCreateTemplateTemporaryOverflow2]
     text_align: NotRequired[TemplateCreateTemplateTemporaryTextAlign1]
 
 
@@ -1675,6 +1835,8 @@ class TemplateCreateTemplateTemporaryFieldMetaInitials(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateCreateTemplateTemporaryOverflow2] = None
+
     text_align: Annotated[
         Optional[TemplateCreateTemplateTemporaryTextAlign1],
         pydantic.Field(alias="textAlign"),
@@ -1683,20 +1845,35 @@ class TemplateCreateTemplateTemporaryFieldMetaInitials(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class TemplateCreateTemplateTemporaryOverflow1(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class TemplateCreateTemplateTemporaryTypeSignature(str, Enum):
@@ -1710,6 +1887,7 @@ class TemplateCreateTemplateTemporaryFieldMetaSignatureTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[TemplateCreateTemplateTemporaryOverflow1]
 
 
 class TemplateCreateTemplateTemporaryFieldMetaSignature(BaseModel):
@@ -1725,17 +1903,21 @@ class TemplateCreateTemplateTemporaryFieldMetaSignature(BaseModel):
 
     font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
 
+    overflow: Optional[TemplateCreateTemplateTemporaryOverflow1] = (
+        TemplateCreateTemplateTemporaryOverflow1.AUTO
+    )
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize"]
+            ["label", "placeholder", "required", "readOnly", "fontSize", "overflow"]
         )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -1846,7 +2028,7 @@ class TemplateCreateTemplateTemporaryField(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -1915,7 +2097,7 @@ class TemplateCreateTemplateTemporaryFolder(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 m[k] = val
@@ -2035,7 +2217,7 @@ class TemplateCreateTemplateTemporaryTemplate(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -2065,3 +2247,105 @@ class TemplateCreateTemplateTemporaryResponse(BaseModel):
     template: TemplateCreateTemplateTemporaryTemplate
 
     upload_url: Annotated[str, pydantic.Field(alias="uploadUrl")]
+
+
+try:
+    TemplateCreateTemplateTemporaryMetaEmailSettings.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateTemporaryMeta.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateTemporaryRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateTemporaryAuthOptions.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateTemporaryTemplateDocumentData.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateTemporaryTemplateMetaEmailSettings.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateTemporaryTemplateMeta.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateTemporaryDirectLink.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateTemporaryRecipientAuthOptions.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateTemporaryRecipient.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateTemporaryFieldMetaDropdown.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateTemporaryFieldMetaCheckbox.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateTemporaryFieldMetaRadio.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateTemporaryFieldMetaNumber.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateTemporaryFieldMetaText.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateTemporaryFieldMetaDate.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateTemporaryFieldMetaEmail.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateTemporaryFieldMetaName.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateTemporaryFieldMetaInitials.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateTemporaryFieldMetaSignature.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateTemporaryField.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateTemporaryFolder.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateTemporaryEnvelopeItem.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateTemporaryTemplate.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateTemporaryResponse.model_rebuild()
+except NameError:
+    pass

@@ -10,7 +10,7 @@ from documenso_sdk.documents_recipients import DocumentsRecipients
 from documenso_sdk.types import OptionalNullable, UNSET
 from documenso_sdk.utils import get_security_from_env
 from documenso_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Dict, List, Mapping, Optional, Union
+from typing import Any, Dict, Iterable, List, Mapping, Optional, Union
 from typing_extensions import deprecated
 
 
@@ -37,6 +37,9 @@ class Documents(BaseSDK):
             self.sdk_configuration, parent_ref=self.parent_ref
         )
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def get(
         self,
         *,
@@ -48,7 +51,7 @@ class Documents(BaseSDK):
     ) -> models.DocumentGetResponse:
         r"""Get document
 
-        Returns a document given an ID
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Returns a document given an ID
 
         :param document_id:
         :param retries: Override the default retry configuration for this method
@@ -104,9 +107,11 @@ class Documents(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -147,6 +152,9 @@ class Documents(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def get_async(
         self,
         *,
@@ -158,7 +166,7 @@ class Documents(BaseSDK):
     ) -> models.DocumentGetResponse:
         r"""Get document
 
-        Returns a document given an ID
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Returns a document given an ID
 
         :param document_id:
         :param retries: Override the default retry configuration for this method
@@ -214,9 +222,11 @@ class Documents(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -257,6 +267,9 @@ class Documents(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def find(
         self,
         *,
@@ -266,6 +279,9 @@ class Documents(BaseSDK):
         template_id: Optional[float] = None,
         source: Optional[models.DocumentFindQueryParamSource] = None,
         status: Optional[models.DocumentFindQueryParamStatus] = None,
+        has_expired_recipients: Optional[
+            models.DocumentFindHasExpiredRecipients
+        ] = None,
         folder_id: Optional[str] = None,
         order_by_column: Optional[models.DocumentFindOrderByColumn] = None,
         order_by_direction: Optional[
@@ -278,7 +294,7 @@ class Documents(BaseSDK):
     ) -> models.DocumentFindResponse:
         r"""Find documents
 
-        Find documents based on a search criteria
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Find documents based on a search criteria
 
         :param query: The search query.
         :param page: The pagination page number, starts at 1.
@@ -286,6 +302,7 @@ class Documents(BaseSDK):
         :param template_id: Filter documents by the template ID used to create it.
         :param source: Filter documents by how it was created.
         :param status: Filter documents by the current status
+        :param has_expired_recipients: Filter for documents that have at least one recipient whose signing link has expired.
         :param folder_id: Filter documents by folder ID
         :param order_by_column:
         :param order_by_direction:
@@ -311,6 +328,7 @@ class Documents(BaseSDK):
             template_id=template_id,
             source=source,
             status=status,
+            has_expired_recipients=has_expired_recipients,
             folder_id=folder_id,
             order_by_column=order_by_column,
             order_by_direction=order_by_direction,
@@ -350,9 +368,11 @@ class Documents(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -393,6 +413,9 @@ class Documents(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def find_async(
         self,
         *,
@@ -402,6 +425,9 @@ class Documents(BaseSDK):
         template_id: Optional[float] = None,
         source: Optional[models.DocumentFindQueryParamSource] = None,
         status: Optional[models.DocumentFindQueryParamStatus] = None,
+        has_expired_recipients: Optional[
+            models.DocumentFindHasExpiredRecipients
+        ] = None,
         folder_id: Optional[str] = None,
         order_by_column: Optional[models.DocumentFindOrderByColumn] = None,
         order_by_direction: Optional[
@@ -414,7 +440,7 @@ class Documents(BaseSDK):
     ) -> models.DocumentFindResponse:
         r"""Find documents
 
-        Find documents based on a search criteria
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Find documents based on a search criteria
 
         :param query: The search query.
         :param page: The pagination page number, starts at 1.
@@ -422,6 +448,7 @@ class Documents(BaseSDK):
         :param template_id: Filter documents by the template ID used to create it.
         :param source: Filter documents by how it was created.
         :param status: Filter documents by the current status
+        :param has_expired_recipients: Filter for documents that have at least one recipient whose signing link has expired.
         :param folder_id: Filter documents by folder ID
         :param order_by_column:
         :param order_by_direction:
@@ -447,6 +474,7 @@ class Documents(BaseSDK):
             template_id=template_id,
             source=source,
             status=status,
+            has_expired_recipients=has_expired_recipients,
             folder_id=folder_id,
             order_by_column=order_by_column,
             order_by_direction=order_by_direction,
@@ -486,9 +514,11 @@ class Documents(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -529,6 +559,9 @@ class Documents(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def create(
         self,
         *,
@@ -543,7 +576,7 @@ class Documents(BaseSDK):
     ) -> models.DocumentCreateResponse:
         r"""Create document
 
-        Create a document using form data.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
 
         :param payload:
         :param file:
@@ -604,9 +637,11 @@ class Documents(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -642,6 +677,9 @@ class Documents(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def create_async(
         self,
         *,
@@ -656,7 +694,7 @@ class Documents(BaseSDK):
     ) -> models.DocumentCreateResponse:
         r"""Create document
 
-        Create a document using form data.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
 
         :param payload:
         :param file:
@@ -717,9 +755,11 @@ class Documents(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -755,6 +795,9 @@ class Documents(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def update(
         self,
         *,
@@ -772,6 +815,8 @@ class Documents(BaseSDK):
     ) -> models.DocumentUpdateResponse:
         r"""Update document
 
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
+
         :param document_id:
         :param data:
         :param meta:
@@ -833,9 +878,11 @@ class Documents(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -871,6 +918,9 @@ class Documents(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def update_async(
         self,
         *,
@@ -888,6 +938,8 @@ class Documents(BaseSDK):
     ) -> models.DocumentUpdateResponse:
         r"""Update document
 
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
+
         :param document_id:
         :param data:
         :param meta:
@@ -949,9 +1001,11 @@ class Documents(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -987,6 +1041,9 @@ class Documents(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def delete(
         self,
         *,
@@ -998,6 +1055,8 @@ class Documents(BaseSDK):
     ) -> models.DocumentDeleteResponse:
         r"""Delete document
 
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
+
         :param document_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1055,9 +1114,11 @@ class Documents(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1093,6 +1154,9 @@ class Documents(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def delete_async(
         self,
         *,
@@ -1104,6 +1168,8 @@ class Documents(BaseSDK):
     ) -> models.DocumentDeleteResponse:
         r"""Delete document
 
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
+
         :param document_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1161,9 +1227,11 @@ class Documents(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1199,6 +1267,9 @@ class Documents(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def duplicate(
         self,
         *,
@@ -1209,6 +1280,8 @@ class Documents(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DocumentDuplicateResponse:
         r"""Duplicate document
+
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
 
         :param document_id:
         :param retries: Override the default retry configuration for this method
@@ -1267,9 +1340,11 @@ class Documents(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1305,6 +1380,9 @@ class Documents(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def duplicate_async(
         self,
         *,
@@ -1315,6 +1393,8 @@ class Documents(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DocumentDuplicateResponse:
         r"""Duplicate document
+
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
 
         :param document_id:
         :param retries: Override the default retry configuration for this method
@@ -1373,9 +1453,11 @@ class Documents(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1411,6 +1493,9 @@ class Documents(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def distribute(
         self,
         *,
@@ -1425,7 +1510,7 @@ class Documents(BaseSDK):
     ) -> models.DocumentDistributeResponse:
         r"""Distribute document
 
-        Send the document out to recipients based on your distribution method
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Send the document out to recipients based on your distribution method
 
         :param document_id:
         :param meta:
@@ -1488,9 +1573,11 @@ class Documents(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1526,6 +1613,9 @@ class Documents(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def distribute_async(
         self,
         *,
@@ -1540,7 +1630,7 @@ class Documents(BaseSDK):
     ) -> models.DocumentDistributeResponse:
         r"""Distribute document
 
-        Send the document out to recipients based on your distribution method
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Send the document out to recipients based on your distribution method
 
         :param document_id:
         :param meta:
@@ -1603,9 +1693,11 @@ class Documents(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1641,11 +1733,14 @@ class Documents(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def redistribute(
         self,
         *,
         document_id: float,
-        recipients: List[float],
+        recipients: Iterable[float],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1653,7 +1748,7 @@ class Documents(BaseSDK):
     ) -> models.DocumentRedistributeResponse:
         r"""Redistribute document
 
-        Redistribute the document to the provided recipients who have not actioned the document. Will use the distribution method set in the document
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Redistribute the document to the provided recipients who have not actioned the document. Will use the distribution method set in the document. This also refreshes the signing-link expiration for the targeted unsigned recipients, renewing any expired links.
 
         :param document_id:
         :param recipients:
@@ -1674,7 +1769,7 @@ class Documents(BaseSDK):
 
         request = models.DocumentRedistributeRequest(
             document_id=document_id,
-            recipients=recipients,
+            recipients=utils.unmarshal(recipients, List[float]),
         )
 
         req = self._build_request(
@@ -1714,9 +1809,11 @@ class Documents(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1756,11 +1853,14 @@ class Documents(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def redistribute_async(
         self,
         *,
         document_id: float,
-        recipients: List[float],
+        recipients: Iterable[float],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1768,7 +1868,7 @@ class Documents(BaseSDK):
     ) -> models.DocumentRedistributeResponse:
         r"""Redistribute document
 
-        Redistribute the document to the provided recipients who have not actioned the document. Will use the distribution method set in the document
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Redistribute the document to the provided recipients who have not actioned the document. Will use the distribution method set in the document. This also refreshes the signing-link expiration for the targeted unsigned recipients, renewing any expired links.
 
         :param document_id:
         :param recipients:
@@ -1789,7 +1889,7 @@ class Documents(BaseSDK):
 
         request = models.DocumentRedistributeRequest(
             document_id=document_id,
-            recipients=recipients,
+            recipients=utils.unmarshal(recipients, List[float]),
         )
 
         req = self._build_request_async(
@@ -1829,9 +1929,11 @@ class Documents(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1871,6 +1973,9 @@ class Documents(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def download(
         self,
         *,
@@ -1884,6 +1989,8 @@ class Documents(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DocumentDownloadResponse:
         r"""Download document
+
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
 
         :param document_id: The ID of the document to download.
         :param version: The version of the document to download. \"signed\" returns the completed document with signatures, \"original\" returns the original uploaded document.
@@ -1941,9 +2048,11 @@ class Documents(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1987,6 +2096,9 @@ class Documents(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def download_async(
         self,
         *,
@@ -2000,6 +2112,8 @@ class Documents(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DocumentDownloadResponse:
         r"""Download document
+
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
 
         :param document_id: The ID of the document to download.
         :param version: The version of the document to download. \"signed\" returns the completed document with signatures, \"original\" returns the original uploaded document.
@@ -2057,9 +2171,11 @@ class Documents(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2115,15 +2231,15 @@ class Documents(BaseSDK):
             models.DocumentCreateDocumentTemporaryVisibilityRequest
         ] = None,
         global_access_auth: Optional[
-            List[models.DocumentCreateDocumentTemporaryGlobalAccessAuthRequest]
+            Iterable[models.DocumentCreateDocumentTemporaryGlobalAccessAuthRequest]
         ] = None,
         global_action_auth: Optional[
-            List[models.DocumentCreateDocumentTemporaryGlobalActionAuthRequest]
+            Iterable[models.DocumentCreateDocumentTemporaryGlobalActionAuthRequest]
         ] = None,
         form_values: Optional[
             Union[
-                Dict[str, models.DocumentCreateDocumentTemporaryFormValuesRequest],
-                Dict[
+                Mapping[str, models.DocumentCreateDocumentTemporaryFormValuesRequest],
+                Mapping[
                     str,
                     models.DocumentCreateDocumentTemporaryFormValuesRequestTypedDict,
                 ],
@@ -2132,14 +2248,16 @@ class Documents(BaseSDK):
         folder_id: Optional[str] = None,
         recipients: Optional[
             Union[
-                List[models.DocumentCreateDocumentTemporaryRecipientRequest],
-                List[models.DocumentCreateDocumentTemporaryRecipientRequestTypedDict],
+                Iterable[models.DocumentCreateDocumentTemporaryRecipientRequest],
+                Iterable[
+                    models.DocumentCreateDocumentTemporaryRecipientRequestTypedDict
+                ],
             ]
         ] = None,
         attachments: Optional[
             Union[
-                List[models.DocumentCreateDocumentTemporaryAttachment],
-                List[models.DocumentCreateDocumentTemporaryAttachmentTypedDict],
+                Iterable[models.DocumentCreateDocumentTemporaryAttachment],
+                Iterable[models.DocumentCreateDocumentTemporaryAttachmentTypedDict],
             ]
         ] = None,
         meta: Optional[
@@ -2155,7 +2273,7 @@ class Documents(BaseSDK):
     ) -> models.DocumentCreateDocumentTemporaryResponse:
         r"""Create document
 
-        You will need to upload the PDF to the provided URL returned. Note: Once V2 API is released, this will be removed since we will allow direct uploads, instead of using an upload URL.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. You will need to upload the PDF to the provided URL returned. This endpoint will be removed since we will allow direct uploads, instead of using an upload URL.
 
         :param title:
         :param external_id:
@@ -2186,9 +2304,24 @@ class Documents(BaseSDK):
             title=title,
             external_id=external_id,
             visibility=visibility,
-            global_access_auth=global_access_auth,
-            global_action_auth=global_action_auth,
-            form_values=form_values,
+            global_access_auth=utils.unmarshal(
+                global_access_auth,
+                Optional[
+                    List[models.DocumentCreateDocumentTemporaryGlobalAccessAuthRequest]
+                ],
+            ),
+            global_action_auth=utils.unmarshal(
+                global_action_auth,
+                Optional[
+                    List[models.DocumentCreateDocumentTemporaryGlobalActionAuthRequest]
+                ],
+            ),
+            form_values=utils.unmarshal(
+                form_values,
+                Optional[
+                    Dict[str, models.DocumentCreateDocumentTemporaryFormValuesRequest]
+                ],
+            ),
             folder_id=folder_id,
             recipients=utils.get_pydantic_model(
                 recipients,
@@ -2244,9 +2377,11 @@ class Documents(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2304,15 +2439,15 @@ class Documents(BaseSDK):
             models.DocumentCreateDocumentTemporaryVisibilityRequest
         ] = None,
         global_access_auth: Optional[
-            List[models.DocumentCreateDocumentTemporaryGlobalAccessAuthRequest]
+            Iterable[models.DocumentCreateDocumentTemporaryGlobalAccessAuthRequest]
         ] = None,
         global_action_auth: Optional[
-            List[models.DocumentCreateDocumentTemporaryGlobalActionAuthRequest]
+            Iterable[models.DocumentCreateDocumentTemporaryGlobalActionAuthRequest]
         ] = None,
         form_values: Optional[
             Union[
-                Dict[str, models.DocumentCreateDocumentTemporaryFormValuesRequest],
-                Dict[
+                Mapping[str, models.DocumentCreateDocumentTemporaryFormValuesRequest],
+                Mapping[
                     str,
                     models.DocumentCreateDocumentTemporaryFormValuesRequestTypedDict,
                 ],
@@ -2321,14 +2456,16 @@ class Documents(BaseSDK):
         folder_id: Optional[str] = None,
         recipients: Optional[
             Union[
-                List[models.DocumentCreateDocumentTemporaryRecipientRequest],
-                List[models.DocumentCreateDocumentTemporaryRecipientRequestTypedDict],
+                Iterable[models.DocumentCreateDocumentTemporaryRecipientRequest],
+                Iterable[
+                    models.DocumentCreateDocumentTemporaryRecipientRequestTypedDict
+                ],
             ]
         ] = None,
         attachments: Optional[
             Union[
-                List[models.DocumentCreateDocumentTemporaryAttachment],
-                List[models.DocumentCreateDocumentTemporaryAttachmentTypedDict],
+                Iterable[models.DocumentCreateDocumentTemporaryAttachment],
+                Iterable[models.DocumentCreateDocumentTemporaryAttachmentTypedDict],
             ]
         ] = None,
         meta: Optional[
@@ -2344,7 +2481,7 @@ class Documents(BaseSDK):
     ) -> models.DocumentCreateDocumentTemporaryResponse:
         r"""Create document
 
-        You will need to upload the PDF to the provided URL returned. Note: Once V2 API is released, this will be removed since we will allow direct uploads, instead of using an upload URL.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. You will need to upload the PDF to the provided URL returned. This endpoint will be removed since we will allow direct uploads, instead of using an upload URL.
 
         :param title:
         :param external_id:
@@ -2375,9 +2512,24 @@ class Documents(BaseSDK):
             title=title,
             external_id=external_id,
             visibility=visibility,
-            global_access_auth=global_access_auth,
-            global_action_auth=global_action_auth,
-            form_values=form_values,
+            global_access_auth=utils.unmarshal(
+                global_access_auth,
+                Optional[
+                    List[models.DocumentCreateDocumentTemporaryGlobalAccessAuthRequest]
+                ],
+            ),
+            global_action_auth=utils.unmarshal(
+                global_action_auth,
+                Optional[
+                    List[models.DocumentCreateDocumentTemporaryGlobalActionAuthRequest]
+                ],
+            ),
+            form_values=utils.unmarshal(
+                form_values,
+                Optional[
+                    Dict[str, models.DocumentCreateDocumentTemporaryFormValuesRequest]
+                ],
+            ),
             folder_id=folder_id,
             recipients=utils.get_pydantic_model(
                 recipients,
@@ -2433,9 +2585,11 @@ class Documents(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

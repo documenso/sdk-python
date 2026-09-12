@@ -1,5 +1,13 @@
 # EnvelopeFindGlobalAccessAuth
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeFindGlobalAccessAuth
+
+value = EnvelopeFindGlobalAccessAuth.ACCOUNT
+```
+
 
 ## Values
 

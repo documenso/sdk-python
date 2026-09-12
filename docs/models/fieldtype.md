@@ -1,5 +1,13 @@
 # FieldType
 
+## Example Usage
+
+```python
+from documenso_sdk.models import FieldType
+
+value = FieldType.SIGNATURE
+```
+
 
 ## Values
 

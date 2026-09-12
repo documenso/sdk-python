@@ -1,5 +1,13 @@
 # DocumentFindDataStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentFindDataStatus
+
+value = DocumentFindDataStatus.DRAFT
+```
+
 
 ## Values
 
@@ -9,3 +17,4 @@
 | `PENDING`   | PENDING     |
 | `COMPLETED` | COMPLETED   |
 | `REJECTED`  | REJECTED    |
+| `CANCELLED` | CANCELLED   |
