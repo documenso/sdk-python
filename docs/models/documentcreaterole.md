@@ -1,5 +1,13 @@
 # DocumentCreateRole
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentCreateRole
+
+value = DocumentCreateRole.CC
+```
+
 
 ## Values
 

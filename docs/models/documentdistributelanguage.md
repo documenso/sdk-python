@@ -1,5 +1,13 @@
 # DocumentDistributeLanguage
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentDistributeLanguage
+
+value = DocumentDistributeLanguage.DE
+```
+
 
 ## Values
 

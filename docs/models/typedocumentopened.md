@@ -1,5 +1,13 @@
 # TypeDocumentOpened
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TypeDocumentOpened
+
+value = TypeDocumentOpened.DOCUMENT_OPENED
+```
+
 
 ## Values
 

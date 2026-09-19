@@ -5,5 +5,6 @@
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `from_`            | *str*              | :heavy_check_mark: | N/A                |
-| `to`               | *str*              | :heavy_check_mark: | N/A                |
+| `recipient_email`  | *str*              | :heavy_check_mark: | N/A                |
+| `recipient_name`   | *str*              | :heavy_check_mark: | N/A                |
+| `recipient_id`     | *float*            | :heavy_check_mark: | N/A                |

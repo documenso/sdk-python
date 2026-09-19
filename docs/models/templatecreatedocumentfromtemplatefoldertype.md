@@ -1,5 +1,13 @@
 # TemplateCreateDocumentFromTemplateFolderType
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateCreateDocumentFromTemplateFolderType
+
+value = TemplateCreateDocumentFromTemplateFolderType.DOCUMENT
+```
+
 
 ## Values
 

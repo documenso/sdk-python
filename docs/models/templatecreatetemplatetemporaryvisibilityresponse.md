@@ -1,5 +1,13 @@
 # TemplateCreateTemplateTemporaryVisibilityResponse
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateCreateTemplateTemporaryVisibilityResponse
+
+value = TemplateCreateTemplateTemporaryVisibilityResponse.EVERYONE
+```
+
 
 ## Values
 

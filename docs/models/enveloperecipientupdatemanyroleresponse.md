@@ -1,5 +1,13 @@
 # EnvelopeRecipientUpdateManyRoleResponse
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeRecipientUpdateManyRoleResponse
+
+value = EnvelopeRecipientUpdateManyRoleResponse.CC
+```
+
 
 ## Values
 

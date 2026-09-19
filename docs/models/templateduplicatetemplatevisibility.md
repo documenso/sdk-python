@@ -1,5 +1,13 @@
 # TemplateDuplicateTemplateVisibility
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateDuplicateTemplateVisibility
+
+value = TemplateDuplicateTemplateVisibility.EVERYONE
+```
+
 
 ## Values
 

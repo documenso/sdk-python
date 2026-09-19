@@ -11,7 +11,7 @@ from documenso_sdk.items import Items
 from documenso_sdk.types import OptionalNullable, UNSET
 from documenso_sdk.utils import get_security_from_env
 from documenso_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Iterable, List, Mapping, Optional, Union
 
 
 class Envelopes(BaseSDK):
@@ -106,9 +106,11 @@ class Envelopes(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -216,9 +218,11 @@ class Envelopes(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -267,8 +271,8 @@ class Envelopes(BaseSDK):
         ],
         files: Optional[
             Union[
-                List[models.EnvelopeCreateFile],
-                List[models.EnvelopeCreateFileTypedDict],
+                Iterable[models.EnvelopeCreateFile],
+                Iterable[models.EnvelopeCreateFileTypedDict],
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -341,9 +345,11 @@ class Envelopes(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -387,8 +393,8 @@ class Envelopes(BaseSDK):
         ],
         files: Optional[
             Union[
-                List[models.EnvelopeCreateFile],
-                List[models.EnvelopeCreateFileTypedDict],
+                Iterable[models.EnvelopeCreateFile],
+                Iterable[models.EnvelopeCreateFileTypedDict],
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -461,9 +467,11 @@ class Envelopes(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -504,7 +512,10 @@ class Envelopes(BaseSDK):
         *,
         payload: Union[models.EnvelopeUsePayload, models.EnvelopeUsePayloadTypedDict],
         files: Optional[
-            Union[List[models.EnvelopeUseFile], List[models.EnvelopeUseFileTypedDict]]
+            Union[
+                Iterable[models.EnvelopeUseFile],
+                Iterable[models.EnvelopeUseFileTypedDict],
+            ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -576,9 +587,11 @@ class Envelopes(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -619,7 +632,10 @@ class Envelopes(BaseSDK):
         *,
         payload: Union[models.EnvelopeUsePayload, models.EnvelopeUsePayloadTypedDict],
         files: Optional[
-            Union[List[models.EnvelopeUseFile], List[models.EnvelopeUseFileTypedDict]]
+            Union[
+                Iterable[models.EnvelopeUseFile],
+                Iterable[models.EnvelopeUseFileTypedDict],
+            ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -691,9 +707,11 @@ class Envelopes(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -807,9 +825,11 @@ class Envelopes(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -923,9 +943,11 @@ class Envelopes(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1029,9 +1051,11 @@ class Envelopes(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1135,9 +1159,11 @@ class Envelopes(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1177,6 +1203,8 @@ class Envelopes(BaseSDK):
         self,
         *,
         envelope_id: str,
+        include_recipients: Optional[bool] = True,
+        include_fields: Optional[bool] = True,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1187,6 +1215,8 @@ class Envelopes(BaseSDK):
         Duplicate an envelope with all its settings
 
         :param envelope_id:
+        :param include_recipients:
+        :param include_fields:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1204,6 +1234,8 @@ class Envelopes(BaseSDK):
 
         request = models.EnvelopeDuplicateRequest(
             envelope_id=envelope_id,
+            include_recipients=include_recipients,
+            include_fields=include_fields,
         )
 
         req = self._build_request(
@@ -1243,9 +1275,11 @@ class Envelopes(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1285,6 +1319,8 @@ class Envelopes(BaseSDK):
         self,
         *,
         envelope_id: str,
+        include_recipients: Optional[bool] = True,
+        include_fields: Optional[bool] = True,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1295,6 +1331,8 @@ class Envelopes(BaseSDK):
         Duplicate an envelope with all its settings
 
         :param envelope_id:
+        :param include_recipients:
+        :param include_fields:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1312,6 +1350,8 @@ class Envelopes(BaseSDK):
 
         request = models.EnvelopeDuplicateRequest(
             envelope_id=envelope_id,
+            include_recipients=include_recipients,
+            include_fields=include_fields,
         )
 
         req = self._build_request_async(
@@ -1351,9 +1391,11 @@ class Envelopes(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1466,9 +1508,11 @@ class Envelopes(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1581,9 +1625,11 @@ class Envelopes(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1623,7 +1669,7 @@ class Envelopes(BaseSDK):
         self,
         *,
         envelope_id: str,
-        recipients: List[float],
+        recipients: Iterable[float],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1631,7 +1677,7 @@ class Envelopes(BaseSDK):
     ) -> models.EnvelopeRedistributeResponse:
         r"""Redistribute envelope
 
-        Redistribute the envelope to the provided recipients who have not actioned the envelope. Will use the distribution method set in the envelope
+        Redistribute the envelope to the provided recipients who have not actioned the envelope. Will use the distribution method set in the envelope. This also refreshes the signing-link expiration for the targeted unsigned recipients, renewing any expired links.
 
         :param envelope_id:
         :param recipients:
@@ -1652,7 +1698,7 @@ class Envelopes(BaseSDK):
 
         request = models.EnvelopeRedistributeRequest(
             envelope_id=envelope_id,
-            recipients=recipients,
+            recipients=utils.unmarshal(recipients, List[float]),
         )
 
         req = self._build_request(
@@ -1692,9 +1738,11 @@ class Envelopes(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1738,7 +1786,7 @@ class Envelopes(BaseSDK):
         self,
         *,
         envelope_id: str,
-        recipients: List[float],
+        recipients: Iterable[float],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1746,7 +1794,7 @@ class Envelopes(BaseSDK):
     ) -> models.EnvelopeRedistributeResponse:
         r"""Redistribute envelope
 
-        Redistribute the envelope to the provided recipients who have not actioned the envelope. Will use the distribution method set in the envelope
+        Redistribute the envelope to the provided recipients who have not actioned the envelope. Will use the distribution method set in the envelope. This also refreshes the signing-link expiration for the targeted unsigned recipients, renewing any expired links.
 
         :param envelope_id:
         :param recipients:
@@ -1767,7 +1815,7 @@ class Envelopes(BaseSDK):
 
         request = models.EnvelopeRedistributeRequest(
             envelope_id=envelope_id,
-            recipients=recipients,
+            recipients=utils.unmarshal(recipients, List[float]),
         )
 
         req = self._build_request_async(
@@ -1807,9 +1855,11 @@ class Envelopes(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

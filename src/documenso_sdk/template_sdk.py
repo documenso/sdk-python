@@ -6,14 +6,18 @@ from documenso_sdk._hooks import HookContext
 from documenso_sdk.types import OptionalNullable, UNSET
 from documenso_sdk.utils import get_security_from_env
 from documenso_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Iterable, List, Mapping, Optional, Union
+from typing_extensions import deprecated
 
 
 class TemplateSDK(BaseSDK):
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def template_get_many(
         self,
         *,
-        template_ids: List[float],
+        template_ids: Iterable[float],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -21,7 +25,7 @@ class TemplateSDK(BaseSDK):
     ) -> models.TemplateGetManyResponse:
         r"""Get multiple templates
 
-        Retrieve multiple templates by their IDs
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Retrieve multiple templates by their IDs
 
         :param template_ids:
         :param retries: Override the default retry configuration for this method
@@ -40,7 +44,7 @@ class TemplateSDK(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.TemplateGetManyRequest(
-            template_ids=template_ids,
+            template_ids=utils.unmarshal(template_ids, List[float]),
         )
 
         req = self._build_request(
@@ -80,9 +84,11 @@ class TemplateSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -118,10 +124,13 @@ class TemplateSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def template_get_many_async(
         self,
         *,
-        template_ids: List[float],
+        template_ids: Iterable[float],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -129,7 +138,7 @@ class TemplateSDK(BaseSDK):
     ) -> models.TemplateGetManyResponse:
         r"""Get multiple templates
 
-        Retrieve multiple templates by their IDs
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Retrieve multiple templates by their IDs
 
         :param template_ids:
         :param retries: Override the default retry configuration for this method
@@ -148,7 +157,7 @@ class TemplateSDK(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.TemplateGetManyRequest(
-            template_ids=template_ids,
+            template_ids=utils.unmarshal(template_ids, List[float]),
         )
 
         req = self._build_request_async(
@@ -188,9 +197,11 @@ class TemplateSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -226,6 +237,9 @@ class TemplateSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def template_create_template_temporary(
         self,
         *,
@@ -236,10 +250,10 @@ class TemplateSDK(BaseSDK):
             models.TemplateCreateTemplateTemporaryVisibilityRequest
         ] = None,
         global_access_auth: Optional[
-            List[models.TemplateCreateTemplateTemporaryGlobalAccessAuthRequest]
+            Iterable[models.TemplateCreateTemplateTemporaryGlobalAccessAuthRequest]
         ] = None,
         global_action_auth: Optional[
-            List[models.TemplateCreateTemplateTemporaryGlobalActionAuthRequest]
+            Iterable[models.TemplateCreateTemplateTemporaryGlobalActionAuthRequest]
         ] = None,
         public_title: Optional[str] = None,
         public_description: Optional[str] = None,
@@ -252,8 +266,8 @@ class TemplateSDK(BaseSDK):
         ] = None,
         attachments: Optional[
             Union[
-                List[models.TemplateCreateTemplateTemporaryAttachment],
-                List[models.TemplateCreateTemplateTemporaryAttachmentTypedDict],
+                Iterable[models.TemplateCreateTemplateTemporaryAttachment],
+                Iterable[models.TemplateCreateTemplateTemporaryAttachmentTypedDict],
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -263,7 +277,7 @@ class TemplateSDK(BaseSDK):
     ) -> models.TemplateCreateTemplateTemporaryResponse:
         r"""Create template
 
-        You will need to upload the PDF to the provided URL returned. Note: Once V2 API is released, this will be removed since we will allow direct uploads, instead of using an upload URL.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. You will need to upload the PDF to the provided URL returned. Note: Once V2 API is released, this will be removed since we will allow direct uploads, instead of using an upload URL.
 
         :param title:
         :param folder_id:
@@ -296,8 +310,18 @@ class TemplateSDK(BaseSDK):
             folder_id=folder_id,
             external_id=external_id,
             visibility=visibility,
-            global_access_auth=global_access_auth,
-            global_action_auth=global_action_auth,
+            global_access_auth=utils.unmarshal(
+                global_access_auth,
+                Optional[
+                    List[models.TemplateCreateTemplateTemporaryGlobalAccessAuthRequest]
+                ],
+            ),
+            global_action_auth=utils.unmarshal(
+                global_action_auth,
+                Optional[
+                    List[models.TemplateCreateTemplateTemporaryGlobalActionAuthRequest]
+                ],
+            ),
             public_title=public_title,
             public_description=public_description,
             type=type_,
@@ -351,9 +375,11 @@ class TemplateSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -399,6 +425,9 @@ class TemplateSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def template_create_template_temporary_async(
         self,
         *,
@@ -409,10 +438,10 @@ class TemplateSDK(BaseSDK):
             models.TemplateCreateTemplateTemporaryVisibilityRequest
         ] = None,
         global_access_auth: Optional[
-            List[models.TemplateCreateTemplateTemporaryGlobalAccessAuthRequest]
+            Iterable[models.TemplateCreateTemplateTemporaryGlobalAccessAuthRequest]
         ] = None,
         global_action_auth: Optional[
-            List[models.TemplateCreateTemplateTemporaryGlobalActionAuthRequest]
+            Iterable[models.TemplateCreateTemplateTemporaryGlobalActionAuthRequest]
         ] = None,
         public_title: Optional[str] = None,
         public_description: Optional[str] = None,
@@ -425,8 +454,8 @@ class TemplateSDK(BaseSDK):
         ] = None,
         attachments: Optional[
             Union[
-                List[models.TemplateCreateTemplateTemporaryAttachment],
-                List[models.TemplateCreateTemplateTemporaryAttachmentTypedDict],
+                Iterable[models.TemplateCreateTemplateTemporaryAttachment],
+                Iterable[models.TemplateCreateTemplateTemporaryAttachmentTypedDict],
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -436,7 +465,7 @@ class TemplateSDK(BaseSDK):
     ) -> models.TemplateCreateTemplateTemporaryResponse:
         r"""Create template
 
-        You will need to upload the PDF to the provided URL returned. Note: Once V2 API is released, this will be removed since we will allow direct uploads, instead of using an upload URL.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. You will need to upload the PDF to the provided URL returned. Note: Once V2 API is released, this will be removed since we will allow direct uploads, instead of using an upload URL.
 
         :param title:
         :param folder_id:
@@ -469,8 +498,18 @@ class TemplateSDK(BaseSDK):
             folder_id=folder_id,
             external_id=external_id,
             visibility=visibility,
-            global_access_auth=global_access_auth,
-            global_action_auth=global_action_auth,
+            global_access_auth=utils.unmarshal(
+                global_access_auth,
+                Optional[
+                    List[models.TemplateCreateTemplateTemporaryGlobalAccessAuthRequest]
+                ],
+            ),
+            global_action_auth=utils.unmarshal(
+                global_action_auth,
+                Optional[
+                    List[models.TemplateCreateTemplateTemporaryGlobalActionAuthRequest]
+                ],
+            ),
             public_title=public_title,
             public_description=public_description,
             type=type_,
@@ -524,9 +563,11 @@ class TemplateSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

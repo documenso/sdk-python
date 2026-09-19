@@ -32,7 +32,7 @@ class EnvelopeItemUpdateManyDataRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -207,3 +207,17 @@ class EnvelopeItemUpdateManyResponse(BaseModel):
     r"""Successful response"""
 
     data: List[EnvelopeItemUpdateManyDataResponse]
+
+
+try:
+    EnvelopeItemUpdateManyDataRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeItemUpdateManyRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeItemUpdateManyDataResponse.model_rebuild()
+except NameError:
+    pass
