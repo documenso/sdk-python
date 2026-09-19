@@ -1,5 +1,13 @@
 # DocumentCreateDocumentTemporaryDateFormat
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentCreateDocumentTemporaryDateFormat
+
+value = DocumentCreateDocumentTemporaryDateFormat.YYYY_M_MDD_HH_MM_A
+```
+
 
 ## Values
 
@@ -8,12 +16,15 @@
 | `YYYY_M_MDD_HH_MM_A`              | yyyy-MM-dd hh:mm a                |
 | `YYYY_M_MDD`                      | yyyy-MM-dd                        |
 | `DD_MM_SLASH_YYYY`                | dd/MM/yyyy                        |
+| `DD_MM_DASH_YYYY`                 | dd-MM-yyyy                        |
 | `MM_DD_SLASH_YYYY`                | MM/dd/yyyy                        |
 | `YY_M_MDD`                        | yy-MM-dd                          |
 | `MMMM_DD_COMMA_YYYY`              | MMMM dd, yyyy                     |
 | `EEEE_MMMM_DD_COMMA_YYYY`         | EEEE, MMMM dd, yyyy               |
 | `DD_MM_SLASH_YYYY_HH_MM_A`        | dd/MM/yyyy hh:mm a                |
 | `DD_MM_SLASH_YYYY_H_HMM`          | dd/MM/yyyy HH:mm                  |
+| `DD_MM_DASH_YYYY_HH_MM_A`         | dd-MM-yyyy hh:mm a                |
+| `DD_MM_DASH_YYYY_H_HMM`           | dd-MM-yyyy HH:mm                  |
 | `MM_DD_SLASH_YYYY_HH_MM_A`        | MM/dd/yyyy hh:mm a                |
 | `MM_DD_SLASH_YYYY_H_HMM`          | MM/dd/yyyy HH:mm                  |
 | `DD_DOT_MM_DOT_YYYY`              | dd.MM.yyyy                        |

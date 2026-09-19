@@ -6,14 +6,18 @@ from documenso_sdk._hooks import HookContext
 from documenso_sdk.types import OptionalNullable, UNSET
 from documenso_sdk.utils import get_security_from_env
 from documenso_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional
+from typing import Any, Iterable, List, Mapping, Optional
+from typing_extensions import deprecated
 
 
 class DocumentSDK(BaseSDK):
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def document_get_many(
         self,
         *,
-        document_ids: List[float],
+        document_ids: Iterable[float],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -21,7 +25,7 @@ class DocumentSDK(BaseSDK):
     ) -> models.DocumentGetManyResponse:
         r"""Get multiple documents
 
-        Retrieve multiple documents by their IDs
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Retrieve multiple documents by their IDs
 
         :param document_ids:
         :param retries: Override the default retry configuration for this method
@@ -40,7 +44,7 @@ class DocumentSDK(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.DocumentGetManyRequest(
-            document_ids=document_ids,
+            document_ids=utils.unmarshal(document_ids, List[float]),
         )
 
         req = self._build_request(
@@ -80,9 +84,11 @@ class DocumentSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -118,10 +124,13 @@ class DocumentSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def document_get_many_async(
         self,
         *,
-        document_ids: List[float],
+        document_ids: Iterable[float],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -129,7 +138,7 @@ class DocumentSDK(BaseSDK):
     ) -> models.DocumentGetManyResponse:
         r"""Get multiple documents
 
-        Retrieve multiple documents by their IDs
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Retrieve multiple documents by their IDs
 
         :param document_ids:
         :param retries: Override the default retry configuration for this method
@@ -148,7 +157,7 @@ class DocumentSDK(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.DocumentGetManyRequest(
-            document_ids=document_ids,
+            document_ids=utils.unmarshal(document_ids, List[float]),
         )
 
         req = self._build_request_async(
@@ -188,9 +197,11 @@ class DocumentSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -226,6 +237,9 @@ class DocumentSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def document_download(
         self,
         *,
@@ -240,7 +254,7 @@ class DocumentSDK(BaseSDK):
     ) -> models.DocumentDownloadBetaResponse:
         r"""Download document (beta)
 
-        Get a pre-signed download URL for the original or signed version of a document
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Get a pre-signed download URL for the original or signed version of a document
 
         :param document_id: The ID of the document to download.
         :param version: The version of the document to download. \"signed\" returns the completed document with signatures, \"original\" returns the original uploaded document.
@@ -298,9 +312,11 @@ class DocumentSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -345,6 +361,9 @@ class DocumentSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def document_download_async(
         self,
         *,
@@ -359,7 +378,7 @@ class DocumentSDK(BaseSDK):
     ) -> models.DocumentDownloadBetaResponse:
         r"""Download document (beta)
 
-        Get a pre-signed download URL for the original or signed version of a document
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Get a pre-signed download URL for the original or signed version of a document
 
         :param document_id: The ID of the document to download.
         :param version: The version of the document to download. \"signed\" returns the completed document with signatures, \"original\" returns the original uploaded document.
@@ -417,9 +436,11 @@ class DocumentSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

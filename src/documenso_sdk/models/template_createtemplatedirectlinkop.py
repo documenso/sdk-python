@@ -31,7 +31,7 @@ class TemplateCreateTemplateDirectLinkRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -200,3 +200,13 @@ class TemplateCreateTemplateDirectLinkResponse(BaseModel):
     envelope_id: Annotated[str, pydantic.Field(alias="envelopeId")]
 
     template_id: Annotated[float, pydantic.Field(alias="templateId")]
+
+
+try:
+    TemplateCreateTemplateDirectLinkRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateDirectLinkResponse.model_rebuild()
+except NameError:
+    pass

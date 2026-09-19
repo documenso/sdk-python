@@ -1,0 +1,19 @@
+# FieldCreateTemplateFieldOverflowCheckbox
+
+## Example Usage
+
+```python
+from documenso_sdk.models import FieldCreateTemplateFieldOverflowCheckbox
+
+value = FieldCreateTemplateFieldOverflowCheckbox.AUTO
+```
+
+
+## Values
+
+| Name         | Value        |
+| ------------ | ------------ |
+| `AUTO`       | auto         |
+| `HORIZONTAL` | horizontal   |
+| `VERTICAL`   | vertical     |
+| `CROP`       | crop         |

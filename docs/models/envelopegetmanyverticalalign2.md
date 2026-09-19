@@ -1,5 +1,13 @@
 # EnvelopeGetManyVerticalAlign2
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeGetManyVerticalAlign2
+
+value = EnvelopeGetManyVerticalAlign2.TOP
+```
+
 
 ## Values
 

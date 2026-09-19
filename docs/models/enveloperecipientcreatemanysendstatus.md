@@ -1,5 +1,13 @@
 # EnvelopeRecipientCreateManySendStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeRecipientCreateManySendStatus
+
+value = EnvelopeRecipientCreateManySendStatus.NOT_SENT
+```
+
 
 ## Values
 

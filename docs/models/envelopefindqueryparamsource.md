@@ -2,6 +2,14 @@
 
 Filter envelopes by how it was created.
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeFindQueryParamSource
+
+value = EnvelopeFindQueryParamSource.DOCUMENT
+```
+
 
 ## Values
 

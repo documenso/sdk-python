@@ -23,7 +23,7 @@ class EnvelopeItemCreateManyPayload(BaseModel):
 
 class EnvelopeItemCreateManyFileTypedDict(TypedDict):
     file_name: str
-    content: Union[bytes, IO[bytes], io.BufferedReader]
+    content: Union[bytes, IO[bytes], io.IOBase]
     content_type: NotRequired[str]
 
 
@@ -33,7 +33,7 @@ class EnvelopeItemCreateManyFile(BaseModel):
     ]
 
     content: Annotated[
-        Union[bytes, IO[bytes], io.BufferedReader],
+        Union[bytes, IO[bytes], io.IOBase],
         pydantic.Field(alias=""),
         FieldMetadata(multipart=MultipartFormMetadata(content=True)),
     ]
@@ -52,7 +52,7 @@ class EnvelopeItemCreateManyFile(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -85,7 +85,7 @@ class EnvelopeItemCreateManyRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -227,6 +227,7 @@ class EnvelopeItemCreateManyDataTypedDict(TypedDict):
     title: str
     envelope_id: str
     order: float
+    document_data_id: str
 
 
 class EnvelopeItemCreateManyData(BaseModel):
@@ -237,6 +238,8 @@ class EnvelopeItemCreateManyData(BaseModel):
     envelope_id: Annotated[str, pydantic.Field(alias="envelopeId")]
 
     order: float
+
+    document_data_id: Annotated[str, pydantic.Field(alias="documentDataId")]
 
 
 class EnvelopeItemCreateManyResponseTypedDict(TypedDict):
@@ -249,3 +252,13 @@ class EnvelopeItemCreateManyResponse(BaseModel):
     r"""Successful response"""
 
     data: List[EnvelopeItemCreateManyData]
+
+
+try:
+    EnvelopeItemCreateManyPayload.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeItemCreateManyData.model_rebuild()
+except NameError:
+    pass

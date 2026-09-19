@@ -1,5 +1,13 @@
 # DocumentGetManyVisibility
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentGetManyVisibility
+
+value = DocumentGetManyVisibility.EVERYONE
+```
+
 
 ## Values
 

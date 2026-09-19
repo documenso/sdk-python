@@ -1,5 +1,13 @@
 # FieldUpdateDocumentFieldTypeResponse
 
+## Example Usage
+
+```python
+from documenso_sdk.models import FieldUpdateDocumentFieldTypeResponse
+
+value = FieldUpdateDocumentFieldTypeResponse.SIGNATURE
+```
+
 
 ## Values
 

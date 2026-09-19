@@ -1,5 +1,13 @@
 # TemplateCreateTemplateLanguage
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateCreateTemplateLanguage
+
+value = TemplateCreateTemplateLanguage.DE
+```
+
 
 ## Values
 

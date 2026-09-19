@@ -1,17 +1,22 @@
-# Documents.Attachments
+# ~~Documents.Attachments~~
+
+> [!WARNING]
+> This SDK is **DEPRECATED**
 
 ## Overview
 
 ### Available Operations
 
-* [create](#create) - Create attachment
-* [update](#update) - Update attachment
-* [delete](#delete) - Delete attachment
-* [find](#find) - Find attachments
+* [~~create~~](#create) - Create attachment :warning: **Deprecated**
+* [~~update~~](#update) - Update attachment :warning: **Deprecated**
+* [~~delete~~](#delete) - Delete attachment :warning: **Deprecated**
+* [~~find~~](#find) - Find attachments :warning: **Deprecated**
 
-## create
+## ~~create~~
 
-Create a new attachment for a document
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Create a new attachment for a document
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -57,9 +62,11 @@ with Documenso(
 | models.DocumentAttachmentCreateInternalServerError | 500                                                | application/json                                   |
 | models.APIError                                    | 4XX, 5XX                                           | \*/\*                                              |
 
-## update
+## ~~update~~
 
-Update an existing attachment
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Update an existing attachment
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -105,9 +112,11 @@ with Documenso(
 | models.DocumentAttachmentUpdateInternalServerError | 500                                                | application/json                                   |
 | models.APIError                                    | 4XX, 5XX                                           | \*/\*                                              |
 
-## delete
+## ~~delete~~
 
-Delete an attachment from a document
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Delete an attachment from a document
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -149,9 +158,11 @@ with Documenso(
 | models.DocumentAttachmentDeleteInternalServerError | 500                                                | application/json                                   |
 | models.APIError                                    | 4XX, 5XX                                           | \*/\*                                              |
 
-## find
+## ~~find~~
 
-Find all attachments for a document
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Find all attachments for a document
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 

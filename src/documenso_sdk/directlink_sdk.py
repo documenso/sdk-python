@@ -7,9 +7,13 @@ from documenso_sdk.types import OptionalNullable, UNSET
 from documenso_sdk.utils import get_security_from_env
 from documenso_sdk.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, Mapping, Optional
+from typing_extensions import deprecated
 
 
 class DirectLinkSDK(BaseSDK):
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def create(
         self,
         *,
@@ -22,7 +26,7 @@ class DirectLinkSDK(BaseSDK):
     ) -> models.TemplateCreateTemplateDirectLinkResponse:
         r"""Create direct link
 
-        Create a direct link for a template
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Create a direct link for a template
 
         :param template_id:
         :param direct_recipient_id:
@@ -87,9 +91,11 @@ class DirectLinkSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -135,6 +141,9 @@ class DirectLinkSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def create_async(
         self,
         *,
@@ -147,7 +156,7 @@ class DirectLinkSDK(BaseSDK):
     ) -> models.TemplateCreateTemplateDirectLinkResponse:
         r"""Create direct link
 
-        Create a direct link for a template
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Create a direct link for a template
 
         :param template_id:
         :param direct_recipient_id:
@@ -212,9 +221,11 @@ class DirectLinkSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -260,6 +271,9 @@ class DirectLinkSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def delete(
         self,
         *,
@@ -271,7 +285,7 @@ class DirectLinkSDK(BaseSDK):
     ) -> models.TemplateDeleteTemplateDirectLinkResponse:
         r"""Delete direct link
 
-        Delete a direct link for a template
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Delete a direct link for a template
 
         :param template_id:
         :param retries: Override the default retry configuration for this method
@@ -334,9 +348,11 @@ class DirectLinkSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -382,6 +398,9 @@ class DirectLinkSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def delete_async(
         self,
         *,
@@ -393,7 +412,7 @@ class DirectLinkSDK(BaseSDK):
     ) -> models.TemplateDeleteTemplateDirectLinkResponse:
         r"""Delete direct link
 
-        Delete a direct link for a template
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Delete a direct link for a template
 
         :param template_id:
         :param retries: Override the default retry configuration for this method
@@ -456,9 +475,11 @@ class DirectLinkSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -504,6 +525,9 @@ class DirectLinkSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def toggle(
         self,
         *,
@@ -516,7 +540,7 @@ class DirectLinkSDK(BaseSDK):
     ) -> models.TemplateToggleTemplateDirectLinkResponse:
         r"""Toggle direct link
 
-        Enable or disable a direct link for a template
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Enable or disable a direct link for a template
 
         :param template_id:
         :param enabled:
@@ -581,9 +605,11 @@ class DirectLinkSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -629,6 +655,9 @@ class DirectLinkSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def toggle_async(
         self,
         *,
@@ -641,7 +670,7 @@ class DirectLinkSDK(BaseSDK):
     ) -> models.TemplateToggleTemplateDirectLinkResponse:
         r"""Toggle direct link
 
-        Enable or disable a direct link for a template
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Enable or disable a direct link for a template
 
         :param template_id:
         :param enabled:
@@ -706,9 +735,11 @@ class DirectLinkSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
