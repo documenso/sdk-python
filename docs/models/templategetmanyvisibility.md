@@ -1,5 +1,13 @@
 # TemplateGetManyVisibility
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateGetManyVisibility
+
+value = TemplateGetManyVisibility.EVERYONE
+```
+
 
 ## Values
 

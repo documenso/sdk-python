@@ -1,5 +1,13 @@
 # EnvelopeGetVisibility
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeGetVisibility
+
+value = EnvelopeGetVisibility.EVERYONE
+```
+
 
 ## Values
 

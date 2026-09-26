@@ -12,3 +12,5 @@
 | `document_completed`        | *Optional[bool]*            | :heavy_minus_sign:          | N/A                         |
 | `document_deleted`          | *Optional[bool]*            | :heavy_minus_sign:          | N/A                         |
 | `owner_document_completed`  | *Optional[bool]*            | :heavy_minus_sign:          | N/A                         |
+| `owner_recipient_expired`   | *Optional[bool]*            | :heavy_minus_sign:          | N/A                         |
+| `owner_document_created`    | *Optional[bool]*            | :heavy_minus_sign:          | N/A                         |

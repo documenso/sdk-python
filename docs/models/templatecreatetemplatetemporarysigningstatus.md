@@ -1,5 +1,13 @@
 # TemplateCreateTemplateTemporarySigningStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateCreateTemplateTemporarySigningStatus
+
+value = TemplateCreateTemplateTemporarySigningStatus.NOT_SIGNED
+```
+
 
 ## Values
 
