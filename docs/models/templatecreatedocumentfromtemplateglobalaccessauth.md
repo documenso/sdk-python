@@ -1,5 +1,13 @@
 # TemplateCreateDocumentFromTemplateGlobalAccessAuth
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateCreateDocumentFromTemplateGlobalAccessAuth
+
+value = TemplateCreateDocumentFromTemplateGlobalAccessAuth.ACCOUNT
+```
+
 
 ## Values
 

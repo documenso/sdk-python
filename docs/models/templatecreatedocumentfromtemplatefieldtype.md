@@ -1,5 +1,13 @@
 # TemplateCreateDocumentFromTemplateFieldType
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateCreateDocumentFromTemplateFieldType
+
+value = TemplateCreateDocumentFromTemplateFieldType.SIGNATURE
+```
+
 
 ## Values
 

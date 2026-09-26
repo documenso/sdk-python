@@ -1,5 +1,13 @@
 # TemplateGetTemplateByIDFieldType
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateGetTemplateByIDFieldType
+
+value = TemplateGetTemplateByIDFieldType.SIGNATURE
+```
+
 
 ## Values
 

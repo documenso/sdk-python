@@ -1,5 +1,13 @@
 # FolderCreateFolderVisibility
 
+## Example Usage
+
+```python
+from documenso_sdk.models import FolderCreateFolderVisibility
+
+value = FolderCreateFolderVisibility.EVERYONE
+```
+
 
 ## Values
 

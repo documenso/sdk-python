@@ -1,5 +1,13 @@
 # FieldGetTemplateFieldType
 
+## Example Usage
+
+```python
+from documenso_sdk.models import FieldGetTemplateFieldType
+
+value = FieldGetTemplateFieldType.SIGNATURE
+```
+
 
 ## Values
 

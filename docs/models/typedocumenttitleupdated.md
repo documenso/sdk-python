@@ -1,5 +1,13 @@
 # TypeDocumentTitleUpdated
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TypeDocumentTitleUpdated
+
+value = TypeDocumentTitleUpdated.DOCUMENT_TITLE_UPDATED
+```
+
 
 ## Values
 
