@@ -1,5 +1,13 @@
 # EnvelopeRecipientGetType
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeRecipientGetType
+
+value = EnvelopeRecipientGetType.SIGNATURE
+```
+
 
 ## Values
 

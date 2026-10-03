@@ -14,17 +14,18 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class EnvelopeItemDownloadVersion(str, Enum):
-    r"""The version of the envelope item to download. \"signed\" returns the completed document with signatures, \"original\" returns the original uploaded document."""
+    r"""The version of the envelope item to download. \"signed\" returns the completed document with all signatures and the audit trail, \"original\" returns the original uploaded document, \"pending\" returns the original document with currently-inserted fields burned in (only valid while the envelope is in PENDING status; not a final executed document)."""
 
     ORIGINAL = "original"
     SIGNED = "signed"
+    PENDING = "pending"
 
 
 class EnvelopeItemDownloadRequestTypedDict(TypedDict):
     envelope_item_id: str
     r"""The ID of the envelope item to download."""
     version: NotRequired[EnvelopeItemDownloadVersion]
-    r"""The version of the envelope item to download. \"signed\" returns the completed document with signatures, \"original\" returns the original uploaded document."""
+    r"""The version of the envelope item to download. \"signed\" returns the completed document with all signatures and the audit trail, \"original\" returns the original uploaded document, \"pending\" returns the original document with currently-inserted fields burned in (only valid while the envelope is in PENDING status; not a final executed document)."""
 
 
 class EnvelopeItemDownloadRequest(BaseModel):
@@ -39,7 +40,7 @@ class EnvelopeItemDownloadRequest(BaseModel):
         Optional[EnvelopeItemDownloadVersion],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = EnvelopeItemDownloadVersion.SIGNED
-    r"""The version of the envelope item to download. \"signed\" returns the completed document with signatures, \"original\" returns the original uploaded document."""
+    r"""The version of the envelope item to download. \"signed\" returns the completed document with all signatures and the audit trail, \"original\" returns the original uploaded document, \"pending\" returns the original document with currently-inserted fields burned in (only valid while the envelope is in PENDING status; not a final executed document)."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -49,7 +50,7 @@ class EnvelopeItemDownloadRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:

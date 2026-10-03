@@ -1,5 +1,13 @@
 # DocumentCreateDocumentTemporaryTextAlignEmail
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentCreateDocumentTemporaryTextAlignEmail
+
+value = DocumentCreateDocumentTemporaryTextAlignEmail.LEFT
+```
+
 
 ## Values
 

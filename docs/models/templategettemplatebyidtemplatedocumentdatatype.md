@@ -1,5 +1,13 @@
 # TemplateGetTemplateByIDTemplateDocumentDataType
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateGetTemplateByIDTemplateDocumentDataType
+
+value = TemplateGetTemplateByIDTemplateDocumentDataType.S3_PATH
+```
+
 
 ## Values
 

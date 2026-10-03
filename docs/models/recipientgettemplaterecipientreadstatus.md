@@ -1,5 +1,13 @@
 # RecipientGetTemplateRecipientReadStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import RecipientGetTemplateRecipientReadStatus
+
+value = RecipientGetTemplateRecipientReadStatus.NOT_OPENED
+```
+
 
 ## Values
 

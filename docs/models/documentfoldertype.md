@@ -1,5 +1,13 @@
 # DocumentFolderType
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentFolderType
+
+value = DocumentFolderType.DOCUMENT
+```
+
 
 ## Values
 

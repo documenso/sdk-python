@@ -1,15 +1,20 @@
-# Template
+# ~~Template~~
+
+> [!WARNING]
+> This SDK is **DEPRECATED**
 
 ## Overview
 
 ### Available Operations
 
-* [template_get_many](#template_get_many) - Get multiple templates
-* [template_create_template_temporary](#template_create_template_temporary) - Create template
+* [~~template_get_many~~](#template_get_many) - Get multiple templates :warning: **Deprecated**
+* [~~template_create_template_temporary~~](#template_create_template_temporary) - Create template :warning: **Deprecated**
 
-## template_get_many
+## ~~template_get_many~~
 
-Retrieve multiple templates by their IDs
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Retrieve multiple templates by their IDs
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -55,9 +60,11 @@ with Documenso(
 | models.TemplateGetManyInternalServerError | 500                                       | application/json                          |
 | models.APIError                           | 4XX, 5XX                                  | \*/\*                                     |
 
-## template_create_template_temporary
+## ~~template_create_template_temporary~~
 
-You will need to upload the PDF to the provided URL returned. Note: Once V2 API is released, this will be removed since we will allow direct uploads, instead of using an upload URL.
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. You will need to upload the PDF to the provided URL returned. Note: Once V2 API is released, this will be removed since we will allow direct uploads, instead of using an upload URL.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 

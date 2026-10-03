@@ -1,5 +1,13 @@
 # DocumentGetStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentGetStatus
+
+value = DocumentGetStatus.DRAFT
+```
+
 
 ## Values
 
@@ -9,3 +17,4 @@
 | `PENDING`   | PENDING     |
 | `COMPLETED` | COMPLETED   |
 | `REJECTED`  | REJECTED    |
+| `CANCELLED` | CANCELLED   |
