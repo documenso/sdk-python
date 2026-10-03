@@ -1,5 +1,13 @@
 # FieldSecurityType1
 
+## Example Usage
+
+```python
+from documenso_sdk.models import FieldSecurityType1
+
+value = FieldSecurityType1.ACCOUNT
+```
+
 
 ## Values
 

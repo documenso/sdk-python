@@ -1,5 +1,13 @@
 # TemplateCreateTemplateTemporaryFolderVisibility
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateCreateTemplateTemporaryFolderVisibility
+
+value = TemplateCreateTemplateTemporaryFolderVisibility.EVERYONE
+```
+
 
 ## Values
 

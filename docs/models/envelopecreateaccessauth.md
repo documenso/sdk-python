@@ -1,5 +1,13 @@
 # EnvelopeCreateAccessAuth
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeCreateAccessAuth
+
+value = EnvelopeCreateAccessAuth.ACCOUNT
+```
+
 
 ## Values
 

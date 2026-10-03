@@ -1,5 +1,13 @@
 # EnvelopeFieldUpdateManyVerticalAlignResponse2
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeFieldUpdateManyVerticalAlignResponse2
+
+value = EnvelopeFieldUpdateManyVerticalAlignResponse2.TOP
+```
+
 
 ## Values
 

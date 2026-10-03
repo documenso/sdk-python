@@ -1,5 +1,13 @@
 # EnvelopeRecipientGetSigningStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeRecipientGetSigningStatus
+
+value = EnvelopeRecipientGetSigningStatus.NOT_SIGNED
+```
+
 
 ## Values
 

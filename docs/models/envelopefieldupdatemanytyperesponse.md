@@ -1,5 +1,13 @@
 # EnvelopeFieldUpdateManyTypeResponse
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeFieldUpdateManyTypeResponse
+
+value = EnvelopeFieldUpdateManyTypeResponse.SIGNATURE
+```
+
 
 ## Values
 

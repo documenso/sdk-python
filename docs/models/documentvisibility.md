@@ -1,5 +1,13 @@
 # DocumentVisibility
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentVisibility
+
+value = DocumentVisibility.EVERYONE
+```
+
 
 ## Values
 

@@ -1,5 +1,13 @@
 # EnvelopeGetRole
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeGetRole
+
+value = EnvelopeGetRole.CC
+```
+
 
 ## Values
 

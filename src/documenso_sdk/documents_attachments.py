@@ -7,9 +7,13 @@ from documenso_sdk.types import OptionalNullable, UNSET
 from documenso_sdk.utils import get_security_from_env
 from documenso_sdk.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, Mapping, Optional, Union
+from typing_extensions import deprecated
 
 
 class DocumentsAttachments(BaseSDK):
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def create(
         self,
         *,
@@ -25,7 +29,7 @@ class DocumentsAttachments(BaseSDK):
     ) -> models.DocumentAttachmentCreateResponse:
         r"""Create attachment
 
-        Create a new attachment for a document
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Create a new attachment for a document
 
         :param document_id:
         :param data:
@@ -86,9 +90,11 @@ class DocumentsAttachments(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -132,6 +138,9 @@ class DocumentsAttachments(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def create_async(
         self,
         *,
@@ -147,7 +156,7 @@ class DocumentsAttachments(BaseSDK):
     ) -> models.DocumentAttachmentCreateResponse:
         r"""Create attachment
 
-        Create a new attachment for a document
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Create a new attachment for a document
 
         :param document_id:
         :param data:
@@ -208,9 +217,11 @@ class DocumentsAttachments(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -254,6 +265,9 @@ class DocumentsAttachments(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def update(
         self,
         *,
@@ -269,7 +283,7 @@ class DocumentsAttachments(BaseSDK):
     ) -> models.DocumentAttachmentUpdateResponse:
         r"""Update attachment
 
-        Update an existing attachment
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Update an existing attachment
 
         :param id:
         :param data:
@@ -330,9 +344,11 @@ class DocumentsAttachments(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -376,6 +392,9 @@ class DocumentsAttachments(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def update_async(
         self,
         *,
@@ -391,7 +410,7 @@ class DocumentsAttachments(BaseSDK):
     ) -> models.DocumentAttachmentUpdateResponse:
         r"""Update attachment
 
-        Update an existing attachment
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Update an existing attachment
 
         :param id:
         :param data:
@@ -452,9 +471,11 @@ class DocumentsAttachments(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -498,6 +519,9 @@ class DocumentsAttachments(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def delete(
         self,
         *,
@@ -509,7 +533,7 @@ class DocumentsAttachments(BaseSDK):
     ) -> models.DocumentAttachmentDeleteResponse:
         r"""Delete attachment
 
-        Delete an attachment from a document
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Delete an attachment from a document
 
         :param id:
         :param retries: Override the default retry configuration for this method
@@ -568,9 +592,11 @@ class DocumentsAttachments(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -614,6 +640,9 @@ class DocumentsAttachments(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def delete_async(
         self,
         *,
@@ -625,7 +654,7 @@ class DocumentsAttachments(BaseSDK):
     ) -> models.DocumentAttachmentDeleteResponse:
         r"""Delete attachment
 
-        Delete an attachment from a document
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Delete an attachment from a document
 
         :param id:
         :param retries: Override the default retry configuration for this method
@@ -684,9 +713,11 @@ class DocumentsAttachments(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -730,6 +761,9 @@ class DocumentsAttachments(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def find(
         self,
         *,
@@ -741,7 +775,7 @@ class DocumentsAttachments(BaseSDK):
     ) -> models.DocumentAttachmentFindResponse:
         r"""Find attachments
 
-        Find all attachments for a document
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Find all attachments for a document
 
         :param document_id:
         :param retries: Override the default retry configuration for this method
@@ -797,9 +831,11 @@ class DocumentsAttachments(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -846,6 +882,9 @@ class DocumentsAttachments(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def find_async(
         self,
         *,
@@ -857,7 +896,7 @@ class DocumentsAttachments(BaseSDK):
     ) -> models.DocumentAttachmentFindResponse:
         r"""Find attachments
 
-        Find all attachments for a document
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Find all attachments for a document
 
         :param document_id:
         :param retries: Override the default retry configuration for this method
@@ -913,9 +952,11 @@ class DocumentsAttachments(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

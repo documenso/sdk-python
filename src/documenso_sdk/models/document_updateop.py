@@ -10,11 +10,13 @@ from documenso_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
+from documenso_sdk.utils import validate_const
 from enum import Enum
 import httpx
 import pydantic
 from pydantic import model_serializer
-from typing import Dict, List, Optional, Union
+from pydantic.functional_validators import AfterValidator
+from typing import Dict, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
@@ -92,7 +94,7 @@ class DocumentUpdateData(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -113,12 +115,15 @@ class DocumentUpdateDateFormat(str, Enum):
     YYYY_M_MDD_HH_MM_A = "yyyy-MM-dd hh:mm a"
     YYYY_M_MDD = "yyyy-MM-dd"
     DD_MM_SLASH_YYYY = "dd/MM/yyyy"
+    DD_MM_DASH_YYYY = "dd-MM-yyyy"
     MM_DD_SLASH_YYYY = "MM/dd/yyyy"
     YY_M_MDD = "yy-MM-dd"
     MMMM_DD_COMMA_YYYY = "MMMM dd, yyyy"
     EEEE_MMMM_DD_COMMA_YYYY = "EEEE, MMMM dd, yyyy"
     DD_MM_SLASH_YYYY_HH_MM_A = "dd/MM/yyyy hh:mm a"
     DD_MM_SLASH_YYYY_H_HMM = "dd/MM/yyyy HH:mm"
+    DD_MM_DASH_YYYY_HH_MM_A = "dd-MM-yyyy hh:mm a"
+    DD_MM_DASH_YYYY_H_HMM = "dd-MM-yyyy HH:mm"
     MM_DD_SLASH_YYYY_HH_MM_A = "MM/dd/yyyy hh:mm a"
     MM_DD_SLASH_YYYY_H_HMM = "MM/dd/yyyy HH:mm"
     DD_DOT_MM_DOT_YYYY = "dd.MM.yyyy"
@@ -166,6 +171,8 @@ class DocumentUpdateEmailSettingsTypedDict(TypedDict):
     document_completed: NotRequired[bool]
     document_deleted: NotRequired[bool]
     owner_document_completed: NotRequired[bool]
+    owner_recipient_expired: NotRequired[bool]
+    owner_document_created: NotRequired[bool]
 
 
 class DocumentUpdateEmailSettings(BaseModel):
@@ -197,6 +204,14 @@ class DocumentUpdateEmailSettings(BaseModel):
         Optional[bool], pydantic.Field(alias="ownerDocumentCompleted")
     ] = True
 
+    owner_recipient_expired: Annotated[
+        Optional[bool], pydantic.Field(alias="ownerRecipientExpired")
+    ] = True
+
+    owner_document_created: Annotated[
+        Optional[bool], pydantic.Field(alias="ownerDocumentCreated")
+    ] = True
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -208,6 +223,8 @@ class DocumentUpdateEmailSettings(BaseModel):
                 "documentCompleted",
                 "documentDeleted",
                 "ownerDocumentCompleted",
+                "ownerRecipientExpired",
+                "ownerDocumentCreated",
             ]
         )
         serialized = handler(self)
@@ -215,13 +232,154 @@ class DocumentUpdateEmailSettings(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class DocumentUpdateEnvelopeExpirationPeriod2TypedDict(TypedDict):
+    disabled: Literal[True]
+
+
+class DocumentUpdateEnvelopeExpirationPeriod2(BaseModel):
+    DISABLED: Annotated[
+        Annotated[Literal[True], AfterValidator(validate_const(True))],
+        pydantic.Field(alias="disabled"),
+    ] = True
+
+
+class DocumentUpdateEnvelopeExpirationPeriodUnit(str, Enum):
+    DAY = "day"
+    WEEK = "week"
+    MONTH = "month"
+    YEAR = "year"
+
+
+class DocumentUpdateEnvelopeExpirationPeriod1TypedDict(TypedDict):
+    unit: DocumentUpdateEnvelopeExpirationPeriodUnit
+    amount: int
+
+
+class DocumentUpdateEnvelopeExpirationPeriod1(BaseModel):
+    unit: DocumentUpdateEnvelopeExpirationPeriodUnit
+
+    amount: int
+
+
+class DocumentUpdateSendAfter2TypedDict(TypedDict):
+    disabled: Literal[True]
+
+
+class DocumentUpdateSendAfter2(BaseModel):
+    DISABLED: Annotated[
+        Annotated[Literal[True], AfterValidator(validate_const(True))],
+        pydantic.Field(alias="disabled"),
+    ] = True
+
+
+DocumentUpdateEnvelopeExpirationPeriodUnionTypedDict = TypeAliasType(
+    "DocumentUpdateEnvelopeExpirationPeriodUnionTypedDict",
+    Union[
+        DocumentUpdateEnvelopeExpirationPeriod2TypedDict,
+        DocumentUpdateEnvelopeExpirationPeriod1TypedDict,
+    ],
+)
+
+
+DocumentUpdateEnvelopeExpirationPeriodUnion = TypeAliasType(
+    "DocumentUpdateEnvelopeExpirationPeriodUnion",
+    Union[
+        DocumentUpdateEnvelopeExpirationPeriod2, DocumentUpdateEnvelopeExpirationPeriod1
+    ],
+)
+
+
+class DocumentUpdateSendAfterUnit(str, Enum):
+    DAY = "day"
+    WEEK = "week"
+    MONTH = "month"
+
+
+class DocumentUpdateSendAfter1TypedDict(TypedDict):
+    unit: DocumentUpdateSendAfterUnit
+    amount: int
+
+
+class DocumentUpdateSendAfter1(BaseModel):
+    unit: DocumentUpdateSendAfterUnit
+
+    amount: int
+
+
+class DocumentUpdateRepeatEvery2TypedDict(TypedDict):
+    disabled: Literal[True]
+
+
+class DocumentUpdateRepeatEvery2(BaseModel):
+    DISABLED: Annotated[
+        Annotated[Literal[True], AfterValidator(validate_const(True))],
+        pydantic.Field(alias="disabled"),
+    ] = True
+
+
+DocumentUpdateSendAfterUnionTypedDict = TypeAliasType(
+    "DocumentUpdateSendAfterUnionTypedDict",
+    Union[DocumentUpdateSendAfter2TypedDict, DocumentUpdateSendAfter1TypedDict],
+)
+
+
+DocumentUpdateSendAfterUnion = TypeAliasType(
+    "DocumentUpdateSendAfterUnion",
+    Union[DocumentUpdateSendAfter2, DocumentUpdateSendAfter1],
+)
+
+
+class DocumentUpdateRepeatEveryUnit(str, Enum):
+    DAY = "day"
+    WEEK = "week"
+    MONTH = "month"
+
+
+class DocumentUpdateRepeatEvery1TypedDict(TypedDict):
+    unit: DocumentUpdateRepeatEveryUnit
+    amount: int
+
+
+class DocumentUpdateRepeatEvery1(BaseModel):
+    unit: DocumentUpdateRepeatEveryUnit
+
+    amount: int
+
+
+DocumentUpdateRepeatEveryUnionTypedDict = TypeAliasType(
+    "DocumentUpdateRepeatEveryUnionTypedDict",
+    Union[DocumentUpdateRepeatEvery2TypedDict, DocumentUpdateRepeatEvery1TypedDict],
+)
+
+
+DocumentUpdateRepeatEveryUnion = TypeAliasType(
+    "DocumentUpdateRepeatEveryUnion",
+    Union[DocumentUpdateRepeatEvery2, DocumentUpdateRepeatEvery1],
+)
+
+
+class DocumentUpdateReminderSettingsTypedDict(TypedDict):
+    send_after: DocumentUpdateSendAfterUnionTypedDict
+    repeat_every: DocumentUpdateRepeatEveryUnionTypedDict
+
+
+class DocumentUpdateReminderSettings(BaseModel):
+    send_after: Annotated[
+        DocumentUpdateSendAfterUnion, pydantic.Field(alias="sendAfter")
+    ]
+
+    repeat_every: Annotated[
+        DocumentUpdateRepeatEveryUnion, pydantic.Field(alias="repeatEvery")
+    ]
 
 
 class DocumentUpdateMetaTypedDict(TypedDict):
@@ -240,6 +398,10 @@ class DocumentUpdateMetaTypedDict(TypedDict):
     email_id: NotRequired[Nullable[str]]
     email_reply_to: NotRequired[Nullable[str]]
     email_settings: NotRequired[Nullable[DocumentUpdateEmailSettingsTypedDict]]
+    envelope_expiration_period: NotRequired[
+        Nullable[DocumentUpdateEnvelopeExpirationPeriodUnionTypedDict]
+    ]
+    reminder_settings: NotRequired[Nullable[DocumentUpdateReminderSettingsTypedDict]]
 
 
 class DocumentUpdateMeta(BaseModel):
@@ -293,6 +455,16 @@ class DocumentUpdateMeta(BaseModel):
         pydantic.Field(alias="emailSettings"),
     ] = UNSET
 
+    envelope_expiration_period: Annotated[
+        OptionalNullable[DocumentUpdateEnvelopeExpirationPeriodUnion],
+        pydantic.Field(alias="envelopeExpirationPeriod"),
+    ] = UNSET
+
+    reminder_settings: Annotated[
+        OptionalNullable[DocumentUpdateReminderSettings],
+        pydantic.Field(alias="reminderSettings"),
+    ] = UNSET
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -312,15 +484,25 @@ class DocumentUpdateMeta(BaseModel):
                 "emailId",
                 "emailReplyTo",
                 "emailSettings",
+                "envelopeExpirationPeriod",
+                "reminderSettings",
             ]
         )
-        nullable_fields = set(["emailId", "emailReplyTo", "emailSettings"])
+        nullable_fields = set(
+            [
+                "emailId",
+                "emailReplyTo",
+                "emailSettings",
+                "envelopeExpirationPeriod",
+                "reminderSettings",
+            ]
+        )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -358,7 +540,7 @@ class DocumentUpdateRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -506,6 +688,7 @@ class DocumentUpdateStatus(str, Enum):
     PENDING = "PENDING"
     COMPLETED = "COMPLETED"
     REJECTED = "REJECTED"
+    CANCELLED = "CANCELLED"
 
 
 class DocumentUpdateSource(str, Enum):
@@ -651,7 +834,7 @@ class DocumentUpdateResponse(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -666,3 +849,45 @@ class DocumentUpdateResponse(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    DocumentUpdateData.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentUpdateEmailSettings.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentUpdateEnvelopeExpirationPeriod2.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentUpdateSendAfter2.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentUpdateRepeatEvery2.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentUpdateReminderSettings.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentUpdateMeta.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentUpdateRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentUpdateAuthOptions.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentUpdateResponse.model_rebuild()
+except NameError:
+    pass

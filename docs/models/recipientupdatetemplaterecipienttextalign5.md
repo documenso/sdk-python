@@ -1,5 +1,13 @@
 # RecipientUpdateTemplateRecipientTextAlign5
 
+## Example Usage
+
+```python
+from documenso_sdk.models import RecipientUpdateTemplateRecipientTextAlign5
+
+value = RecipientUpdateTemplateRecipientTextAlign5.LEFT
+```
+
 
 ## Values
 
