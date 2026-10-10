@@ -1,5 +1,13 @@
 # RecipientCreateDocumentRecipientsActionAuthRequest
 
+## Example Usage
+
+```python
+from documenso_sdk.models import RecipientCreateDocumentRecipientsActionAuthRequest
+
+value = RecipientCreateDocumentRecipientsActionAuthRequest.ACCOUNT
+```
+
 
 ## Values
 

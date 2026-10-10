@@ -1,5 +1,13 @@
 # DocumentCreateVerticalAlignText
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentCreateVerticalAlignText
+
+value = DocumentCreateVerticalAlignText.TOP
+```
+
 
 ## Values
 

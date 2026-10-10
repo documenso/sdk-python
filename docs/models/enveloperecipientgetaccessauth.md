@@ -1,5 +1,13 @@
 # EnvelopeRecipientGetAccessAuth
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeRecipientGetAccessAuth
+
+value = EnvelopeRecipientGetAccessAuth.ACCOUNT
+```
+
 
 ## Values
 

@@ -1,5 +1,13 @@
 # DocumentGetReadStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentGetReadStatus
+
+value = DocumentGetReadStatus.NOT_OPENED
+```
+
 
 ## Values
 

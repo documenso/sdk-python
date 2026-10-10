@@ -1,5 +1,13 @@
 # TemplateGetTemplateByIDFolderVisibility
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateGetTemplateByIDFolderVisibility
+
+value = TemplateGetTemplateByIDFolderVisibility.EVERYONE
+```
+
 
 ## Values
 

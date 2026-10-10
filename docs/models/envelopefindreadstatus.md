@@ -1,5 +1,13 @@
 # EnvelopeFindReadStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeFindReadStatus
+
+value = EnvelopeFindReadStatus.NOT_OPENED
+```
+
 
 ## Values
 
