@@ -1,5 +1,13 @@
 # DocumentGetDistributionMethod
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentGetDistributionMethod
+
+value = DocumentGetDistributionMethod.EMAIL
+```
+
 
 ## Values
 

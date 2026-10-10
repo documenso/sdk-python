@@ -170,3 +170,9 @@ class DocumentAttachmentCreateResponse(BaseModel):
     r"""Successful response"""
 
     id: str
+
+
+try:
+    DocumentAttachmentCreateRequest.model_rebuild()
+except NameError:
+    pass

@@ -1,5 +1,13 @@
 # EnvelopeRecipientGetVerticalAlign2
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeRecipientGetVerticalAlign2
+
+value = EnvelopeRecipientGetVerticalAlign2.TOP
+```
+
 
 ## Values
 

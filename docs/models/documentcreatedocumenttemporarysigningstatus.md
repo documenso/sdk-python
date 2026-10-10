@@ -1,5 +1,13 @@
 # DocumentCreateDocumentTemporarySigningStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentCreateDocumentTemporarySigningStatus
+
+value = DocumentCreateDocumentTemporarySigningStatus.NOT_SIGNED
+```
+
 
 ## Values
 

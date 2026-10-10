@@ -1,5 +1,13 @@
 # DocumentGetSendStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentGetSendStatus
+
+value = DocumentGetSendStatus.NOT_SENT
+```
+
 
 ## Values
 

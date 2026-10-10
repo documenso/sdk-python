@@ -1,5 +1,13 @@
 # DocumentFindDataSource
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentFindDataSource
+
+value = DocumentFindDataSource.DOCUMENT
+```
+
 
 ## Values
 

@@ -1,5 +1,13 @@
 # DocumentDistributeGlobalAccessAuth
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentDistributeGlobalAccessAuth
+
+value = DocumentDistributeGlobalAccessAuth.ACCOUNT
+```
+
 
 ## Values
 

@@ -1,5 +1,13 @@
 # TemplateCreateDocumentFromTemplateDocumentDataType
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateCreateDocumentFromTemplateDocumentDataType
+
+value = TemplateCreateDocumentFromTemplateDocumentDataType.S3_PATH
+```
+
 
 ## Values
 
