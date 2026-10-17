@@ -1,5 +1,13 @@
 # RecipientUpdateDocumentRecipientDirection2
 
+## Example Usage
+
+```python
+from documenso_sdk.models import RecipientUpdateDocumentRecipientDirection2
+
+value = RecipientUpdateDocumentRecipientDirection2.VERTICAL
+```
+
 
 ## Values
 

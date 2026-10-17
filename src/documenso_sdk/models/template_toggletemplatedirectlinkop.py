@@ -181,3 +181,13 @@ class TemplateToggleTemplateDirectLinkResponse(BaseModel):
     envelope_id: Annotated[str, pydantic.Field(alias="envelopeId")]
 
     template_id: Annotated[float, pydantic.Field(alias="templateId")]
+
+
+try:
+    TemplateToggleTemplateDirectLinkRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateToggleTemplateDirectLinkResponse.model_rebuild()
+except NameError:
+    pass

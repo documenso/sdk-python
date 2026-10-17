@@ -6,7 +6,7 @@ from documenso_sdk._hooks import HookContext
 from documenso_sdk.types import OptionalNullable, UNSET
 from documenso_sdk.utils import get_security_from_env
 from documenso_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Iterable, List, Mapping, Optional, Union
 
 
 class EnvelopesFields(BaseSDK):
@@ -77,9 +77,11 @@ class EnvelopesFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -187,9 +189,11 @@ class EnvelopesFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -235,8 +239,8 @@ class EnvelopesFields(BaseSDK):
         *,
         envelope_id: str,
         data: Union[
-            List[models.EnvelopeFieldCreateManyDataUnion],
-            List[models.EnvelopeFieldCreateManyDataUnionTypedDict],
+            Iterable[models.EnvelopeFieldCreateManyDataUnion1],
+            Iterable[models.EnvelopeFieldCreateManyDataUnion1TypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -267,7 +271,7 @@ class EnvelopesFields(BaseSDK):
         request = models.EnvelopeFieldCreateManyRequest(
             envelope_id=envelope_id,
             data=utils.get_pydantic_model(
-                data, List[models.EnvelopeFieldCreateManyDataUnion]
+                data, List[models.EnvelopeFieldCreateManyDataUnion1]
             ),
         )
 
@@ -308,9 +312,11 @@ class EnvelopesFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -357,8 +363,8 @@ class EnvelopesFields(BaseSDK):
         *,
         envelope_id: str,
         data: Union[
-            List[models.EnvelopeFieldCreateManyDataUnion],
-            List[models.EnvelopeFieldCreateManyDataUnionTypedDict],
+            Iterable[models.EnvelopeFieldCreateManyDataUnion1],
+            Iterable[models.EnvelopeFieldCreateManyDataUnion1TypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -389,7 +395,7 @@ class EnvelopesFields(BaseSDK):
         request = models.EnvelopeFieldCreateManyRequest(
             envelope_id=envelope_id,
             data=utils.get_pydantic_model(
-                data, List[models.EnvelopeFieldCreateManyDataUnion]
+                data, List[models.EnvelopeFieldCreateManyDataUnion1]
             ),
         )
 
@@ -430,9 +436,11 @@ class EnvelopesFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -479,8 +487,8 @@ class EnvelopesFields(BaseSDK):
         *,
         envelope_id: str,
         data: Union[
-            List[models.EnvelopeFieldUpdateManyDataUnion],
-            List[models.EnvelopeFieldUpdateManyDataUnionTypedDict],
+            Iterable[models.EnvelopeFieldUpdateManyDataUnion],
+            Iterable[models.EnvelopeFieldUpdateManyDataUnionTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -552,9 +560,11 @@ class EnvelopesFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -601,8 +611,8 @@ class EnvelopesFields(BaseSDK):
         *,
         envelope_id: str,
         data: Union[
-            List[models.EnvelopeFieldUpdateManyDataUnion],
-            List[models.EnvelopeFieldUpdateManyDataUnionTypedDict],
+            Iterable[models.EnvelopeFieldUpdateManyDataUnion],
+            Iterable[models.EnvelopeFieldUpdateManyDataUnionTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -674,9 +684,11 @@ class EnvelopesFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -788,9 +800,11 @@ class EnvelopesFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -896,9 +910,11 @@ class EnvelopesFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

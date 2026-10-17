@@ -1,5 +1,13 @@
 # EnvelopeCreateVerticalAlignNumber
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeCreateVerticalAlignNumber
+
+value = EnvelopeCreateVerticalAlignNumber.TOP
+```
+
 
 ## Values
 

@@ -1,5 +1,13 @@
 # TemplateFindTemplatesActionAuth
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateFindTemplatesActionAuth
+
+value = TemplateFindTemplatesActionAuth.ACCOUNT
+```
+
 
 ## Values
 

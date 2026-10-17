@@ -1,5 +1,13 @@
 # EnvelopeFieldGetTextAlign2
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeFieldGetTextAlign2
+
+value = EnvelopeFieldGetTextAlign2.LEFT
+```
+
 
 ## Values
 

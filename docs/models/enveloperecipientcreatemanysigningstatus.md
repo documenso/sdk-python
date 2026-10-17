@@ -1,5 +1,13 @@
 # EnvelopeRecipientCreateManySigningStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeRecipientCreateManySigningStatus
+
+value = EnvelopeRecipientCreateManySigningStatus.NOT_SIGNED
+```
+
 
 ## Values
 

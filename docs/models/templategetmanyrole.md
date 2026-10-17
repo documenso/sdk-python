@@ -1,5 +1,13 @@
 # TemplateGetManyRole
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateGetManyRole
+
+value = TemplateGetManyRole.CC
+```
+
 
 ## Values
 
