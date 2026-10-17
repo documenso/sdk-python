@@ -1,5 +1,13 @@
 # DocumentGetVisibility
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentGetVisibility
+
+value = DocumentGetVisibility.EVERYONE
+```
+
 
 ## Values
 

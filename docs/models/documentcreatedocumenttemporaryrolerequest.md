@@ -1,5 +1,13 @@
 # DocumentCreateDocumentTemporaryRoleRequest
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentCreateDocumentTemporaryRoleRequest
+
+value = DocumentCreateDocumentTemporaryRoleRequest.CC
+```
+
 
 ## Values
 

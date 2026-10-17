@@ -1,5 +1,13 @@
 # DocumentDocumentDataType
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentDocumentDataType
+
+value = DocumentDocumentDataType.S3_PATH
+```
+
 
 ## Values
 

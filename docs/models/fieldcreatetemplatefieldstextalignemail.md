@@ -1,5 +1,13 @@
 # FieldCreateTemplateFieldsTextAlignEmail
 
+## Example Usage
+
+```python
+from documenso_sdk.models import FieldCreateTemplateFieldsTextAlignEmail
+
+value = FieldCreateTemplateFieldsTextAlignEmail.LEFT
+```
+
 
 ## Values
 

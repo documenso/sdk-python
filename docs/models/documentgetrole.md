@@ -1,5 +1,13 @@
 # DocumentGetRole
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentGetRole
+
+value = DocumentGetRole.CC
+```
+
 
 ## Values
 

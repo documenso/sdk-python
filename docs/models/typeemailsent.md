@@ -1,5 +1,13 @@
 # TypeEmailSent
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TypeEmailSent
+
+value = TypeEmailSent.EMAIL_SENT
+```
+
 
 ## Values
 

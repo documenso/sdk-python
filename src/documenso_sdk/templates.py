@@ -10,7 +10,8 @@ from documenso_sdk.templates_recipients import TemplatesRecipients
 from documenso_sdk.types import OptionalNullable, UNSET
 from documenso_sdk.utils import get_security_from_env
 from documenso_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Dict, List, Mapping, Optional, Union
+from typing import Any, Dict, Iterable, List, Mapping, Optional, Union
+from typing_extensions import deprecated
 
 
 class Templates(BaseSDK):
@@ -36,6 +37,9 @@ class Templates(BaseSDK):
             self.sdk_configuration, parent_ref=self.parent_ref
         )
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def find(
         self,
         *,
@@ -51,7 +55,7 @@ class Templates(BaseSDK):
     ) -> models.TemplateFindTemplatesResponse:
         r"""Find templates
 
-        Find templates based on a search criteria
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Find templates based on a search criteria
 
         :param query: The search query.
         :param page: The pagination page number, starts at 1.
@@ -115,9 +119,11 @@ class Templates(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -162,6 +168,9 @@ class Templates(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def find_async(
         self,
         *,
@@ -177,7 +186,7 @@ class Templates(BaseSDK):
     ) -> models.TemplateFindTemplatesResponse:
         r"""Find templates
 
-        Find templates based on a search criteria
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Find templates based on a search criteria
 
         :param query: The search query.
         :param page: The pagination page number, starts at 1.
@@ -241,9 +250,11 @@ class Templates(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -288,6 +299,9 @@ class Templates(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def get(
         self,
         *,
@@ -298,6 +312,8 @@ class Templates(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TemplateGetTemplateByIDResponse:
         r"""Get template
+
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
 
         :param template_id:
         :param retries: Override the default retry configuration for this method
@@ -353,9 +369,11 @@ class Templates(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -402,6 +420,9 @@ class Templates(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def get_async(
         self,
         *,
@@ -412,6 +433,8 @@ class Templates(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TemplateGetTemplateByIDResponse:
         r"""Get template
+
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
 
         :param template_id:
         :param retries: Override the default retry configuration for this method
@@ -467,9 +490,11 @@ class Templates(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -516,6 +541,9 @@ class Templates(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def create(
         self,
         *,
@@ -534,7 +562,7 @@ class Templates(BaseSDK):
     ) -> models.TemplateCreateTemplateResponse:
         r"""Create template
 
-        Create a new template
+        Create a new template. Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
 
         :param payload:
         :param file:
@@ -597,9 +625,11 @@ class Templates(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -641,6 +671,9 @@ class Templates(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def create_async(
         self,
         *,
@@ -659,7 +692,7 @@ class Templates(BaseSDK):
     ) -> models.TemplateCreateTemplateResponse:
         r"""Create template
 
-        Create a new template
+        Create a new template. Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
 
         :param payload:
         :param file:
@@ -722,9 +755,11 @@ class Templates(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -766,6 +801,9 @@ class Templates(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def update(
         self,
         *,
@@ -789,6 +827,8 @@ class Templates(BaseSDK):
     ) -> models.TemplateUpdateTemplateResponse:
         r"""Update template
 
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
+
         :param template_id:
         :param data:
         :param meta:
@@ -854,9 +894,11 @@ class Templates(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -898,6 +940,9 @@ class Templates(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def update_async(
         self,
         *,
@@ -921,6 +966,8 @@ class Templates(BaseSDK):
     ) -> models.TemplateUpdateTemplateResponse:
         r"""Update template
 
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
+
         :param template_id:
         :param data:
         :param meta:
@@ -986,9 +1033,11 @@ class Templates(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1030,6 +1079,9 @@ class Templates(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def duplicate(
         self,
         *,
@@ -1041,6 +1093,8 @@ class Templates(BaseSDK):
     ) -> models.TemplateDuplicateTemplateResponse:
         r"""Duplicate template
 
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
+
         :param template_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1098,9 +1152,11 @@ class Templates(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1146,6 +1202,9 @@ class Templates(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def duplicate_async(
         self,
         *,
@@ -1157,6 +1216,8 @@ class Templates(BaseSDK):
     ) -> models.TemplateDuplicateTemplateResponse:
         r"""Duplicate template
 
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
+
         :param template_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1214,9 +1275,11 @@ class Templates(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1262,6 +1325,9 @@ class Templates(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def delete(
         self,
         *,
@@ -1272,6 +1338,8 @@ class Templates(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TemplateDeleteTemplateResponse:
         r"""Delete template
+
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
 
         :param template_id:
         :param retries: Override the default retry configuration for this method
@@ -1330,9 +1398,11 @@ class Templates(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1374,6 +1444,9 @@ class Templates(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def delete_async(
         self,
         *,
@@ -1384,6 +1457,8 @@ class Templates(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TemplateDeleteTemplateResponse:
         r"""Delete template
+
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
 
         :param template_id:
         :param retries: Override the default retry configuration for this method
@@ -1442,9 +1517,11 @@ class Templates(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1486,21 +1563,26 @@ class Templates(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def use(
         self,
         *,
         template_id: float,
         recipients: Union[
-            List[models.TemplateCreateDocumentFromTemplateRecipientRequest],
-            List[models.TemplateCreateDocumentFromTemplateRecipientRequestTypedDict],
+            Iterable[models.TemplateCreateDocumentFromTemplateRecipientRequest],
+            Iterable[
+                models.TemplateCreateDocumentFromTemplateRecipientRequestTypedDict
+            ],
         ],
         external_id: Optional[str] = None,
         distribute_document: Optional[bool] = None,
         custom_document_data_id: Optional[str] = None,
         custom_document_data: Optional[
             Union[
-                List[models.TemplateCreateDocumentFromTemplateCustomDocumentDatum],
-                List[
+                Iterable[models.TemplateCreateDocumentFromTemplateCustomDocumentDatum],
+                Iterable[
                     models.TemplateCreateDocumentFromTemplateCustomDocumentDatumTypedDict
                 ],
             ]
@@ -1508,8 +1590,8 @@ class Templates(BaseSDK):
         folder_id: Optional[str] = None,
         prefill_fields: Optional[
             Union[
-                List[models.TemplateCreateDocumentFromTemplatePrefillFieldUnion],
-                List[
+                Iterable[models.TemplateCreateDocumentFromTemplatePrefillFieldUnion],
+                Iterable[
                     models.TemplateCreateDocumentFromTemplatePrefillFieldUnionTypedDict
                 ],
             ]
@@ -1522,14 +1604,16 @@ class Templates(BaseSDK):
         ] = None,
         attachments: Optional[
             Union[
-                List[models.TemplateCreateDocumentFromTemplateAttachment],
-                List[models.TemplateCreateDocumentFromTemplateAttachmentTypedDict],
+                Iterable[models.TemplateCreateDocumentFromTemplateAttachment],
+                Iterable[models.TemplateCreateDocumentFromTemplateAttachmentTypedDict],
             ]
         ] = None,
         form_values: Optional[
             Union[
-                Dict[str, models.TemplateCreateDocumentFromTemplateFormValuesRequest],
-                Dict[
+                Mapping[
+                    str, models.TemplateCreateDocumentFromTemplateFormValuesRequest
+                ],
+                Mapping[
                     str,
                     models.TemplateCreateDocumentFromTemplateFormValuesRequestTypedDict,
                 ],
@@ -1542,7 +1626,7 @@ class Templates(BaseSDK):
     ) -> models.TemplateCreateDocumentFromTemplateResponse:
         r"""Use template
 
-        Use the template to create a document
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Use the template to create a document
 
         :param template_id:
         :param recipients:
@@ -1599,7 +1683,14 @@ class Templates(BaseSDK):
                 attachments,
                 Optional[List[models.TemplateCreateDocumentFromTemplateAttachment]],
             ),
-            form_values=form_values,
+            form_values=utils.unmarshal(
+                form_values,
+                Optional[
+                    Dict[
+                        str, models.TemplateCreateDocumentFromTemplateFormValuesRequest
+                    ]
+                ],
+            ),
         )
 
         req = self._build_request(
@@ -1643,9 +1734,11 @@ class Templates(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1692,21 +1785,26 @@ class Templates(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def use_async(
         self,
         *,
         template_id: float,
         recipients: Union[
-            List[models.TemplateCreateDocumentFromTemplateRecipientRequest],
-            List[models.TemplateCreateDocumentFromTemplateRecipientRequestTypedDict],
+            Iterable[models.TemplateCreateDocumentFromTemplateRecipientRequest],
+            Iterable[
+                models.TemplateCreateDocumentFromTemplateRecipientRequestTypedDict
+            ],
         ],
         external_id: Optional[str] = None,
         distribute_document: Optional[bool] = None,
         custom_document_data_id: Optional[str] = None,
         custom_document_data: Optional[
             Union[
-                List[models.TemplateCreateDocumentFromTemplateCustomDocumentDatum],
-                List[
+                Iterable[models.TemplateCreateDocumentFromTemplateCustomDocumentDatum],
+                Iterable[
                     models.TemplateCreateDocumentFromTemplateCustomDocumentDatumTypedDict
                 ],
             ]
@@ -1714,8 +1812,8 @@ class Templates(BaseSDK):
         folder_id: Optional[str] = None,
         prefill_fields: Optional[
             Union[
-                List[models.TemplateCreateDocumentFromTemplatePrefillFieldUnion],
-                List[
+                Iterable[models.TemplateCreateDocumentFromTemplatePrefillFieldUnion],
+                Iterable[
                     models.TemplateCreateDocumentFromTemplatePrefillFieldUnionTypedDict
                 ],
             ]
@@ -1728,14 +1826,16 @@ class Templates(BaseSDK):
         ] = None,
         attachments: Optional[
             Union[
-                List[models.TemplateCreateDocumentFromTemplateAttachment],
-                List[models.TemplateCreateDocumentFromTemplateAttachmentTypedDict],
+                Iterable[models.TemplateCreateDocumentFromTemplateAttachment],
+                Iterable[models.TemplateCreateDocumentFromTemplateAttachmentTypedDict],
             ]
         ] = None,
         form_values: Optional[
             Union[
-                Dict[str, models.TemplateCreateDocumentFromTemplateFormValuesRequest],
-                Dict[
+                Mapping[
+                    str, models.TemplateCreateDocumentFromTemplateFormValuesRequest
+                ],
+                Mapping[
                     str,
                     models.TemplateCreateDocumentFromTemplateFormValuesRequestTypedDict,
                 ],
@@ -1748,7 +1848,7 @@ class Templates(BaseSDK):
     ) -> models.TemplateCreateDocumentFromTemplateResponse:
         r"""Use template
 
-        Use the template to create a document
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Use the template to create a document
 
         :param template_id:
         :param recipients:
@@ -1805,7 +1905,14 @@ class Templates(BaseSDK):
                 attachments,
                 Optional[List[models.TemplateCreateDocumentFromTemplateAttachment]],
             ),
-            form_values=form_values,
+            form_values=utils.unmarshal(
+                form_values,
+                Optional[
+                    Dict[
+                        str, models.TemplateCreateDocumentFromTemplateFormValuesRequest
+                    ]
+                ],
+            ),
         )
 
         req = self._build_request_async(
@@ -1849,9 +1956,11 @@ class Templates(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
