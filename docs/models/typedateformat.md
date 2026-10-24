@@ -1,5 +1,13 @@
 # TypeDateFormat
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TypeDateFormat
+
+value = TypeDateFormat.DATE_FORMAT
+```
+
 
 ## Values
 

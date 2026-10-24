@@ -6,10 +6,14 @@ from documenso_sdk._hooks import HookContext
 from documenso_sdk.types import OptionalNullable, UNSET
 from documenso_sdk.utils import get_security_from_env
 from documenso_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Iterable, List, Mapping, Optional, Union
+from typing_extensions import deprecated
 
 
 class DocumentsFields(BaseSDK):
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def get(
         self,
         *,
@@ -21,7 +25,7 @@ class DocumentsFields(BaseSDK):
     ) -> models.FieldGetDocumentFieldResponse:
         r"""Get document field
 
-        Returns a single field. If you want to retrieve all the fields for a document, use the \"Get Document\" endpoint.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Returns a single field. If you want to retrieve all the fields for a document, use the \"Get Document\" endpoint.
 
         :param field_id:
         :param retries: Override the default retry configuration for this method
@@ -77,9 +81,11 @@ class DocumentsFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -124,6 +130,9 @@ class DocumentsFields(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def get_async(
         self,
         *,
@@ -135,7 +144,7 @@ class DocumentsFields(BaseSDK):
     ) -> models.FieldGetDocumentFieldResponse:
         r"""Get document field
 
-        Returns a single field. If you want to retrieve all the fields for a document, use the \"Get Document\" endpoint.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Returns a single field. If you want to retrieve all the fields for a document, use the \"Get Document\" endpoint.
 
         :param field_id:
         :param retries: Override the default retry configuration for this method
@@ -191,9 +200,11 @@ class DocumentsFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -238,6 +249,9 @@ class DocumentsFields(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def create(
         self,
         *,
@@ -253,7 +267,7 @@ class DocumentsFields(BaseSDK):
     ) -> models.FieldCreateDocumentFieldResponse:
         r"""Create document field
 
-        Create a single field for a document.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Create a single field for a document.
 
         :param document_id:
         :param field:
@@ -316,9 +330,11 @@ class DocumentsFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -362,6 +378,9 @@ class DocumentsFields(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def create_async(
         self,
         *,
@@ -377,7 +396,7 @@ class DocumentsFields(BaseSDK):
     ) -> models.FieldCreateDocumentFieldResponse:
         r"""Create document field
 
-        Create a single field for a document.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Create a single field for a document.
 
         :param document_id:
         :param field:
@@ -440,9 +459,11 @@ class DocumentsFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -486,13 +507,16 @@ class DocumentsFields(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def create_many(
         self,
         *,
         document_id: float,
         fields: Union[
-            List[models.FieldCreateDocumentFieldsFieldUnion],
-            List[models.FieldCreateDocumentFieldsFieldUnionTypedDict],
+            Iterable[models.FieldCreateDocumentFieldsFieldUnion],
+            Iterable[models.FieldCreateDocumentFieldsFieldUnionTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -501,7 +525,7 @@ class DocumentsFields(BaseSDK):
     ) -> models.FieldCreateDocumentFieldsResponse:
         r"""Create document fields
 
-        Create multiple fields for a document.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Create multiple fields for a document.
 
         :param document_id:
         :param fields:
@@ -564,9 +588,11 @@ class DocumentsFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -612,13 +638,16 @@ class DocumentsFields(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def create_many_async(
         self,
         *,
         document_id: float,
         fields: Union[
-            List[models.FieldCreateDocumentFieldsFieldUnion],
-            List[models.FieldCreateDocumentFieldsFieldUnionTypedDict],
+            Iterable[models.FieldCreateDocumentFieldsFieldUnion],
+            Iterable[models.FieldCreateDocumentFieldsFieldUnionTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -627,7 +656,7 @@ class DocumentsFields(BaseSDK):
     ) -> models.FieldCreateDocumentFieldsResponse:
         r"""Create document fields
 
-        Create multiple fields for a document.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Create multiple fields for a document.
 
         :param document_id:
         :param fields:
@@ -690,9 +719,11 @@ class DocumentsFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -738,6 +769,9 @@ class DocumentsFields(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def update(
         self,
         *,
@@ -753,7 +787,7 @@ class DocumentsFields(BaseSDK):
     ) -> models.FieldUpdateDocumentFieldResponse:
         r"""Update document field
 
-        Update a single field for a document.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Update a single field for a document.
 
         :param document_id:
         :param field:
@@ -816,9 +850,11 @@ class DocumentsFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -862,6 +898,9 @@ class DocumentsFields(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def update_async(
         self,
         *,
@@ -877,7 +916,7 @@ class DocumentsFields(BaseSDK):
     ) -> models.FieldUpdateDocumentFieldResponse:
         r"""Update document field
 
-        Update a single field for a document.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Update a single field for a document.
 
         :param document_id:
         :param field:
@@ -940,9 +979,11 @@ class DocumentsFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -986,13 +1027,16 @@ class DocumentsFields(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def update_many(
         self,
         *,
         document_id: float,
         fields: Union[
-            List[models.FieldUpdateDocumentFieldsFieldUnion],
-            List[models.FieldUpdateDocumentFieldsFieldUnionTypedDict],
+            Iterable[models.FieldUpdateDocumentFieldsFieldUnion],
+            Iterable[models.FieldUpdateDocumentFieldsFieldUnionTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1001,7 +1045,7 @@ class DocumentsFields(BaseSDK):
     ) -> models.FieldUpdateDocumentFieldsResponse:
         r"""Update document fields
 
-        Update multiple fields for a document.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Update multiple fields for a document.
 
         :param document_id:
         :param fields:
@@ -1064,9 +1108,11 @@ class DocumentsFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1112,13 +1158,16 @@ class DocumentsFields(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def update_many_async(
         self,
         *,
         document_id: float,
         fields: Union[
-            List[models.FieldUpdateDocumentFieldsFieldUnion],
-            List[models.FieldUpdateDocumentFieldsFieldUnionTypedDict],
+            Iterable[models.FieldUpdateDocumentFieldsFieldUnion],
+            Iterable[models.FieldUpdateDocumentFieldsFieldUnionTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1127,7 +1176,7 @@ class DocumentsFields(BaseSDK):
     ) -> models.FieldUpdateDocumentFieldsResponse:
         r"""Update document fields
 
-        Update multiple fields for a document.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Update multiple fields for a document.
 
         :param document_id:
         :param fields:
@@ -1190,9 +1239,11 @@ class DocumentsFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1238,6 +1289,9 @@ class DocumentsFields(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def delete(
         self,
         *,
@@ -1248,6 +1302,8 @@ class DocumentsFields(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.FieldDeleteDocumentFieldResponse:
         r"""Delete document field
+
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
 
         :param field_id:
         :param retries: Override the default retry configuration for this method
@@ -1306,9 +1362,11 @@ class DocumentsFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1352,6 +1410,9 @@ class DocumentsFields(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def delete_async(
         self,
         *,
@@ -1362,6 +1423,8 @@ class DocumentsFields(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.FieldDeleteDocumentFieldResponse:
         r"""Delete document field
+
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
 
         :param field_id:
         :param retries: Override the default retry configuration for this method
@@ -1420,9 +1483,11 @@ class DocumentsFields(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Document Fields"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

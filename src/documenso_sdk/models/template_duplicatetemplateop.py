@@ -151,6 +151,7 @@ class TemplateDuplicateTemplateBadRequestError(DocumensoError):
 class TemplateDuplicateTemplateType(str, Enum):
     PUBLIC = "PUBLIC"
     PRIVATE = "PRIVATE"
+    ORGANISATION = "ORGANISATION"
 
 
 class TemplateDuplicateTemplateVisibility(str, Enum):
@@ -260,7 +261,7 @@ class TemplateDuplicateTemplateResponse(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -275,3 +276,17 @@ class TemplateDuplicateTemplateResponse(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    TemplateDuplicateTemplateRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateDuplicateTemplateAuthOptions.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateDuplicateTemplateResponse.model_rebuild()
+except NameError:
+    pass

@@ -1,5 +1,13 @@
 # TemplateGetTemplateByIDReadStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateGetTemplateByIDReadStatus
+
+value = TemplateGetTemplateByIDReadStatus.NOT_OPENED
+```
+
 
 ## Values
 

@@ -1,5 +1,13 @@
 # DocumentGetSource
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentGetSource
+
+value = DocumentGetSource.DOCUMENT
+```
+
 
 ## Values
 

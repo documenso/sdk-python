@@ -87,7 +87,7 @@ class EnvelopeRecipientCreateManyDataRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -301,6 +301,8 @@ class EnvelopeRecipientCreateManyDataResponseTypedDict(TypedDict):
     token: str
     document_deleted_at: Nullable[str]
     expired: Nullable[str]
+    expires_at: Nullable[str]
+    expiration_notified_at: Nullable[str]
     signed_at: Nullable[str]
     auth_options: Nullable[EnvelopeRecipientCreateManyAuthOptionsTypedDict]
     signing_order: Nullable[float]
@@ -338,6 +340,12 @@ class EnvelopeRecipientCreateManyDataResponse(BaseModel):
 
     expired: Nullable[str]
 
+    expires_at: Annotated[Nullable[str], pydantic.Field(alias="expiresAt")]
+
+    expiration_notified_at: Annotated[
+        Nullable[str], pydantic.Field(alias="expirationNotifiedAt")
+    ]
+
     signed_at: Annotated[Nullable[str], pydantic.Field(alias="signedAt")]
 
     auth_options: Annotated[
@@ -356,7 +364,7 @@ class EnvelopeRecipientCreateManyDataResponse(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 m[k] = val
@@ -374,3 +382,21 @@ class EnvelopeRecipientCreateManyResponse(BaseModel):
     r"""Successful response"""
 
     data: List[EnvelopeRecipientCreateManyDataResponse]
+
+
+try:
+    EnvelopeRecipientCreateManyDataRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeRecipientCreateManyRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeRecipientCreateManyAuthOptions.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeRecipientCreateManyDataResponse.model_rebuild()
+except NameError:
+    pass

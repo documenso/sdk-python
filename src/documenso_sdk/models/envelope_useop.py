@@ -3,14 +3,26 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 from documenso_sdk.models import DocumensoError
-from documenso_sdk.types import BaseModel, Nullable, UNSET_SENTINEL
-from documenso_sdk.utils import FieldMetadata, MultipartFormMetadata, get_discriminator
+from documenso_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
+from documenso_sdk.utils import (
+    FieldMetadata,
+    MultipartFormMetadata,
+    get_discriminator,
+    validate_const,
+)
 from enum import Enum
 import httpx
 import io
 import pydantic
 from pydantic import Discriminator, Tag, model_serializer
-from typing import Dict, IO, List, Optional, Union
+from pydantic.functional_validators import AfterValidator
+from typing import Dict, IO, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
@@ -54,7 +66,7 @@ class EnvelopeUsePayloadRecipient(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -107,7 +119,7 @@ class EnvelopeUsePrefillFieldDate(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -144,7 +156,7 @@ class EnvelopeUsePrefillFieldDropdown(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -181,7 +193,7 @@ class EnvelopeUsePrefillFieldCheckbox(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -218,7 +230,7 @@ class EnvelopeUsePrefillFieldRadio(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -258,7 +270,7 @@ class EnvelopeUsePrefillFieldNumber(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -298,7 +310,7 @@ class EnvelopeUsePrefillFieldText(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -337,12 +349,15 @@ class EnvelopeUseDateFormat(str, Enum):
     YYYY_M_MDD_HH_MM_A = "yyyy-MM-dd hh:mm a"
     YYYY_M_MDD = "yyyy-MM-dd"
     DD_MM_SLASH_YYYY = "dd/MM/yyyy"
+    DD_MM_DASH_YYYY = "dd-MM-yyyy"
     MM_DD_SLASH_YYYY = "MM/dd/yyyy"
     YY_M_MDD = "yy-MM-dd"
     MMMM_DD_COMMA_YYYY = "MMMM dd, yyyy"
     EEEE_MMMM_DD_COMMA_YYYY = "EEEE, MMMM dd, yyyy"
     DD_MM_SLASH_YYYY_HH_MM_A = "dd/MM/yyyy hh:mm a"
     DD_MM_SLASH_YYYY_H_HMM = "dd/MM/yyyy HH:mm"
+    DD_MM_DASH_YYYY_HH_MM_A = "dd-MM-yyyy hh:mm a"
+    DD_MM_DASH_YYYY_H_HMM = "dd-MM-yyyy HH:mm"
     MM_DD_SLASH_YYYY_HH_MM_A = "MM/dd/yyyy hh:mm a"
     MM_DD_SLASH_YYYY_H_HMM = "MM/dd/yyyy HH:mm"
     DD_DOT_MM_DOT_YYYY = "dd.MM.yyyy"
@@ -371,6 +386,8 @@ class EnvelopeUseEmailSettingsTypedDict(TypedDict):
     document_completed: NotRequired[bool]
     document_deleted: NotRequired[bool]
     owner_document_completed: NotRequired[bool]
+    owner_recipient_expired: NotRequired[bool]
+    owner_document_created: NotRequired[bool]
 
 
 class EnvelopeUseEmailSettings(BaseModel):
@@ -402,6 +419,14 @@ class EnvelopeUseEmailSettings(BaseModel):
         Optional[bool], pydantic.Field(alias="ownerDocumentCompleted")
     ] = True
 
+    owner_recipient_expired: Annotated[
+        Optional[bool], pydantic.Field(alias="ownerRecipientExpired")
+    ] = True
+
+    owner_document_created: Annotated[
+        Optional[bool], pydantic.Field(alias="ownerDocumentCreated")
+    ] = True
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -413,6 +438,8 @@ class EnvelopeUseEmailSettings(BaseModel):
                 "documentCompleted",
                 "documentDeleted",
                 "ownerDocumentCompleted",
+                "ownerRecipientExpired",
+                "ownerDocumentCreated",
             ]
         )
         serialized = handler(self)
@@ -420,7 +447,7 @@ class EnvelopeUseEmailSettings(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -443,6 +470,50 @@ class EnvelopeUseLanguage(str, Enum):
     ZH = "zh"
 
 
+class EnvelopeUseEnvelopeExpirationPeriod2TypedDict(TypedDict):
+    disabled: Literal[True]
+
+
+class EnvelopeUseEnvelopeExpirationPeriod2(BaseModel):
+    DISABLED: Annotated[
+        Annotated[Literal[True], AfterValidator(validate_const(True))],
+        pydantic.Field(alias="disabled"),
+    ] = True
+
+
+class EnvelopeUseUnit(str, Enum):
+    DAY = "day"
+    WEEK = "week"
+    MONTH = "month"
+    YEAR = "year"
+
+
+class EnvelopeUseEnvelopeExpirationPeriod1TypedDict(TypedDict):
+    unit: EnvelopeUseUnit
+    amount: int
+
+
+class EnvelopeUseEnvelopeExpirationPeriod1(BaseModel):
+    unit: EnvelopeUseUnit
+
+    amount: int
+
+
+EnvelopeUseEnvelopeExpirationPeriodUnionTypedDict = TypeAliasType(
+    "EnvelopeUseEnvelopeExpirationPeriodUnionTypedDict",
+    Union[
+        EnvelopeUseEnvelopeExpirationPeriod2TypedDict,
+        EnvelopeUseEnvelopeExpirationPeriod1TypedDict,
+    ],
+)
+
+
+EnvelopeUseEnvelopeExpirationPeriodUnion = TypeAliasType(
+    "EnvelopeUseEnvelopeExpirationPeriodUnion",
+    Union[EnvelopeUseEnvelopeExpirationPeriod2, EnvelopeUseEnvelopeExpirationPeriod1],
+)
+
+
 class EnvelopeUseOverrideTypedDict(TypedDict):
     title: NotRequired[str]
     subject: NotRequired[str]
@@ -457,6 +528,9 @@ class EnvelopeUseOverrideTypedDict(TypedDict):
     upload_signature_enabled: NotRequired[bool]
     draw_signature_enabled: NotRequired[bool]
     allow_dictate_next_signer: NotRequired[bool]
+    envelope_expiration_period: NotRequired[
+        Nullable[EnvelopeUseEnvelopeExpirationPeriodUnionTypedDict]
+    ]
 
 
 class EnvelopeUseOverride(BaseModel):
@@ -501,6 +575,11 @@ class EnvelopeUseOverride(BaseModel):
         Optional[bool], pydantic.Field(alias="allowDictateNextSigner")
     ] = None
 
+    envelope_expiration_period: Annotated[
+        OptionalNullable[EnvelopeUseEnvelopeExpirationPeriodUnion],
+        pydantic.Field(alias="envelopeExpirationPeriod"),
+    ] = UNSET
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -518,17 +597,27 @@ class EnvelopeUseOverride(BaseModel):
                 "uploadSignatureEnabled",
                 "drawSignatureEnabled",
                 "allowDictateNextSigner",
+                "envelopeExpirationPeriod",
             ]
         )
+        nullable_fields = set(["envelopeExpirationPeriod"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m
@@ -559,7 +648,7 @@ class EnvelopeUseAttachment(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -640,7 +729,7 @@ class EnvelopeUsePayload(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -651,7 +740,7 @@ class EnvelopeUsePayload(BaseModel):
 
 class EnvelopeUseFileTypedDict(TypedDict):
     file_name: str
-    content: Union[bytes, IO[bytes], io.BufferedReader]
+    content: Union[bytes, IO[bytes], io.IOBase]
     content_type: NotRequired[str]
 
 
@@ -661,7 +750,7 @@ class EnvelopeUseFile(BaseModel):
     ]
 
     content: Annotated[
-        Union[bytes, IO[bytes], io.BufferedReader],
+        Union[bytes, IO[bytes], io.IOBase],
         pydantic.Field(alias=""),
         FieldMetadata(multipart=MultipartFormMetadata(content=True)),
     ]
@@ -680,7 +769,7 @@ class EnvelopeUseFile(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -712,7 +801,7 @@ class EnvelopeUseRequest(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -889,7 +978,7 @@ class EnvelopeUseRecipientResponse(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 m[k] = val
@@ -910,3 +999,33 @@ class EnvelopeUseResponse(BaseModel):
     id: str
 
     recipients: List[EnvelopeUseRecipientResponse]
+
+
+try:
+    EnvelopeUsePayloadRecipient.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeUseCustomDocumentDatum.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeUseEmailSettings.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeUseEnvelopeExpirationPeriod2.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeUseOverride.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeUsePayload.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeUseRecipientResponse.model_rebuild()
+except NameError:
+    pass
