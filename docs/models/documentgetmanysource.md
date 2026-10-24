@@ -1,5 +1,13 @@
 # DocumentGetManySource
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentGetManySource
+
+value = DocumentGetManySource.DOCUMENT
+```
+
 
 ## Values
 

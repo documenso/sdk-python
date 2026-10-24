@@ -1,5 +1,13 @@
 # DocumentDistributeSource
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentDistributeSource
+
+value = DocumentDistributeSource.DOCUMENT
+```
+
 
 ## Values
 

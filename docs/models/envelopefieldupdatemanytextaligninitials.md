@@ -1,5 +1,13 @@
 # EnvelopeFieldUpdateManyTextAlignInitials
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeFieldUpdateManyTextAlignInitials
+
+value = EnvelopeFieldUpdateManyTextAlignInitials.LEFT
+```
+
 
 ## Values
 

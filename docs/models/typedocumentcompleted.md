@@ -1,5 +1,13 @@
 # TypeDocumentCompleted
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TypeDocumentCompleted
+
+value = TypeDocumentCompleted.DOCUMENT_COMPLETED
+```
+
 
 ## Values
 

@@ -23,7 +23,7 @@ with Documenso(
     api_key=os.getenv("DOCUMENSO_API_KEY", ""),
 ) as documenso:
 
-    res = documenso.embedding.embedding_presign_create_embedding_presign_token(expires_in=60)
+    res = documenso.embedding.embedding_presign_create_embedding_presign_token(expires_in=60.0)
 
     # Handle response
     print(res)

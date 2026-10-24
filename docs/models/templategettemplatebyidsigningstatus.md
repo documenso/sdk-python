@@ -1,5 +1,13 @@
 # TemplateGetTemplateByIDSigningStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateGetTemplateByIDSigningStatus
+
+value = TemplateGetTemplateByIDSigningStatus.NOT_SIGNED
+```
+
 
 ## Values
 
