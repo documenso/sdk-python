@@ -3,7 +3,12 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 from documenso_sdk.models import DocumensoError
-from documenso_sdk.types import BaseModel, UNSET_SENTINEL
+from documenso_sdk.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
 from documenso_sdk.utils import FieldMetadata, PathParamMetadata, QueryParamMetadata
 from enum import Enum
 import httpx
@@ -42,14 +47,20 @@ class DocumentDownloadBetaRequest(BaseModel):
     r"""The version of the document to download. \"signed\" returns the completed document with signatures, \"original\" returns the original uploaded document."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["version"])
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -234,3 +245,9 @@ class DocumentDownloadBetaResponse(BaseModel):
     filename: str
 
     content_type: Annotated[str, pydantic.Field(alias="contentType")]
+
+
+try:
+    DocumentDownloadBetaResponse.model_rebuild()
+except NameError:
+    pass

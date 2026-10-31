@@ -1,5 +1,13 @@
 # TemplateCreateDocumentFromTemplateVisibility
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateCreateDocumentFromTemplateVisibility
+
+value = TemplateCreateDocumentFromTemplateVisibility.EVERYONE
+```
+
 
 ## Values
 

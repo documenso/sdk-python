@@ -9,6 +9,8 @@ from documenso_sdk.types import (
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
 )
 from documenso_sdk.utils import get_discriminator
 from enum import Enum
@@ -74,16 +76,22 @@ class RecipientUpdateTemplateRecipientsRecipientRequest(BaseModel):
     ] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             ["email", "name", "role", "signingOrder", "accessAuth", "actionAuth"]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -301,6 +309,13 @@ class RecipientUpdateTemplateRecipientsType(str, Enum):
     DROPDOWN = "DROPDOWN"
 
 
+class RecipientUpdateTemplateRecipientsOverflow10(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
+
+
 class RecipientUpdateTemplateRecipientsTypeDropdown(str, Enum):
     DROPDOWN = "dropdown"
 
@@ -320,6 +335,7 @@ class RecipientUpdateTemplateRecipientsFieldMetaDropdownTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[RecipientUpdateTemplateRecipientsOverflow10]
     values: NotRequired[List[RecipientUpdateTemplateRecipientsValue3TypedDict]]
     default_value: NotRequired[str]
 
@@ -335,13 +351,18 @@ class RecipientUpdateTemplateRecipientsFieldMetaDropdown(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12.0
+
+    overflow: Optional[RecipientUpdateTemplateRecipientsOverflow10] = None
 
     values: Optional[List[RecipientUpdateTemplateRecipientsValue3]] = None
 
     default_value: Annotated[Optional[str], pydantic.Field(alias="defaultValue")] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -350,22 +371,33 @@ class RecipientUpdateTemplateRecipientsFieldMetaDropdown(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "values",
                 "defaultValue",
             ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class RecipientUpdateTemplateRecipientsOverflow9(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class RecipientUpdateTemplateRecipientsTypeCheckbox(str, Enum):
@@ -398,6 +430,7 @@ class RecipientUpdateTemplateRecipientsFieldMetaCheckboxTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[RecipientUpdateTemplateRecipientsOverflow9]
     values: NotRequired[List[RecipientUpdateTemplateRecipientsValue2TypedDict]]
     validation_rule: NotRequired[str]
     validation_length: NotRequired[float]
@@ -415,7 +448,9 @@ class RecipientUpdateTemplateRecipientsFieldMetaCheckbox(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12.0
+
+    overflow: Optional[RecipientUpdateTemplateRecipientsOverflow9] = None
 
     values: Optional[List[RecipientUpdateTemplateRecipientsValue2]] = None
 
@@ -432,6 +467,9 @@ class RecipientUpdateTemplateRecipientsFieldMetaCheckbox(BaseModel):
     )
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -440,24 +478,35 @@ class RecipientUpdateTemplateRecipientsFieldMetaCheckbox(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "values",
                 "validationRule",
                 "validationLength",
                 "direction",
             ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class RecipientUpdateTemplateRecipientsOverflow8(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class RecipientUpdateTemplateRecipientsTypeRadio(str, Enum):
@@ -490,6 +539,7 @@ class RecipientUpdateTemplateRecipientsFieldMetaRadioTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[RecipientUpdateTemplateRecipientsOverflow8]
     values: NotRequired[List[RecipientUpdateTemplateRecipientsValue1TypedDict]]
     direction: NotRequired[RecipientUpdateTemplateRecipientsDirection1]
 
@@ -505,7 +555,9 @@ class RecipientUpdateTemplateRecipientsFieldMetaRadio(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12.0
+
+    overflow: Optional[RecipientUpdateTemplateRecipientsOverflow8] = None
 
     values: Optional[List[RecipientUpdateTemplateRecipientsValue1]] = None
 
@@ -514,6 +566,9 @@ class RecipientUpdateTemplateRecipientsFieldMetaRadio(BaseModel):
     )
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -522,22 +577,33 @@ class RecipientUpdateTemplateRecipientsFieldMetaRadio(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "values",
                 "direction",
             ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class RecipientUpdateTemplateRecipientsOverflow7(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class RecipientUpdateTemplateRecipientsTypeNumber(str, Enum):
@@ -563,6 +629,7 @@ class RecipientUpdateTemplateRecipientsFieldMetaNumberTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[RecipientUpdateTemplateRecipientsOverflow7]
     number_format: NotRequired[Nullable[str]]
     value: NotRequired[str]
     min_value: NotRequired[Nullable[float]]
@@ -586,7 +653,9 @@ class RecipientUpdateTemplateRecipientsFieldMetaNumber(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12.0
+
+    overflow: Optional[RecipientUpdateTemplateRecipientsOverflow7] = None
 
     number_format: Annotated[
         OptionalNullable[str], pydantic.Field(alias="numberFormat")
@@ -621,6 +690,9 @@ class RecipientUpdateTemplateRecipientsFieldMetaNumber(BaseModel):
     ] = UNSET
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -629,6 +701,7 @@ class RecipientUpdateTemplateRecipientsFieldMetaNumber(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "numberFormat",
                 "value",
                 "minValue",
@@ -649,12 +722,15 @@ class RecipientUpdateTemplateRecipientsFieldMetaNumber(BaseModel):
                 "verticalAlign",
             ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -669,6 +745,13 @@ class RecipientUpdateTemplateRecipientsFieldMetaNumber(BaseModel):
                     m[k] = val
 
         return m
+
+
+class RecipientUpdateTemplateRecipientsOverflow6(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class RecipientUpdateTemplateRecipientsTypeText(str, Enum):
@@ -694,6 +777,7 @@ class RecipientUpdateTemplateRecipientsFieldMetaTextTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[RecipientUpdateTemplateRecipientsOverflow6]
     text: NotRequired[str]
     character_limit: NotRequired[float]
     text_align: NotRequired[RecipientUpdateTemplateRecipientsTextAlign5]
@@ -715,7 +799,9 @@ class RecipientUpdateTemplateRecipientsFieldMetaText(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12.0
+
+    overflow: Optional[RecipientUpdateTemplateRecipientsOverflow6] = None
 
     text: Optional[str] = None
 
@@ -742,6 +828,9 @@ class RecipientUpdateTemplateRecipientsFieldMetaText(BaseModel):
     ] = UNSET
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -750,6 +839,7 @@ class RecipientUpdateTemplateRecipientsFieldMetaText(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "text",
                 "characterLimit",
                 "textAlign",
@@ -759,12 +849,15 @@ class RecipientUpdateTemplateRecipientsFieldMetaText(BaseModel):
             ]
         )
         nullable_fields = set(["lineHeight", "letterSpacing", "verticalAlign"])
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -779,6 +872,13 @@ class RecipientUpdateTemplateRecipientsFieldMetaText(BaseModel):
                     m[k] = val
 
         return m
+
+
+class RecipientUpdateTemplateRecipientsOverflow5(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class RecipientUpdateTemplateRecipientsTypeDate(str, Enum):
@@ -798,6 +898,7 @@ class RecipientUpdateTemplateRecipientsFieldMetaDateTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[RecipientUpdateTemplateRecipientsOverflow5]
     text_align: NotRequired[RecipientUpdateTemplateRecipientsTextAlign4]
 
 
@@ -812,7 +913,11 @@ class RecipientUpdateTemplateRecipientsFieldMetaDate(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12.0
+
+    overflow: Optional[RecipientUpdateTemplateRecipientsOverflow5] = (
+        RecipientUpdateTemplateRecipientsOverflow5.AUTO
+    )
 
     text_align: Annotated[
         Optional[RecipientUpdateTemplateRecipientsTextAlign4],
@@ -820,22 +925,43 @@ class RecipientUpdateTemplateRecipientsFieldMetaDate(BaseModel):
     ] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class RecipientUpdateTemplateRecipientsOverflow4(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class RecipientUpdateTemplateRecipientsTypeEmail(str, Enum):
@@ -855,6 +981,7 @@ class RecipientUpdateTemplateRecipientsFieldMetaEmailTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[RecipientUpdateTemplateRecipientsOverflow4]
     text_align: NotRequired[RecipientUpdateTemplateRecipientsTextAlign3]
 
 
@@ -869,7 +996,11 @@ class RecipientUpdateTemplateRecipientsFieldMetaEmail(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12.0
+
+    overflow: Optional[RecipientUpdateTemplateRecipientsOverflow4] = (
+        RecipientUpdateTemplateRecipientsOverflow4.AUTO
+    )
 
     text_align: Annotated[
         Optional[RecipientUpdateTemplateRecipientsTextAlign3],
@@ -877,22 +1008,43 @@ class RecipientUpdateTemplateRecipientsFieldMetaEmail(BaseModel):
     ] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class RecipientUpdateTemplateRecipientsOverflow3(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class RecipientUpdateTemplateRecipientsTypeName(str, Enum):
@@ -912,6 +1064,7 @@ class RecipientUpdateTemplateRecipientsFieldMetaNameTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[RecipientUpdateTemplateRecipientsOverflow3]
     text_align: NotRequired[RecipientUpdateTemplateRecipientsTextAlign2]
 
 
@@ -926,7 +1079,9 @@ class RecipientUpdateTemplateRecipientsFieldMetaName(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12.0
+
+    overflow: Optional[RecipientUpdateTemplateRecipientsOverflow3] = None
 
     text_align: Annotated[
         Optional[RecipientUpdateTemplateRecipientsTextAlign2],
@@ -934,22 +1089,43 @@ class RecipientUpdateTemplateRecipientsFieldMetaName(BaseModel):
     ] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class RecipientUpdateTemplateRecipientsOverflow2(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class RecipientUpdateTemplateRecipientsTypeInitials(str, Enum):
@@ -969,6 +1145,7 @@ class RecipientUpdateTemplateRecipientsFieldMetaInitialsTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[RecipientUpdateTemplateRecipientsOverflow2]
     text_align: NotRequired[RecipientUpdateTemplateRecipientsTextAlign1]
 
 
@@ -983,7 +1160,9 @@ class RecipientUpdateTemplateRecipientsFieldMetaInitials(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12.0
+
+    overflow: Optional[RecipientUpdateTemplateRecipientsOverflow2] = None
 
     text_align: Annotated[
         Optional[RecipientUpdateTemplateRecipientsTextAlign1],
@@ -991,22 +1170,43 @@ class RecipientUpdateTemplateRecipientsFieldMetaInitials(BaseModel):
     ] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class RecipientUpdateTemplateRecipientsOverflow1(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class RecipientUpdateTemplateRecipientsTypeSignature(str, Enum):
@@ -1020,6 +1220,7 @@ class RecipientUpdateTemplateRecipientsFieldMetaSignatureTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[RecipientUpdateTemplateRecipientsOverflow1]
 
 
 class RecipientUpdateTemplateRecipientsFieldMetaSignature(BaseModel):
@@ -1033,19 +1234,29 @@ class RecipientUpdateTemplateRecipientsFieldMetaSignature(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12.0
+
+    overflow: Optional[RecipientUpdateTemplateRecipientsOverflow1] = (
+        RecipientUpdateTemplateRecipientsOverflow1.AUTO
+    )
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize"]
+            ["label", "placeholder", "required", "readOnly", "fontSize", "overflow"]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -1150,15 +1361,21 @@ class RecipientUpdateTemplateRecipientsField(BaseModel):
     ] = UNSET
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["documentId", "templateId"])
         nullable_fields = set(["fieldMeta", "documentId", "templateId"])
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -1187,6 +1404,8 @@ class RecipientUpdateTemplateRecipientsRecipientResponseTypedDict(TypedDict):
     token: str
     document_deleted_at: Nullable[str]
     expired: Nullable[str]
+    expires_at: Nullable[str]
+    expiration_notified_at: Nullable[str]
     signed_at: Nullable[str]
     auth_options: Nullable[RecipientUpdateTemplateRecipientsAuthOptionsTypedDict]
     signing_order: Nullable[float]
@@ -1228,6 +1447,12 @@ class RecipientUpdateTemplateRecipientsRecipientResponse(BaseModel):
 
     expired: Nullable[str]
 
+    expires_at: Annotated[Nullable[str], pydantic.Field(alias="expiresAt")]
+
+    expiration_notified_at: Annotated[
+        Nullable[str], pydantic.Field(alias="expirationNotifiedAt")
+    ]
+
     signed_at: Annotated[Nullable[str], pydantic.Field(alias="signedAt")]
 
     auth_options: Annotated[
@@ -1250,12 +1475,17 @@ class RecipientUpdateTemplateRecipientsRecipientResponse(BaseModel):
     ] = UNSET
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["documentId", "templateId"])
         nullable_fields = set(
             [
                 "documentDeletedAt",
                 "expired",
+                "expiresAt",
+                "expirationNotifiedAt",
                 "signedAt",
                 "authOptions",
                 "signingOrder",
@@ -1264,12 +1494,15 @@ class RecipientUpdateTemplateRecipientsRecipientResponse(BaseModel):
                 "templateId",
             ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -1296,3 +1529,65 @@ class RecipientUpdateTemplateRecipientsResponse(BaseModel):
     r"""Successful response"""
 
     recipients: List[RecipientUpdateTemplateRecipientsRecipientResponse]
+
+
+try:
+    RecipientUpdateTemplateRecipientsRecipientRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    RecipientUpdateTemplateRecipientsRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    RecipientUpdateTemplateRecipientsAuthOptions.model_rebuild()
+except NameError:
+    pass
+try:
+    RecipientUpdateTemplateRecipientsFieldMetaDropdown.model_rebuild()
+except NameError:
+    pass
+try:
+    RecipientUpdateTemplateRecipientsFieldMetaCheckbox.model_rebuild()
+except NameError:
+    pass
+try:
+    RecipientUpdateTemplateRecipientsFieldMetaRadio.model_rebuild()
+except NameError:
+    pass
+try:
+    RecipientUpdateTemplateRecipientsFieldMetaNumber.model_rebuild()
+except NameError:
+    pass
+try:
+    RecipientUpdateTemplateRecipientsFieldMetaText.model_rebuild()
+except NameError:
+    pass
+try:
+    RecipientUpdateTemplateRecipientsFieldMetaDate.model_rebuild()
+except NameError:
+    pass
+try:
+    RecipientUpdateTemplateRecipientsFieldMetaEmail.model_rebuild()
+except NameError:
+    pass
+try:
+    RecipientUpdateTemplateRecipientsFieldMetaName.model_rebuild()
+except NameError:
+    pass
+try:
+    RecipientUpdateTemplateRecipientsFieldMetaInitials.model_rebuild()
+except NameError:
+    pass
+try:
+    RecipientUpdateTemplateRecipientsFieldMetaSignature.model_rebuild()
+except NameError:
+    pass
+try:
+    RecipientUpdateTemplateRecipientsField.model_rebuild()
+except NameError:
+    pass
+try:
+    RecipientUpdateTemplateRecipientsRecipientResponse.model_rebuild()
+except NameError:
+    pass

@@ -3,7 +3,8 @@
 
 ## Fields
 
-| Field                   | Type                    | Required                | Description             |
-| ----------------------- | ----------------------- | ----------------------- | ----------------------- |
-| `from_`                 | *OptionalNullable[str]* | :heavy_minus_sign:      | N/A                     |
-| `to`                    | *OptionalNullable[str]* | :heavy_minus_sign:      | N/A                     |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `recipient_email`  | *str*              | :heavy_check_mark: | N/A                |
+| `recipient_name`   | *str*              | :heavy_check_mark: | N/A                |
+| `recipient_id`     | *float*            | :heavy_check_mark: | N/A                |

@@ -1,5 +1,13 @@
 # TemplateCreateDocumentFromTemplatePrefillFieldTypeDropdown
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateCreateDocumentFromTemplatePrefillFieldTypeDropdown
+
+value = TemplateCreateDocumentFromTemplatePrefillFieldTypeDropdown.DROPDOWN
+```
+
 
 ## Values
 

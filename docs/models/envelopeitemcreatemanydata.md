@@ -9,3 +9,4 @@
 | `title`            | *str*              | :heavy_check_mark: | N/A                |
 | `envelope_id`      | *str*              | :heavy_check_mark: | N/A                |
 | `order`            | *float*            | :heavy_check_mark: | N/A                |
+| `document_data_id` | *str*              | :heavy_check_mark: | N/A                |

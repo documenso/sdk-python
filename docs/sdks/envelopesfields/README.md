@@ -22,7 +22,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.envelopes.fields.get(field_id=6981.76)
@@ -67,7 +67,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.envelopes.fields.create_many(envelope_id="<id>", data=[])
@@ -79,11 +79,11 @@ with Documenso(
 
 ### Parameters
 
-| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `envelope_id`                                                                                     | *str*                                                                                             | :heavy_check_mark:                                                                                | N/A                                                                                               |
-| `data`                                                                                            | List[[models.EnvelopeFieldCreateManyDataUnion](../../models/envelopefieldcreatemanydataunion.md)] | :heavy_check_mark:                                                                                | N/A                                                                                               |
-| `retries`                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                  | :heavy_minus_sign:                                                                                | Configuration to override the default retry behavior of the client.                               |
+| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `envelope_id`                                                                                       | *str*                                                                                               | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `data`                                                                                              | List[[models.EnvelopeFieldCreateManyDataUnion1](../../models/envelopefieldcreatemanydataunion1.md)] | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `retries`                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                    | :heavy_minus_sign:                                                                                  | Configuration to override the default retry behavior of the client.                                 |
 
 ### Response
 
@@ -112,7 +112,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.envelopes.fields.update_many(envelope_id="<id>", data=[])
@@ -157,7 +157,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.envelopes.fields.delete(field_id=2481.37)

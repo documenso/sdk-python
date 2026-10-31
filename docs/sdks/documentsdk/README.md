@@ -1,15 +1,20 @@
-# Document
+# ~~Document~~
+
+> [!WARNING]
+> This SDK is **DEPRECATED**
 
 ## Overview
 
 ### Available Operations
 
-* [document_get_many](#document_get_many) - Get multiple documents
-* [document_download](#document_download) - Download document (beta)
+* [~~document_get_many~~](#document_get_many) - Get multiple documents :warning: **Deprecated**
+* [~~document_download~~](#document_download) - Download document (beta) :warning: **Deprecated**
 
-## document_get_many
+## ~~document_get_many~~
 
-Retrieve multiple documents by their IDs
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Retrieve multiple documents by their IDs
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -20,7 +25,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.document.document_get_many(document_ids=[])
@@ -51,9 +56,11 @@ with Documenso(
 | models.DocumentGetManyInternalServerError | 500                                       | application/json                          |
 | models.APIError                           | 4XX, 5XX                                  | \*/\*                                     |
 
-## document_download
+## ~~document_download~~
 
-Get a pre-signed download URL for the original or signed version of a document
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Get a pre-signed download URL for the original or signed version of a document
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -65,7 +72,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.document.document_download(document_id=9550.11, version=documenso_sdk.DocumentDownloadBetaVersion.SIGNED)

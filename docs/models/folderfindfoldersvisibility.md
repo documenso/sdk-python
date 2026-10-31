@@ -1,5 +1,13 @@
 # FolderFindFoldersVisibility
 
+## Example Usage
+
+```python
+from documenso_sdk.models import FolderFindFoldersVisibility
+
+value = FolderFindFoldersVisibility.EVERYONE
+```
+
 
 ## Values
 

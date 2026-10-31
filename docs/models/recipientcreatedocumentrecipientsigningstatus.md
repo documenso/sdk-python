@@ -1,5 +1,13 @@
 # RecipientCreateDocumentRecipientSigningStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import RecipientCreateDocumentRecipientSigningStatus
+
+value = RecipientCreateDocumentRecipientSigningStatus.NOT_SIGNED
+```
+
 
 ## Values
 

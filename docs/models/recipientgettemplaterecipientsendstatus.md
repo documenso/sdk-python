@@ -1,5 +1,13 @@
 # RecipientGetTemplateRecipientSendStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import RecipientGetTemplateRecipientSendStatus
+
+value = RecipientGetTemplateRecipientSendStatus.NOT_SENT
+```
+
 
 ## Values
 

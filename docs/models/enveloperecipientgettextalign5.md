@@ -1,5 +1,13 @@
 # EnvelopeRecipientGetTextAlign5
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeRecipientGetTextAlign5
+
+value = EnvelopeRecipientGetTextAlign5.LEFT
+```
+
 
 ## Values
 

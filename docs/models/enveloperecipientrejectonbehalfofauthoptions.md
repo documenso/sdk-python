@@ -1,0 +1,9 @@
+# EnvelopeRecipientRejectOnBehalfOfAuthOptions
+
+
+## Fields
+
+| Field                                                                                                                | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `access_auth`                                                                                                        | List[[models.EnvelopeRecipientRejectOnBehalfOfAccessAuth](../models/enveloperecipientrejectonbehalfofaccessauth.md)] | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
+| `action_auth`                                                                                                        | List[[models.EnvelopeRecipientRejectOnBehalfOfActionAuth](../models/enveloperecipientrejectonbehalfofactionauth.md)] | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
