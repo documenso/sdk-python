@@ -158,3 +158,9 @@ class TemplateDeleteTemplateDirectLinkResponse(BaseModel):
     r"""Successful response"""
 
     success: bool
+
+
+try:
+    TemplateDeleteTemplateDirectLinkRequest.model_rebuild()
+except NameError:
+    pass

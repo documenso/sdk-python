@@ -1,5 +1,13 @@
 # TemplateFindTemplatesSendStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateFindTemplatesSendStatus
+
+value = TemplateFindTemplatesSendStatus.NOT_SENT
+```
+
 
 ## Values
 

@@ -1,5 +1,13 @@
 # TypeDocumentFieldPrefilled
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TypeDocumentFieldPrefilled
+
+value = TypeDocumentFieldPrefilled.DOCUMENT_FIELD_PREFILLED
+```
+
 
 ## Values
 

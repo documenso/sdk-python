@@ -22,7 +22,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.envelopes.attachments.find(envelope_id="<id>")
@@ -68,7 +68,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.envelopes.attachments.create(envelope_id="<id>", data={
@@ -116,7 +116,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.envelopes.attachments.update(id="<id>", data={
@@ -164,7 +164,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.envelopes.attachments.delete(id="<id>")

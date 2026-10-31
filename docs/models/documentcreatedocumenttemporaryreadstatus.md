@@ -1,5 +1,13 @@
 # DocumentCreateDocumentTemporaryReadStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentCreateDocumentTemporaryReadStatus
+
+value = DocumentCreateDocumentTemporaryReadStatus.NOT_OPENED
+```
+
 
 ## Values
 

@@ -1,5 +1,13 @@
 # FieldUpdateDocumentFieldsVerticalAlignText
 
+## Example Usage
+
+```python
+from documenso_sdk.models import FieldUpdateDocumentFieldsVerticalAlignText
+
+value = FieldUpdateDocumentFieldsVerticalAlignText.TOP
+```
+
 
 ## Values
 

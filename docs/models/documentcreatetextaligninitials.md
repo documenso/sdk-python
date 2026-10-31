@@ -1,5 +1,13 @@
 # DocumentCreateTextAlignInitials
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentCreateTextAlignInitials
+
+value = DocumentCreateTextAlignInitials.LEFT
+```
+
 
 ## Values
 

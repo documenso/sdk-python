@@ -9,14 +9,22 @@ from documenso_sdk.types import (
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
 )
-from documenso_sdk.utils import FieldMetadata, MultipartFormMetadata, get_discriminator
+from documenso_sdk.utils import (
+    FieldMetadata,
+    MultipartFormMetadata,
+    get_discriminator,
+    validate_const,
+)
 from enum import Enum
 import httpx
 import io
 import pydantic
 from pydantic import Discriminator, Tag, model_serializer
-from typing import Dict, IO, List, Optional, Union
+from pydantic.functional_validators import AfterValidator
+from typing import Dict, IO, List, Literal, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
 
@@ -73,6 +81,13 @@ class DocumentCreateTypeDropdown1(str, Enum):
     DROPDOWN = "DROPDOWN"
 
 
+class DocumentCreateOverflowDropdown(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
+
+
 class DocumentCreateTypeDropdown2(str, Enum):
     DROPDOWN = "dropdown"
 
@@ -92,6 +107,7 @@ class DocumentCreateFieldMetaDropdownTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[DocumentCreateOverflowDropdown]
     values: NotRequired[List[DocumentCreateValueDropdownTypedDict]]
     default_value: NotRequired[str]
 
@@ -107,13 +123,18 @@ class DocumentCreateFieldMetaDropdown(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12.0
+
+    overflow: Optional[DocumentCreateOverflowDropdown] = None
 
     values: Optional[List[DocumentCreateValueDropdown]] = None
 
     default_value: Annotated[Optional[str], pydantic.Field(alias="defaultValue")] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -122,16 +143,20 @@ class DocumentCreateFieldMetaDropdown(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "values",
                 "defaultValue",
             ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -168,14 +193,20 @@ class DocumentCreateFieldDropdown(BaseModel):
     ] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["fieldMeta"])
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -186,6 +217,13 @@ class DocumentCreateFieldDropdown(BaseModel):
 
 class DocumentCreateTypeCheckbox1(str, Enum):
     CHECKBOX = "CHECKBOX"
+
+
+class DocumentCreateOverflowCheckbox(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class DocumentCreateTypeCheckbox2(str, Enum):
@@ -218,6 +256,7 @@ class DocumentCreateFieldMetaCheckboxTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[DocumentCreateOverflowCheckbox]
     values: NotRequired[List[DocumentCreateValueCheckboxTypedDict]]
     validation_rule: NotRequired[str]
     validation_length: NotRequired[float]
@@ -235,7 +274,9 @@ class DocumentCreateFieldMetaCheckbox(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12.0
+
+    overflow: Optional[DocumentCreateOverflowCheckbox] = None
 
     values: Optional[List[DocumentCreateValueCheckbox]] = None
 
@@ -252,6 +293,9 @@ class DocumentCreateFieldMetaCheckbox(BaseModel):
     )
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -260,18 +304,22 @@ class DocumentCreateFieldMetaCheckbox(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "values",
                 "validationRule",
                 "validationLength",
                 "direction",
             ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -308,14 +356,20 @@ class DocumentCreateFieldCheckbox(BaseModel):
     ] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["fieldMeta"])
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -326,6 +380,13 @@ class DocumentCreateFieldCheckbox(BaseModel):
 
 class DocumentCreateTypeRadio1(str, Enum):
     RADIO = "RADIO"
+
+
+class DocumentCreateOverflowRadio(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class DocumentCreateTypeRadio2(str, Enum):
@@ -358,6 +419,7 @@ class DocumentCreateFieldMetaRadioTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[DocumentCreateOverflowRadio]
     values: NotRequired[List[DocumentCreateValueRadioTypedDict]]
     direction: NotRequired[DocumentCreateDirectionRadio]
 
@@ -373,7 +435,9 @@ class DocumentCreateFieldMetaRadio(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12.0
+
+    overflow: Optional[DocumentCreateOverflowRadio] = None
 
     values: Optional[List[DocumentCreateValueRadio]] = None
 
@@ -382,6 +446,9 @@ class DocumentCreateFieldMetaRadio(BaseModel):
     )
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -390,16 +457,20 @@ class DocumentCreateFieldMetaRadio(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "values",
                 "direction",
             ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -436,14 +507,20 @@ class DocumentCreateFieldRadio(BaseModel):
     ] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["fieldMeta"])
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -454,6 +531,13 @@ class DocumentCreateFieldRadio(BaseModel):
 
 class DocumentCreateTypeNumber1(str, Enum):
     NUMBER = "NUMBER"
+
+
+class DocumentCreateOverflowNumber(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class DocumentCreateTypeNumber2(str, Enum):
@@ -479,6 +563,7 @@ class DocumentCreateFieldMetaNumberTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[DocumentCreateOverflowNumber]
     number_format: NotRequired[Nullable[str]]
     value: NotRequired[str]
     min_value: NotRequired[Nullable[float]]
@@ -500,7 +585,9 @@ class DocumentCreateFieldMetaNumber(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12.0
+
+    overflow: Optional[DocumentCreateOverflowNumber] = None
 
     number_format: Annotated[
         OptionalNullable[str], pydantic.Field(alias="numberFormat")
@@ -534,6 +621,9 @@ class DocumentCreateFieldMetaNumber(BaseModel):
     ] = UNSET
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -542,6 +632,7 @@ class DocumentCreateFieldMetaNumber(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "numberFormat",
                 "value",
                 "minValue",
@@ -562,12 +653,15 @@ class DocumentCreateFieldMetaNumber(BaseModel):
                 "verticalAlign",
             ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -612,14 +706,20 @@ class DocumentCreateFieldNumber(BaseModel):
     ] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["fieldMeta"])
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -630,6 +730,13 @@ class DocumentCreateFieldNumber(BaseModel):
 
 class DocumentCreateTypeText1(str, Enum):
     TEXT = "TEXT"
+
+
+class DocumentCreateOverflowText(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class DocumentCreateTypeText2(str, Enum):
@@ -655,6 +762,7 @@ class DocumentCreateFieldMetaTextTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[DocumentCreateOverflowText]
     text: NotRequired[str]
     character_limit: NotRequired[float]
     text_align: NotRequired[DocumentCreateTextAlignText]
@@ -674,7 +782,9 @@ class DocumentCreateFieldMetaText(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12.0
+
+    overflow: Optional[DocumentCreateOverflowText] = None
 
     text: Optional[str] = None
 
@@ -700,6 +810,9 @@ class DocumentCreateFieldMetaText(BaseModel):
     ] = UNSET
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -708,6 +821,7 @@ class DocumentCreateFieldMetaText(BaseModel):
                 "required",
                 "readOnly",
                 "fontSize",
+                "overflow",
                 "text",
                 "characterLimit",
                 "textAlign",
@@ -717,12 +831,15 @@ class DocumentCreateFieldMetaText(BaseModel):
             ]
         )
         nullable_fields = set(["lineHeight", "letterSpacing", "verticalAlign"])
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -767,14 +884,20 @@ class DocumentCreateFieldText(BaseModel):
     ] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["fieldMeta"])
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -785,6 +908,13 @@ class DocumentCreateFieldText(BaseModel):
 
 class DocumentCreateTypeDate1(str, Enum):
     DATE = "DATE"
+
+
+class DocumentCreateOverflowDate(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class DocumentCreateTypeDate2(str, Enum):
@@ -804,6 +934,7 @@ class DocumentCreateFieldMetaDateTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[DocumentCreateOverflowDate]
     text_align: NotRequired[DocumentCreateTextAlignDate]
 
 
@@ -818,23 +949,39 @@ class DocumentCreateFieldMetaDate(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12.0
+
+    overflow: Optional[DocumentCreateOverflowDate] = DocumentCreateOverflowDate.AUTO
 
     text_align: Annotated[
         Optional[DocumentCreateTextAlignDate], pydantic.Field(alias="textAlign")
     ] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -871,14 +1018,20 @@ class DocumentCreateFieldDate(BaseModel):
     ] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["fieldMeta"])
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -889,6 +1042,13 @@ class DocumentCreateFieldDate(BaseModel):
 
 class DocumentCreateTypeEmail1(str, Enum):
     EMAIL = "EMAIL"
+
+
+class DocumentCreateOverflowEmail(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class DocumentCreateTypeEmail2(str, Enum):
@@ -908,6 +1068,7 @@ class DocumentCreateFieldMetaEmailTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[DocumentCreateOverflowEmail]
     text_align: NotRequired[DocumentCreateTextAlignEmail]
 
 
@@ -922,23 +1083,39 @@ class DocumentCreateFieldMetaEmail(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12.0
+
+    overflow: Optional[DocumentCreateOverflowEmail] = DocumentCreateOverflowEmail.AUTO
 
     text_align: Annotated[
         Optional[DocumentCreateTextAlignEmail], pydantic.Field(alias="textAlign")
     ] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -975,14 +1152,20 @@ class DocumentCreateFieldEmail(BaseModel):
     ] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["fieldMeta"])
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -993,6 +1176,13 @@ class DocumentCreateFieldEmail(BaseModel):
 
 class DocumentCreateTypeName1(str, Enum):
     NAME = "NAME"
+
+
+class DocumentCreateOverflowName(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class DocumentCreateTypeName2(str, Enum):
@@ -1012,6 +1202,7 @@ class DocumentCreateFieldMetaNameTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[DocumentCreateOverflowName]
     text_align: NotRequired[DocumentCreateTextAlignName]
 
 
@@ -1026,23 +1217,39 @@ class DocumentCreateFieldMetaName(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12.0
+
+    overflow: Optional[DocumentCreateOverflowName] = None
 
     text_align: Annotated[
         Optional[DocumentCreateTextAlignName], pydantic.Field(alias="textAlign")
     ] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -1079,14 +1286,20 @@ class DocumentCreateFieldName(BaseModel):
     ] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["fieldMeta"])
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -1097,6 +1310,13 @@ class DocumentCreateFieldName(BaseModel):
 
 class DocumentCreateTypeInitials1(str, Enum):
     INITIALS = "INITIALS"
+
+
+class DocumentCreateOverflowInitials(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
 
 
 class DocumentCreateTypeInitials2(str, Enum):
@@ -1116,6 +1336,7 @@ class DocumentCreateFieldMetaInitialsTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[DocumentCreateOverflowInitials]
     text_align: NotRequired[DocumentCreateTextAlignInitials]
 
 
@@ -1130,23 +1351,39 @@ class DocumentCreateFieldMetaInitials(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12.0
+
+    overflow: Optional[DocumentCreateOverflowInitials] = None
 
     text_align: Annotated[
         Optional[DocumentCreateTextAlignInitials], pydantic.Field(alias="textAlign")
     ] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize", "textAlign"]
+            [
+                "label",
+                "placeholder",
+                "required",
+                "readOnly",
+                "fontSize",
+                "overflow",
+                "textAlign",
+            ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -1183,14 +1420,20 @@ class DocumentCreateFieldInitials(BaseModel):
     ] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["fieldMeta"])
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -1230,6 +1473,13 @@ class DocumentCreateTypeSignature1(str, Enum):
     SIGNATURE = "SIGNATURE"
 
 
+class DocumentCreateOverflowSignature(str, Enum):
+    AUTO = "auto"
+    HORIZONTAL = "horizontal"
+    VERTICAL = "vertical"
+    CROP = "crop"
+
+
 class DocumentCreateTypeSignature2(str, Enum):
     SIGNATURE = "signature"
 
@@ -1241,6 +1491,7 @@ class DocumentCreateFieldMetaSignatureTypedDict(TypedDict):
     required: NotRequired[bool]
     read_only: NotRequired[bool]
     font_size: NotRequired[float]
+    overflow: NotRequired[DocumentCreateOverflowSignature]
 
 
 class DocumentCreateFieldMetaSignature(BaseModel):
@@ -1254,19 +1505,29 @@ class DocumentCreateFieldMetaSignature(BaseModel):
 
     read_only: Annotated[Optional[bool], pydantic.Field(alias="readOnly")] = None
 
-    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12
+    font_size: Annotated[Optional[float], pydantic.Field(alias="fontSize")] = 12.0
+
+    overflow: Optional[DocumentCreateOverflowSignature] = (
+        DocumentCreateOverflowSignature.AUTO
+    )
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
-            ["label", "placeholder", "required", "readOnly", "fontSize"]
+            ["label", "placeholder", "required", "readOnly", "fontSize", "overflow"]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -1303,14 +1564,20 @@ class DocumentCreateFieldSignature(BaseModel):
     ] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["fieldMeta"])
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -1387,14 +1654,20 @@ class DocumentCreateRecipient(BaseModel):
     fields: Optional[List[DocumentCreateFieldUnion]] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["signingOrder", "accessAuth", "actionAuth", "fields"])
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -1421,14 +1694,20 @@ class DocumentCreateAttachment(BaseModel):
     type: Optional[DocumentCreateTypeLink] = DocumentCreateTypeLink.LINK
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["type"])
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -1441,12 +1720,15 @@ class DocumentCreateDateFormat(str, Enum):
     YYYY_M_MDD_HH_MM_A = "yyyy-MM-dd hh:mm a"
     YYYY_M_MDD = "yyyy-MM-dd"
     DD_MM_SLASH_YYYY = "dd/MM/yyyy"
+    DD_MM_DASH_YYYY = "dd-MM-yyyy"
     MM_DD_SLASH_YYYY = "MM/dd/yyyy"
     YY_M_MDD = "yy-MM-dd"
     MMMM_DD_COMMA_YYYY = "MMMM dd, yyyy"
     EEEE_MMMM_DD_COMMA_YYYY = "EEEE, MMMM dd, yyyy"
     DD_MM_SLASH_YYYY_HH_MM_A = "dd/MM/yyyy hh:mm a"
     DD_MM_SLASH_YYYY_H_HMM = "dd/MM/yyyy HH:mm"
+    DD_MM_DASH_YYYY_HH_MM_A = "dd-MM-yyyy hh:mm a"
+    DD_MM_DASH_YYYY_H_HMM = "dd-MM-yyyy HH:mm"
     MM_DD_SLASH_YYYY_HH_MM_A = "MM/dd/yyyy hh:mm a"
     MM_DD_SLASH_YYYY_H_HMM = "MM/dd/yyyy HH:mm"
     DD_DOT_MM_DOT_YYYY = "dd.MM.yyyy"
@@ -1494,6 +1776,8 @@ class DocumentCreateEmailSettingsTypedDict(TypedDict):
     document_completed: NotRequired[bool]
     document_deleted: NotRequired[bool]
     owner_document_completed: NotRequired[bool]
+    owner_recipient_expired: NotRequired[bool]
+    owner_document_created: NotRequired[bool]
 
 
 class DocumentCreateEmailSettings(BaseModel):
@@ -1525,7 +1809,18 @@ class DocumentCreateEmailSettings(BaseModel):
         Optional[bool], pydantic.Field(alias="ownerDocumentCompleted")
     ] = True
 
+    owner_recipient_expired: Annotated[
+        Optional[bool], pydantic.Field(alias="ownerRecipientExpired")
+    ] = True
+
+    owner_document_created: Annotated[
+        Optional[bool], pydantic.Field(alias="ownerDocumentCreated")
+    ] = True
+
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -1536,20 +1831,166 @@ class DocumentCreateEmailSettings(BaseModel):
                 "documentCompleted",
                 "documentDeleted",
                 "ownerDocumentCompleted",
+                "ownerRecipientExpired",
+                "ownerDocumentCreated",
             ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+class DocumentCreateEnvelopeExpirationPeriod2TypedDict(TypedDict):
+    disabled: Literal[True]
+
+
+class DocumentCreateEnvelopeExpirationPeriod2(BaseModel):
+    DISABLED: Annotated[
+        Annotated[Literal[True], AfterValidator(validate_const(True))],
+        pydantic.Field(alias="disabled"),
+    ] = True
+
+
+class DocumentCreateEnvelopeExpirationPeriodUnit(str, Enum):
+    DAY = "day"
+    WEEK = "week"
+    MONTH = "month"
+    YEAR = "year"
+
+
+class DocumentCreateEnvelopeExpirationPeriod1TypedDict(TypedDict):
+    unit: DocumentCreateEnvelopeExpirationPeriodUnit
+    amount: int
+
+
+class DocumentCreateEnvelopeExpirationPeriod1(BaseModel):
+    unit: DocumentCreateEnvelopeExpirationPeriodUnit
+
+    amount: int
+
+
+class DocumentCreateSendAfter2TypedDict(TypedDict):
+    disabled: Literal[True]
+
+
+class DocumentCreateSendAfter2(BaseModel):
+    DISABLED: Annotated[
+        Annotated[Literal[True], AfterValidator(validate_const(True))],
+        pydantic.Field(alias="disabled"),
+    ] = True
+
+
+DocumentCreateEnvelopeExpirationPeriodUnionTypedDict = TypeAliasType(
+    "DocumentCreateEnvelopeExpirationPeriodUnionTypedDict",
+    Union[
+        DocumentCreateEnvelopeExpirationPeriod2TypedDict,
+        DocumentCreateEnvelopeExpirationPeriod1TypedDict,
+    ],
+)
+
+
+DocumentCreateEnvelopeExpirationPeriodUnion = TypeAliasType(
+    "DocumentCreateEnvelopeExpirationPeriodUnion",
+    Union[
+        DocumentCreateEnvelopeExpirationPeriod2, DocumentCreateEnvelopeExpirationPeriod1
+    ],
+)
+
+
+class DocumentCreateSendAfterUnit(str, Enum):
+    DAY = "day"
+    WEEK = "week"
+    MONTH = "month"
+
+
+class DocumentCreateSendAfter1TypedDict(TypedDict):
+    unit: DocumentCreateSendAfterUnit
+    amount: int
+
+
+class DocumentCreateSendAfter1(BaseModel):
+    unit: DocumentCreateSendAfterUnit
+
+    amount: int
+
+
+class DocumentCreateRepeatEvery2TypedDict(TypedDict):
+    disabled: Literal[True]
+
+
+class DocumentCreateRepeatEvery2(BaseModel):
+    DISABLED: Annotated[
+        Annotated[Literal[True], AfterValidator(validate_const(True))],
+        pydantic.Field(alias="disabled"),
+    ] = True
+
+
+DocumentCreateSendAfterUnionTypedDict = TypeAliasType(
+    "DocumentCreateSendAfterUnionTypedDict",
+    Union[DocumentCreateSendAfter2TypedDict, DocumentCreateSendAfter1TypedDict],
+)
+
+
+DocumentCreateSendAfterUnion = TypeAliasType(
+    "DocumentCreateSendAfterUnion",
+    Union[DocumentCreateSendAfter2, DocumentCreateSendAfter1],
+)
+
+
+class DocumentCreateRepeatEveryUnit(str, Enum):
+    DAY = "day"
+    WEEK = "week"
+    MONTH = "month"
+
+
+class DocumentCreateRepeatEvery1TypedDict(TypedDict):
+    unit: DocumentCreateRepeatEveryUnit
+    amount: int
+
+
+class DocumentCreateRepeatEvery1(BaseModel):
+    unit: DocumentCreateRepeatEveryUnit
+
+    amount: int
+
+
+DocumentCreateRepeatEveryUnionTypedDict = TypeAliasType(
+    "DocumentCreateRepeatEveryUnionTypedDict",
+    Union[DocumentCreateRepeatEvery2TypedDict, DocumentCreateRepeatEvery1TypedDict],
+)
+
+
+DocumentCreateRepeatEveryUnion = TypeAliasType(
+    "DocumentCreateRepeatEveryUnion",
+    Union[DocumentCreateRepeatEvery2, DocumentCreateRepeatEvery1],
+)
+
+
+class DocumentCreateReminderSettingsTypedDict(TypedDict):
+    send_after: DocumentCreateSendAfterUnionTypedDict
+    repeat_every: DocumentCreateRepeatEveryUnionTypedDict
+
+
+class DocumentCreateReminderSettings(BaseModel):
+    send_after: Annotated[
+        DocumentCreateSendAfterUnion, pydantic.Field(alias="sendAfter")
+    ]
+
+    repeat_every: Annotated[
+        DocumentCreateRepeatEveryUnion, pydantic.Field(alias="repeatEvery")
+    ]
 
 
 class DocumentCreateMetaTypedDict(TypedDict):
@@ -1568,6 +2009,10 @@ class DocumentCreateMetaTypedDict(TypedDict):
     email_id: NotRequired[Nullable[str]]
     email_reply_to: NotRequired[Nullable[str]]
     email_settings: NotRequired[Nullable[DocumentCreateEmailSettingsTypedDict]]
+    envelope_expiration_period: NotRequired[
+        Nullable[DocumentCreateEnvelopeExpirationPeriodUnionTypedDict]
+    ]
+    reminder_settings: NotRequired[Nullable[DocumentCreateReminderSettingsTypedDict]]
 
 
 class DocumentCreateMeta(BaseModel):
@@ -1621,7 +2066,20 @@ class DocumentCreateMeta(BaseModel):
         pydantic.Field(alias="emailSettings"),
     ] = UNSET
 
+    envelope_expiration_period: Annotated[
+        OptionalNullable[DocumentCreateEnvelopeExpirationPeriodUnion],
+        pydantic.Field(alias="envelopeExpirationPeriod"),
+    ] = UNSET
+
+    reminder_settings: Annotated[
+        OptionalNullable[DocumentCreateReminderSettings],
+        pydantic.Field(alias="reminderSettings"),
+    ] = UNSET
+
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -1640,15 +2098,28 @@ class DocumentCreateMeta(BaseModel):
                 "emailId",
                 "emailReplyTo",
                 "emailSettings",
+                "envelopeExpirationPeriod",
+                "reminderSettings",
             ]
         )
-        nullable_fields = set(["emailId", "emailReplyTo", "emailSettings"])
+        nullable_fields = set(
+            [
+                "emailId",
+                "emailReplyTo",
+                "emailSettings",
+                "envelopeExpirationPeriod",
+                "reminderSettings",
+            ]
+        )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -1709,6 +2180,9 @@ class DocumentCreatePayload(BaseModel):
     meta: Optional[DocumentCreateMeta] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -1723,12 +2197,15 @@ class DocumentCreatePayload(BaseModel):
                 "meta",
             ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -1739,7 +2216,7 @@ class DocumentCreatePayload(BaseModel):
 
 class DocumentCreateFileTypedDict(TypedDict):
     file_name: str
-    content: Union[bytes, IO[bytes], io.BufferedReader]
+    content: Union[bytes, IO[bytes], io.IOBase]
     content_type: NotRequired[str]
 
 
@@ -1749,7 +2226,7 @@ class DocumentCreateFile(BaseModel):
     ]
 
     content: Annotated[
-        Union[bytes, IO[bytes], io.BufferedReader],
+        Union[bytes, IO[bytes], io.IOBase],
         pydantic.Field(alias=""),
         FieldMetadata(multipart=MultipartFormMetadata(content=True)),
     ]
@@ -1761,14 +2238,20 @@ class DocumentCreateFile(BaseModel):
     ] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["contentType"])
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -1933,3 +2416,125 @@ class DocumentCreateResponse(BaseModel):
     envelope_id: Annotated[str, pydantic.Field(alias="envelopeId")]
 
     id: float
+
+
+try:
+    DocumentCreateFieldMetaDropdown.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateFieldDropdown.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateFieldMetaCheckbox.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateFieldCheckbox.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateFieldMetaRadio.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateFieldRadio.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateFieldMetaNumber.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateFieldNumber.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateFieldMetaText.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateFieldText.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateFieldMetaDate.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateFieldDate.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateFieldMetaEmail.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateFieldEmail.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateFieldMetaName.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateFieldName.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateFieldMetaInitials.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateFieldInitials.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateFieldFreeSignature.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateFieldMetaSignature.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateFieldSignature.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateRecipient.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateEmailSettings.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateEnvelopeExpirationPeriod2.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateSendAfter2.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateRepeatEvery2.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateReminderSettings.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateMeta.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreatePayload.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentCreateResponse.model_rebuild()
+except NameError:
+    pass

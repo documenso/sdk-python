@@ -3,7 +3,13 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 from documenso_sdk.models import DocumensoError
-from documenso_sdk.types import BaseModel, Nullable, UNSET_SENTINEL
+from documenso_sdk.types import (
+    BaseModel,
+    Nullable,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
 from documenso_sdk.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import httpx
@@ -35,6 +41,14 @@ class EnvelopeFindQueryParamStatus(str, Enum):
     PENDING = "PENDING"
     COMPLETED = "COMPLETED"
     REJECTED = "REJECTED"
+    CANCELLED = "CANCELLED"
+
+
+class EnvelopeFindHasExpiredRecipients(str, Enum):
+    r"""Filter for envelopes that have at least one recipient whose signing link has expired."""
+
+    TRUE = "true"
+    FALSE = "false"
 
 
 class EnvelopeFindOrderByColumn(str, Enum):
@@ -63,6 +77,8 @@ class EnvelopeFindRequestTypedDict(TypedDict):
     r"""Filter envelopes by how it was created."""
     status: NotRequired[EnvelopeFindQueryParamStatus]
     r"""Filter envelopes by the current status."""
+    has_expired_recipients: NotRequired[EnvelopeFindHasExpiredRecipients]
+    r"""Filter for envelopes that have at least one recipient whose signing link has expired."""
     folder_id: NotRequired[str]
     r"""Filter envelopes by folder ID."""
     order_by_column: NotRequired[EnvelopeFindOrderByColumn]
@@ -115,6 +131,13 @@ class EnvelopeFindRequest(BaseModel):
     ] = None
     r"""Filter envelopes by the current status."""
 
+    has_expired_recipients: Annotated[
+        Optional[EnvelopeFindHasExpiredRecipients],
+        pydantic.Field(alias="hasExpiredRecipients"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter for envelopes that have at least one recipient whose signing link has expired."""
+
     folder_id: Annotated[
         Optional[str],
         pydantic.Field(alias="folderId"),
@@ -136,6 +159,9 @@ class EnvelopeFindRequest(BaseModel):
     r"""Sort direction."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -146,17 +172,21 @@ class EnvelopeFindRequest(BaseModel):
                 "templateId",
                 "source",
                 "status",
+                "hasExpiredRecipients",
                 "folderId",
                 "orderByColumn",
                 "orderByDirection",
             ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -335,6 +365,7 @@ class EnvelopeFindDataStatus(str, Enum):
     PENDING = "PENDING"
     COMPLETED = "COMPLETED"
     REJECTED = "REJECTED"
+    CANCELLED = "CANCELLED"
 
 
 class EnvelopeFindDataSource(str, Enum):
@@ -352,6 +383,7 @@ class EnvelopeFindVisibility(str, Enum):
 class EnvelopeFindTemplateType(str, Enum):
     PUBLIC = "PUBLIC"
     PRIVATE = "PRIVATE"
+    ORGANISATION = "ORGANISATION"
 
 
 class EnvelopeFindGlobalAccessAuth(str, Enum):
@@ -469,6 +501,8 @@ class EnvelopeFindRecipientTypedDict(TypedDict):
     token: str
     document_deleted_at: Nullable[str]
     expired: Nullable[str]
+    expires_at: Nullable[str]
+    expiration_notified_at: Nullable[str]
     signed_at: Nullable[str]
     auth_options: Nullable[EnvelopeFindRecipientAuthOptionsTypedDict]
     signing_order: Nullable[float]
@@ -502,6 +536,12 @@ class EnvelopeFindRecipient(BaseModel):
 
     expired: Nullable[str]
 
+    expires_at: Annotated[Nullable[str], pydantic.Field(alias="expiresAt")]
+
+    expiration_notified_at: Annotated[
+        Nullable[str], pydantic.Field(alias="expirationNotifiedAt")
+    ]
+
     signed_at: Annotated[Nullable[str], pydantic.Field(alias="signedAt")]
 
     auth_options: Annotated[
@@ -513,13 +553,19 @@ class EnvelopeFindRecipient(BaseModel):
     rejection_reason: Annotated[Nullable[str], pydantic.Field(alias="rejectionReason")]
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 m[k] = val
@@ -624,13 +670,19 @@ class EnvelopeFindData(BaseModel):
     team: Nullable[EnvelopeFindTeam]
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 m[k] = val
@@ -660,3 +712,25 @@ class EnvelopeFindResponse(BaseModel):
     per_page: Annotated[float, pydantic.Field(alias="perPage")]
 
     total_pages: Annotated[float, pydantic.Field(alias="totalPages")]
+
+
+try:
+    EnvelopeFindAuthOptions.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFindRecipientAuthOptions.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFindRecipient.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFindData.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeFindResponse.model_rebuild()
+except NameError:
+    pass

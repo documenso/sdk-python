@@ -159,3 +159,9 @@ class DocumentRedistributeResponse(BaseModel):
     r"""Successful response"""
 
     success: bool
+
+
+try:
+    DocumentRedistributeRequest.model_rebuild()
+except NameError:
+    pass

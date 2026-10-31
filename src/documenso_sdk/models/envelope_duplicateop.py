@@ -3,19 +3,57 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 from documenso_sdk.models import DocumensoError
-from documenso_sdk.types import BaseModel
+from documenso_sdk.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
 import httpx
 import pydantic
+from pydantic import model_serializer
 from typing import List, Optional
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class EnvelopeDuplicateRequestTypedDict(TypedDict):
     envelope_id: str
+    include_recipients: NotRequired[bool]
+    include_fields: NotRequired[bool]
 
 
 class EnvelopeDuplicateRequest(BaseModel):
     envelope_id: Annotated[str, pydantic.Field(alias="envelopeId")]
+
+    include_recipients: Annotated[
+        Optional[bool], pydantic.Field(alias="includeRecipients")
+    ] = True
+
+    include_fields: Annotated[Optional[bool], pydantic.Field(alias="includeFields")] = (
+        True
+    )
+
+    @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
+    def serialize_model(self, handler):
+        optional_fields = set(["includeRecipients", "includeFields"])
+        exclude_none = current_exclude_none()
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class EnvelopeDuplicateInternalServerErrorIssueTypedDict(TypedDict):
@@ -156,3 +194,9 @@ class EnvelopeDuplicateResponse(BaseModel):
     r"""Successful response"""
 
     id: str
+
+
+try:
+    EnvelopeDuplicateRequest.model_rebuild()
+except NameError:
+    pass
