@@ -1,5 +1,13 @@
 # TemplateGetManyFieldType
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateGetManyFieldType
+
+value = TemplateGetManyFieldType.SIGNATURE
+```
+
 
 ## Values
 

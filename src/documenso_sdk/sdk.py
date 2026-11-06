@@ -19,6 +19,7 @@ if TYPE_CHECKING:
     from documenso_sdk.documents import Documents
     from documenso_sdk.embedding import Embedding
     from documenso_sdk.envelope import Envelope
+    from documenso_sdk.envelope_recipients import EnvelopeRecipients
     from documenso_sdk.envelopes import Envelopes
     from documenso_sdk.folders import Folders
     from documenso_sdk.template_sdk import TemplateSDK
@@ -32,6 +33,7 @@ class Documenso(BaseSDK):
     """
 
     envelopes: "Envelopes"
+    envelope_recipients: "EnvelopeRecipients"
     envelope: "Envelope"
     documents: "Documents"
     document: "DocumentSDK"
@@ -41,6 +43,10 @@ class Documenso(BaseSDK):
     embedding: "Embedding"
     _sub_sdk_map = {
         "envelopes": ("documenso_sdk.envelopes", "Envelopes"),
+        "envelope_recipients": (
+            "documenso_sdk.envelope_recipients",
+            "EnvelopeRecipients",
+        ),
         "envelope": ("documenso_sdk.envelope", "Envelope"),
         "documents": ("documenso_sdk.documents", "Documents"),
         "document": ("documenso_sdk.document_sdk", "DocumentSDK"),
@@ -54,8 +60,8 @@ class Documenso(BaseSDK):
         self,
         api_key: Optional[Union[Optional[str], Callable[[], Optional[str]]]] = None,
         server_idx: Optional[int] = None,
-        server_url: Optional[str] = None,
         url_params: Optional[Dict[str, str]] = None,
+        server_url: Optional[str] = None,
         client: Optional[HttpClient] = None,
         async_client: Optional[AsyncHttpClient] = None,
         retry_config: OptionalNullable[RetryConfig] = UNSET,
@@ -95,7 +101,9 @@ class Documenso(BaseSDK):
         ), "The provided async_client must implement the AsyncHttpClient protocol."
 
         security: Any = None
-        if callable(api_key):
+        if api_key is None:
+            security = None
+        elif callable(api_key):
             # pylint: disable=unnecessary-lambda-assignment
             security = lambda: models.Security(api_key=api_key())
         else:

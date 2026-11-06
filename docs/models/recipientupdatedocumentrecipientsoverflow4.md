@@ -1,0 +1,19 @@
+# RecipientUpdateDocumentRecipientsOverflow4
+
+## Example Usage
+
+```python
+from documenso_sdk.models import RecipientUpdateDocumentRecipientsOverflow4
+
+value = RecipientUpdateDocumentRecipientsOverflow4.AUTO
+```
+
+
+## Values
+
+| Name         | Value        |
+| ------------ | ------------ |
+| `AUTO`       | auto         |
+| `HORIZONTAL` | horizontal   |
+| `VERTICAL`   | vertical     |
+| `CROP`       | crop         |

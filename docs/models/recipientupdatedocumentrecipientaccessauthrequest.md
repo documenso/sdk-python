@@ -1,5 +1,13 @@
 # RecipientUpdateDocumentRecipientAccessAuthRequest
 
+## Example Usage
+
+```python
+from documenso_sdk.models import RecipientUpdateDocumentRecipientAccessAuthRequest
+
+value = RecipientUpdateDocumentRecipientAccessAuthRequest.ACCOUNT
+```
+
 
 ## Values
 

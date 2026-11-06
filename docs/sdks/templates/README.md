@@ -1,20 +1,25 @@
-# Templates
+# ~~Templates~~
+
+> [!WARNING]
+> This SDK is **DEPRECATED**
 
 ## Overview
 
 ### Available Operations
 
-* [find](#find) - Find templates
-* [get](#get) - Get template
-* [create](#create) - Create template
-* [update](#update) - Update template
-* [duplicate](#duplicate) - Duplicate template
-* [delete](#delete) - Delete template
-* [use](#use) - Use template
+* [~~find~~](#find) - Find templates :warning: **Deprecated**
+* [~~get~~](#get) - Get template :warning: **Deprecated**
+* [~~create~~](#create) - Create template :warning: **Deprecated**
+* [~~update~~](#update) - Update template :warning: **Deprecated**
+* [~~duplicate~~](#duplicate) - Duplicate template :warning: **Deprecated**
+* [~~delete~~](#delete) - Delete template :warning: **Deprecated**
+* [~~use~~](#use) - Use template :warning: **Deprecated**
 
-## find
+## ~~find~~
 
-Find templates based on a search criteria
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Find templates based on a search criteria
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -25,7 +30,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.templates.find()
@@ -42,7 +47,7 @@ with Documenso(
 | `query`                                                                                                     | *Optional[str]*                                                                                             | :heavy_minus_sign:                                                                                          | The search query.                                                                                           |
 | `page`                                                                                                      | *Optional[float]*                                                                                           | :heavy_minus_sign:                                                                                          | The pagination page number, starts at 1.                                                                    |
 | `per_page`                                                                                                  | *Optional[float]*                                                                                           | :heavy_minus_sign:                                                                                          | The number of items per page.                                                                               |
-| `type`                                                                                                      | [Optional[models.TemplateFindTemplatesQueryParamType]](../../models/templatefindtemplatesqueryparamtype.md) | :heavy_minus_sign:                                                                                          | Filter templates by type.                                                                                   |
+| `type_`                                                                                                     | [Optional[models.TemplateFindTemplatesQueryParamType]](../../models/templatefindtemplatesqueryparamtype.md) | :heavy_minus_sign:                                                                                          | Filter templates by type.                                                                                   |
 | `folder_id`                                                                                                 | *Optional[str]*                                                                                             | :heavy_minus_sign:                                                                                          | The ID of the folder to filter templates by.                                                                |
 | `retries`                                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                            | :heavy_minus_sign:                                                                                          | Configuration to override the default retry behavior of the client.                                         |
 
@@ -61,9 +66,11 @@ with Documenso(
 | models.TemplateFindTemplatesInternalServerError | 500                                             | application/json                                |
 | models.APIError                                 | 4XX, 5XX                                        | \*/\*                                           |
 
-## get
+## ~~get~~
 
-Get template
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -74,7 +81,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.templates.get(template_id=2128.54)
@@ -106,9 +113,11 @@ with Documenso(
 | models.TemplateGetTemplateByIDInternalServerError | 500                                               | application/json                                  |
 | models.APIError                                   | 4XX, 5XX                                          | \*/\*                                             |
 
-## create
+## ~~create~~
 
-Create a new template
+Create a new template. Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -119,7 +128,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.templates.create(payload={
@@ -156,9 +165,11 @@ with Documenso(
 | models.TemplateCreateTemplateInternalServerError | 500                                              | application/json                                 |
 | models.APIError                                  | 4XX, 5XX                                         | \*/\*                                            |
 
-## update
+## ~~update~~
 
-Update template
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -169,7 +180,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.templates.update(template_id=9404.77)
@@ -202,9 +213,11 @@ with Documenso(
 | models.TemplateUpdateTemplateInternalServerError | 500                                              | application/json                                 |
 | models.APIError                                  | 4XX, 5XX                                         | \*/\*                                            |
 
-## duplicate
+## ~~duplicate~~
 
-Duplicate template
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -215,7 +228,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.templates.duplicate(template_id=2490.16)
@@ -246,9 +259,11 @@ with Documenso(
 | models.TemplateDuplicateTemplateInternalServerError | 500                                                 | application/json                                    |
 | models.APIError                                     | 4XX, 5XX                                            | \*/\*                                               |
 
-## delete
+## ~~delete~~
 
-Delete template
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -259,7 +274,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.templates.delete(template_id=536.89)
@@ -290,9 +305,11 @@ with Documenso(
 | models.TemplateDeleteTemplateInternalServerError | 500                                              | application/json                                 |
 | models.APIError                                  | 4XX, 5XX                                         | \*/\*                                            |
 
-## use
+## ~~use~~
 
-Use the template to create a document
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Use the template to create a document
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -303,7 +320,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.templates.use(template_id=7392.96, recipients=[])

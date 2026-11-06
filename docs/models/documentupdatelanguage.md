@@ -1,5 +1,13 @@
 # DocumentUpdateLanguage
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentUpdateLanguage
+
+value = DocumentUpdateLanguage.DE
+```
+
 
 ## Values
 

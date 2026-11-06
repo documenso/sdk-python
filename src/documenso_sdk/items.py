@@ -6,7 +6,7 @@ from documenso_sdk._hooks import HookContext
 from documenso_sdk.types import OptionalNullable, UNSET
 from documenso_sdk.utils import get_security_from_env
 from documenso_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Iterable, List, Mapping, Optional, Union
 
 
 class Items(BaseSDK):
@@ -19,8 +19,8 @@ class Items(BaseSDK):
         ],
         files: Optional[
             Union[
-                List[models.EnvelopeItemCreateManyFile],
-                List[models.EnvelopeItemCreateManyFileTypedDict],
+                Iterable[models.EnvelopeItemCreateManyFile],
+                Iterable[models.EnvelopeItemCreateManyFileTypedDict],
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -95,9 +95,11 @@ class Items(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope Items"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -148,8 +150,8 @@ class Items(BaseSDK):
         ],
         files: Optional[
             Union[
-                List[models.EnvelopeItemCreateManyFile],
-                List[models.EnvelopeItemCreateManyFileTypedDict],
+                Iterable[models.EnvelopeItemCreateManyFile],
+                Iterable[models.EnvelopeItemCreateManyFileTypedDict],
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -224,9 +226,11 @@ class Items(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope Items"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -273,8 +277,8 @@ class Items(BaseSDK):
         *,
         envelope_id: str,
         data: Union[
-            List[models.EnvelopeItemUpdateManyDataRequest],
-            List[models.EnvelopeItemUpdateManyDataRequestTypedDict],
+            Iterable[models.EnvelopeItemUpdateManyDataRequest],
+            Iterable[models.EnvelopeItemUpdateManyDataRequestTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -346,9 +350,11 @@ class Items(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope Items"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -395,8 +401,8 @@ class Items(BaseSDK):
         *,
         envelope_id: str,
         data: Union[
-            List[models.EnvelopeItemUpdateManyDataRequest],
-            List[models.EnvelopeItemUpdateManyDataRequestTypedDict],
+            Iterable[models.EnvelopeItemUpdateManyDataRequest],
+            Iterable[models.EnvelopeItemUpdateManyDataRequestTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -468,9 +474,11 @@ class Items(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope Items"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -585,9 +593,11 @@ class Items(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope Items"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -696,9 +706,11 @@ class Items(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope Items"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -751,7 +763,7 @@ class Items(BaseSDK):
         Download an envelope item by its ID
 
         :param envelope_item_id: The ID of the envelope item to download.
-        :param version: The version of the envelope item to download. \"signed\" returns the completed document with signatures, \"original\" returns the original uploaded document.
+        :param version: The version of the envelope item to download. \"signed\" returns the completed document with all signatures and the audit trail, \"original\" returns the original uploaded document, \"pending\" returns the original document with currently-inserted fields burned in (only valid while the envelope is in PENDING status; not a final executed document).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -806,9 +818,11 @@ class Items(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope Items"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -871,7 +885,7 @@ class Items(BaseSDK):
         Download an envelope item by its ID
 
         :param envelope_item_id: The ID of the envelope item to download.
-        :param version: The version of the envelope item to download. \"signed\" returns the completed document with signatures, \"original\" returns the original uploaded document.
+        :param version: The version of the envelope item to download. \"signed\" returns the completed document with all signatures and the audit trail, \"original\" returns the original uploaded document, \"pending\" returns the original document with currently-inserted fields burned in (only valid while the envelope is in PENDING status; not a final executed document).
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -926,9 +940,11 @@ class Items(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Envelope Items"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

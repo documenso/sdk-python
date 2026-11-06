@@ -1,5 +1,13 @@
 # TypeDocumentDeleted
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TypeDocumentDeleted
+
+value = TypeDocumentDeleted.DOCUMENT_DELETED
+```
+
 
 ## Values
 

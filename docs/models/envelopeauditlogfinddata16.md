@@ -5,4 +5,5 @@
 
 | Field                                                  | Type                                                   | Required                                               | Description                                            |
 | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
-| `changes`                                              | List[[models.ChangeUnion1](../models/changeunion1.md)] | :heavy_check_mark:                                     | N/A                                                    |
+| `from_`                                                | [Nullable[models.FromUnion1]](../models/fromunion1.md) | :heavy_check_mark:                                     | N/A                                                    |
+| `to`                                                   | [Nullable[models.ToUnion1]](../models/tounion1.md)     | :heavy_check_mark:                                     | N/A                                                    |

@@ -1,5 +1,13 @@
 # EnvelopeRecipientCreateManyAccessAuthRequest
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeRecipientCreateManyAccessAuthRequest
+
+value = EnvelopeRecipientCreateManyAccessAuthRequest.ACCOUNT
+```
+
 
 ## Values
 

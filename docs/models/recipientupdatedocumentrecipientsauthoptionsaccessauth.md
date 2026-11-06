@@ -1,5 +1,13 @@
 # RecipientUpdateDocumentRecipientsAuthOptionsAccessAuth
 
+## Example Usage
+
+```python
+from documenso_sdk.models import RecipientUpdateDocumentRecipientsAuthOptionsAccessAuth
+
+value = RecipientUpdateDocumentRecipientsAuthOptionsAccessAuth.ACCOUNT
+```
+
 
 ## Values
 

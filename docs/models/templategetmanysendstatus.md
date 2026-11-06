@@ -1,5 +1,13 @@
 # TemplateGetManySendStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateGetManySendStatus
+
+value = TemplateGetManySendStatus.NOT_SENT
+```
+
 
 ## Values
 

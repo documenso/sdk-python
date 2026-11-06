@@ -1,5 +1,13 @@
 # FieldCreateDocumentFieldVerticalAlignNumber
 
+## Example Usage
+
+```python
+from documenso_sdk.models import FieldCreateDocumentFieldVerticalAlignNumber
+
+value = FieldCreateDocumentFieldVerticalAlignNumber.TOP
+```
+
 
 ## Values
 
