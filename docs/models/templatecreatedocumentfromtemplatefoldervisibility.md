@@ -1,5 +1,13 @@
 # TemplateCreateDocumentFromTemplateFolderVisibility
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateCreateDocumentFromTemplateFolderVisibility
+
+value = TemplateCreateDocumentFromTemplateFolderVisibility.EVERYONE
+```
+
 
 ## Values
 

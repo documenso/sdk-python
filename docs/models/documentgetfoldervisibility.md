@@ -1,5 +1,13 @@
 # DocumentGetFolderVisibility
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentGetFolderVisibility
+
+value = DocumentGetFolderVisibility.EVERYONE
+```
+
 
 ## Values
 

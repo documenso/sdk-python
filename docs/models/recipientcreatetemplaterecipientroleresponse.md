@@ -1,5 +1,13 @@
 # RecipientCreateTemplateRecipientRoleResponse
 
+## Example Usage
+
+```python
+from documenso_sdk.models import RecipientCreateTemplateRecipientRoleResponse
+
+value = RecipientCreateTemplateRecipientRoleResponse.CC
+```
+
 
 ## Values
 

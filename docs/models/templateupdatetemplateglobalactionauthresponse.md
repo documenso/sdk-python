@@ -1,5 +1,13 @@
 # TemplateUpdateTemplateGlobalActionAuthResponse
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateUpdateTemplateGlobalActionAuthResponse
+
+value = TemplateUpdateTemplateGlobalActionAuthResponse.ACCOUNT
+```
+
 
 ## Values
 

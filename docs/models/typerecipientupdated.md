@@ -1,5 +1,13 @@
 # TypeRecipientUpdated
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TypeRecipientUpdated
+
+value = TypeRecipientUpdated.RECIPIENT_UPDATED
+```
+
 
 ## Values
 

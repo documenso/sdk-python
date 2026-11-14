@@ -1,5 +1,13 @@
 # TemplateFindTemplatesVisibility
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateFindTemplatesVisibility
+
+value = TemplateFindTemplatesVisibility.EVERYONE
+```
+
 
 ## Values
 

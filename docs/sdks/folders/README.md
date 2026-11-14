@@ -22,7 +22,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.folders.find()
@@ -40,7 +40,7 @@ with Documenso(
 | `page`                                                                                              | *Optional[float]*                                                                                   | :heavy_minus_sign:                                                                                  | The pagination page number, starts at 1.                                                            |
 | `per_page`                                                                                          | *Optional[float]*                                                                                   | :heavy_minus_sign:                                                                                  | The number of items per page.                                                                       |
 | `parent_id`                                                                                         | *Optional[str]*                                                                                     | :heavy_minus_sign:                                                                                  | N/A                                                                                                 |
-| `type`                                                                                              | [Optional[models.FolderFindFoldersQueryParamType]](../../models/folderfindfoldersqueryparamtype.md) | :heavy_minus_sign:                                                                                  | N/A                                                                                                 |
+| `type_`                                                                                             | [Optional[models.FolderFindFoldersQueryParamType]](../../models/folderfindfoldersqueryparamtype.md) | :heavy_minus_sign:                                                                                  | N/A                                                                                                 |
 | `retries`                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                    | :heavy_minus_sign:                                                                                  | Configuration to override the default retry behavior of the client.                                 |
 
 ### Response
@@ -71,7 +71,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.folders.create(name="<value>")
@@ -87,7 +87,7 @@ with Documenso(
 | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | `name`                                                                                          | *str*                                                                                           | :heavy_check_mark:                                                                              | N/A                                                                                             |
 | `parent_id`                                                                                     | *Optional[str]*                                                                                 | :heavy_minus_sign:                                                                              | N/A                                                                                             |
-| `type`                                                                                          | [Optional[models.FolderCreateFolderTypeRequest]](../../models/foldercreatefoldertyperequest.md) | :heavy_minus_sign:                                                                              | N/A                                                                                             |
+| `type_`                                                                                         | [Optional[models.FolderCreateFolderTypeRequest]](../../models/foldercreatefoldertyperequest.md) | :heavy_minus_sign:                                                                              | N/A                                                                                             |
 | `retries`                                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                | :heavy_minus_sign:                                                                              | Configuration to override the default retry behavior of the client.                             |
 
 ### Response
@@ -117,7 +117,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.folders.update(folder_id="<id>", data={})
@@ -162,7 +162,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.folders.delete(folder_id="<id>")

@@ -1,5 +1,13 @@
 # TemplateCreateTemplateTemporaryTextAlign2
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateCreateTemplateTemporaryTextAlign2
+
+value = TemplateCreateTemplateTemporaryTextAlign2.LEFT
+```
+
 
 ## Values
 

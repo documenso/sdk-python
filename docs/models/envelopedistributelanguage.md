@@ -1,5 +1,13 @@
 # EnvelopeDistributeLanguage
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeDistributeLanguage
+
+value = EnvelopeDistributeLanguage.DE
+```
+
 
 ## Values
 

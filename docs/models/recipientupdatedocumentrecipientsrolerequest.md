@@ -1,5 +1,13 @@
 # RecipientUpdateDocumentRecipientsRoleRequest
 
+## Example Usage
+
+```python
+from documenso_sdk.models import RecipientUpdateDocumentRecipientsRoleRequest
+
+value = RecipientUpdateDocumentRecipientsRoleRequest.CC
+```
+
 
 ## Values
 
