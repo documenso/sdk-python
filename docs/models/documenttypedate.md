@@ -1,5 +1,13 @@
 # DocumentTypeDate
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentTypeDate
+
+value = DocumentTypeDate.DATE
+```
+
 
 ## Values
 

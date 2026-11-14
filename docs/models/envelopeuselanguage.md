@@ -1,5 +1,13 @@
 # EnvelopeUseLanguage
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeUseLanguage
+
+value = EnvelopeUseLanguage.DE
+```
+
 
 ## Values
 

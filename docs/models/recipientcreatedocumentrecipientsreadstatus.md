@@ -1,5 +1,13 @@
 # RecipientCreateDocumentRecipientsReadStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import RecipientCreateDocumentRecipientsReadStatus
+
+value = RecipientCreateDocumentRecipientsReadStatus.NOT_OPENED
+```
+
 
 ## Values
 

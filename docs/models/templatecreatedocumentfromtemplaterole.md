@@ -1,5 +1,13 @@
 # TemplateCreateDocumentFromTemplateRole
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateCreateDocumentFromTemplateRole
+
+value = TemplateCreateDocumentFromTemplateRole.CC
+```
+
 
 ## Values
 

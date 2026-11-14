@@ -1,5 +1,13 @@
 # DocumentUpdateSource
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentUpdateSource
+
+value = DocumentUpdateSource.DOCUMENT
+```
+
 
 ## Values
 

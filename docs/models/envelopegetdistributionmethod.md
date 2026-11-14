@@ -1,5 +1,13 @@
 # EnvelopeGetDistributionMethod
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeGetDistributionMethod
+
+value = EnvelopeGetDistributionMethod.EMAIL
+```
+
 
 ## Values
 
