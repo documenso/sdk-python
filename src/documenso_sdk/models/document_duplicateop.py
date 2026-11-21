@@ -159,3 +159,13 @@ class DocumentDuplicateResponse(BaseModel):
     id: str
 
     document_id: Annotated[float, pydantic.Field(alias="documentId")]
+
+
+try:
+    DocumentDuplicateRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    DocumentDuplicateResponse.model_rebuild()
+except NameError:
+    pass

@@ -1,0 +1,19 @@
+# FieldUpdateTemplateFieldOverflowDate
+
+## Example Usage
+
+```python
+from documenso_sdk.models import FieldUpdateTemplateFieldOverflowDate
+
+value = FieldUpdateTemplateFieldOverflowDate.AUTO
+```
+
+
+## Values
+
+| Name         | Value        |
+| ------------ | ------------ |
+| `AUTO`       | auto         |
+| `HORIZONTAL` | horizontal   |
+| `VERTICAL`   | vertical     |
+| `CROP`       | crop         |

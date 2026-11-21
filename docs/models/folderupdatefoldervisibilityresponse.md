@@ -1,5 +1,13 @@
 # FolderUpdateFolderVisibilityResponse
 
+## Example Usage
+
+```python
+from documenso_sdk.models import FolderUpdateFolderVisibilityResponse
+
+value = FolderUpdateFolderVisibilityResponse.EVERYONE
+```
+
 
 ## Values
 

@@ -9,7 +9,10 @@ from documenso_sdk.types import (
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
 )
+from documenso_sdk.types.basemodel import current_filtered_dump
 from enum import Enum
 import httpx
 import pydantic
@@ -89,16 +92,23 @@ class EnvelopeRecipientUpdateManyDataRequest(BaseModel):
     ] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             ["email", "name", "role", "signingOrder", "accessAuth", "actionAuth"]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -312,6 +322,8 @@ class EnvelopeRecipientUpdateManyDataResponseTypedDict(TypedDict):
     token: str
     document_deleted_at: Nullable[str]
     expired: Nullable[str]
+    expires_at: Nullable[str]
+    expiration_notified_at: Nullable[str]
     signed_at: Nullable[str]
     auth_options: Nullable[EnvelopeRecipientUpdateManyAuthOptionsTypedDict]
     signing_order: Nullable[float]
@@ -351,6 +363,12 @@ class EnvelopeRecipientUpdateManyDataResponse(BaseModel):
 
     expired: Nullable[str]
 
+    expires_at: Annotated[Nullable[str], pydantic.Field(alias="expiresAt")]
+
+    expiration_notified_at: Annotated[
+        Nullable[str], pydantic.Field(alias="expirationNotifiedAt")
+    ]
+
     signed_at: Annotated[Nullable[str], pydantic.Field(alias="signedAt")]
 
     auth_options: Annotated[
@@ -371,12 +389,17 @@ class EnvelopeRecipientUpdateManyDataResponse(BaseModel):
     ] = UNSET
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["documentId", "templateId"])
         nullable_fields = set(
             [
                 "documentDeletedAt",
                 "expired",
+                "expiresAt",
+                "expirationNotifiedAt",
                 "signedAt",
                 "authOptions",
                 "signingOrder",
@@ -385,12 +408,16 @@ class EnvelopeRecipientUpdateManyDataResponse(BaseModel):
                 "templateId",
             ]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -417,3 +444,21 @@ class EnvelopeRecipientUpdateManyResponse(BaseModel):
     r"""Successful response"""
 
     data: List[EnvelopeRecipientUpdateManyDataResponse]
+
+
+try:
+    EnvelopeRecipientUpdateManyDataRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeRecipientUpdateManyRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeRecipientUpdateManyAuthOptions.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeRecipientUpdateManyDataResponse.model_rebuild()
+except NameError:
+    pass

@@ -1,5 +1,13 @@
 # DocumentCreateDocumentTemporaryVisibilityRequest
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentCreateDocumentTemporaryVisibilityRequest
+
+value = DocumentCreateDocumentTemporaryVisibilityRequest.EVERYONE
+```
+
 
 ## Values
 

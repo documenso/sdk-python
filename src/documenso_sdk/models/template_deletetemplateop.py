@@ -156,3 +156,9 @@ class TemplateDeleteTemplateResponse(BaseModel):
     r"""Successful response"""
 
     success: bool
+
+
+try:
+    TemplateDeleteTemplateRequest.model_rebuild()
+except NameError:
+    pass

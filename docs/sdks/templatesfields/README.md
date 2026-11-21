@@ -1,19 +1,24 @@
-# Templates.Fields
+# ~~Templates.Fields~~
+
+> [!WARNING]
+> This SDK is **DEPRECATED**
 
 ## Overview
 
 ### Available Operations
 
-* [create](#create) - Create template field
-* [get](#get) - Get template field
-* [create_many](#create_many) - Create template fields
-* [update](#update) - Update template field
-* [update_many](#update_many) - Update template fields
-* [delete](#delete) - Delete template field
+* [~~create~~](#create) - Create template field :warning: **Deprecated**
+* [~~get~~](#get) - Get template field :warning: **Deprecated**
+* [~~create_many~~](#create_many) - Create template fields :warning: **Deprecated**
+* [~~update~~](#update) - Update template field :warning: **Deprecated**
+* [~~update_many~~](#update_many) - Update template fields :warning: **Deprecated**
+* [~~delete~~](#delete) - Delete template field :warning: **Deprecated**
 
-## create
+## ~~create~~
 
-Create a single field for a template.
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Create a single field for a template.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -25,7 +30,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.templates.fields.create(template_id=1203.71, field={
@@ -65,9 +70,11 @@ with Documenso(
 | models.FieldCreateTemplateFieldInternalServerError | 500                                                | application/json                                   |
 | models.APIError                                    | 4XX, 5XX                                           | \*/\*                                              |
 
-## get
+## ~~get~~
 
-Returns a single field. If you want to retrieve all the fields for a template, use the "Get Template" endpoint.
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Returns a single field. If you want to retrieve all the fields for a template, use the "Get Template" endpoint.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -78,7 +85,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.templates.fields.get(field_id=1152.82)
@@ -110,9 +117,11 @@ with Documenso(
 | models.FieldGetTemplateFieldInternalServerError | 500                                             | application/json                                |
 | models.APIError                                 | 4XX, 5XX                                        | \*/\*                                           |
 
-## create_many
+## ~~create_many~~
 
-Create multiple fields for a template.
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Create multiple fields for a template.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -124,7 +133,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.templates.fields.create_many(template_id=586.2, fields=[
@@ -166,9 +175,11 @@ with Documenso(
 | models.FieldCreateTemplateFieldsInternalServerError | 500                                                 | application/json                                    |
 | models.APIError                                     | 4XX, 5XX                                            | \*/\*                                               |
 
-## update
+## ~~update~~
 
-Update a single field for a template.
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Update a single field for a template.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -180,7 +191,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.templates.fields.update(template_id=5083.07, field={
@@ -215,9 +226,11 @@ with Documenso(
 | models.FieldUpdateTemplateFieldInternalServerError | 500                                                | application/json                                   |
 | models.APIError                                    | 4XX, 5XX                                           | \*/\*                                              |
 
-## update_many
+## ~~update_many~~
 
-Update multiple fields for a template.
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Update multiple fields for a template.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -229,7 +242,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.templates.fields.update_many(template_id=3969.1, fields=[
@@ -266,9 +279,11 @@ with Documenso(
 | models.FieldUpdateTemplateFieldsInternalServerError | 500                                                 | application/json                                    |
 | models.APIError                                     | 4XX, 5XX                                            | \*/\*                                               |
 
-## delete
+## ~~delete~~
 
-Delete template field
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -279,7 +294,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.templates.fields.delete(field_id=7996.49)

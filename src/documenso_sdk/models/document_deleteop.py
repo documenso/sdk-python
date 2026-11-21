@@ -156,3 +156,9 @@ class DocumentDeleteResponse(BaseModel):
     r"""Successful response"""
 
     success: bool
+
+
+try:
+    DocumentDeleteRequest.model_rebuild()
+except NameError:
+    pass

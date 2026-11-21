@@ -158,3 +158,9 @@ class RecipientDeleteDocumentRecipientResponse(BaseModel):
     r"""Successful response"""
 
     success: bool
+
+
+try:
+    RecipientDeleteDocumentRecipientRequest.model_rebuild()
+except NameError:
+    pass

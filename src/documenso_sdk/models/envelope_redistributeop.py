@@ -3,7 +3,14 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 from documenso_sdk.models import DocumensoError
-from documenso_sdk.types import BaseModel, Nullable, UNSET_SENTINEL
+from documenso_sdk.types import (
+    BaseModel,
+    Nullable,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from documenso_sdk.types.basemodel import current_filtered_dump
 from enum import Enum
 import httpx
 import pydantic
@@ -185,13 +192,20 @@ class EnvelopeRedistributeRecipient(BaseModel):
     signing_url: Annotated[str, pydantic.Field(alias="signingUrl")]
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 m[k] = val
@@ -215,3 +229,13 @@ class EnvelopeRedistributeResponse(BaseModel):
     id: str
 
     recipients: List[EnvelopeRedistributeRecipient]
+
+
+try:
+    EnvelopeRedistributeRequest.model_rebuild()
+except NameError:
+    pass
+try:
+    EnvelopeRedistributeRecipient.model_rebuild()
+except NameError:
+    pass

@@ -1,5 +1,13 @@
 # DocumentCreateDocumentTemporaryVerticalAlignText
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentCreateDocumentTemporaryVerticalAlignText
+
+value = DocumentCreateDocumentTemporaryVerticalAlignText.TOP
+```
+
 
 ## Values
 
