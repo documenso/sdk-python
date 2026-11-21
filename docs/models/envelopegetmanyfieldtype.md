@@ -1,5 +1,13 @@
 # EnvelopeGetManyFieldType
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeGetManyFieldType
+
+value = EnvelopeGetManyFieldType.SIGNATURE
+```
+
 
 ## Values
 

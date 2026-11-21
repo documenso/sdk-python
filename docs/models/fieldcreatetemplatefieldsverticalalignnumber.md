@@ -1,5 +1,13 @@
 # FieldCreateTemplateFieldsVerticalAlignNumber
 
+## Example Usage
+
+```python
+from documenso_sdk.models import FieldCreateTemplateFieldsVerticalAlignNumber
+
+value = FieldCreateTemplateFieldsVerticalAlignNumber.TOP
+```
+
 
 ## Values
 

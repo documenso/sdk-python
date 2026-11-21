@@ -1,5 +1,13 @@
 # EnvelopeCreateGlobalActionAuth
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeCreateGlobalActionAuth
+
+value = EnvelopeCreateGlobalActionAuth.ACCOUNT
+```
+
 
 ## Values
 

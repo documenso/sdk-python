@@ -6,10 +6,14 @@ from documenso_sdk._hooks import HookContext
 from documenso_sdk.types import OptionalNullable, UNSET
 from documenso_sdk.utils import get_security_from_env
 from documenso_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, Iterable, List, Mapping, Optional, Union
+from typing_extensions import deprecated
 
 
 class TemplatesRecipients(BaseSDK):
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def get(
         self,
         *,
@@ -21,7 +25,7 @@ class TemplatesRecipients(BaseSDK):
     ) -> models.RecipientGetTemplateRecipientResponse:
         r"""Get template recipient
 
-        Returns a single recipient. If you want to retrieve all the recipients for a template, use the \"Get Template\" endpoint.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Returns a single recipient. If you want to retrieve all the recipients for a template, use the \"Get Template\" endpoint.
 
         :param recipient_id:
         :param retries: Override the default retry configuration for this method
@@ -77,9 +81,11 @@ class TemplatesRecipients(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template Recipients"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -132,6 +138,9 @@ class TemplatesRecipients(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def get_async(
         self,
         *,
@@ -143,7 +152,7 @@ class TemplatesRecipients(BaseSDK):
     ) -> models.RecipientGetTemplateRecipientResponse:
         r"""Get template recipient
 
-        Returns a single recipient. If you want to retrieve all the recipients for a template, use the \"Get Template\" endpoint.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Returns a single recipient. If you want to retrieve all the recipients for a template, use the \"Get Template\" endpoint.
 
         :param recipient_id:
         :param retries: Override the default retry configuration for this method
@@ -199,9 +208,11 @@ class TemplatesRecipients(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template Recipients"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "404", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -254,6 +265,9 @@ class TemplatesRecipients(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def create(
         self,
         *,
@@ -269,7 +283,7 @@ class TemplatesRecipients(BaseSDK):
     ) -> models.RecipientCreateTemplateRecipientResponse:
         r"""Create template recipient
 
-        Create a single recipient for a template.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Create a single recipient for a template.
 
         :param template_id:
         :param recipient:
@@ -336,9 +350,11 @@ class TemplatesRecipients(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template Recipients"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -384,6 +400,9 @@ class TemplatesRecipients(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def create_async(
         self,
         *,
@@ -399,7 +418,7 @@ class TemplatesRecipients(BaseSDK):
     ) -> models.RecipientCreateTemplateRecipientResponse:
         r"""Create template recipient
 
-        Create a single recipient for a template.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Create a single recipient for a template.
 
         :param template_id:
         :param recipient:
@@ -466,9 +485,11 @@ class TemplatesRecipients(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template Recipients"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -514,13 +535,16 @@ class TemplatesRecipients(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def create_many(
         self,
         *,
         template_id: float,
         recipients: Union[
-            List[models.RecipientCreateTemplateRecipientsRecipientRequest],
-            List[models.RecipientCreateTemplateRecipientsRecipientRequestTypedDict],
+            Iterable[models.RecipientCreateTemplateRecipientsRecipientRequest],
+            Iterable[models.RecipientCreateTemplateRecipientsRecipientRequestTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -529,7 +553,7 @@ class TemplatesRecipients(BaseSDK):
     ) -> models.RecipientCreateTemplateRecipientsResponse:
         r"""Create template recipients
 
-        Create multiple recipients for a template.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Create multiple recipients for a template.
 
         :param template_id:
         :param recipients:
@@ -597,9 +621,11 @@ class TemplatesRecipients(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template Recipients"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -646,13 +672,16 @@ class TemplatesRecipients(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def create_many_async(
         self,
         *,
         template_id: float,
         recipients: Union[
-            List[models.RecipientCreateTemplateRecipientsRecipientRequest],
-            List[models.RecipientCreateTemplateRecipientsRecipientRequestTypedDict],
+            Iterable[models.RecipientCreateTemplateRecipientsRecipientRequest],
+            Iterable[models.RecipientCreateTemplateRecipientsRecipientRequestTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -661,7 +690,7 @@ class TemplatesRecipients(BaseSDK):
     ) -> models.RecipientCreateTemplateRecipientsResponse:
         r"""Create template recipients
 
-        Create multiple recipients for a template.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Create multiple recipients for a template.
 
         :param template_id:
         :param recipients:
@@ -729,9 +758,11 @@ class TemplatesRecipients(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template Recipients"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -778,6 +809,9 @@ class TemplatesRecipients(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def update(
         self,
         *,
@@ -793,7 +827,7 @@ class TemplatesRecipients(BaseSDK):
     ) -> models.RecipientUpdateTemplateRecipientResponse:
         r"""Update template recipient
 
-        Update a single recipient for a template.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Update a single recipient for a template.
 
         :param template_id:
         :param recipient:
@@ -860,9 +894,11 @@ class TemplatesRecipients(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template Recipients"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -908,6 +944,9 @@ class TemplatesRecipients(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def update_async(
         self,
         *,
@@ -923,7 +962,7 @@ class TemplatesRecipients(BaseSDK):
     ) -> models.RecipientUpdateTemplateRecipientResponse:
         r"""Update template recipient
 
-        Update a single recipient for a template.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Update a single recipient for a template.
 
         :param template_id:
         :param recipient:
@@ -990,9 +1029,11 @@ class TemplatesRecipients(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template Recipients"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1038,13 +1079,16 @@ class TemplatesRecipients(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def update_many(
         self,
         *,
         template_id: float,
         recipients: Union[
-            List[models.RecipientUpdateTemplateRecipientsRecipientRequest],
-            List[models.RecipientUpdateTemplateRecipientsRecipientRequestTypedDict],
+            Iterable[models.RecipientUpdateTemplateRecipientsRecipientRequest],
+            Iterable[models.RecipientUpdateTemplateRecipientsRecipientRequestTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1053,7 +1097,7 @@ class TemplatesRecipients(BaseSDK):
     ) -> models.RecipientUpdateTemplateRecipientsResponse:
         r"""Update template recipients
 
-        Update multiple recipients for a template.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Update multiple recipients for a template.
 
         :param template_id:
         :param recipients:
@@ -1121,9 +1165,11 @@ class TemplatesRecipients(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template Recipients"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1170,13 +1216,16 @@ class TemplatesRecipients(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def update_many_async(
         self,
         *,
         template_id: float,
         recipients: Union[
-            List[models.RecipientUpdateTemplateRecipientsRecipientRequest],
-            List[models.RecipientUpdateTemplateRecipientsRecipientRequestTypedDict],
+            Iterable[models.RecipientUpdateTemplateRecipientsRecipientRequest],
+            Iterable[models.RecipientUpdateTemplateRecipientsRecipientRequestTypedDict],
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1185,7 +1234,7 @@ class TemplatesRecipients(BaseSDK):
     ) -> models.RecipientUpdateTemplateRecipientsResponse:
         r"""Update template recipients
 
-        Update multiple recipients for a template.
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Update multiple recipients for a template.
 
         :param template_id:
         :param recipients:
@@ -1253,9 +1302,11 @@ class TemplatesRecipients(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template Recipients"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1302,6 +1353,9 @@ class TemplatesRecipients(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def delete(
         self,
         *,
@@ -1312,6 +1366,8 @@ class TemplatesRecipients(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.RecipientDeleteTemplateRecipientResponse:
         r"""Delete template recipient
+
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
 
         :param recipient_id:
         :param retries: Override the default retry configuration for this method
@@ -1374,9 +1430,11 @@ class TemplatesRecipients(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template Recipients"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1422,6 +1480,9 @@ class TemplatesRecipients(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def delete_async(
         self,
         *,
@@ -1432,6 +1493,8 @@ class TemplatesRecipients(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.RecipientDeleteTemplateRecipientResponse:
         r"""Delete template recipient
+
+        Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
 
         :param recipient_id:
         :param retries: Override the default retry configuration for this method
@@ -1494,9 +1557,11 @@ class TemplatesRecipients(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Template Recipients"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "401", "403", "4XX", "500", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

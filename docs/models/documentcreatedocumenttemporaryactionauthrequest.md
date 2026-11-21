@@ -1,5 +1,13 @@
 # DocumentCreateDocumentTemporaryActionAuthRequest
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentCreateDocumentTemporaryActionAuthRequest
+
+value = DocumentCreateDocumentTemporaryActionAuthRequest.ACCOUNT
+```
+
 
 ## Values
 

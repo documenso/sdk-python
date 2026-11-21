@@ -3,7 +3,7 @@
 
 ## Fields
 
-| Field                                                  | Type                                                   | Required                                               | Description                                            |
-| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
-| `from_`                                                | [Nullable[models.FromUnion2]](../models/fromunion2.md) | :heavy_check_mark:                                     | N/A                                                    |
-| `to`                                                   | [Nullable[models.ToUnion2]](../models/tounion2.md)     | :heavy_check_mark:                                     | N/A                                                    |
+| Field                                      | Type                                       | Required                                   | Description                                |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| `field`                                    | [models.FieldEnum](../models/fieldenum.md) | :heavy_check_mark:                         | N/A                                        |
+| `field_id`                                 | *str*                                      | :heavy_check_mark:                         | N/A                                        |

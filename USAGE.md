@@ -6,7 +6,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.envelopes.get(envelope_id="<id>")
@@ -28,7 +28,7 @@ import os
 async def main():
 
     async with Documenso(
-        api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+        api_key=os.getenv("DOCUMENSO_API_KEY"),
     ) as documenso:
 
         res = await documenso.envelopes.get_async(envelope_id="<id>")

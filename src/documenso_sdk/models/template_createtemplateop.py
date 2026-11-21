@@ -9,7 +9,10 @@ from documenso_sdk.types import (
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
 )
+from documenso_sdk.types.basemodel import current_filtered_dump
 from documenso_sdk.utils import FieldMetadata, MultipartFormMetadata
 from enum import Enum
 import httpx
@@ -41,18 +44,22 @@ class TemplateCreateTemplateGlobalActionAuth(str, Enum):
 class TemplateCreateTemplateType(str, Enum):
     PUBLIC = "PUBLIC"
     PRIVATE = "PRIVATE"
+    ORGANISATION = "ORGANISATION"
 
 
 class TemplateCreateTemplateDateFormat(str, Enum):
     YYYY_M_MDD_HH_MM_A = "yyyy-MM-dd hh:mm a"
     YYYY_M_MDD = "yyyy-MM-dd"
     DD_MM_SLASH_YYYY = "dd/MM/yyyy"
+    DD_MM_DASH_YYYY = "dd-MM-yyyy"
     MM_DD_SLASH_YYYY = "MM/dd/yyyy"
     YY_M_MDD = "yy-MM-dd"
     MMMM_DD_COMMA_YYYY = "MMMM dd, yyyy"
     EEEE_MMMM_DD_COMMA_YYYY = "EEEE, MMMM dd, yyyy"
     DD_MM_SLASH_YYYY_HH_MM_A = "dd/MM/yyyy hh:mm a"
     DD_MM_SLASH_YYYY_H_HMM = "dd/MM/yyyy HH:mm"
+    DD_MM_DASH_YYYY_HH_MM_A = "dd-MM-yyyy hh:mm a"
+    DD_MM_DASH_YYYY_H_HMM = "dd-MM-yyyy HH:mm"
     MM_DD_SLASH_YYYY_HH_MM_A = "MM/dd/yyyy hh:mm a"
     MM_DD_SLASH_YYYY_H_HMM = "MM/dd/yyyy HH:mm"
     DD_DOT_MM_DOT_YYYY = "dd.MM.yyyy"
@@ -81,6 +88,8 @@ class TemplateCreateTemplateEmailSettingsTypedDict(TypedDict):
     document_completed: NotRequired[bool]
     document_deleted: NotRequired[bool]
     owner_document_completed: NotRequired[bool]
+    owner_recipient_expired: NotRequired[bool]
+    owner_document_created: NotRequired[bool]
 
 
 class TemplateCreateTemplateEmailSettings(BaseModel):
@@ -112,7 +121,18 @@ class TemplateCreateTemplateEmailSettings(BaseModel):
         Optional[bool], pydantic.Field(alias="ownerDocumentCompleted")
     ] = True
 
+    owner_recipient_expired: Annotated[
+        Optional[bool], pydantic.Field(alias="ownerRecipientExpired")
+    ] = True
+
+    owner_document_created: Annotated[
+        Optional[bool], pydantic.Field(alias="ownerDocumentCreated")
+    ] = True
+
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -123,14 +143,20 @@ class TemplateCreateTemplateEmailSettings(BaseModel):
                 "documentCompleted",
                 "documentDeleted",
                 "ownerDocumentCompleted",
+                "ownerRecipientExpired",
+                "ownerDocumentCreated",
             ]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -229,6 +255,9 @@ class TemplateCreateTemplateMeta(BaseModel):
     ] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -250,12 +279,16 @@ class TemplateCreateTemplateMeta(BaseModel):
             ]
         )
         nullable_fields = set(["emailId", "emailReplyTo"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -290,14 +323,21 @@ class TemplateCreateTemplateAttachment(BaseModel):
     type: Optional[TemplateCreateTemplateTypeLink] = TemplateCreateTemplateTypeLink.LINK
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["type"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -354,6 +394,9 @@ class TemplateCreateTemplatePayload(BaseModel):
     attachments: Optional[List[TemplateCreateTemplateAttachment]] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -370,12 +413,16 @@ class TemplateCreateTemplatePayload(BaseModel):
             ]
         )
         nullable_fields = set(["externalId"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -394,7 +441,7 @@ class TemplateCreateTemplatePayload(BaseModel):
 
 class TemplateCreateTemplateFileTypedDict(TypedDict):
     file_name: str
-    content: Union[bytes, IO[bytes], io.BufferedReader]
+    content: Union[bytes, IO[bytes], io.IOBase]
     content_type: NotRequired[str]
 
 
@@ -404,7 +451,7 @@ class TemplateCreateTemplateFile(BaseModel):
     ]
 
     content: Annotated[
-        Union[bytes, IO[bytes], io.BufferedReader],
+        Union[bytes, IO[bytes], io.IOBase],
         pydantic.Field(alias=""),
         FieldMetadata(multipart=MultipartFormMetadata(content=True)),
     ]
@@ -416,14 +463,21 @@ class TemplateCreateTemplateFile(BaseModel):
     ] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["contentType"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k)
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -590,3 +644,21 @@ class TemplateCreateTemplateResponse(BaseModel):
     envelope_id: Annotated[str, pydantic.Field(alias="envelopeId")]
 
     id: float
+
+
+try:
+    TemplateCreateTemplateEmailSettings.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateMeta.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplatePayload.model_rebuild()
+except NameError:
+    pass
+try:
+    TemplateCreateTemplateResponse.model_rebuild()
+except NameError:
+    pass

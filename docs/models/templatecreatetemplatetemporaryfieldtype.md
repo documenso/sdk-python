@@ -1,5 +1,13 @@
 # TemplateCreateTemplateTemporaryFieldType
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateCreateTemplateTemporaryFieldType
+
+value = TemplateCreateTemplateTemporaryFieldType.SIGNATURE
+```
+
 
 ## Values
 
