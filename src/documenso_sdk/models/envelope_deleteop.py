@@ -156,3 +156,9 @@ class EnvelopeDeleteResponse(BaseModel):
     r"""Successful response"""
 
     success: bool
+
+
+try:
+    EnvelopeDeleteRequest.model_rebuild()
+except NameError:
+    pass

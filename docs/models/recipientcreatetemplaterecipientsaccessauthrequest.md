@@ -1,5 +1,13 @@
 # RecipientCreateTemplateRecipientsAccessAuthRequest
 
+## Example Usage
+
+```python
+from documenso_sdk.models import RecipientCreateTemplateRecipientsAccessAuthRequest
+
+value = RecipientCreateTemplateRecipientsAccessAuthRequest.ACCOUNT
+```
+
 
 ## Values
 

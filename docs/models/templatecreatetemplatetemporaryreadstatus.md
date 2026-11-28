@@ -1,5 +1,13 @@
 # TemplateCreateTemplateTemporaryReadStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateCreateTemplateTemporaryReadStatus
+
+value = TemplateCreateTemplateTemporaryReadStatus.NOT_OPENED
+```
+
 
 ## Values
 

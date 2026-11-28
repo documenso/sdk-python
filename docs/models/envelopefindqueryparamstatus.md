@@ -2,6 +2,14 @@
 
 Filter envelopes by the current status.
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeFindQueryParamStatus
+
+value = EnvelopeFindQueryParamStatus.DRAFT
+```
+
 
 ## Values
 
@@ -11,3 +19,4 @@ Filter envelopes by the current status.
 | `PENDING`   | PENDING     |
 | `COMPLETED` | COMPLETED   |
 | `REJECTED`  | REJECTED    |
+| `CANCELLED` | CANCELLED   |

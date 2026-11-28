@@ -1,5 +1,13 @@
 # DocumentDistributeVisibility
 
+## Example Usage
+
+```python
+from documenso_sdk.models import DocumentDistributeVisibility
+
+value = DocumentDistributeVisibility.EVERYONE
+```
+
 
 ## Values
 

@@ -158,3 +158,9 @@ class RecipientDeleteTemplateRecipientResponse(BaseModel):
     r"""Successful response"""
 
     success: bool
+
+
+try:
+    RecipientDeleteTemplateRecipientRequest.model_rebuild()
+except NameError:
+    pass

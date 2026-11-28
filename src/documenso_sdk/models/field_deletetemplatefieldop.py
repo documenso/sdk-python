@@ -156,3 +156,9 @@ class FieldDeleteTemplateFieldResponse(BaseModel):
     r"""Successful response"""
 
     success: bool
+
+
+try:
+    FieldDeleteTemplateFieldRequest.model_rebuild()
+except NameError:
+    pass

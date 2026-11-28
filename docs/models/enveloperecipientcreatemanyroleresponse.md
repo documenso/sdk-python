@@ -1,5 +1,13 @@
 # EnvelopeRecipientCreateManyRoleResponse
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeRecipientCreateManyRoleResponse
+
+value = EnvelopeRecipientCreateManyRoleResponse.CC
+```
+
 
 ## Values
 

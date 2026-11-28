@@ -1,5 +1,13 @@
 # TemplateFindTemplatesFieldType
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateFindTemplatesFieldType
+
+value = TemplateFindTemplatesFieldType.SIGNATURE
+```
+
 
 ## Values
 

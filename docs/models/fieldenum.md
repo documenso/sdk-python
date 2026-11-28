@@ -1,5 +1,13 @@
 # FieldEnum
 
+## Example Usage
+
+```python
+from documenso_sdk.models import FieldEnum
+
+value = FieldEnum.SIGNATURE
+```
+
 
 ## Values
 

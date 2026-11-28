@@ -1,5 +1,13 @@
 # EnvelopeDistributeRole
 
+## Example Usage
+
+```python
+from documenso_sdk.models import EnvelopeDistributeRole
+
+value = EnvelopeDistributeRole.CC
+```
+
 
 ## Values
 
