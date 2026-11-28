@@ -15,6 +15,18 @@ value: models.DataEnvelopeItemCreated = /* values here */
 value: models.DataEnvelopeItemDeleted = /* values here */
 ```
 
+### `models.DataEnvelopeItemUpdated`
+
+```python
+value: models.DataEnvelopeItemUpdated = /* values here */
+```
+
+### `models.DataEnvelopeItemPdfReplaced`
+
+```python
+value: models.DataEnvelopeItemPdfReplaced = /* values here */
+```
+
 ### `models.DataEmailSent`
 
 ```python
@@ -37,6 +49,12 @@ value: models.DataDocumentCreated = /* values here */
 
 ```python
 value: models.DataDocumentDeleted = /* values here */
+```
+
+### `models.DataDocumentCancelled`
+
+```python
+value: models.DataDocumentCancelled = /* values here */
 ```
 
 ### `models.DataDocumentMovedToTeam`
@@ -193,5 +211,41 @@ value: models.DataRecipientUpdated = /* values here */
 
 ```python
 value: models.DataRecipientDeleted = /* values here */
+```
+
+### `models.DataDocumentRecipientExpired`
+
+```python
+value: models.DataDocumentRecipientExpired = /* values here */
+```
+
+### `models.DataDocumentRecipientCscAuthenticated`
+
+```python
+value: models.DataDocumentRecipientCscAuthenticated = /* values here */
+```
+
+### `models.DataDocumentRecipientCscAuthenticationFailed`
+
+```python
+value: models.DataDocumentRecipientCscAuthenticationFailed = /* values here */
+```
+
+### `models.DataDocumentRecipientCscSignRequested`
+
+```python
+value: models.DataDocumentRecipientCscSignRequested = /* values here */
+```
+
+### `models.DataDocumentRecipientCscAuthorized`
+
+```python
+value: models.DataDocumentRecipientCscAuthorized = /* values here */
+```
+
+### `models.DataDocumentRecipientCscSigned`
+
+```python
+value: models.DataDocumentRecipientCscSigned = /* values here */
 ```
 

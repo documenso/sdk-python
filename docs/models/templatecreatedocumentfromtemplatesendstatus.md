@@ -1,5 +1,13 @@
 # TemplateCreateDocumentFromTemplateSendStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateCreateDocumentFromTemplateSendStatus
+
+value = TemplateCreateDocumentFromTemplateSendStatus.NOT_SENT
+```
+
 
 ## Values
 

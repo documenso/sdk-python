@@ -1,5 +1,13 @@
 # FieldGetTemplateFieldTextAlign2
 
+## Example Usage
+
+```python
+from documenso_sdk.models import FieldGetTemplateFieldTextAlign2
+
+value = FieldGetTemplateFieldTextAlign2.LEFT
+```
+
 
 ## Values
 

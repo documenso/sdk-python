@@ -1,5 +1,13 @@
 # TypeDocumentAccessAuth2FaValidated
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TypeDocumentAccessAuth2FaValidated
+
+value = TypeDocumentAccessAuth2FaValidated.DOCUMENT_ACCESS_AUTH_2_FA_VALIDATED
+```
+
 
 ## Values
 

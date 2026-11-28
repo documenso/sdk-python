@@ -1,5 +1,13 @@
 # TemplateFindTemplatesSigningStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateFindTemplatesSigningStatus
+
+value = TemplateFindTemplatesSigningStatus.NOT_SIGNED
+```
+
 
 ## Values
 

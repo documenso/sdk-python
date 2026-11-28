@@ -1,23 +1,28 @@
-# Documents
+# ~~Documents~~
+
+> [!WARNING]
+> This SDK is **DEPRECATED**
 
 ## Overview
 
 ### Available Operations
 
-* [get](#get) - Get document
-* [find](#find) - Find documents
-* [create](#create) - Create document
-* [update](#update) - Update document
-* [delete](#delete) - Delete document
-* [duplicate](#duplicate) - Duplicate document
-* [distribute](#distribute) - Distribute document
-* [redistribute](#redistribute) - Redistribute document
-* [download](#download) - Download document
+* [~~get~~](#get) - Get document :warning: **Deprecated**
+* [~~find~~](#find) - Find documents :warning: **Deprecated**
+* [~~create~~](#create) - Create document :warning: **Deprecated**
+* [~~update~~](#update) - Update document :warning: **Deprecated**
+* [~~delete~~](#delete) - Delete document :warning: **Deprecated**
+* [~~duplicate~~](#duplicate) - Duplicate document :warning: **Deprecated**
+* [~~distribute~~](#distribute) - Distribute document :warning: **Deprecated**
+* [~~redistribute~~](#redistribute) - Redistribute document :warning: **Deprecated**
+* [~~download~~](#download) - Download document :warning: **Deprecated**
 * [~~create_v0~~](#create_v0) - Create document :warning: **Deprecated**
 
-## get
+## ~~get~~
 
-Returns a document given an ID
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Returns a document given an ID
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -28,7 +33,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.documents.get(document_id=6150.61)
@@ -60,9 +65,11 @@ with Documenso(
 | models.DocumentGetInternalServerError | 500                                   | application/json                      |
 | models.APIError                       | 4XX, 5XX                              | \*/\*                                 |
 
-## find
+## ~~find~~
 
-Find documents based on a search criteria
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Find documents based on a search criteria
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -74,7 +81,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.documents.find(order_by_direction=documenso_sdk.DocumentFindOrderByDirection.DESC)
@@ -86,18 +93,19 @@ with Documenso(
 
 ### Parameters
 
-| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   |
-| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `query`                                                                                       | *Optional[str]*                                                                               | :heavy_minus_sign:                                                                            | The search query.                                                                             |
-| `page`                                                                                        | *Optional[float]*                                                                             | :heavy_minus_sign:                                                                            | The pagination page number, starts at 1.                                                      |
-| `per_page`                                                                                    | *Optional[float]*                                                                             | :heavy_minus_sign:                                                                            | The number of items per page.                                                                 |
-| `template_id`                                                                                 | *Optional[float]*                                                                             | :heavy_minus_sign:                                                                            | Filter documents by the template ID used to create it.                                        |
-| `source`                                                                                      | [Optional[models.DocumentFindQueryParamSource]](../../models/documentfindqueryparamsource.md) | :heavy_minus_sign:                                                                            | Filter documents by how it was created.                                                       |
-| `status`                                                                                      | [Optional[models.DocumentFindQueryParamStatus]](../../models/documentfindqueryparamstatus.md) | :heavy_minus_sign:                                                                            | Filter documents by the current status                                                        |
-| `folder_id`                                                                                   | *Optional[str]*                                                                               | :heavy_minus_sign:                                                                            | Filter documents by folder ID                                                                 |
-| `order_by_column`                                                                             | [Optional[models.DocumentFindOrderByColumn]](../../models/documentfindorderbycolumn.md)       | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `order_by_direction`                                                                          | [Optional[models.DocumentFindOrderByDirection]](../../models/documentfindorderbydirection.md) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `retries`                                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                              | :heavy_minus_sign:                                                                            | Configuration to override the default retry behavior of the client.                           |
+| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `query`                                                                                               | *Optional[str]*                                                                                       | :heavy_minus_sign:                                                                                    | The search query.                                                                                     |
+| `page`                                                                                                | *Optional[float]*                                                                                     | :heavy_minus_sign:                                                                                    | The pagination page number, starts at 1.                                                              |
+| `per_page`                                                                                            | *Optional[float]*                                                                                     | :heavy_minus_sign:                                                                                    | The number of items per page.                                                                         |
+| `template_id`                                                                                         | *Optional[float]*                                                                                     | :heavy_minus_sign:                                                                                    | Filter documents by the template ID used to create it.                                                |
+| `source`                                                                                              | [Optional[models.DocumentFindQueryParamSource]](../../models/documentfindqueryparamsource.md)         | :heavy_minus_sign:                                                                                    | Filter documents by how it was created.                                                               |
+| `status`                                                                                              | [Optional[models.DocumentFindQueryParamStatus]](../../models/documentfindqueryparamstatus.md)         | :heavy_minus_sign:                                                                                    | Filter documents by the current status                                                                |
+| `has_expired_recipients`                                                                              | [Optional[models.DocumentFindHasExpiredRecipients]](../../models/documentfindhasexpiredrecipients.md) | :heavy_minus_sign:                                                                                    | Filter for documents that have at least one recipient whose signing link has expired.                 |
+| `folder_id`                                                                                           | *Optional[str]*                                                                                       | :heavy_minus_sign:                                                                                    | Filter documents by folder ID                                                                         |
+| `order_by_column`                                                                                     | [Optional[models.DocumentFindOrderByColumn]](../../models/documentfindorderbycolumn.md)               | :heavy_minus_sign:                                                                                    | N/A                                                                                                   |
+| `order_by_direction`                                                                                  | [Optional[models.DocumentFindOrderByDirection]](../../models/documentfindorderbydirection.md)         | :heavy_minus_sign:                                                                                    | N/A                                                                                                   |
+| `retries`                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                      | :heavy_minus_sign:                                                                                    | Configuration to override the default retry behavior of the client.                                   |
 
 ### Response
 
@@ -114,9 +122,11 @@ with Documenso(
 | models.DocumentFindInternalServerError | 500                                    | application/json                       |
 | models.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
-## create
+## ~~create~~
 
-Create a document using form data.
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -127,7 +137,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.documents.create(payload={
@@ -164,9 +174,11 @@ with Documenso(
 | models.DocumentCreateInternalServerError | 500                                      | application/json                         |
 | models.APIError                          | 4XX, 5XX                                 | \*/\*                                    |
 
-## update
+## ~~update~~
 
-Update document
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -177,7 +189,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.documents.update(document_id=3428.95)
@@ -210,9 +222,11 @@ with Documenso(
 | models.DocumentUpdateInternalServerError | 500                                      | application/json                         |
 | models.APIError                          | 4XX, 5XX                                 | \*/\*                                    |
 
-## delete
+## ~~delete~~
 
-Delete document
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -223,7 +237,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.documents.delete(document_id=3963.4)
@@ -254,9 +268,11 @@ with Documenso(
 | models.DocumentDeleteInternalServerError | 500                                      | application/json                         |
 | models.APIError                          | 4XX, 5XX                                 | \*/\*                                    |
 
-## duplicate
+## ~~duplicate~~
 
-Duplicate document
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -267,7 +283,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.documents.duplicate(document_id=5285.3)
@@ -298,9 +314,11 @@ with Documenso(
 | models.DocumentDuplicateInternalServerError | 500                                         | application/json                            |
 | models.APIError                             | 4XX, 5XX                                    | \*/\*                                       |
 
-## distribute
+## ~~distribute~~
 
-Send the document out to recipients based on your distribution method
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Send the document out to recipients based on your distribution method
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -311,7 +329,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.documents.distribute(document_id=7548.74)
@@ -343,9 +361,11 @@ with Documenso(
 | models.DocumentDistributeInternalServerError | 500                                          | application/json                             |
 | models.APIError                              | 4XX, 5XX                                     | \*/\*                                        |
 
-## redistribute
+## ~~redistribute~~
 
-Redistribute the document to the provided recipients who have not actioned the document. Will use the distribution method set in the document
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. Redistribute the document to the provided recipients who have not actioned the document. Will use the distribution method set in the document. This also refreshes the signing-link expiration for the targeted unsigned recipients, renewing any expired links.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -356,7 +376,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.documents.redistribute(document_id=9084.69, recipients=[
@@ -392,9 +412,11 @@ with Documenso(
 | models.DocumentRedistributeInternalServerError | 500                                            | application/json                               |
 | models.APIError                                | 4XX, 5XX                                       | \*/\*                                          |
 
-## download
+## ~~download~~
 
-Download document
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -406,7 +428,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.documents.download(document_id=5396.97, version=documenso_sdk.DocumentDownloadVersion.SIGNED)
@@ -441,7 +463,7 @@ with Documenso(
 
 ## ~~create_v0~~
 
-You will need to upload the PDF to the provided URL returned. Note: Once V2 API is released, this will be removed since we will allow direct uploads, instead of using an upload URL.
+Deprecated: this endpoint is being replaced by the Envelope API. See https://docs.documenso.com/docs/developers/api/migrate-to-envelopes for the migration guide. You will need to upload the PDF to the provided URL returned. This endpoint will be removed since we will allow direct uploads, instead of using an upload URL.
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
@@ -454,7 +476,7 @@ import os
 
 
 with Documenso(
-    api_key=os.getenv("DOCUMENSO_API_KEY", ""),
+    api_key=os.getenv("DOCUMENSO_API_KEY"),
 ) as documenso:
 
     res = documenso.documents.create_v0(title="<value>")

@@ -1,5 +1,13 @@
 # TemplateUpdateTemplateVisibilityResponse
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TemplateUpdateTemplateVisibilityResponse
+
+value = TemplateUpdateTemplateVisibilityResponse.EVERYONE
+```
+
 
 ## Values
 

@@ -1,5 +1,13 @@
 # RecipientUpdateDocumentRecipientsSendStatus
 
+## Example Usage
+
+```python
+from documenso_sdk.models import RecipientUpdateDocumentRecipientsSendStatus
+
+value = RecipientUpdateDocumentRecipientsSendStatus.NOT_SENT
+```
+
 
 ## Values
 

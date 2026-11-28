@@ -1,5 +1,13 @@
 # TypeDocumentRecipientRejected
 
+## Example Usage
+
+```python
+from documenso_sdk.models import TypeDocumentRecipientRejected
+
+value = TypeDocumentRecipientRejected.DOCUMENT_RECIPIENT_REJECTED
+```
+
 
 ## Values
 
